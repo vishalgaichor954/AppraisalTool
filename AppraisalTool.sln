@@ -1,0 +1,124 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1676B500-3BB5-4772-BFFC-4774A81F5FC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{63DBCAF7-0E92-4CD6-904E-A8EF081070C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F2FCB738-002F-41BE-B7B3-A442B6BD0E68}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.Application", "AppraisalTool\src\Core\AppraisalTool.Application\AppraisalTool.Application.csproj", "{B4401BBA-6962-48D5-963E-151F808C94E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.Domain", "AppraisalTool\src\Core\AppraisalTool.Domain\AppraisalTool.Domain.csproj", "{4A84FE94-2B61-42C8-9CD3-D2381C53AAA5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.Identity", "AppraisalTool\src\Infrastructure\AppraisalTool.Identity\AppraisalTool.Identity.csproj", "{E597C315-5B30-4B74-961C-CF9C3BD1F61D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.Infrastructure", "AppraisalTool\src\Infrastructure\AppraisalTool.Infrastructure\AppraisalTool.Infrastructure.csproj", "{87811C92-D34A-4B70-8859-C01645BA6AE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.Persistence", "AppraisalTool\src\Infrastructure\AppraisalTool.Persistence\AppraisalTool.Persistence.csproj", "{3260F216-C14B-4248-8184-6A21E35ACB87}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B7DCB68C-7E1B-4F54-9119-9669771295F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.Persistence.IntegrationTests", "AppraisalTool\test\AppraisalTool.Persistence.IntegrationTests\AppraisalTool.Persistence.IntegrationTests.csproj", "{C53CDAFE-5264-4F7D-8A35-4C63917FBCCA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B4401BBA-6962-48D5-963E-151F808C94E8} = {B4401BBA-6962-48D5-963E-151F808C94E8}
+		{4A84FE94-2B61-42C8-9CD3-D2381C53AAA5} = {4A84FE94-2B61-42C8-9CD3-D2381C53AAA5}
+		{3260F216-C14B-4248-8184-6A21E35ACB87} = {3260F216-C14B-4248-8184-6A21E35ACB87}
+		{E597C315-5B30-4B74-961C-CF9C3BD1F61D} = {E597C315-5B30-4B74-961C-CF9C3BD1F61D}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.Application.UnitTests", "AppraisalTool\test\AppraisalTool.Application.UnitTests\AppraisalTool.Application.UnitTests.csproj", "{03D15DF9-F01E-460B-BA0E-9145B1EFD054}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.Identity.UnitTests", "AppraisalTool\test\AppraisalTool.Identity.UnitTests\AppraisalTool.Identity.UnitTests.csproj", "{4C2135ED-EAB9-4D6B-8329-0BCA9B3D044E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.Infrastructure.UnitTests", "AppraisalTool\test\AppraisalTool.Infrastructure.UnitTests\AppraisalTool.Infrastructure.UnitTests.csproj", "{DE65F320-32E4-4937-90E5-86D310166FCF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{53D637A7-BA1C-43BD-B636-5B784D315815}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.Api", "AppraisalTool\src\API\AppraisalTool.Api\AppraisalTool.Api.csproj", "{C0EADD44-0A75-4DA3-A6A2-C83F66175FFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.API.IntegrationTests", "AppraisalTool\test\AppraisalTool.API.IntegrationTests\AppraisalTool.API.IntegrationTests.csproj", "{35E58B1B-7CDD-49DD-A282-0455D4F8A0E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.API.UnitTests", "AppraisalTool\test\AppraisalTool.API.UnitTests\AppraisalTool.API.UnitTests.csproj", "{DA03D02B-B39A-4CBE-9DC2-608B1960BBA7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4401BBA-6962-48D5-963E-151F808C94E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4401BBA-6962-48D5-963E-151F808C94E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4401BBA-6962-48D5-963E-151F808C94E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4401BBA-6962-48D5-963E-151F808C94E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A84FE94-2B61-42C8-9CD3-D2381C53AAA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A84FE94-2B61-42C8-9CD3-D2381C53AAA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A84FE94-2B61-42C8-9CD3-D2381C53AAA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A84FE94-2B61-42C8-9CD3-D2381C53AAA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E597C315-5B30-4B74-961C-CF9C3BD1F61D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E597C315-5B30-4B74-961C-CF9C3BD1F61D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E597C315-5B30-4B74-961C-CF9C3BD1F61D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E597C315-5B30-4B74-961C-CF9C3BD1F61D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87811C92-D34A-4B70-8859-C01645BA6AE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87811C92-D34A-4B70-8859-C01645BA6AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87811C92-D34A-4B70-8859-C01645BA6AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87811C92-D34A-4B70-8859-C01645BA6AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3260F216-C14B-4248-8184-6A21E35ACB87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3260F216-C14B-4248-8184-6A21E35ACB87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3260F216-C14B-4248-8184-6A21E35ACB87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3260F216-C14B-4248-8184-6A21E35ACB87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C53CDAFE-5264-4F7D-8A35-4C63917FBCCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C53CDAFE-5264-4F7D-8A35-4C63917FBCCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C53CDAFE-5264-4F7D-8A35-4C63917FBCCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C53CDAFE-5264-4F7D-8A35-4C63917FBCCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03D15DF9-F01E-460B-BA0E-9145B1EFD054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03D15DF9-F01E-460B-BA0E-9145B1EFD054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03D15DF9-F01E-460B-BA0E-9145B1EFD054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03D15DF9-F01E-460B-BA0E-9145B1EFD054}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C2135ED-EAB9-4D6B-8329-0BCA9B3D044E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C2135ED-EAB9-4D6B-8329-0BCA9B3D044E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C2135ED-EAB9-4D6B-8329-0BCA9B3D044E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C2135ED-EAB9-4D6B-8329-0BCA9B3D044E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE65F320-32E4-4937-90E5-86D310166FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE65F320-32E4-4937-90E5-86D310166FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE65F320-32E4-4937-90E5-86D310166FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE65F320-32E4-4937-90E5-86D310166FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0EADD44-0A75-4DA3-A6A2-C83F66175FFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0EADD44-0A75-4DA3-A6A2-C83F66175FFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0EADD44-0A75-4DA3-A6A2-C83F66175FFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0EADD44-0A75-4DA3-A6A2-C83F66175FFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35E58B1B-7CDD-49DD-A282-0455D4F8A0E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35E58B1B-7CDD-49DD-A282-0455D4F8A0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35E58B1B-7CDD-49DD-A282-0455D4F8A0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35E58B1B-7CDD-49DD-A282-0455D4F8A0E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA03D02B-B39A-4CBE-9DC2-608B1960BBA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA03D02B-B39A-4CBE-9DC2-608B1960BBA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA03D02B-B39A-4CBE-9DC2-608B1960BBA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA03D02B-B39A-4CBE-9DC2-608B1960BBA7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{63DBCAF7-0E92-4CD6-904E-A8EF081070C8} = {1676B500-3BB5-4772-BFFC-4774A81F5FC2}
+		{F2FCB738-002F-41BE-B7B3-A442B6BD0E68} = {1676B500-3BB5-4772-BFFC-4774A81F5FC2}
+		{B4401BBA-6962-48D5-963E-151F808C94E8} = {63DBCAF7-0E92-4CD6-904E-A8EF081070C8}
+		{4A84FE94-2B61-42C8-9CD3-D2381C53AAA5} = {63DBCAF7-0E92-4CD6-904E-A8EF081070C8}
+		{E597C315-5B30-4B74-961C-CF9C3BD1F61D} = {F2FCB738-002F-41BE-B7B3-A442B6BD0E68}
+		{87811C92-D34A-4B70-8859-C01645BA6AE8} = {F2FCB738-002F-41BE-B7B3-A442B6BD0E68}
+		{3260F216-C14B-4248-8184-6A21E35ACB87} = {F2FCB738-002F-41BE-B7B3-A442B6BD0E68}
+		{C53CDAFE-5264-4F7D-8A35-4C63917FBCCA} = {B7DCB68C-7E1B-4F54-9119-9669771295F1}
+		{03D15DF9-F01E-460B-BA0E-9145B1EFD054} = {B7DCB68C-7E1B-4F54-9119-9669771295F1}
+		{4C2135ED-EAB9-4D6B-8329-0BCA9B3D044E} = {B7DCB68C-7E1B-4F54-9119-9669771295F1}
+		{DE65F320-32E4-4937-90E5-86D310166FCF} = {B7DCB68C-7E1B-4F54-9119-9669771295F1}
+		{53D637A7-BA1C-43BD-B636-5B784D315815} = {1676B500-3BB5-4772-BFFC-4774A81F5FC2}
+		{C0EADD44-0A75-4DA3-A6A2-C83F66175FFC} = {53D637A7-BA1C-43BD-B636-5B784D315815}
+		{35E58B1B-7CDD-49DD-A282-0455D4F8A0E5} = {B7DCB68C-7E1B-4F54-9119-9669771295F1}
+		{DA03D02B-B39A-4CBE-9DC2-608B1960BBA7} = {B7DCB68C-7E1B-4F54-9119-9669771295F1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {920EDF2B-79D6-48A5-AF80-5C4256675664}
+	EndGlobalSection
+EndGlobal
