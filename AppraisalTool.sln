@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppraisalTool.API.UnitTests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{A7F3CD5F-90A2-4DB8-B4F7-AD2713A84CB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppraisalTool.App", "AppraisalTool.App\AppraisalTool.App.csproj", "{49AB6EA2-3777-4A41-AB0A-7842F13C1C2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppraisalTool.App", "AppraisalTool/src/UI/AppraisalTool.Application/AppraisalTool.App.csproj", "{49AB6EA2-3777-4A41-AB0A-7842F13C1C2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
