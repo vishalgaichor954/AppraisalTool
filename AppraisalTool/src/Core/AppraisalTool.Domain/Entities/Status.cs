@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppraisalTool.Identity.Models
+namespace AppraisalTool.Domain.Entities
 {
-    public class Kra
+    public class Status
     {
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Type { get; set; }
-        public int Weightage { get; set; }
+        public string StatusTitle { get; set; }
     }
 }

@@ -23,4 +23,8 @@
     <ProjectReference Include="..\AppraisalTool.Domain\AppraisalTool.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\User\Queries\" />
+  </ItemGroup>
+
 </Project>

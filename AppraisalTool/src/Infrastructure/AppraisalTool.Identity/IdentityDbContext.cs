@@ -27,21 +27,6 @@ namespace AppraisalTool.Identity
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
         }
-        public DbSet<Branch> Branch { get; set; }
-        public DbSet<Appraisal> Appraisal { get; set; }
-        public DbSet<ApplicationUser> ApplicationUser { get; set; }
-        public DbSet<Kra> Kra { get; set; }
-        public DbSet<FinancialYear> FinancialYear { get; set; }
-        public DbSet<KraDetail> KraDetail { get; set; }
-        public DbSet<Status> Status { get; set; }
-
-
-
-
-
-
-
-
-
+ 
     }
 }
