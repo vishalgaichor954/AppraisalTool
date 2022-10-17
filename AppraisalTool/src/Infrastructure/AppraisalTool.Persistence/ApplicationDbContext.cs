@@ -41,6 +41,9 @@ namespace AppraisalTool.Persistence
         public DbSet<KraDetail> KraDetail { get; set; }
         public DbSet<Status> Status { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
+        public DbSet<JobRoles> JobRoles { get; set; }
+        public DbSet<UserAuthorityMapping> UserAuthorityMappings { get; set; }
+        public DbSet<UserJobRoles> UserJobRoles { get; set; }
 
         private IDbContextTransaction _transaction;
 
