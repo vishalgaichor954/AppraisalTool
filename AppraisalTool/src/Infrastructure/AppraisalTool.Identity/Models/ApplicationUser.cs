@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AppraisalTool.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,17 +13,13 @@ namespace AppraisalTool.Identity.Models
         public string LoginId { get; set; }
         public DateTime JoinDate { get; set; }
         public DateTime LastAppraisalDate { get; set; }
-        public string PrimaryJobRole { get; set; }
-        public string AdditionalRole1 { get; set; }
-        public string AdditionalRole2 { get; set; }
-        public string AdditionalRole3 { get; set; }
-        public string AdditionalRole4 { get; set; }
         public  int BranchId { get; set; }
         public string AddedBy { get; set; }
         public DateTime AddedOn { get; set; } = DateTime.UtcNow;
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
-        public string DeletedBy { get; set; }
+        public string
+            DeletedBy { get; set; }
 
         [ForeignKey("AddedBy")]
         public virtual ApplicationUser AddedByUser { get; set; }
