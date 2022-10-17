@@ -18,15 +18,13 @@
                     <div class="auth-form-light text-left p-5">
                         <div class="brand-logo">
                             <img src="~/lib/assets/images/logo.svg">
-                            @*  <img src="../../assets/images/logo.svg">*@
                         </div>
-                        <!-- <h4>Hello! let's get started</h4> -->
                         <h2 style="font-weight:500 ;padding-left:6rem" class=" pt-3" asp-action="Login">LogIn</h2>
                         <form class="pt-3" asp-action="Login">
                             <div class="form-group">
-                                <label asp-for="UserName" class="control-label"></label>
-                                <input asp-for="UserName" type="text" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username" required>
-                                <span asp-validation-for="UserName" class="text-danger"></span>
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" required>
+                                <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
@@ -37,7 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <div style="align-items:center ;">
-                                <input type="submit" value="Create" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" />
+                                <input type="submit" value="Login" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" />
 
 
                                 </div>

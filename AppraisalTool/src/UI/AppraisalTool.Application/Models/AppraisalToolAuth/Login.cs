@@ -5,8 +5,8 @@ namespace AppraisalTool.App.Models.AppraisalToolAuth
     public class Login
     {
         [Required(ErrorMessage = "Please Enter a Value")]
-        [RegularExpression(@"^[a-zA-z]+$", ErrorMessage = "Letter only Allowed")]
-        public string UserName { get; set; }
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
 
 
         [Required (ErrorMessage = "Please Enter a Value")]
