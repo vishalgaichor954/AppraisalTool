@@ -1,6 +1,7 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Infrastructure.EncryptDecrypt;
 using AppraisalTool.Persistence.Repositories;
+using AppraisalTool.Persistence.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,9 @@ namespace AppraisalTool.Persistence
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAuthenticationService,AuthenticationService>();
 
             return services;
         }

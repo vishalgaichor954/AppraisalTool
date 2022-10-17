@@ -32,11 +32,26 @@ namespace AppraisalTool.Persistence
         public DbSet<Order> Orders { get; set; }
         public DbSet<Message> Messages { get; set; }
 
+        //Appraisal Tool
+        public DbSet<Branch> Branch { get; set; }
+        public DbSet<Appraisal> Appraisal { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Kra> Kra { get; set; }
+        public DbSet<FinancialYear> FinancialYear { get; set; }
+        public DbSet<KraDetail> KraDetail { get; set; }
+        public DbSet<Status> Status { get; set; }
+        public DbSet<UserRole> UserRole { get; set; }
+
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
 
             //seed data, added through migrations
             var concertGuid = Guid.Parse("{B0788D2F-8003-43C1-92A4-EDC76A7C5DDE}");
@@ -230,6 +245,32 @@ namespace AppraisalTool.Persistence
                 Language = "en",
                 Type = Message.MessageType.Error
             });
+
+            modelBuilder.Entity<UserRole>().HasData(new UserRole
+            {
+                Id = 1,
+                Role = "ADMINISTRATOR"
+            });
+            modelBuilder.Entity<UserRole>().HasData(new UserRole
+            {
+                Id = 2,
+                Role = "REPORTINGAUTHORITY"
+            });
+            modelBuilder.Entity<UserRole>().HasData(new UserRole
+            { 
+                Id=3,
+                Role = "REVIEWINGAUTHORITY"
+            });
+
+            modelBuilder.Entity<Branch>().HasData(new Branch
+            {
+                Id = 1,
+                BranchName = "Mumbai",
+                BranchCode = "BR001"
+
+            });
+
+
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

@@ -6,14 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppraisalTool.Identity.Models
+namespace AppraisalTool.Domain.Entities
 {
-    public class FinancialYear
+    public class KraDetail
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int StartYear { get; set; }
-        public int EndYear { get; set; }
+        public string Description { get; set; }
+        public int KraTypeId { get; set; }
+        public bool IsMeasurable { get; set; }
+
+        [ForeignKey("KraTypeId")]
+        public virtual Kra KraType { get; set; }
     }
 }
