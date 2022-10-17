@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppraisalTool.Identity.Models
+namespace AppraisalTool.Domain.Entities
 {
     public class Appraisal
     {
@@ -14,11 +14,9 @@ namespace AppraisalTool.Identity.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int FinancialYearId { get; set; }
-        public string UserId { get; set; }
+        public int UserId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string ReportingAuthorityId { get; set; }
-        public string ReviewingAuthorityId { get; set; }
         public int StatusId { get; set; }
         public int? KraId { get; set; }
         public DateTime ReviewedOn { get; set; }
@@ -27,13 +25,9 @@ namespace AppraisalTool.Identity.Models
         [ForeignKey("FinancialYearId")]
         public virtual FinancialYear FinancialYear { get; set; }
         [ForeignKey("UserId")]
-        public virtual ApplicationUser User { get; set; }
-        [ForeignKey("ReportingAuthorityId")]
-        public virtual ApplicationUser ReportingAuthority { get; set; }
-        [ForeignKey("ReviewingAuthorityId")]
-        public virtual ApplicationUser ReviewingAuthority { get; set; }
+        public virtual User User { get; set; }
+        
         [ForeignKey("StatusId")]
         public virtual Status Status { get; set; }
-
     }
 }

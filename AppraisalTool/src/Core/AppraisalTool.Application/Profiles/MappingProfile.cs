@@ -11,6 +11,7 @@ using AppraisalTool.Application.Features.Events.Queries.GetEventsExport;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsList;
 using AppraisalTool.Application.Features.Orders.GetOrdersForMonth;
 using AppraisalTool.Domain.Entities;
+using AppraisalTool.Application.Models.AppraisalTool;
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -36,6 +37,9 @@ namespace AppraisalTool.Application.Profiles
             CreateMap<Order, OrdersForMonthDto>();
 
             CreateMap<Event, EventListVm>().ConvertUsing<EventVmCustomMapper>();
+
+            //Appraisal Tool
+            CreateMap<User,AddUserViewModel>().ReverseMap();
         }
     }
 }
