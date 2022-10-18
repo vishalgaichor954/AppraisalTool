@@ -11265,7 +11265,10 @@ html {
   overflow: auto; }
 
 .container-scroller {
-  overflow: hidden; }
+
+  overflow: hidden;
+
+}
 
 pre {
   background: color(gray-lighter);

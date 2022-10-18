@@ -26,11 +26,13 @@ namespace AppraisalTool.App.Controllers
             return View();
         }
 
+<<<<<<< HEAD
+=======
         public IActionResult Register()
         {
             return View();
         }
-        
+>>>>>>> c0801cce76f6e36dd116132ea0a3f7d940b6738d
         [HttpPost]
         public ActionResult Login(Login login)
         {
