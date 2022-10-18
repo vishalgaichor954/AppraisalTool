@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AppraisalTool.App.Models.AppraisalToolAuth;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AppraisalTool.App.Controllers
 {
@@ -12,6 +13,18 @@ namespace AppraisalTool.App.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult Login(Login login)
+        {
+            if (ModelState.IsValid)
+            {
+                return View(login);
+            }
+            else
+            {
+                return StatusCode(401,"Unauthorized User");
+            }
         }
     }
 }
