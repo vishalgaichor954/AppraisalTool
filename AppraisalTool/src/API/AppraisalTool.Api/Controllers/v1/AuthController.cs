@@ -1,6 +1,8 @@
-﻿using AppraisalTool.Application.Contracts.Persistence;
+﻿using AppraisalTool.Application.Contracts.Infrastructure;
+using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Categories.Commands.CreateCategory;
 using AppraisalTool.Application.Models.AppraisalTool;
+using AppraisalTool.Application.Models.Mail;
 using AppraisalTool.Domain.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -15,11 +17,13 @@ namespace AppraisalTool.Api.Controllers.v1
 
         private readonly IAuthenticationService _authService;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailservice;
 
-        public AuthController(IAuthenticationService authService,IMapper mapper)
+        public AuthController(IAuthenticationService authService,IMapper mapper,IEmailService emailservice)
         {
             _authService = authService;
             _mapper = mapper;
+            _emailservice = emailservice;
         }
 
 
@@ -44,8 +48,16 @@ namespace AppraisalTool.Api.Controllers.v1
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
                 bool userAdded = await _authService.AddUser(user);
+
                 if (userAdded)
                 {
+                    var email = new Email()
+                    {
+                        To = model.Email,
+                        Body = $"Dear User, <br/><br/You application registered successfully on portal.<br/>\r\n we will contact you soon!.<br /><br />Thanks <br/> <br/>Regards, <br/> Team. Support",
+                        Subject = "User Registered Successfully !!"
+                    };
+                    await _emailservice.SendEmail(email);
                     return Ok("User Created Successfully");
                 }
                 return BadRequest("Failed To Register User");

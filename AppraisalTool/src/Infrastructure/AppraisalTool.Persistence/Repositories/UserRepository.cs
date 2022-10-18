@@ -1,4 +1,5 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
+using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,11 +15,13 @@ namespace AppraisalTool.Persistence.Repositories
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly ILogger _logger;
+        //private readonly IAuthenticationService _authService;
 
-        public UserRepository(ApplicationDbContext context, ILogger<User> logger):base(context, logger)
+        public UserRepository(ApplicationDbContext context, ILogger<User> logger/* IAuthenticationService authservice*/) :base(context, logger)
         {
             _dbContext = context;
             _logger = logger;
+            //_authService = authservice;
         }
 
         public async Task<User> AddUser(User u)
@@ -28,6 +31,7 @@ namespace AppraisalTool.Persistence.Repositories
             {
                 await AddAsync(u);
                 return await _dbContext.User.FirstOrDefaultAsync(obj => obj.Email  == u.Email);
+
             }
             else
             {
@@ -35,5 +39,31 @@ namespace AppraisalTool.Persistence.Repositories
             }
         }
 
+        public async Task<CreateUserDto> RegisterUserAsync(User request)
+        {
+            var user = _dbContext.User.Where(u => u.Email == request.Email).FirstOrDefault();
+            CreateUserDto response = new CreateUserDto();
+            if(user != null)
+            {
+                response.Message = "Email id Already Exist .";
+                response.Succeeded = false;
+                return response;
+
+            }
+            //_authService.CreatePasswordHash(response.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            //user.PasswordHash = passwordHash;
+            //user.PasswordSalt = passwordSalt;
+            await _dbContext.User.AddAsync(request);
+            await _dbContext.SaveChangesAsync();
+            response.Email = request.Email;
+            response.Id = request.Id;
+            response.FirstName = request.FirstName;
+            response.LastName = request.LastName;
+            response.Succeeded = true;
+            response.Message = "User registered successfully .";
+            return response;
+
+
+        }
     }
 }

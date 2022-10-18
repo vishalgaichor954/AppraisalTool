@@ -39,7 +39,8 @@ namespace AppraisalTool.Application.Profiles
             CreateMap<Event, EventListVm>().ConvertUsing<EventVmCustomMapper>();
 
             //Appraisal Tool
-            CreateMap<User,AddUserViewModel>().ReverseMap();
+            //CreateMap<User,CreateUserCommand>().ReverseMap();
+            CreateMap<User, AddUserViewModel>().ReverseMap();
         }
     }
 }
