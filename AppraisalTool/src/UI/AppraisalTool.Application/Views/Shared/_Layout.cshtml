@@ -35,10 +35,34 @@
                 </div>
             </div>
         </nav>*@
+      @*  @Html.Partial("_LoggedIn")*@
     </header>
     <div class="container-fluid m-0">
         <main role="main" class="pb-3">
-            @RenderBody()
+            @{
+                string x = Context.Session.GetString("Role");
+                string y = Context.Session.GetString("LoggedIn");
+                    if (x == "User" && y =="True")
+                    {
+                        @Html.Partial("_LoggedIn")
+                    }
+            }
+       
+                    
+            
+                @RenderBody()
+               @* @{
+                         if (x == "User")
+                    {
+                            <!-- main-panel ends -->
+                       </div>
+                        <!-- page-body-wrapper ends -->
+                        </div>
+                    }
+                }*@
+                  
+    
+           
         </main>
     </div>
 
@@ -50,6 +74,12 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+     <script src="~/js/misc.js" asp-append-version="true"></script>
+     <script src="~/js/hoverable-collapse.js" asp-append-version="true"></script>
+     <script src="~/js/off-canvas.js" asp-append-version="true"></script>
+      <script src="~/js/jquery.cookie.js" asp-append-version="true"></script>
+     <script src="~/js/vendor.bundle.base.js" asp-append-version="true"></script>
+
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

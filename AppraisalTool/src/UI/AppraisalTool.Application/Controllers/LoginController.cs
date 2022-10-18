@@ -11,6 +11,11 @@ namespace AppraisalTool.App.Controllers
 
         public IActionResult Login()
         {
+            string x = HttpContext.Session.GetString("Role");
+            if(x != null)
+            {
+                return RedirectToAction("Dashboard", "Dashboard");
+            }
             return View();
         }
     }

@@ -105,7 +105,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
-
+app.UseSession();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
