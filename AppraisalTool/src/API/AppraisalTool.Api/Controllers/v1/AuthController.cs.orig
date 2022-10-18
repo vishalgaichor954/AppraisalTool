@@ -19,7 +19,11 @@ namespace AppraisalTool.Api.Controllers.v1
         private readonly IMapper _mapper;
         private readonly IEmailService _emailservice;
 
+<<<<<<< HEAD
         public AuthController(IAuthenticationService authService,IMapper mapper,IEmailService emailservice)
+=======
+        public AuthController(IAuthenticationService authService, IMapper mapper)
+>>>>>>> 7273fb2eb05f554506b7918efe83b731dd8171bf
         {
             _authService = authService;
             _mapper = mapper;
@@ -29,7 +33,7 @@ namespace AppraisalTool.Api.Controllers.v1
 
         [HttpPost]
         [Route("/User/Register")]
-        public async Task<ActionResult> Register(AddUserViewModel model)
+        public async Task<ActionResult> RegisterUser(AddUserViewModel model)
         {
             try
             {
@@ -44,7 +48,7 @@ namespace AppraisalTool.Api.Controllers.v1
                     var email = new Email()
                     {
                         To = model.Email,
-                        Body = $"Dear User, <br/><br/>You application registered successfully on portal.<br/>\r\n  Kindly refer below credentials to Login.<br/>\r\nUsername : {model.Email} <br/>\r\nPassword : {model.Password}.<br /><br />Thanks <br/> <br/>Regards, <br/> Team. Support",
+                        Body = $"Dear User, <br/><br/You application registered successfully on portal.<br/>\r\n we will contact you soon!.<br /><br />Thanks <br/> <br/>Regards, <br/> Team. Support",
                         Subject = "User Registered Successfully !!"
                     };
                     await _emailservice.SendEmail(email);

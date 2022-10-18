@@ -54,13 +54,13 @@ namespace AppraisalTool.Infrastructure.Mail
 
             using (MailMessage mm = new MailMessage(_emailSettings.Mail, email.To))
             {
-                mm.Subject = "Registered Successfully!";
-                string body = "Dear User" + ",";
-                body += "<br /> You application registered successfully on portal.";
-                body += "<br /><br /> we will contact you soon!.";
-                body += "<br /><br />Thanks" + ",";
-                body += "<br />Team support";
-                mm.Body = body;
+                mm.Subject = email.Subject;
+                //string body = "Dear User" + ",";
+                //body += "<br /> You application registered successfully on portal.";
+                //body += "<br /><br /> we will contact you soon!.";
+                //body += "<br /><br />Thanks" + ",";
+                //body += "<br />Team support";
+                mm.Body = email.Body;
                 mm.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = _emailSettings.Host;

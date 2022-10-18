@@ -39,6 +39,7 @@ namespace AppraisalTool.Persistence.Repositories
             }
         }
 
+<<<<<<< HEAD
         public async Task<CreateUserDto> RegisterUserAsync(User request)
         {
             var user = _dbContext.User.Where(u => u.Email == request.Email).FirstOrDefault();
@@ -65,6 +66,7 @@ namespace AppraisalTool.Persistence.Repositories
 
 
         }
+=======
         public async Task<User> FindUserByEmail(string email)
         {
             User user = await _dbContext.User.Include(x=>x.Role).FirstOrDefaultAsync(u => u.Email == email);
@@ -77,5 +79,6 @@ namespace AppraisalTool.Persistence.Repositories
 
 
 
+>>>>>>> 7273fb2eb05f554506b7918efe83b731dd8171bf
     }
 }

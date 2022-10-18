@@ -14,11 +14,12 @@ namespace AppraisalTool.App.Controllers
         {
             return View();
         }
+<<<<<<< HEAD
 
         public IActionResult Register()
         {
             return View();
-        }
+=======
         [HttpPost]
         public ActionResult Login(Login login)
         {
@@ -30,6 +31,7 @@ namespace AppraisalTool.App.Controllers
             {
                 return StatusCode(401,"Unauthorized User");
             }
+>>>>>>> 7273fb2eb05f554506b7918efe83b731dd8171bf
         }
     }
 }

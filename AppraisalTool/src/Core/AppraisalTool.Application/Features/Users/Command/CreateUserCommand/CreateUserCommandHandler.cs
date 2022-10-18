@@ -42,13 +42,13 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
             _logger.LogInformation("Hanlde Completed");
             if (userDto.Succeeded)
             {
-                var email = new Email()
-                {
-                    To = userDto.Email,
-                    Body = $"Dear User, <br/><br/You application registered successfully on portal.<br/>\r\n we will contact you soon!.<br /><br />Thanks <br/> <br/>Regards, <br/> Team. Support",
-                    Subject = "User Registered Successfully !!"
-                };
-                await _emailservice.SendEmail(email);
+                ////var email = new Email()
+                ////{
+                ////    To = userDto.Email,
+                ////    Body = $"Dear User, <br/><br/You application registered successfully on portal.<br/>\r\n we will contact you soon!.<br /><br />Thanks <br/> <br/>Regards, <br/> Team. Support",
+                ////    Subject = "User Registered Successfully !!"
+                ////};
+                //await _emailservice.SendEmail(email);
                 return new Response<CreateUserDto>(userDto, "success");
             }
             else
