@@ -1,4 +1,5 @@
-﻿using AppraisalTool.Domain.Entities;
+﻿using AppraisalTool.Application.Models.AppraisalTool;
+using AppraisalTool.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<bool> AddUser(User user);
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt);
         public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt);
+        public Task<AuthenticationResponse> Login(string email, string password);
     }
 }

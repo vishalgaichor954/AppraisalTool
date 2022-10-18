@@ -36,7 +36,6 @@ namespace AppraisalTool.Domain.Entities
         [ForeignKey("DeletedBy")]
         public virtual User? DeletedByUser { get; set; }
 
-        [NotMapped]
         [ForeignKey("RoleId")]
         public virtual UserRole? Role { get; set; }
         [ForeignKey("BranchId")]

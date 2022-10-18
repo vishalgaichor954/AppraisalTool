@@ -16,7 +16,7 @@ namespace AppraisalTool.Api.Controllers.v1
         private readonly IAuthenticationService _authService;
         private readonly IMapper _mapper;
 
-        public AuthController(IAuthenticationService authService,IMapper mapper)
+        public AuthController(IAuthenticationService authService, IMapper mapper)
         {
             _authService = authService;
             _mapper = mapper;
@@ -25,18 +25,8 @@ namespace AppraisalTool.Api.Controllers.v1
 
         [HttpPost]
         [Route("/User/Register")]
-        public async  Task<ActionResult> RegisterUser(AddUserViewModel model)
+        public async Task<ActionResult> RegisterUser(AddUserViewModel model)
         {
-            //#region Register
-            //User user = new User()
-            //{
-            //    Name = model.Name,
-            //    Email = model.Email,
-            //    Password = model.Password,
-            //    Address = model.Address,
-            //    Role = "user",
-            //    CreatedOn = DateTime.Now
-            //};
             try
             {
                 User user = _mapper.Map<User>(model);
@@ -54,7 +44,28 @@ namespace AppraisalTool.Api.Controllers.v1
             {
                 return BadRequest(e.Message);
             }
-            
+
+        }
+
+        [HttpPost]
+        [Route("/Auth/Login")]
+        public async Task<ActionResult> LoginUser(LoginUserViewModel model)
+        {
+            try
+            {
+                AuthenticationResponse response = await _authService.Login(model.Email, model.Password);
+                if (response != null)
+                {
+                    return Ok(response);
+                }
+                return BadRequest(new AuthenticationResponse() { Message = "Failed to Login user", IsAuthenticated = false,Token=null,Role=null }); ;
+
+            }
+            catch(Exception e)
+            {
+                return BadRequest(new AuthenticationResponse() { Message = e.Message, IsAuthenticated = false, Token = null, Role = null });
+            }
+           
         }
     }
 }

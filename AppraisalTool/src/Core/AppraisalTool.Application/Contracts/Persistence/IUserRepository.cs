@@ -10,5 +10,6 @@ namespace AppraisalTool.Application.Contracts.Persistence
     public interface IUserRepository
     {
         public Task<User> AddUser(User user);
+        public Task<User> FindUserByEmail(string email);
     }
 }

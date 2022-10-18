@@ -35,5 +35,17 @@ namespace AppraisalTool.Persistence.Repositories
             }
         }
 
+        public async Task<User> FindUserByEmail(string email)
+        {
+            User user = await _dbContext.User.Include(x=>x.Role).FirstOrDefaultAsync(u => u.Email == email);
+            if(user == null)
+            {
+                return null;
+            }
+            return user;
+        }
+
+
+
     }
 }
