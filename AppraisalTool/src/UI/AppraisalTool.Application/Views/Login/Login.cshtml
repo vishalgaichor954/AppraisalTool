@@ -31,16 +31,30 @@
                                 <label asp-for="Password" class="control-label"></label>
                                 <input asp-for="Password" type="Password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" required>
                                 <span asp-validation-for="Password" class="text-danger"></span>
-
                             </div>
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <img id="img-captcha" src="~/get-captcha-image" />
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Captcha Code" asp-for="CaptchaCode" maxlength="4" />
+                                </div>
+                                <span asp-validation-for="CaptchaCode" class="text-danger">
+                                    @if (TempData["msg"] != null)
+                                    {
+                                        @TempData["msg"]
+
+                                    }
+                                </span>
+                            </div>
+
                             <div class="form-group">
                                 <div style="align-items:center ;">
-                                <input type="submit" value="Login" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" />
-
-
+                                    <input type="submit" value="Login" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" />
                                 </div>
                             </div>
-                           
+
                         </form>
                     </div>
                 </div>
@@ -50,6 +64,9 @@
     </div>
     <!-- page-body-wrapper ends -->
 </div>
+
+
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
@@ -69,3 +86,14 @@
 
     <script src="./lib/assets/js/misc.js"></script>
     <!-- endinject -->
+
+    <script>
+        $("#img-captcha").click(function () {
+            resetCaptchaImage();
+        });
+
+        function resetCaptchaImage() {
+            d = new Date();
+            $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
+        }
+    </script>

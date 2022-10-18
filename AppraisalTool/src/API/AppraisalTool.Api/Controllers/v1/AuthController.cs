@@ -24,7 +24,7 @@ namespace AppraisalTool.Api.Controllers.v1
 
 
         [HttpPost]
-        [Route("/User/Register")]
+        [Route("AddUser")]
         public async Task<ActionResult> RegisterUser(AddUserViewModel model)
         {
             try
@@ -48,7 +48,7 @@ namespace AppraisalTool.Api.Controllers.v1
         }
 
         [HttpPost]
-        [Route("/Auth/Login")]
+        [Route("Login")]
         public async Task<ActionResult> LoginUser(LoginUserViewModel model)
         {
             try

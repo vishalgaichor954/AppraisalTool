@@ -29,6 +29,7 @@ namespace AppraisalTool.Api.Controllers.v1
         }
 
         //[Authorize]
+        [Authorize(Roles = "ADMINISTRATOR")]
         [HttpGet("all", Name = "GetAllCategories")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> GetAllCategories()

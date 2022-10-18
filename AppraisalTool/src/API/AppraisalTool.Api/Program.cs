@@ -16,6 +16,9 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using AppraisalTool.Api.SwaggerHelper;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,6 +86,36 @@ builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+//ValidateTokenWithParameters(builder.Services, builder.Configuration);
+
+//void ValidateTokenWithParameters(IServiceCollection services, ConfigurationManager configuration)
+//{
+//    var JwtSecret = configuration["JwtSettings:Key"];
+//    var issuer = configuration["JwtSettings:Issuer"];
+//    var audience = configuration["JwtSettings:Audience"];
+//    var symmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSecret));
+//    var tokenValidationParameters = new TokenValidationParameters()
+//    {
+//        ValidateIssuer = true,
+//        ValidIssuer = issuer,
+
+//        ValidateAudience = true,
+//        ValidAudience = audience,
+
+//        ValidateIssuerSigningKey = true,
+//        IssuerSigningKey = symmetricKey,
+
+//        ValidateLifetime = true
+//    };
+
+//    builder.Services.AddAuthentication(u =>
+//    {
+//        u.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//        u.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//    }).AddJwtBearer(u => u.TokenValidationParameters = tokenValidationParameters);
+//}
+
 var app = builder.Build();
 
 
@@ -109,8 +142,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseSwagger();
+
 
 // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),  
 // specifying the Swagger JSON endpoint.  
@@ -119,7 +154,7 @@ IApiVersionDescriptionProvider provider = app.Services.GetRequiredService<IApiVe
 app.UseSwaggerUI(
 options =>
 {
-                // build a swagger endpoint for each discovered API version  
+    // build a swagger endpoint for each discovered API version  
     foreach (var description in provider.ApiVersionDescriptions)
     {
         options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());

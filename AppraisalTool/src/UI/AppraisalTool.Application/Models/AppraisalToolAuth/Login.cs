@@ -13,5 +13,9 @@ namespace AppraisalTool.App.Models.AppraisalToolAuth
         [RegularExpression(@"^[a-zA-z0-9@&*$]{8,}", ErrorMessage = "Please enter a valid password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Required]
+        [StringLength(4)]
+        public string CaptchaCode { get; set; }
     }
 }

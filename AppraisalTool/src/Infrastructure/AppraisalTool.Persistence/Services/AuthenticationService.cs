@@ -78,7 +78,7 @@ namespace AppraisalTool.Persistence.Services
 
             string JwtSecret = _configuration.GetValue<string>("JwtSettings:Key");
             string JwtIssuer = _configuration.GetValue<string>("JwtSettings:Issuer");
-            var JwtAudiance = _configuration.GetValue<string>("JwtSettings:Audiance");
+            var JwtAudiance = _configuration.GetValue<string>("JwtSettings:Audience");
             var JwtValidity = _configuration.GetValue<string>("JwtSettings:DurationInMinutes");
 
             var symmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSecret));
