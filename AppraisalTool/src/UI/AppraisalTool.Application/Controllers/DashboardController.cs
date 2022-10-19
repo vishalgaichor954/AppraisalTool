@@ -11,8 +11,13 @@ namespace AppraisalTool.App.Controllers
         }
         public IActionResult Dashboard()
         {
-            HttpContext.Session.SetString("Role", "User");
-            HttpContext.Session.SetString("LoggedIn", "True");
+            string x = HttpContext.Session.GetString("user");
+            if (x == null)
+            {
+                return RedirectToAction("Login","Login");
+            }
+            //HttpContext.Session.SetString("Role", "User");
+            //HttpContext.Session.SetString("LoggedIn", "True");
             JobProfilesViewmodel jobProfiles = new JobProfilesViewmodel();
             //{
             //       PrimaryRole="Savings Account Officer",

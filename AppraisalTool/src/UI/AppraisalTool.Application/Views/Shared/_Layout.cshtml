@@ -41,9 +41,9 @@
         <main role="main" class="pb-3">
             @{ 
                 
-                string x = Context.Session.GetString("Role");
-                string y = Context.Session.GetString("LoggedIn");
-                    if (x == "User" && y =="True")
+                string x = Context.Session.GetString("user");
+                //string y = Context.Session.GetString("LoggedIn");
+                    if (x != null )
                     {
                         @Html.Partial("_LoggedIn")
                     }
