@@ -18,10 +18,17 @@ namespace AppraisalTool.App.Controllers
 
         public IActionResult Login()
         {
+<<<<<<< HEAD
+            string x = HttpContext.Session.GetString("Role");
+            if(x != null)
+            {
+                return RedirectToAction("Dashboard", "Dashboard");
+=======
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             if (userSession != null)
             {
-                return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+>>>>>>> 8b5a3a0cde36584eca233f492171c85bb96174ec
             }
             return View();
         }
@@ -58,7 +65,7 @@ namespace AppraisalTool.App.Controllers
 
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "user",AuthData);
 
-                    return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 return View();
             }

@@ -28,8 +28,13 @@ namespace AppraisalTool.Api.Controllers.v1
 
 
         [HttpPost]
+<<<<<<< HEAD
         [Route("AddUser")]
         public async Task<ActionResult> RegisterUser(AddUserViewModel model)
+=======
+        [Route("/User/Register")]
+        public async Task<ActionResult> Register(AddUserViewModel model)
+>>>>>>> c0801cce76f6e36dd116132ea0a3f7d940b6738d
         {
             try
             {

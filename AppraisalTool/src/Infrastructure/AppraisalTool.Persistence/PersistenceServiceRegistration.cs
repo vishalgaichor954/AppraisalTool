@@ -19,7 +19,6 @@ namespace AppraisalTool.Persistence
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
-
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthenticationService,AuthenticationService>();
 
