@@ -70,12 +70,12 @@ namespace AppraisalTool.Api.Controllers.v1
                 {
                     return Ok(response);
                 }
-                return BadRequest(new AuthenticationResponse() { Message = "Failed to Login user", IsAuthenticated = false,Token=null,Role=null }); ;
+                return BadRequest(new AuthenticationResponse() { Message = "Failed to Login user", IsAuthenticated = false,Token=null,Role=null,Name=null }); ;
 
             }
             catch(Exception e)
             {
-                return BadRequest(new AuthenticationResponse() { Message = e.Message, IsAuthenticated = false, Token = null, Role = null });
+                return BadRequest(new AuthenticationResponse() { Message = e.Message, IsAuthenticated = false, Token = null, Role = null,Name=null });
             }
            
         }

@@ -39,14 +39,13 @@
     </header>
     <div class="container-fluid m-0">
         <main role="main" class="pb-3">
-            @{ 
-                
-                string x = Context.Session.GetString("Role");
-                string y = Context.Session.GetString("LoggedIn");
-                    if (x == "User" && y =="True")
-                    {
+            @{
+
+                string x = Context.Session.GetString("user");
+                if (x != null)
+                {
                         @Html.Partial("_LoggedIn")
-                    }
+                }
             }
        
                     
