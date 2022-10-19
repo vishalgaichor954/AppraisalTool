@@ -3,6 +3,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8b5a3a0cde36584eca233f492171c85bb96174ec
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -16,8 +20,11 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 8b5a3a0cde36584eca233f492171c85bb96174ec
 app.UseRouting();
 
 app.UseAuthorization();

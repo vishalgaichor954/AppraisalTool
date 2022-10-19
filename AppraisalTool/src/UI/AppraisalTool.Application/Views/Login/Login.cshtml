@@ -9,7 +9,14 @@
 
 
 
-
+@if (TempData["Error"] != null)
+{
+    <div class="container">
+        <div class="alert alert-danger mt-5" role="alert">
+            @TempData["Error"]
+        </div>
+    </div>
+}
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth">

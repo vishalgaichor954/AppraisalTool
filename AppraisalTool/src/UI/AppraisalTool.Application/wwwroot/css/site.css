@@ -17,3 +17,35 @@ body {
   
   margin-bottom: 60px;
 }
+.Dash-Card {
+    height: 200px;
+}
+
+.roles {
+    display: inline;
+}
+
+.Anchor-body {
+    text-decoration: none;
+    height: 200px;
+    width: 100%;
+}
+
+.icon-card {
+    font-size: 3rem;
+    font-weight: 300;
+}
+
+.role-div {
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+.user-roles {
+    margin-right: 18px;
+}
+
+.no-margin {
+    margin: 0% !important;
+    padding: 0% !important;
+}

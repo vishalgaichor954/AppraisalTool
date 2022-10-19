@@ -21,7 +21,7 @@ namespace AppraisalTool.App.Controllers
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             if (userSession != null)
             {
-                return RedirectToRoute(new { controller = "Home", action = "Index" });
+                return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
             }
             return View();
         }
@@ -58,13 +58,21 @@ namespace AppraisalTool.App.Controllers
 
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "user",AuthData);
 
-                    return RedirectToRoute(new { controller = "Home", action = "Index" });
+                    return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
                 }
+                TempData["Error"] = "Faild to Login User";
                 return View();
             }
             return View();
+        }
 
-
+        [HttpGet]
+        public IActionResult UserLogout()
+        {
+            Console.WriteLine(HttpContext.Session.GetString("user"));
+            HttpContext.Session.Remove("user");
+            Console.WriteLine($"NUll : {HttpContext.Session.GetString("user")}");
+            return RedirectToAction("Login");
         }
     }
 }
