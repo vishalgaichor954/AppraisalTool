@@ -1,4 +1,6 @@
-﻿using AppraisalTool.App.Models;
+﻿using AppraisalTool.App.Helpers;
+using AppraisalTool.App.Models;
+using AppraisalTool.App.Models.AppraisalToolAuth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppraisalTool.App.Controllers
@@ -18,6 +20,12 @@ namespace AppraisalTool.App.Controllers
             }
             //HttpContext.Session.SetString("Role", "User");
             //HttpContext.Session.SetString("LoggedIn", "True");
+            var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            if(user != null)
+            {
+                ViewBag.FullName = user.Name;
+                ViewBag.UserRole = user.Role;
+            }
             JobProfilesViewmodel jobProfiles = new JobProfilesViewmodel();
             //{
             //       PrimaryRole="Savings Account Officer",

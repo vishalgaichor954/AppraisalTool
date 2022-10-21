@@ -60,11 +60,19 @@ namespace AppraisalTool.App.Controllers
 
                     return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
                 }
+                TempData["Error"] = "Faild to Login User";
                 return View();
             }
             return View();
+        }
 
-
+        [HttpGet]
+        public IActionResult UserLogout()
+        {
+            Console.WriteLine(HttpContext.Session.GetString("user"));
+            HttpContext.Session.Remove("user");
+            Console.WriteLine($"NUll : {HttpContext.Session.GetString("user")}");
+            return RedirectToAction("Login");
         }
     }
 }

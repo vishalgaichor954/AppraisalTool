@@ -9,7 +9,14 @@
 
 
 
-
+@if (TempData["Error"] != null)
+{
+    <div class="container">
+        <div class="alert alert-danger mt-5" role="alert">
+           <strong>Error !</strong> @TempData["Error"]
+        </div>
+    </div>
+}
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth">
@@ -48,7 +55,20 @@
                                     }
                                 </span>
                             </div>
+                              <div class="my-1 mb-2 d-flex justify-content-between align-items-center">
+                   @* <div class="form-check">
+                      <label class="form-check-label text-muted">
+                        <input type="checkbox" class="form-check-input"> Keep me signed in </label>
+                    </div>*@
+                   <!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>*@
 
+<!-- Modal -->
+
+                    <a   href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="auth-link text-black">Forgot password?</a>
+                  </div>
                             <div class="form-group">
                                 <div style="align-items:center ;">
                                     <input type="submit" value="Login" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" />
@@ -64,7 +84,42 @@
     </div>
     <!-- page-body-wrapper ends -->
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form >
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="email1">Email address</label>
+                        <input type="email" id="email1" class="form-control" />
+                   
+                    </div>
 
+                    <!-- password input -->
+                   
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+     @*   <button type="button" class="btn btn-primary">Save changes</button>*@
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
+<!-- Modal -->
 
 
 @section Scripts {
