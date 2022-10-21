@@ -13,5 +13,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<User> AddUser(User user);
         Task<CreateUserDto> RegisterUserAsync(User request);
         public Task<User> FindUserByEmail(string email);
+        public Task<bool> UpdateUser(User user);
     }
+
 }

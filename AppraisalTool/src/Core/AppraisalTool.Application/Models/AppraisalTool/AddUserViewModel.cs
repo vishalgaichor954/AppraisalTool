@@ -17,7 +17,5 @@ namespace AppraisalTool.Application.Models.AppraisalTool
         public int RoleId { get; set; }
         public int BranchId { get; set; }
         public int? AddedBy { get; set; } = null;
-
-
     }
 }

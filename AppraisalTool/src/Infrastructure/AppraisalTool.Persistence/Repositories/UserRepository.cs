@@ -65,6 +65,8 @@ namespace AppraisalTool.Persistence.Repositories
 
 
         }
+
+        //@Author : Ilyas Dabholkar
         public async Task<User> FindUserByEmail(string email)
         {
             User user = await _dbContext.User.Include(x=>x.Role).FirstOrDefaultAsync(u => u.Email == email);
@@ -73,6 +75,14 @@ namespace AppraisalTool.Persistence.Repositories
                 return null;
             }
             return user;
+        }
+
+
+        //@Author : Ilyas Dabholkar
+        public async Task<bool> UpdateUser(User user)
+        {
+            await UpdateAsync(user);
+            return true;
         }
 
 
