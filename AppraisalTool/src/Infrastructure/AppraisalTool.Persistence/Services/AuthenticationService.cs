@@ -3,6 +3,7 @@ using AppraisalTool.Application.Models.AppraisalTool;
 using AppraisalTool.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -19,16 +20,31 @@ namespace AppraisalTool.Persistence.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration _configuration;
+        private readonly ILogger<AuthenticationService> _logger;
 
-        public AuthenticationService(IUserRepository userRepository,IConfiguration configuration)
+        public AuthenticationService(IUserRepository userRepository, IConfiguration configuration, ILogger<AuthenticationService> logger)
         {
             _userRepository = userRepository;
             _configuration = configuration;
+            _logger = logger;
         }
 
+        //@Author : Ilyas Dabholkar
+        //Generates random password of specified length using lower/upper case alphabets numbers and symbols.
+        public static string GeneratePassword(int passLength)
+        {
+            var chars = "abcdefghijklmnopqrstuvwxyz@#$&ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            var result = new string(
+                Enumerable.Repeat(chars, passLength)
+                          .Select(s => s[random.Next(s.Length)])
+                          .ToArray());
+            return result;
+        }
+
+        //@Author : Ilyas Dabholkar
         public async Task<bool> AddUser(User user)
         {
             try
@@ -36,13 +52,14 @@ namespace AppraisalTool.Persistence.Services
                 await _userRepository.AddUser(user);
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
         }
 
-        public async Task<AuthenticationResponse> Login(string email,string password)
+        //@Author : Ilyas Dabholkar
+        public async Task<AuthenticationResponse> Login(string email, string password)
         {
             User user = await _userRepository.FindUserByEmail(email);
             if (user == null)
@@ -57,7 +74,7 @@ namespace AppraisalTool.Persistence.Services
                 {
                     string name = $"{user.FirstName} {user.LastName}";
                     string token = GenerateToken(user.Id, user.Email, user.Role.Role, name);
-                    return new AuthenticationResponse() { IsAuthenticated = true, Token = token, Role = user.Role.Role,Message=null,Name=name};
+                    return new AuthenticationResponse() { IsAuthenticated = true, Token = token, Role = user.Role.Role, Message = null, Name = name,RoleId=user.RoleId };
                 }
                 else
                 {
@@ -66,6 +83,8 @@ namespace AppraisalTool.Persistence.Services
             }
         }
 
+        //@Author : Ilyas Dabholkar
+        //Method for setting claims and JWT Token generation 
         public string GenerateToken(int id, string email, string role, string name)
         {
             var payload = new Claim[]
@@ -94,6 +113,9 @@ namespace AppraisalTool.Persistence.Services
             return jwtSecurityTokenHandler;
         }
 
+
+        //@Author : Ilyas Dabholkar
+        //Generates Passwords Hash and Password Salt
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
@@ -103,12 +125,48 @@ namespace AppraisalTool.Persistence.Services
             }
         }
 
+        //@Author : Ilyas Dabholkar
+        //Verify Password with Existing Hashed Password
         public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-             using (var hmac = new HMACSHA512(passwordSalt))
+            using (var hmac = new HMACSHA512(passwordSalt))
             {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return computedHash.SequenceEqual(passwordHash);
+            }
+        }
+
+
+        //@Author : Ilyas Dabholkar
+        //resets password to a new randomly generated password
+        public async Task<string> ResetPassword(string email)
+        {
+            try
+            {
+                _logger.LogInformation("Reset Password Initiated");
+                var user = await _userRepository.FindUserByEmail(email);
+                if (user != null)
+                {
+                    _logger.LogInformation("User Found!Generating new password");
+                    string password = GeneratePassword(8);
+                    Console.Write($"Password Generated :{password}");
+                    _logger.LogInformation("Encrypting GenaratedPassword");
+                    CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+                    user.PasswordHash = passwordHash;
+                    user.PasswordSalt = passwordSalt;
+                    bool userUpdated = await _userRepository.UpdateUser(user);
+                    if (userUpdated == true)
+                    {
+                        _logger.LogInformation("Password Updated Successfully");
+                        return password;
+                    }
+                    return null;
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                return null;
             }
         }
     }

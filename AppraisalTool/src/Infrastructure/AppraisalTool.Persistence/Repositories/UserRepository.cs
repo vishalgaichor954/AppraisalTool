@@ -1,5 +1,7 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
+using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
+using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
 using AppraisalTool.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -65,6 +67,8 @@ namespace AppraisalTool.Persistence.Repositories
 
 
         }
+
+        //@Author : Ilyas Dabholkar
         public async Task<User> FindUserByEmail(string email)
         {
             User user = await _dbContext.User.Include(x=>x.Role).FirstOrDefaultAsync(u => u.Email == email);
@@ -75,7 +79,68 @@ namespace AppraisalTool.Persistence.Repositories
             return user;
         }
 
+        public async Task<RemoveUserCommandDto> RemoveUserAsync(int id)
+        {
+            var user = await _dbContext.User.Where(u => u.Id == id).FirstOrDefaultAsync();
 
+           RemoveUserCommandDto response = new RemoveUserCommandDto();
+        
+    
+            if (user != null)
+            {
+                user.IsDeleted =true;
+                await _dbContext.SaveChangesAsync();
+                response.Id = id;
+                response.Message = $"User of id:{id} has been removed successfully .";
+                response.Succeeded = true;
+                return response;
+            }
+            else
+            {
+                response.Id = id;
+                response.Message = $"User of id:{id} does not exists .";
+                response.Succeeded = false;
+                return response;
+            }
+        }
 
+        public async Task<UpdateUserCommandDto> UpdateUserAsync(int id, UpdateUserCommand request)
+        {
+            var user = await _dbContext.User.Where(u => u.Email ==request.Email).FirstOrDefaultAsync();
+            UpdateUserCommandDto response = new UpdateUserCommandDto();
+            if (user!= null)
+            {
+                response.Message = "Email Already Exist";
+                response.Succeeded = false;
+                return response;
+            }
+            var userToUpdate=await _dbContext.User.Where(u=>u.Id==id).FirstOrDefaultAsync();
+            if (userToUpdate != null)
+            {
+                userToUpdate.Id = request.Id;
+                userToUpdate.FirstName=request.FirstName;
+                userToUpdate.LastName=request.LastName;
+                userToUpdate.Email=request.Email;
+                userToUpdate.RoleId = request.RoleId;
+                userToUpdate.BranchId = request.BranchId;
+                await _dbContext.SaveChangesAsync();
+                response.Message = "User Details Update Successfully";
+                response.Succeeded = true;
+                response.Id = userToUpdate.Id;
+                return response;
+            }
+            else
+            {
+                response.Message = "User Doesnt Exist";
+                response.Succeeded = false;
+                return response;
+            }
+        }
+         //@Author : Ilyas Dabholkar
+        public async Task<bool> UpdateUser(User user)
+        {
+            await UpdateAsync(user);
+            return true;
+        }
     }
 }

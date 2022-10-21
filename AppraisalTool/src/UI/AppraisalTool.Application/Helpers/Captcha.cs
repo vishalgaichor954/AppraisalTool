@@ -5,6 +5,9 @@ using System.Text;
 
 namespace AppraisalTool.App.Helpers
 {
+
+    //@Author : Ilyas Dabholkar
+    //Helper Class For Captcha Generation
     public class Captcha
     {
         const string Letters = "2346789ABCDEFGHJKLMNPRTUVWXYZ";
