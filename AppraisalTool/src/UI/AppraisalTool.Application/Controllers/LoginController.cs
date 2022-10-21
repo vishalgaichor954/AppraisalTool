@@ -16,6 +16,7 @@ namespace AppraisalTool.App.Controllers
             return View();
         }
 
+        //@Author : Abhishek Singh
         public IActionResult Login()
         {
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
@@ -26,11 +27,14 @@ namespace AppraisalTool.App.Controllers
             return View();
         }
 
+        //@Author : Abhishek Singh
         public IActionResult Register()
         {
             return View();
         }
-        
+
+
+        //@Author : Ilyas Dabholkar
         [HttpPost]
         public ActionResult Login(Login login)
         {
@@ -66,6 +70,7 @@ namespace AppraisalTool.App.Controllers
             return View();
         }
 
+        //@Author : Ilyas Dabholkar
         [HttpGet]
         public IActionResult UserLogout()
         {

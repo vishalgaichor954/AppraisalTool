@@ -67,6 +67,8 @@ namespace AppraisalTool.Persistence.Repositories
 
 
         }
+
+        //@Author : Ilyas Dabholkar
         public async Task<User> FindUserByEmail(string email)
         {
             User user = await _dbContext.User.Include(x=>x.Role).FirstOrDefaultAsync(u => u.Email == email);
@@ -82,7 +84,8 @@ namespace AppraisalTool.Persistence.Repositories
             var user = await _dbContext.User.Where(u => u.Id == id).FirstOrDefaultAsync();
 
            RemoveUserCommandDto response = new RemoveUserCommandDto();
-
+        
+    
             if (user != null)
             {
                 user.IsDeleted =true;
@@ -132,6 +135,12 @@ namespace AppraisalTool.Persistence.Repositories
                 response.Succeeded = false;
                 return response;
             }
+        }
+         //@Author : Ilyas Dabholkar
+        public async Task<bool> UpdateUser(User user)
+        {
+            await UpdateAsync(user);
+            return true;
         }
     }
 }

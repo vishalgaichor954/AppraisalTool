@@ -3,6 +3,7 @@ using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Categories.Commands.CreateCategory;
 using AppraisalTool.Application.Models.AppraisalTool;
 using AppraisalTool.Application.Models.Mail;
+using AppraisalTool.Application.Responses;
 using AppraisalTool.Domain.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,7 @@ namespace AppraisalTool.Api.Controllers.v1
         }
 
 
+        //@Author : Ilyas Dabholkar
         [HttpPost]
         [Route("AddUser")]
         public async Task<ActionResult> RegisterUser(AddUserViewModel model)
@@ -59,6 +61,7 @@ namespace AppraisalTool.Api.Controllers.v1
 
         }
 
+        //@Author : Ilyas Dabholkar
         [HttpPost]
         [Route("Login")]
         public async Task<ActionResult> LoginUser(LoginUserViewModel model)
@@ -70,14 +73,35 @@ namespace AppraisalTool.Api.Controllers.v1
                 {
                     return Ok(response);
                 }
-                return BadRequest(new AuthenticationResponse() { Message = "Failed to Login user", IsAuthenticated = false,Token=null,Role=null,Name=null }); ;
+                return BadRequest(new AuthenticationResponse() { Message = "Failed to Login user", IsAuthenticated = false,Token=null,Role=null,Name=null,RoleId=null }); ;
 
             }
             catch(Exception e)
             {
-                return BadRequest(new AuthenticationResponse() { Message = e.Message, IsAuthenticated = false, Token = null, Role = null,Name=null });
+                return BadRequest(new AuthenticationResponse() { Message = e.Message, IsAuthenticated = false, Token = null, Role = null,Name=null, RoleId = null });
             }
            
+        }
+
+        //@Author : Ilyas Dabholkar
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public async Task<ActionResult> ForgotPassword(string email)
+        {
+            string newPassword = await _authService.ResetPassword(email);
+            if(newPassword != null)
+            {
+                var targetEmail = new Email()
+                {
+                    To = email,
+                    Body = $"Dear User, <br/><br/>Your Password has been reset successfully<br/>\r\n  Use following credentials to Login.<br/>\r\nUsername : {email} <br/>\r\nPassword : {newPassword}.<br /><br />Thanks <br/> <br/>Regards, <br/> Team. Support",
+                    Subject = "Password Reset Successfully !!"
+                };
+                await _emailservice.SendEmail(targetEmail);
+                return Ok(new Response<string>() { Succeeded=true,Errors=null,Message="Password Reset Succcessfully",Data=null});
+            }
+            return BadRequest(new Response<string>() { Succeeded = false, Errors = { "Failed to reset password" }, Message = "Password Reset Failed", Data = null });
+
         }
     }
 }

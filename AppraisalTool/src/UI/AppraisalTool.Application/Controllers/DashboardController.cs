@@ -11,6 +11,8 @@ namespace AppraisalTool.App.Controllers
         {
             return View();
         }
+
+        //@Author : Abhishek Singh
         public IActionResult Dashboard()
         {
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");

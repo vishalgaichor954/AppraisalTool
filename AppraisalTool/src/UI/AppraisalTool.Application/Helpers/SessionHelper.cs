@@ -2,6 +2,9 @@
 
 namespace AppraisalTool.App.Helpers
 {
+
+    //@Author : Ilyas Dabholkar
+    //Helper For setting serialized object to session and accessing by deserializing it
     public static class SessionHelper
     {
         public static void SetObjectAsJson(this ISession session, string key, object value)
