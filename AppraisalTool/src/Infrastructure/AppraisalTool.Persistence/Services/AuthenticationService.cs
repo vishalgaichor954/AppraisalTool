@@ -169,5 +169,22 @@ namespace AppraisalTool.Persistence.Services
                 return null;
             }
         }
+
+        public async Task<bool> EmailsDoesNotExists(string email)
+        {
+            _logger.LogInformation("Email Does not exists intiated");
+            var user = await _userRepository.FindUserByEmail(email);
+
+            if(user != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+        }
     }
 }
