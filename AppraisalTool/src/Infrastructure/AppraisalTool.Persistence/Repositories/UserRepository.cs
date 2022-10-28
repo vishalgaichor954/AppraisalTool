@@ -71,6 +71,15 @@ namespace AppraisalTool.Persistence.Repositories
         //@Author : Ilyas Dabholkar
         public async Task<User> FindUserByEmail(string email)
         {
+
+            //var cards =    _dbContext.UserRole.Where(x => x.Id == 1).Include(y=>y.MenuRoleMappings).ThenInclude(z=>z.MenuList);
+            var cards = _dbContext.MenuRoleMappings.Where(x => x.Role_id == 1).Include(y => y.MenuList).ToList();
+            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
+            foreach(var card in cards)
+            {
+                Console.WriteLine($"menuId::{card.MenuList.Menu_Id}, Menu Text :: {card.MenuList.MenuText} , Menu Class :: {card.MenuList.MenuClass}, menu Icon :: {card.MenuList.MenuIcon}, :: menu Url :: {card.MenuList.MenuUrl}");
+            }
             User user = await _dbContext.User.Include(x=>x.Role).FirstOrDefaultAsync(u => u.Email == email);
             if(user == null)
             {
@@ -78,6 +87,12 @@ namespace AppraisalTool.Persistence.Repositories
             }
             return user;
         }
+        public async Task<dynamic> getCards(int id)
+        {
+            var cards = _dbContext.MenuRoleMappings.Where(x => x.Role_id == id).Include(y => y.MenuList).ToList();
+            return cards;
+        }
+
 
         public async Task<RemoveUserCommandDto> RemoveUserAsync(int id)
         {

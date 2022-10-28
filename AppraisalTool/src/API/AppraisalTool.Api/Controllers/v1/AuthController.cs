@@ -8,6 +8,7 @@ using AppraisalTool.Domain.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -95,6 +96,19 @@ namespace AppraisalTool.Api.Controllers.v1
             {
                 return Ok(new Response<string>() { Succeeded = false, Errors = null, Message = "user With This Email Does not  Exists", Data = null });
             }
+
+
+        }
+        [HttpGet]
+        [Route("getAllCards")]
+        public async Task<ActionResult> GetAllCards(int id)
+        {
+           var cards = await _authService.GetCards(id);
+
+            string data = JsonConvert.SerializeObject(cards);
+            return Ok(new Response<string>() { Succeeded = true, Errors = null, Message = "user With This Email Exists", Data = data });
+            
+           
 
 
         }
