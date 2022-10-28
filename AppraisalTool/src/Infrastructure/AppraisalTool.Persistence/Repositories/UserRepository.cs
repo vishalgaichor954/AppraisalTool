@@ -2,6 +2,7 @@
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
 using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
+using AppraisalTool.Application.Models.Mail;
 using AppraisalTool.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -71,7 +72,7 @@ namespace AppraisalTool.Persistence.Repositories
         //@Author : Ilyas Dabholkar
         public async Task<User> FindUserByEmail(string email)
         {
-            User user = await _dbContext.User.Include(x=>x.Role).FirstOrDefaultAsync(u => u.Email == email);
+            User user = await _dbContext.User.Include(x=>x.Role).Include(x=>x.JobRoles).ThenInclude(x=>x.JobRole).FirstOrDefaultAsync(u => u.Email == email);
             if(user == null)
             {
                 return null;
@@ -136,11 +137,19 @@ namespace AppraisalTool.Persistence.Repositories
                 return response;
             }
         }
+
          //@Author : Ilyas Dabholkar
         public async Task<bool> UpdateUser(User user)
         {
             await UpdateAsync(user);
             return true;
+        }
+
+        //@Author : Ilyas Dabholkar
+        public async Task<User> GetUserById(int id)
+        {
+            var user = await _dbContext.User.Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).FirstOrDefaultAsync(u => u.Id == id);
+            return user;
         }
     }
 }
