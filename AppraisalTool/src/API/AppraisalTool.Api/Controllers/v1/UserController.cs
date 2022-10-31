@@ -40,7 +40,7 @@ namespace AppraisalTool.Api.Controllers.v1
         }
 
         //@Author : Ilyas Dabholkar
-        [HttpPost("GetUserJobProfile")]
+        [HttpGet("GetUserJobProfile")]
         public async Task<ActionResult> GetUserJobProfile(int id)
         {
             _logger.LogInformation("GetUserJobProfile Initiated");
