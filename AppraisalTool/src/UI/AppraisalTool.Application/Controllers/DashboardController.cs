@@ -28,7 +28,7 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.FullName = user.Name;
                 ViewBag.UserRole = user.Role;
             }
-            JobProfilesViewmodel jobProfiles = new JobProfilesViewmodel();
+            JobProfilesViewmodel jobProfiles = new JobProfilesViewmodel(); 
             jobProfiles.PrimaryRole = "Savings Account Officer";
             jobProfiles.SecondaryRole = "Current Account Officer";
             jobProfiles.Roles = new List<string>() { "Job Profile1", "Job Profile2", "Job Profile3", "job profile4" };

@@ -105,7 +105,6 @@ namespace AppraisalTool.App.Controllers
                 string responseData = response.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(responseData);
 
-
                 var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
                 if (res.Succeeded)
                 {
