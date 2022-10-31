@@ -1,7 +1,10 @@
 ﻿
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
+<<<<<<< Updated upstream
+=======
 using AppraisalTool.Application.Features.Users.Queries.GetMenuList;
+>>>>>>> Stashed changes
 using AppraisalTool.Application.Features.Users.Queries.GetUserJobProfiles;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -41,7 +44,11 @@ namespace AppraisalTool.Api.Controllers.v1
         }
 
         //@Author : Ilyas Dabholkar
+<<<<<<< Updated upstream
+        [HttpPost("GetUserJobProfile")]
+=======
         [HttpGet("GetUserJobProfile")]
+>>>>>>> Stashed changes
         public async Task<ActionResult> GetUserJobProfile(int id)
         {
             _logger.LogInformation("GetUserJobProfile Initiated");
@@ -49,6 +56,8 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("GetUserJobProfile Completed");
             return Ok(dtos);
         }
+<<<<<<< Updated upstream
+=======
 
 
 
@@ -61,5 +70,6 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("GetUserJobProfile Completed");
             return Ok(dtos);
         }
+>>>>>>> Stashed changes
     }
 }
