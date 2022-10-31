@@ -72,7 +72,20 @@ namespace AppraisalTool.Persistence.Repositories
         //@Author : Ilyas Dabholkar
         public async Task<User> FindUserByEmail(string email)
         {
+<<<<<<< HEAD
+
+            //var cards =    _dbContext.UserRole.Where(x => x.Id == 1).Include(y=>y.MenuRoleMappings).ThenInclude(z=>z.MenuList);
+            var cards = _dbContext.MenuRoleMappings.Where(x => x.Role_id == 1).Include(y => y.MenuList).ToList();
+            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
+            foreach(var card in cards)
+            {
+                Console.WriteLine($"menuId::{card.MenuList.Menu_Id}, Menu Text :: {card.MenuList.MenuText} , Menu Class :: {card.MenuList.MenuClass}, menu Icon :: {card.MenuList.MenuIcon}, :: menu Url :: {card.MenuList.MenuUrl}");
+            }
+            User user = await _dbContext.User.Include(x=>x.Role).FirstOrDefaultAsync(u => u.Email == email);
+=======
             User user = await _dbContext.User.Include(x=>x.Role).Include(x=>x.JobRoles).ThenInclude(x=>x.JobRole).FirstOrDefaultAsync(u => u.Email == email);
+>>>>>>> d2f5c4c6a386579cd1b195d592a7684cf7a51973
             if(user == null)
             {
                 return null;

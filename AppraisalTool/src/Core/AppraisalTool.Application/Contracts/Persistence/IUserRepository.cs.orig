@@ -18,8 +18,11 @@ namespace AppraisalTool.Application.Contracts.Persistence
         Task<RemoveUserCommandDto> RemoveUserAsync(int id);
         Task<UpdateUserCommandDto> UpdateUserAsync(int id, UpdateUserCommand request);
         public Task<bool> UpdateUser(User user);
+<<<<<<< HEAD
         public Task<dynamic> getCards(int id);
+=======
         public Task<User> GetUserById(int id);
+>>>>>>> d2f5c4c6a386579cd1b195d592a7684cf7a51973
     }
 
 }

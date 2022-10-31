@@ -10,6 +10,7 @@ namespace AppraisalTool.Application.Models.AppraisalTool
     {
         public string Message { get; set; }
         public bool IsAuthenticated { get; set; }
+        public int? UserId { get; set; }
         public string Token { get; set; }
         public int? RoleId { get; set; }
         public string Role { get; set; }

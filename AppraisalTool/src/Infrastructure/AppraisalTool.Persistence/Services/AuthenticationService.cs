@@ -74,7 +74,7 @@ namespace AppraisalTool.Persistence.Services
                 {
                     string name = $"{user.FirstName} {user.LastName}";
                     string token = GenerateToken(user.Id, user.Email, user.Role.Role, name);
-                    return new AuthenticationResponse() { IsAuthenticated = true, Token = token, Role = user.Role.Role, Message = null, Name = name,RoleId=user.RoleId };
+                    return new AuthenticationResponse() { IsAuthenticated = true, Token = token, Role = user.Role.Role, Message = null, Name = name,RoleId=user.RoleId,UserId=user.Id };
                 }
                 else
                 {
