@@ -79,6 +79,12 @@ namespace AppraisalTool.Persistence.Repositories
             }
             return user;
         }
+        public async Task<dynamic> getCards(int id)
+        {
+            var cards = _dbContext.MenuRoleMappings.Where(x => x.Role_id == id).Include(y => y.MenuList).ToList();
+            return cards;
+        }
+
 
         public async Task<RemoveUserCommandDto> RemoveUserAsync(int id)
         {

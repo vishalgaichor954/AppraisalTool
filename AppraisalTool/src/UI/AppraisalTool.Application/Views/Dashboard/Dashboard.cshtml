@@ -58,22 +58,29 @@
                 <div class="col-md-8">
                   <div class="row justify-content-center">
                     <!-- <div class="col-md-1"></div> -->
-                    <div  class="col-md-6 stretch-card grid-margin Dash-Card">
+
+                    @{
+                        foreach (var item in ViewBag.GetMenuCards)
+                        {
+                            <div  class="col-md-6 stretch-card grid-margin Dash-Card">
                       <a href="" class="Anchor-body">
-                      <div class="card bg-gradient-danger card-img-holder text-white Dash-Card">
+                      <div class="card @item.MenuList.MenuClass card-img-holder text-white Dash-Card">
                         <div class="card-body">
                           <img src="~/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                          <h4 class="font-weight-normal mb-3">Role Allocator <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                          <h4 class="font-weight-normal mb-3">@item.MenuList.MenuText <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                           </h4>
-                          <i class=" icon-card mdi mdi-book"></i>
+                          <i class=" @item.MenuList.MenuIcon"></i>
                           
                           <!-- <h2 class="mb-5">$ 15,0000</h2>
                           <h6 class="card-text">Increased by 60%</h6> -->
                         </div>
                       </div>
                     </a>
-                    </div>
-                    <div class="col-md-6 stretch-card grid-margin Dash-Card">
+                    </div>  
+                        }
+                    }
+                  
+                    @*<div class="col-md-6 stretch-card grid-margin Dash-Card">
                       <a href="" class="Anchor-body">
                       <div  class="card bg-gradient-info card-img-holder text-white Dash-Card">
                         <div class="card-body">
@@ -86,11 +93,11 @@
                         </div>
                       </div>
                     </a>
-                    </div>
+                    </div>*@
                     <!-- <div class="col-md-1"></div>
                     <div class="col-md-1"></div> -->
           
-                    <div class="col-md-6 stretch-card grid-margin Dash-Card">
+                 @*   <div class="col-md-6 stretch-card grid-margin Dash-Card">
                       <a href="" class="Anchor-body">
                       <div class="card bg-gradient-success card-img-holder text-white Dash-Card">
                         <div class="card-body">
@@ -217,7 +224,7 @@
                         </div>
                       </div>
                     </a>
-                    </div>
+                    </div>*@
                   </div>
                 </div>
             

@@ -44,6 +44,8 @@ namespace AppraisalTool.Persistence
         public DbSet<JobRoles> JobRoles { get; set; }
         public DbSet<UserAuthorityMapping> UserAuthorityMappings { get; set; }
         public DbSet<UserJobRoles> UserJobRoles { get; set; }
+        public DbSet<MenuList> MenuLists { get; set; }
+        public DbSet<MenuRoleMapping> MenuRoleMappings { get; set; }
 
         private IDbContextTransaction _transaction;
 
