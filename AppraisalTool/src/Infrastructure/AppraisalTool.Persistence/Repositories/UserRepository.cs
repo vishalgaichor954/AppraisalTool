@@ -79,10 +79,17 @@ namespace AppraisalTool.Persistence.Repositories
             }
             return user;
         }
-        public async Task<dynamic> getCards(int id)
+        //public async Task<dynamic> getCards(int id)
+        //{
+        //   var  menu = _dbContext.MenuRoleMappings.Where(x => x.Role_id == id).Include(y => y.MenuList).ToList();
+        //    return menu;
+        //}
+
+        //@Author : Abhishek Singh
+        public async Task<List<MenuRoleMapping>> getAllCards(int id)
         {
-            var cards = _dbContext.MenuRoleMappings.Where(x => x.Role_id == id).Include(y => y.MenuList).ToList();
-            return cards;
+            List<MenuRoleMapping> menu = _dbContext.MenuRoleMappings.Where(x => x.Role_id == id).Include(y => y.MenuList).ToList();
+            return menu;
         }
 
 
