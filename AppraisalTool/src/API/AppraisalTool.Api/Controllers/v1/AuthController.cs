@@ -99,19 +99,7 @@ namespace AppraisalTool.Api.Controllers.v1
 
 
         }
-        [HttpGet]
-        [Route("getAllCards")]
-        public async Task<ActionResult> GetAllCards(int id)
-        {
-           var cards = await _authService.GetCards(id);
-
-            string data = JsonConvert.SerializeObject(cards);
-            return Ok(new Response<string>() { Succeeded = true, Errors = null, Message = "user With This Email Exists", Data = data });
-            
-           
-
-
-        }
+     
         //@Author : Ilyas Dabholkar
         [HttpPost]
         [Route("ForgotPassword")]

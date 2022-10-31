@@ -186,14 +186,14 @@ namespace AppraisalTool.Persistence.Services
 
 
         }
-        public async Task<dynamic> GetCards(int id)
-        {
+        //public async Task<dynamic> GetCards(int id)
+        //{
            
-            var cards = await _userRepository.getCards(id);
+        //    var cards = await _userRepository.getCards(id);
 
-            return cards;
+        //    return cards;
 
 
-        }
+        //}
     }
 }
