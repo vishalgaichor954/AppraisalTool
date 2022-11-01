@@ -1,0 +1,246 @@
+﻿
+@{
+    ViewData["Title"] = "HomePageAppraisal";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Purple Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
+    <style>
+      .Dash-Card{
+        height: 240px;
+      }
+      .roles{
+        display: inline;
+      }
+      .Anchor-body{
+        text-decoration: none;
+        height: 240px;
+        width: 100%;
+      }
+      .icon-card{
+        font-size: 3rem;
+        font-weight: 300;
+      }
+      .role-div{
+        background-color: white;
+        border-radius: 0.5rem;
+      }
+      .user-roles{
+        margin-right: 18px;
+      }
+      .appraisal-card{
+        padding: 0.2rem 0.5rem!important;
+      }
+      .appraisal>p{
+        margin-bottom: 0%;
+      }
+      
+      .Last-Date{
+        margin-right: 40px;
+      }
+      .gradient-1{
+        background-image: linear-gradient(30deg, #316bfd, #6f1ef1);
+      }
+      .gradient-2{
+  background-image: linear-gradient(30deg, #fa1157, #fc4939); }
+  .gradient-3 {
+    background-image: linear-gradient(30deg, #fd9d2e, #ff550d); }
+    </style>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:../../partials/_navbar.html -->
+     
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div style="height:100vh ;width:100%; background-color: white;border-radius: 0.5rem;" class="container">
+               <!-- <h2 >Appraisal Home</h2> -->
+               <div>
+                <h2 style="padding-top:30px;padding-left: 20px ;">Appraisal Home</h2>
+               </div>
+              <div style="display:flex">
+                <div class="col-md-6" style="display:flex ; justify-content: space-between;">
+                  <div>
+                    <select name="" id="">
+                      <option value="">FY-2019-20</option>
+                      <option value="">FY-2020-21</option>
+                      <option value="">FY-2021-22</option>
+                      <option value="">FY-2022-23</option>
+                      <option value="">FY-2023-24</option>
+                    </select>
+
+                  </div>
+                   <!-- <div>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-outline-secondary">
+                     Mid Year </button>
+                      <button type="button" class="btn btn-outline-secondary">
+                      </i> Annual</button>
+                     
+                    </div>
+                  </div>
+                </div>
+                <div style="justify-content: center;" class="col-md-6" >
+                  <div style="display: inline;" class="btn-div">
+                    <button> Download</button>
+                  </div>
+                  
+                </div>
+               </div> -->
+               <!-- <div class="row justify-content-center">
+                <div class="col-md-3">
+                  <select name="" id="">
+                    <option value="">FY-2019-20</option>
+                    <option value="">FY-2020-21</option>
+                    <option value="">FY-2021-22</option>
+                    <option value="">FY-2022-23</option>
+                    <option value="">FY-2023-24</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                  <a type="button" href=""></a>
+                    <button type="button" class="btn btn-outline-secondary">
+                    </i> Annual</button>
+                   
+                  </div>
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-1"></div>
+                <div style="justify-content:flex-end ;" class="col-md-2"> <button> Download</button></div>
+               </div> -->
+               <div class="mt-5">
+                <div class="row justify-content-center">
+                  <!-- <div class="col-md-1"></div> -->
+                  <div  class="col-md-6 stretch-card grid-margin Dash-Card">
+                    <a href="" class="Anchor-body">
+                    <div class="card gradient-1 card-img-holder text-white Dash-Card">
+                      <div class="card-body appraisal-card">
+                        <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
+                        <h2 class="font-weight-normal pt-2">Self Appraisal
+                        </h2>
+                        <h6>Total appraisal to be filled</h6>
+                        <p>1</p>
+                        <h6>Pending Appraisals</h6>
+                        <p>0</p>
+
+                        
+                         <div style="text-align:end ;" class="Last-Date">
+                          <h6>Last date</h6>
+                          <h4>31st March</h4>
+                         </div>
+
+                        <!-- <h2 class="mb-5">$ 15,0000</h2>
+                        <h6 class="card-text">Increased by 60%</h6> -->
+                      </div>
+                    </div>
+                  </a>
+                  </div>
+                  <div class="col-md-6 stretch-card grid-margin Dash-Card">
+                    <a href="" class="Anchor-body">
+                    <div  class="card gradient-2 card-img-holder text-white Dash-Card">
+                      <div class="card-body appraisal-card">
+                        <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
+                        <h2 class="font-weight-normal pt-2">Reportee Appraisal 
+                        </h2>
+                        <h6>Total appraisal to be filled</h6>
+                        <p>27</p>
+                        <h6>Pending Appraisals</h6>
+                        <p>1</p>
+
+                        
+                         <div style="text-align:end ;" class="Last-Date">
+                          <h6>Last date</h6>
+                          <h4>31st March </h4>
+                         </div>
+                        <!-- <h2 class="mb-5">45,6334</h2>
+                        <h6 class="card-text">Decreased by 10%</h6> -->
+                      </div>
+                    </div>
+                  </a>
+                  </div>
+                  <!-- <div class="col-md-1"></div>
+                  <div class="col-md-1"></div> -->
+        
+                  <div class="col-md-6 stretch-card grid-margin Dash-Card">
+                    <a href="" class="Anchor-body">
+                    <div class="card gradient-3 card-img-holder text-white Dash-Card">
+                      <div class="card-body appraisal-card">
+                        <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
+                        <h2 class="font-weight-normal pt-2">Appraisal Review 
+                        </h2>
+                        <h6>Total appraisal to be filled</h6>
+                        <p>53</p>
+                        <h6>Pending Appraisals</h6>
+                        <p>0</p>
+
+                        
+                         <div style="text-align:end ;" class="Last-Date">
+                          <h6>Last date</h6>
+                          <h4>26th May 2022</h4>
+                         </div>
+                        <!-- <i class=" icon-card mdi mdi-airplay"></i> -->
+                        <!-- <h2 class="mb-5">$ 15,0000</h2>
+                        <h6 class="card-text">Increased by 60%</h6> -->
+                       
+                      </div>
+                    </div>
+                  </a>
+                  </div>
+                  
+                
+                
+                 
+                 
+                 
+                 
+                </div>
+               </div>
+              
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <footer class="footer">
+           
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../assets/js/off-canvas.js"></script>
+    <script src="../../assets/js/hoverable-collapse.js"></script>
+    <script src="../../assets/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <!-- End custom js for this page -->
+  </body>
+</html>
+

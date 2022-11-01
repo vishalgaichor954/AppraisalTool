@@ -79,6 +79,7 @@ namespace AppraisalTool.Persistence
                 CategoryId = playGuid,
                 Name = "Plays"
             });
+            
             modelBuilder.Entity<Category>().HasData(new Category
             {
                 CategoryId = conferenceGuid,
