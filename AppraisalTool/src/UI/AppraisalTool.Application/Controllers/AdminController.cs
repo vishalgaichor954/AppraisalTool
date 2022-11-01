@@ -81,6 +81,10 @@ namespace AppraisalTool.App.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             Console.WriteLine("PostMethod hit");
+            if (ModelState.IsValid)
+            {
+
+            }
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PostAsync(client.BaseAddress + "User/RegisterUser?api-version=1", content).Result;

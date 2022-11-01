@@ -56,7 +56,7 @@ namespace AppraisalTool.App.Controllers
                 Console.WriteLine(datacard);
                 ViewBag.GetMenuCards = json.data;
 
-
+                ViewBag.GetSideBarData = json.data;
             }
 
 
