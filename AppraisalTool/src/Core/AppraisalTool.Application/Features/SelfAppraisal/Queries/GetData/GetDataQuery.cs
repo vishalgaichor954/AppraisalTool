@@ -1,4 +1,5 @@
-﻿using AppraisalTool.Application.Responses;
+﻿using AppraisalTool.Application.Response;
+
 using MediatR;
 using System;
 using System.Collections.Generic;

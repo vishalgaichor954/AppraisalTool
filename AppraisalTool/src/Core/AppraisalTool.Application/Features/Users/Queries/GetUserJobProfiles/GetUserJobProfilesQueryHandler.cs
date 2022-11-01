@@ -1,6 +1,6 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using AppraisalTool.Domain.Entities;
 using AutoMapper;
 using MediatR;

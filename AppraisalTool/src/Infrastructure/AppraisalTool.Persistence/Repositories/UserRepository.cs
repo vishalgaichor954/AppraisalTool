@@ -196,6 +196,7 @@ namespace AppraisalTool.Persistence.Repositories
             var res = await result.OrderBy(x => x.Id).ToListAsync();
 
             return res;
+        }
 
         //@Author : Ilyas Dabholkar
         public async Task<User> GetUserById(int id)
@@ -204,4 +205,5 @@ namespace AppraisalTool.Persistence.Repositories
             return user;
         }
     }
-}
+
+        }
