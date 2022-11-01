@@ -2,7 +2,7 @@
 using AppraisalTool.Application.Contracts.Infrastructure;
 using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Models.Mail;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using AppraisalTool.Domain.Entities;
 using MediatR;
 using Microsoft.Extensions.Logging;

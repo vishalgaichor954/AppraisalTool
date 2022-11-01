@@ -3,7 +3,7 @@ using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Events.Queries.GetEventDetail;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsList;
 using AppraisalTool.Application.Profiles;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using AppraisalTool.Application.UnitTests.Mocks;
 using AppraisalTool.Domain.Entities;
 using Microsoft.Extensions.Logging;

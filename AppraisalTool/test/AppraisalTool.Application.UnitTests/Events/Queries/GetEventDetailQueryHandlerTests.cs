@@ -2,7 +2,7 @@
 using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Events.Queries.GetEventDetail;
 using AppraisalTool.Application.Profiles;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using AppraisalTool.Application.UnitTests.Mocks;
 using AppraisalTool.Domain.Entities;
 using Microsoft.AspNetCore.DataProtection;

@@ -2,7 +2,7 @@
 using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
 using AppraisalTool.Application.Profiles;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using AppraisalTool.Application.UnitTests.Mocks;
 using Moq;
 using Shouldly;

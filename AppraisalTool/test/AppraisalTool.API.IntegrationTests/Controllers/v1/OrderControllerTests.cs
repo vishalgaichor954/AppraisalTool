@@ -1,6 +1,6 @@
 ﻿using AppraisalTool.API.IntegrationTests.Base;
 using AppraisalTool.Application.Features.Orders.GetOrdersForMonth;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using Newtonsoft.Json;
 using Shouldly;
 using System.Collections.Generic;

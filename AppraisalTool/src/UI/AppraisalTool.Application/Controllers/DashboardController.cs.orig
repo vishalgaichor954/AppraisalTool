@@ -23,7 +23,6 @@ namespace AppraisalTool.App.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
-
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             if (user != null)
             {
@@ -31,6 +30,33 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.UserRole = user.Role;
 
             }
+<<<<<<< HEAD
+<<<<<<< HEAD
+            JobProfilesViewmodel jobProfiles = new JobProfilesViewmodel(); 
+=======
+        //https://localhost:5000/api/Auth/getAllCards?id=1&api-version=1
+            HttpClient client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"/Auth/getAllCards?id={user.RoleId}&api-version=1").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+                var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
+                dynamic json = JsonConvert.DeserializeObject(res.Data);
+                //var menuList = JsonConvert.DeserializeObject<List<MenuListViewModel>>(json);
+                ViewBag.GetMenuCards = json;
+
+                
+                //if (res.Succeeded == true)
+                //{
+                //    return Json(true);
+                //}
+                //else
+                //{
+                //    return Json(false);
+                //}
+               
+=======
 
             //Api call to get dashboard menus
             //https://localhost:5000/api/Auth/getAllCards?id=1&api-version=1
@@ -55,15 +81,21 @@ namespace AppraisalTool.App.Controllers
                 var datacard = json.data[0].menuList;
                 Console.WriteLine(datacard);
                 ViewBag.GetMenuCards = json.data;
+>>>>>>> c4e5eadb3757611f10f6c8f4dc4301e0bd14518d
 
 
             }
 
+<<<<<<< HEAD
+            JobProfilesViewmodel jobProfiles = new JobProfilesViewmodel();
+>>>>>>> 109cb7bfccedb83cb96a7f3e6b8b720acfc54107
+=======
 
             //Api call to get dashboard 
             HttpResponseMessage responses = client.GetAsync(client.BaseAddress + $"/User/GetUserJobProfile?id={user.UserId}&api-version=1").Result;
             JobProfilesViewmodel jobProfiles = new JobProfilesViewmodel();
 <<<<<<< Updated upstream
+>>>>>>> c4e5eadb3757611f10f6c8f4dc4301e0bd14518d
             jobProfiles.PrimaryRole = "Savings Account Officer";
             jobProfiles.SecondaryRole = "Current Account Officer";
             jobProfiles.Roles = new List<string>() { "Job Profile1", "Job Profile2", "Job Profile3", "job profile4" };

@@ -1,5 +1,5 @@
 ﻿using AppraisalTool.Application.Exceptions;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;

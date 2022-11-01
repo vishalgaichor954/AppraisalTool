@@ -30,7 +30,6 @@ namespace AppraisalTool.Domain.Entities
         public int? UpdatedBy { get; set; }
         public DateTime? UpdatedOn { get; set; }
 
-
         [ForeignKey("AddedBy")]
         public virtual User? AddedByUser { get; set; }
         [ForeignKey("DeletedBy")]
