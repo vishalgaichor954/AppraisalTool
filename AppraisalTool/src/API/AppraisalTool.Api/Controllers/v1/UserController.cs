@@ -7,6 +7,8 @@ using AppraisalTool.Application.Features.Users.Query.GetRoleList;
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
 using AppraisalTool.Application.Features.Users.Query.GetUserRole;
 using AppraisalTool.Application.Features.Users.Query.GetUserRole.GetBranchList;
+using AppraisalTool.Application.Features.Users.Queries.GetMenuList;
+using AppraisalTool.Application.Features.Users.Queries.GetUserJobProfiles;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -85,5 +87,26 @@ namespace AppraisalTool.Api.Controllers.v1
             return Ok(res);
         }
 
+        //@Author : Ilyas Dabholkar
+        [HttpGet("GetUserJobProfile")]
+        public async Task<ActionResult> GetUserJobProfile(int id)
+        {
+            _logger.LogInformation("GetUserJobProfile Initiated");
+            var dtos = await _mediator.Send(new GetUserJobProfilesQuery() { Id=id});
+            _logger.LogInformation("GetUserJobProfile Completed");
+            return Ok(dtos);
+        }
+
+
+
+        //@Author : Abhishek Singh
+        [HttpGet("GetAllCard")]
+        public async Task<ActionResult> GetAllCard(int id)
+        {
+            _logger.LogInformation("GetUserJobProfile Initiated");
+            var dtos = await _mediator.Send(new GetMenuListQuery() { Id = id });
+            _logger.LogInformation("GetUserJobProfile Completed");
+            return Ok(dtos);
+        }
     }
 }

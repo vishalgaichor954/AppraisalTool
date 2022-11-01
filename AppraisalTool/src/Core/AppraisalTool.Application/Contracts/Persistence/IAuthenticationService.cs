@@ -15,5 +15,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt);
         public Task<AuthenticationResponse> Login(string email, string password);
         public Task<string> ResetPassword(string email);
+        public Task<bool> EmailsDoesNotExists(string email);
+        //public Task<dynamic> GetCards(int id);
     }
 }

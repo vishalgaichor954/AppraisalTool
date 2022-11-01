@@ -8,6 +8,7 @@ using AppraisalTool.Domain.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -73,28 +74,44 @@ namespace AppraisalTool.Api.Controllers.v1
                 {
                     return Ok(response);
                 }
-                return BadRequest(new AuthenticationResponse() { Message = "Failed to Login user", IsAuthenticated = false,Token=null,Role=null,Name=null,RoleId=null }); ;
+                return BadRequest(new AuthenticationResponse() { Message = "Failed to Login user", IsAuthenticated = false,Token=null,Role=null,Name=null,RoleId=null,UserId=null }); ;
 
             }
             catch(Exception e)
             {
-                return BadRequest(new AuthenticationResponse() { Message = e.Message, IsAuthenticated = false, Token = null, Role = null,Name=null, RoleId = null });
+                return BadRequest(new AuthenticationResponse() { Message = e.Message, IsAuthenticated = false, Token = null, Role = null,Name=null, RoleId = null,UserId=null });
             }
            
         }
 
+        [HttpGet]
+        public async Task<ActionResult> UserEmailDoesNotExists(string email)
+        {
+            bool UserExists = await _authService.EmailsDoesNotExists(email);
+            if (UserExists == true)
+            {
+                return Ok(new Response<string>() { Succeeded = true, Errors = null, Message = "user With This Email Exists", Data = null });
+            }
+            else
+            {
+                return Ok(new Response<string>() { Succeeded = false, Errors = null, Message = "user With This Email Does not  Exists", Data = null });
+            }
+
+
+        }
+     
         //@Author : Ilyas Dabholkar
         [HttpPost]
         [Route("ForgotPassword")]
-        public async Task<ActionResult> ForgotPassword(string email)
+        public async Task<ActionResult> ForgotPassword(ForgetPasswordView forgetPassword)
         {
-            string newPassword = await _authService.ResetPassword(email);
+            string newPassword = await _authService.ResetPassword(forgetPassword.email);
             if(newPassword != null)
             {
                 var targetEmail = new Email()
                 {
-                    To = email,
-                    Body = $"Dear User, <br/><br/>Your Password has been reset successfully<br/>\r\n  Use following credentials to Login.<br/>\r\nUsername : {email} <br/>\r\nPassword : {newPassword}.<br /><br />Thanks <br/> <br/>Regards, <br/> Team. Support",
+                    To = forgetPassword.email,
+                    Body = $"Dear User, <br/><br/>Your Password has been reset successfully<br/>\r\n  Use following credentials to Login.<br/>\r\nUsername : {forgetPassword.email} <br/>\r\nPassword : {newPassword}.<br /><br />Thanks <br/> <br/>Regards, <br/> Team. Support",
                     Subject = "Password Reset Successfully !!"
                 };
                 await _emailservice.SendEmail(targetEmail);

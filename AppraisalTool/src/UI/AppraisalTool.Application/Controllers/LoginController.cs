@@ -49,18 +49,18 @@ namespace AppraisalTool.App.Controllers
                 }
 
                 string data = JsonConvert.SerializeObject(login);
-                StringContent content = new StringContent(data,Encoding.UTF8,"application/json");
-                
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
                 HttpClient client = new HttpClient();
                 client.BaseAddress = baseAddress;
-                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/Auth/Login?api-version=1",content).Result;
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/Auth/Login?api-version=1", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string responseData = response.Content.ReadAsStringAsync().Result;
                     Console.WriteLine(responseData);
                     LoginResponseDto AuthData = JsonConvert.DeserializeObject<LoginResponseDto>(responseData);
 
-                    SessionHelper.SetObjectAsJson(HttpContext.Session, "user",AuthData);
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "user", AuthData);
 
                     return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
                 }
@@ -79,5 +79,68 @@ namespace AppraisalTool.App.Controllers
             Console.WriteLine($"NUll : {HttpContext.Session.GetString("user")}");
             return RedirectToAction("Login");
         }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            if (userSession != null)
+            {
+                return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ForgotPassword(ForgotPasswordViewModel forgotPasswordView)
+        {
+            string data = JsonConvert.SerializeObject(forgotPasswordView);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/Auth/ForgotPassword?api-version=1", content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string responseData = response.Content.ReadAsStringAsync().Result;
+                Console.WriteLine(responseData);
+
+                var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
+                if (res.Succeeded)
+                {
+                    TempData["PassReset"] = "Check your Email for new Login Credentails";
+                }
+
+                return View();
+            }
+
+            return View();
+        }
+
+
+        [HttpGet]
+        public JsonResult UserExistsEmail(string email)
+        {
+            //https://localhost:5000/api/Auth?email=ssabhishek00%40gmail.com&api-version=1
+            HttpClient client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"/Auth?email={email}&api-version=1").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+                var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
+                if (res.Succeeded == true)
+                {
+                    return Json(true);
+                }
+                else
+                {
+                    return Json(false);
+                }
+            }
+            return Json(false);
+        }
+
     }
 }
+

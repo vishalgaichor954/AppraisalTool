@@ -13,7 +13,7 @@
 {
     <div class="container">
         <div class="alert alert-danger mt-5" role="alert">
-            @TempData["Error"]
+           <strong>Error !</strong> @TempData["Error"]
         </div>
     </div>
 }
@@ -23,10 +23,10 @@
             <div class="row flex-grow">
                 <div class="col-lg-4 mx-auto">
                     <div class="auth-form-light text-left p-5">
-                        <div class="brand-logo">
-                            <img src="~/lib/assets/images/logo.svg">
+                        <div class="brand-logo logoImgLogin">
+                            <img src="~/lib/assets/images/Union_Bank_of_India_Logo.svg">
                         </div>
-                        <h2 style="font-weight:500 ;padding-left:6rem" class=" pt-3" asp-action="Login">LogIn</h2>
+                        <h2 style="font-weight:500 ;padding-left:6rem" class=" LoginHeader pt-0" asp-action="Login">LogIn</h2>
                         <form class="pt-3" asp-action="Login">
                             <div class="form-group">
                                 <label asp-for="Email" class="control-label"></label>
@@ -55,10 +55,23 @@
                                     }
                                 </span>
                             </div>
+                              <div class="my-1 mb-2 d-flex justify-content-between align-items-center">
+                   @* <div class="form-check">
+                      <label class="form-check-label text-muted">
+                        <input type="checkbox" class="form-check-input"> Keep me signed in </label>
+                    </div>*@
+                   <!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>*@
 
-                            <div class="form-group">
+<!-- Modal -->
+
+                    <a    asp-controller="Login" asp-action="ForgotPassword" class="auth-link text-black">Forgot password?</a>
+                  </div>
+                           <div class="form-group">
                                 <div style="align-items:center ;">
-                                    <input type="submit" value="Login" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" />
+                                    <input type="submit" value="Login" class="btn btn-block LoginBtn btn-lg font-weight-medium auth-form-btn" />
                                 </div>
                             </div>
 
@@ -71,7 +84,42 @@
     </div>
     <!-- page-body-wrapper ends -->
 </div>
+@*<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form asp-action="ForgotPassword" method="post">
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="email1">Email address</label>
+                        <input type="email" id="email" name="email" class="form-control" />
+                   
+                    </div>
 
+                    <!-- password input -->
+                   
+
+                    <!-- Submit button -->
+                    <button  asp-action="ForgotPassword" type="submit" class="btn btn-primary btn-block">Reset Password</button>
+         </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>*@
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
+<!-- Modal -->
 
 
 @section Scripts {

@@ -18,9 +18,9 @@ namespace AppraisalTool.Infrastructure.Mail
     {
         public EmailSettings _emailSettings { get; }
         public ILogger<EmailService> _logger { get; }
-        //private readonly ISendGridClient _sendGridClient;
+       //private readonly ISendGridClient _sendGridClient;
 
-        public EmailService(IOptions<EmailSettings> mailSettings, ILogger<EmailService> logger /*ISendGridClient sendGridClient*/)
+        public EmailService(IOptions<EmailSettings> mailSettings, ILogger<EmailService> logger/*, ISendGridClient sendGridClient*/)
         {
             _emailSettings = mailSettings.Value;
             _logger = logger;

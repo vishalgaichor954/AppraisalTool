@@ -30,7 +30,6 @@ namespace AppraisalTool.Domain.Entities
         public int? UpdatedBy { get; set; }
         public DateTime? UpdatedOn { get; set; }
 
-
         [ForeignKey("AddedBy")]
         public virtual User? AddedByUser { get; set; }
         [ForeignKey("DeletedBy")]
@@ -40,6 +39,7 @@ namespace AppraisalTool.Domain.Entities
         public virtual UserRole? Role { get; set; }
         [ForeignKey("BranchId")]
         public virtual Branch? Branch { get; set; }
+        public virtual List<UserJobRoles> JobRoles { get; set; }
 
     }
 }

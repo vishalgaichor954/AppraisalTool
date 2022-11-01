@@ -23,6 +23,9 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<IEnumerable<GetUserListQueryVm>> GetAllUser();
         Task<CreateRoleCommandDto> CreateUserRole(UserJobRoles request);
 
+        //public Task<dynamic> getCards(int id);
+        public Task<User> GetUserById(int id);
+        public Task<List<MenuRoleMapping>> getAllCards(int id);
     }
 
 }

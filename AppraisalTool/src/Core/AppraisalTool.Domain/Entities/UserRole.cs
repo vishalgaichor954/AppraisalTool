@@ -15,5 +15,7 @@ namespace AppraisalTool.Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Role { get; set; }
+
+        public virtual List<MenuRoleMapping> ?MenuRoleMappings { get; set; }
     }
 }

@@ -35,7 +35,29 @@ body {
     font-size: 3rem;
     font-weight: 300;
 }
-
+.logoImgLogin > img {
+    height: 100px;
+    width: 280px !important;
+}
+.LoginBtn {
+    background-color:#E0144C;
+    color:white;
+}
+.containerBackGroundColor {
+    background-color: #2146C7 !important;
+}
+.LoginBtn:hover {
+    background-color: white;
+    color: #E0144C;
+    border: 2px solid #E0144C;
+}
+.LogoMiniUi > img {
+    height: 100px;
+    width: 280px !important;
+}
+.LoginHeader {
+    color: rgb(29, 29, 129);
+}
 .role-div {
     background-color: white;
     border-radius: 0.5rem;

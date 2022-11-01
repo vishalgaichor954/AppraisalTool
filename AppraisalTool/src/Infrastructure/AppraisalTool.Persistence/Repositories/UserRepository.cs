@@ -4,6 +4,7 @@ using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
 using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
+using AppraisalTool.Application.Models.Mail;
 using AppraisalTool.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -71,13 +72,26 @@ namespace AppraisalTool.Persistence.Repositories
         //@Author : Ilyas Dabholkar
         public async Task<User> FindUserByEmail(string email)
         {
-            User user = await _dbContext.User.Include(x=>x.Role).FirstOrDefaultAsync(u => u.Email == email);
+            User user = await _dbContext.User.Include(x=>x.Role).Include(x=>x.JobRoles).ThenInclude(x=>x.JobRole).FirstOrDefaultAsync(u => u.Email == email);
             if(user == null)
             {
                 return null;
             }
             return user;
         }
+        //public async Task<dynamic> getCards(int id)
+        //{
+        //   var  menu = _dbContext.MenuRoleMappings.Where(x => x.Role_id == id).Include(y => y.MenuList).ToList();
+        //    return menu;
+        //}
+
+        //@Author : Abhishek Singh
+        public async Task<List<MenuRoleMapping>> getAllCards(int id)
+        {
+            List<MenuRoleMapping> menu = _dbContext.MenuRoleMappings.Where(x => x.Role_id == id).Include(y => y.MenuList).ToList();
+            return menu;
+        }
+
 
         public async Task<RemoveUserCommandDto> RemoveUserAsync(int id)
         {
@@ -140,6 +154,7 @@ namespace AppraisalTool.Persistence.Repositories
                 return response;
             }
         }
+
          //@Author : Ilyas Dabholkar
         public async Task<bool> UpdateUser(User user)
         {
@@ -181,6 +196,12 @@ namespace AppraisalTool.Persistence.Repositories
             var res = await result.OrderBy(x => x.Id).ToListAsync();
 
             return res;
+
+        //@Author : Ilyas Dabholkar
+        public async Task<User> GetUserById(int id)
+        {
+            var user = await _dbContext.User.Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).FirstOrDefaultAsync(u => u.Id == id);
+            return user;
         }
     }
 }

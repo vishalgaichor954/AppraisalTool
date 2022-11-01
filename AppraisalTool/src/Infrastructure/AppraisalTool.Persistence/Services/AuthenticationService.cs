@@ -74,7 +74,7 @@ namespace AppraisalTool.Persistence.Services
                 {
                     string name = $"{user.FirstName} {user.LastName}";
                     string token = GenerateToken(user.Id, user.Email, user.Role.Role, name);
-                    return new AuthenticationResponse() { IsAuthenticated = true, Token = token, Role = user.Role.Role, Message = null, Name = name,RoleId=user.RoleId };
+                    return new AuthenticationResponse() { IsAuthenticated = true, Token = token, Role = user.Role.Role, Message = null, Name = name,RoleId=user.RoleId,UserId=user.Id };
                 }
                 else
                 {
@@ -169,5 +169,31 @@ namespace AppraisalTool.Persistence.Services
                 return null;
             }
         }
+
+        public async Task<bool> EmailsDoesNotExists(string email)
+        {
+            _logger.LogInformation("Email Does not exists intiated");
+            var user = await _userRepository.FindUserByEmail(email);
+
+            if(user != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+        }
+        //public async Task<dynamic> GetCards(int id)
+        //{
+           
+        //    var cards = await _userRepository.getCards(id);
+
+        //    return cards;
+
+
+        //}
     }
 }

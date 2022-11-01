@@ -45,8 +45,8 @@ namespace AppraisalTool.App.Helpers
                 graph.Clear(GetRandomLightColor());
 
                 DrawCaptchaCode();
-                DrawDisorderLine();
-                AdjustRippleEffect();
+                //DrawDisorderLine();
+                //AdjustRippleEffect();
 
                 MemoryStream ms = new MemoryStream();
 
