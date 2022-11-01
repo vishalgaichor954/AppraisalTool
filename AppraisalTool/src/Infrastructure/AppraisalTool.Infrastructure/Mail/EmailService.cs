@@ -24,7 +24,7 @@ namespace AppraisalTool.Infrastructure.Mail
         {
             _emailSettings = mailSettings.Value;
             _logger = logger;
-            //_sendGridClient = sendGridClient;
+           //_sendGridClient = sendGridClient;
         }
 
         public async Task<bool> SendEmail(Email email)

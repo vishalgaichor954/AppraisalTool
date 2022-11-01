@@ -1,5 +1,14 @@
-﻿    <div class="container-scroller">
+﻿@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+@using AppraisalTool.App.Models.Navbar;
+<div class="container-scroller">
     
+    @{
+        //var navSession = JsonConvert.DeserializeObject(Context.Session.GetString("navbarViewModel"));
+         //var navSession = JsonConvert.DeserializeObject<NavbarViewModel>(Context.Session.GetString("navbarViewModel"));
+         dynamic json = JsonConvert.DeserializeObject(Context.Session.GetString("navbarViewModel"));
+       
+        }
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row no-margin">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -66,10 +75,10 @@
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
                   <img src="~/lib/assets/images/faces/user.png" alt="image">
-                  <span class="availability-status online"></span>
+                  <span class="availability-status online"> </span>
                 </div>
                 <div class="nav-profile-text">
-                  <p class="mb-1 text-black">@ViewBag.FullName</p>
+                  <p class="mb-1 text-black">@json.UserName</p>
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
@@ -162,23 +171,23 @@
                   <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
-                  <span class="font-weight-bold mb-2" style="text-transform:capitalize">@ViewBag.FullName</span>
-                            <span class="text-secondary text-small" style="text-transform:capitalize">@ViewBag.UserRole</span>
+                  <span class="font-weight-bold mb-2" style="text-transform:capitalize">@json.UserName</span>
+                            <span class="text-secondary text-small" style="text-transform:capitalize">@json.UserRole</span>
                 </div>
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
               </a>
             </li>
              @{
-                        foreach (var item in ViewBag.GetMenuCards)
+                        foreach (var item in json.SideBarList)
                         { 
                             if(item.menuList.menuFlag=="SIDEBAR"){
                    
-                <li class="nav-item">
-                  <a class="nav-link" asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction">
-                    <span class="@item.menuList.menuClass">@item.menuList.menuText</span>
-                    <i class="@item.menuList.menuIcon"></i>
-                  </a>
-                </li>
+                    <li class="nav-item">
+                      <a class="nav-link" asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction">
+                        <span class="@item.menuList.menuClass">@item.menuList.menuText</span>
+                        <i class="@item.menuList.menuIcon"></i>
+                      </a>
+                    </li>
             }
              }
              }
