@@ -5,7 +5,7 @@ using AppraisalTool.Application.Features.Events.Commands.Transaction;
 using AppraisalTool.Application.Features.Events.Commands.UpdateEvent;
 using AppraisalTool.Application.Features.Events.Queries.GetEventDetail;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsList;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;

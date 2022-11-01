@@ -13,6 +13,8 @@ using AppraisalTool.Application.Features.Orders.GetOrdersForMonth;
 using AppraisalTool.Domain.Entities;
 using AppraisalTool.Application.Models.AppraisalTool;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
+using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
+using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -40,10 +42,13 @@ namespace AppraisalTool.Application.Profiles
             CreateMap<Event, EventListVm>().ConvertUsing<EventVmCustomMapper>();
 
             //Appraisal Tool
-            //CreateMap<User,CreateUserCommand>().ReverseMap();
+            CreateMap<User, CreateUserCommand>().ReverseMap();
+            //CreateMap<User, CreateUserDto>().ReverseMap();
             CreateMap<User, AddUserViewModel>().ReverseMap();
             CreateMap<Appraisal, GetDataVM>().ConvertUsing<GetDataVmCustomMapper>();
             //CreateMap<Appraisal, GetDataQuery>().ReverseMap();  
+
+            CreateMap<User, UpdateUserCommand>().ReverseMap();
         }
     }
 }

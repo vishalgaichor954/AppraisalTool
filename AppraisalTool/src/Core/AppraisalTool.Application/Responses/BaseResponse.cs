@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AppraisalTool.Application.Responses
+namespace AppraisalTool.Application.Response
 {
 
 

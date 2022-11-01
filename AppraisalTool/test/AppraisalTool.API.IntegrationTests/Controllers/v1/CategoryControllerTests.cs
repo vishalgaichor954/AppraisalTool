@@ -1,6 +1,6 @@
 using AppraisalTool.API.IntegrationTests.Base;
 using AppraisalTool.Application.Features.Categories.Queries.GetCategoriesList;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;

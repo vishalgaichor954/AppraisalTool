@@ -1,7 +1,7 @@
 ﻿using AppraisalTool.Application.Contracts.Infrastructure;
 using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Models.Mail;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using AppraisalTool.Domain.Entities;
 using AutoMapper;
 using MediatR;
@@ -20,13 +20,15 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
         private readonly ILogger<CreateUserCommandHandler> _logger;
         private readonly IMapper _mapper;
         private readonly IEmailService _emailservice;
+        private readonly IAuthenticationService _authService;
 
-        public CreateUserCommandHandler(IUserRepository userRepository, ILogger<CreateUserCommandHandler> logger, IMapper mapper, IEmailService emailService)
+        public CreateUserCommandHandler(IAuthenticationService authService, IUserRepository userRepository, ILogger<CreateUserCommandHandler> logger, IMapper mapper, IEmailService emailService)
         {
             _userRepository = userRepository;
             _logger = logger;
             _mapper = mapper;
             _emailservice = emailService;
+            _authService=authService;
         }
         #region This method will call repository method 
         /// <summary>
@@ -37,18 +39,28 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
         public async Task<Response<CreateUserDto>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Handle Initiated");
+            //primaryRole=request.primaryrole
+            //SecondaryRole=request.SecondaryRole
+            
+          
             var user = _mapper.Map<User>(request);
+
+            _authService.CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+            
+
             var userDto = await _userRepository.RegisterUserAsync(user);
             _logger.LogInformation("Hanlde Completed");
             if (userDto.Succeeded)
             {
-                ////var email = new Email()
-                ////{
-                ////    To = userDto.Email,
-                ////    Body = $"Dear User, <br/><br/You application registered successfully on portal.<br/>\r\n we will contact you soon!.<br /><br />Thanks <br/> <br/>Regards, <br/> Team. Support",
-                ////    Subject = "User Registered Successfully !!"
-                ////};
-                //await _emailservice.SendEmail(email);
+                var email = new Email()
+                {
+                    To = request.Email,
+                    Body = $"Dear User, <br/><br/>You application registered successfully on portal.<br/>\r\n  Kindly refer below credentials to Login.<br/>\r\nUsername : {request.Email} <br/>\r\nPassword : {request.Password}.<br /> <br/>Regards, <br/> Team. Support",
+                    Subject = "User Registered Successfully !!"
+                };
+                await _emailservice.SendEmail(email);
                 return new Response<CreateUserDto>(userDto, "success");
             }
             else

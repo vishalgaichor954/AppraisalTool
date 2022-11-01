@@ -1,7 +1,7 @@
 ﻿using AppraisalTool.Api.Controllers.v1;
 using AppraisalTool.API.UnitTests.Mocks;
 using AppraisalTool.Application.Features.Orders.GetOrdersForMonth;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;

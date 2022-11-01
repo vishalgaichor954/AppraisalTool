@@ -3,7 +3,7 @@ using AppraisalTool.Application.Features.Categories.Commands.CreateCategory;
 using AppraisalTool.Application.Features.Categories.Queries.GetCategoriesList;
 using AppraisalTool.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
 using AppraisalTool.Application.Models.Authentication;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using Newtonsoft.Json;
 using Shouldly;
 using System.Collections.Generic;

@@ -14,13 +14,13 @@
                     <i class="mdi mdi-home"></i>
                 </span> Dashboard
             </h3>
-            <nav aria-label="breadcrumb">
+           @* <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">
                         <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
                     </li>
                 </ul>
-            </nav>
+            </nav>*@
         </div>
         <!-- <div  style="margin-left:200px ;" class="container1"> -->
         <div class="row ">
@@ -77,9 +77,10 @@
                 <!-- <div class="col-md-1"></div> -->
                     @{
                         foreach (var item in ViewBag.GetMenuCards)
-                        {
+                        { 
+                            if(item.menuList.menuFlag=="DASHBOARD"){
                         <div class="col-md-6 stretch-card grid-margin Dash-Card">
-                            <a href="" class="Anchor-body">
+                            <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="Anchor-body">
                                 <div class="card @item.menuList.menuClass card-img-holder text-white Dash-Card">
                                     <div class="card-body">
                                         <img src="~/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
@@ -94,6 +95,8 @@
                                 </div>
                             </a>
                         </div>
+
+                        }
                         }
                     }
 
