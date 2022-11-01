@@ -1,4 +1,4 @@
-﻿using AppraisalTool.Application.Responses;
+﻿using AppraisalTool.Application.Response;
 using MediatR;
 
 namespace AppraisalTool.Application.Features.Categories.Commands.StoredProcedure

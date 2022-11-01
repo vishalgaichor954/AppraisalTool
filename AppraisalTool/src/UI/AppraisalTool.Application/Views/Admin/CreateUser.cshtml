@@ -1,0 +1,121 @@
+﻿@model AppraisalTool.App.Models.UserViewModel
+
+@{
+    ViewData["Title"] = "Add User";
+}
+<style>
+
+
+.container
+{
+ border:1px solid black;
+ margin:50px;
+}
+
+</style>
+@if (TempData["Error"] != null)
+{
+    <div class="container">
+        <div class="alert alert-danger mt-5" role="alert">
+            @TempData["Error"]
+        </div>
+    </div>
+}
+    <div class="row d-flex justify-content-center">
+               <div class="col-6 grid-margin stretch-card ">
+                <div class="card">
+                  <div class="card-body container">
+                    <h4 class="card-title">Add User</h4>
+                    @*<p class="card-description"> Basic form elements </p>*@
+                    <form class="forms-sample" asp-action="CreateUser">
+                      <div class="form-group">
+                        <label asp-for="FirstName">First Name</label>
+                        <input  asp-for="FirstName" type="text" class="form-control" id="exampleInputName1" placeholder="example">
+                       <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                      <div class="form-group">
+                        <label  asp-for="LastName">Last Name</label>
+                        <input asp-for="LastName" type="text" class="form-control" id="exampleInputName1" placeholder="example">
+                       <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                      <div class="form-group">
+                        <label asp-for="Email">Email Id</label>
+                        <input asp-for="Email" type="email" class="form-control" id="exampleInputEmail3" placeholder="example@gmail.com">
+                       <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                      
+                      <div class="form-group">
+                        <label asp-for="Password" >Password</label>
+                        <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
+                     <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                       <div class="form-group">
+                        <label asp-for="JoinDate">Joining Date</label>
+                        <input asp-for="JoinDate" type="date" class="form-control" id="date">
+                      <span asp-validation-for="JoinDate" class="text-danger"></span>
+                    </div>
+                       <div class="form-group">
+                        <label asp-for="LastAppraisalDate">Last Appraisal Date</label>
+                        <input  asp-for="LastAppraisalDate" type="date" class="form-control" id="date">
+                       <span asp-validation-for="LastAppraisalDate" class="text-danger"></span>
+                    </div>
+
+                       <div class="form-group">
+                      <label  asp-for="BranchId">Branch</</label>
+                      <select asp-for="BranchId" class="form-control form-control-lg" asp-items="@ViewBag.branchlist">
+                      <option>Mumbai</option>
+                     </select>
+                     </div>
+
+                      <div class="form-group">
+                      <label asp-for="RoleId">Role</</label>
+                      <select asp-for="RoleId" class="form-control form-control-lg" asp-items="@ViewBag.Rolelist">
+                     @* <option>Reporting Authority</option>
+                      <option>Repviewing Authority</option>*@
+                     </select>
+                     </div>
+                     
+                     <div class="form-group">
+                     <label asp-for="PrimaryRole">Primary Role</</label>
+                     <select asp-for="PrimaryRole" class="form-control form-control-lg" asp-items="@ViewBag.JobProfileRolelist">
+                      
+                      
+                     </select>
+                     </div>
+                    
+                     <div class="form-group">
+                      <label asp-for="SecondaryRole" >Secondary Role</</label>
+                      <select asp-for="SecondaryRole" class="form-control form-control-lg" asp-items="@ViewBag.JobProfileRolelist">
+                     
+                      
+                     </select>
+                     </div>
+                     
+                      
+                      <input type="submit" value="Add" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" />
+                      <button type="reset" value="Reset"  class="btn btn-light">Reset</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              </div>
+
+    @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+     <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+      
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="./lib/assets/js/off-canvas.js"></script>
+ 
+   
+    <script src="./lib/assets/js/hoverable-collapse.js"></script>
+   
+     <script src="./lib/assets/js/misc.js"></script>
+    <!-- endinject -->

@@ -3,7 +3,7 @@ using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Categories.Commands.CreateCategory;
 using AppraisalTool.Application.Models.AppraisalTool;
 using AppraisalTool.Application.Models.Mail;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using AppraisalTool.Domain.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;

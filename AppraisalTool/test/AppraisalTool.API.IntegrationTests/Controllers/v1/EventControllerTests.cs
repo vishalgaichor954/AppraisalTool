@@ -3,7 +3,7 @@ using AppraisalTool.Application.Features.Events.Commands.CreateEvent;
 using AppraisalTool.Application.Features.Events.Queries.GetEventDetail;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsExport;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsList;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using Newtonsoft.Json;
 using Shouldly;
 using System;

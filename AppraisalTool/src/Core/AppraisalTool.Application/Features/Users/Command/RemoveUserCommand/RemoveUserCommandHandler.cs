@@ -1,5 +1,5 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;

@@ -2015,10 +2015,13 @@ button,
 select,
 optgroup,
 textarea {
-  margin: 0;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit; }
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 100%;
+   
+}
 
 button,
 select {
@@ -10932,7 +10935,10 @@ a,
 div, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5,
 p,
 span {
-  text-shadow: none; }
+    text-shadow: none;
+
+
+}
 
 [type=button]:focus,
 a:active,

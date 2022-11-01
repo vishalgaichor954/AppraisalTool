@@ -1,5 +1,5 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using AppraisalTool.Domain.Entities;
 using AutoMapper;
 using MediatR;
@@ -17,11 +17,15 @@ namespace AppraisalTool.Application.Features.Users.Command.UpdateUserCommand
         private readonly ILogger<UpdateUserCommandHandler> _logger;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
-        public UpdateUserCommandHandler(ILogger<UpdateUserCommandHandler> logger,IMapper mapper, IUserRepository userRepository)
+        private readonly IAuthenticationService _authservice;
+
+
+        public UpdateUserCommandHandler(IAuthenticationService authservice ,ILogger<UpdateUserCommandHandler> logger,IMapper mapper, IUserRepository userRepository)
         {
             _logger = logger;
             _mapper = mapper;
             _userRepository = userRepository;
+            _authservice = authservice;
         }
         #region This method will call repository method 
         /// <summary>
@@ -33,7 +37,7 @@ namespace AppraisalTool.Application.Features.Users.Command.UpdateUserCommand
         {
             _logger.LogInformation("UpdateUserCommandHandler Intiated");
             var userDto = await _userRepository.UpdateUserAsync(request.Id, request);
-            _logger.LogInformation("UpdateUserCommandHandler Completed");
+            _logger.LogInformation("UpdateUserCommandHandler Completed");            
             if (userDto.Succeeded)
             {
                 return new Response<UpdateUserCommandDto>(userDto, "Success");

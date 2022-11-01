@@ -1,4 +1,4 @@
-﻿using AppraisalTool.Application.Responses;
+﻿using AppraisalTool.Application.Response;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -19,6 +19,10 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
         public int RoleId { get; set; }
         public int BranchId { get; set; }
 
-       
+        //public int PrimaryRole { get; set; }
+
+        //public int SecondaryRole { get; set; }
+
+
     }
 }

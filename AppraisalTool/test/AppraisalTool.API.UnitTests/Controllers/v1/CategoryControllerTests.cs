@@ -4,7 +4,7 @@ using AppraisalTool.Application.Features.Categories.Commands.CreateCategory;
 using AppraisalTool.Application.Features.Categories.Commands.StoredProcedure;
 using AppraisalTool.Application.Features.Categories.Queries.GetCategoriesList;
 using AppraisalTool.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
-using AppraisalTool.Application.Responses;
+using AppraisalTool.Application.Response;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
