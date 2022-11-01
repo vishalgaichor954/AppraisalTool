@@ -83,23 +83,17 @@ namespace AppraisalTool.App.Controllers
             Console.WriteLine("PostMethod hit");
             if (ModelState.IsValid)
             {
-
-            }
-            string data = JsonConvert.SerializeObject(model);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "User/RegisterUser?api-version=1", content).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                return RedirectToAction("CreateUser");
+                string data = JsonConvert.SerializeObject(model);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "User/RegisterUser?api-version=1", content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["Success"] = "User Created Successfully";
+                    return RedirectToAction("CreateUser");
+                }
             }
             TempData["Error"] = "Faild to Register User";
             return RedirectToAction("CreateUser");
-
-
-
-
-
-
         }
         //[HttpGet]
         //public IActionResult GetRoles()
@@ -132,12 +126,12 @@ namespace AppraisalTool.App.Controllers
                 dynamic json = JsonConvert.DeserializeObject(responseData);
                 Console.WriteLine(responseData);
                 //modellist = JsonConvert.DeserializeObject<List<UserViewModel>>(json.data[0]);
-                ViewBag.Firstname=json.firstname;
+                ViewBag.Firstname = json.firstname;
                 ViewBag.LastName = json.lastName;
-                ViewBag.Email=json.email;
-                ViewBag.BranchName=json.branchName;
+                ViewBag.Email = json.email;
+                ViewBag.BranchName = json.branchName;
                 ViewBag.JoinDate = json.joinDate;
-                ViewBag.LastAppraisalDate=json.lastAppraisalDate;
+                ViewBag.LastAppraisalDate = json.lastAppraisalDate;
                 return View();
 
             }
