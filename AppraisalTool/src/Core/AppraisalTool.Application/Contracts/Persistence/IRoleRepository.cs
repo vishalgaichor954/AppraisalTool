@@ -10,6 +10,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
     public interface IRoleRepository
     {
         public Task<IEnumerable<JobRoles>> GetAllJobRoles();
+        public Task<bool> AddJobRoles(List<UserJobRoles> userJobRoles);
     }
 
 }

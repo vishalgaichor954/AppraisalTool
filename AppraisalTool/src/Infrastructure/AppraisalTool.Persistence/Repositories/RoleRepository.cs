@@ -22,6 +22,20 @@ namespace AppraisalTool.Persistence.Repositories
             return await ListAllAsync();
         }
 
+        public async Task<bool> AddJobRoles(List<UserJobRoles> userJobRoles)
+        {
+            try
+            {
+                await _dbContext.UserJobRoles.AddRangeAsync(userJobRoles);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }catch(Exception e)
+            {
+                Console.Write(e);
+                return false;
+            }
+        }
+
        
     }
 }

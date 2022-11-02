@@ -61,7 +61,7 @@ namespace AppraisalTool.App.Controllers
 
                 ViewBag.GetMenuCards = json.data;
 
-
+                ViewBag.GetSideBarData = json.data;
             }
 
 
