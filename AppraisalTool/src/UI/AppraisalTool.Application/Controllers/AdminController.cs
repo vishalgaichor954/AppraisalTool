@@ -1,4 +1,6 @@
-﻿using AppraisalTool.App.Models;
+﻿using AppraisalTool.App.Helpers;
+using AppraisalTool.App.Models;
+using AppraisalTool.App.Models.AppraisalToolAuth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -74,15 +76,38 @@ namespace AppraisalTool.App.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public IActionResult ListUsers()
+        {
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            List<UserViewModel> modellist = new List<UserViewModel>(); ;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User?api-version=1").Result;
+            if (response.IsSuccessStatusCode)
+            {
+
+                string responseData = response.Content.ReadAsStringAsync().Result;
+                dynamic json = JsonConvert.DeserializeObject(responseData);
+                ViewBag.UserList = json.data;
+                return View();
+
+            }
+            return View();
+        }
+
         [HttpPost]
         public IActionResult CreateUser(UserViewModel model)
         {
 
+            Console.WriteLine("PostMethod hit");
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            Console.WriteLine("PostMethod hit");
+            var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+
             if (ModelState.IsValid)
             {
+                model.AddedBy = userSession.UserId;
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(client.BaseAddress + "User/RegisterUser?api-version=1", content).Result;

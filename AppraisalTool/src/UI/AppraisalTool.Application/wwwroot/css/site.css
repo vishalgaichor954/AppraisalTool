@@ -43,6 +43,16 @@ body {
     background-color:#E0144C;
     color:white;
 }
+.active {
+    color: #E0144C !important;
+    background-color: #E0144C !important;
+}
+    .active > a > span {
+        color: white !important;
+    }
+    .active > a > i {
+        color: white !important;
+    }
 .navbarLogo > img {
     height: 48px !important;
     width: auto !important;
@@ -79,4 +89,22 @@ body {
 .required {
     color : red;
     font-size : 14px;
+}
+
+::-webkit-scrollbar{
+    height:6px;
+    width:6px;
+    border-radius : 12px;
+}
+
+::-webkit-scrollbar-track{
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #E0144C;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

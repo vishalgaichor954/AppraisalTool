@@ -42,13 +42,16 @@ namespace AppraisalTool.Application.Profiles
                 EndYear =source.FinancialYear.EndYear,
                 FinancialYearId= source.FinancialYearId,
                 Role = source.User.Role.Role,
+<<<<<<< HEAD
                 //AuthorityId = source.User.UserAuthorities.Id,
                 //ReviewingAuthority = source.User.UserAuthorities.ReviewingAuthority,
                 //ReportingAuthority = source.User.UserAuthorities.ReportingAuthority,
 
 
             };
+=======
     };
+>>>>>>> 6633c2a30fee5c7df895049f6e518f00ccf25e3a
             return dest;
         }
     }

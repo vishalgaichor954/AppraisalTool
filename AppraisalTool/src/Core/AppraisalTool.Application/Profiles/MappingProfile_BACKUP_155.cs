@@ -15,8 +15,11 @@ using AppraisalTool.Application.Models.AppraisalTool;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
+<<<<<<< HEAD
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetYear;
+=======
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
+>>>>>>> 6633c2a30fee5c7df895049f6e518f00ccf25e3a
 
 namespace AppraisalTool.Application.Profiles
 {

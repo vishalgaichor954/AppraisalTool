@@ -9,6 +9,7 @@ using AppraisalTool.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -161,6 +162,7 @@ namespace AppraisalTool.Persistence.Repositories
             await UpdateAsync(user);
             return true;
         }
+
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
@@ -170,6 +172,7 @@ namespace AppraisalTool.Persistence.Repositories
             }
         }
 
+        //@Author : Ilyas Dabholkar
         public async Task<CreateRoleCommandDto> CreateUserRole(UserJobRoles request)
         {
             CreateRoleCommandDto response = new CreateRoleCommandDto();
@@ -179,31 +182,40 @@ namespace AppraisalTool.Persistence.Repositories
             return response;
         }
 
-        public async Task<IEnumerable<GetUserListQueryVm>> GetAllUser()
-        {
-            var result = (from A in _dbContext.User
-                          join B in _dbContext.Branch on A.BranchId equals B.Id
-                          select new GetUserListQueryVm
-                          {
-                              Id = A.Id,
-                              FirstName = A.FirstName,
-                              LastName = A.LastName,
-                              Email = A.Email,
-                              BranchName = B.BranchName,
-                              JoinDate = (DateTime)A.JoinDate,
-                              LastAppraisalDate = A.LastAppraisalDate
-                          });
-            var res = await result.OrderBy(x => x.Id).ToListAsync();
 
-            return res;
+        public async Task<IEnumerable<User>> GetAllUser()
+        {
+            IEnumerable<User> users = await _dbContext.User.Include(x=>x.Branch).Include(x=>x.Role).Include(x=>x.JobRoles).ThenInclude(x=>x.JobRole).ToListAsync();
+            //var result = (from A in _dbContext.User
+            //              join B in _dbContext.Branch on A.BranchId equals B.Id
+            //              select new GetUserListQueryVm
+            //              {
+            //                  Id = A.Id,
+            //                  FirstName = A.FirstName,
+            //                  LastName = A.LastName,
+            //                  Email = A.Email,
+            //                  BranchName = B.BranchName,
+            //                  JoinDate = (DateTime)A.JoinDate,
+            //                  LastAppraisalDate = A.LastAppraisalDate
+
+
+            //              });
+            //var res = await res.OrderBy(x => x.Id).ToListAsync();
+
+            return users;
         }
 
         //@Author : Ilyas Dabholkar
         public async Task<User> GetUserById(int id)
         {
-            var user = await _dbContext.User.Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).FirstOrDefaultAsync(u => u.Id == id && u.IsDeleted != true);
             return user;
         }
+
+        //public async Task<List<User>> GetUserAuthorities(int id)
+        //{
+
+        //}
     }
 
         }

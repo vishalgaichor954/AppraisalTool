@@ -27,8 +27,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Core\AppraisalTool.Application\AppraisalTool.Application.csproj" />
-  </ItemGroup>
-
 </Project>
