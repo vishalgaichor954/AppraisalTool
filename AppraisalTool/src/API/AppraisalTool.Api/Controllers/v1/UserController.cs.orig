@@ -1,11 +1,17 @@
 ﻿
+using AppraisalTool.Application.Features.Users.Command.CreateRoleCommand;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
-<<<<<<< Updated upstream
+<<<<<<< HEAD
+using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
+using AppraisalTool.Application.Features.Users.Query.GetRoleList;
+using AppraisalTool.Application.Features.Users.Query.GetUserList;
+using AppraisalTool.Application.Features.Users.Query.GetUserRole;
+using AppraisalTool.Application.Features.Users.Query.GetUserRole.GetBranchList;
 =======
 using AppraisalTool.Application.Features.Users.Queries.GetMenuList;
->>>>>>> Stashed changes
 using AppraisalTool.Application.Features.Users.Queries.GetUserJobProfiles;
+>>>>>>> 5e623f6df04e08c5c5aa7abf1ce56b93be1105bc
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,17 +30,22 @@ namespace AppraisalTool.Api.Controllers.v1
             _mediator = mediator;
             _logger=logger;
         }
-
+        
         [HttpPost("RegisterUser")]
         public async Task<ActionResult> RegisterAsync(CreateUserCommand request)
         {
             _logger.LogInformation("RegisterAsync Initiated");
             var dtos = await _mediator.Send(request);
+           
             _logger.LogInformation("RegisterAsync Completed");
             return Ok(dtos);
         }
+<<<<<<< HEAD
+        [HttpDelete("removeUser")]
+=======
 
         [HttpPost("removeUser/{Id }")]
+>>>>>>> 5e623f6df04e08c5c5aa7abf1ce56b93be1105bc
         public async Task<ActionResult> RemoveAsync(int Id)
         {
             _logger.LogInformation("RemoveAsync Initiated");
@@ -43,12 +54,51 @@ namespace AppraisalTool.Api.Controllers.v1
             return Ok(dtos);
         }
 
-        //@Author : Ilyas Dabholkar
-<<<<<<< Updated upstream
-        [HttpPost("GetUserJobProfile")]
+<<<<<<< HEAD
+        [HttpPut("UpdateUser")]
+        public async Task<ActionResult> UpdateUserAsync(UpdateUserCommand request)
+        {
+            _logger.LogInformation("UpdateUserAsync Initiates");
+            var dtos=await _mediator.Send(request);
+            _logger.LogInformation("UpdateUserAsync Completed ");
+            return Ok(dtos);
+        }
+        [HttpGet]
+        [Route("GetJobProfile")]
+        public async Task<ActionResult> GetJobProfile()
+        {
+           var dtos= await _mediator.Send(new GetRoleQuery());
+           return Ok(dtos);
+                 
+        }
+        [HttpGet]
+        [Route("GetBranch")]
+        public async Task<ActionResult> GetBranch()
+        {
+            var dtos = await _mediator.Send(new GetBranchListQuery());
+            return Ok(dtos);
+
+        }
+        [HttpGet]
+        [Route("GetRole")]
+
+        public async Task<ActionResult> GetRole()
+        {
+            var dtos = await _mediator.Send(new GetRoleListQuery());
+            return Ok(dtos);
+
+        }
+        [HttpGet(Name = "GetUserList")]
+        
+        public async Task<ActionResult> GetAllUserList()
+        {
+            var res = await _mediator.Send(new GetUserListQuery());
+            return Ok(res);
+        }
+
 =======
+        //@Author : Ilyas Dabholkar
         [HttpGet("GetUserJobProfile")]
->>>>>>> Stashed changes
         public async Task<ActionResult> GetUserJobProfile(int id)
         {
             _logger.LogInformation("GetUserJobProfile Initiated");
@@ -56,8 +106,6 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("GetUserJobProfile Completed");
             return Ok(dtos);
         }
-<<<<<<< Updated upstream
-=======
 
 
 
@@ -70,6 +118,6 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("GetUserJobProfile Completed");
             return Ok(dtos);
         }
->>>>>>> Stashed changes
+>>>>>>> 5e623f6df04e08c5c5aa7abf1ce56b93be1105bc
     }
 }
