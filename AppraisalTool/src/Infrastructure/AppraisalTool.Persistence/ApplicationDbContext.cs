@@ -46,7 +46,10 @@ namespace AppraisalTool.Persistence
         public DbSet<UserJobRoles> UserJobRoles { get; set; }
         public DbSet<MenuList> MenuLists { get; set; }
         public DbSet<MenuRoleMapping> MenuRoleMappings { get; set; }
+        public DbSet<KraTypes> kraTypes { get; set; }
+        public DbSet<ListOfKra> ListOfKras { get; set; }
 
+        public DbSet<ListOfMetrics> listOfMetrics { get; set; }
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
