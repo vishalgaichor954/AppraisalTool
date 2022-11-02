@@ -130,6 +130,7 @@ namespace AppraisalTool.Persistence.Repositories
                 return response;
             }
             var userToUpdate = await _dbContext.User.Where(u => u.Id == id).FirstOrDefaultAsync();
+            //var userToUpdate = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).FirstOrDefaultAsync();
             if (userToUpdate != null)
             {
                 CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
@@ -197,13 +198,17 @@ namespace AppraisalTool.Persistence.Repositories
 
             return res;
         }
-
-        }
-
         //@Author : Ilyas Dabholkar
         public async Task<User> GetUserById(int id)
         {
             var user = await _dbContext.User.Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
-    } }
+
+    }
+
+       
+        
+  } 
+
+

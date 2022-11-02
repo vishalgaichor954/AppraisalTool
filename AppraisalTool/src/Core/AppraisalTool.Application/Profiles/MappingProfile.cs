@@ -15,6 +15,7 @@ using AppraisalTool.Application.Models.AppraisalTool;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
+using AppraisalTool.Application.Features.Users.Query.GetUserById;
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -49,6 +50,7 @@ namespace AppraisalTool.Application.Profiles
             //CreateMap<Appraisal, GetDataQuery>().ReverseMap();  
 
             CreateMap<User, UpdateUserCommand>().ReverseMap();
+            CreateMap<User, GetUserByIdDto>().ReverseMap();
         }
     }
 }

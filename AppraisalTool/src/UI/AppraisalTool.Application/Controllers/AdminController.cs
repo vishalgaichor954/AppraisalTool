@@ -95,22 +95,27 @@ namespace AppraisalTool.App.Controllers
             TempData["Error"] = "Faild to Register User";
             return RedirectToAction("CreateUser");
         }
-        //[HttpGet]
-        //public IActionResult GetRoles()
-        //{
-        //    HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User?api-version=1").Result;
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var responseData = response.Content.ReadAsStringAsync().Result;
-        //        Console.WriteLine(responseData);
-        //        return RedirectToAction("");
-        //    }
-        //    else
-        //    {
-        //        return View();
-        //    }
+        [HttpGet]
+        public IActionResult  UpdateUser(int id)
+        {
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            UserViewModel user = new UserViewModel();
+            //User/getUser?id=1&api-version=1
+            
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User/getUser?id=1&api-version=1").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var data = response.Content.ReadAsStringAsync().Result;
 
-        //}
+                var res = JsonConvert.DeserializeObject<Response>(data);
+                var serres = JsonConvert.SerializeObject(res.Data);
+                user = JsonConvert.DeserializeObject<UserViewModel>(serres);
+
+                Console.WriteLine(user);
+            }
+            return View(user);
+        }
 
         [HttpGet]
         public IActionResult GetAllUserList()
@@ -139,5 +144,6 @@ namespace AppraisalTool.App.Controllers
 
 
         }
+
     }
 }
