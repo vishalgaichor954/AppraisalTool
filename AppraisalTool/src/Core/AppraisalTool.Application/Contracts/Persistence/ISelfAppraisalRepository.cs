@@ -10,6 +10,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
     public interface ISelfAppraisalRepository
     {
         public  Task<List<Appraisal>> GetDataById(int userId, int financialYearId);
+        public  Task<List<Appraisal>> GetYear(int userId);
 
     }
 }

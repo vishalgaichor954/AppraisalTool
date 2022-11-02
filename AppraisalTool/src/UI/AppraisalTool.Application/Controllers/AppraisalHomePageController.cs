@@ -24,7 +24,7 @@ namespace AppraisalTool.App.Controllers
         {
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/byYear?yearId=1&userId={user.UserId}").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome?userId={user.UserId}").Result;
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
@@ -34,7 +34,7 @@ namespace AppraisalTool.App.Controllers
                 foreach (var item in data.Data)
                 {
 
-                    financialYearList.Add(new SelectListItem { Text = item.startYear.ToString(), Value = item.id.ToString() });
+                    financialYearList.Add(new SelectListItem { Text ="FY" + item.startYear.ToString()+"-"+item.endYear.ToString(), Value = item.id.ToString() });
 
                 }
                 ViewBag.financialYearList = financialYearList;

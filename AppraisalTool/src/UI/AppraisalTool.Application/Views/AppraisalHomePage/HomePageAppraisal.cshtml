@@ -105,65 +105,13 @@
 
 
 
-                        @*<td>@appraisal.Id</td>
-                        <td>@appraisal.StartYear</td>
-                        <td>@appraisal.EndYear</td>
-                        <td>@appraisal.FinancialYearId</td>*@
-
-
-                        @*<select name="" id="">
-                            @foreach (var appraisal in ViewBag.appraisal)
-                            {
-
-                                <option value="">FY-@appraisal.StartYear-@appraisal.EndYear </option>
-
-
-                            }
-                        </select>*@
-                        <label>FY</label>
+                        
+                        
                         <select asp-for="StartYear" class="form-control" asp-items="@ViewBag.financialYearList">
                             </select>
 
                     </div>
-                    <!-- <div>
-                         <div class="btn-group" role="group" aria-label="Basic example">
-                           <button type="button" class="btn btn-outline-secondary">
-                          Mid Year </button>
-                           <button type="button" class="btn btn-outline-secondary">
-                           </i> Annual</button>
-
-                         </div>
-                       </div>
-                     </div>
-                     <div style="justify-content: center;" class="col-md-6" >
-                       <div style="display: inline;" class="btn-div">
-                         <button> Download</button>
-                       </div>
-
-                     </div>
-                    </div> -->
-                    <!-- <div class="row justify-content-center">
-                     <div class="col-md-3">
-                       <select name="" id="">
-                         <option value="">FY-2019-20</option>
-                         <option value="">FY-2020-21</option>
-                         <option value="">FY-2021-22</option>
-                         <option value="">FY-2022-23</option>
-                         <option value="">FY-2023-24</option>
-                       </select>
-                     </div>
-                     <div class="col-md-3">
-                       <div class="btn-group" role="group" aria-label="Basic example">
-                       <a type="button" href=""></a>
-                         <button type="button" class="btn btn-outline-secondary">
-                         </i> Annual</button>
-
-                       </div>
-                     </div>
-                     <div class="col-md-3"></div>
-                     <div class="col-md-1"></div>
-                     <div style="justify-content:flex-end ;" class="col-md-2"> <button> Download</button></div>
-                    </div> -->
+                   
                     <div class="mt-5">
                         <div class="dash-card-wrapper">
                             <!-- <div class="col-md-1"></div> -->

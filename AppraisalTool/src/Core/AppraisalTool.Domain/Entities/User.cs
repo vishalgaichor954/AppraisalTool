@@ -10,6 +10,7 @@ namespace AppraisalTool.Domain.Entities
 {
     public class User
     {
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -39,7 +40,13 @@ namespace AppraisalTool.Domain.Entities
         public virtual UserRole? Role { get; set; }
         [ForeignKey("BranchId")]
         public virtual Branch? Branch { get; set; }
+        
         public virtual List<UserJobRoles> JobRoles { get; set; }
+
+        
+       
+        public virtual UserAuthorityMapping UserAuthorities { get; set; }
+       
 
     }
 }

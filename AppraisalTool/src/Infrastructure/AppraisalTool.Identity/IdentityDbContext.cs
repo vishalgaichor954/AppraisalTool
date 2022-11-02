@@ -26,6 +26,7 @@ namespace AppraisalTool.Identity
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+            
         }
  
     }

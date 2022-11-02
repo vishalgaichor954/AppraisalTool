@@ -2,6 +2,7 @@
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.AppraisalToolDashboard;
+using AppraisalTool.App.Models.Navbar;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -54,9 +55,13 @@ namespace AppraisalTool.App.Controllers
 
                 var datacard = json.data[0].menuList;
                 Console.WriteLine(datacard);
+                NavbarViewModel navbarVM = new NavbarViewModel() { UserRole = user.Role,UserName=user.Name,SideBarList=json.data};
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "navbarViewModel", navbarVM);
+
+
                 ViewBag.GetMenuCards = json.data;
 
-
+                ViewBag.GetSideBarData = json.data;
             }
 
 

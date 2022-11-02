@@ -18,18 +18,21 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
     {
         private readonly IUserRepository _userRepository;
         private readonly ILogger<CreateUserCommandHandler> _logger;
+        private readonly IRoleRepository _roleRepository;
         private readonly IMapper _mapper;
         private readonly IEmailService _emailservice;
         private readonly IAuthenticationService _authService;
 
-        public CreateUserCommandHandler(IAuthenticationService authService, IUserRepository userRepository, ILogger<CreateUserCommandHandler> logger, IMapper mapper, IEmailService emailService)
+        public CreateUserCommandHandler(IAuthenticationService authService, IUserRepository userRepository, ILogger<CreateUserCommandHandler> logger, IMapper mapper, IEmailService emailService, IRoleRepository roleRepository)
         {
             _userRepository = userRepository;
             _logger = logger;
             _mapper = mapper;
             _emailservice = emailService;
-            _authService=authService;
+            _authService = authService;
+            _roleRepository = roleRepository;
         }
+
         #region This method will call repository method 
         /// <summary>
         /// 01/11/2021 - This method will call repository method
@@ -51,6 +54,17 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
             
 
             var userDto = await _userRepository.RegisterUserAsync(user);
+            if (userDto != null)
+            {
+                List<UserJobRoles> jobList = new List<UserJobRoles>()
+                {
+                    new UserJobRoles(){UserId = userDto.Id,JobRoleId=request.PrimaryRole,IsPrimary=true,IsSecondary=false},
+                    new UserJobRoles(){UserId = userDto.Id,JobRoleId=request.SecondaryRole,IsPrimary=false,IsSecondary=true}
+                };
+                await _roleRepository.AddJobRoles(jobList);
+            }
+
+
             _logger.LogInformation("Hanlde Completed");
             if (userDto.Succeeded)
             {

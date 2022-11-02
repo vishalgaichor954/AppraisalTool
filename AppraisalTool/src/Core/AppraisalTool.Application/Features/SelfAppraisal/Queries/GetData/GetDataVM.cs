@@ -19,6 +19,10 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData
         public int EndYear { get; set; }
         public string Role { get; set; }
         public int FinancialYearId { get; set; }
+        public string? ReportingAuthority { get; set; }
+        
+        public string? ReviewingAuthority { get; set; }
+        public int AuthorityId { get; set; }
 
 
     }

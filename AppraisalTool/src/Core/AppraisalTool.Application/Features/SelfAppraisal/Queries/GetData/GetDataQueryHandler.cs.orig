@@ -1,6 +1,9 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Response;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 318a4df2633deb7f212b7adce5ec2a5d2a3b2617
 using AppraisalTool.Domain.Entities;
 using AutoMapper;
 using MediatR;
@@ -33,11 +36,11 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData
             List<Appraisal> appraisals = await _selfAppraisalRepository.GetDataById(request.UserId,request.FinancialYearId);
            
 
-          
+            Console.WriteLine(appraisals[0].FinancialYear.StartYear);
 
             var dataVM = _mapper.Map<List<GetDataVM>>(appraisals);
-            
-         
+            Console.WriteLine(appraisals[0].FinancialYear.EndYear);
+            _logger.LogError(dataVM.ToString());
             
            
            
