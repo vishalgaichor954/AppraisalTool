@@ -43,15 +43,15 @@ body {
     background-color:#E0144C;
     color:white;
 }
-.active {
+/*.active {
     color: #E0144C !important;
     background-color: #E0144C !important;
-}
+}*/
     .active > a > span {
-        color: white !important;
+        color: #E0144C !important;
     }
     .active > a > i {
-        color: white !important;
+        color: #E0144C !important;
     }
 .navbarLogo > img {
     height: 48px !important;
