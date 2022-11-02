@@ -18,6 +18,10 @@ namespace AppraisalTool.Domain.Entities
 
         public string MenuClass { get; set; }
         public string MenuIcon { get; set; }
-        public string MenuUrl { get; set; }
+
+        public string ?MenuFlag { get; set; }
+        public string ?MenuController { get; set; }
+
+        public string ?MenuAction { get; set; }
     }
 }

@@ -43,6 +43,10 @@ body {
     background-color:#E0144C;
     color:white;
 }
+.navbarLogo > img {
+    height: 48px !important;
+    width: auto !important;
+}
 .containerBackGroundColor {
     background-color: #2146C7 !important;
 }
@@ -70,4 +74,9 @@ body {
 .no-margin {
     margin: 0% !important;
     padding: 0% !important;
+}
+
+.required {
+    color : red;
+    font-size : 14px;
 }

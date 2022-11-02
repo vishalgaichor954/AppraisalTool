@@ -7,24 +7,24 @@ namespace AppraisalTool.App.Models
 
         public int Id { get; set; }  
 
-        [Required(ErrorMessage = "First Name is Required")]
+        [Required(ErrorMessage = "First name is required")]
         [RegularExpression(@"^[a-zA-z]+$", ErrorMessage = "First Name Should Contain only Alphabet")]
 
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Display(Name = "First Name")]
-        [Required(ErrorMessage = "Last Name is Required")]
+        [Required(ErrorMessage = "Last name is required")]
         [RegularExpression(@"^[a-zA-z]+$", ErrorMessage = "Last Name Should Contain only Alphabet")]
         public string LastName { get; set; }
 
         [Display(Name = "Email Id")]
-        [Required(ErrorMessage = "Email Address is Required")]
+        [Required(ErrorMessage = "Email address is required")]
         [RegularExpression(@"^[0-9a-zA-z]+[.+-_$]{0,1}[0-9a-zA-z]+[@][a-zA-z]+[.][a-zA-z]{2,3}$", ErrorMessage = "Please Enter Valid Email")]
         public string Email { get; set; }
 
         [Required]
-        [RegularExpression(@"^[a-zA-z0-9@&*$]{8,}", ErrorMessage = "password pattern not match")]
+        [RegularExpression(@"^[a-zA-z0-9@&*$]{8,}", ErrorMessage = "Enter a strong password")]
         public string Password { get; set; }
 
         [Display(Name = "Join Date")]
@@ -35,16 +35,16 @@ namespace AppraisalTool.App.Models
         [Display(Name = "Last Appraisal Date")]
         public DateTime? LastAppraisalDate { get; set; }
 
-        [Required(ErrorMessage = "Please Select PrimaryRole")]
+        [Required(ErrorMessage = "Please select primary job profile")]
         public string PrimaryRole { get; set; }
 
-        [Required(ErrorMessage = "Please Select SecondaryRole")]
+        [Required(ErrorMessage = "Please select a secondary job profile")]
         public string SecondaryRole { get; set; }
 
-        [Required(ErrorMessage = "Please Select Roles")]
+        [Required(ErrorMessage = "Role is required")]
         public int RoleId { get; set; }
 
-        [Required(ErrorMessage = "Please Select Branch")]
+        [Required(ErrorMessage = "Branch is required")]
         public int BranchId { get; set; }
 
         [Display(Name = "Branch Name")]

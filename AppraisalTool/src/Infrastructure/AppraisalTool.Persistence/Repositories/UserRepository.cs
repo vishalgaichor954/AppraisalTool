@@ -196,6 +196,7 @@ namespace AppraisalTool.Persistence.Repositories
             var res = await result.OrderBy(x => x.Id).ToListAsync();
 
             return res;
+        }
 
         }
 

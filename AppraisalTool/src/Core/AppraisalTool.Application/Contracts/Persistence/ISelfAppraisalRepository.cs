@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace AppraisalTool.Application.Contracts.Persistence
 {
-    public interface IRoleRepository
+    public interface ISelfAppraisalRepository
     {
-        public Task<IEnumerable<JobRoles>> GetAllJobRoles();
-        public Task<bool> AddJobRoles(List<UserJobRoles> userJobRoles);
-    }
+        public  Task<List<Appraisal>> GetDataById(int userId, int financialYearId);
 
+    }
 }
