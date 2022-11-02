@@ -31,8 +31,8 @@ namespace AppraisalTool.App.Models
         [Required]
         public DateTime? JoinDate { get; set; }
 
-        [Required]
-        [Display(Name = "Last Appraisal Date")]
+        //[Required]
+        //[Display(Name = "Last Appraisal Date")]
         public DateTime? LastAppraisalDate { get; set; }
 
         [Required(ErrorMessage = "Please select primary job profile")]
@@ -48,6 +48,14 @@ namespace AppraisalTool.App.Models
         public int BranchId { get; set; }
 
         [Display(Name = "Branch Name")]
-        public string BranchName { get; set; }
+        public string? BranchName { get; set; }
+
+        public int? AddedBy { get; set; }
+        public int Role { get; set; }
+        public string? RoleName { get; set; }
+        public string? PrimaryJobProfileName { get; set; }
+        public string? SecondaryJobProfileName { get; set; }
+        public int? SecondaryJobProfileId { get; set; }
+        public int? PrimaryJobProfileId { get; set; }
     }
 }

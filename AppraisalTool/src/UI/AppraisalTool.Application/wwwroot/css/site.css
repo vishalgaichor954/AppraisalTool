@@ -80,3 +80,21 @@ body {
     color : red;
     font-size : 14px;
 }
+
+::-webkit-scrollbar{
+    height:6px;
+    width:6px;
+    border-radius : 12px;
+}
+
+::-webkit-scrollbar-track{
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #E0144C;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
