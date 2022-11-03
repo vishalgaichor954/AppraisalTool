@@ -17,5 +17,10 @@ namespace AppraisalTool.App.Controllers
             }
             return View();
         }
+
+        public IActionResult AddSelfAppraisal()
+        {
+            return View();
+        }
     }
 }
