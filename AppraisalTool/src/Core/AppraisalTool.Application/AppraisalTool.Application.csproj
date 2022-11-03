@@ -30,4 +30,8 @@
     <ProjectReference Include="..\AppraisalTool.Domain\AppraisalTool.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Metrics\Commands\" />
+  </ItemGroup>
+
 </Project>
