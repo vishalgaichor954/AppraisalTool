@@ -12,27 +12,27 @@
 
 
 <div class="container">
-    @if (TempData["Error"] != null)
+    @if (TempData["editError"] != null)
     {
         <div class="container">
             <div class="alert alert-danger mt-5" role="alert">
-                @TempData["Error"]
+                @TempData["editError"]
             </div>
         </div>
     }
-    @if (TempData["Success"] != null)
+   @* @if (TempData["Success"] != null)
     {
         <div class="container">
             <div class="alert alert-success mt-5" role="alert">
                 @TempData["Success"]
             </div>
         </div>
-    }
+    }*@
     <div class="col-11">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Create New User</h4>
-                <form class="form-sample" asp-action="CreateUser">
+                <h4 class="card-title"> Update User</h4>
+                <form class="form-sample" asp-action="UpdateUser" method="post">
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
@@ -64,7 +64,17 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="JoinDate" class="col-sm-4 col-form-label">Joining Date<sup class="required">*</sup></label>
+                                <div class="col-sm-8">
+                                    <input asp-for="JoinDate" type="date" class="form-control" />
+                                    <span asp-validation-for="JoinDate" class="text-danger mx-1 small"></span>
+                                </div>
+                            </div>
+                        </div>
+                       @* <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="Password" class="col-sm-4 col-form-label">Password<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
@@ -72,9 +82,9 @@
                                     <span asp-validation-for="Password" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
-                    <div class="row">
+                   @* <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="JoinDate" class="col-sm-4 col-form-label">Joining Date<sup class="required">*</sup></label>
@@ -93,7 +103,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
 
                     <div class="row">
                         <div class="col-md-6">
@@ -111,7 +121,7 @@
                             <div class="form-group row">
                                 <label asp-for="RoleId" class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="RoleId" class="form-control" asp-items="@ViewBag.Rolelist">
+                                    <select asp-for="RoleId" class="form-control" asp-items="@ViewBag.Rolelist" >
                                         <option value="">Select Role</option>
                                     </select>
                                     <span asp-validation-for="RoleId" class="text-danger mx-1 small"></span>
@@ -122,7 +132,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="PrimaryRole" class="col-sm-4 col-form-label">Primary Job Profile<sup class="required">*</sup></label>
+                                <label asp-for="PrimaryRole" class="col-sm-4 col-form-label">Primary Job Profile<span style="color: Red">&nbsp;*</span></label>
                                 <div class="col-sm-8">
                                     <select asp-for="PrimaryRole" class="form-control" asp-items="@ViewBag.JobProfileRolelist">
                                         <option value="">Select Primary Job Profile</option>
@@ -134,7 +144,7 @@
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="SecondaryRole" class="col-sm-4 col-form-label">
-                                    Secondary Job Profile<sup class="required">*</sup>
+                                    Secondary Job Profile<span style="color: Red">&nbsp;*</span>
                                 </label>
                                 <div asp-for="SecondaryRole" class="col-sm-8">
                                     <select asp-for="SecondaryRole" asp-items="@ViewBag.JobProfileRolelist" class="form-control">
@@ -145,12 +155,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row d-flex justify-content-center">
+                     <div class="row d-flex justify-content-center">
                         <div style="max-width:40%;">
                             <div style="align-items:center;">
-                                <input type="submit" value="Create User" class="btn btn-block LoginBtn btn-lg font-weight-medium auth-form-btn" />
-                            </div>
+                                <input type="submit" value="Save" class="btn btn-block LoginBtn btn-lg font-weight-medium auth-form-btn" />
+                              
+
+                           </div>
+                           
                         </div>
+                         <div style="max-width:40%;">
+                        <div style="align-items:center;">
+                                <a  style="width:100%;" asp-action="ListUsers" class="btn btn-light btn-block btn-lg font-weight-medium auth-form-btn">Cancel</a>
+                        </div>
+                       </div>
                     </div>
                 </form>
             </div>

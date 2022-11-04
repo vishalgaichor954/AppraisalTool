@@ -16,13 +16,14 @@ using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
 using AppraisalTool.Application.Features.Users.Query.GetUserById;
+using AppraisalTool.Application.Features.Users.Query.GetUserList;
 
 namespace AppraisalTool.Application.Profiles
 {
-    public class MappingProfile: Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
-        {          
+        {
             CreateMap<Event, CreateEventCommand>().ReverseMap();
             CreateMap<Event, TransactionCommand>().ReverseMap();
             CreateMap<Event, UpdateEventCommand>().ReverseMap();
@@ -50,7 +51,10 @@ namespace AppraisalTool.Application.Profiles
             //CreateMap<Appraisal, GetDataQuery>().ReverseMap();  
 
             CreateMap<User, UpdateUserCommand>().ReverseMap();
+
             CreateMap<User, GetUserByIdDto>().ReverseMap();
+
+            CreateMap<User, GetUserListQueryVm>().ConvertUsing<GetUserListVmCustomMapper>();
         }
     }
 }

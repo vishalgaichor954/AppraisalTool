@@ -18,14 +18,16 @@ namespace AppraisalTool.Application.Features.Users.Command.UpdateUserCommand
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private readonly IAuthenticationService _authservice;
+        private readonly IRoleRepository _roleRepository;
 
 
-        public UpdateUserCommandHandler(IAuthenticationService authservice ,ILogger<UpdateUserCommandHandler> logger,IMapper mapper, IUserRepository userRepository)
+        public UpdateUserCommandHandler(IRoleRepository roleRepository,IAuthenticationService authservice ,ILogger<UpdateUserCommandHandler> logger,IMapper mapper, IUserRepository userRepository)
         {
             _logger = logger;
             _mapper = mapper;
             _userRepository = userRepository;
             _authservice = authservice;
+            _roleRepository=roleRepository;
         }
         #region This method will call repository method 
         /// <summary>

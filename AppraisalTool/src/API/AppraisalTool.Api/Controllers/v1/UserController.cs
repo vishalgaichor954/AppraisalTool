@@ -39,10 +39,10 @@ namespace AppraisalTool.Api.Controllers.v1
             return Ok(dtos);
         }
         [HttpDelete("removeUser")]
-        public async Task<ActionResult> RemoveAsync(int Id)
+        public async Task<ActionResult> RemoveAsync(int id)
         {
             _logger.LogInformation("RemoveAsync Initiated");
-            var dtos = await _mediator.Send(new RemoveUserCommand(Id));
+            var dtos = await _mediator.Send(new RemoveUserCommand() { Id=id});
             _logger.LogInformation("RemoveAsync Completed");
             return Ok(dtos);
         }
@@ -50,6 +50,7 @@ namespace AppraisalTool.Api.Controllers.v1
         [HttpPut("UpdateUser")]
         public async Task<ActionResult> UpdateUserAsync(UpdateUserCommand request)
         {
+            //var request = new UpdateUserCommand();
             _logger.LogInformation("UpdateUserAsync Initiates");
             var dtos=await _mediator.Send(request);
             _logger.LogInformation("UpdateUserAsync Completed ");

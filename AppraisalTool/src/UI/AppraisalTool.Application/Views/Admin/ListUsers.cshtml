@@ -1,0 +1,171 @@
+﻿@{
+    ViewData["Title"] = "ListUsers";
+}
+
+@*<link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="~/css/dataTables.bootstrap5.min.css" />*@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"/>
+<div class="container">
+    
+    @if (TempData["AddUserSuccess"] != null)
+    {
+        <div class="container">
+            <div class="alert alert-success mt-5" role="alert">
+                @TempData["AddUserSuccess"]
+            </div>
+        </div>
+    }
+    @if (TempData["AAddUserFailed"] != null)
+    {
+        <div class="container">
+            <div class="alert alert-success mt-5" role="alert">
+                @TempData["AddUserFailed"]
+            </div>
+        </div>
+    }
+     @if (TempData["DeleteuserSuccess"] != null)
+    {
+        <div class="container">
+            <div class="alert alert-success mt-5" role="alert">
+                @TempData["DeleteuserSuccess"]
+            </div>
+        </div>
+    }
+
+
+    @if (TempData["DeleteUserFaild"] != null)
+    {
+        <div class="container">
+            <div class="alert alert-success mt-5" role="alert">
+                @TempData["DeleteUserFaild"] 
+            </div>
+        </div>
+    }
+
+     @if (TempData["editError"] != null)
+    {
+        <div class="container">
+            <div class="alert alert-danger mt-5" role="alert">
+                @TempData["editError"]
+            </div>
+        </div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="container">
+            <div class="alert alert-success mt-5" role="alert">
+                @TempData["Success"]
+            </div>
+        </div>
+    }
+    
+    
+    <div class="container-scroller ">
+        <!-- partial -->
+        <div>
+            <div class="row">
+                <div class="col-lg-12 grid-margin">
+                    <div class="card" style="max-width:95%">
+                        <div class="card-body">
+                            <div class="page-header">
+                                <h3 class="page-title"> Users </h3>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item active" aria-current="page">
+                                            <div style="align-items:center;">
+                                                <a class="btn btn-block LoginBtn btn-lg font-weight-medium auth-form-btn" asp-action="CreateUser">Create User</a>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                           <div style="overflow:scroll;">
+                                <table class="table table-bordered display" id="myTable" style="max-width:95%">
+                                    <thead>
+                                        <tr>
+                                            <th> Name </th>
+                                            <th> Branch </th>
+                                            <th> Role </th>
+                                            <th> Join Date </th>
+                                            <th> Primary Profile </th>
+                                            <th> Secondary Profile </th>
+                                            <th> Actions </th>  
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (ViewBag.UserList != null)
+                                        {
+                                            @foreach (var item in ViewBag.UserList)
+                                            {
+                                                <tr>
+                                                    <td style="text-transform:'Capatilize';"> @item.firstName @item.lastName </td>
+                                                    <td> @item.branchName </td>
+                                                    <td> @item.roleName </td>
+                                                    <td> @item.joinDate </td>
+                                                    <td> @item.primaryJobProfileName </td>
+                                                    <td> @item.secondaryJobProfileName </td>
+                                                    <td> <a asp-action="UpdateUser" asp-route-id="@item.id" class="btn btn-sm LoginBtn"><i class="mdi mdi-table-edit"></i></a>
+                                                     <a asp-action="DeleteUser" asp-route-id="@item.id" class="btn btn-sm LoginBtn" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
+                                                    </td>
+                                                 </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+   
+@*   <script src="~/js/dataTables.bootstrap5.min.js"></script>
+*@ 
+ <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.slim.min.js"></script>
+ 
+ <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+<script>
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                 'columnDefs': [ {
+        'targets': [4,5], // column index (start from 0)
+        'orderable': false, // set orderable false for selected columns
+            }],
+            dom: 'lBfrtip',
+            responsive: true,
+        buttons: [
+            { extend: 'excel', text: 'Export To Excel file' },
+            { extend: 'csv', text: 'Export To CSV file' },
+            {extend: 'print',
+                text: 'Print all',
+                exportOptions: {
+                    modifier: {
+                        selected: null
+                    }
+                }}
+            
+              
+        ]
+        
+
+            });
+        
+      } );
+    </script>
+
+<script>
+function loadDelete() {
+    let r = confirm("Are you sure you want to delete?");
+    if (r == false) {
+        return event.preventDefault();
+    }
+}
+</script>
+ 
+
+
