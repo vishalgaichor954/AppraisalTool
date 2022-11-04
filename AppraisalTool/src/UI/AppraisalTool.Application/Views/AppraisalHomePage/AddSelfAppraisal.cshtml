@@ -7,7 +7,7 @@
     <div class="col-11">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Create New User</h4>
+                <h1 class="card-title FormHeader">Self Appraisal</h1>
                 <div>
                     <form enctype="multipart/form-data">
                         <div class="text-danger"></div>
@@ -19,7 +19,7 @@
                                 @{
                                     foreach (var item in ViewBag.AppraisalFormModel.IMetric)
                                     {
-                                        <div class="row pt-2">
+                                        <div class="row pt-2 ">
                                             <div class="row">
                                                 <div class="col-9"><h4>@item.Metric_Description</h4></div>
                                                 <div class="col-3">
@@ -28,7 +28,7 @@
                                                             <label>Score</label>
                                                         </div>
                                                         <div class="col-7">
-                                                            <input class="form-control my-2" type="number">
+                                                            <input class="form-control my-2" type="number"  min="1" max="@item.metric_Weightage" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -81,7 +81,7 @@
                                 @{
                                     foreach (var item in ViewBag.AppraisalFormModel.BevMetric)
                                     {
-                                         <div class="row pt-2">
+                                         <div class="row pt-2 ">
                                             <div class="row">
                                                 <div class="col-9"><h4>@item.Metric_Description</h4></div>
                                                 <div class="col-3">
@@ -90,7 +90,7 @@
                                                             <label>Score</label>
                                                         </div>
                                                         <div class="col-7">
-                                                            <input class="form-control my-2" type="number">
+                                                            <input class="form-control my-2" type="number" min="1" max="@item.metric_Weightage"   required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -192,7 +192,7 @@
                                 @{
                                     foreach (var item in ViewBag.AppraisalFormModel.JobMetric)
                                     {
-                                        <div class="row pt-2">
+                                        <div class="row pt-2 ">
                                             <div class="row">
                                                 <div class="col-9"><h4>@item.Metric_Description</h4></div>
                                                 <div class="col-3">
@@ -201,7 +201,7 @@
                                                             <label>Score</label>
                                                         </div>
                                                         <div class="col-7">
-                                                            <input class="form-control my-2" type="number">
+                                                            <input class="form-control my-2" type="number" min="1" max="@item.metric_Weightage" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -268,8 +268,14 @@
 
                         <div class="form-group text-center">
                             <input type="hidden" name="job" id="job" />
-                            <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
-                            <input type="reset" value="reset" class="btn btn-danger mt-4" />
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-3"><input id="submit" type="submit" value="Reset" class=" btn btn-block ApprovalBtn  btn-lg " /></div>
+                                <div class="col-3"><input id="submit" type="submit" value="Procced" class="   btn btn-block LoginBtn btn-lg " /></div>
+                                <div class="col-3"></div>
+                                @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
+                            <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
+                            </div>
 
                         </div>
                     </form>
@@ -278,3 +284,8 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
