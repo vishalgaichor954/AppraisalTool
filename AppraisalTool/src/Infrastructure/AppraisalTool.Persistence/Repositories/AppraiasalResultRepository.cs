@@ -13,6 +13,22 @@ namespace AppraisalTool.Persistence.Repositories
     {
         public AppraiasalResultRepository(ApplicationDbContext dbContext, ILogger<AppraisalResult> logger) : base(dbContext, logger)
         {
+           
+        }
+
+        public async Task<bool> AddAprraisalResultData(List<AppraisalResult> appraisalResult)
+        {
+            try
+            {
+                await _dbContext.AppraisalResult.AddRangeAsync(appraisalResult);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e);
+                return false;
+            }
         }
     }
 }
