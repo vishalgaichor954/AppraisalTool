@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\AppraisalResult\**" />
     <Compile Remove="Features\User\**" />
+    <EmbeddedResource Remove="Features\AppraisalResult\**" />
     <EmbeddedResource Remove="Features\User\**" />
+    <None Remove="Features\AppraisalResult\**" />
     <None Remove="Features\User\**" />
   </ItemGroup>
 
@@ -28,6 +31,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AppraisalTool.Domain\AppraisalTool.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Metrics\Commands\" />
   </ItemGroup>
 
 </Project>

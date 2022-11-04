@@ -37,6 +37,7 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("RegisterAsync Completed");
             return Ok(dtos);
         }
+
         [HttpDelete("removeUser")]
         public async Task<ActionResult> RemoveAsync(int Id)
         {

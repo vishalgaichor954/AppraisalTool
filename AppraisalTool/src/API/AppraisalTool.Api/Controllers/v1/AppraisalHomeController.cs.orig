@@ -1,10 +1,13 @@
+<<<<<<< HEAD
 ﻿using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetYear;
+=======
 ﻿using AppraisalTool.Application.Features.AppraisalResults.Commands.AddAppraisalResult;
 using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAllAppraisalResults;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Domain.Entities;
+>>>>>>> e0bc04fc592a172edc70a55be7508251b234f604
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,17 +31,21 @@ namespace AppraisalTool.Api.Controllers.v1
         }
 
         [HttpGet("byYear", Name = "GetAllData")]
+<<<<<<< HEAD
         public async Task<ActionResult> GetDataByYear(int userId)
-
+=======
+        public async Task<ActionResult> GetDataByYear(int yearId, int userId)
+>>>>>>> e0bc04fc592a172edc70a55be7508251b234f604
 
         {
             _logger.LogInformation("GetDataByYear Initiated");
-            var dtos = new GetDataQuery() { UserId = userId };
+            var dtos = new GetDataQuery() {  UserId = userId };
             _logger.LogInformation("GetDataByYear Completed");
             return Ok(await _mediator.Send(dtos));
 
         }
 
+<<<<<<< HEAD
         [HttpGet]
         public async Task<ActionResult> GetYear(int userId)
         {
@@ -47,7 +54,7 @@ namespace AppraisalTool.Api.Controllers.v1
             var dtos = new GetYearQuery() { UserId = userId };
             _logger.LogInformation("GetYear Completed");
             return Ok(await _mediator.Send(dtos));
-        }
+=======
         [HttpGet("GetAllAppraisalResult")]
         public async Task<ActionResult> GetAllAppraisalResult()
         {
@@ -68,12 +75,12 @@ namespace AppraisalTool.Api.Controllers.v1
         public async Task<ActionResult> RegisterAsync(List<AddAppraisalResultDto> results)
         {
             _logger.LogInformation("AddAppraisalResults Initiated");
-            var dtos = await _mediator.Send(new AddAppraisalResultCommand() { DataList = results });
+            var dtos = await _mediator.Send(new AddAppraisalResultCommand() { DataList = results});
             _logger.LogInformation("AddAppraisalResults Completed");
             return Ok(dtos);
+>>>>>>> e0bc04fc592a172edc70a55be7508251b234f604
         }
 
 
     }
 }
-  

@@ -16,6 +16,6 @@ namespace AppraisalTool.Domain.Entities
 
         public string Kra_Description { get; set; }
 
-        public virtual List<ListOfKra> ?listOfKra { get; set; }
+        //public virtual List<ListOfKra> ?listOfKra { get; set; }
     }
 }

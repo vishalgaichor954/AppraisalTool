@@ -1,22 +1,26 @@
 ﻿using AppraisalTool.App.Helpers;
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
+<<<<<<< HEAD
 using AppraisalTool.App.Models.SelfAppraisal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+=======
 using AppraisalTool.App.Models.Navbar;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NuGet.Protocol;
 using System.ComponentModel;
 using System.Reflection;
+>>>>>>> e0bc04fc592a172edc70a55be7508251b234f604
 
 namespace AppraisalTool.App.Controllers
 {
 
     public class AppraisalHomePageController : Controller
     {
+<<<<<<< HEAD
         private readonly ILogger<AppraisalHomePageController> _logger;
         Uri baseAddress = new Uri("https://localhost:5000/api/v1");
         HttpClient client;
@@ -26,8 +30,10 @@ namespace AppraisalTool.App.Controllers
             client.BaseAddress = baseAddress;
             _logger = logger;
         }
+=======
 
-        //Uri baseAddress = new Uri("https://localhost:5000/api");
+        Uri baseAddress = new Uri("https://localhost:5000/api");
+>>>>>>> e0bc04fc592a172edc70a55be7508251b234f604
 
         public IActionResult HomePageAppraisal()
         {
@@ -38,6 +44,7 @@ namespace AppraisalTool.App.Controllers
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
+<<<<<<< HEAD
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<Response>(responseData);
                 Console.WriteLine(data.Data);
@@ -66,9 +73,11 @@ namespace AppraisalTool.App.Controllers
                 
                 return View();
 
+=======
                 ViewBag.UserId = user.UserId;
                 ViewBag.UserRole = user.Role;
-                //ViewBag.FinanceId = user.FinancialYearId;
+                ViewBag.FinanceId = user.FinancialYearId;
+>>>>>>> e0bc04fc592a172edc70a55be7508251b234f604
             }
             return View();
 
