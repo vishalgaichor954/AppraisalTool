@@ -47,9 +47,12 @@ namespace AppraisalTool.Application.Profiles
             CreateMap<User, CreateUserCommand>().ReverseMap();
             //CreateMap<User, CreateUserDto>().ReverseMap();
             CreateMap<User, AddUserViewModel>().ReverseMap();
-            CreateMap<Appraisal, GetDataVM>().ConvertUsing<GetDataVmCustomMapper>();
+            //CreateMap<Appraisal, GetDataVM>().ConvertUsing<GetDataVmCustomMapper>();
             //CreateMap<Appraisal, GetDataQuery>().ReverseMap();  
+            CreateMap<User, GetDataVM>().ConvertUsing<GetDataVmCustomMapper>();
             
+
+
             CreateMap<Appraisal, GetYearQuery>().ReverseMap();
             CreateMap<FinancialYear, GetYearVm>().ReverseMap();
 

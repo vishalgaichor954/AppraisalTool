@@ -45,7 +45,7 @@ namespace AppraisalTool.Domain.Entities
 
         
        
-        public virtual UserAuthorityMapping UserAuthorities { get; set; }
+        //public virtual List<UserAuthorityMapping> UserAuthorities { get; set; }
        
 
     }

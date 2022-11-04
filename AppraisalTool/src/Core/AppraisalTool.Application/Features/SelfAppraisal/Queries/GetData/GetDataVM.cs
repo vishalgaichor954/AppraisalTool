@@ -10,19 +10,27 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData
     public class GetDataVM
     {
         public int Id { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public int StatusId { get; set; }
-        public DateTime ReviewedOn { get; set; }
-        public DateTime ApprovedOn { get; set; }
-        public int StartYear { get; set; }
-        public int EndYear { get; set; }
-        public string Role { get; set; }
-        public int FinancialYearId { get; set; }
-        public string? ReportingAuthority { get; set; }
         
-        public string? ReviewingAuthority { get; set; }
-        public int AuthorityId { get; set; }
+        //public int ReportingAuthorityId { get; set; }
+        
+        public string? ReviewingAuthorityFirstName { get; set; }
+        public string? ReviewingAuthorityLastName { get; set; }
+
+        public string? ReportingAuthorityFirstName { get; set; }
+        public string? ReportingAuthorityLastName { get; set; }
+
+        //public int AuthorityId { get; set; }
+        //public DateTime StartDate { get; set; }
+        //public DateTime EndDate { get; set; }
+        //public int StatusId { get; set; }
+        //public DateTime ReviewedOn { get; set; }
+        //public DateTime ApprovedOn { get; set; }
+        //public int StartYear { get; set; }
+        //public int EndYear { get; set; }
+        public string? Role { get; set; }
+        public string? AppraisalStatus { get; set; } = "Pending at Authority Level";
+        public string? Date { get; set; } = "1-APRIL-2021 to 30-MARCH-2022";
+        //public int FinancialYearId { get; set; }  
 
 
     }

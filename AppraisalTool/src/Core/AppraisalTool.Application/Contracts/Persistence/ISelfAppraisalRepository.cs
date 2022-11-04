@@ -1,4 +1,5 @@
-﻿using AppraisalTool.Domain.Entities;
+﻿using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
+using AppraisalTool.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
 {
     public interface ISelfAppraisalRepository
     {
-        public  Task<List<Appraisal>> GetDataById(int userId, int financialYearId);
+        public  Task<IQueryable<GetDataVM>> GetDataById(int userId);
         public  Task<List<Appraisal>> GetYear(int userId);
 
     }

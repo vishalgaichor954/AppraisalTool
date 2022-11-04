@@ -1,4 +1,4 @@
-﻿@model AppraisalTool.App.Models.AppraisalToolAuth.SelfAppraisalHome
+﻿@model AppraisalTool.App.Models.SelfAppraisal.SelfAppraisalHome
 @{
     ViewData["Title"] = "HomePageAppraisal";
 }
@@ -23,8 +23,8 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
     <style>
-        .Dash-Card {
-            height: 240px;
+        .dash-card {
+            width: 100%;
         }
 
         .roles {
@@ -33,9 +33,6 @@
 
         .Anchor-body {
             text-decoration: none;
-            height: 240px;
-            width: 100%;
-            display: flex;
         }
 
         .icon-card {
@@ -53,7 +50,9 @@
         }
 
         .appraisal-card {
-            padding: 0.2rem 0.5rem !important;
+            /*padding: 0.2rem 0.5rem !important;*/
+            padding: .2em .5em;
+
         }
 
         .appraisal > p {
@@ -62,6 +61,7 @@
 
         .Last-Date {
             margin-right: 40px;
+
         }
 
         .gradient-1 {
@@ -80,16 +80,29 @@
             display: flex;
             gap: 3em;
         }
+
         .Dropdown {
             display: flex;
+            width: 200px !important;
+            height : 40px !important;
+
 
         }
 
+        .appraisal-dash-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1em;
+        }
+        .text-dropdown{
+            font-weight:bolder;
+            text-size: 0.9em;
+        }
 
     </style>
 </head>
 <body>
-
+    
     <div class="main-panel">
         <div class="content-wrapper">
             <div style="height:100vh ;width:100%; background-color: white;border-radius: 0.5rem;" class="container">
@@ -98,40 +111,36 @@
                     <h2 style="padding-top:30px;padding-left: 20px;">Appraisal Home</h2>
                 </div>
                 <div>
-
+                    <p style="padding-top:30px">FY Selection</p>
                     <div class="Dropdown">
-
-
-
-
-
-                        
-                        
+                     
                         <select asp-for="StartYear" class="form-control" asp-items="@ViewBag.financialYearList">
-                            </select>
+                            <option class=" text-dropdown">Select Financial Year</option>
+                        </select>
+                       
 
                     </div>
-                   
+
                     <div class="mt-5">
-                        <div class="dash-card-wrapper">
+                        <div class="appraisal-dash-card">
                             <!-- <div class="col-md-1"></div> -->
-                            <div class="stretch-card grid-margin Dash-Card">
-                                <a href="" class="Anchor-body">
-                                    <div class="card gradient-1 card-img-holder text-white Dash-Card">
+                            <div class="dash-card">
+                                <a asp-action="SelfAppraisalDashboard" class="Anchor-body">
+                                    <div class="card gradient-1 card-img-holder text-white">
                                         <div class="card-body appraisal-card">
                                             <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
                                             <h2 class="font-weight-normal pt-2">
                                                 Self Appraisal
                                             </h2>
                                             <h6>Total appraisal to be filled</h6>
-                                            <p>1</p>
+                                           <p>@ViewBag.AppraisalsToBeFilled</p>
                                             <h6>Pending Appraisals</h6>
-                                            <p>0</p>
+                                            <p>@ViewBag.PendingAppraisals </p>
 
 
-                                            <div style="text-align:end ;" class="Last-Date">
+                                            <div class="Last-Date">
                                                 <h6>Last date</h6>
-                                                <h4>31st March</h4>
+                                                <h4>@ViewBag.LastDate </h4>
                                             </div>
 
 
@@ -141,23 +150,23 @@
                             </div>
 
 
-                            <div class="stretch-card grid-margin Dash-Card">
+                            <div class="dash-card">
                                 <a href="" class="Anchor-body">
-                                    <div class="card gradient-2 card-img-holder text-white Dash-Card">
+                                    <div class="card gradient-2 card-img-holder text-white">
                                         <div class="card-body appraisal-card">
                                             <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
                                             <h2 class="font-weight-normal pt-2">
                                                 Reportee Appraisal
                                             </h2>
                                             <h6>Total appraisal to be filled</h6>
-                                            <p>27</p>
+                                            <p>@ViewBag.AppraisalsToBeFilled</p>
                                             <h6>Pending Appraisals</h6>
-                                            <p>1</p>
+                                            <p>@ViewBag.PendingAppraisals </p>
 
 
                                             <div style="text-align:end ;" class="Last-Date">
                                                 <h6>Last date</h6>
-                                                <h4>31st March </h4>
+                                                <h4>@ViewBag.LastDate </h4>
                                             </div>
                                         </div>
                                     </div>
@@ -165,9 +174,9 @@
                             </div>
 
 
-                            <div class="stretch-card grid-margin Dash-Card">
+                            <div class="dash-card">
                                 <a href="" class="Anchor-body">
-                                    <div class="card gradient-3 card-img-holder text-white Dash-Card">
+                                    <div class="card gradient-3 card-img-holder text-white">
                                         <div class="card-body appraisal-card">
                                             <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
                                             <h2 class="font-weight-normal pt-2">
@@ -197,6 +206,7 @@
 
 
                 </div>
+                
                 <!-- content-wrapper ends -->
                 <!-- partial:../../partials/_footer.html -->
                 <footer class="footer">
@@ -220,6 +230,7 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <!-- End custom js for this page -->
+  
 </body>
 </html>
 

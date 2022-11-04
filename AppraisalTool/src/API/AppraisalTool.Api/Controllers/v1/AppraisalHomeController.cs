@@ -23,11 +23,11 @@ namespace AppraisalTool.Api.Controllers.v1
         }
 
         [HttpGet("byYear", Name = "GetAllData")]
-        public async Task<ActionResult> GetDataByYear(int yearId, int userId)
+        public async Task<ActionResult> GetDataByYear(int userId)
 
         {
             _logger.LogInformation("GetDataByYear Initiated");
-            var dtos = new GetDataQuery() { FinancialYearId = yearId, UserId = userId };
+            var dtos = new GetDataQuery() {  UserId = userId };
             _logger.LogInformation("GetDataByYear Completed");
             return Ok(await _mediator.Send(dtos));
 
@@ -41,7 +41,6 @@ namespace AppraisalTool.Api.Controllers.v1
             var dtos = new GetYearQuery() { UserId = userId };
             _logger.LogInformation("GetYear Completed");
             return Ok(await _mediator.Send(dtos));
-
         }
 
 

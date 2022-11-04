@@ -64,7 +64,7 @@ namespace AppraisalTool.App.Controllers
 
                     return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
                 }
-                TempData["Error"] = "Faild to Login User";
+                TempData["Error"] = "Failed to Login User";
                 return View();
             }
             return View();
