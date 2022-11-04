@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppraisalTool.App.Models
 {
@@ -11,6 +13,13 @@ namespace AppraisalTool.App.Models
         public string Metric_Description { get; set; }
 
         public double metric_Weightage { get; set; }
+
+        //[Required]
+        public string? Score { get; set; }
+
+        //[Required]
+        //[MinLength(2)]
+        public string? Comment { get; set; }
 
 
     }

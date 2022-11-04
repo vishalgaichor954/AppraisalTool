@@ -27,6 +27,54 @@ namespace AppraisalTool.App.Controllers
             return View();
         }
 
+        //public IActionResult AddSelfAppraisal()
+        //{
+        //    HttpClient client = new HttpClient();
+        //    client.BaseAddress = baseAddress;
+        //    HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/v1/Metric/GetAllListOfMetric").Result;
+        //    if (cardResponse.IsSuccessStatusCode)
+        //    {
+        //        var responseData = cardResponse.Content.ReadAsStringAsync().Result;
+        //        var res = JsonConvert.DeserializeObject<Response>(responseData);
+
+        //        List<MetricsDto> mylist = JsonConvert.DeserializeObject<List<MetricsDto>>(JsonConvert.SerializeObject(res.Data));
+
+        //        List<MetricsDto> IMetric = new List<MetricsDto>();
+        //        List<MetricsDto> BevMetric = new List<MetricsDto>();
+        //        List<MetricsDto> JobMetric = new List<MetricsDto>();
+
+        //        mylist.ForEach(item =>
+        //        {
+        //            if (item.List_Id.Equals(1))
+        //            {
+        //                IMetric.Add(item);
+        //            }
+        //            else if (item.List_Id.Equals(3))
+        //            {
+        //                BevMetric.Add(item);
+        //            }
+        //            else if (item.List_Id.Equals(4))
+        //            {
+        //                JobMetric.Add(item);
+        //            }
+        //        });
+
+
+        //        SelfAppraisalMetricsModel model = new SelfAppraisalMetricsModel() { IMetric = IMetric, BevMetric = BevMetric, JobMetric = JobMetric };
+        //        Console.Write(model);
+        //        ViewBag.AppraisalFormModel = model;
+        //        return View();
+        //    }
+        //    return View();
+
+        //}
+
+        //[HttpPost]
+        //public IActionResult AddSelfAppraisal(IEnumerable<ScoreModel> scores)
+        //{
+        //    return RedirectToAction("AddSelfAppraisal");
+        //}
+
         public IActionResult AddSelfAppraisal()
         {
             HttpClient client = new HttpClient();
@@ -58,15 +106,22 @@ namespace AppraisalTool.App.Controllers
                         JobMetric.Add(item);
                     }
                 });
-               
 
-                SelfAppraisalMetricsModel model = new SelfAppraisalMetricsModel() { IMetric = IMetric,BevMetric = BevMetric,JobMetric=JobMetric};
+
+                SelfAppraisalMetricsModel model = new SelfAppraisalMetricsModel() { IMetric = IMetric, BevMetric = BevMetric, JobMetric = JobMetric };
                 Console.Write(model);
                 ViewBag.AppraisalFormModel = model;
-                return View();
+                //[] bindingModel = new MetricsDto[mylist.Count()];
+                return View(mylist);
             }
             return View();
+        }
 
+        [HttpPost]
+        public IActionResult AddSelfAppraisal(List<MetricsDto> scores )
+        {
+            return RedirectToAction("AddSelfAppraisal");
         }
     }
+
 }
