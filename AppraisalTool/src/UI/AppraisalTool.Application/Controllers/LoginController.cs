@@ -10,7 +10,7 @@ namespace AppraisalTool.App.Controllers
 {
     public class LoginController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:5000/api");
+       Uri baseAddress = new Uri("https://localhost:5000/api");
         public IActionResult Index()
         {
             return View();
@@ -64,7 +64,7 @@ namespace AppraisalTool.App.Controllers
 
                     return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
                 }
-                TempData["Error"] = "Faild to Login User";
+                TempData["Error"] = "Failed to Login User";
                 return View();
             }
             return View();
@@ -122,7 +122,7 @@ namespace AppraisalTool.App.Controllers
         public JsonResult UserExistsEmail(string email)
         {
             //https://localhost:5000/api/Auth?email=ssabhishek00%40gmail.com&api-version=1
-            HttpClient client = new HttpClient();
+                HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"/Auth?email={email}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
@@ -140,6 +140,8 @@ namespace AppraisalTool.App.Controllers
             }
             return Json(false);
         }
+
+
 
     }
 }

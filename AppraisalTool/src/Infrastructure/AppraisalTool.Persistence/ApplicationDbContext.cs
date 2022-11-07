@@ -48,12 +48,15 @@ namespace AppraisalTool.Persistence
         public DbSet<MenuRoleMapping> MenuRoleMappings { get; set; }
         public DbSet<KraTypes> kraTypes { get; set; }
         public DbSet<ListOfKra> ListOfKras { get; set; }
+        public DbSet<AppraisalResult> AppraisalResult { get; set; }
 
         public DbSet<ListOfMetrics> listOfMetrics { get; set; }
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
+
         {
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
             foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))

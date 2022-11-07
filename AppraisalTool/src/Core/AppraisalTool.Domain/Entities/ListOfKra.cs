@@ -17,10 +17,11 @@ namespace AppraisalTool.Domain.Entities
         public int Kra_Type_ID { get; set; }
        
         public string List_Kra_Description { get; set; }
+
         [ForeignKey("Kra_Type_ID")]
         public virtual KraTypes ?KraTypes { get; set; } 
         
-        public virtual ICollection<ListOfMetrics> ?ListOfMetrics { get; set; }
+        //public virtual ICollection<ListOfMetrics> ?ListOfMetrics { get; set; }
 
 
     }

@@ -130,8 +130,8 @@ namespace AppraisalTool.Persistence.Repositories
                 response.Succeeded = false;
                 return response;
             }
-            //int primaryRoleId = 0;
-            //int secondaryRoleId = 0;
+            //int PrimaryJobProfileId = 0;
+            //int SecondaryJobProfileId = 0;
             var userToUpdate = await _dbContext.User.Where(u => u.Id == id).FirstOrDefaultAsync();
             //var userToUpdate = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).ThenInclude(x => x.Id).FirstOrDefaultAsync();
             if (userToUpdate != null)
@@ -149,18 +149,18 @@ namespace AppraisalTool.Persistence.Repositories
                 //{
                 //    if (item.IsPrimary)
                 //    {
-                        
-                //       primaryRoleId = item.JobRole.Id;
+
+                //        PrimaryJobProfileId = item.JobRole.Id;
 
                 //    }
                 //    else if (item.IsSecondary)
                 //    {
-                        
-                //      secondaryRoleId = item.JobRole.Id;
+
+                //        SecondaryJobProfileId = item.JobRole.Id;
                 //    }
                 //}
-                //primaryRoleId = (int)request.PrimaryRole;
-                //secondaryRoleId = (int)request.SecondaryRole;
+                //PrimaryJobProfileId = (int)request.PrimaryJobProfileId;
+                //SecondaryJobProfileId = (int)request.SecondaryJobProfileId;
                 await _dbContext.SaveChangesAsync();
                 response.Message = "User Details Update Successfully";
                 response.Succeeded = true;
@@ -241,3 +241,4 @@ namespace AppraisalTool.Persistence.Repositories
   } 
 
 
+        

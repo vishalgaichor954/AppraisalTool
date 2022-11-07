@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AppraisalTool.Application.Profiles
 {
-    public class GetDataVmCustomMapper : ITypeConverter<Appraisal, GetDataVM>
+    public class GetDataVmCustomMapper : ITypeConverter<User, GetDataVM>
     {
         
 
@@ -17,33 +17,34 @@ namespace AppraisalTool.Application.Profiles
         {
             
         }
+
+        //    EventId = _protector.Protect(source.EventId.ToString()),
+        //    Name = source.Name,
+        //    ImageUrl = source.ImageUrl,
+        //    Date = source.Date
+        //};
+
+        //return dest;
+
         
-            //    EventId = _protector.Protect(source.EventId.ToString()),
-            //    Name = source.Name,
-            //    ImageUrl = source.ImageUrl,
-            //    Date = source.Date
-            //};
 
-            //return dest;
-
-        
-
-        public GetDataVM Convert(Appraisal source, GetDataVM destination, ResolutionContext context)
+        public GetDataVM Convert(User source, GetDataVM destination, ResolutionContext context)
         {
+
+          
             GetDataVM dest = new GetDataVM()
             {
                 Id = source.Id,
-                StartDate = source.StartDate,
-                EndDate = source.EndDate,
-                StatusId = source.StatusId,
-                ReviewedOn = source.ReviewedOn,
-                ApprovedOn = source.ApprovedOn,
-                StartYear=source.FinancialYear.StartYear,
-                EndYear =source.FinancialYear.EndYear,
-                FinancialYearId= source.FinancialYearId,
-                Role = source.User.Role.Role,
-    };
+                Role =source.Role.Role,
+                ReviewingAuthorityFirstName = source.FirstName,
+                ReportingAuthorityFirstName = source.FirstName,
+
+             
+
+            };
+
             return dest;
+            
         }
     }
 }

@@ -1,0 +1,505 @@
+﻿@{
+    ViewData["Title"] = "AddSelfAppraisal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container d-flex justify-content-center">
+    <div class="col-11">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Create New User</h4>
+                <div>
+                    <form enctype="multipart/form-data">
+                        <div class="text-danger"></div>
+                        <fieldset class="border p-2 m-5" style="display:flex;justify-content:center;">
+                            <legend class="float-none w-auto">
+                                Input & Effort metric
+                            </legend>
+<<<<<<< Updated upstream
+                            <div class="row d-flex justify-content-center">
+                                @{
+                                    foreach (var item in ViewBag.AppraisalFormModel.IMetric)
+                                    {
+                                        <div class="row pt-2">
+                                            <div class="row">
+                                                <div class="col-9"><h4>@item.Metric_Description</h4></div>
+                                                <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                        <div class="col-5">
+                                                            <label>Score</label>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input class="form-control my-2" type="number">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12"> <textarea class="form-control " placeholder="Add Comment"></textarea></div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+                                @*    <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>2. Discipline & Punctuality</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2"><input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>3. Decision Making</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2"><input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>4. Initiative / Leadership & Mentoring</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2">  <input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div> *@
+
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2 m-5" style="display:flex;justify-content:center;">
+                            <legend class="float-none w-auto">
+                                Behavioral competencies
+                            </legend>
+                            <div class="row">
+                                @{
+                                    foreach (var item in ViewBag.AppraisalFormModel.BevMetric)
+                                    {
+                                         <div class="row pt-2">
+                                            <div class="row">
+                                                <div class="col-9"><h4>@item.Metric_Description</h4></div>
+                                                <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                        <div class="col-5">
+                                                            <label>Score</label>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input class="form-control my-2" type="number">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12"> <textarea class="form-control " placeholder="Add Comment"></textarea></div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                @* <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>1. Collaboration</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2"> <input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>2. Digital mindset</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2"><input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>3. Communication</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2"><input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>4. Emotional intelligence</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2">  <input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>5. Individual ownership and accountability</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2">  <input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>6. Compliance and risk discipline</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2">  <input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>7. Customer focus</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2">  <input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>8. Change management</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2">  <input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div> *@
+                            </div>
+                        </fieldset>
+                        <fieldset class="border  p-2 m-5" style="display:flex;justify-content:center;">
+                            <legend class="float-none w-auto">
+                                Job family grooming
+                            </legend>
+                            <div class="row">
+
+                                @{
+                                    foreach (var item in ViewBag.AppraisalFormModel.JobMetric)
+                                    {
+                                        <div class="row pt-2">
+                                            <div class="row">
+                                                <div class="col-9"><h4>@item.Metric_Description</h4></div>
+                                                <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                        <div class="col-5">
+                                                            <label>Score</label>
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input class="form-control my-2" type="number">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12"> <textarea class="form-control " placeholder="Add Comment"></textarea></div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                @*   <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>1. Proactively reaches out for opportunities and actively participates in bank initiatives and grooming activities in his/her job family</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2"> <input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>2. Shows commitment to improve skills and specialization in his/her job family</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2"><input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>3. Acts as a mentor/guide to others and is approached by others within the job family due to expertise in the job family</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2"><input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>4. Has acquired the top skills in line with the market to become an expert in his/her job family</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2">  <input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div>
+                                <div class="row pt-2">
+                                <div class="row">
+                                <div class="col-9"><h4>5. Shows substantial increase in proficiency of skillsets in his/her job family</h4></div>
+                                <div class="col-1"><label>Score</label> </div>
+                                <div class="col-2">  <input type="number"> </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                </div>
+                                </div> *@
+
+                            </div>
+                        </fieldset>
+=======
+                            <div class="row" class="d-flex justify-content-center">
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>1. Ability to handle autonomy</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2"> <input type="number" class="form-control"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea class="form-control" placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>2. Discipline & Punctuality</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2"><input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>3. Decision Making</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2"><input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>4. Initiative / Leadership & Mentoring</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2">  <input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2 m-5" style="display:flex;justify-content:center;">
+                            <legend class="float-none w-auto">
+                                Behavioral competencies
+                            </legend>
+                            <div class="row">
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>1. Collaboration</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2"> <input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>2. Digital mindset</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2"><input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>3. Communication</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2"><input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>4. Emotional intelligence</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2">  <input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>5. Individual ownership and accountability</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2">  <input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>6. Compliance and risk discipline</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2">  <input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>7. Customer focus</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2">  <input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>8. Change management</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2">  <input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="border  p-2 m-5" style="display:flex;justify-content:center;">
+                            <legend class="float-none w-auto">
+                                Job family grooming
+                            </legend>
+                            <div class="row">
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>1. Proactively reaches out for opportunities and actively participates in bank initiatives and grooming activities in his/her job family</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2"> <input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>2. Shows commitment to improve skills and specialization in his/her job family</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2"><input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>3. Acts as a mentor/guide to others and is approached by others within the job family due to expertise in the job family</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2"><input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>4. Has acquired the top skills in line with the market to become an expert in his/her job family</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2">  <input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+                                <div class="row pt-2">
+                                    <div class="row">
+                                        <div class="col-9"><h4>5. Shows substantial increase in proficiency of skillsets in his/her job family</h4></div>
+                                        <div class="col-1"><label>Score</label> </div>
+                                        <div class="col-2">  <input type="number"> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </fieldset>
+>>>>>>> Stashed changes
+
+                        <div class="form-group text-center">
+                            <input type="hidden" name="job" id="job" />
+                            <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
+                            <input type="reset" value="reset" class="btn btn-danger mt-4" />
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                        @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+    <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="./lib/assets/js/off-canvas.js"></script>
+
+
+    <script src="./lib/assets/js/hoverable-collapse.js"></script>
+
+    <script src="./lib/assets/js/misc.js"></script>
+    <!-- endinject -->
+
+    <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+    @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
+    <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
+    @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
+    <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+    @*<script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>*@
+    <script src=" ~/lib/assets/js/off-canvas.js"></script>
+    <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
+    <script src=" ~/lib/assets/js/misc.js"></script>
+

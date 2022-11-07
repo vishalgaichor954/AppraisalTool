@@ -26,8 +26,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Infrastructure\AppraisalTool.Infrastructure\AppraisalTool.Infrastructure.csproj" />
-  </ItemGroup>
-
 </Project>

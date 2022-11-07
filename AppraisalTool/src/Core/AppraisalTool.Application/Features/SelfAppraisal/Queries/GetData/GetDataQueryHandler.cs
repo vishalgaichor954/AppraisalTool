@@ -1,5 +1,6 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Response;
+
 using AppraisalTool.Domain.Entities;
 using AutoMapper;
 using MediatR;
@@ -29,14 +30,14 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData
         public async Task<Response<IEnumerable<GetDataVM>>> Handle(GetDataQuery request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("GetDataQuery Initiated");
-            List<Appraisal> appraisals = await _selfAppraisalRepository.GetDataById(request.UserId,request.FinancialYearId);
-           
+            IQueryable<GetDataVM> appraisals = await _selfAppraisalRepository.GetDataById(request.UserId);
 
-            Console.WriteLine(appraisals[0].FinancialYear.StartYear);
+
+            Console.WriteLine("tt");
 
             var dataVM = _mapper.Map<List<GetDataVM>>(appraisals);
-            Console.WriteLine(appraisals[0].FinancialYear.EndYear);
-            _logger.LogError(dataVM.ToString());
+            
+         
             
            
            

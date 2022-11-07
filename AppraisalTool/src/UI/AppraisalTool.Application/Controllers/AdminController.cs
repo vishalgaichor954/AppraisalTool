@@ -273,6 +273,29 @@ namespace AppraisalTool.App.Controllers
             return View();
         }
 
+        [HttpGet]
+        public JsonResult UserExistsEmail(string email)
+        {
+            //https://localhost:5000/api/Auth?email=ssabhishek00%40gmail.com&api-version=1
+            HttpClient client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Auth?email={email}&api-version=1").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+                var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
+                if (res.Succeeded == true)
+                {
+                    return Json(false);
+                }
+                else
+                {
+                    return Json(true);
+                }
+            }
+            return Json(true);
+        }
+
 
     }
 }

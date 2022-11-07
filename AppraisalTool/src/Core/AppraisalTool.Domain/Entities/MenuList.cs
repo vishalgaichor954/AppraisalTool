@@ -23,5 +23,24 @@ namespace AppraisalTool.Domain.Entities
         public string ?MenuController { get; set; }
 
         public string ?MenuAction { get; set; }
+
+        public string ?MenuLink { get; set; }
+
+        public int? AddedBy { get; set; }
+        public DateTime AddedOn { get; set; } = DateTime.UtcNow;
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? DeletedOn { get; set; }
+        public int? DeletedBy { get; set; }
+        public int? UpdatedBy { get; set; }
+        public DateTime? UpdatedOn { get; set; }
+
+        [ForeignKey("AddedBy")]
+        public virtual User? AddedByUser { get; set; }
+        [ForeignKey("DeletedBy")]
+        public virtual User? DeletedByUser { get; set; }
+
+        [ForeignKey("UpdatedBy")]
+        public virtual User? UpdatedByByUser { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace AppraisalTool.App.Models
 {
@@ -20,6 +21,8 @@ namespace AppraisalTool.App.Models
         public string ?LastName { get; set; }
 
         [Display(Name = "Email Id")]
+        [DataType(DataType.EmailAddress)]
+        [Remote("UserExistsEmail", "Admin", HttpMethod = "GET", ErrorMessage = "User with this Email exists")]
         [Required(ErrorMessage = "Email address is required")]
         [RegularExpression(@"^[0-9a-zA-z]+[.+-_$]{0,1}[0-9a-zA-z]+[@][a-zA-z]+[.][a-zA-z]{2,3}$", ErrorMessage = "Please Enter Valid Email")]
         public string ?Email { get; set; }

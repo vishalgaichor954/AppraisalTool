@@ -16,7 +16,9 @@ using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
 using AppraisalTool.Application.Features.Users.Query.GetUserById;
+using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetYear;
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
+using AppraisalTool.Application.Features.AppraisalResults.Commands.AddAppraisalResult;
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -47,14 +49,23 @@ namespace AppraisalTool.Application.Profiles
             CreateMap<User, CreateUserCommand>().ReverseMap();
             //CreateMap<User, CreateUserDto>().ReverseMap();
             CreateMap<User, AddUserViewModel>().ReverseMap();
-            CreateMap<Appraisal, GetDataVM>().ConvertUsing<GetDataVmCustomMapper>();
+            //CreateMap<Appraisal, GetDataVM>().ConvertUsing<GetDataVmCustomMapper>();
             //CreateMap<Appraisal, GetDataQuery>().ReverseMap();  
+            CreateMap<User, GetDataVM>().ConvertUsing<GetDataVmCustomMapper>();
+            
+
+
+            CreateMap<Appraisal, GetYearQuery>().ReverseMap();
+            CreateMap<FinancialYear, GetYearVm>().ReverseMap();
+
 
             CreateMap<User, UpdateUserCommand>().ReverseMap();
 
             CreateMap<User, GetUserByIdDto>().ReverseMap();
 
             CreateMap<User, GetUserListQueryVm>().ConvertUsing<GetUserListVmCustomMapper>();
+
+            CreateMap<AppraisalResult, AddAppraisalResultDto>().ReverseMap();
         }
     }
 }
