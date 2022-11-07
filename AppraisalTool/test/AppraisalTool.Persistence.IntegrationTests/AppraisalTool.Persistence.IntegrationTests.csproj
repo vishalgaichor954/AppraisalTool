@@ -24,9 +24,9 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\src\Core\AppraisalTool.Application\AppraisalTool.Application.csproj" />
-	  <ProjectReference Include="..\..\src\Core\AppraisalTool.Domain\AppraisalTool.Domain.csproj" />
-	  <ProjectReference Include="..\..\src\Infrastructure\AppraisalTool.Identity\AppraisalTool.Identity.csproj" />
-	  <ProjectReference Include="..\..\src\Infrastructure\AppraisalTool.Persistence\AppraisalTool.Persistence.csproj" />
+		
+		  <ProjectReference Include="..\..\src\Infrastructure\AppraisalTool.Infrastructure\AppraisalTool.Infrastructure.csproj" />
+	<ProjectReference Include="..\..\src\Infrastructure\AppraisalTool.Persistence\AppraisalTool.Persistence.csproj" />
 	</ItemGroup>
 
 </Project>

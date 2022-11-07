@@ -12,6 +12,7 @@ using AppraisalTool.Application.Features.Users.Queries.GetUserJobProfiles;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using AppraisalTool.Application.Features.Users.Query.GetUserById;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -39,10 +40,10 @@ namespace AppraisalTool.Api.Controllers.v1
         }
 
         [HttpDelete("removeUser")]
-        public async Task<ActionResult> RemoveAsync(int Id)
+        public async Task<ActionResult> RemoveAsync(int id)
         {
             _logger.LogInformation("RemoveAsync Initiated");
-            var dtos = await _mediator.Send(new RemoveUserCommand(Id));
+            var dtos = await _mediator.Send(new RemoveUserCommand() { Id=id});
             _logger.LogInformation("RemoveAsync Completed");
             return Ok(dtos);
         }
@@ -50,6 +51,7 @@ namespace AppraisalTool.Api.Controllers.v1
         [HttpPut("UpdateUser")]
         public async Task<ActionResult> UpdateUserAsync(UpdateUserCommand request)
         {
+            //var request = new UpdateUserCommand();
             _logger.LogInformation("UpdateUserAsync Initiates");
             var dtos=await _mediator.Send(request);
             _logger.LogInformation("UpdateUserAsync Completed ");
@@ -107,6 +109,15 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("GetUserJobProfile Initiated");
             var dtos = await _mediator.Send(new GetMenuListQuery() { Id = id });
             _logger.LogInformation("GetUserJobProfile Completed");
+            return Ok(dtos);
+        }
+
+        [HttpGet("getUser")]
+        public async Task<ActionResult> GetUserById(int id)
+        {
+            _logger.LogInformation("GetUserAsync Initiated");
+            var dtos = await _mediator.Send(new GetUserByIdQuery() { Id = id });
+            _logger.LogInformation("GetUserAsync Completed");
             return Ok(dtos);
         }
     }

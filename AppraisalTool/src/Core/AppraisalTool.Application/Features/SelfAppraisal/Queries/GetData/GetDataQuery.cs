@@ -1,4 +1,5 @@
 ﻿using AppraisalTool.Application.Response;
+
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData
     public class GetDataQuery : IRequest<Response<IEnumerable<GetDataVM>>>
 
     {
-        public int FinancialYearId { get; set; }
+       
         public int UserId { get; set; }
     }
 }

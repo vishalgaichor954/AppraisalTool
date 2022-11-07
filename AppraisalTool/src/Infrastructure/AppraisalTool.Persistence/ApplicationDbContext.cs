@@ -54,7 +54,9 @@ namespace AppraisalTool.Persistence
         private IDbContextTransaction _transaction;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
+
         {
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
             foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))

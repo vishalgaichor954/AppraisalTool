@@ -14,9 +14,16 @@ namespace AppraisalTool.Application.Features.Users.Command.UpdateUserCommand
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        public string ?Password { get; set; }
+
+        public DateTime? JoinDate { get; set; }
         public DateTime? LastAppraisalDate { get; set; }
-        public int RoleId { get; set; }
-        public int BranchId { get; set; }
+        public int? RoleId { get; set; }
+        public int? BranchId { get; set; }
+
+        //public int? PrimaryRole { get; set; }
+        //public int? SecondaryRole { get; set; }
+        public int? SecondaryJobProfileId { get; set; }
+        public int? PrimaryJobProfileId { get; set; }
     }
 }

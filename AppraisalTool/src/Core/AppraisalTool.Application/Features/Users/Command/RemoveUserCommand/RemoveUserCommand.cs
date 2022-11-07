@@ -10,10 +10,16 @@ namespace AppraisalTool.Application.Features.Users.Command.RemoveUserCommand
 {
     public class RemoveUserCommand : IRequest<Response<RemoveUserCommandDto>>
     {
+        public RemoveUserCommand()
+        {
+        }
+
         public RemoveUserCommand(int id)
         {
             Id = id;
         }
+
+       
         public int Id { get; set; }
 
     }

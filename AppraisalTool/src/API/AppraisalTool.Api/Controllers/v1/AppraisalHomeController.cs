@@ -1,3 +1,5 @@
+﻿using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
+using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetYear;
 ﻿using AppraisalTool.Application.Features.AppraisalResults.Commands.AddAppraisalResult;
 using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAllAppraisalResults;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
@@ -26,16 +28,26 @@ namespace AppraisalTool.Api.Controllers.v1
         }
 
         [HttpGet("byYear", Name = "GetAllData")]
-        public async Task<ActionResult> GetDataByYear(int yearId, int userId)
+        public async Task<ActionResult> GetDataByYear(int userId)
+
 
         {
             _logger.LogInformation("GetDataByYear Initiated");
-            var dtos = new GetDataQuery() { FinancialYearId = yearId, UserId = userId };
+            var dtos = new GetDataQuery() { UserId = userId };
             _logger.LogInformation("GetDataByYear Completed");
             return Ok(await _mediator.Send(dtos));
 
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetYear(int userId)
+        {
+
+            _logger.LogInformation("GetYear Initiated");
+            var dtos = new GetYearQuery() { UserId = userId };
+            _logger.LogInformation("GetYear Completed");
+            return Ok(await _mediator.Send(dtos));
+        }
         [HttpGet("GetAllAppraisalResult")]
         public async Task<ActionResult> GetAllAppraisalResult()
         {
@@ -56,7 +68,7 @@ namespace AppraisalTool.Api.Controllers.v1
         public async Task<ActionResult> RegisterAsync(List<AddAppraisalResultDto> results)
         {
             _logger.LogInformation("AddAppraisalResults Initiated");
-            var dtos = await _mediator.Send(new AddAppraisalResultCommand() { DataList = results});
+            var dtos = await _mediator.Send(new AddAppraisalResultCommand() { DataList = results });
             _logger.LogInformation("AddAppraisalResults Completed");
             return Ok(dtos);
         }
@@ -64,3 +76,4 @@ namespace AppraisalTool.Api.Controllers.v1
 
     }
 }
+  

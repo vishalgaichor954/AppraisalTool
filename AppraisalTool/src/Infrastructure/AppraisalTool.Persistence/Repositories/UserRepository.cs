@@ -18,13 +18,13 @@ using System.Threading.Tasks;
 
 namespace AppraisalTool.Persistence.Repositories
 {
-    public class UserRepository:BaseRepository<User>,IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly ILogger _logger;
         //private readonly IAuthenticationService _authService;
 
-        public UserRepository(ApplicationDbContext context, ILogger<User> logger/* IAuthenticationService authservice*/) :base(context, logger)
+        public UserRepository(ApplicationDbContext context, ILogger<User> logger/* IAuthenticationService authservice*/) : base(context, logger)
         {
             _dbContext = context;
             _logger = logger;
@@ -37,7 +37,7 @@ namespace AppraisalTool.Persistence.Repositories
             if (usr == null)
             {
                 await AddAsync(u);
-                return await _dbContext.User.FirstOrDefaultAsync(obj => obj.Email  == u.Email);
+                return await _dbContext.User.FirstOrDefaultAsync(obj => obj.Email == u.Email);
 
             }
             else
@@ -50,7 +50,7 @@ namespace AppraisalTool.Persistence.Repositories
         {
             var user = _dbContext.User.Where(u => u.Email == request.Email).FirstOrDefault();
             CreateUserDto response = new CreateUserDto();
-            if(user != null)
+            if (user != null)
             {
                 response.Message = "Email id Already Exist .";
                 response.Succeeded = false;
@@ -73,8 +73,8 @@ namespace AppraisalTool.Persistence.Repositories
         //@Author : Ilyas Dabholkar
         public async Task<User> FindUserByEmail(string email)
         {
-            User user = await _dbContext.User.Include(x=>x.Role).Include(x=>x.JobRoles).ThenInclude(x=>x.JobRole).FirstOrDefaultAsync(u => u.Email == email);
-            if(user == null)
+            User user = await _dbContext.User.Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).FirstOrDefaultAsync(u => u.Email == email);
+            if (user == null)
             {
                 return null;
             }
@@ -98,13 +98,13 @@ namespace AppraisalTool.Persistence.Repositories
         {
             var user = await _dbContext.User.Where(u => u.Id == id).FirstOrDefaultAsync();
 
-           RemoveUserCommandDto response = new RemoveUserCommandDto();
-        
-    
+            RemoveUserCommandDto response = new RemoveUserCommandDto();
+
+
             if (user != null)
             {
-                //user.IsDeleted =true;
-                await DeleteAsync(user);
+                user.IsDeleted = true;
+                //await DeleteAsync(user);
                 await _dbContext.SaveChangesAsync();
                 response.Id = id;
                 response.Message = $"User of id:{id} has been removed successfully .";
@@ -122,26 +122,45 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<UpdateUserCommandDto> UpdateUserAsync(int id, UpdateUserCommand request)
         {
-            var user = await _dbContext.User.Where(u => u.Email ==request.Email).FirstOrDefaultAsync();
+            var user = await _dbContext.User.Where(u => u.Email == request.Email).FirstOrDefaultAsync();
             UpdateUserCommandDto response = new UpdateUserCommandDto();
-            if (user!= null)
+            if (user != null)
             {
                 response.Message = "Email Already Exist";
                 response.Succeeded = false;
                 return response;
             }
-            var userToUpdate=await _dbContext.User.Where(u=>u.Id==id).FirstOrDefaultAsync();
+            //int PrimaryJobProfileId = 0;
+            //int SecondaryJobProfileId = 0;
+            var userToUpdate = await _dbContext.User.Where(u => u.Id == id).FirstOrDefaultAsync();
+            //var userToUpdate = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).ThenInclude(x => x.Id).FirstOrDefaultAsync();
             if (userToUpdate != null)
             {
-                CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
-                userToUpdate.PasswordHash = passwordHash;
-                userToUpdate.PasswordSalt = passwordSalt;
-                userToUpdate.Id = request.Id;
-                userToUpdate.FirstName=request.FirstName;
-                userToUpdate.LastName=request.LastName;
-                userToUpdate.Email=request.Email;
-                userToUpdate.RoleId = request.RoleId;
-                userToUpdate.BranchId = request.BranchId;
+                //CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+                //userToUpdate.PasswordHash = passwordHash;
+                //userToUpdate.PasswordSalt = passwordSalt;
+                //userToUpdate.Id = request.Id;
+                userToUpdate.FirstName = request.FirstName;
+                userToUpdate.LastName = request.LastName;
+                userToUpdate.Email = request.Email;
+                userToUpdate.RoleId = (int)request.RoleId;
+                userToUpdate.BranchId = (int)request.BranchId;
+                //foreach (UserJobRoles item in userToUpdate.JobRoles)
+                //{
+                //    if (item.IsPrimary)
+                //    {
+
+                //        PrimaryJobProfileId = item.JobRole.Id;
+
+                //    }
+                //    else if (item.IsSecondary)
+                //    {
+
+                //        SecondaryJobProfileId = item.JobRole.Id;
+                //    }
+                //}
+                //PrimaryJobProfileId = (int)request.PrimaryJobProfileId;
+                //SecondaryJobProfileId = (int)request.SecondaryJobProfileId;
                 await _dbContext.SaveChangesAsync();
                 response.Message = "User Details Update Successfully";
                 response.Succeeded = true;
@@ -156,7 +175,7 @@ namespace AppraisalTool.Persistence.Repositories
             }
         }
 
-         //@Author : Ilyas Dabholkar
+        //@Author : Ilyas Dabholkar
         public async Task<bool> UpdateUser(User user)
         {
             await UpdateAsync(user);
@@ -176,7 +195,7 @@ namespace AppraisalTool.Persistence.Repositories
         public async Task<CreateRoleCommandDto> CreateUserRole(UserJobRoles request)
         {
             CreateRoleCommandDto response = new CreateRoleCommandDto();
-             await _dbContext.UserJobRoles.AddAsync(request);
+            await _dbContext.UserJobRoles.AddAsync(request);
             await _dbContext.SaveChangesAsync();
             response.Message = "UserRole Added successfully .";
             return response;
@@ -185,7 +204,7 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<IEnumerable<User>> GetAllUser()
         {
-            IEnumerable<User> users = await _dbContext.User.Include(x=>x.Branch).Include(x=>x.Role).Include(x=>x.JobRoles).ThenInclude(x=>x.JobRole).ToListAsync();
+            IEnumerable<User> users = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).Where(u=>u.IsDeleted !=true).ToListAsync();
             //var result = (from A in _dbContext.User
             //              join B in _dbContext.Branch on A.BranchId equals B.Id
             //              select new GetUserListQueryVm
@@ -204,7 +223,6 @@ namespace AppraisalTool.Persistence.Repositories
 
             return users;
         }
-
         //@Author : Ilyas Dabholkar
         public async Task<User> GetUserById(int id)
         {
@@ -217,4 +235,10 @@ namespace AppraisalTool.Persistence.Repositories
 
         //}
     }
-}
+
+       
+        
+  } 
+
+
+        
