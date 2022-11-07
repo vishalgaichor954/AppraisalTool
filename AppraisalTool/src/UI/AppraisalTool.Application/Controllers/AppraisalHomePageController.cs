@@ -93,10 +93,13 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.Role = data.Data[0].role;
                 ViewBag.AppraisalStatus = data.Data[0].appraisalStatus;
                 ViewBag.Date = data.Data[0].date;
+                ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
+                ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
 
 
 
-             
+
+
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
 

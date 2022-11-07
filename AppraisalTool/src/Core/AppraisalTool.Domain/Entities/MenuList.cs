@@ -29,10 +29,10 @@ namespace AppraisalTool.Domain.Entities
         public int? AddedBy { get; set; }
         public DateTime AddedOn { get; set; } = DateTime.UtcNow;
         public bool IsDeleted { get; set; } = false;
-        public DateTime? DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }=DateTime.UtcNow;
         public int? DeletedBy { get; set; }
         public int? UpdatedBy { get; set; }
-        public DateTime? UpdatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }= DateTime.UtcNow;
 
         [ForeignKey("AddedBy")]
         public virtual User? AddedByUser { get; set; }

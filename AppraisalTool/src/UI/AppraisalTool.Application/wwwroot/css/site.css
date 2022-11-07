@@ -21,6 +21,13 @@ body {
     height: 200px;
 }
 
+.appraisal-dash-card{
+    position:relative;
+}
+.dash-card {
+    margin-bottom: 2rem;
+}
+
 .roles {
     display: inline;
 }

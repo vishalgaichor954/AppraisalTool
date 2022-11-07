@@ -19,6 +19,7 @@ using AppraisalTool.Application.Features.Users.Query.GetUserById;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetYear;
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
 using AppraisalTool.Application.Features.AppraisalResults.Commands.AddAppraisalResult;
+using AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand;
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -66,6 +67,8 @@ namespace AppraisalTool.Application.Profiles
             CreateMap<User, GetUserListQueryVm>().ConvertUsing<GetUserListVmCustomMapper>();
 
             CreateMap<AppraisalResult, AddAppraisalResultDto>().ReverseMap();
+
+            CreateMap<MenuList, CreateMenuCommand>().ReverseMap();
         }
     }
 }
