@@ -132,25 +132,25 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="PrimaryRole" class="col-sm-4 col-form-label">Primary Job Profile<span style="color: Red">&nbsp;*</span></label>
+                                <label asp-for="PrimaryJobProfileId" class="col-sm-4 col-form-label">Primary Job Profile<span style="color: Red">&nbsp;*</span></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="PrimaryRole" class="form-control" asp-items="@ViewBag.JobProfileRolelist">
+                                    <select asp-for="PrimaryJobProfileId" class="form-control" asp-items="@ViewBag.JobProfileRolelist">
                                         <option value="">Select Primary Job Profile</option>
                                     </select>
-                                    <span asp-validation-for="PrimaryRole" class="text-danger mx-1 small"></span>
+                                    <span asp-validation-for="PrimaryJobProfileId" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="SecondaryRole" class="col-sm-4 col-form-label">
+                                <label asp-for="SecondaryJobProfileId" class="col-sm-4 col-form-label">
                                     Secondary Job Profile<span style="color: Red">&nbsp;*</span>
                                 </label>
                                 <div asp-for="SecondaryRole" class="col-sm-8">
-                                    <select asp-for="SecondaryRole" asp-items="@ViewBag.JobProfileRolelist" class="form-control">
+                                    <select asp-for="SecondaryJobProfileId" asp-items="@ViewBag.JobProfileRolelist" class="form-control">
                                         <option value="">Select Secondary Job Profile</option>
                                     </select>
-                                    <span asp-validation-for="SecondaryRole" class="text-danger mx-1 small"></span>
+                                    <span asp-validation-for="SecondaryJobProfileId" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
                         </div>

@@ -122,16 +122,17 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<UpdateUserCommandDto> UpdateUserAsync(int id, UpdateUserCommand request)
         {
-            var user = await _dbContext.User.Where(u => u.Email == request.Email).FirstOrDefaultAsync();
+            //var user = await _dbContext.User.Where(u => u.Id == request.Id).FirstOrDefaultAsync();
+            //UpdateUserCommandDto response = new UpdateUserCommandDto();
+            //if (user != null)
+            //{
+            //    response.Message = "Email Already Exist";
+            //    response.Succeeded = false;
+            //    return response;
+            //}
+            int PrimaryJobProfileId = 0;
+            int SecondaryJobProfileId = 0;
             UpdateUserCommandDto response = new UpdateUserCommandDto();
-            if (user != null)
-            {
-                response.Message = "Email Already Exist";
-                response.Succeeded = false;
-                return response;
-            }
-            //int PrimaryJobProfileId = 0;
-            //int SecondaryJobProfileId = 0;
             var userToUpdate = await _dbContext.User.Where(u => u.Id == id).FirstOrDefaultAsync();
             //var userToUpdate = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).ThenInclude(x => x.Id).FirstOrDefaultAsync();
             if (userToUpdate != null)
@@ -145,20 +146,24 @@ namespace AppraisalTool.Persistence.Repositories
                 userToUpdate.Email = request.Email;
                 userToUpdate.RoleId = (int)request.RoleId;
                 userToUpdate.BranchId = (int)request.BranchId;
-                //foreach (UserJobRoles item in userToUpdate.JobRoles)
-                //{
-                //    if (item.IsPrimary)
-                //    {
+                var Getuserrole = await GetUserById(userToUpdate.Id);
 
-                //        PrimaryJobProfileId = item.JobRole.Id;
 
-                //    }
-                //    else if (item.IsSecondary)
-                //    {
 
-                //        SecondaryJobProfileId = item.JobRole.Id;
-                //    }
-                //}
+                foreach (UserJobRoles item in Getuserrole.JobRoles)
+                {
+                    if (item.IsPrimary)
+                    {
+
+                        item.JobRoleId= (int)request.PrimaryJobProfileId;
+
+                    }
+                    else if (item.IsSecondary)
+                    {
+
+                        item.JobRoleId = (int)request.SecondaryJobProfileId;
+                    }
+                }
                 //PrimaryJobProfileId = (int)request.PrimaryJobProfileId;
                 //SecondaryJobProfileId = (int)request.SecondaryJobProfileId;
                 await _dbContext.SaveChangesAsync();
