@@ -1,9 +1,13 @@
-﻿<!DOCTYPE html>
+﻿
+@using Microsoft.AspNetCore.Http;
+@using Newtonsoft.Json;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - AppraisalTool.App</title>
+    
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/assets/vendors//mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/lib/assets/vendors/css/vendor.bundle.base.css">
@@ -11,6 +15,8 @@
      <link rel="stylesheet" href="~/lib/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="~/lib/assets/images/favicon.ico" />
+   
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AppraisalTool.App.styles.css" asp-append-version="true" />
 </head>
@@ -39,20 +45,11 @@
     </header>
     <div class="container-fluid m-0">
         <main role="main" class="pb-3">
-<<<<<<< HEAD
-            @{ 
-                
-                string x = Context.Session.GetString("user");
-                //string y = Context.Session.GetString("LoggedIn");
-                    if (x != null )
-                    {
-=======
             @{
 
                 string x = Context.Session.GetString("user");
                 if (x != null)
                 {
->>>>>>> 4327b131bc1d4d673bb044eb129a024d96f00074
                         @Html.Partial("_LoggedIn")
                 }
             }
@@ -75,22 +72,32 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @*<footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2022 - AppraisalTool.App - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer>*@
+<<<<<<< HEAD
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+  <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
+     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+=======
+@*    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    
+*@    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+>>>>>>> 6a36ccbf12f2401cbd411f41d5ea8c57d1e5aad0
     <script src="~/js/site.js" asp-append-version="true"></script>
      <script src="~/js/misc.js" asp-append-version="true"></script>
      <script src="~/js/hoverable-collapse.js" asp-append-version="true"></script>
      <script src="~/js/off-canvas.js" asp-append-version="true"></script>
       <script src="~/js/jquery.cookie.js" asp-append-version="true"></script>
      <script src="~/js/vendor.bundle.base.js" asp-append-version="true"></script>
-
-
+@*     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+*@
     @await RenderSectionAsync("Scripts", required: false)
     
 </body>
 </html>
+  

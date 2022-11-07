@@ -156,9 +156,10 @@ namespace AppraisalTool.App.Controllers
 
         public IActionResult AddSelfAppraisal()
         {
+        //https://localhost:5000/api/v1/Metric/GetAllListOfMetric
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/v1/Metric/GetAllListOfMetric").Result;
+            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/Metric/GetAllListOfMetric").Result;
             if (cardResponse.IsSuccessStatusCode)
             {
                 var responseData = cardResponse.Content.ReadAsStringAsync().Result;
