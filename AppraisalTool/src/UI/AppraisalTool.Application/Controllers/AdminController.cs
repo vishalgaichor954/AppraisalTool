@@ -199,8 +199,8 @@ namespace AppraisalTool.App.Controllers
                 JoinDate = model.JoinDate,
                 BranchId=model.BranchId,
                 RoleId=model.RoleId,
-                PrimaryRole=model.PrimaryJobProfileId,
-                SecondaryRole=model.SecondaryJobProfileId,
+                PrimaryJobProfileId = model.PrimaryJobProfileId,
+                SecondaryJobProfileId = model.SecondaryJobProfileId,
 
             };
 

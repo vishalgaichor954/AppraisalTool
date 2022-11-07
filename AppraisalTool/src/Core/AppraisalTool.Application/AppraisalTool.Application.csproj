@@ -34,7 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Menu\Command\CreateMenuCommand\" />
     <Folder Include="Features\Menu\Command\UpdateMenuCommand\" />
     <Folder Include="Features\Menu\Query\" />
     <Folder Include="Features\Metrics\Commands\" />
