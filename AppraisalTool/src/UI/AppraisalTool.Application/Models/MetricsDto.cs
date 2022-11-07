@@ -15,6 +15,8 @@ namespace AppraisalTool.App.Models
         public double metric_Weightage { get; set; }
 
         [Required (ErrorMessage ="Score is a Required Field")]
+        [Range(1, 5)]
+       
         public int? Score { get; set; }
 
        

@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using NuGet.Protocol;
 using System.ComponentModel;
 using System.Reflection;
+using System.Text;
 
 namespace AppraisalTool.App.Controllers
 {
@@ -120,7 +121,48 @@ namespace AppraisalTool.App.Controllers
         [HttpPost]
         public IActionResult AddSelfAppraisal(List<MetricsDto> scores )
         {
+            var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            List<AppraisalResultVM> appraisalResultsVm = new List<AppraisalResultVM>();
+
+            foreach(var metrics in scores)
+            {
+                appraisalResultsVm.Add(new AppraisalResultVM
+                {
+                    KraListId = metrics.List_Id,
+                    MetricId = metrics.Metric_ID,
+                    UserId= (int)user.UserId,
+                    MetricDescription=metrics.Metric_Description,
+                    MetricWeightage=metrics.metric_Weightage,
+                    SelfScore=metrics.Score,
+                    SelfComment=metrics.Comment,
+                    SelfCreatatedDate= DateTime.Now,
+
+
+
+
+                });
+            }
+
+            Console.WriteLine(appraisalResultsVm);
+           string data = JsonConvert.SerializeObject(appraisalResultsVm);
+           StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/v1/AppraisalHome/AddAppraisalResults", content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string responseData = response.Content.ReadAsStringAsync().Result;
+                Console.WriteLine(responseData);
+                var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
+                Console.WriteLine(res);
+                //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
+            }
+
+
             return RedirectToAction("AddSelfAppraisal");
+
+
         }
     }
 

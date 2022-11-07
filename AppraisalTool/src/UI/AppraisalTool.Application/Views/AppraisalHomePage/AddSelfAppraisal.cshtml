@@ -20,23 +20,47 @@
                     <form asp-action="AddSelfAppraisal" enctype="multipart/form-data">
                         <div class="text-danger"></div>
                         <fieldset class="border p-2 m-5" style="display:flex;justify-content:center;">
-                            <legend class="float-none w-auto">
+                            <legend class="float-none HEADdata w-auto">
                                 Input & Effort metric
                             </legend>
                             <div class="row d-flex justify-content-center">
                                 @for (int i = 0; i < EffortList; i++)
                                 {
 
-                                    <div class="row pt-2">
+                                    <div class="row py-2">
+                                        <div class="col-3"><h4 class="HEADMetrics">@Model[i].Metric_Description</h4></div>
+                                         <div class="col-3">
+                                               <div class="row d-flex justify-content-center align-items-center">
+                                                    <div class="col-5">
+                                                        <label>Score<sup class="required">*</sup></label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number">
+                                                    </div>
+                                                       <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
+                                                </div>
+                                         </div>
+                                          <div class="col-6">
+                                               <input asp-for="@Model[i].Metric_ID" hidden value="@Model[i].Metric_ID"  type="number">
+                                              <input asp-for="@Model[i].List_Id" hidden value="@Model[i].List_Id"   type="number">
+                                                <input asp-for="@Model[i].metric_Weightage" hidden value="@Model[i].metric_Weightage"   type="number">
+                                              <input asp-for="@Model[i].Metric_Description" hidden  value="@Model[i].Metric_Description"  type="text">
+                                            <div class="col-12"> <textarea class="form-control " asp-for="@Model[i].Comment" placeholder="Add Comment"></textarea>
+                                                   <span asp-validation-for="@Model[i].Comment" class="text-danger   mx-1 small"></span>
+                                            </div>
+                                            
+                                          </div>
+                                    </div>
+                                   @* <div class="row pt-2">
                                         <div class="row">
-                                            <div class="col-9"><h4>@Model[i].Metric_Description</h4></div>
+                                            <div class="col-9"><h4 class="HEADMetrics">@Model[i].Metric_Description</h4></div>
                                             <div class="col-3">
                                                 <div class="row d-flex justify-content-center align-items-center">
                                                     <div class="col-5">
                                                         <label>Score<sup class="required">*</sup></label>
                                                     </div>
                                                     <div class="col-7">
-                                                        <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" type="number">
+                                                        <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number">
                                                     </div>
                                                 </div>
                                             </div>
@@ -52,81 +76,77 @@
                                         </div>
                                         <span asp-validation-for="@Model[i].Comment" class="text-danger   mx-1 small"></span>
                                         <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
-                                    </div>
+                                    </div>*@
                                    
                                 }
                             </div>
                         </fieldset>
                         <fieldset class="border p-2 m-5" style="display:flex;justify-content:center;">
-                            <legend class="float-none w-auto">
+                            <legend class="float-none HEADdata w-auto">
                                 Behavioral competencies
                             </legend>
                             <div class="row d-flex justify-content-center">
                                 @for (int i = EffortList -1; i < EffortList+BevList-1; i++)
                                 {
                                     var temp = i + 1;
-                                    <div class="row pt-2">
-                                        <div class="row">
-                                            <div class="col-9"><h4>@Model[temp].Metric_Description</h4></div>
-                                            <div class="col-3">
-                                                <div class="row d-flex justify-content-center align-items-center">
+                                      <div class="row py-2">
+                                        <div class="col-3"><h4 class="HEADMetrics">@Model[temp].Metric_Description</h4></div>
+                                         <div class="col-3">
+                                               <div class="row d-flex justify-content-center align-items-center">
                                                     <div class="col-5">
                                                         <label>Score<sup class="required">*</sup></label>
                                                     </div>
                                                     <div class="col-7">
-                                                        <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" type="number">
+                                                        <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" min="1" max="5" type="number">
                                                     </div>
+                                                       <span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>
                                                 </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                             <input asp-for="@Model[temp].Metric_ID" hidden value="@Model[temp].Metric_ID"  type="number">
+                                         </div>
+                                          <div class="col-6">
+                                               <input asp-for="@Model[temp].Metric_ID" hidden value="@Model[temp].Metric_ID"  type="number">
                                               <input asp-for="@Model[temp].List_Id" hidden value="@Model[temp].List_Id"   type="number">
                                                 <input asp-for="@Model[temp].metric_Weightage" hidden value="@Model[temp].metric_Weightage"   type="number">
                                               <input asp-for="@Model[temp].Metric_Description" hidden  value="@Model[temp].Metric_Description"  type="text">
-                                            <div class="col-12"> <textarea class="form-control " asp-for="@Model[temp].Comment" placeholder="Add Comment"></textarea></div>
-
-                                        </div>
-                                        <span asp-validation-for="@Model[temp].Comment" class="text-danger mx-1 small"></span>
-                                        <span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>
+                                            <div class="col-12"> <textarea class="form-control " asp-for="@Model[temp].Comment" placeholder="Add Comment"></textarea>
+                                                   <span asp-validation-for="@Model[temp].Comment" class="text-danger   mx-1 small"></span>
+                                            </div>
+                                            
+                                          </div>
                                     </div>
                                 }
                             </div>
                         </fieldset>
                         <fieldset class="border  p-2 m-5" style="display:flex;justify-content:center;">
-                            <legend class="float-none w-auto">
+                            <legend class="float-none HEADdata w-auto">
                                 Job family grooming
                             </legend>
                             <div class="row d-flex justify-content-center">
                                 @for (int i = EffortList + BevList - 1; i < EffortList + BevList + JobList - 1; i++)
                                 {
                                     var temp = i + 1;
-                                    <div class="row pt-2">
-                                        <div class="row">
-                                            <div class="col-9"><h4>@Model[temp].Metric_Description</h4></div>
-                                            <div class="col-3">
-                                                <div class="row d-flex justify-content-center align-items-center">
+                                     <div class="row py-2">
+                                        <div class="col-3"><h4 class="HEADMetrics">@Model[temp].Metric_Description</h4></div>
+                                         <div class="col-3">
+                                               <div class="row d-flex justify-content-center align-items-center">
                                                     <div class="col-5">
                                                         <label>Score<sup class="required">*</sup></label>
                                                     </div>
                                                     <div class="col-7">
-                                                        <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" type="number">
+                                                        <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" min="1" max="5" type="number">
                                                     </div>
+                                                       <span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>
                                                 </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                             <input asp-for="@Model[temp].Metric_ID" hidden value="@Model[temp].Metric_ID"  type="number">
+                                         </div>
+                                          <div class="col-6">
+                                               <input asp-for="@Model[temp].Metric_ID" hidden value="@Model[temp].Metric_ID"  type="number">
                                               <input asp-for="@Model[temp].List_Id" hidden value="@Model[temp].List_Id"   type="number">
-                                                  <input asp-for="@Model[temp].metric_Weightage" hidden value="@Model[temp].metric_Weightage"   type="number">
+                                                <input asp-for="@Model[temp].metric_Weightage" hidden value="@Model[temp].metric_Weightage"   type="number">
                                               <input asp-for="@Model[temp].Metric_Description" hidden  value="@Model[temp].Metric_Description"  type="text">
-                                            <div class="col-12"> <textarea required class="form-control " asp-for="@Model[temp].Comment" placeholder="Add Comment"></textarea></div>
-
-                                        </div>
-                                        <span asp-validation-for="@Model[temp].Comment" class="text-danger mx-1 small"></span>
-                                        <span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>
+                                            <div class="col-12"> <textarea required rows="5" class="form-control " asp-for="@Model[temp].Comment" placeholder="Add Comment"></textarea>
+                                                   <span asp-validation-for="@Model[temp].Comment" class="text-danger   mx-1 small"></span>
+                                            </div>
+                                            
+                                          </div>
                                     </div>
                                 }
                             </div>
