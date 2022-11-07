@@ -9,6 +9,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Purple Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -29,59 +31,65 @@
 
         .roles {
             display: inline;
+            
         }
 
         .Anchor-body {
             text-decoration: none;
+            
         }
 
         .icon-card {
             font-size: 3rem;
             font-weight: 300;
+            
         }
 
         .role-div {
             background-color: white;
             border-radius: 0.5rem;
+            
         }
 
         .user-roles {
             margin-right: 18px;
+
         }
 
         .appraisal-card {
             /*padding: 0.2rem 0.5rem !important;*/
             padding: .2em .5em;
-
+            width: 100%;
         }
 
         .appraisal > p {
             margin-bottom: 0%;
+
         }
 
         .Last-Date {
             margin-right: 40px;
 
+
         }
 
         .gradient-1 {
             background-image: linear-gradient(30deg, #316bfd, #6f1ef1);
+            
         }
 
         .gradient-2 {
+            
             background-image: linear-gradient(30deg, #fa1157, #fc4939);
         }
 
         .gradient-3 {
+            
             background-image: linear-gradient(30deg, #fd9d2e, #ff550d);
         }
 
-        .dash-card-wrapper {
-            display: flex;
-            gap: 3em;
-        }
-
         .Dropdown {
+            
             display: flex;
             width: 200px !important;
             height : 40px !important;
@@ -92,20 +100,45 @@
         .appraisal-dash-card {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1em;
+            gap: 3em;
         }
         .text-dropdown{
             font-weight:bolder;
             text-size: 0.9em;
         }
 
+        .navigation:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+.navigation:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+.navigation:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+.navigation:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+
+
+
     </style>
 </head>
 <body>
     
-    <div class="main-panel">
-        <div class="content-wrapper">
+  
+        <div class="content-wrapper main-panel">
             <div style="height:100vh ;width:100%; background-color: white;border-radius: 0.5rem;" class="container">
+                <h4><a asp-controller="Dashboard" asp-action="Dashboard" class="navigation">Dashboard</a>  /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal" class="navigation"> Home   </a>   </h4>
                 <!-- <h2 >Appraisal Home</h2> -->
                 <div>
                     <h2 style="padding-top:30px;padding-left: 20px;">Appraisal Home</h2>
@@ -130,7 +163,7 @@
                                         <div class="card-body appraisal-card">
                                             <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
                                             <h2 class="font-weight-normal pt-2">
-                                                Self Appraisal
+                                                Self <br />Appraisal
                                             </h2>
                                             <h6>Total appraisal to be filled</h6>
                                            <p>@ViewBag.AppraisalsToBeFilled</p>
@@ -138,7 +171,7 @@
                                             <p>@ViewBag.PendingAppraisals </p>
 
 
-                                            <div class="Last-Date">
+                                            <div style="text-align:end ;" class="Last-Date">
                                                 <h6>Last date</h6>
                                                 <h4>@ViewBag.LastDate </h4>
                                             </div>
@@ -156,7 +189,7 @@
                                         <div class="card-body appraisal-card">
                                             <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
                                             <h2 class="font-weight-normal pt-2">
-                                                Reportee Appraisal
+                                                Reportee <br />Appraisal
                                             </h2>
                                             <h6>Total appraisal to be filled</h6>
                                             <p>@ViewBag.AppraisalsToBeFilled</p>
@@ -180,17 +213,17 @@
                                         <div class="card-body appraisal-card">
                                             <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
                                             <h2 class="font-weight-normal pt-2">
-                                                Appraisal Review
+                                                Appraisal <br /> Review
                                             </h2>
                                             <h6>Total appraisal to be filled</h6>
-                                            <p>53</p>
+                                            <p>@ViewBag.AppraisalsToBeFilled</p>
                                             <h6>Pending Appraisals</h6>
-                                            <p>0</p>
+                                            <p>@ViewBag.PendingAppraisals</p>
 
 
                                             <div style="text-align:end ;" class="Last-Date">
                                                 <h6>Last date</h6>
-                                                <h4>31st March 2022</h4>
+                                                <h4>@ViewBag.LastDate</h4>
                                             </div>
                                             <!-- <i class=" icon-card mdi mdi-airplay"></i> -->
                                             <!-- <h2 class="mb-5">$ 15,0000</h2>
@@ -212,7 +245,7 @@
                 <footer class="footer">
                 </footer>
                 <!-- partial -->
-            </div>
+            
             <!-- main-panel ends -->
         </div>
         <!-- page-body-wrapper ends -->
