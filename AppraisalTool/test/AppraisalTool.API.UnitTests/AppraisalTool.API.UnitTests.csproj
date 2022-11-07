@@ -22,4 +22,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\API\AppraisalTool.Api\AppraisalTool.Api.csproj" />
+    <ProjectReference Include="..\..\src\Core\AppraisalTool.Application\AppraisalTool.Application.csproj" />
+  </ItemGroup>
+
 </Project>

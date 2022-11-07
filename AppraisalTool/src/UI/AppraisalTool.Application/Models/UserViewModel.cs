@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace AppraisalTool.App.Models
 {
@@ -9,23 +10,26 @@ namespace AppraisalTool.App.Models
 
         [Required(ErrorMessage = "First name is required")]
         [RegularExpression(@"^[a-zA-z]+$", ErrorMessage = "First Name Should Contain only Alphabet")]
-
+        [MaxLength(20)]
         [Display(Name = "First Name")]
-        public string FirstName { get; set; }
+        public string ?FirstName { get; set; }
 
-        [Display(Name = "First Name")]
+        [Display(Name = "Last Name")]
         [Required(ErrorMessage = "Last name is required")]
+        [MaxLength(20)]
         [RegularExpression(@"^[a-zA-z]+$", ErrorMessage = "Last Name Should Contain only Alphabet")]
-        public string LastName { get; set; }
+        public string ?LastName { get; set; }
 
         [Display(Name = "Email Id")]
+        [DataType(DataType.EmailAddress)]
+        //[Remote("UserExistsEmail", "Admin", HttpMethod = "GET", ErrorMessage = "User with this Email exists")]
         [Required(ErrorMessage = "Email address is required")]
         [RegularExpression(@"^[0-9a-zA-z]+[.+-_$]{0,1}[0-9a-zA-z]+[@][a-zA-z]+[.][a-zA-z]{2,3}$", ErrorMessage = "Please Enter Valid Email")]
-        public string Email { get; set; }
+        public string ?Email { get; set; }
 
         [Required]
         [RegularExpression(@"^[a-zA-z0-9@&*$]{8,}", ErrorMessage = "Enter a strong password")]
-        public string Password { get; set; }
+        public string ?Password { get; set; }
 
         [Display(Name = "Join Date")]
         [Required]
@@ -36,22 +40,22 @@ namespace AppraisalTool.App.Models
         public DateTime? LastAppraisalDate { get; set; }
 
         [Required(ErrorMessage = "Please select primary job profile")]
-        public string PrimaryRole { get; set; }
+        public string ?PrimaryRole { get; set; }
 
         [Required(ErrorMessage = "Please select a secondary job profile")]
-        public string SecondaryRole { get; set; }
+        public string? SecondaryRole { get; set; }
 
         [Required(ErrorMessage = "Role is required")]
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
 
         [Required(ErrorMessage = "Branch is required")]
-        public int BranchId { get; set; }
+        public int ?BranchId { get; set; }
 
         [Display(Name = "Branch Name")]
         public string? BranchName { get; set; }
 
         public int? AddedBy { get; set; }
-        public int Role { get; set; }
+        public int ?Role { get; set; }
         public string? RoleName { get; set; }
         public string? PrimaryJobProfileName { get; set; }
         public string? SecondaryJobProfileName { get; set; }

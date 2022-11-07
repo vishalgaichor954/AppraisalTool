@@ -1,7 +1,7 @@
-﻿using AppraisalTool.Api;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 using System.Collections.Generic;
 using Xunit;
 

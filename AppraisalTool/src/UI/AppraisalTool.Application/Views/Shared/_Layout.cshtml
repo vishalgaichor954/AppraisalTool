@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - AppraisalTool.App</title>
+    
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/assets/vendors//mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/lib/assets/vendors/css/vendor.bundle.base.css">
@@ -74,16 +75,17 @@
             &copy; 2022 - AppraisalTool.App - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>*@
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+@*    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    
+*@    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
      <script src="~/js/misc.js" asp-append-version="true"></script>
      <script src="~/js/hoverable-collapse.js" asp-append-version="true"></script>
      <script src="~/js/off-canvas.js" asp-append-version="true"></script>
       <script src="~/js/jquery.cookie.js" asp-append-version="true"></script>
      <script src="~/js/vendor.bundle.base.js" asp-append-version="true"></script>
-
-
+@*     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+*@
     @await RenderSectionAsync("Scripts", required: false)
     
 </body>
