@@ -87,8 +87,11 @@
         }
 
         .Button {
+<<<<<<< HEAD
             background-color: dodgerblue;
+=======
             background-color: blue;
+>>>>>>> 6a36ccbf12f2401cbd411f41d5ea8c57d1e5aad0
             border: none;
             color: white;
             padding: 15px 32px;
@@ -100,6 +103,7 @@
             cursor: pointer;
             width: auto;
         }
+<<<<<<< HEAD
 
         a:link {
   color: green;
@@ -128,6 +132,8 @@ a:active {
 
 
 
+=======
+>>>>>>> 6a36ccbf12f2401cbd411f41d5ea8c57d1e5aad0
     </style>
 </head>
 <body>
@@ -187,8 +193,11 @@ a:active {
                                                 <span style="display: inline-block;">Reporting Authority</span>
                                             </div>
                                             <div class="row date-p ">
+<<<<<<< HEAD
                                                 <asp-for ="ReportingAuthority">@ViewBag.ReportingAuthorityFirstName  @ViewBag.ReportingAuthorityLastName
-                                                
+=======
+                                                <asp-for ="ReportingAuthority">@ViewBag.ReportingAuthorityFirstName
+>>>>>>> 6a36ccbf12f2401cbd411f41d5ea8c57d1e5aad0
                                             </div>
                                         </div>
                                     </div>

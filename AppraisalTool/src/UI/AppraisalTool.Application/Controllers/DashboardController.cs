@@ -53,8 +53,7 @@ namespace AppraisalTool.App.Controllers
                 var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
                 dynamic json = JsonConvert.DeserializeObject(responseData);
 
-                var datacard = json.data[0].menuList;
-                Console.WriteLine(datacard);
+        
                 NavbarViewModel navbarVM = new NavbarViewModel() { UserRole = user.Role,UserName=user.Name,SideBarList=json.data};
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "navbarViewModel", navbarVM);
 

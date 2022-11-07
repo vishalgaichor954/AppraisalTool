@@ -21,6 +21,13 @@ body {
     height: 200px;
 }
 
+.appraisal-dash-card{
+    position:relative;
+}
+.dash-card {
+    margin-bottom: 2rem;
+}
+
 .roles {
     display: inline;
 }
@@ -40,8 +47,7 @@ body {
     width: 280px !important;
 }
 .LoginBtn {
-    /*background-color:#E0144C;*/
-    background: linear-gradient(to right, #da8cff, #9a55ff);
+    background-color:#E0144C;
     color: white;
 }
 .active {
@@ -91,10 +97,8 @@ legend {
 }
 .LoginBtn:hover {
     background-color: white;
-    /*color: #E0144C;*/
-    color: white;
-    /*border: 2px solid #E0144C;*/
-    border: 2px solid #da8cff;
+    color: #E0144C;
+    border: 2px solid #E0144C;
 }
 .LogoMiniUi > img {
     height: 100px;
@@ -133,8 +137,7 @@ legend {
 }
 
 ::-webkit-scrollbar-thumb {
-    /*background: #E0144C*/
-    background: #da8cff;
+    background: #E0144C
 }
 
 ::-webkit-scrollbar-thumb:hover {
