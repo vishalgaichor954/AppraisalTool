@@ -30,4 +30,10 @@
     </PackageReference>
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Infrastructure\AppraisalTool.Identity\AppraisalTool.Identity.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\AppraisalTool.Persistence\AppraisalTool.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

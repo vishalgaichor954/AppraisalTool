@@ -26,122 +26,137 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.ico" />
     <style>
-            .Dash-Card{
-              height: 240px;
-            }
-            .Date-Badge{
-              margin-right: 0%!important;
-            }
-            .roles{
-              display: inline;
-            }
-            .Anchor-body{
-              text-decoration: none;
-              height: 240px;
-              width: 100%;
-            }
-            .icon-card{
-              font-size: 3rem;
-              font-weight: 300;
-            }
-            .role-div{
-              background-color: white;
-              border-radius: 0.5rem;
-            }
-            .user-roles{
-              margin-right: 18px;
-            }
-            .appraisal-card{
-              padding: 0.2rem 0.5rem!important;
-            }
-            .appraisal>p{
-              margin-bottom: 0%;
-            }
+        .Dash-Card {
+            height: 240px;
+        }
 
-            .Last-Date{
-              margin-right: 40px;
-            }
-            .gradient-1{
-              background-image: linear-gradient(30deg, #316bfd, #6f1ef1);
-            }
-            .date-p{
-              margin: 0%!important;
-            }
-            .gradient-2{
-        background-image: linear-gradient(30deg, #fa1157, #fc4939); }
+        .Date-Badge {
+            margin-right: 0% !important;
+        }
+
+        .roles {
+            display: inline;
+        }
+
+        .Anchor-body {
+            text-decoration: none;
+            height: 240px;
+            width: 100%;
+        }
+
+        .icon-card {
+            font-size: 3rem;
+            font-weight: 300;
+        }
+
+        .role-div {
+            background-color: white;
+            border-radius: 0.5rem;
+        }
+
+        .user-roles {
+            margin-right: 18px;
+        }
+
+        .appraisal-card {
+            padding: 0.2rem 0.5rem !important;
+        }
+
+        .appraisal > p {
+            margin-bottom: 0%;
+        }
+
+        .Last-Date {
+            margin-right: 40px;
+        }
+
+        .gradient-1 {
+            background-image: linear-gradient(30deg, #316bfd, #6f1ef1);
+        }
+
+        .date-p {
+            margin: 0% !important;
+        }
+
+        .gradient-2 {
+            background-image: linear-gradient(30deg, #fa1157, #fc4939);
+        }
+
         .gradient-3 {
-          background-image: linear-gradient(30deg, #fd9d2e, #ff550d); }
-          .Button {
-  background-color: blue;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-      width: auto;
-}
+            background-image: linear-gradient(30deg, #fd9d2e, #ff550d);
+        }
+
+        .Button {
+            background-color: blue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: auto;
+        }
     </style>
 </head>
 <body>
     <div class="container-scroller">
 
         <div class="container-fluid page-body-wrapper">
-          
+
             <div>
                 <div class="content-wrapper">
                     <div style="  background-color: white;border-radius: 0.5rem;" class="container">
                         <h3 style="text-align:right "> FY 2019-2020</h3>
-                        <input type="button" value="Back" class="Button" onclick="history.back()"/>
-                        
+                        <input type="button" value="Back" class="Button" onclick="history.back()" />
+
                         <!-- <h2 >Appraisal Home</h2> -->
                         <div>
                             <h2 style="padding-top:30px;padding-left: 44px ;">Self Appraisal Dashboard</h2>
                         </div>
-                       
+
                         <div style="background-color: rgb(190, 24, 24);margin-top: 2rem;" class="row justify-content-center mt-5">
                         </div>
                         <div style="display:flex;align-items: center;justify-content: center;">
 
-                            <div class=" row alert alert-primary " role="alert" style="width:96%">
+                            <div class=" row alert alert-danger " role="alert" style="width:96%">
                                 <div class="col-md-5"> <p>Your final grade for financial year 2019-2020 </p> </div>
                                 <div class="col-md-3"></div>
-                                <div class="col-md-4"><button class="btn btn-outline-primary btn-icon-text"><i class="mdi mdi-file-check btn-icon-prepend"></i>Download Grade Letter</button></div>
+                                <div class="col-md-4"><button class="btn btn-icon-text LoginBtn"><i class="mdi mdi-file-check btn-icon-prepend"></i>Download Grade Letter</button></div>
                             </div>
                         </div>
                         <div style="display:flex;align-items: center;justify-content: center;">
 
-                            <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style="width:96%; border: 1px solid blueviolet; border-radius: 0.3rem;">
+                            <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style="width:96%; border: 1px solid #E0144C; border-radius: 0.3rem;">
                                 <div class="col-md-4">
 
                                     <div class="row">
                                         <div class="col-md-2 Date-Badge">
-                                            <label style="font-size:1rem ;" class="badge badge-pill badge-primary user-roles " for=""><i class="mdi mdi-calendar-blank"></i></label>
+                                            <label style="font-size:1rem ;" class="badge badge-pill  user-roles LoginBtn " for=""><i class="mdi mdi-calendar-blank"></i></label>
                                         </div>
                                         <div class="col-md-10">
                                             <div class="row d-flex row date-p">
                                                 <span style="display: inline-block;">Date</span>
-                                            
-                                                <small asp-for ="Date" >@ViewBag.Date </small>
+
+                                                <small asp-for="Date">@ViewBag.Date </small>
 
                                             </div>
-                                        </div>  
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="row">
                                         <div class="col-md-2 Date-Badge">
-                                            <label style="font-size:1rem ;" class="badge badge-pill badge-primary user-roles " for=""><i class=" mdi mdi-account-check"></i></label>
+                                            <label style="font-size:1rem ;" class="badge badge-pill user-roles  LoginBtn" for=""><i class=" mdi mdi-account-check"></i></label>
                                         </div>
                                         <div class="col-md-10">
                                             <div class="row d-flex justify-content-center">
                                                 <span style="display: inline-block;">Reporting Authority</span>
                                             </div>
                                             <div class="row date-p ">
-                                                <asp-for ="ReportingAuthority" >@ViewBag.ReportingAuthorityFirstName
+                                                <asp-for ="ReportingAuthority">@ViewBag.ReportingAuthorityFirstName
                                             </div>
                                         </div>
                                     </div>
@@ -151,21 +166,21 @@
                                         <div class="row d-flex justify-content-center">
                                             <span style="display: inline-block;">Apprasial Status</span>
                                         </div>
-                                       
-                                            <small style="border-radius: 0.5rem; font-size:13px ; background-color: rgb(245, 177, 138);" class="pt-1 pb-1"><asp-for ="AppraisalStatus" >@ViewBag.AppraisalStatus</small>
-                                        
+
+                                        <small style="border-radius: 0.5rem; font-size:13px ; background-color: rgb(245, 177, 138);" class="pt-1 pb-1"><asp-for ="AppraisalStatus">@ViewBag.AppraisalStatus</small>
+
                                     </div>
                                 </div>
                                 <div class="col-md-4 mt-4">
                                     <div class="row">
                                         <div class="col-md-2 Date-Badge">
-                                            <label style="font-size:1rem ;" class="badge badge-pill badge-primary user-roles " for=""><i class=" mdi mdi-account-box-outline"></i></label>
+                                            <label style="font-size:1rem ;" class="badge badge-pill user-roles  LoginBtn" for=""><i class=" mdi mdi-account-box-outline"></i></label>
                                         </div>
                                         <div class="col-md-10">
                                             <div class="row d-flex row date-p">
                                                 <span style="display: inline-block;">Primary Role</span>
-                                           
-                                           
+
+
                                                 <asp-for ="Role">  @ViewBag.Role
 
                                             </div>
@@ -176,7 +191,7 @@
                                 <div class="col-md-4 mt-4">
                                     <div class="row">
                                         <div class="col-md-2 Date-Badge">
-                                            <label style="font-size:1rem ;" class="badge badge-pill badge-primary user-roles " for=""><i class=" mdi mdi-account-circle"></i></label>
+                                            <label style="font-size:1rem ;" class="badge badge-pill user-roles  LoginBtn" for=""><i class=" mdi mdi-account-circle"></i></label>
                                         </div>
                                         <div class="col-md-10">
                                             <div class="row d-flex justify-content-center">
@@ -203,7 +218,7 @@
                             </div>
                         </div>
 
-                      
+
 
 
                         <!-- partial -->
