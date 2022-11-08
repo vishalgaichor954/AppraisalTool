@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AutoMapper;
+using AppraisalTool.Domain.Common;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AppraisalTool.Persistence.Repositories
 {
@@ -85,5 +87,59 @@ namespace AppraisalTool.Persistence.Repositories
                 .ToListAsync();
             return years;
         }
+
+
+        //Author : Ilyas Dabholkar
+        //returns list of all appraisals data 
+        public async Task<List<ReporteeAppraisalListVm>> GetAllReporteeAppraisals()
+        {
+            List<UserAuthorityMapping> mappings = await _dbContext.UserAuthorityMappings.Include(x=>x.ReviewingAuthority).Include(x=>x.User).ToListAsync();
+            List<Appraisal> appraisals = await _dbContext.Appraisal.Include(x=>x.Status).Include(x=>x.User).Include(x=>x.FinancialYear).ToListAsync();
+
+           
+            var res = (from A in mappings join B in appraisals on A.UserId equals B.UserId
+                                         select new ReporteeAppraisalListVm
+                                         {
+                                             StartDate = B.StartDate,
+                                             EndDate = B.EndDate,
+                                             FirstName = B.User.FirstName,
+                                             LastName = B.User.LastName,
+                                             RevaName = A.ReviewingAuthority.FirstName +" "+ A.ReviewingAuthority.LastName,
+                                             AppraisalStatus = B.Status.StatusTitle,
+                                             FinancialYearId = B.FinancialYear.Id,
+                                             FinancialStartYear = B.FinancialYear.StartYear,
+                                             FinancialEndYear = B.FinancialYear.EndYear
+                                         });
+            return res.ToList<ReporteeAppraisalListVm>();
+        }
+
+
+        //Author : Ilyas Dabholkar
+        //Endpoint takes id of reporting autority and return list of appraisals data belonging to that reporting authority
+        //Joins UserAuthorityMapping,User,Appraisal,Status,FinancialYear
+        public async Task<List<ReporteeAppraisalListVm>> GetReporteeAppraisalsByRepAuthority(int id)
+        {
+            List<UserAuthorityMapping> mappings = await _dbContext.UserAuthorityMappings.Include(x => x.ReviewingAuthority).ToListAsync();
+            List<Appraisal> appraisals = await _dbContext.Appraisal.Include(x => x.Status).Include(x => x.User).Include(x => x.FinancialYear).ToListAsync();
+
+
+            var res = (from A in mappings
+                       join B in appraisals on A.UserId equals B.UserId
+                       where A.ReportingAuthorityId == id
+                       select new ReporteeAppraisalListVm
+                       {
+                           StartDate = B.StartDate,
+                           EndDate = B.EndDate,
+                           FirstName = B.User.FirstName,
+                           LastName = B.User.LastName,
+                           RevaName = A.ReviewingAuthority.FirstName + " " + A.ReviewingAuthority.LastName,
+                           AppraisalStatus = B.Status.StatusTitle,
+                           FinancialYearId = B.FinancialYear.Id,
+                           FinancialStartYear = B.FinancialYear.StartYear,
+                           FinancialEndYear = B.FinancialYear.EndYear
+                       });
+            return res.ToList<ReporteeAppraisalListVm>();
+        }
+
     }
 }

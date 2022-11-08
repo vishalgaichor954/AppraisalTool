@@ -43,10 +43,11 @@ namespace AppraisalTool.Domain.Entities
         
         public virtual List<UserJobRoles> JobRoles { get; set; }
 
-        
-       
+        public virtual List<Appraisal>? UserAppraisals { get; set; }
+
+
         //public virtual List<UserAuthorityMapping> UserAuthorities { get; set; }
-       
+
 
     }
 }
