@@ -15,22 +15,22 @@ namespace AppraisalTool.Domain.Entities
         public int Id { get; set; }
         public int FinancialYearId { get; set; }
         public int UserId { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public int StatusId { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public int? StatusId { get; set; }
         public int? KraId { get; set; }
-        public DateTime ReviewedOn { get; set; }
-        public DateTime ApprovedOn { get; set; }
+        public DateTime? ReviewedOn { get; set; }
+        public DateTime? ApprovedOn { get; set; }
 
         [ForeignKey("FinancialYearId")]
-        public virtual FinancialYear FinancialYear { get; set; }
+        public virtual FinancialYear? FinancialYear { get; set; }
 
         [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
 
         
         [ForeignKey("StatusId")]
-        public virtual Status Status { get; set; }
-        public virtual List<AppraisalResult> AppraisalResults { get; set; }
+        public virtual Status? Status { get; set; }
+        public virtual List<AppraisalResult>? AppraisalResults { get; set; }
     }
 }
