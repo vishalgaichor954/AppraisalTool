@@ -8,6 +8,8 @@ using AppraisalTool.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetAllReporteeAppraisals;
+using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetReporteeAppraisalsByRevAuthority;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -48,6 +50,9 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("GetYear Completed");
             return Ok(await _mediator.Send(dtos));
         }
+
+        //Author : Ilyas Dabholkar
+        //Return list of all appraisal results
         [HttpGet("GetAllAppraisalResult")]
         public async Task<ActionResult> GetAllAppraisalResult()
         {
@@ -64,6 +69,8 @@ namespace AppraisalTool.Api.Controllers.v1
             }
         }
 
+        //Author : Ilyas Dabholkar
+        //Takes List of AppraisalResult Dto and bulk inserts them into db
         [HttpPost("AddAppraisalResults")]
         public async Task<ActionResult> RegisterAsync(List<AddAppraisalResultDto> results)
         {
@@ -71,6 +78,44 @@ namespace AppraisalTool.Api.Controllers.v1
             var dtos = await _mediator.Send(new AddAppraisalResultCommand() { DataList = results });
             _logger.LogInformation("AddAppraisalResults Completed");
             return Ok(dtos);
+        }
+
+
+        //Author : Ilyas Dabholkar
+        //returns list of all appraisals data 
+        [HttpGet("GetAllReporteeAppraisal")]
+        public async Task<ActionResult> GetAllReporteeAppraisal()
+        {
+            try
+            {
+                _logger.LogInformation("GetAllReporteeAppraisal Initiated");
+                var res = await _mediator.Send(new GetAllReporteeAppraisalsQuery());
+                _logger.LogInformation("GetAllReporteeAppraisal Completed");
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+
+        //Author : Ilyas Dabholkar
+        //Endpoint takes id of reporting autority and return list of appraisals data belonging to that reporting authority
+        [HttpGet("GetReporteeAppraisalByRepAuthority")]
+        public async Task<ActionResult> GetReporteeAppraisalByRepAuthority(int id)
+        {
+            try
+            {
+                _logger.LogInformation("GetReporteeAppraisalByRevAuthority Initiated");
+                var res = await _mediator.Send(new GetReporteeAppraisalsByRepAuthorityQuery() { Id=id});
+                _logger.LogInformation("GetReporteeAppraisalByRevAuthority Completed");
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
         }
 
 

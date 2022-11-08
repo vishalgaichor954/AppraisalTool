@@ -24,10 +24,13 @@ namespace AppraisalTool.Domain.Entities
 
         [ForeignKey("FinancialYearId")]
         public virtual FinancialYear FinancialYear { get; set; }
+
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
+
         
         [ForeignKey("StatusId")]
         public virtual Status Status { get; set; }
+        public virtual List<AppraisalResult> AppraisalResults { get; set; }
     }
 }

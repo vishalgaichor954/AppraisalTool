@@ -1,4 +1,5 @@
-﻿using AppraisalTool.Domain.Entities;
+﻿using AppraisalTool.Domain.Common;
+using AppraisalTool.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

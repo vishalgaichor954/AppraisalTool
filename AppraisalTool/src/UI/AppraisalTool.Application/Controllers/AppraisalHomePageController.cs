@@ -156,11 +156,12 @@ namespace AppraisalTool.App.Controllers
         //    return RedirectToAction("AddSelfAppraisal");
         //}
 
+        [HttpGet]
         public IActionResult AddSelfAppraisal()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/v1/Metric/GetAllListOfMetric").Result;
+            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/Metric/GetAllListOfMetric").Result;
             if (cardResponse.IsSuccessStatusCode)
             {
                 var responseData = cardResponse.Content.ReadAsStringAsync().Result;

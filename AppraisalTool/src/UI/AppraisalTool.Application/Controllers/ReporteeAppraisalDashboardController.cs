@@ -31,22 +31,72 @@ namespace AppraisalTool.App.Controllers
         {
             Console.WriteLine("ReporteeAppraisalDashboard");
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            List<ReporteeAppraisalDashboard> modellist = new List<ReporteeAppraisalDashboard>();
+            //List<ReporteeAppraisalDashboard> modellist = new List<ReporteeAppraisalDashboard>();
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $" ").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={user.UserId} ").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var users = JsonConvert.DeserializeObject<Response>(responseData);
-                List<SelectListItem> financialYearList = new List<SelectListItem>();
+
+
+                List<SelectListItem> startDate = new List<SelectListItem>();
                 foreach (var item in users.Data)
                 {
+                    int i = 1;
 
-                    financialYearList.Add(new SelectListItem { Text = "FY" + item.startDate.ToString() + "-" + item.endDate.ToString(), Value = item.id.ToString() });
-
+                    startDate.Add(new SelectListItem { Text =   item.startDate, Value = i.ToString() });
+                    i = i + 1;
                 }
-                ViewBag.financialYearList = financialYearList;
+                ViewBag.startDate = startDate;
+
+                List<SelectListItem> endDate = new List<SelectListItem>();
+                foreach (var item in users.Data)
+                {
+                    int i = 1;
+
+                    endDate.Add(new SelectListItem { Text = item.endDate, Value = i.ToString() });
+                    i = i + 1;
+                }
+                ViewBag.endDate = endDate;
+
+                List<SelectListItem> employeeName = new List<SelectListItem>();
+                foreach (var item in users.Data)
+                {
+                    int i = 1;
+
+                    employeeName.Add(new SelectListItem { Text = item.firstName + item.lastName, Value = i.ToString() });
+                    i = i + 1;
+                }
+                ViewBag.employeeName = employeeName;
+
+                List<SelectListItem> reviewingAuthority = new List<SelectListItem>();
+                foreach (var item in users.Data)
+                {
+                    int i = 1;
+
+                    reviewingAuthority.Add(new SelectListItem { Text = item.revaName, Value = i.ToString() });
+                    i = i + 1;
+                }
+                ViewBag.reviewingAuthority = reviewingAuthority;
+
+                List<SelectListItem> appraisalStatus = new List<SelectListItem>();
+                foreach (var item in users.Data)
+                {
+                    int i = 1;
+
+                    appraisalStatus.Add(new SelectListItem { Text = item.appraisalStatus, Value = i.ToString() });
+                    i = i + 1;
+                }
+                ViewBag.appraisalStatus = appraisalStatus;
+
+
+
+
+
+
+
                 Console.WriteLine(users.Data);
                 ViewBag.UserList = users.Data;
                 return View();
