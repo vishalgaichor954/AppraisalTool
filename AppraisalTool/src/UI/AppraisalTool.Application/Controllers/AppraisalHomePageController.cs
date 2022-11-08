@@ -74,7 +74,7 @@ namespace AppraisalTool.App.Controllers
             return View();
 
         }
-        public IActionResult SelfAppraisalDashboard()
+        public IActionResult SelfAppraisalDashboard(int? Fid,string? Fyear)
         {
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
@@ -85,7 +85,8 @@ namespace AppraisalTool.App.Controllers
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<Response>(responseData);
                 Console.WriteLine(data.Data);
-                
+                ViewBag.fyear = Fyear;
+                ViewBag.Fid = Fid;
                 ViewBag.ReportingAuthorityFirstName = data.Data[0].reportingAuthorityFirstName;
                 Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
                 ViewBag.ReviewingAuthorityFirstName = data.Data[0].reviewingAuthorityFirstName;
@@ -156,15 +157,17 @@ namespace AppraisalTool.App.Controllers
         //{
         //    return RedirectToAction("AddSelfAppraisal");
         //}
-
-        public IActionResult AddSelfAppraisal()
+        [HttpGet]
+        public IActionResult AddSelfAppraisal( int? fid)
         {
+           
         //https://localhost:5000/api/v1/Metric/GetAllListOfMetric
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
             HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/Metric/GetAllListOfMetric").Result;
             if (cardResponse.IsSuccessStatusCode)
             {
+                ViewBag.Fid = fid;
                 var responseData = cardResponse.Content.ReadAsStringAsync().Result;
                 var res = JsonConvert.DeserializeObject<Response>(responseData);
 
@@ -201,8 +204,9 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddSelfAppraisal(List<MetricsDto> scores )
+        public IActionResult AddSelfAppraisal(List<MetricsDto> scores,int Fid)
         {
+            Console.WriteLine(Fid);
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             List<AppraisalResultVM> appraisalResultsVm = new List<AppraisalResultVM>();
 
@@ -231,15 +235,18 @@ namespace AppraisalTool.App.Controllers
 
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/v1/AppraisalHome/AddAppraisalResults", content).Result;
+            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/AppraisalHome/AddAppraisalResults", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 string responseData = response.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(responseData);
                 var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
                 Console.WriteLine(res);
+                TempData["SUCCESS"] = "Successfully Submited";
+                return RedirectToAction("AddSelfAppraisal");
                 //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
             }
+            TempData["Error"] = "Error Occured";
 
 
             return RedirectToAction("AddSelfAppraisal");

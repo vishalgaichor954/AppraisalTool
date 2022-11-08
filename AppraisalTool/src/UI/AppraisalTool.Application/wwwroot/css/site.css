@@ -50,15 +50,25 @@ body {
     background-color:#E0144C;
     color: white;
 }
+
 .ApprovalBtn {
     border: 2px solid #E0144C;
     background-color: white;
     color: #E0144C;
 }
-    .ApprovalBtn:hover {
-        background-color: #E0144C;
-        color: white;
-    }
+.card-bcakground {
+    background-color: #fcd6cbb2;
+}
+.featureBackground {
+    background-color: white;
+    padding-bottom:2.5rem;
+    padding-top:2rem;
+    border-radius:0.2rem;
+}
+.ApprovalBtn:hover {
+    background-color: #E0144C;
+    color: white;
+}
 .HEADdata {
     font-size: 21px !important;
     font-weight: 700 !important;
