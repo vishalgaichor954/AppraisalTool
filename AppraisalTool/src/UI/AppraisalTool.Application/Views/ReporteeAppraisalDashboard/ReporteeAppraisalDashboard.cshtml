@@ -1,0 +1,180 @@
+﻿@model AppraisalTool.App.Models.ReporteeAppraisal.ReporteeAppraisalDashboard
+
+
+
+@{
+    ViewData["Title"] = "ReporteeAppraisalDashboard";
+}
+
+
+<h3>Reportee Appraisal Dashboard</h3>
+
+<br />
+<div class=" row pt-2 mb-4  pb-2 p-2">
+
+
+    <div class="col-md-2">
+        <div class="row">
+            <p style="padding-top:30px">Primary Role</p>
+            <div class="Dropdown">
+
+                <select class="form-control" asp-items="ViewBag.financialYearList">
+                    <option class=" text-dropdown"> </option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-2">
+        <div class="row">
+            <p style="padding-top:30px">Start Date</p>
+            <div class="Dropdown">
+
+                <select class="form-control" asp-items="ViewBag.financialYearList">
+                    <option class=" text-dropdown"></option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-md-2">
+        <div class="row">
+            <p style="padding-top:30px">End Date</p>
+            <div class="Dropdown">
+
+                <select class="form-control" asp-items="ViewBag.financialYearList">
+                    <option class=" text-dropdown">Select Financial Year</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="row">
+            <p style="padding-top:30px">Employee Name</p>
+            <div class="Dropdown">
+
+                <select class="form-control" asp-items="ViewBag.financialYearList">
+                    <option class=" text-dropdown">Select Financial Year</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-2">
+        <div class="row">
+            <p style="padding-top:30px">Reviewing Authority</p>
+            <div class="Dropdown">
+
+                <select class="form-control" asp-items="ViewBag.financialYearList">
+                    <option class=" text-dropdown">Select Financial Year</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-2">
+        <div class="row">
+            <p style="padding-top:30px">Status</p>
+            <div class="Dropdown">
+
+                <select class="form-control" asp-items="ViewBag.financialYearList">
+                    <option class=" text-dropdown">Select Financial Year</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+@if (ViewBag.ReporteeAppraisalDashboard != null)
+{
+    @foreach (var item in ViewBag.UserList)
+    {
+
+
+
+        <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" border: 1px solid #E0144C; border-radius: 0.3rem;">
+            <div class="col-md-3">
+
+                <div class="row">
+                    <div class="col-md-2 Date-Badge">
+                        <label style="font-size:1rem ;" class="badge badge-pill  user-roles LoginBtn " for=""><i class="mdi mdi-calendar-blank"></i></label>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row d-flex row date-p">
+                            <span style="display: inline-block;">Date</span>
+
+                            <small asp-for="Date">@item.Date </small>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="row">
+                    <div class="col-md-2 Date-Badge">
+                        <label style="font-size:1rem ;" class="badge badge-pill user-roles  LoginBtn" for=""><i class=" mdi mdi-account-check"></i></label>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row d-flex row date-p">
+                            <span style="display: inline-block;">Employee Name</span>
+
+                            <small asp-for="EmployeeName">@item.EmployeeName </small>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="row">
+                    <div class="col-md-2 Date-Badge">
+                        <label style="font-size:1rem ;" class="badge badge-pill user-roles  LoginBtn" for=""><i class=" mdi mdi-account"></i></label>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row d-flex row date-p">
+                            <span style="display: inline-block;">Reviewing Authority</span>
+
+                            <small asp-for="ReviewingAuthority">@item.ReviewingAuthority </small>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="row">
+                    <div class="col-md-10 row date-p">
+                        <div class="row d-flex justify-content-center">
+                            <span style="display: inline-block;">@item.ApprasialStatus</span>
+                        </div>
+
+                        <small style="border-radius: 0.5rem; font-size:13px ; background-color: rgb(245, 177, 138);" class="pt-1 pb-1"><asp-for ="AppraisalStatus">AppraisalStatus</small>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+        }
+
+
+
+
+
+
+
+
+
+
+
