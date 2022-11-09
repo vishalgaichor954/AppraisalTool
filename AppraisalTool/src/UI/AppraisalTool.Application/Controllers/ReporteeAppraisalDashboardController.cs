@@ -44,51 +44,45 @@ namespace AppraisalTool.App.Controllers
                 List<SelectListItem> startDate = new List<SelectListItem>();
                 foreach (var item in users.Data)
                 {
-                    int i = 1;
 
-                    startDate.Add(new SelectListItem { Text =   item.startDate, Value = i.ToString() });
-                    i = i + 1;
+                    startDate.Add(new SelectListItem { Text =   item.startDate, Value = item.startDate });
                 }
                 ViewBag.startDate = startDate;
 
                 List<SelectListItem> endDate = new List<SelectListItem>();
                 foreach (var item in users.Data)
                 {
-                    int i = 1;
 
-                    endDate.Add(new SelectListItem { Text = item.endDate, Value = i.ToString() });
-                    i = i + 1;
+                    endDate.Add(new SelectListItem { Text = item.endDate, Value = item.endDate });
                 }
                 ViewBag.endDate = endDate;
 
                 List<SelectListItem> employeeName = new List<SelectListItem>();
                 foreach (var item in users.Data)
                 {
-                    int i = 1;
 
-                    employeeName.Add(new SelectListItem { Text = item.firstName + item.lastName, Value = i.ToString() });
-                    i = i + 1;
+                    employeeName.Add(new SelectListItem { Text = item.firstName + item.lastName, Value = item.firstName + item.lastName });
+                    
                 }
                 ViewBag.employeeName = employeeName;
 
                 List<SelectListItem> reviewingAuthority = new List<SelectListItem>();
                 foreach (var item in users.Data)
                 {
-                    int i = 1;
 
-                    reviewingAuthority.Add(new SelectListItem { Text = item.revaName, Value = i.ToString() });
-                    i = i + 1;
+                    reviewingAuthority.Add(new SelectListItem { Text = item.revaName, Value = item.revaName });
                 }
                 ViewBag.reviewingAuthority = reviewingAuthority;
 
                 List<SelectListItem> appraisalStatus = new List<SelectListItem>();
                 foreach (var item in users.Data)
                 {
-                    int i = 1;
+                    
+                    {
 
-                    appraisalStatus.Add(new SelectListItem { Text = item.appraisalStatus, Value = i.ToString() });
-                    i = i + 1;
-                }
+                        appraisalStatus.Add(new SelectListItem { Text = item.appraisalStatus, Value = item.appraisalStatus });
+                    }
+                    }
                 ViewBag.appraisalStatus = appraisalStatus;
 
 
