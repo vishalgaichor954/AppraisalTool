@@ -7,23 +7,23 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"/>
 <div class="container">
     
-    @if (TempData["AddUserSuccess"] != null)
+    @if (TempData["AddMenuSuccess"] != null)
     {
         <div class="container">
             <div class="alert alert-success mt-5" role="alert">
-                @TempData["AddUserSuccess"]
+                @TempData["AddMenuSuccess"]
             </div>
         </div>
     }
-    @if (TempData["AAddUserFailed"] != null)
+    @if (TempData["AddMenuFaild"] != null)
     {
         <div class="container">
             <div class="alert alert-success mt-5" role="alert">
-                @TempData["AddUserFailed"]
+                @TempData["AddMenuFaild"]
             </div>
         </div>
     }
-     @if (TempData["DeleteuserSuccess"] != null)
+     @if (TempData["DeleteMenuSuccess"] != null)
     {
         <div class="container">
             <div class="alert alert-success mt-5" role="alert">
@@ -33,7 +33,7 @@
     }
 
 
-    @if (TempData["DeleteUserFaild"] != null)
+    @if (TempData["DeleteMenuFaild"] != null)
     {
         <div class="container">
             <div class="alert alert-success mt-5" role="alert">
@@ -68,12 +68,12 @@
                     <div class="card" style="max-width:95%">
                         <div class="card-body">
                             <div class="page-header">
-                                <h3 class="page-title"> Users </h3>
+                                <h3 class="page-title"> Menu </h3>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item active" aria-current="page">
                                             <div style="align-items:center;">
-                                                <a class="btn btn-block LoginBtn btn-md font-weight-medium auth-form-btn" asp-action="CreateUser">Create User</a>
+                                                <a class="btn btn-block LoginBtn btn-md font-weight-medium auth-form-btn" asp-action="CreateMenu">Create Menu</a>
                                             </div>
                                         </li>
                                     </ol>
@@ -84,28 +84,32 @@
                                     <thead>
                                         <tr>
                                             <th> Name </th>
-                                            <th> Branch </th>
-                                            <th> Role </th>
-                                            <th> Join Date </th>
-                                            <th> Primary Profile </th>
-                                            <th> Secondary Profile </th>
-                                            <th> Actions </th>  
+                                            <th> Class Name </th>
+                                            <th> Icon Name </th>
+                                            <th> Flag Name </th>
+                                           @* <th> Controller Name</th>
+                                            <th> Action Name </th>*@
+                                            <th> Link Name </th>  
+                                             <th> Role </th> 
+                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (ViewBag.UserList != null)
+                                        @if (ViewBag.MenuList != null)
                                         {
-                                            @foreach (var item in ViewBag.UserList)
+                                            @foreach (var item in ViewBag.MenuList)
                                             {
                                                 <tr>
-                                                    <td style="text-transform:'Capatilize';"> @item.firstName @item.lastName </td>
-                                                    <td> @item.branchName </td>
-                                                    <td> @item.roleName </td>
-                                                    <td> @item.joinDate </td>
-                                                    <td> @item.primaryJobProfileName </td>
-                                                    <td> @item.secondaryJobProfileName </td>
-                                                    <td> <a asp-action="UpdateUser" asp-route-id="@item.id" class="btn btn-sm LoginBtn"><i class="mdi mdi-table-edit"></i></a>
-                                                     <a asp-action="DeleteUser" asp-route-id="@item.id" class="btn btn-sm LoginBtn" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
+                                                    <td> @item.menuText </td>
+                                                    <td> @item.menuClass </td>
+                                                    <td> @item.menuIcon </td>
+                                                    <td> @item.menuFlag</td>
+                                                 @*   <td> @item.menuController </td>
+                                                     <td> @item.menuAction </td>*@
+                                                     <td> @item.menuLink </td>
+                                                     <td> @item.roleName </td>
+                                                    <td> <a asp-action="UpdateMenu" asp-route-id="@item.menu_Id" class="btn btn-sm LoginBtn"><i class="mdi mdi-table-edit"></i></a>
+                                                     <a asp-action="DeleteMenu" asp-route-id="@item.menu_Id" class="btn btn-sm LoginBtn" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>
                                                  </tr>
                                             }

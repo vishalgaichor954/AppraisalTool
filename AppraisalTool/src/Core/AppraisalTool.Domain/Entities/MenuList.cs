@@ -42,5 +42,9 @@ namespace AppraisalTool.Domain.Entities
         [ForeignKey("UpdatedBy")]
         public virtual User? UpdatedByByUser { get; set; }
 
+
+        //public virtual MenuRoleMapping RoleMapping { get; set; }
+
+
     }
 }
