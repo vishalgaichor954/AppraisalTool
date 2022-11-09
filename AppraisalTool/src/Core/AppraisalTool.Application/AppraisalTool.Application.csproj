@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Metrics\Commands\" />
+    <Folder Include="Features\ReporteeAppraisals\Commands\" />
   </ItemGroup>
 
 </Project>
