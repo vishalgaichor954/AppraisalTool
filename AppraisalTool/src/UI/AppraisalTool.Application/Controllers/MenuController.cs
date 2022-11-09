@@ -47,11 +47,11 @@ namespace AppraisalTool.App.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["AddMenuSuccess"] = "Menu Added Successfully";
-                    return RedirectToAction("CreateMenu");
+                    return RedirectToAction("ListMenu");
                 }
             }
             TempData["AddMenuFaild"] = "Faild to Add Menu";
-            return RedirectToAction("CreateMenu");
+            return RedirectToAction("ListMenu");
             
         }
 
