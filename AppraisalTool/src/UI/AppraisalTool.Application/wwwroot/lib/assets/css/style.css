@@ -13061,7 +13061,7 @@ code {
   display: block;
   margin-top: 15px;
   margin-bottom: 10px;
-  padding-left: 0; }
+  padding-left: none; }
   .form-check .form-check-label {
     display: block;
     margin-left: 1.75rem;

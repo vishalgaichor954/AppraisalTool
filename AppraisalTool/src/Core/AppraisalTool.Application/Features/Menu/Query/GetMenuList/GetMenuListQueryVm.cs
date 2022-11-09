@@ -1,15 +1,14 @@
-﻿using AppraisalTool.Application.Response;
-using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand
+namespace AppraisalTool.Application.Features.Menu.Query.GetMenuList
 {
-    public class CreateMenuCommand:IRequest<Response<CreateMenuCommandDto>>
+    public class GetMenuListQueryVm
     {
+        public int Menu_Id { get; set; }
         public string MenuText { get; set; }
 
         public string MenuClass { get; set; }
@@ -22,8 +21,6 @@ namespace AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand
 
         public string? MenuLink { get; set; }
 
-        public int? AddedBy { get; set; }
-
-        public List<int> RoleList { get; set; }
+        public string RoleName { get; set; }
     }
 }

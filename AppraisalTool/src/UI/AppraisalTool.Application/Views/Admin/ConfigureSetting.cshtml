@@ -11,7 +11,7 @@
         <div class="page-header">
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
-                    <i class="mdi mdi-home"></i>
+                    <i class="mdi mdi-settings"></i>
                 </span>Configure Settings
             </h3>
            @* <nav aria-label="breadcrumb">
@@ -23,7 +23,7 @@
             </nav>*@
         </div>
         <!-- <div  style="margin-left:200px ;" class="container1"> -->
-        @*<div class="row ">
+       @* <div class="row ">
             <div class="col-md-4 role-div">
                     <h3 style="color: grey; font-family: sans-serif;margin-left: 20px;" class="mt-5 ">My Role</h3>
                     
@@ -68,8 +68,8 @@
 
         
 
-    </div>*@
- 
+    </div>
+ *@
 
 
         <div class="col-md-8">
@@ -78,7 +78,7 @@
                     @{
                         foreach (var item in ViewBag.GetMenuCards)
                         { 
-                            if(item.menuList.menuFlag=="DASHBOARD"){
+                            if(item.menuList.menuFlag=="ConfigureSettings"){
                         <div class="col-md-6 stretch-card grid-margin Dash-Card">
                             <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="Anchor-body">
                                 <div class="card @item.menuList.menuClass card-img-holder text-white Dash-Card">

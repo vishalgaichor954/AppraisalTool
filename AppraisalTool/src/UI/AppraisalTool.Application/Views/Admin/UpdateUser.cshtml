@@ -1,4 +1,4 @@
-﻿@model AppraisalTool.App.Models.UserViewModel
+﻿@model AppraisalTool.App.Models.EditUserViewModel
 
 @{
     ViewData["Title"] = "Update User";
@@ -156,15 +156,15 @@
                         </div>
                     </div>
                      <div class="row d-flex justify-content-center">
-                        <div style="max-width:40%;">
+                        <div style="max-width:20%;">
                             <div style="align-items:center;">
                                 <input type="submit" value="Save" class="btn btn-block LoginBtn btn-md font-weight-medium auth-form-btn" />
                            </div>
                            
                         </div>
-                         <div style="max-width:40%;">
+                         <div style="max-width:20%;">
                         <div style="align-items:center;">
-                                <a  style="width:100%;" asp-action="ListUsers" class="btn btn-light btn-block btn-md font-weight-medium auth-form-btn">Cancel</a>
+                                <a  asp-action="ListUsers" class="btn btn-outline-secondary btn-block btn-md font-weight-medium auth-form-btn">Cancel</a>
                         </div>
                        </div>
                     </div>
