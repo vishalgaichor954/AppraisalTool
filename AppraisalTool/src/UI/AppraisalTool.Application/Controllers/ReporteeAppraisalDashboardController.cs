@@ -2,6 +2,7 @@
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.ReporteeAppraisal;
+using AppraisalTool.Application.Models.AppraisalTool;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -27,7 +28,7 @@ namespace AppraisalTool.App.Controllers
         }
 
 
-        public IActionResult ReporteeAppraisalDashboard()
+        public IActionResult ReporteeAppraisalDashboard( ReporteeAppraisalFilter? reporteeAppraisalFilter)
         {
             Console.WriteLine("ReporteeAppraisalDashboard");
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
@@ -41,28 +42,28 @@ namespace AppraisalTool.App.Controllers
                 var users = JsonConvert.DeserializeObject<Response>(responseData);
 
 
-                List<SelectListItem> startDate = new List<SelectListItem>();
-                foreach (var item in users.Data)
-                {
+                //List<SelectListItem> startDate = new List<SelectListItem>();
+                //foreach (var item in users.Data)
+                //{
 
-                    startDate.Add(new SelectListItem { Text =   item.startDate, Value = item.startDate });
-                }
-                ViewBag.startDate = startDate;
+                //    startDate.Add(new SelectListItem { Text = item.startDate, Value = item.startDate });
+                //}
+                //ViewBag.startDate = startDate;
 
-                List<SelectListItem> endDate = new List<SelectListItem>();
-                foreach (var item in users.Data)
-                {
+                //List<SelectListItem> endDate = new List<SelectListItem>();
+                //foreach (var item in users.Data)
+                //{
 
-                    endDate.Add(new SelectListItem { Text = item.endDate, Value = item.endDate });
-                }
-                ViewBag.endDate = endDate;
+                //    endDate.Add(new SelectListItem { Text = item.endDate, Value = item.endDate });
+                //}
+                //ViewBag.endDate = endDate;
 
                 List<SelectListItem> employeeName = new List<SelectListItem>();
                 foreach (var item in users.Data)
                 {
 
-                    employeeName.Add(new SelectListItem { Text = item.firstName + item.lastName, Value = item.firstName + item.lastName });
-                    
+                    employeeName.Add(new SelectListItem { Text = item.firstName + item.lastName, Value = item.employeeId });
+
                 }
                 ViewBag.employeeName = employeeName;
 
@@ -70,19 +71,19 @@ namespace AppraisalTool.App.Controllers
                 foreach (var item in users.Data)
                 {
 
-                    reviewingAuthority.Add(new SelectListItem { Text = item.revaName, Value = item.revaName });
+                    reviewingAuthority.Add(new SelectListItem { Text = item.revaName, Value = item.revAuthorityId });
                 }
                 ViewBag.reviewingAuthority = reviewingAuthority;
 
                 List<SelectListItem> appraisalStatus = new List<SelectListItem>();
                 foreach (var item in users.Data)
                 {
-                    
+
                     {
 
-                        appraisalStatus.Add(new SelectListItem { Text = item.appraisalStatus, Value = item.appraisalStatus });
+                        appraisalStatus.Add(new SelectListItem { Text = item.appraisalStatus, Value = item.appraisalStatusId });
                     }
-                    }
+                }
                 ViewBag.appraisalStatus = appraisalStatus;
 
 

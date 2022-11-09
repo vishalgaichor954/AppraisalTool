@@ -1,4 +1,4 @@
-﻿@model AppraisalTool.App.Models.ReporteeAppraisal.ReporteeAppraisalDashboard
+﻿@model AppraisalTool.Application.Models.AppraisalTool.ReporteeAppraisalFilter
 
 
 
@@ -30,101 +30,208 @@
         text-decoration: underline;
     }
 
-</style>
+    .Button {
 
+            background-color: blue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: auto;
+        }
+        .ApplyButton{
+             background-color: blue;
+            border: none;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px;
+            cursor: pointer;
+            width: auto;
+
+        }
+
+
+</style>
 
 
 <div class="content-wrapper">
     <div style="  background-color: white;border-radius: 0.5rem;" class="container">
 
         <h4><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard"> Reportee Appraisal Dashboard   </a></h4>
-
+        <br />
+        <input type="button" value="Back" class="Button" onclick="history.back()" />
+        <br />
         <div>
             <h3>Reportee Appraisal Dashboard</h3>
         </div>
-
         <br />
-        <div class=" row pt-2 mb-4  pb-2 p-2">
 
 
-            <div class="col-md-2">
-                <div class="row">
-                    <p style="padding-top:30px">Primary Role</p>
-                    <div class="Dropdown">
 
-                        <select class="form-control" asp-items="ViewBag.appraisalStatus">
-                            <option class=" text-dropdown">-Select- </option>
+        <form method="get" asp-action="ReporteeAppraisalDashboard">
+            <div class=" row pt-2 ">
+
+
+                <div class="col-md-2">
+                    <div class="row">
+                        <p style="padding-top:30px">Primary Role</p>
+                        @*<div class="Dropdown">
+
+                        <select class="form-control" asp-for="@Model.PrimaryRole">
+                        <option class=" text-dropdown">-Select- </option>
+                        <option class=" text-dropdown" value="4">Employee </option>
                         </select>
+                        </div>*@
+                    </div>
+
+                </div>
+
+                <div class="col-md-2">
+                    <div class="row">
+                        <p style="padding-top:30px">Start Date</p>
+                        @*<div class="Dropdown">
+
+                        <input class="form-control" type="date" asp-for="@Model.StartDate" />
+
+
+                        </div>*@
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-2">
+                    <div class="row">
+                        <p style="padding-top:30px">End Date</p>
+                        @*<div class="Dropdown">
+
+
+
+                        </div>*@
                     </div>
                 </div>
 
-            </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <p style="padding-top:30px">Employee Name</p>
+                        @*<div class="Dropdown">
 
-            <div class="col-md-2">
-                <div class="row">
-                    <p style="padding-top:30px">Start Date</p>
-                    <div class="Dropdown">
+                        <select class="form-control" asp-items="ViewBag.employeeName" asp-for="@Model.EmployeeName">
+                        <option class=" text-dropdown ">-Select-</option>
+                        </select>
+                        </div>*@
+                    </div>
 
-                        <select class="form-control" asp-items="ViewBag.startDate">
+                </div>
+
+                <div class="col-md-2">
+                    <div class="row">
+                        <p style="padding-top:30px">Reviewing Authority</p>
+                        <div class="Dropdown">
+                            @*
+                            <select class="form-control" asp-items="ViewBag.reviewingAuthority" asp-for="@Model.ReviewingAuthority">
                             <option class=" text-dropdown">-Select-</option>
-                        </select>
+                            </select>*@
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-2">
+                    <div class="row">
+                        <p style="padding-top:30px">Status</p>
+                        @*<div class="Dropdown">
+
+
+                        </div>*@
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row pb-4">
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="Dropdown">
+
+                            <select class="form-control" asp-for="@Model.PrimaryRole">
+                                <option class=" text-dropdown">-Select- </option>
+                                <option class=" text-dropdown" value="4">Employee </option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-            </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="Dropdown">
 
+                            <input class="form-control p-2" type="date" asp-for="@Model.StartDate" />
 
-            <div class="col-md-2">
-                <div class="row">
-                    <p style="padding-top:30px">End Date</p>
-                    <div class="Dropdown">
-
-                        <select class="form-control" asp-items="ViewBag.endDate">
-                            <option class=" text-dropdown">-Select-</option>
-                        </select>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="col-md-2">
-                <div class="row">
-                    <p style="padding-top:30px">Employee Name</p>
-                    <div class="Dropdown">
-
-                        <select class="form-control" asp-items="ViewBag.employeeName">
-                            <option class=" text-dropdown">-Select-</option>
-                        </select>
-                    </div>
                 </div>
 
-            </div>
-
-            <div class="col-md-2">
-                <div class="row">
-                    <p style="padding-top:30px">Reviewing Authority</p>
-                    <div class="Dropdown">
-
-                        <select class="form-control" asp-items="ViewBag.reviewingAuthority">
-                            <option class=" text-dropdown">-Select-</option>
-                        </select>
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="Dropdown">
+                            <input class="form-control p-2" type="date" asp-for="@Model.EndDate" />
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
-
-            <div class="col-md-2">
-                <div class="row">
-                    <p style="padding-top:30px">Status</p>
-                    <div class="Dropdown">
-
-                        <select class="form-control" asp-items="ViewBag.appraisalStatus">
-                            <option class=" text-dropdown">-Select-</option>
-                        </select>
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="Dropdown">
+                            <select class="form-control" asp-items="ViewBag.employeeName" asp-for="@Model.EmployeeName">
+                                <option class=" text-dropdown ">-Select-</option>
+                            </select>
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
-        </div>
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="Dropdown">
+                            <select class="form-control" asp-items="ViewBag.reviewingAuthority" asp-for="@Model.ReviewingAuthority">
+                                <option class=" text-dropdown">-Select-</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-2">
+                    <div class="row">
+                        <div class="Dropdown">
+                            <select class="form-control" asp-items="ViewBag.appraisalStatus" asp-for="@Model.Status">
+                                <option class=" text-dropdown">-Select-</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="d-flex justify-content-end">
+                    <input type="submit" class="inline btn btn-primary ApplyButton " value="Apply" />
+                </div>
+
+
+
+                <hr />
+        </form>
 
 
 
@@ -136,7 +243,7 @@
 
 
 
-                <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:100%; margin-left:5px ;border: 1px solid #E0144C; border-radius: 0.3rem;">
+                <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1px solid #E0144C; border-radius: 0.3rem;">
                     <div class="col-md-3">
 
                         <div class="row">
@@ -147,7 +254,7 @@
                                 <div class="row d-flex row date-p">
                                     <span style="display: inline-block;">Date</span>
 
-                                    <small asp-for="Date">@item.startDate - @item.endDate </small>
+                                    <small asp-for="Date">@item.startDate to @item.endDate </small>
 
                                 </div>
                             </div>
