@@ -11,5 +11,6 @@ namespace AppraisalTool.Application.Contracts.Persistence
     public interface IAppraisalResultRepository: IAsyncRepository<AppraisalResult>
     {
         public Task<bool> AddAprraisalResultData(List<AppraisalResult> appraisalResult);
+        public Task<List<AppraisalResult>> GetAppraisalResultsByApppraisalId(int id);
     }
 }

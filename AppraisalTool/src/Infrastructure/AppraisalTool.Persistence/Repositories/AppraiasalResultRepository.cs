@@ -1,5 +1,6 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -30,5 +31,12 @@ namespace AppraisalTool.Persistence.Repositories
                 return false;
             }
         }
+
+        public async Task<List<AppraisalResult>> GetAppraisalResultsByApppraisalId(int id)
+        {
+            List<AppraisalResult> list = await _dbContext.AppraisalResult.Where(item => item.AppraisalId == id).ToListAsync();
+            return list;
+        }
+    
     }
 }

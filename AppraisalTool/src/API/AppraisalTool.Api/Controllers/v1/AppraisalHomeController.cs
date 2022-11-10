@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetAllReporteeAppraisals;
 using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetReporteeAppraisalsByRevAuthority;
 using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
+using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByAppraisalId;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -73,7 +74,7 @@ namespace AppraisalTool.Api.Controllers.v1
         //Author : Ilyas Dabholkar
         //Takes List of AppraisalResult Dto and bulk inserts them into db
         [HttpPost("AddAppraisalResults")]
-        public async Task<ActionResult> RegisterAsync(List<AddAppraisalResultDto> results)
+        public async Task<ActionResult> AddAppraisalResults(List<AddAppraisalResultDto> results)
         {
             _logger.LogInformation("AddAppraisalResults Initiated");
             var dtos = await _mediator.Send(new AddAppraisalResultCommand() { DataList = results });
@@ -124,6 +125,13 @@ namespace AppraisalTool.Api.Controllers.v1
         public async Task<ActionResult> AddAppraisal( AddAppraisalVM addAppraisalVM)
         {
             var response = await _mediator.Send(new AddAppraisalCommand() { addAppraisal = addAppraisalVM });
+            return Ok(response);
+        }
+
+        [HttpGet("GetAppraisalResultsByAppraisalId")]
+        public async Task<ActionResult> GetAppraisalResultsByAppraisalId(int id)
+        {
+            var response = await _mediator.Send(new GetApprasisalResultsByAppraisalIdQuery() { Id = id });
             return Ok(response);
         }
 
