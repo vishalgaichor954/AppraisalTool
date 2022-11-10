@@ -36,9 +36,14 @@ namespace AppraisalTool.App.Controllers
 
             SelfAppraisalHome model = new SelfAppraisalHome();
             HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome?userId={user.UserId}").Result;
-
-            if (httpResponseMessage.IsSuccessStatusCode)
+            HttpResponseMessage cardResponse = client.GetAsync($"https://localhost:5000/api/User/GetAllCard?id={user.RoleId}&api-version=1").Result;
+            if (httpResponseMessage.IsSuccessStatusCode && cardResponse.IsSuccessStatusCode)
             {
+                var CardresponseData = cardResponse.Content.ReadAsStringAsync().Result;
+                var Cardres = JsonConvert.DeserializeObject<ForgetPasswordResponse>(CardresponseData);
+                dynamic json = JsonConvert.DeserializeObject(CardresponseData);
+                ViewBag.GetMenuCards = json.data; 
+                Console.WriteLine(ViewBag.GetMenuCards);
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<Response>(responseData);
                 Console.WriteLine(data.Data);
@@ -70,6 +75,7 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.UserId = user.UserId;
                 ViewBag.UserRole = user.Role;
                 //ViewBag.FinanceId = user.FinancialYearId;
+               
             }
             return View();
 
@@ -82,6 +88,7 @@ namespace AppraisalTool.App.Controllers
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
+
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<Response>(responseData);
                 Console.WriteLine(data.Data);
