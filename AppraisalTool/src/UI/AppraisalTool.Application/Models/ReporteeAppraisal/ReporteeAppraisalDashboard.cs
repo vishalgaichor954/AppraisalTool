@@ -4,7 +4,7 @@
     {
         public int UserId { get; set; }
         public string? EmployeeName { get; set; }
-
+        
         public string? PrimaryRole { get; set; }
 
         public DateTime StartDate { get; set; }

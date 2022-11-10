@@ -17,6 +17,8 @@ namespace AppraisalTool.Persistence.Repositories
            
         }
 
+        //Author : Ilyas Dabholkar
+        //Accepts List of AppraisalReult and bulk inserts them
         public async Task<bool> AddAprraisalResultData(List<AppraisalResult> appraisalResult)
         {
             try
@@ -32,10 +34,28 @@ namespace AppraisalTool.Persistence.Repositories
             }
         }
 
+        //Author : Ilyas Dabholkar
+        //Returns List of AppraisalResults with provided appraisalId
         public async Task<List<AppraisalResult>> GetAppraisalResultsByApppraisalId(int id)
         {
             List<AppraisalResult> list = await _dbContext.AppraisalResult.Where(item => item.AppraisalId == id).ToListAsync();
             return list;
+        }
+
+        //Author : Ilyas Dabholkar
+        public async Task<bool> UpdateAprraisalResultData(List<AppraisalResult> appraisalResult)
+        {
+            try
+            {
+                _dbContext.AppraisalResult.UpdateRange(appraisalResult);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e);
+                return false;
+            }
         }
     
     }

@@ -61,8 +61,56 @@
 
 
 </style>
+<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
+   <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
+     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+   @if ( TempData["RepaError"] != null)
+{
+  
 
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 5000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
+Toast.fire({
+  icon: 'error',
+  title: 'Oops ! something went wrong form was not submitted'
+})
+    </script>
+}
+    @if (TempData["RepaSUCCESS"] != null)
+    {
+          <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Form was submitted successfully'
+})
+    </script>
+    }
 <div class="content-wrapper">
     <div style="  background-color: white;border-radius: 0.5rem;" class="container">
 

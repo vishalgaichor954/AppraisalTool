@@ -12,6 +12,7 @@ using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetAllReport
 using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetReporteeAppraisalsByRevAuthority;
 using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByAppraisalId;
+using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResult;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -133,6 +134,15 @@ namespace AppraisalTool.Api.Controllers.v1
         {
             var response = await _mediator.Send(new GetApprasisalResultsByAppraisalIdQuery() { Id = id });
             return Ok(response);
+        }
+
+        [HttpPut("UpdateAppraisalResults")]
+        public async Task<ActionResult> UpdateAppraisalResults(List<UpdateAppraisalResultDto> results)
+        {
+            _logger.LogInformation("UpdateAppraisalResults Initiated");
+            var dtos = await _mediator.Send(new UpdateAppraisalResultCommand() { DataList = results });
+            _logger.LogInformation("UpdateAppraisalResults Completed");
+            return Ok(dtos);
         }
 
 

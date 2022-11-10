@@ -10,6 +10,7 @@ namespace AppraisalTool.Domain.Common
     {
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public int? AppraisalId { get; set; }
         public int? EmployeeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

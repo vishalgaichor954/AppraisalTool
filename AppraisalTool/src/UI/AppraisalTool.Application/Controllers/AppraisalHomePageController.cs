@@ -207,7 +207,32 @@ namespace AppraisalTool.App.Controllers
         public IActionResult AddReportingAuthorityAppraisal(List<ReportingMetricDto> scores)
         {
             Console.WriteLine(scores);
-            return View();
+
+            foreach(var item in scores)
+            {
+                item.RepaSelfCreatatedDate = DateTime.Now;
+            }
+            string data = JsonConvert.SerializeObject(scores);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
+            //https://localhost:5000/api/v1/AppraisalHome/AddAppraisal
+            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/AppraisalHome/UpdateAppraisalResults", content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string responseData = response.Content.ReadAsStringAsync().Result;
+                Console.WriteLine(responseData);
+                var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
+                Console.WriteLine(res);
+                TempData["RepaSUCCESS"] = "Successfully Submited";
+                return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
+                //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
+            }
+        
+
+        TempData["RepaError"] = "Error Occured";
+
+
+            return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
         }
         [HttpGet]
         public IActionResult AddSelfAppraisal( int? fid)
