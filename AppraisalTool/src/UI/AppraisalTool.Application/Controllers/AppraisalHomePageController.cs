@@ -159,13 +159,13 @@ namespace AppraisalTool.App.Controllers
         //}
 
         [HttpGet]
-        public IActionResult AddReportingAuthorityAppraisal()
+        public IActionResult AddReportingAuthorityAppraisal(int Appraisald)
         {
 
-            //https://localhost:5000/api/v1/Metric/GetAllListOfMetric
+            ///AppraisalHome/GetAppraisalResultsByAppraisalId?id=40
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/Metric/GetAllListOfMetric").Result;
+            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
             if (cardResponse.IsSuccessStatusCode)
             {
                
@@ -201,6 +201,12 @@ namespace AppraisalTool.App.Controllers
                 //[] bindingModel = new MetricsDto[mylist.Count()];
                 return View(mylist);
             }
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddReportingAuthorityAppraisal(List<ReportingMetricDto> scores)
+        {
+            Console.WriteLine(scores);
             return View();
         }
         [HttpGet]

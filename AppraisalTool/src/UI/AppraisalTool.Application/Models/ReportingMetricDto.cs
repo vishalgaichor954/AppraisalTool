@@ -4,22 +4,25 @@ namespace AppraisalTool.App.Models
 {
     public class ReportingMetricDto
     {
-        public int Metric_ID { get; set; }
-        public int List_Id { get; set; }
-
-        public string Metric_Description { get; set; }
-
-        public double metric_Weightage { get; set; }
-
+        public int ID { get; set; }
+        public int UserId { get; set; } //FK
+        public int KraListId { get; set; } //FK
+        public int MetricId { get; set; } //FK
+        public int AppraisalId { get; set; }//FK
+        public string? MetricDescription { get; set; }
+        public double? MetricWeightage { get; set; }
         [Required(ErrorMessage = "Score is a Required Field")]
         [Range(1, 5)]
-
-        public int? Score { get; set; }
-
-
-        [MinLength(2)]
-        public string? Comment { get; set; }
+        public double? SelfScore { get; set; }
+        public string? SelfComment { get; set; }
+        public DateTime? SelfCreatatedDate { get; set; } = DateTime.Now;
+        [Required(ErrorMessage = "Score is a Required Field")]
+        [Range(1, 5)]
         public double? RepaSelfScore { get; set; }
         public string? RepaSelfComment { get; set; }
+        public DateTime? RepaSelfCreatatedDate { get; set; }
+        public double? RevaSelfScore { get; set; }
+        public string? RevaSelfComment { get; set; }
+        public DateTime? RevaSelfCreatatedDate { get; set; }
     }
 }
