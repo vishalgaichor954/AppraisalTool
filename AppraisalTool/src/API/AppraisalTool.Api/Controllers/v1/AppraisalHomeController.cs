@@ -137,10 +137,15 @@ namespace AppraisalTool.Api.Controllers.v1
         }
 
         [HttpPut("UpdateAppraisalResults")]
-        public async Task<ActionResult> UpdateAppraisalResults(List<UpdateAppraisalResultDto> results)
+        public async Task<ActionResult> UpdateAppraisalResults(List<UpdateAppraisalResultDto> results,int statusId)
         {
+            if(results == null || statusId == null)
+            {
+                return BadRequest();
+            }
             _logger.LogInformation("UpdateAppraisalResults Initiated");
-            var dtos = await _mediator.Send(new UpdateAppraisalResultCommand() { DataList = results });
+            int appraisalId = results[0].AppraisalId;
+            var dtos = await _mediator.Send(new UpdateAppraisalResultCommand() { DataList = results,AppraisalId=appraisalId,StatusId=statusId });
             _logger.LogInformation("UpdateAppraisalResults Completed");
             return Ok(dtos);
         }

@@ -82,10 +82,18 @@ namespace AppraisalTool.Persistence.Repositories
         {
             await _dbContext.Appraisal.AddAsync(addAppraisal);
             await _dbContext.SaveChangesAsync();
-            
             return addAppraisal;
-
         }
+
+        public async Task<bool> UpdateAppraisalStatus(int appraisalId,int status)
+        {
+            Appraisal data = await _dbContext.Appraisal.FirstOrDefaultAsync(x => x.Id == appraisalId);
+            data.StatusId = status;
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+
         public async Task<List<Appraisal>> GetYear(int userId)
         {
             var years = await _dbContext.Appraisal.Include(x => x.FinancialYear).Where(x => x.UserId == userId)

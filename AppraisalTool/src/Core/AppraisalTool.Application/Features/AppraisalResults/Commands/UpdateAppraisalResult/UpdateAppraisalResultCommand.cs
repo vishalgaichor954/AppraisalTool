@@ -11,6 +11,8 @@ namespace AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateApp
 {
     public class UpdateAppraisalResultCommand: IRequest<Response<string>>
     {
+        public int AppraisalId { get; set; }
+        public int StatusId { get; set; }
         public List<UpdateAppraisalResultDto> DataList { get; set; }
     }
 }
