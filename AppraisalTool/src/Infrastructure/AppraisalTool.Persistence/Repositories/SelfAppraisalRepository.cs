@@ -82,10 +82,18 @@ namespace AppraisalTool.Persistence.Repositories
         {
             await _dbContext.Appraisal.AddAsync(addAppraisal);
             await _dbContext.SaveChangesAsync();
-            
             return addAppraisal;
-
         }
+
+        public async Task<bool> UpdateAppraisalStatus(int appraisalId,int status)
+        {
+            Appraisal data = await _dbContext.Appraisal.FirstOrDefaultAsync(x => x.Id == appraisalId);
+            data.StatusId = status;
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+
         public async Task<List<Appraisal>> GetYear(int userId)
         {
             var years = await _dbContext.Appraisal.Include(x => x.FinancialYear).Where(x => x.UserId == userId)
@@ -106,6 +114,7 @@ namespace AppraisalTool.Persistence.Repositories
             var res = (from A in mappings join B in appraisals on A.UserId equals B.UserId
                                          select new ReporteeAppraisalListVm
                                          {
+                                             AppraisalId = B.Id,
                                              StartDate =B.StartDate,
                                              EndDate = B.EndDate,
                                              FirstName = B.User.FirstName,
@@ -137,6 +146,7 @@ namespace AppraisalTool.Persistence.Repositories
                        where A.ReportingAuthorityId == id
                        select new ReporteeAppraisalListVm
                        {
+                           AppraisalId = B.Id,
                            StartDate = B.StartDate,
                            EndDate = B.EndDate,
                            FirstName = B.User.FirstName,

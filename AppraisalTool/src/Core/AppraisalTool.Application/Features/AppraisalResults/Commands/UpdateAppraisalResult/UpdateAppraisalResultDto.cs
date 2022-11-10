@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppraisalTool.Application.Features.AppraisalResults.Commands.AddAppraisalResult
+namespace AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResult
 {
-    public class AddAppraisalResultDto
+    public class UpdateAppraisalResultDto
     {
         public int? ID { get; set; }
         public int UserId { get; set; } //FK
         public int KraListId { get; set; } //FK
-        public int MetricId { get; set; } //FK
         public int AppraisalId { get; set; }
+        public int MetricId { get; set; } //FK
         public string? MetricDescription { get; set; }
         public double? MetricWeightage { get; set; }
         public double? SelfScore { get; set; }
         public string? SelfComment { get; set; }
-        public DateTime? SelfCreatatedDate { get; set; } 
+        public DateTime? SelfCreatatedDate { get; set; }
         public double? RepaSelfScore { get; set; }
         public string? RepaSelfComment { get; set; }
         public DateTime? RepaSelfCreatatedDate { get; set; }
