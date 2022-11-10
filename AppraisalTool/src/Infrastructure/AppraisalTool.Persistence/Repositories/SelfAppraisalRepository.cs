@@ -106,6 +106,7 @@ namespace AppraisalTool.Persistence.Repositories
             var res = (from A in mappings join B in appraisals on A.UserId equals B.UserId
                                          select new ReporteeAppraisalListVm
                                          {
+                                             AppraisalId = B.Id,
                                              StartDate =B.StartDate,
                                              EndDate = B.EndDate,
                                              FirstName = B.User.FirstName,
@@ -137,6 +138,7 @@ namespace AppraisalTool.Persistence.Repositories
                        where A.ReportingAuthorityId == id
                        select new ReporteeAppraisalListVm
                        {
+                           AppraisalId = B.Id,
                            StartDate = B.StartDate,
                            EndDate = B.EndDate,
                            FirstName = B.User.FirstName,
