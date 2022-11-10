@@ -46,6 +46,7 @@ namespace AppraisalTool.App.Controllers
                 {
                     templateData.Add(new ReporteeAppraisalListVm()
                     {
+                        AppraisalId = i.appraisalId,
                         StartDate = i.startDate,
                         EndDate = i.endDate,
                         EmployeeId = i.employeeId,

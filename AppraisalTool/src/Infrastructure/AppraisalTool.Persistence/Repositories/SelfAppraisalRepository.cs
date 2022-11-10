@@ -34,20 +34,20 @@ namespace AppraisalTool.Persistence.Repositories
         //public async Task<List<User>> GetDataById(int userId, int financialYearId)
         public async Task<IQueryable<GetDataVM>> GetDataById(int userId)
         {
-            var test = "";
+            var primaryRole = "";
 
             //var user = await _dbContext.User.Include(x => x.Role).Include(x => x.Appraisals).ThenInclude(x=>x.FinancialYear).FirstOrDefaultAsync(u => u.Id == userId );
 
             //var appraisals = await _dbContext.Appraisal.Include(x => x.FinancialYear).Where(x => x.UserId == userId && x.FinancialYearId == financialYearId).Include(x=>x.User).ThenInclude(x=>x.Role).ToListAsync();
-            User u = await _userRepository.GetUserById(userId);
+            User user = await _userRepository.GetUserById(userId);
 
-            if (u.JobRoles[0].IsPrimary = true)
+            if (user.JobRoles[0].IsPrimary = true)
             {
-                test = u.JobRoles[0].JobRole.Name;
+                primaryRole = user.JobRoles[0].JobRole.Name;
             }
             else
             {
-                test = u.JobRoles[1].JobRole.Name;
+                primaryRole = user.JobRoles[1].JobRole.Name;
             }
 
 
@@ -62,7 +62,7 @@ namespace AppraisalTool.Persistence.Repositories
                                              Id = A.Id,
                                              ReportingAuthorityFirstName = B.ReportingAuthority.FirstName,
                                              ReportingAuthorityLastName = B.ReportingAuthority.LastName,
-                                             Role = test,
+                                             Role = primaryRole,
                                              ReviewingAuthorityFirstName = B.ReviewingAuthority.FirstName,
                                              ReviewingAuthorityLastName = B.ReviewingAuthority.LastName,
                                              AppraisalStatus = C.Status.StatusTitle,
@@ -82,10 +82,18 @@ namespace AppraisalTool.Persistence.Repositories
         {
             await _dbContext.Appraisal.AddAsync(addAppraisal);
             await _dbContext.SaveChangesAsync();
-            
             return addAppraisal;
-
         }
+
+        public async Task<bool> UpdateAppraisalStatus(int appraisalId,int status)
+        {
+            Appraisal data = await _dbContext.Appraisal.FirstOrDefaultAsync(x => x.Id == appraisalId);
+            data.StatusId = status;
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+
         public async Task<List<Appraisal>> GetYear(int userId)
         {
             var years = await _dbContext.Appraisal.Include(x => x.FinancialYear).Where(x => x.UserId == userId)
@@ -106,6 +114,7 @@ namespace AppraisalTool.Persistence.Repositories
             var res = (from A in mappings join B in appraisals on A.UserId equals B.UserId
                                          select new ReporteeAppraisalListVm
                                          {
+                                             AppraisalId = B.Id,
                                              StartDate =B.StartDate,
                                              EndDate = B.EndDate,
                                              FirstName = B.User.FirstName,
@@ -137,6 +146,7 @@ namespace AppraisalTool.Persistence.Repositories
                        where A.ReportingAuthorityId == id
                        select new ReporteeAppraisalListVm
                        {
+                           AppraisalId = B.Id,
                            StartDate = B.StartDate,
                            EndDate = B.EndDate,
                            FirstName = B.User.FirstName,

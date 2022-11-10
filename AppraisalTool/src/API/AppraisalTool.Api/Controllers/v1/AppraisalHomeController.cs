@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetAllReporteeAppraisals;
 using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetReporteeAppraisalsByRevAuthority;
 using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
+using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByAppraisalId;
+using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResult;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -73,7 +75,7 @@ namespace AppraisalTool.Api.Controllers.v1
         //Author : Ilyas Dabholkar
         //Takes List of AppraisalResult Dto and bulk inserts them into db
         [HttpPost("AddAppraisalResults")]
-        public async Task<ActionResult> RegisterAsync(List<AddAppraisalResultDto> results)
+        public async Task<ActionResult> AddAppraisalResults(List<AddAppraisalResultDto> results)
         {
             _logger.LogInformation("AddAppraisalResults Initiated");
             var dtos = await _mediator.Send(new AddAppraisalResultCommand() { DataList = results });
@@ -125,6 +127,27 @@ namespace AppraisalTool.Api.Controllers.v1
         {
             var response = await _mediator.Send(new AddAppraisalCommand() { addAppraisal = addAppraisalVM });
             return Ok(response);
+        }
+
+        [HttpGet("GetAppraisalResultsByAppraisalId")]
+        public async Task<ActionResult> GetAppraisalResultsByAppraisalId(int id)
+        {
+            var response = await _mediator.Send(new GetApprasisalResultsByAppraisalIdQuery() { Id = id });
+            return Ok(response);
+        }
+
+        [HttpPut("UpdateAppraisalResults")]
+        public async Task<ActionResult> UpdateAppraisalResults(List<UpdateAppraisalResultDto> results,int statusId)
+        {
+            if(results == null || statusId == null)
+            {
+                return BadRequest();
+            }
+            _logger.LogInformation("UpdateAppraisalResults Initiated");
+            int appraisalId = results[0].AppraisalId;
+            var dtos = await _mediator.Send(new UpdateAppraisalResultCommand() { DataList = results,AppraisalId=appraisalId,StatusId=statusId });
+            _logger.LogInformation("UpdateAppraisalResults Completed");
+            return Ok(dtos);
         }
 
 
