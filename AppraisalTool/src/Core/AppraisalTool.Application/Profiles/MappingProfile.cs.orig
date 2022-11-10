@@ -20,9 +20,12 @@ using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetYear;
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
 using AppraisalTool.Application.Features.AppraisalResults.Commands.AddAppraisalResult;
 using AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand;
+<<<<<<< HEAD
 using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
+=======
 using AppraisalTool.Application.Features.Menu.Query.GetMenuById;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuList;
+>>>>>>> a7105c5a6c816c2d8f0ac041a311bb483b89e608
 
 namespace AppraisalTool.Application.Profiles
 {

@@ -77,25 +77,7 @@ namespace AppraisalTool.App.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult ListUsers()
-        {
-            client = new HttpClient();
-            client.BaseAddress = baseAddress;
-            List<UserViewModel> modellist = new List<UserViewModel>(); ;
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User?api-version=1").Result;
-            if (response.IsSuccessStatusCode)
-            {
-
-                string responseData = response.Content.ReadAsStringAsync().Result;
-                dynamic json = JsonConvert.DeserializeObject(responseData);
-                ViewBag.UserList = json.data;
-                return View();
-
-            }
-            return View();
-        }
-
+        
         [HttpPost]
         public IActionResult CreateUser(UserViewModel model)
         {
@@ -120,12 +102,13 @@ namespace AppraisalTool.App.Controllers
             TempData["AddUserFailed"] = "Faild to Register User";
             return RedirectToAction("ListUsers");
         }
+
         [HttpGet]
         public IActionResult  UpdateUser(int id)
         {
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            UserViewModel user = new UserViewModel();
+            EditUserViewModel user = new EditUserViewModel();
             //User/getUser?id=1&api-version=1
             HttpResponseMessage jobProfileresponse = client.GetAsync(client.BaseAddress + "User/GetJobProfile?api-version=1").Result;
             HttpResponseMessage BranchReponse = client.GetAsync(client.BaseAddress + "User/GetBranch?api-version=1").Result;
@@ -138,7 +121,7 @@ namespace AppraisalTool.App.Controllers
 
                 var res = JsonConvert.DeserializeObject<Response>(data);
                 var serres = JsonConvert.SerializeObject(res.Data);
-                user = JsonConvert.DeserializeObject<UserViewModel>(serres);
+                user = JsonConvert.DeserializeObject<EditUserViewModel>(serres);
 
                 //bind data from database
                 var responseData = jobProfileresponse.Content.ReadAsStringAsync().Result;
@@ -182,29 +165,29 @@ namespace AppraisalTool.App.Controllers
             return View(user);
         }
         [HttpPost]
-        public IActionResult UpdateUser(UserViewModel model)
+        public IActionResult UpdateUser(EditUserViewModel model)
         {
 
             Console.WriteLine("PostMethod hit");
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             //model.upda = userSession.UserId;
-            EditUserViewModel editmodel = new EditUserViewModel()
-            {
-                Id=model.Id,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email,
-                JoinDate = model.JoinDate,
-                BranchId=model.BranchId,
-                RoleId=model.RoleId,
-                PrimaryJobProfileId = model.PrimaryJobProfileId,
-                SecondaryJobProfileId = model.SecondaryJobProfileId,
+            //EditUserViewModel editmodel = new EditUserViewModel()
+            //{
+            //    Id=model.Id,
+            //    FirstName = model.FirstName,
+            //    LastName = model.LastName,
+            //    Email = model.Email,
+            //    JoinDate = model.JoinDate,
+            //    BranchId=model.BranchId,
+            //    RoleId=model.RoleId,
+            //    PrimaryJobProfileId = model.PrimaryJobProfileId,
+            //    SecondaryJobProfileId = model.SecondaryJobProfileId,
 
-            };
-
-            string data = JsonConvert.SerializeObject(editmodel);
+            //};
+            model.UpdatedBy = userSession.UserId;
+            string data = JsonConvert.SerializeObject(model);
 
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PutAsync("https://localhost:5000/api/User/UpdateUser?api-version=1", content).Result;
@@ -219,33 +202,25 @@ namespace AppraisalTool.App.Controllers
 
 
         }
-        //[HttpGet]
-        //public IActionResult GetAllUserList()
-        //{
-        //    client = new HttpClient();
-        //    client.BaseAddress = baseAddress;
-        //    List<UserViewModel> modellist = new List<UserViewModel>(); ;
-        //    HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User?api-version=1").Result;
-        //    if (response.IsSuccessStatusCode)
-        //    {
+        [HttpGet]
+        public IActionResult ListUsers()
+        {
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            List<UserViewModel> modellist = new List<UserViewModel>(); ;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User?api-version=1").Result;
+            if (response.IsSuccessStatusCode)
+            {
 
-        //        string responseData = response.Content.ReadAsStringAsync().Result;
-        //        dynamic json = JsonConvert.DeserializeObject(responseData);
-        //        Console.WriteLine(responseData);
-        //        //modellist = JsonConvert.DeserializeObject<List<UserViewModel>>(json.data[0]);
-        //        ViewBag.Firstname = json.firstname;
-        //        ViewBag.LastName = json.lastName;
-        //        ViewBag.Email = json.email;
-        //        ViewBag.BranchName = json.branchName;
-        //        ViewBag.JoinDate = json.joinDate;
-        //        ViewBag.LastAppraisalDate = json.lastAppraisalDate;
-        //        return View();
+                string responseData = response.Content.ReadAsStringAsync().Result;
+                dynamic json = JsonConvert.DeserializeObject(responseData);
+                ViewBag.UserList = json.data;
+                return View();
 
-        //    }
-        //    return View();
+            }
+            return View();
+        }
 
-
-        //}
         public IActionResult DeleteUser(int id)
         {
             //User/removeUser?id=9&api-version=1
@@ -270,8 +245,23 @@ namespace AppraisalTool.App.Controllers
         [HttpGet]
         public IActionResult ConfigureSetting()
         {
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"User/GetAllCard?id={user.RoleId}&api-version=1").Result;
+            if (cardResponse.IsSuccessStatusCode)
+            {
+                var responseData = cardResponse.Content.ReadAsStringAsync().Result;
+                var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
+                dynamic json = JsonConvert.DeserializeObject(responseData);
+                ViewBag.GetMenuCards = json.data;
+                
+
+            }
             return View();
         }
+
+
 
         [HttpGet]
         public JsonResult UserExistsEmail(string email)

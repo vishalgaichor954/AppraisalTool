@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand
+namespace AppraisalTool.Application.Features.Menu.Command.UpdateMenuCommand
 {
-    public class CreateMenuCommand:IRequest<Response<CreateMenuCommandDto>>
+    public class UpdateMenuCommand:IRequest<Response<UpdateMenuCommandDto>>
     {
+        public int Menu_Id { get; set; }
         public string MenuText { get; set; }
 
         public string MenuClass { get; set; }
@@ -22,7 +23,8 @@ namespace AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand
 
         public string? MenuLink { get; set; }
 
-        public int? AddedBy { get; set; }
+      
+        public int? UpdatedBy { get; set; }
 
         public List<int> RoleList { get; set; }
     }

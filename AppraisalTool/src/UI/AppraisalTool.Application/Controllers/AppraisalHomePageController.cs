@@ -47,10 +47,10 @@ namespace AppraisalTool.App.Controllers
                 foreach (var item in data.Data)
                 {
 
-                    financialYearList.Add(new SelectListItem { Text ="FY" + item.startYear.ToString()+"-"+item.endYear.ToString(), Value = item.id.ToString() });
+                    financialYearList.Add(new SelectListItem { Text ="FY" + item.startYear.ToString()+"-"+item.endYear.ToString(), Value = item.id.ToString(),Selected=true });
 
                 }
-                ViewBag.financialYearList = financialYearList;
+                ViewBag.financialYearList = financialYearList.DistinctBy(x=>x.Value);
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
                 ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
@@ -327,6 +327,42 @@ namespace AppraisalTool.App.Controllers
 
             return RedirectToAction("AddSelfAppraisal");
 
+
+        }
+
+        [HttpGet]
+        public IActionResult GradeReport()
+        {
+            var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/byYear?userId={user.UserId}").Result;
+
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<Response>(responseData);
+                Console.WriteLine(data.Data);
+
+                ViewBag.ReportingAuthorityFirstName = data.Data[0].reportingAuthorityFirstName;
+                Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
+                ViewBag.ReviewingAuthorityFirstName = data.Data[0].reviewingAuthorityFirstName;
+                Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
+                ViewBag.Role = data.Data[0].role;
+                ViewBag.AppraisalStatus = data.Data[0].appraisalStatus;
+                ViewBag.Date = data.Data[0].date;
+                ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
+                ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
+
+
+
+
+
+                string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                Console.WriteLine(response);
+
+                return View();
+            }
+            return View();
 
         }
     }

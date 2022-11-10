@@ -147,7 +147,7 @@ namespace AppraisalTool.Persistence.Repositories
                 userToUpdate.RoleId = (int)request.RoleId;
                 userToUpdate.BranchId = (int)request.BranchId;
                 var Getuserrole = await GetUserById(userToUpdate.Id);
-
+                
 
 
                 foreach (UserJobRoles item in Getuserrole.JobRoles)
@@ -227,6 +227,7 @@ namespace AppraisalTool.Persistence.Repositories
             //var res = await res.OrderBy(x => x.Id).ToListAsync();
 
             return users;
+            
         }
         //@Author : Ilyas Dabholkar
         public async Task<User> GetUserById(int id)

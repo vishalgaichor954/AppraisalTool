@@ -13058,10 +13058,11 @@ code {
 /* Checkboxes and Radios */
 .form-check {
   position: relative;
-  display: block;
+  display: flex;
+  justify-content:space-around;
   margin-top: 15px;
   margin-bottom: 10px;
-  padding-left: 0; }
+  padding-left: none; }
   .form-check .form-check-label {
     display: block;
     margin-left: 1.75rem;

@@ -53,22 +53,20 @@ namespace AppraisalTool.Persistence.Repositories
 
             IQueryable<GetDataVM> res = (from A in _dbContext.User
                                          join B in _dbContext.UserAuthorityMappings on A.Id equals B.UserId
+                                         join C in _dbContext.Appraisal on B.UserId equals C.UserId
                                          where A.Id == userId
 
                                          select new GetDataVM
                                          {
 
-
-                                             //u.JobRoles[0].JobRole.Name
-
-                                             //Role = A.Role.Role,
                                              Id = A.Id,
                                              ReportingAuthorityFirstName = B.ReportingAuthority.FirstName,
                                              ReportingAuthorityLastName = B.ReportingAuthority.LastName,
                                              Role = test,
-                                                                      ReviewingAuthorityFirstName = B.ReviewingAuthority.FirstName,
+                                             ReviewingAuthorityFirstName = B.ReviewingAuthority.FirstName,
                                              ReviewingAuthorityLastName = B.ReviewingAuthority.LastName,
-                                         }) ;
+                                             AppraisalStatus = C.Status.StatusTitle,
+                                         }) ;   
 
             Console.WriteLine(res);
 
@@ -108,11 +106,14 @@ namespace AppraisalTool.Persistence.Repositories
             var res = (from A in mappings join B in appraisals on A.UserId equals B.UserId
                                          select new ReporteeAppraisalListVm
                                          {
-                                             StartDate = B.StartDate,
+                                             StartDate =B.StartDate,
                                              EndDate = B.EndDate,
                                              FirstName = B.User.FirstName,
+                                             EmployeeId = B.User.Id,
                                              LastName = B.User.LastName,
                                              RevaName = A.ReviewingAuthority.FirstName +" "+ A.ReviewingAuthority.LastName,
+                                             AppraisalStatusId = B.Status.Id,
+                                             RevAuthorityId = A.ReviewingAuthorityId,
                                              AppraisalStatus = B.Status.StatusTitle,
                                              FinancialYearId = B.FinancialYear.Id,
                                              FinancialStartYear = B.FinancialYear.StartYear,
@@ -139,8 +140,11 @@ namespace AppraisalTool.Persistence.Repositories
                            StartDate = B.StartDate,
                            EndDate = B.EndDate,
                            FirstName = B.User.FirstName,
+                           EmployeeId = B.User.Id,
                            LastName = B.User.LastName,
                            RevaName = A.ReviewingAuthority.FirstName + " " + A.ReviewingAuthority.LastName,
+                           AppraisalStatusId = B.Status.Id,
+                           RevAuthorityId = A.ReviewingAuthorityId,
                            AppraisalStatus = B.Status.StatusTitle,
                            FinancialYearId = B.FinancialYear.Id,
                            FinancialStartYear = B.FinancialYear.StartYear,

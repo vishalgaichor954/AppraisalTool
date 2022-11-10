@@ -64,7 +64,7 @@
                             <div class="form-group row">
                                 <label asp-for="JoinDate" class="col-sm-4 col-form-label">Joining Date<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="JoinDate" type="date" class="form-control" />
+                                    <input asp-for="JoinDate" type="date" class="form-control" id="date_picker" />
                                     <span asp-validation-for="JoinDate" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -132,17 +132,17 @@
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center">
-                        <div style="max-width:40%;">
+                        <div style="max-width:20%;">
                             <div style="align-items:center;">
-                                <input type="submit" value="Create User" class="btn btn-block LoginBtn btn-lg font-weight-medium auth-form-btn" />
+                                <input type="submit" value="Create User" class="btn btn-block LoginBtn btn-md font-weight-medium auth-form-btn" />
                               
 
                            </div>
                            
                         </div>
-                         <div style="max-width:40%;">
+                         <div style="max-width:20%;">
                         <div style="align-items:center;">
-                                <a  style="width:100%;" asp-action="ListUsers" class="btn btn-light btn-block btn-lg font-weight-medium auth-form-btn">Cancel</a>
+                                <a asp-action="ListUsers" class="btn btn-outline-secondary btn-block btn-md font-weight-medium auth-form-btn">Cancel</a>
                         </div>
                        </div>
                     </div>
@@ -152,6 +152,18 @@
     </div>
 
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script language="javascript">
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        $('#date_picker').attr('min',today);
+    </script>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

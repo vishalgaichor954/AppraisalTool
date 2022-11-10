@@ -18,4 +18,8 @@
     <Folder Include="Services\Interfaces\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\AppraisalTool.Application\AppraisalTool.Application.csproj" />
+  </ItemGroup>
+
 </Project>
