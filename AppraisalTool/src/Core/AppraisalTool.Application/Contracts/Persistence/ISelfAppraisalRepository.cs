@@ -1,4 +1,5 @@
 ﻿using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
+using AppraisalTool.Domain.Common;
 using AppraisalTool.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,9 @@ namespace AppraisalTool.Application.Contracts.Persistence
     {
         public  Task<IQueryable<GetDataVM>> GetDataById(int userId);
         public  Task<List<Appraisal>> GetYear(int userId);
+        public Task<List<ReporteeAppraisalListVm>> GetAllReporteeAppraisals();
+        public Task<List<ReporteeAppraisalListVm>> GetReporteeAppraisalsByRepAuthority(int id);
+        public Task<Appraisal> AddAppraisal(Appraisal addAppraisal);
 
     }
 }

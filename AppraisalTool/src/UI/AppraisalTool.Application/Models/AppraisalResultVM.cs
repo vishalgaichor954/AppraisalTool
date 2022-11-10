@@ -6,6 +6,7 @@
         public int UserId { get; set; } //FK
         public int KraListId { get; set; } //FK
         public int MetricId { get; set; } //FK
+        public int AppraisalId { get; set; }//FK
         public string? MetricDescription { get; set; }
         public double? MetricWeightage { get; set; }
         public double? SelfScore { get; set; }

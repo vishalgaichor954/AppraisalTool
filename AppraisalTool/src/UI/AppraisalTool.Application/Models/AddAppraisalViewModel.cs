@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal
+﻿namespace AppraisalTool.App.Models
 {
-    public class AddAppraisalVM
+    public class AddAppraisalViewModel
     {
         public int? Id { get; set; }
         public int FinancialYearId { get; set; }
