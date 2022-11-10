@@ -33,20 +33,20 @@ namespace AppraisalTool.Persistence.Repositories
         //public async Task<List<User>> GetDataById(int userId, int financialYearId)
         public async Task<IQueryable<GetDataVM>> GetDataById(int userId)
         {
-            var test = "";
+            var primaryRole = "";
 
             //var user = await _dbContext.User.Include(x => x.Role).Include(x => x.Appraisals).ThenInclude(x=>x.FinancialYear).FirstOrDefaultAsync(u => u.Id == userId );
 
             //var appraisals = await _dbContext.Appraisal.Include(x => x.FinancialYear).Where(x => x.UserId == userId && x.FinancialYearId == financialYearId).Include(x=>x.User).ThenInclude(x=>x.Role).ToListAsync();
-            User u = await _userRepository.GetUserById(userId);
+            User user = await _userRepository.GetUserById(userId);
 
-            if (u.JobRoles[0].IsPrimary = true)
+            if (user.JobRoles[0].IsPrimary = true)
             {
-                test = u.JobRoles[0].JobRole.Name;
+                primaryRole = user.JobRoles[0].JobRole.Name;
             }
             else
             {
-                test = u.JobRoles[1].JobRole.Name;
+                primaryRole = user.JobRoles[1].JobRole.Name;
             }
 
 
@@ -61,7 +61,7 @@ namespace AppraisalTool.Persistence.Repositories
                                              Id = A.Id,
                                              ReportingAuthorityFirstName = B.ReportingAuthority.FirstName,
                                              ReportingAuthorityLastName = B.ReportingAuthority.LastName,
-                                             Role = test,
+                                             Role = primaryRole,
                                              ReviewingAuthorityFirstName = B.ReviewingAuthority.FirstName,
                                              ReviewingAuthorityLastName = B.ReviewingAuthority.LastName,
                                              AppraisalStatus = C.Status.StatusTitle,
