@@ -84,34 +84,36 @@
                                 </div>
                             </div>
                         </div>
-                       
 
-                        </div>
 
-                        <div class="col-md-12">
-                            <div class="form-group row">
-                               <label class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>                  
-                               <div class="form-check">
-                                    @foreach (var item in ViewBag.Rolelist)
-                                    {
-                                        
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
+                            <div class="form-check d-flex justify-content-around">
+                                @foreach (var item in ViewBag.Rolelist)
+                                {
+                                    <span>
+
                                         <input type="checkbox" value="@item.Value" name="selectedRoles" class="form-check-input">
                                         <label class="form-check-label">@item.Key</label>
-                                       
+                                    </span>
 
-                                    }
-                                    
 
-                                    
-                                </div>
+                                }
+
+
+
                             </div>
                         </div>
+                    </div>
 
 
 
-                        
-                        
-                  
+
+
+
 
 
 
@@ -128,7 +130,7 @@
                         </div>
                         <div style="max-width:20%;">
                             <div style="align-items:center;">
-                                <a  asp-action="ListMenu" class="btn btn-outline-secondary btn-block btn-md font-weight-medium auth-form-btn">Cancel</a>
+                                <a asp-action="ListMenu" class="btn btn-outline-secondary btn-block btn-md font-weight-medium auth-form-btn">Cancel</a>
                             </div>
                         </div>
                     </div>

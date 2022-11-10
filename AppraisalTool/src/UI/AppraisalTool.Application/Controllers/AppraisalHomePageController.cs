@@ -46,10 +46,10 @@ namespace AppraisalTool.App.Controllers
                 foreach (var item in data.Data)
                 {
 
-                    financialYearList.Add(new SelectListItem { Text ="FY" + item.startYear.ToString()+"-"+item.endYear.ToString(), Value = item.id.ToString() });
+                    financialYearList.Add(new SelectListItem { Text ="FY" + item.startYear.ToString()+"-"+item.endYear.ToString(), Value = item.id.ToString(),Selected=true });
 
                 }
-                ViewBag.financialYearList = financialYearList;
+                ViewBag.financialYearList = financialYearList.DistinctBy(x=>x.Value);
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
                 ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
