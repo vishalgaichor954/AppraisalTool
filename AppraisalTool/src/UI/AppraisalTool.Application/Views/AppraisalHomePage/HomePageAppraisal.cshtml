@@ -165,8 +165,63 @@
 
 
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
+
+
+                            <div class="dash-card">
+                                <a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard" class="Anchor-body">
+                                    <div class="card gradient-2 card-img-holder text-white">
+                                        <div class="card-body appraisal-card">
+                                            <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
+                                            <h2 class="font-weight-normal pt-2">
+                                                Reportee <br />Appraisal
+                                            </h2>
+                                            <h6>Total appraisal to be filled</h6>
+                                            <p>@ViewBag.AppraisalsToBeFilled</p>
+                                            <h6>Pending Appraisals</h6>
+                                            <p>@ViewBag.PendingAppraisals </p>
+
+
+                                            <div style="text-align:end ;" class="Last-Date">
+                                                <h6>Last date</h6>
+                                                <h4>@ViewBag.LastDate </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+
+                            <div class="dash-card">
+                                <a href="" class="Anchor-body">
+                                    <div class="card gradient-3 card-img-holder text-white">
+                                        <div class="card-body appraisal-card">
+                                            <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
+                                            <h2 class="font-weight-normal pt-2">
+                                                Appraisal <br /> Review
+                                            </h2>
+                                            <h6>Total appraisal to be filled</h6>
+                                            <p>@ViewBag.AppraisalsToBeFilled</p>
+                                            <h6>Pending Appraisals</h6>
+                                            <p>@ViewBag.PendingAppraisals</p>
+
+
+                                            <div style="text-align:end ;" class="Last-Date">
+                                                <h6>Last date</h6>
+                                                <h4>@ViewBag.LastDate</h4>
+                                            </div>
+                                            <!-- <i class=" icon-card mdi mdi-airplay"></i> -->
+                                            <!-- <h2 class="mb-5">$ 15,0000</h2>
+                                            <h6 class="card-text">Increased by 60%</h6> -->
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                                <!-- </div>
+                            </a> -->
                         </div>
 
 
