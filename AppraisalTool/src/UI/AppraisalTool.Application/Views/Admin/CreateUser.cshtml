@@ -1,33 +1,18 @@
 ﻿@model AppraisalTool.App.Models.UserViewModel
 
 @{
-    ViewData["Title"] = "Add User";
+    //ViewData["Title"] = "AppraisalTool";
 }
+
+
 
 <style>
     .small{
         font-size : 14px;
     }
 </style>
-
-
 <div class="container">
-    @if (TempData["Error"] != null)
-    {
-        <div class="container">
-            <div class="alert alert-danger mt-5" role="alert">
-                @TempData["Error"]
-            </div>
-        </div>
-    }
-    @if (TempData["Success"] != null)
-    {
-        <div class="container">
-            <div class="alert alert-success mt-5" role="alert">
-                @TempData["Success"]
-            </div>
-        </div>
-    }
+
     <div class="col-11">
         <div class="card">
             <div class="card-body">

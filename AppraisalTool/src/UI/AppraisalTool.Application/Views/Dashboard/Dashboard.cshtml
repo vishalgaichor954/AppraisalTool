@@ -1,10 +1,37 @@
 ﻿@model AppraisalTool.App.Models.JobProfilesViewmodel
 
 @{
-    ViewData["Title"] = "Dashboard";
+    //ViewData["Title"] = "AppraisalTool";
 }
+ <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
+   <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
+     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
 
+@if (TempData["Sucess"] != null)
+{
+    
 
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Welcome  @TempData["Sucess"]'
+})
+    </script>
+}
 
 <div class="main-panel">
     <div class="content-wrapper">
@@ -30,38 +57,41 @@
                     @{
                         if (Model.PrimaryRole!=null && Model.PrimaryRole!="")
                         {
-                             <ul>
-                    
-                        <div class=" mt-3">
+                                 <ul>
+                            @if (Model.PrimaryRole!=null){
+
                            
-                               <label class="badge badge-pill badge-primary user-roles" for="">1</label>
-                               <li class="roles">@Model.PrimaryRole</li>
-                         
-                      </div> 
-                   
-                    
-                        <div class=" mt-3">
-                            
-                                 <label class="badge badge-pill badge-gradient-info user-roles" for="">2</label>
-                                  <li class="roles">@Model.SecondaryRole</li>
-                                 
-                              
-                    </div>
+                            <div class=" mt-3">
+                               
+                                   <label class="badge badge-pill badge-primary user-roles" for="">1</label>
+                                   <li class="roles">@Model.PrimaryRole</li>
+                             
+                          </div> 
+                           }
                        
-                    @{
+                         @if (Model.SecondaryRole!=null){
+                            <div class=" mt-3">
+                                
+                                     <label class="badge badge-pill badge-gradient-info user-roles" for="">2</label>
+                                      <li class="roles">@Model.SecondaryRole</li>
+                                     
+                                  
+                        </div>
+                         }
+                        @{
                         int temp = 2;
                         for (int i = 0; i < Model.Roles.Count(); i++)
                         {
                             temp = temp + int.Parse("1");
-                    <div class=" mt-3">
-                        <label class="badge badge-pill badge-gradient-danger user-roles" for=""> @temp</label>
-                        <li class="roles">@Model.Roles.ElementAt(i)</li>
-                    </div>
+                            <div class=" mt-3">
+                                <label class="badge badge-pill badge-gradient-danger user-roles" for=""> @temp</label>
+                                <li class="roles">@Model.Roles.ElementAt(i)</li>
+                            </div>
 
                         }
 
-                    }
-            </ul>
+                        }
+                </ul>
                         }
                     }
                    
@@ -79,22 +109,22 @@
                         foreach (var item in ViewBag.GetMenuCards)
                         { 
                             if(item.menuList.menuFlag=="DASHBOARD"){
-                        <div class="col-md-6 stretch-card grid-margin Dash-Card">
-                            <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="Anchor-body">
-                                <div class="card @item.menuList.menuClass card-img-holder text-white Dash-Card">
-                                    <div class="card-body">
-                                        <img src="~/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                                        <h4 class="font-weight-normal mb-3">
-                                                @item.menuList.menuText <i class="mdi mdi-chart-line mdi-24px float-right"></i>
-                                        </h4>
-                                        <i class=" @item.menuList.menuIcon"></i>
+                            <div class="col-md-6 stretch-card grid-margin Dash-Card">
+                                <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="Anchor-body">
+                                    <div class="card @item.menuList.menuClass card-img-holder text-white Dash-Card">
+                                        <div class="card-body">
+                                            <img src="~/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                            <h4 class="font-weight-normal mb-3">
+                                                    @item.menuList.menuText <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                                            </h4>
+                                            <i class=" @item.menuList.menuIcon"></i>
 
-                                        <!-- <h2 class="mb-5">$ 15,0000</h2>
-                                        <h6 class="card-text">Increased by 60%</h6> -->
+                                            <!-- <h2 class="mb-5">$ 15,0000</h2>
+                                            <h6 class="card-text">Increased by 60%</h6> -->
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
 
                         }
                         }

@@ -102,6 +102,7 @@ namespace AppraisalTool.App.Controllers
             TempData["AddUserFailed"] = "Faild to Register User";
             return RedirectToAction("ListUsers");
         }
+
         [HttpGet]
         public IActionResult  UpdateUser(int id)
         {

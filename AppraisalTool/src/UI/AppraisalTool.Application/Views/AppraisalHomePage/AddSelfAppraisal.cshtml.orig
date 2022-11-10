@@ -1,477 +1,254 @@
-﻿@{
+﻿@model List<AppraisalTool.App.Models.MetricsDto>
+@{
     ViewData["Title"] = "AddSelfAppraisal";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+    var EffortList1 = Model.Where(item => item.List_Id == 1).ToList();
+    var EffortList = Model.Where(item => item.List_Id == 1).ToList().Count ;
+    var BevList = Model.Where(item => item.List_Id == 3).ToList().Count;
+    var JobList = Model.Where(item => item.List_Id == 4).ToList().Count;
+}
+<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
+   <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
+     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+
+       @if ( TempData["Error"] != null)
+{
+  
+
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 5000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: 'Oops ! something went wrong form was not submitted'
+})
+    </script>
+}
+    @if (TempData["SUCCESS"] != null)
+    {
+          <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Form was submitted successfully'
+})
+    </script>
+    }
 <div class="container d-flex justify-content-center">
     <div class="col-11">
-        <div class="card">
+        <div class="card card-bcakground">
             <div class="card-body">
-                <h4 class="card-title">Create New User</h4>
+<<<<<<< HEAD
+                <h1 class="card-title FormHeader">Self Appraisal</h1>
+                <div class="featureBackground ">
+=======
                 <div>
-                    <form enctype="multipart/form-data">
+>>>>>>> 5f82a2f8274714776040c5d0f03bf1c5c845fee5
+                    <form asp-action="AddSelfAppraisal" method="post" enctype="multipart/form-data">
                         <div class="text-danger"></div>
-                        <fieldset class="border p-2 m-5" style="display:flex;justify-content:center;">
-                            <legend class="float-none w-auto">
+                           <input name="Fid" hidden value="@ViewBag.Fid"  type="number">
+                        <fieldset class="border p-2 m-5 " style="display:flex;justify-content:center;">
+                            <legend class="float-none HEADdata w-auto">
                                 Input & Effort metric
                             </legend>
-<<<<<<< Updated upstream
                             <div class="row d-flex justify-content-center">
-                                @{
-                                    foreach (var item in ViewBag.AppraisalFormModel.IMetric)
-                                    {
-                                        <div class="row pt-2">
-                                            <div class="row">
-                                                <div class="col-9"><h4>@item.Metric_Description</h4></div>
-                                                <div class="col-3">
-                                                    <div class="row d-flex justify-content-center align-items-center">
-                                                        <div class="col-5">
-                                                            <label>Score</label>
-                                                        </div>
-                                                        <div class="col-7">
-                                                            <input class="form-control my-2" type="number">
-                                                        </div>
+                                @for (int i = 0; i < EffortList; i++)
+                                {
+
+                                    <div class="row py-2">
+                                        <div class="col-3"><h4 class="HEADMetrics">@Model[i].Metric_Description</h4></div>
+                                         <div class="col-3">
+                                               <div class="row d-flex justify-content-center align-items-center">
+                                                    <div class="col-5">
+                                                        <label>Score<sup class="required">*</sup></label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number">
+                                                    </div>
+                                                       <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
+                                                </div>
+                                         </div>
+                                          <div class="col-6">
+                                               <input asp-for="@Model[i].Metric_ID" hidden value="@Model[i].Metric_ID"  type="number">
+                                              <input asp-for="@Model[i].List_Id" hidden value="@Model[i].List_Id"   type="number">
+                                                <input asp-for="@Model[i].metric_Weightage" hidden value="@Model[i].metric_Weightage"   type="number">
+                                              <input asp-for="@Model[i].Metric_Description" hidden  value="@Model[i].Metric_Description"  type="text">
+                                            <div class="col-12"> <textarea class="form-control " asp-for="@Model[i].Comment" placeholder="Add Comment"></textarea>
+                                                   <span asp-validation-for="@Model[i].Comment" class="text-danger   mx-1 small"></span>
+                                            </div>
+                                            
+                                          </div>
+                                    </div>
+                                   @* <div class="row pt-2">
+                                        <div class="row">
+                                            <div class="col-9"><h4 class="HEADMetrics">@Model[i].Metric_Description</h4></div>
+                                            <div class="col-3">
+                                                <div class="row d-flex justify-content-center align-items-center">
+                                                    <div class="col-5">
+                                                        <label>Score<sup class="required">*</sup></label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-12"> <textarea class="form-control " placeholder="Add Comment"></textarea></div>
-                                            </div>
+                                          
                                         </div>
-                                    }
+                                        <div class="row">
+                                             <input asp-for="@Model[i].Metric_ID" hidden value="@Model[i].Metric_ID"  type="number">
+                                              <input asp-for="@Model[i].List_Id" hidden value="@Model[i].List_Id"   type="number">
+                                                <input asp-for="@Model[i].metric_Weightage" hidden value="@Model[i].metric_Weightage"   type="number">
+                                              <input asp-for="@Model[i].Metric_Description" hidden  value="@Model[i].Metric_Description"  type="text">
+                                            <div class="col-12"> <textarea class="form-control " asp-for="@Model[i].Comment" placeholder="Add Comment"></textarea></div>
+                                            
+                                        </div>
+                                        <span asp-validation-for="@Model[i].Comment" class="text-danger   mx-1 small"></span>
+                                        <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
+                                    </div>*@
+                                   
                                 }
-
-                                @*    <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>2. Discipline & Punctuality</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2"><input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>3. Decision Making</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2"><input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>4. Initiative / Leadership & Mentoring</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2">  <input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div> *@
-
                             </div>
                         </fieldset>
                         <fieldset class="border p-2 m-5" style="display:flex;justify-content:center;">
-                            <legend class="float-none w-auto">
+                            <legend class="float-none HEADdata w-auto">
                                 Behavioral competencies
                             </legend>
-                            <div class="row">
-                                @{
-                                    foreach (var item in ViewBag.AppraisalFormModel.BevMetric)
-                                    {
-                                         <div class="row pt-2">
-                                            <div class="row">
-                                                <div class="col-9"><h4>@item.Metric_Description</h4></div>
-                                                <div class="col-3">
-                                                    <div class="row d-flex justify-content-center align-items-center">
-                                                        <div class="col-5">
-                                                            <label>Score</label>
-                                                        </div>
-                                                        <div class="col-7">
-                                                            <input class="form-control my-2" type="number">
-                                                        </div>
+                            <div class="row d-flex justify-content-center">
+                                @for (int i = EffortList -1; i < EffortList+BevList-1; i++)
+                                {
+                                    var temp = i + 1;
+                                      <div class="row py-2">
+                                        <div class="col-3"><h4 class="HEADMetrics">@Model[temp].Metric_Description</h4></div>
+                                         <div class="col-3">
+                                               <div class="row d-flex justify-content-center align-items-center">
+                                                    <div class="col-5">
+                                                        <label>Score<sup class="required">*</sup></label>
                                                     </div>
+                                                    <div class="col-7">
+                                                        <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" min="1" max="5" type="number">
+                                                    </div>
+                                                       <span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>
                                                 </div>
+                                         </div>
+                                          <div class="col-6">
+                                               <input asp-for="@Model[temp].Metric_ID" hidden value="@Model[temp].Metric_ID"  type="number">
+                                              <input asp-for="@Model[temp].List_Id" hidden value="@Model[temp].List_Id"   type="number">
+                                                <input asp-for="@Model[temp].metric_Weightage" hidden value="@Model[temp].metric_Weightage"   type="number">
+                                              <input asp-for="@Model[temp].Metric_Description" hidden  value="@Model[temp].Metric_Description"  type="text">
+                                            <div class="col-12"> <textarea class="form-control " asp-for="@Model[temp].Comment" placeholder="Add Comment"></textarea>
+                                                   <span asp-validation-for="@Model[temp].Comment" class="text-danger   mx-1 small"></span>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-12"> <textarea class="form-control " placeholder="Add Comment"></textarea></div>
-                                            </div>
-                                        </div>
-                                    }
+                                            
+                                          </div>
+                                    </div>
                                 }
-                                @* <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>1. Collaboration</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2"> <input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>2. Digital mindset</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2"><input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>3. Communication</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2"><input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>4. Emotional intelligence</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2">  <input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>5. Individual ownership and accountability</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2">  <input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>6. Compliance and risk discipline</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2">  <input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>7. Customer focus</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2">  <input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>8. Change management</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2">  <input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div> *@
                             </div>
                         </fieldset>
                         <fieldset class="border  p-2 m-5" style="display:flex;justify-content:center;">
-                            <legend class="float-none w-auto">
+                            <legend class="float-none HEADdata w-auto">
                                 Job family grooming
                             </legend>
-                            <div class="row">
-
-                                @{
-                                    foreach (var item in ViewBag.AppraisalFormModel.JobMetric)
-                                    {
-                                        <div class="row pt-2">
-                                            <div class="row">
-                                                <div class="col-9"><h4>@item.Metric_Description</h4></div>
-                                                <div class="col-3">
-                                                    <div class="row d-flex justify-content-center align-items-center">
-                                                        <div class="col-5">
-                                                            <label>Score</label>
-                                                        </div>
-                                                        <div class="col-7">
-                                                            <input class="form-control my-2" type="number">
-                                                        </div>
+                            <div class="row d-flex justify-content-center">
+                                @for (int i = EffortList + BevList - 1; i < EffortList + BevList + JobList - 1; i++)
+                                {
+                                    var temp = i + 1;
+                                     <div class="row py-2">
+                                        <div class="col-3"><h4 class="HEADMetrics">@Model[temp].Metric_Description</h4></div>
+                                         <div class="col-3">
+                                               <div class="row d-flex justify-content-center align-items-center">
+                                                    <div class="col-5">
+                                                        <label>Score<sup class="required">*</sup></label>
                                                     </div>
+                                                    <div class="col-7">
+                                                        <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" min="1" max="5" type="number">
+                                                    </div>
+                                                       <span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>
                                                 </div>
+                                         </div>
+                                          <div class="col-6">
+                                               <input asp-for="@Model[temp].Metric_ID" hidden value="@Model[temp].Metric_ID"  type="number">
+                                              <input asp-for="@Model[temp].List_Id" hidden value="@Model[temp].List_Id"   type="number">
+                                                <input asp-for="@Model[temp].metric_Weightage" hidden value="@Model[temp].metric_Weightage"   type="number">
+                                              <input asp-for="@Model[temp].Metric_Description" hidden  value="@Model[temp].Metric_Description"  type="text">
+                                            <div class="col-12"> <textarea required rows="5" class="form-control " asp-for="@Model[temp].Comment" placeholder="Add Comment"></textarea>
+                                                   <span asp-validation-for="@Model[temp].Comment" class="text-danger   mx-1 small"></span>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-12"> <textarea class="form-control " placeholder="Add Comment"></textarea></div>
-                                            </div>
-                                        </div>
-                                    }
+                                            
+                                          </div>
+                                    </div>
                                 }
-                                @*   <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>1. Proactively reaches out for opportunities and actively participates in bank initiatives and grooming activities in his/her job family</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2"> <input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>2. Shows commitment to improve skills and specialization in his/her job family</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2"><input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>3. Acts as a mentor/guide to others and is approached by others within the job family due to expertise in the job family</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2"><input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>4. Has acquired the top skills in line with the market to become an expert in his/her job family</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2">  <input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div>
-                                <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4>5. Shows substantial increase in proficiency of skillsets in his/her job family</h4></div>
-                                <div class="col-1"><label>Score</label> </div>
-                                <div class="col-2">  <input type="number"> </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                </div>
-                                </div> *@
-
                             </div>
                         </fieldset>
-=======
-                            <div class="row" class="d-flex justify-content-center">
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>1. Ability to handle autonomy</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2"> <input type="number" class="form-control"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea class="form-control" placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>2. Discipline & Punctuality</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2"><input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>3. Decision Making</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2"><input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>4. Initiative / Leadership & Mentoring</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2">  <input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </fieldset>
-                        <fieldset class="border p-2 m-5" style="display:flex;justify-content:center;">
-                            <legend class="float-none w-auto">
-                                Behavioral competencies
-                            </legend>
-                            <div class="row">
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>1. Collaboration</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2"> <input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>2. Digital mindset</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2"><input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>3. Communication</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2"><input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>4. Emotional intelligence</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2">  <input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>5. Individual ownership and accountability</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2">  <input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>6. Compliance and risk discipline</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2">  <input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>7. Customer focus</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2">  <input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>8. Change management</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2">  <input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="border  p-2 m-5" style="display:flex;justify-content:center;">
-                            <legend class="float-none w-auto">
-                                Job family grooming
-                            </legend>
-                            <div class="row">
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>1. Proactively reaches out for opportunities and actively participates in bank initiatives and grooming activities in his/her job family</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2"> <input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>2. Shows commitment to improve skills and specialization in his/her job family</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2"><input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>3. Acts as a mentor/guide to others and is approached by others within the job family due to expertise in the job family</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2"><input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>4. Has acquired the top skills in line with the market to become an expert in his/her job family</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2">  <input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="row pt-2">
-                                    <div class="row">
-                                        <div class="col-9"><h4>5. Shows substantial increase in proficiency of skillsets in his/her job family</h4></div>
-                                        <div class="col-1"><label>Score</label> </div>
-                                        <div class="col-2">  <input type="number"> </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12"> <textarea placeholder="Add Comment"></textarea></div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </fieldset>
->>>>>>> Stashed changes
-
-                        <div class="form-group text-center">
+                          <div class="form-group text-center">
                             <input type="hidden" name="job" id="job" />
-                            <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
-                            <input type="reset" value="reset" class="btn btn-danger mt-4" />
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ApprovalBtn  btn-lg " /></div>
+                                <div class="col-3"><input id="submit" type="submit" value="Procced" class="   btn btn-block LoginBtn btn-lg " /></div>
+                                <div class="col-3"></div>
+                                @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
+                            <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
+                            </div>
 
                         </div>
                     </form>
+                  
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
 
-                        @section Scripts {
+    const json = []
+    const submit = () => {
+        event.preventDefault();
+        const scoresClassList = document.querySelectorAll(".kra-score");
+        scoresClassList.forEach(item => {
+            let comment = document.getElementById(item.getAttribute("name"));
+            let obj = {
+                MetricId: item.dataset.id,
+                KraListId: item.dataset.kraid,
+                MetricDescription: item.getAttribute("name"),
+                MetricWeihtage: item.dataset.weightage,
+                Score: item.value,
+                Comment: comment.value
+            }
+            json.push(obj);
+        })
+        console.log(json);
+    }
+</script>
+
+
+@section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

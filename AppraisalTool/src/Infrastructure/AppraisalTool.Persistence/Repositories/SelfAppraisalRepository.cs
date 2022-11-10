@@ -10,6 +10,7 @@ using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AutoMapper;
 using AppraisalTool.Domain.Common;
 using static System.Net.Mime.MediaTypeNames;
+using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 
 namespace AppraisalTool.Persistence.Repositories
 {
@@ -77,7 +78,14 @@ namespace AppraisalTool.Persistence.Repositories
 
             return res;
         }
+        public async Task<Appraisal> AddAppraisal(Appraisal addAppraisal)
+        {
+            await _dbContext.Appraisal.AddAsync(addAppraisal);
+            await _dbContext.SaveChangesAsync();
+            
+            return addAppraisal;
 
+        }
         public async Task<List<Appraisal>> GetYear(int userId)
         {
             var years = await _dbContext.Appraisal.Include(x => x.FinancialYear).Where(x => x.UserId == userId)

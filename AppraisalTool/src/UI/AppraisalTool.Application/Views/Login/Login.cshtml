@@ -4,18 +4,37 @@
 
 
 @{
-    ViewData["Title"] = "Login";
+    //ViewData["Title"] = "AppraisalTool";
 }
 
-
+ <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
+   <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
+     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
 
 @if (TempData["Error"] != null)
 {
-    <div class="container">
-        <div class="alert alert-danger mt-5" role="alert">
-           <strong>Error !</strong> @TempData["Error"]
-        </div>
-    </div>
+  
+
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: 'Invalid Login Credentials'
+})
+    </script>
 }
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -140,6 +159,7 @@
     <script src="./lib/assets/js/hoverable-collapse.js"></script>
 
     <script src="./lib/assets/js/misc.js"></script>
+
     <!-- endinject -->
 
     <script>

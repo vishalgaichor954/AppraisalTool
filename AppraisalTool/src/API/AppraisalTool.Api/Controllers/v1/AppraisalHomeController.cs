@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetAllReporteeAppraisals;
 using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetReporteeAppraisalsByRevAuthority;
+using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -117,6 +118,15 @@ namespace AppraisalTool.Api.Controllers.v1
                 return BadRequest(e);
             }
         }
+
+        [HttpPost("AddAppraisal")]
+
+        public async Task<ActionResult> AddAppraisal( AddAppraisalVM addAppraisalVM)
+        {
+            var response = await _mediator.Send(new AddAppraisalCommand() { addAppraisal = addAppraisalVM });
+            return Ok(response);
+        }
+
 
 
     }

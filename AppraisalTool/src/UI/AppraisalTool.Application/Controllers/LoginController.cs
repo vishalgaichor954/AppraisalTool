@@ -61,7 +61,7 @@ namespace AppraisalTool.App.Controllers
                     LoginResponseDto AuthData = JsonConvert.DeserializeObject<LoginResponseDto>(responseData);
 
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "user", AuthData);
-
+                    TempData["Sucess"] = AuthData.Name ;
                     return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
                 }
                 TempData["Error"] = "Failed to Login User";
