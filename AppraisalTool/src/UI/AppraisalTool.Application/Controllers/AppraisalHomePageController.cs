@@ -53,10 +53,19 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.financialYearList = financialYearList.DistinctBy(x=>x.Value);
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
-                ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
-                ViewBag.PendingAppraisals = data.Data[0].pendingAppraisals;
-                ViewBag.LastDate = data.Data[0].lastDate;
 
+                //HardCoded Values
+                try
+                {
+                    ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
+                    ViewBag.PendingAppraisals = data.Data[0].pendingAppraisals;
+                    ViewBag.LastDate = data.Data[0].lastDate;
+                }catch(Exception e)
+                {
+                    ViewBag.AppraisalsToBeFilled = 1;
+                    ViewBag.PendingAppraisals = 1;
+                    ViewBag.LastDate = "31-March";
+                }
 
                 ForgetPasswordResponse AuthData = JsonConvert.DeserializeObject<ForgetPasswordResponse>(response);
                 dynamic res = JsonConvert.SerializeObject(AuthData.Data);
@@ -66,10 +75,6 @@ namespace AppraisalTool.App.Controllers
                
                 
                 return View();
-
-                ViewBag.UserId = user.UserId;
-                ViewBag.UserRole = user.Role;
-                //ViewBag.FinanceId = user.FinancialYearId;
             }
             return View();
 
