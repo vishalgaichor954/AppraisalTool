@@ -16,6 +16,7 @@ html {
 body {
     margin-bottom: 60px;
 }
+.blueTheme
 
 .Dash-Card {
     height: 200px;
@@ -44,7 +45,7 @@ element.style {
     border-radius:0.2rem;
 }
 .DarkBlueP {
-    color: #1746A2
+    color: #1746A2;
 }
 .blueTheme {
     background-color: #1746A2;
@@ -56,6 +57,11 @@ element.style {
 .reporteeTagSmall {
     color: darkgrey !important;
 }
+    .blueTheme:hover {
+        background-color: white;
+        color: #1746A2;
+        border: 2px solid #1746A2;
+    }
     .proceedBtn > span {
         font-size: 25px !important;
         color: white !important;
@@ -248,7 +254,7 @@ legend {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #E0144C
+    background: #1746A2
 }
 
     ::-webkit-scrollbar-thumb:hover {

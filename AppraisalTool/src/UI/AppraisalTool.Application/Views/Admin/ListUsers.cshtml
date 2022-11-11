@@ -57,17 +57,117 @@ Toast.fire({
 })
     </script>
     }
+
+
+@*add user*@
+
+       @if (TempData["AAddUserFailed"] != null)
+{
+  
+
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: 'Oops ! something went wrong user was not Added'
+})
+    </script>
+}
+    @if (TempData["AddUserSuccess"] != null)
+    {
+          <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'User Added Successfully'
+})
+    </script>
+    }
+
+    @*add user end*@
+       @if (TempData["DeleteUserFaild"] != null)
+{
+  
+
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: 'Oops ! something went wrong user was not Deleted'
+})
+    </script>
+}
+    @if (TempData["DeleteuserSuccess"] != null)
+    {
+          <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'User Deleted Successfully'
+})
+    </script>
+    }
+
+
 <div class="container">
     
-    @if (TempData["AddUserSuccess"] != null)
+    @*@if (TempData["AddUserSuccess"] != null)
     {
         <div class="container">
             <div class="alert alert-success mt-5" role="alert">
                 @TempData["AddUserSuccess"]
             </div>
         </div>
-    }
-    @if (TempData["AAddUserFailed"] != null)
+    }*@
+@*    @if (TempData["AAddUserFailed"] != null)
     {
         <div class="container">
             <div class="alert alert-success mt-5" role="alert">
@@ -92,7 +192,7 @@ Toast.fire({
                 @TempData["DeleteUserFaild"] 
             </div>
         </div>
-    }
+    }*@
 
     @* @if (TempData["editError"] != null)
     {
