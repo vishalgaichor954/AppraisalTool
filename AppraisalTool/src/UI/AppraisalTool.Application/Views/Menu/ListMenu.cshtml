@@ -4,10 +4,160 @@
 
 @*<link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
 <link rel="stylesheet" href="~/css/dataTables.bootstrap5.min.css" />*@
+@*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"/>*@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"/>
+ <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
+   <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
+     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+
+       @if (TempData["editError"] != null)
+{
+  
+
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: 'Oops ! something went wrong Menu was not Updated'
+})
+    </script>
+}
+    @if (TempData["Success"] != null)
+    {
+          <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Menu updated Successfully'
+})
+    </script>
+    }
+
+
+@*add user*@
+
+       @if (TempData["AddMenuFaild"] != null)
+{
+  
+
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: 'Oops ! something went wrong Menu was not Added'
+})
+    </script>
+}
+    @if (TempData["AddMenuSuccess"] != null)
+    {
+          <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Menu Added Successfully'
+})
+    </script>
+    }
+
+    @*add user end*@
+       @if (TempData["DeleteMenuFaild"] != null)
+{
+  
+
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: 'Oops ! something went wrong Menu was not Deleted'
+})
+    </script>
+}
+    @if (TempData["DeleteMenuSuccess"] != null)
+    {
+          <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Menu Deleted Successfully'
+})
+    </script>
+    }
 <div class="container">
     
-    @if (TempData["AddMenuSuccess"] != null)
+    @*@if (TempData["AddMenuSuccess"] != null)
     {
         <div class="container">
             <div class="alert alert-success mt-5" role="alert">
@@ -57,7 +207,7 @@
                 @TempData["Success"]
             </div>
         </div>
-    }
+    }*@
     
     
     <div class="container-scroller ">

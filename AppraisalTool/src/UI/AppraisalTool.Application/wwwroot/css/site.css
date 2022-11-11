@@ -16,6 +16,7 @@ html {
 body {
     margin-bottom: 60px;
 }
+.blueTheme
 
 .Dash-Card {
     height: 200px;
@@ -45,6 +46,11 @@ element.style {
     background-color: #1746A2;
     color:white;
 }
+    .blueTheme:hover {
+        background-color: white;
+        color: #1746A2;
+        border: 2px solid #1746A2;
+    }
     .proceedBtn > span {
         font-size: 25px !important;
         color: white !important;
