@@ -382,7 +382,7 @@ Toast.fire({
                                 <div class="row d-flex row date-p">
                                     <span class="reporteeTagPara" style="display: inline-block;">Date</span>
 
-                                    <small class="reporteeTagSmall" asp-for="Date">@item.StartDate to @item.EndDate </small>
+                                    <small class="reporteeTagSmall" asp-for="Date">@item.StartDate.ToString("dd MMM yyyy") to @item.EndDate.ToString("dd MMM yyyy") </small>
 
                                 </div>
                             </div>
