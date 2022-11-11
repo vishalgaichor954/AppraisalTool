@@ -87,12 +87,13 @@
                   text-size: 0.9em;
               }
 
-              .navigation{
+              .navigation:link{
                   color: green;
     background-color: transparent;
     text-decoration: none;
 
       }
+       
 
 
 
@@ -117,7 +118,7 @@
                         <div class="Dropdown">
 
                             <select asp-for="StartYear" id="FincaialYear" class="form-control FincaialYear" asp-items="@ViewBag.financialYearList">
-                            <option class = "text-dropdown">Select Financial Year</option>
+                            <option class = "text-dropdown">@ViewBag.CurrentYear</option>
                             </select>
 
 
@@ -136,7 +137,7 @@
                             if (item.menuList.menuFlag == "SelfAppraisal")
                             {
                                         <div class="dash-card">
-                                            <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="Anchor-body">
+                                             <a id="SelfAppraisal" class="Anchor-body">
 
                                                 <div class="@item.menuList.menuClass card-img-holder text-white">
                                                     <div class="card-body appraisal-card">

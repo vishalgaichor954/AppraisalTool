@@ -61,6 +61,7 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
                 ViewBag.PendingAppraisals = data.Data[0].pendingAppraisals;
                 ViewBag.LastDate = data.Data[0].lastDate;
+                ViewBag.CurrentYear = data.Data[0].currentYear;
 
 
                 ForgetPasswordResponse AuthData = JsonConvert.DeserializeObject<ForgetPasswordResponse>(response);
@@ -338,7 +339,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
-        public IActionResult GradeReport()
+        public IActionResult GradeReport(int? Fid, string? Fyear)
         {
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
@@ -349,7 +350,8 @@ namespace AppraisalTool.App.Controllers
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<Response>(responseData);
                 Console.WriteLine(data.Data);
-
+                ViewBag.fyear = Fyear;
+                ViewBag.Fid = Fid;
                 ViewBag.ReportingAuthorityFirstName = data.Data[0].reportingAuthorityFirstName;
                 Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
                 ViewBag.ReviewingAuthorityFirstName = data.Data[0].reviewingAuthorityFirstName;
@@ -359,6 +361,7 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.Date = data.Data[0].date;
                 ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
                 ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
+              
 
 
 
