@@ -58,11 +58,19 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.financialYearList = financialYearList.DistinctBy(x=>x.Value);
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
-                ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
-                ViewBag.PendingAppraisals = data.Data[0].pendingAppraisals;
-                ViewBag.LastDate = data.Data[0].lastDate;
-                ViewBag.CurrentYear = data.Data[0].currentYear;
 
+                //HardCoded Values
+                try
+                {
+                    ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
+                    ViewBag.PendingAppraisals = data.Data[0].pendingAppraisals;
+                    ViewBag.LastDate = data.Data[0].lastDate;
+                }catch(Exception e)
+                {
+                    ViewBag.AppraisalsToBeFilled = 1;
+                    ViewBag.PendingAppraisals = 1;
+                    ViewBag.LastDate = "31-March";
+                }
 
                 ForgetPasswordResponse AuthData = JsonConvert.DeserializeObject<ForgetPasswordResponse>(response);
                 dynamic res = JsonConvert.SerializeObject(AuthData.Data);
@@ -72,11 +80,6 @@ namespace AppraisalTool.App.Controllers
                
                 
                 return View();
-
-                ViewBag.UserId = user.UserId;
-                ViewBag.UserRole = user.Role;
-                //ViewBag.FinanceId = user.FinancialYearId;
-               
             }
             return View();
 
@@ -167,13 +170,13 @@ namespace AppraisalTool.App.Controllers
         //}
 
         [HttpGet]
-        public IActionResult AddReportingAuthorityAppraisal()
+        public IActionResult AddReportingAuthorityAppraisal(int Appraisald)
         {
 
-            //https://localhost:5000/api/v1/Metric/GetAllListOfMetric
+            ///AppraisalHome/GetAppraisalResultsByAppraisalId?id=40
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/Metric/GetAllListOfMetric").Result;
+            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
             if (cardResponse.IsSuccessStatusCode)
             {
                
@@ -210,6 +213,37 @@ namespace AppraisalTool.App.Controllers
                 return View(mylist);
             }
             return View();
+        }
+        [HttpPost]
+        public IActionResult AddReportingAuthorityAppraisal(List<ReportingMetricDto> scores)
+        {
+            Console.WriteLine(scores);
+
+            foreach(var item in scores)
+            {
+                item.RepaSelfCreatatedDate = DateTime.Now;
+            }
+            string data = JsonConvert.SerializeObject(scores);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            //https://localhost:5000/api/v1/AppraisalHome/UpdateAppraisalResults?statusId=1
+            //https://localhost:5000/api/v1/AppraisalHome/AddAppraisal
+            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/AppraisalHome/UpdateAppraisalResults?statusId=3", content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string responseData = response.Content.ReadAsStringAsync().Result;
+                Console.WriteLine(responseData);
+                var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
+                Console.WriteLine(res);
+                TempData["RepaSUCCESS"] = "Successfully Submited";
+                return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
+                //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
+            }
+        
+
+        TempData["RepaError"] = "Error Occured";
+
+
+            return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
         }
         [HttpGet]
         public IActionResult AddSelfAppraisal( int? fid)

@@ -5,12 +5,12 @@
 }
 
 @{
-    var EffortList1 = Model.Where(item => item.List_Id == 1).ToList();
-    var EffortList = Model.Where(item => item.List_Id == 1).ToList().Count ;
-    var BevList = Model.Where(item => item.List_Id == 3).ToList().Count;
-    var JobList = Model.Where(item => item.List_Id == 4).ToList().Count;
+    var EffortList1 = Model.Where(item => item.KraListId == 1).ToList();
+    var EffortList = Model.Where(item => item.KraListId == 1).ToList().Count ;
+    var BevList = Model.Where(item => item.KraListId == 3).ToList().Count;
+    var JobList = Model.Where(item => item.KraListId == 4).ToList().Count;
 }
-<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
+@*<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
    <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
    <script src="~/lib/package/dist/sweetalert2.all.js"></script>
      <script src="~/lib/package/dist/sweetalert2.min.js"></script>
@@ -60,14 +60,14 @@ Toast.fire({
   title: 'Form was submitted successfully'
 })
     </script>
-    }
+    }*@
 <div class="container d-flex justify-content-center">
     <div class="col-11">
         <div class="card content-wrapper-Blue">
             <div class="card-body">
                 <h1 class="card-title FormHeader">Reportee Appraisal</h1>
                 <div class="featureBackground ">
-                    <form asp-action="AddSelfAppraisal" method="post" enctype="multipart/form-data">
+                    <form asp-action="AddReportingAuthorityAppraisal" method="post" enctype="multipart/form-data">
                         <div class="text-danger"></div>
                            <input name="Fid" hidden value="@ViewBag.Fid"  type="number">
                         <fieldset class="border p-2 m-5 " style="display:flex;justify-content:center;">
@@ -79,7 +79,7 @@ Toast.fire({
                                 {
 
                                     <div class="row py-2">
-                                        <div class="col-2"><h4 class="HEADMetricsReportee">@Model[i].Metric_Description</h4></div>
+                                        <div class="col-2"><h4 class="HEADMetricsReportee">@Model[i].MetricDescription</h4></div>
                                          <div class="col-2">
                                                <div class="row d-flex justify-content-center align-items-center">
                                                     
@@ -87,19 +87,23 @@ Toast.fire({
                                                      <label class="labelfont">Score<sup class="required">*</sup></label>
                                                     
                                                     
-                                                         <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number">
-                                                       <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
+                                                         <input class=" form-control my-2 kra-score" readonly  value="@Model[i].SelfScore" asp-for="@Model[i].SelfScore" min="1" max="5" type="number">
+                                                       <span  asp-validation-for="@Model[i].SelfScore"  class="text-danger mx-1 small"></span>
                                                 </div>
                                          </div>
                                           <div class="col-3">
                                               <div class="row d-flex justify-content-center align-items-center">
-                                               <input asp-for="@Model[i].Metric_ID" hidden value="@Model[i].Metric_ID"  type="number">
-                                              <input asp-for="@Model[i].List_Id" hidden value="@Model[i].List_Id"   type="number">
-                                                <input asp-for="@Model[i].metric_Weightage" hidden value="@Model[i].metric_Weightage"   type="number">
-                                              <input asp-for="@Model[i].Metric_Description" hidden  value="@Model[i].Metric_Description"  type="text">
+                                               <input asp-for="@Model[i].MetricId" hidden value="@Model[i].MetricId"  type="number">
+                                                <input asp-for="@Model[i].ID" hidden value="@Model[i].ID"  type="number">
+                                                 <input asp-for="@Model[i].SelfCreatatedDate" hidden value="@Model[i].SelfCreatatedDate"  type="datetime">
+                                                <input asp-for="@Model[i].UserId" hidden value="@Model[i].UserId"  type="number">
+                                                <input asp-for="@Model[i].AppraisalId" hidden value="@Model[i].AppraisalId"  type="number">
+                                              <input asp-for="@Model[i].KraListId" hidden value="@Model[i].KraListId"   type="number">
+                                                <input asp-for="@Model[i].MetricWeightage" hidden value="@Model[i].MetricWeightage"   type="number">
+                                              <input asp-for="@Model[i].MetricDescription" hidden  value="@Model[i].MetricDescription"  type="text">
                                               <label class="labelfont">Employee Comment</label>
-                                            <div class="col-12"> <textarea class="form-control " asp-for="@Model[i].Comment" placeholder="Add Comment"></textarea>
-                                                   <span asp-validation-for="@Model[i].Comment" class="text-danger   mx-1 small"></span>
+                                            <div class="col-12"> <textarea readonly  class="form-control " asp-for="@Model[i].SelfComment" placeholder="Add Comment">@Model[i].SelfComment</textarea>
+                                                   <span asp-validation-for="@Model[i].SelfComment" class="text-danger   mx-1 small"></span>
                                             </div>
                                             </div>
                                           </div>
@@ -165,7 +169,7 @@ Toast.fire({
                                 {
                                     var temp = i + 1;
                                       <div class="row py-2">
-                                        <div class="col-2"><h4 class="HEADMetricsReportee">@Model[temp].Metric_Description</h4></div>
+                                        <div class="col-2"><h4 class="HEADMetricsReportee">@Model[temp].MetricDescription</h4></div>
                                          <div class="col-2">
                                                <div class="row d-flex justify-content-center align-items-center">
                                                     
@@ -173,19 +177,23 @@ Toast.fire({
                                                      <label class="labelfont">Score<sup class="required">*</sup></label>
                                                     
                                                     
-                                                         <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" min="1" max="5" type="number">
-                                                       <span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>
+                                                         <input class=" form-control my-2 kra-score" readonly  value="@Model[i].SelfScore" asp-for="@Model[temp].SelfScore" min="1" max="5" type="number">
+                                                       <span asp-validation-for="@Model[temp].SelfScore" class="text-danger mx-1 small"></span>
                                                 </div>
                                          </div>
                                           <div class="col-3">
                                               <div class="row d-flex justify-content-center align-items-center">
-                                               <input asp-for="@Model[temp].Metric_ID" hidden value="@Model[temp].Metric_ID"  type="number">
-                                              <input asp-for="@Model[temp].List_Id" hidden value="@Model[temp].List_Id"   type="number">
-                                                <input asp-for="@Model[temp].metric_Weightage" hidden value="@Model[temp].metric_Weightage"   type="number">
-                                              <input asp-for="@Model[temp].Metric_Description" hidden  value="@Model[temp].Metric_Description"  type="text">
+                                               <input asp-for="@Model[temp].MetricId" hidden value="@Model[temp].MetricId"  type="number">
+                                                  <input asp-for="@Model[temp].ID" hidden value="@Model[temp].ID"  type="number">
+                                                 <input asp-for="@Model[temp].SelfCreatatedDate" hidden value="@Model[temp].SelfCreatatedDate"  type="datetime">
+                                                <input asp-for="@Model[temp].UserId" hidden value="@Model[temp].UserId"  type="number">
+                                                <input asp-for="@Model[temp].AppraisalId" hidden value="@Model[temp].AppraisalId"  type="number">
+                                              <input asp-for="@Model[temp].KraListId" hidden value="@Model[temp].KraListId"   type="number">
+                                                <input asp-for="@Model[temp].MetricWeightage" hidden value="@Model[temp].MetricWeightage"   type="number">
+                                              <input asp-for="@Model[temp].MetricDescription" hidden  value="@Model[temp].MetricDescription"  type="text">
                                               <label class="labelfont">Employee Comment</label>
-                                            <div class="col-12"> <textarea class="form-control " asp-for="@Model[temp].Comment" placeholder="Add Comment"></textarea>
-                                                   <span asp-validation-for="@Model[temp].Comment" class="text-danger   mx-1 small"></span>
+                                            <div class="col-12"> <textarea readonly class="form-control " asp-for="@Model[temp].SelfComment" placeholder="Add Comment">@Model[i].SelfComment</textarea>
+                                                   <span asp-validation-for="@Model[temp].SelfComment" class="text-danger   mx-1 small"></span>
                                             </div>
                                             </div>
                                           </div>
@@ -224,7 +232,7 @@ Toast.fire({
                                 {
                                     var temp = i + 1;
                                       <div class="row py-2">
-                                        <div class="col-2"><h4 class="HEADMetricsReportee">@Model[temp].Metric_Description</h4></div>
+                                        <div class="col-2"><h4 class="HEADMetricsReportee">@Model[temp].MetricDescription</h4></div>
                                          <div class="col-2">
                                                <div class="row d-flex justify-content-center align-items-center">
                                                     
@@ -232,19 +240,23 @@ Toast.fire({
                                                      <label class="labelfont">Score<sup class="required">*</sup></label>
                                                     
                                                     
-                                                         <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" min="1" max="5" type="number">
-                                                       <span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>
+                                                         <input class=" form-control my-2 kra-score" readonly  value="@Model[i].SelfScore" asp-for="@Model[temp].SelfScore" min="1" max="5" type="number">
+                                                       <span asp-validation-for="@Model[temp].SelfScore" class="text-danger mx-1 small"></span>
                                                 </div>
                                          </div>
                                           <div class="col-3">
                                               <div class="row d-flex justify-content-center align-items-center">
-                                               <input asp-for="@Model[temp].Metric_ID" hidden value="@Model[temp].Metric_ID"  type="number">
-                                              <input asp-for="@Model[temp].List_Id" hidden value="@Model[temp].List_Id"   type="number">
-                                                <input asp-for="@Model[temp].metric_Weightage" hidden value="@Model[temp].metric_Weightage"   type="number">
-                                              <input asp-for="@Model[temp].Metric_Description" hidden  value="@Model[temp].Metric_Description"  type="text">
+                                               <input asp-for="@Model[temp].MetricId" hidden value="@Model[temp].MetricId"  type="number">
+                                                    <input asp-for="@Model[temp].ID" hidden value="@Model[temp].ID"  type="number">
+                                                 <input asp-for="@Model[temp].SelfCreatatedDate" hidden value="@Model[temp].SelfCreatatedDate"  type="datetime">
+                                                <input asp-for="@Model[temp].UserId" hidden value="@Model[temp].UserId"  type="number">
+                                                <input asp-for="@Model[temp].AppraisalId" hidden value="@Model[temp].AppraisalId"  type="number">
+                                              <input asp-for="@Model[temp].KraListId" hidden value="@Model[temp].KraListId"   type="number">
+                                                <input asp-for="@Model[temp].MetricWeightage" hidden value="@Model[temp].MetricWeightage"   type="number">
+                                              <input asp-for="@Model[temp].MetricDescription" hidden  value="@Model[temp].MetricDescription"  type="text">
                                               <label class="labelfont">Employee Comment</label>
-                                            <div class="col-12"> <textarea class="form-control " asp-for="@Model[temp].Comment" placeholder="Add Comment"></textarea>
-                                                   <span asp-validation-for="@Model[temp].Comment" class="text-danger   mx-1 small"></span>
+                                            <div class="col-12"> <textarea readonly class="form-control " asp-for="@Model[temp].SelfComment" placeholder="Add Comment">@Model[i].SelfComment</textarea>
+                                                   <span asp-validation-for="@Model[temp].SelfComment" class="text-danger   mx-1 small"></span>
                                             </div>
                                             </div>
                                           </div>

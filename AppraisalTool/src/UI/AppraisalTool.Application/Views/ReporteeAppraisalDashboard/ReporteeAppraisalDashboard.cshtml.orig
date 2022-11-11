@@ -6,6 +6,15 @@
     ViewData["Title"] = "ReporteeAppraisalDashboard";
 }
 <style>
+<<<<<<< HEAD
+=======
+
+    a {
+        color: green;
+      background-color: transparent;
+      text-decoration: none;
+    }
+>>>>>>> 496e310e8cae77f26abeed2dbeac4a2ceef27540
    /* a:link {
         color: green;
         background-color: transparent;
@@ -116,13 +125,8 @@ Toast.fire({
 }
     @if (TempData["RepaSUCCESS"] != null)
     {
-        string checksuccess=@TempData["RepaSUCCESS"].ToString();
-
-    if(checksuccess == "Successfully Submited")
-    {
-         <script>
-@*var check = @TempData["RepaSUCCESS"].ToString();
-console.log(@TempData["RepaSUCCESS"].ToString());*@                 
+          <script>
+                             
         const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
@@ -140,8 +144,6 @@ Toast.fire({
   title: 'Form was submitted successfully'
 })
     </script>
-    }
-   
     }
         <div class="container-scroller">
 

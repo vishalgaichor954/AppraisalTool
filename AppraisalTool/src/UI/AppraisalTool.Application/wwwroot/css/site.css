@@ -35,16 +35,27 @@ element.style {
     height: 40px !important;
     width: 40px !important;
 }
+.ReporteeAnchorTag {
+    background-color:none !important ;
+    text-decoration: none !important;
+   
+}
 .LightBlueTheme {
     background-color: #EEF1FF;
     border-radius:0.2rem;
 }
 .DarkBlueP {
-    color: #1746A2
+    color: #1746A2;
 }
 .blueTheme {
     background-color: #1746A2;
     color:white;
+}
+.reporteeTagPara{
+    color:black !important;
+}
+.reporteeTagSmall {
+    color: darkgrey !important;
 }
     .blueTheme:hover {
         background-color: white;
@@ -243,7 +254,7 @@ legend {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #E0144C
+    background: #1746A2
 }
 
     ::-webkit-scrollbar-thumb:hover {
