@@ -6,13 +6,13 @@
     ViewData["Title"] = "ReporteeAppraisalDashboard";
 }
 <style>
-    a:link {
+   /* a:link {
         color: green;
         background-color: transparent;
         text-decoration: none;
-    }
+    }*/
 
-    a:visited {
+ /*   a:visited {
         color: pink;
         background-color: transparent;
         text-decoration: none;
@@ -28,14 +28,17 @@
         color: yellow;
         background-color: transparent;
         text-decoration: underline;
-    }
+    }*/
 
-    .Button {
 
-            background-color: blue;
-            border: none;
-            color: white;
-            padding: 15px 32px;
+        .Button {
+          
+            background-color: #1746A2;
+           color: white;
+          /* border: 2px solid #E0144C;*/
+          border-radius:0.3rem;
+            border:none;
+            padding: 13px 40px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -44,6 +47,28 @@
             cursor: pointer;
             width: auto;
         }
+
+  a:link {
+  
+  background-color: transparent;
+  text-decoration: none;
+}
+.BreadCrump > a:visited {
+  color: grey;
+  background-color: transparent;
+  text-decoration: none;
+}
+.BreadCrump > a:hover {
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
+}
+ .BreadCrump > a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
         .ApplyButton{
              background-color: blue;
             border: none;
@@ -111,15 +136,20 @@ Toast.fire({
 })
     </script>
     }
-<div class="content-wrapper">
+        <div class="container-scroller">
+
+        <div class="container-fluid page-body-wrapper">
+     
+<div class="content-wrapper content-wrapper-Blue">
+     <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard"> Reportee Appraisal Dashboard   </a></h6>
+        <br />
+        <input type="button" value="Back" class="Button mb-4" onclick="history.back()" />
+        <br />
     <div style="  background-color: white;border-radius: 0.5rem;" class="container">
 
-        <h4><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard"> Reportee Appraisal Dashboard   </a></h4>
-        <br />
-        <input type="button" value="Back" class="Button" onclick="history.back()" />
-        <br />
+      
         <div>
-            <h3>Reportee Appraisal Dashboard</h3>
+            <h3 class="pt-4">Reportee Appraisal Dashboard</h3>
         </div>
         <br />
 
@@ -131,7 +161,7 @@ Toast.fire({
 
                 <div class="col-md-2">
                     <div class="row">
-                        <p style="padding-top:30px">Primary Role</p>
+                        <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Primary Role</p>
                         
                     </div>
 
@@ -139,7 +169,7 @@ Toast.fire({
 
                 <div class="col-md-2">
                     <div class="row">
-                        <p style="padding-top:30px">Start Date</p>
+                        <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Start Date</p>
                        
                     </div>
 
@@ -148,14 +178,14 @@ Toast.fire({
 
                 <div class="col-md-2">
                     <div class="row">
-                        <p style="padding-top:30px">End Date</p>
+                        <p class="DarkBlueP" style="font-weight:600;padding-top:30px">End Date</p>
                        
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="row">
-                        <p style="padding-top:30px">Employee Name</p>
+                        <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Employee Name</p>
                      
                     </div>
 
@@ -163,7 +193,7 @@ Toast.fire({
 
                 <div class="col-md-2">
                     <div class="row">
-                        <p style="padding-top:30px">Reviewing Authority</p>
+                        <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Reviewing Authority</p>
                         <div class="Dropdown">
                           
                         </div>
@@ -173,7 +203,7 @@ Toast.fire({
 
                 <div class="col-md-2">
                     <div class="row">
-                        <p style="padding-top:30px">Status</p>
+                        <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Status</p>
                        
                     </div>
 
@@ -185,7 +215,7 @@ Toast.fire({
                     <div class="row">
                         <div class="Dropdown">
 
-                            <select class="form-control" asp-for="@Model.PrimaryRole">
+                            <select class="form-control form-select" asp-for="@Model.PrimaryRole">
                                 <option class=" text-dropdown">-Select- </option>
                                 <option class=" text-dropdown" value="4">Employee </option>
                             </select>
@@ -216,7 +246,7 @@ Toast.fire({
                 <div class="col-md-2">
                     <div class="row">
                         <div class="Dropdown">
-                            <select class="form-control" asp-items="ViewBag.employeeName" asp-for="@Model.EmployeeName">
+                            <select class="form-control form-select" asp-items="ViewBag.employeeName" asp-for="@Model.EmployeeName">
                                 <option class=" text-dropdown ">-Select-</option>
                             </select>
                         </div>
@@ -227,7 +257,7 @@ Toast.fire({
                 <div class="col-md-2">
                     <div class="row">
                         <div class="Dropdown">
-                            <select class="form-control" asp-items="ViewBag.reviewingAuthority" asp-for="@Model.ReviewingAuthority">
+                            <select class="form-control form-select" asp-items="ViewBag.reviewingAuthority" asp-for="@Model.ReviewingAuthority">
                                 <option class=" text-dropdown">-Select-</option>
                             </select>
                         </div>
@@ -238,7 +268,7 @@ Toast.fire({
                 <div class="col-md-2">
                     <div class="row">
                         <div class="Dropdown">
-                            <select class="form-control" asp-items="ViewBag.appraisalStatus" asp-for="@Model.Status">
+                            <select class="form-control form-select" asp-items="ViewBag.appraisalStatus" asp-for="@Model.Status">
                                 <option class=" text-dropdown">-Select-</option>
                             </select>
                         </div>
@@ -263,9 +293,8 @@ Toast.fire({
             @foreach (var item in ViewBag.UserList)
             {
 
-
-
-                <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1px solid #E0144C; border-radius: 0.3rem;">
+           @*      <a style="display:block" class="ReporteeAnchorTag" href="/AppraisalHomePage/AddReportingAuthorityAppraisal?Appraisald=@item.AppraisalId">*@
+               @* <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1px solid #1746A2; border-radius: 0.3rem;">
                     <div class="col-md-3">
 
                         <div class="row">
@@ -282,7 +311,7 @@ Toast.fire({
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
 
                         <div class="row">
                             <div class="col-md-2 Date-Badge">
@@ -298,7 +327,7 @@ Toast.fire({
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
 
                         <div class="row">
                             <div class="col-md-2 Date-Badge">
@@ -327,7 +356,78 @@ Toast.fire({
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-2">
+
+                        HELU
+                    </div>
+                </div>*@
+                @*</a>*@
+               
+                 <a class="ReporteeAnchorTag" href="/AppraisalHomePage/AddReportingAuthorityAppraisal?Appraisald=@item.AppraisalId">
+                <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1.5px solid #1746A2; border-radius: 0.3rem;">
+                    <div class="col-md-3">
+
+                        <div class="row">
+                            <div class="col-md-2 Date-Badge">
+                                <label style="font-size:1rem ;" class="badge badge-pill  user-roles blueTheme " for=""><i class="mdi mdi-calendar-blank"></i></label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="row d-flex row date-p">
+                                    <span class="reporteeTagPara" style="display: inline-block;">Date</span>
+
+                                    <small class="reporteeTagSmall" asp-for="Date">@item.StartDate to @item.EndDate </small>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <div class="row">
+                            <div class="col-md-2 Date-Badge">
+                                <label style="font-size:1rem ;" class="badge badge-pill user-roles blueTheme" for=""><i class=" mdi mdi-account-check"></i></label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="row d-flex row date-p">
+                                    <span class="reporteeTagPara" style="display: inline-block;">Employee Name</span>
+
+                                    <small class="reporteeTagSmall" asp-for="EmployeeName">@item.FirstName  @item.LastName </small>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <div class="row">
+                            <div class="col-md-2 Date-Badge">
+                                <label style="font-size:1rem ;" class="badge badge-pill user-roles blueTheme" for=""><i class=" mdi mdi-account"></i></label>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="row d-flex row date-p">
+                                    <span class="reporteeTagPara" style="display: inline-block;">Reviewing Authority</span>
+
+                                    <small class="reporteeTagSmall" asp-for="ReviewingAuthority">@item.RevaName </small>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <div class="row">
+                            <div class="col-md-10 row date-p">
+
+                                <div class="row d-flex justify-content-center">
+                                    <span class=" reporteeTagPara" style="display: inline-block;">Appraisal Status</span>
+                                </div>
+                                <smaller class=" reporteeTagPara" style="border-radius: 0.5rem; font-size:12px ; background-color: rgb(245, 177, 138);" class="pt-1 pb-1"><asp-for ="AppraisalStatus">@item.AppraisalStatus</smaller>
+                                   
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                </a>
             }
         }
     </div>

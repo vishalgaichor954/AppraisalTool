@@ -214,9 +214,9 @@ namespace AppraisalTool.App.Controllers
             }
             string data = JsonConvert.SerializeObject(scores);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-
+            //https://localhost:5000/api/v1/AppraisalHome/UpdateAppraisalResults?statusId=1
             //https://localhost:5000/api/v1/AppraisalHome/AddAppraisal
-            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/AppraisalHome/UpdateAppraisalResults", content).Result;
+            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/AppraisalHome/UpdateAppraisalResults?statusId=3", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 string responseData = response.Content.ReadAsStringAsync().Result;
