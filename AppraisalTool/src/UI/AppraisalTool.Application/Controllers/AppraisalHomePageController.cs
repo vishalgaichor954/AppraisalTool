@@ -65,12 +65,10 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
                     ViewBag.PendingAppraisals = data.Data[0].pendingAppraisals;
                     ViewBag.LastDate = data.Data[0].lastDate;
-                }catch(Exception e)
-                {
-                    ViewBag.AppraisalsToBeFilled = 1;
-                    ViewBag.PendingAppraisals = 1;
-                    ViewBag.LastDate = "31-March";
+                    ViewBag.CurrentYear = data.Data[0].currentYear; 
                 }
+                catch(Exception e)
+                { }
 
                 ForgetPasswordResponse AuthData = JsonConvert.DeserializeObject<ForgetPasswordResponse>(response);
                 dynamic res = JsonConvert.SerializeObject(AuthData.Data);
@@ -96,17 +94,23 @@ namespace AppraisalTool.App.Controllers
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<Response>(responseData);
                 Console.WriteLine(data.Data);
-                ViewBag.fyear = Fyear;
-                ViewBag.Fid = Fid;
-                ViewBag.ReportingAuthorityFirstName = data.Data[0].reportingAuthorityFirstName;
-                Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
-                ViewBag.ReviewingAuthorityFirstName = data.Data[0].reviewingAuthorityFirstName;
-                Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
-                ViewBag.Role = data.Data[0].role;
-                ViewBag.AppraisalStatus = data.Data[0].appraisalStatus;
-                ViewBag.Date = data.Data[0].date;
-                ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
-                ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
+                try
+                {
+                    ViewBag.fyear = Fyear;
+                    ViewBag.Fid = Fid;
+                    ViewBag.ReportingAuthorityFirstName = data.Data[0].reportingAuthorityFirstName;
+                    Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
+                    ViewBag.ReviewingAuthorityFirstName = data.Data[0].reviewingAuthorityFirstName;
+                    Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
+                    ViewBag.Role = data.Data[0].role;
+                    ViewBag.AppraisalStatus = data.Data[0].appraisalStatus;
+                    ViewBag.Date = data.Data[0].date;
+                    ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
+                    ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
+                }
+                catch (Exception e)
+                { }
+
 
 
 
@@ -381,21 +385,28 @@ namespace AppraisalTool.App.Controllers
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
-                var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
-                var data = JsonConvert.DeserializeObject<Response>(responseData);
-                Console.WriteLine(data.Data);
-                ViewBag.fyear = Fyear;
-                ViewBag.Fid = Fid;
-                ViewBag.ReportingAuthorityFirstName = data.Data[0].reportingAuthorityFirstName;
-                Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
-                ViewBag.ReviewingAuthorityFirstName = data.Data[0].reviewingAuthorityFirstName;
-                Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
-                ViewBag.Role = data.Data[0].role;
-                ViewBag.AppraisalStatus = data.Data[0].appraisalStatus;
-                ViewBag.Date = data.Data[0].date;
-                ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
-                ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
-              
+                try
+                {
+                    var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                    var data = JsonConvert.DeserializeObject<Response>(responseData);
+                    Console.WriteLine(data.Data);
+                    ViewBag.fyear = Fyear;
+                    ViewBag.Fid = Fid;
+                    ViewBag.ReportingAuthorityFirstName = data.Data[0].reportingAuthorityFirstName;
+                    Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
+                    ViewBag.ReviewingAuthorityFirstName = data.Data[0].reviewingAuthorityFirstName;
+                    Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
+                    ViewBag.Role = data.Data[0].role;
+                    ViewBag.AppraisalStatus = data.Data[0].appraisalStatus;
+                    ViewBag.Date = data.Data[0].date;
+                    ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
+                    ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
+                }
+                catch(Exception e)
+                { }
+
+
+
 
 
 
