@@ -65,8 +65,11 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
                     ViewBag.PendingAppraisals = data.Data[0].pendingAppraisals;
                     ViewBag.LastDate = data.Data[0].lastDate;
-                }catch(Exception e)
+                    ViewBag.CurrentYear = data.Data[0].currentYear;
+                }
+                catch(Exception e)
                 {
+                    ViewBag.CurrentYear = "FY2022 - 2023";
                     ViewBag.AppraisalsToBeFilled = 1;
                     ViewBag.PendingAppraisals = 1;
                     ViewBag.LastDate = "31-March";
