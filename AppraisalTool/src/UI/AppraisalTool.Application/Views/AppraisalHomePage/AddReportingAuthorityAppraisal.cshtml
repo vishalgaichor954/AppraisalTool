@@ -75,16 +75,36 @@ Toast.fire({
                                 Input & Effort metric
                             </legend>
                             <div class="row d-flex justify-content-center">
+                                 <div class="row pt-3 pb-1">
+                                    @* /*20.833333325%*/*@
+                                    <div style="width:22.499999991%">
+                                        <h4 class="DarkBlueP "> Metric Name</h4>
+                                      
+                                    </div>
+                                   @* /*12.499999995%*/*@
+                                     <div style="width:10.833333329%">
+                                        <h4 class="DarkBlueP "> Score</h4>
+                                    </div>
+                                     <div class="col-3">
+                                        <h4 class="DarkBlueP "> Self Comment</h4>
+                                    </div>
+                                       <div class="col-2">
+                                        <h4 class="DarkBlueP ">Repa Score</h4>
+                                    </div>
+                                     <div class="col-3">
+                                        <h4 class="DarkBlueP "> Repa Comment</h4>
+                                    </div>
+                                </div>
                                 @for (int i = 0; i < EffortList; i++)
                                 {
 
                                     <div class="row py-2">
-                                        <div class="col-2"><h4 class="HEADMetricsReportee">@Model[i].MetricDescription</h4></div>
-                                         <div class="col-2">
+                                        <div class="col-3"><h4 class="HEADMetricsReportee">@Model[i].MetricDescription</h4><span style="color:black;font-size:13px"> (Weightage @Model[i].MetricWeightage pts) </span></div>
+                                         <div class="col-1">
                                                <div class="row d-flex justify-content-center align-items-center">
                                                     
                                                    
-                                                     <label class="labelfont">Score<sup class="required">*</sup></label>
+                                                   
                                                     
                                                     
                                                          <input class=" form-control my-2 kra-score" readonly  value="@Model[i].SelfScore" asp-for="@Model[i].SelfScore" min="1" max="5" type="number">
@@ -101,7 +121,7 @@ Toast.fire({
                                               <input asp-for="@Model[i].KraListId" hidden value="@Model[i].KraListId"   type="number">
                                                 <input asp-for="@Model[i].MetricWeightage" hidden value="@Model[i].MetricWeightage"   type="number">
                                               <input asp-for="@Model[i].MetricDescription" hidden  value="@Model[i].MetricDescription"  type="text">
-                                              <label class="labelfont">Employee Comment</label>
+                                              
                                             <div class="col-12"> <textarea readonly  class="form-control " asp-for="@Model[i].SelfComment" placeholder="Add Comment">@Model[i].SelfComment</textarea>
                                                    <span asp-validation-for="@Model[i].SelfComment" class="text-danger   mx-1 small"></span>
                                             </div>
@@ -111,7 +131,7 @@ Toast.fire({
                                                <div class="row d-flex justify-content-center align-items-center">
                                                     
                                                    
-                                                        <label class="labelfont">Score</label>
+                                                      
                                                     
                                                     
                                                          <input class=" form-control my-2 kra-score" asp-for="@Model[i].RepaSelfScore" min="1" max="5" type="number">
@@ -125,7 +145,7 @@ Toast.fire({
                                           </div>
                                            <div class="col-3 ml-2">
                                        
-                                               <label class="labelfont">RepA Comment</label>
+                                              
                                                <textarea class="form-control " asp-for="@Model[i].RepaSelfComment" placeholder="Add Comment"></textarea>
                                          
                                            </div>
@@ -165,16 +185,35 @@ Toast.fire({
                                 Behavioral competencies
                             </legend>
                             <div class="row d-flex justify-content-center">
+                                 <div class="row pt-3 pb-1">
+                                    @* /*20.833333325%*/*@
+                                    <div style="width:22.499999991%">
+                                        <h4 class="DarkBlueP "> Metric Name</h4>
+                                      
+                                    </div>
+                                   @* /*12.499999995%*/*@
+                                     <div style="width:10.833333329%">
+                                        <h4 class="DarkBlueP "> Score</h4>
+                                    </div>
+                                     <div class="col-3">
+                                        <h4 class="DarkBlueP "> Self Comment</h4>
+                                    </div>
+                                       <div class="col-2">
+                                        <h4 class="DarkBlueP ">Repa Score</h4>
+                                    </div>
+                                     <div class="col-3">
+                                        <h4 class="DarkBlueP "> Repa Comment</h4>
+                                    </div>
+                                </div>
                                 @for (int i = EffortList -1; i < EffortList+BevList-1; i++)
                                 {
                                     var temp = i + 1;
                                       <div class="row py-2">
-                                        <div class="col-2"><h4 class="HEADMetricsReportee">@Model[temp].MetricDescription</h4></div>
-                                         <div class="col-2">
+                                        <div class="col-3"><h4 class="HEADMetricsReportee">@Model[temp].MetricDescription</h4><span style="color:black;font-size:13px"> (Weightage @Model[i].MetricWeightage pts) </span></div>
+                                         <div class="col-1">
                                                <div class="row d-flex justify-content-center align-items-center">
                                                     
                                                    
-                                                     <label class="labelfont">Score<sup class="required">*</sup></label>
                                                     
                                                     
                                                          <input class=" form-control my-2 kra-score" readonly  value="@Model[i].SelfScore" asp-for="@Model[temp].SelfScore" min="1" max="5" type="number">
@@ -191,7 +230,7 @@ Toast.fire({
                                               <input asp-for="@Model[temp].KraListId" hidden value="@Model[temp].KraListId"   type="number">
                                                 <input asp-for="@Model[temp].MetricWeightage" hidden value="@Model[temp].MetricWeightage"   type="number">
                                               <input asp-for="@Model[temp].MetricDescription" hidden  value="@Model[temp].MetricDescription"  type="text">
-                                              <label class="labelfont">Employee Comment</label>
+                                              
                                             <div class="col-12"> <textarea readonly class="form-control " asp-for="@Model[temp].SelfComment" placeholder="Add Comment">@Model[i].SelfComment</textarea>
                                                    <span asp-validation-for="@Model[temp].SelfComment" class="text-danger   mx-1 small"></span>
                                             </div>
@@ -201,7 +240,7 @@ Toast.fire({
                                                <div class="row d-flex justify-content-center align-items-center">
                                                     
                                                    
-                                                        <label class="labelfont">Score</label>
+                                                     
                                                     
                                                     
                                                          <input class=" form-control my-2 kra-score" asp-for="@Model[temp].RepaSelfScore" min="1" max="5" type="number">
@@ -215,7 +254,7 @@ Toast.fire({
                                           </div>
                                            <div class="col-3 ml-2">
                                        
-                                               <label class="labelfont">RepA Comment</label>
+                                              
                                                <textarea class="form-control " asp-for="@Model[temp].RepaSelfComment" placeholder="Add Comment"></textarea>
                                          
                                            </div>
@@ -228,16 +267,36 @@ Toast.fire({
                                 Job family grooming
                             </legend>
                             <div class="row d-flex justify-content-center">
+                                 <div class="row pt-3 pb-1">
+                                    @* /*20.833333325%*/*@
+                                    <div style="width:22.499999991%">
+                                        <h4 class="DarkBlueP "> Metric Name</h4>
+                                      
+                                    </div>
+                                   @* /*12.499999995%*/*@
+                                     <div style="width:10.833333329%">
+                                        <h4 class="DarkBlueP "> Score</h4>
+                                    </div>
+                                     <div class="col-3">
+                                        <h4 class="DarkBlueP "> Self Comment</h4>
+                                    </div>
+                                       <div class="col-2">
+                                        <h4 class="DarkBlueP ">Repa Score</h4>
+                                    </div>
+                                     <div class="col-3">
+                                        <h4 class="DarkBlueP "> Repa Comment</h4>
+                                    </div>
+                                </div>
                                 @for (int i = EffortList + BevList - 1; i < EffortList + BevList + JobList - 1; i++)
                                 {
                                     var temp = i + 1;
                                       <div class="row py-2">
-                                        <div class="col-2"><h4 class="HEADMetricsReportee">@Model[temp].MetricDescription</h4></div>
-                                         <div class="col-2">
+                                        <div class="col-3"><h4 class="HEADMetricsReportee">@Model[temp].MetricDescription</h4><span style="color:black;font-size:13px"> (Weightage @Model[i].MetricWeightage pts) </span></div>
+                                         <div class="col-1">
                                                <div class="row d-flex justify-content-center align-items-center">
                                                     
                                                    
-                                                     <label class="labelfont">Score<sup class="required">*</sup></label>
+                                                     
                                                     
                                                     
                                                          <input class=" form-control my-2 kra-score" readonly  value="@Model[i].SelfScore" asp-for="@Model[temp].SelfScore" min="1" max="5" type="number">
@@ -254,7 +313,7 @@ Toast.fire({
                                               <input asp-for="@Model[temp].KraListId" hidden value="@Model[temp].KraListId"   type="number">
                                                 <input asp-for="@Model[temp].MetricWeightage" hidden value="@Model[temp].MetricWeightage"   type="number">
                                               <input asp-for="@Model[temp].MetricDescription" hidden  value="@Model[temp].MetricDescription"  type="text">
-                                              <label class="labelfont">Employee Comment</label>
+                                             
                                             <div class="col-12"> <textarea readonly class="form-control " asp-for="@Model[temp].SelfComment" placeholder="Add Comment">@Model[i].SelfComment</textarea>
                                                    <span asp-validation-for="@Model[temp].SelfComment" class="text-danger   mx-1 small"></span>
                                             </div>
@@ -264,7 +323,7 @@ Toast.fire({
                                                <div class="row d-flex justify-content-center align-items-center">
                                                     
                                                    
-                                                        <label class="labelfont">Score</label>
+                                                      
                                                     
                                                     
                                                          <input class=" form-control my-2 kra-score" asp-for="@Model[temp].RepaSelfScore" min="1" max="5" type="number">
@@ -278,7 +337,7 @@ Toast.fire({
                                           </div>
                                            <div class="col-3 ml-2">
                                        
-                                               <label class="labelfont">RepA Comment</label>
+                                             
                                                <textarea class="form-control " asp-for="@Model[temp].RepaSelfComment" placeholder="Add Comment"></textarea>
                                          
                                            </div>
@@ -290,8 +349,8 @@ Toast.fire({
                             <input type="hidden" name="job" id="job" />
                             <div class="row">
                                 <div class="col-3"></div>
-                                <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ApprovalBtn  btn-lg " /></div>
-                                <div class="col-3"><input id="submit" type="submit" value="Procced" class="   btn btn-block LoginBtn btn-lg " /></div>
+                                <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " /></div>
+                                <div class="col-3"><input id="submit" type="submit" value="Procced" class="   btn btn-block AddAppraisalBtn btn-lg " /></div>
                                 <div class="col-3"></div>
                                 @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
                             <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
