@@ -262,8 +262,8 @@ Toast.fire({
                                     <thead>
                                         <tr>
                                             <th> Name </th>
-                                            <th> Class Name </th>
-                                            <th> Icon Name </th>
+                                           @* <th> Class Name </th>
+                                            <th> Icon Name </th>*@
                                             <th> Flag Name </th>
                                            @* <th> Controller Name</th>
                                             <th> Action Name </th>*@
@@ -279,8 +279,8 @@ Toast.fire({
                                             {
                                                 <tr>
                                                     <td> @item.menuText </td>
-                                                    <td> @item.menuClass </td>
-                                                    <td> @item.menuIcon </td>
+                                                   @* <td> @item.menuClass </td>
+                                                    <td> @item.menuIcon </td>*@
                                                     <td> @item.menuFlag</td>
                                                  @*   <td> @item.menuController </td>
                                                      <td> @item.menuAction </td>*@
@@ -342,7 +342,7 @@ Toast.fire({
 
 <script>
 function loadDelete() {
-    let r = confirm("Are you sure you want to delete?");
+    let r = confirm("Are you sure you want to delete Menu?");
     if (r == false) {
         return event.preventDefault();
     }
