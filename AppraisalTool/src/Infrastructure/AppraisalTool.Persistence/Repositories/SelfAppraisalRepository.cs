@@ -96,9 +96,11 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<List<Appraisal>> GetYear(int userId)
         {
+            
             var years = await _dbContext.Appraisal.Include(x => x.FinancialYear).Where(x => x.UserId == userId)
                 .Include(x => x.FinancialYear)
                 .ToListAsync();
+
             return years;
         }
 
