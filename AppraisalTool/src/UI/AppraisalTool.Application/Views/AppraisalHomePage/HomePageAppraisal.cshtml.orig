@@ -87,21 +87,36 @@
                   text-size: 0.9em;
               }
 
-              .navigation:link{
-                  color: green;
-    background-color: transparent;
-    text-decoration: none;
-
-      }
+   a:link {
+  
+  background-color: transparent;
+  text-decoration: none;
+}
+.BreadCrump > a:visited {
+  color: grey;
+  background-color: transparent;
+  text-decoration: none;
+}
+.BreadCrump > a:hover {
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
+}
+ .BreadCrump > a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
        
 
 </style>
 
 
 
-<div class="content-wrapper main-panel">
+<div class="content-wrapper main-panel content-wrapper-Blue">
+     <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard" >Dashboard</a>  /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal" > Home   </a>   </h6>
     <div style="height:100vh ;width:100%; background-color: white;border-radius: 0.5rem;" class="container">
-        <h4><a asp-controller="Dashboard" asp-action="Dashboard" class="navigation">Dashboard</a>  /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal" class="navigation"> Home   </a>   </h4>
+       
         <!-- <h2 >Appraisal Home</h2> -->
         <div>
             <h2 style="padding-top:30px;padding-left: 20px;">Appraisal Home</h2>
@@ -114,15 +129,13 @@
                         <h1>@fid @fyear</h1>
                         <div class="Dropdown">
 
-<<<<<<< HEAD
                     <select asp-for="StartYear" id="FincaialYear" class="form-control form-select FincaialYear" asp-items="@ViewBag.financialYearList">
-                        <option class=" text-dropdown">Select Financial Year</option>
-                    </select>
+<<<<<<< HEAD
+                        <option class=" text-dropdown"value="4">@ViewBag.CurrentYear</option>
 =======
-                            <select asp-for="StartYear" id="FincaialYear" class="form-control FincaialYear" asp-items="@ViewBag.financialYearList">
-                            <option class = "text-dropdown">@ViewBag.CurrentYear</option>
-                            </select>
->>>>>>> 496e310e8cae77f26abeed2dbeac4a2ceef27540
+                       <option class=" text-dropdown" value ="4">@ViewBag.CurrentYear</option>
+>>>>>>> cc3838bfefc7414b1ce93756f1f8fa4b8440af25
+                    </select>
 
 
                         </div>
@@ -247,8 +260,7 @@
 
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
-        <footer class="footer">
-        </footer>
+       
         <!-- partial -->
         <!-- main-panel ends -->
     </div>
