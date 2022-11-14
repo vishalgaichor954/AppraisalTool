@@ -113,7 +113,14 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
                 }
                 catch (Exception e)
-                { }
+                {
+                    ViewBag.ReportingAuthorityFirstName = "Not Assigned";
+                    ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
+                    ViewBag.Date = "1st April 2022-31st March 2023";
+
+
+
+                }
 
 
 

@@ -146,7 +146,7 @@
                  
                            @foreach (var item in ViewBag.GetMenuCards)
                         {
-                            if (item.menuList.menuFlag == "SelfAppraisal")
+                            if (item.menuList.menuFlag == "SelfAppraisal" && item.menuList.menuFlag != "ReporteeAppraisal")
                             {
                                         <div class="dash-card">
                                              <a id="SelfAppraisal" class="Anchor-body">
