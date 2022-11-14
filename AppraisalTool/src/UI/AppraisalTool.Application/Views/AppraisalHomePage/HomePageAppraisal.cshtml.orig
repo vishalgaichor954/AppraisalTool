@@ -130,14 +130,15 @@
                         <div class="Dropdown">
 
                     <select asp-for="StartYear" id="FincaialYear" class="form-control form-select FincaialYear" asp-items="@ViewBag.financialYearList">
-                        //////<option class=" text-dropdown">Select Financial Year</option>
+<<<<<<< HEAD
+                       <option class=" text-dropdown" value="4">@ViewBag.CurrentYear</option>
+=======
+                       <option class=" text-dropdown" value ="4">@ViewBag.CurrentYear</option>
+>>>>>>> 5315c19cb7b0d0ff4ce39ab8c1aa5d4fdc2992a1
                     </select>
 
 
                         </div>
-
-
-
             }
             <div class="mt-5">
 
@@ -254,13 +255,9 @@
 
         </div>
 
-<<<<<<< Updated upstream
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
        
-=======
-
->>>>>>> Stashed changes
         <!-- partial -->
         <!-- main-panel ends -->
     </div>
