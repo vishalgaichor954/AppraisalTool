@@ -89,6 +89,7 @@
   
   background-color: transparent;
   text-decoration: none;
+  color:grey;
 }
 .BreadCrump > a:visited {
   color: grey;
@@ -98,12 +99,12 @@
 .BreadCrump > a:hover {
   color: black;
   background-color: transparent;
-  text-decoration: underline;
+  text-decoration: none;
 }
  .BreadCrump > a:active {
-  color: yellow;
+  color: grey;
   background-color: transparent;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 
@@ -121,7 +122,7 @@
            
             <div>
                 <div class="content-wrapper content-wrapper-Blue">
-                     <div>  <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="AppraisalHomePage" asp-action="SelfAppraisalDashboard"> Self Appraisal Dashboard   </a></h6></div>
+                     <div>  <h6 class="BreadCrump"><a class="" asp-controller="Dashboard" asp-action="Dashboard" >Dashboard</a>  /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal" > Home   </a>  /<a asp-controller="AppraisalHomePage" asp-action="SelfAppraisalDashboard" >  Self Appraisal Dashboard </a>  </h6>
                       <h3 style="text-align:right;color:darkgrey ">@ViewBag.fyear  </h3>
                        <input type="button" value="Back" class=" Button mb-4" onclick="history.back()" />
                     <div style="  background-color: white;border-radius: 0.5rem;" class="container">

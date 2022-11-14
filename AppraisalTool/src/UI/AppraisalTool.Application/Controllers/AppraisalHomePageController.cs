@@ -65,15 +65,13 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
                     ViewBag.PendingAppraisals = data.Data[0].pendingAppraisals;
                     ViewBag.LastDate = data.Data[0].lastDate;
-                    ViewBag.CurrentYear = data.Data[0].currentYear;
-
+                    ViewBag.CurrentYear = data.Data[0].currentYear; 
                 }
-                catch (Exception e)
+                catch(Exception e)
                 {
-                    ViewBag.AppraisalsToBeFilled = 1;
-                    ViewBag.PendingAppraisals = 1;
-                    ViewBag.LastDate = "31-March";
                     ViewBag.CurrentYear = "FY2022-2023";
+                    ViewBag.PendingAppraisals = 1;
+                    ViewBag.LastDate = "31st March 2022";
                 }
 
                 ForgetPasswordResponse AuthData = JsonConvert.DeserializeObject<ForgetPasswordResponse>(response);
@@ -96,11 +94,12 @@ namespace AppraisalTool.App.Controllers
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
+
+                var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<Response>(responseData);
+                Console.WriteLine(data.Data);
                 try
                 {
-                    var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
-                    var data = JsonConvert.DeserializeObject<Response>(responseData);
-                    Console.WriteLine(data.Data);
                     ViewBag.fyear = Fyear;
                     ViewBag.Fid = Fid;
                     ViewBag.ReportingAuthorityFirstName = data.Data[0].reportingAuthorityFirstName;
@@ -113,14 +112,9 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
                     ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
                 }
-                catch(Exception e)
-                {
-                    ViewBag.AppraisalsToBeFilled = 1;
-                    ViewBag.PendingAppraisals = 1;
-                    ViewBag.LastDate = "31-March";
-                    ViewBag.CurrentYear = "FY2022-2023";
-                }
-                
+                catch (Exception e)
+                { }
+
 
 
 
@@ -413,13 +407,15 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
                 }
                 catch(Exception e)
-                {
-                    ViewBag.AppraisalsToBeFilled = 1;
-                    ViewBag.PendingAppraisals = 1;
-                    ViewBag.LastDate = "31-March";
-                    ViewBag.CurrentYear = "FY2022-2023";
-                }
-               
+                { }
+
+
+
+
+
+
+
+
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
 

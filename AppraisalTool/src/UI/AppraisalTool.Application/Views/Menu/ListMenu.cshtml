@@ -155,8 +155,36 @@ Toast.fire({
 })
     </script>
     }
+
+    <head>
+        <style>
+ .BreadCrump>a:link {
+            color: grey;
+      background-color: transparent;
+      text-decoration: none;
+        }
+        
+
+.BreadCrump > a:visited {
+  color: grey;
+  background-color: transparent;
+  text-decoration: none;
+}
+.BreadCrump > a:hover {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+ .BreadCrump > a:active {
+  color: grey;
+  background-color: transparent;
+  text-decoration: none;
+}
+</style>
+</head>
 <div class="container">
-    
+ <h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting" >Configure Settings</a>  /<a asp-controller="Admin" asp-action="ListMenu" >  Menu Management </a></h6>
+   
     @*@if (TempData["AddMenuSuccess"] != null)
     {
         <div class="container">
@@ -223,7 +251,7 @@ Toast.fire({
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item active" aria-current="page">
                                             <div style="align-items:center;">
-                                                <a class="btn btn-block LoginBtn btn-md font-weight-medium auth-form-btn" asp-action="CreateMenu">Create Menu</a>
+                                                <a class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" asp-action="CreateMenu">Create Menu</a>
                                             </div>
                                         </li>
                                     </ol>
@@ -258,7 +286,7 @@ Toast.fire({
                                                      <td> @item.menuAction </td>*@
                                                      <td> @item.menuLink </td>
                                                      <td> @item.roleName </td>
-                                                    <td> <a asp-action="UpdateMenu" asp-route-id="@item.menu_Id" class="btn btn-sm LoginBtn"><i class="mdi mdi-table-edit"></i></a>
+                                                    <td> <a asp-action="UpdateMenu" asp-route-id="@item.menu_Id" class="btn btn-sm blueTheme"><i class="mdi mdi-table-edit"></i></a>
                                                      <a asp-action="DeleteMenu" asp-route-id="@item.menu_Id" class="btn btn-sm LoginBtn" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>
                                                  </tr>

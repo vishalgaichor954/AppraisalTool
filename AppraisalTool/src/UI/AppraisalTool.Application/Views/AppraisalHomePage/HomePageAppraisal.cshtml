@@ -130,7 +130,7 @@
                         <div class="Dropdown">
 
                     <select asp-for="StartYear" id="FincaialYear" class="form-control form-select FincaialYear" asp-items="@ViewBag.financialYearList">
-                        <option class=" text-dropdown"value="4">@ViewBag.CurrentYear</option>
+                       <option class=" text-dropdown" value ="4">@ViewBag.CurrentYear</option>
                     </select>
 
 
@@ -139,11 +139,11 @@
 
 
             }
-            <div class="mt-5">
+            <div class="mt-5 col-xs-4">
 
                 <div class="appraisal-dash-card">
                     <!-- <div class="col-md-1"></div> -->
-                 
+                
                            @foreach (var item in ViewBag.GetMenuCards)
                         {
                             if (item.menuList.menuFlag == "SelfAppraisal")
@@ -174,11 +174,12 @@
                                                 </div>
                                             </a>
                                 </div>
+                                
                             }
                         }
                     
-
-
+                       
+                       
                     
                         @foreach (var item in ViewBag.GetMenuCards)
                         {
@@ -209,10 +210,7 @@
                             }
                         }
                     
-                            
-
-
-
+                       
                   
                         @foreach (var item in ViewBag.GetMenuCards)
                         {
@@ -247,7 +245,7 @@
                             }
                         }
                     
-
+           
                 </div>
             </div>
 
