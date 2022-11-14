@@ -68,7 +68,11 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.CurrentYear = data.Data[0].currentYear; 
                 }
                 catch(Exception e)
-                { }
+                {
+                    ViewBag.CurrentYear = "FY2022-2023";
+                    ViewBag.PendingAppraisals = 1;
+                    ViewBag.LastDate = "31st March 2022";
+                }
 
                 ForgetPasswordResponse AuthData = JsonConvert.DeserializeObject<ForgetPasswordResponse>(response);
                 dynamic res = JsonConvert.SerializeObject(AuthData.Data);

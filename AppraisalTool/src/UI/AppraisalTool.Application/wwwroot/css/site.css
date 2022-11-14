@@ -101,7 +101,19 @@ element.style {
     background-color: #E0144C;
     color: white;
 }
-
+.AddAppraisalBtn {
+    background-color: #1746A2;
+    color: white;
+}
+.ResetButton {
+    background-color: #E0144C;
+    color: white;
+}
+.LoginBtn:hover {
+    background-color: white;
+    color: #1746A2;
+    border: 2px solid #1746A2;
+}
 .ApprovalBtn {
     border: 2px solid #E0144C;
     background-color: white;

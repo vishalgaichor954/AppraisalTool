@@ -136,11 +136,11 @@
 
                         </div>
             }
-            <div class="mt-5">
+            <div class="mt-5 col-xs-4">
 
                 <div class="appraisal-dash-card">
                     <!-- <div class="col-md-1"></div> -->
-                 
+                
                            @foreach (var item in ViewBag.GetMenuCards)
                         {
                             if (item.menuList.menuFlag == "SelfAppraisal")
@@ -148,7 +148,7 @@
                                         <div class="dash-card">
                                              <a id="SelfAppraisal" class="Anchor-body">
 
-                                                <div class="@item.menuList.menuClass card-img-holder text-white">
+                                                <div class="@item.menuList.menuClass card-img-holder text-white card-menu">
                                                     <div class="card-body appraisal-card">
                                                         <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
                                                         <h2 class="font-weight-normal pt-2">
@@ -171,11 +171,12 @@
                                                 </div>
                                             </a>
                                 </div>
+                                
                             }
                         }
                     
-
-
+                       
+                       
                     
                         @foreach (var item in ViewBag.GetMenuCards)
                         {
@@ -183,7 +184,7 @@
                             {
                                 <div class="dash-card">
                                     <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="Anchor-body">
-                                        <div class="@item.menuList.menuClass card-img-holder text-white">
+                                        <div class="@item.menuList.menuClass card-img-holder text-white card-menu">
                                             <div class="card-body appraisal-card">
                                                 <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
                                                 <h2 class="font-weight-normal pt-2">
@@ -206,10 +207,7 @@
                             }
                         }
                     
-                            
-
-
-
+                       
                   
                         @foreach (var item in ViewBag.GetMenuCards)
                         {
@@ -218,7 +216,7 @@
                                         <div class="dash-card">
                                             <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="Anchor-body">
 
-                                                <div class="@item.menuList.menuClass card-img-holder text-white">
+                                                <div class="@item.menuList.menuClass card-img-holder text-white card-menu">
                                                     <div class="card-body appraisal-card">
                                                         <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
                                                         <h2 class="font-weight-normal pt-2">
@@ -244,7 +242,7 @@
                             }
                         }
                     
-
+           
                 </div>
             </div>
 
@@ -266,7 +264,12 @@
         const SelfAppraisalDashboard = document.querySelector("#SelfAppraisal");
         let text = SelectDrp.options[SelectDrp.selectedIndex].text;
         console.log("On Load + ",text);
-        SelfAppraisalDashboard.setAttribute("href", `/AppraisalHomePage/SelfAppraisalDashboard?Fyear=${text}&Fid=${SelectDrp.value}`)
+        SelfAppraisalDashboard.setAttribute("href", `/AppraisalHomePage/SelfAppraisalDashboard?Fyear=${text}&Fid=${SelectDrp.value}`);
+
+        const menuCards = document.querySelectorAll(".card-menu");
+        if(menuCards.length == 1){
+            menuCards[0].classList.add("w-50");
+        }
     });
 
     const SelectDrp = document.querySelector('#FincaialYear');

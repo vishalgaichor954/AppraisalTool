@@ -160,7 +160,7 @@ namespace AppraisalTool.Persistence.Repositories
                            FinancialStartYear = B.FinancialYear.StartYear,
                            FinancialEndYear = B.FinancialYear.EndYear
                        });
-            return res.ToList<ReporteeAppraisalListVm>();
+            return res.OrderByDescending(d => d.StartDate).ToList<ReporteeAppraisalListVm>();
         }
 
     }

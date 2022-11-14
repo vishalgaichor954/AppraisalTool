@@ -101,10 +101,27 @@
         }
 
         a:link {
-            color: green;
+            color: grey;
       background-color: transparent;
       text-decoration: none;
         }
+        
+
+.BreadCrump > a:visited {
+  color: grey;
+  background-color: transparent;
+  text-decoration: none;
+}
+.BreadCrump > a:hover {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+ .BreadCrump > a:active {
+  color: grey;
+  background-color: transparent;
+  text-decoration: none;
+}
         
 
         .downloadbtn {
@@ -152,8 +169,9 @@
 
             <div>
                 <div class="content-wrapper">
+                  <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard" >Dashboard</a>  /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal" > Home   </a>  /<a asp-controller="AppraisalHomePage" asp-action="SelfAppraisalDashboard" >  Self Appraisal Dashboard </a> /<a asp-controller="AppraisalHomePage" asp-action="GradeReport" > GradeReport </a>   </h6>
+
                     <div style="  background-color: white;border-radius: 0.5rem;" class="container">
-                        <h4><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard  </a>/<a asp-controller="AppraisalHomePage" asp-action="GradeReport">    Grade Repoort </a></h4>
                             <input type="button" value="Back" class=" Button mb-4" onclick="history.back()" />
 
 
@@ -172,7 +190,7 @@
                             <div class=" row  alert alert-danger alertclass " role="alert" style="width:100%;background-color: #1B98E033">
                                 <div class="col-md-5"> <p style="padding-top:20px;">Your final grade for the Selected financial year @ViewBag.fyear  </p> </div>
                                 <div class="col-md-3"></div>
-                            <div class="col-md-4"><button  onclick="location.href='@Url.Action("GradeReport", "AppraisalHomePage")'" class="btn btn-icon-text blueTheme"><i class="mdi mdi-file-check btn-icon-prepend"></i>Download Grade Letter</button></div>
+                            <div class="col-md-4"><button  onclick="location.href='@Url.Action("GradeReport", "AppraisalHomePage")'" class="btn btn-icon-text blueTheme d-flex"><i class="mdi mdi-file-check btn-icon-prepend"></i>Download Grade Letter</button></div>
                             </div>
                         </div>
                         @*heading part*@

@@ -41,6 +41,8 @@ namespace AppraisalTool.App.Controllers
             {
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var users = JsonConvert.DeserializeObject<Response>(responseData);
+
+                
                 List<ReporteeAppraisalListVm> templateData = new List<ReporteeAppraisalListVm>();
                 foreach(var i in users.Data)
                 {
@@ -123,7 +125,7 @@ namespace AppraisalTool.App.Controllers
                 {
                     templateData = templateData.FindAll(x => x.AppraisalStatusId == reporteeAppraisalFilter.Status);
                 }
-
+                //templateData.Reverse();
                 ViewBag.UserList = templateData;
                 return View();
             }
