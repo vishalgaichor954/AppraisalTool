@@ -26,6 +26,7 @@ namespace AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetRepor
         public async Task<Response<List<ReporteeAppraisalListVm>>> Handle(GetReporteeAppraisalsByRepAuthorityQuery request, CancellationToken cancellationToken)
         {
             var data = await _selfAppraisalRepository.GetReporteeAppraisalsByRepAuthority(request.Id);
+            //data.OrderByDescending(d => d.StartDate);
             return new Response<List<ReporteeAppraisalListVm>>(data, "success");
         }
     }
