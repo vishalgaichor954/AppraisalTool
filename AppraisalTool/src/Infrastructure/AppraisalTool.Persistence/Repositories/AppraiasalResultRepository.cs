@@ -58,7 +58,18 @@ namespace AppraisalTool.Persistence.Repositories
             }
         }
 
-       
-    
+        public async Task<List<AppraisalResult>> GetAprraisalResultData(int fYearId,int userId)
+        {
+            Appraisal? appraisal = await _dbContext.Appraisal.FirstOrDefaultAsync(item => item.UserId == userId && item.FinancialYearId == fYearId);
+            if(appraisal!= null)
+            {
+                List<AppraisalResult> appraisalResults = await _dbContext.AppraisalResult.Where(item => item.AppraisalId == appraisal.Id).ToListAsync();
+                return appraisalResults;
+            }
+            return null;
+        }
+      
+
+
     }
 }
