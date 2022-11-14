@@ -29,7 +29,7 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetYear
         public async Task<Response<IEnumerable<GetYearVm>>> Handle(GetYearQuery request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("GetDataQuery Initiated");
-            List<Appraisal> appraisals = await _selfAppraisalRepository.GetYear(request.UserId);
+            List<Appraisal> appraisals = await _selfAppraisalRepository.GetYear(request.UserId);6
 
             var dataVM = appraisals.Select(x => new GetYearVm()
             {

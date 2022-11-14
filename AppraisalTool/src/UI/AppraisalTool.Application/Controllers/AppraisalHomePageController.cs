@@ -54,7 +54,10 @@ namespace AppraisalTool.App.Controllers
 
                     financialYearList.Add(new SelectListItem { Text ="FY" + item.startYear.ToString()+"-"+item.endYear.ToString(), Value = item.id.ToString(),Selected=true });
 
+
                 }
+                financialYearList.Add(new SelectListItem { Text = "FY2022-2023", Value = "4" });
+    
                 ViewBag.financialYearList = financialYearList.DistinctBy(x=>x.Value);
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
@@ -414,7 +417,13 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
                 }
                 catch(Exception e)
-                { }
+                {
+                    ViewBag.ReportingAuthorityFirstName = "Not Assigned";
+                    ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
+                    ViewBag.Date = "1-April-2022 to 31-March-2023 ";
+
+
+                }
 
 
 
