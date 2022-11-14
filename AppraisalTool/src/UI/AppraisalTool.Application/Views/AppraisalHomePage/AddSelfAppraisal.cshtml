@@ -97,17 +97,29 @@
                                 Input & Effort metric
                             </legend>
                             <div class="row d-flex justify-content-center">
+                                <div class="row pt-3 pb-1">
+                                    <div class="col-3">
+                                        <h4 class="DarkBlueP "> Metric Name</h4>
+                                      
+                                    </div>
+                                     <div class="col-3">
+                                        <h4 class="DarkBlueP "> Score<sup class="required">*</sup></h4>
+                                    </div>
+                                     <div class="col-3">
+                                        <h4 class="DarkBlueP "> Self Comment</h4>
+                                    </div>
+                                </div>
                                 @for (int i = 0; i < EffortList; i++)
                                 {
 
                                     <div class="row py-2">
-                                        <div class="col-3"><h4 class="HEADMetrics">@Model[i].Metric_Description</h4></div>
+                                        <div class="col-3"><h4 class="HEADMetrics">@Model[i].Metric_Description </h4><span style="color:black;font-style:italic;font-size:11px"> (Weightage @Model[i].metric_Weightage pts) </span></div>
                                         <div class="col-3">
                                             <div class="row d-flex justify-content-center align-items-center">
-                                                <div class="col-5">
+                                                @*<div class="col-5">
                                                     <label>Score<sup class="required">*</sup></label>
-                                                </div>
-                                                <div class="col-7">
+                                                </div>*@
+                                                <div class="col-12">
                                                     <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number">
                                                 </div>
                                                 <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
@@ -160,17 +172,29 @@
                                 Behavioral competencies
                             </legend>
                             <div class="row d-flex justify-content-center">
+                                <div class="row pt-3 pb-1">
+                                    <div class="col-3">
+                                        <h4 class="DarkBlueP "> Metric Name</h4>
+                                      
+                                    </div>
+                                     <div class="col-3">
+                                        <h4 class="DarkBlueP "> Score<sup class="required">*</sup></h4>
+                                    </div>
+                                     <div class="col-3">
+                                        <h4 class="DarkBlueP "> Self Comment</h4>
+                                    </div>
+                                </div>
                                 @for (int i = EffortList - 1; i < EffortList + BevList - 1; i++)
                                 {
                                     var temp = i + 1;
                                     <div class="row py-2">
-                                        <div class="col-3"><h4 class="HEADMetrics">@Model[temp].Metric_Description</h4></div>
+                                        <div class="col-3"><h4 class="HEADMetrics">@Model[temp].Metric_Description</h4><span style="color:black;font-style:italic;font-size:11px"> (Weightage @Model[i].metric_Weightage pts) </span></div>
                                         <div class="col-3">
                                             <div class="row d-flex justify-content-center align-items-center">
-                                                <div class="col-5">
+                                               @* <div class="col-5">
                                                     <label>Score<sup class="required">*</sup></label>
-                                                </div>
-                                                <div class="col-7">
+                                                </div>*@
+                                                <div class="col-12">
                                                     <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" min="1" max="5" type="number">
                                                 </div>
                                                 <span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>
@@ -196,17 +220,29 @@
                                 Job family grooming
                             </legend>
                             <div class="row d-flex justify-content-center">
+                                <div class="row pt-3 pb-1">
+                                    <div class="col-3">
+                                        <h4 class="DarkBlueP "> Metric Name</h4>
+                                      
+                                    </div>
+                                     <div class="col-3">
+                                        <h4 class="DarkBlueP "> Score<sup class="required">*</sup></h4>
+                                    </div>
+                                     <div class="col-3">
+                                        <h4 class="DarkBlueP "> Self Comment<sup class="required">*</sup></h4>
+                                    </div>
+                                </div>
                                 @for (int i = EffortList + BevList - 1; i < EffortList + BevList + JobList - 1; i++)
                                 {
                                     var temp = i + 1;
                                     <div class="row py-2">
-                                        <div class="col-3"><h4 class="HEADMetrics">@Model[temp].Metric_Description</h4></div>
+                                        <div class="col-3"><h4 class="HEADMetrics">@Model[temp].Metric_Description</h4><span style="color:black;font-style:italic;font-size:11px"> (Weightage @Model[i].metric_Weightage pts) </span></div>
                                         <div class="col-3">
                                             <div class="row d-flex justify-content-center align-items-center">
-                                                <div class="col-5">
+                                              @*  <div class="col-5">
                                                     <label>Score<sup class="required">*</sup></label>
-                                                </div>
-                                                <div class="col-7">
+                                                </div>*@
+                                                <div class="col-12">
                                                     <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" min="1" max="5" type="number">
                                                 </div>
                                                 <span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>
@@ -231,8 +267,8 @@
                             <input type="hidden" name="job" id="job" />
                             <div class="row">
                                 <div class="col-3"></div>
-                                <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ApprovalBtn  btn-lg " /></div>
-                                <div class="col-3"><input id="submit" type="submit" value="Procced" class="   btn btn-block LoginBtn btn-lg " /></div>
+                                <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " /></div>
+                                <div class="col-3"><input id="submit" type="submit" value="Procced" class="   btn btn-block AddAppraisalBtn btn-lg " /></div>
                                 <div class="col-3"></div>
                                 @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
                                 <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
