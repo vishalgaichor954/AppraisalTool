@@ -28,6 +28,7 @@ namespace AppraisalTool.Persistence
             services.AddScoped<IMetricRepository, MetricRepository>();
             services.AddScoped<IAppraisalResultRepository, AppraiasalResultRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddScoped<IFinancialYearRepository, FinancialYearRepository>();
 
 
             return services;

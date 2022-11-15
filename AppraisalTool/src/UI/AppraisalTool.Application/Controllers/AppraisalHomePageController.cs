@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 using static System.Formats.Asn1.AsnWriter;
+using AppraisalTool.Domain.Entities;
 
 namespace AppraisalTool.App.Controllers
 {
@@ -38,25 +39,30 @@ namespace AppraisalTool.App.Controllers
             SelfAppraisalHome model = new SelfAppraisalHome();
             HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome?userId={user.UserId}").Result;
             HttpResponseMessage cardResponse = client.GetAsync($"https://localhost:5000/api/User/GetAllCard?id={user.RoleId}&api-version=1").Result;
-            if (httpResponseMessage.IsSuccessStatusCode && cardResponse.IsSuccessStatusCode)
+            HttpResponseMessage yearResponse = client.GetAsync($"https://localhost:5000/api/v1/FinancialYear/GetAllFinancialYears").Result;
+            if (httpResponseMessage.IsSuccessStatusCode && cardResponse.IsSuccessStatusCode && yearResponse.IsSuccessStatusCode)
             {
                 var CardresponseData = cardResponse.Content.ReadAsStringAsync().Result;
-                var Cardres = JsonConvert.DeserializeObject<ForgetPasswordResponse>(CardresponseData);
+                //var Cardres = JsonConvert.DeserializeObject<ForgetPasswordResponse>(CardresponseData);
                 dynamic json = JsonConvert.DeserializeObject(CardresponseData);
                 ViewBag.GetMenuCards = json.data;
                 Console.WriteLine(ViewBag.GetMenuCards);
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                var yearResponseData = yearResponse.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<Response>(responseData);
                 Console.WriteLine(data.Data);
-                List<SelfAppraisalHome> mylist = JsonConvert.DeserializeObject<List<SelfAppraisalHome>>(JsonConvert.SerializeObject(data.Data));
+                //List<SelfAppraisalHome> mylist = JsonConvert.DeserializeObject<List<SelfAppraisalHome>>(JsonConvert.SerializeObject(data.Data));
+                List<FinancialYear> yearResponseList = JsonConvert.DeserializeObject<List<FinancialYear>>(JsonConvert.SerializeObject(JsonConvert.DeserializeObject<Response>(yearResponseData).Data));
+
                 List<SelectListItem> financialYearList = new List<SelectListItem>();
-                foreach (var item in data.Data)
+                foreach (var item in yearResponseList)
                 {
 
-                    financialYearList.Add(new SelectListItem { Text = "FY" + item.startYear.ToString() + "-" + item.endYear.ToString(), Value = item.id.ToString(), Selected = true });
+                    financialYearList.Add(new SelectListItem { Text = "FY" + item.StartYear.ToString() + "-" + item.EndYear.ToString(), Value = item.Id.ToString(), Selected = true });
 
                 }
-                ViewBag.financialYearList = financialYearList.DistinctBy(x => x.Value);
+                ViewBag.financialYearList = financialYearList;
+
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
 
@@ -66,11 +72,11 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
                     ViewBag.PendingAppraisals = data.Data[0].pendingAppraisals;
                     ViewBag.LastDate = data.Data[0].lastDate;
-                    ViewBag.CurrentYear = data.Data[0].currentYear;
+                  
                 }
                 catch (Exception e)
                 {
-                    ViewBag.CurrentYear = "FY2022-2023";
+                    
                     ViewBag.PendingAppraisals = 1;
                     ViewBag.LastDate = "31st March 2023";
                 }
