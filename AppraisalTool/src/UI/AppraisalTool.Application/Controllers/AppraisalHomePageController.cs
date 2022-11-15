@@ -377,7 +377,7 @@ namespace AppraisalTool.App.Controllers
                 var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
                 Console.WriteLine(res);
                 TempData["SUCCESS"] = "Successfully Submited";
-                return RedirectToAction("AddSelfAppraisal");
+                return RedirectToAction("SelfAppraisalDashboard");
                 //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
             }
             }
@@ -385,7 +385,7 @@ namespace AppraisalTool.App.Controllers
             TempData["Error"] = "Error Occured";
 
 
-            return RedirectToAction("AddSelfAppraisal");
+            return RedirectToAction("SelfAppraisalDashboard");
 
 
         }

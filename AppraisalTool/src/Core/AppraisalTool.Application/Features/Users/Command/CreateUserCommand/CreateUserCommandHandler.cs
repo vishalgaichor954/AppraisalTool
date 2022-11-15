@@ -63,6 +63,7 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
                 };
                 await _roleRepository.AddJobRoles(jobList);
             }
+            bool authorityStatus = await _userRepository.AssignAuthority(5, 2, userDto.Id);
 
 
             _logger.LogInformation("Hanlde Completed");

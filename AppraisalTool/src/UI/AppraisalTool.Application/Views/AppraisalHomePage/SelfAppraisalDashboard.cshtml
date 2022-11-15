@@ -114,7 +114,57 @@
 
 
     </style>
+<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
+<script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+<script src="~/lib/package/dist/sweetalert2.all.js"></script>
+<script src="~/lib/package/dist/sweetalert2.min.js"></script>
 
+@if (TempData["Error"] != null)
+{
+
+
+    <script>
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Oops ! something went wrong form was not submitted'
+        })
+    </script>
+}
+@if (TempData["SUCCESS"] != null)
+{
+    <script>
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Form was submitted successfully'
+        })
+    </script>
+}
 
     <div class="container-scroller">
 
@@ -124,7 +174,7 @@
                 <div class="content-wrapper content-wrapper-Blue">
                      <div>  <h6 class="BreadCrump"><a class="" asp-controller="Dashboard" asp-action="Dashboard" >Dashboard</a>  /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal" > Home   </a>  /<a asp-controller="AppraisalHomePage" asp-action="SelfAppraisalDashboard" >  Self Appraisal Dashboard </a>  </h6>
                       <h3 style="text-align:right;color:darkgrey ">@ViewBag.fyear  </h3>
-                       <input type="button" value="Back" class=" Button mb-4" onclick="history.back()" />
+                       <input type="button" value="Back" class=" Button mb-4"  onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
                     <div style="  background-color: white;border-radius: 0.5rem;" class="container">
                       
 
