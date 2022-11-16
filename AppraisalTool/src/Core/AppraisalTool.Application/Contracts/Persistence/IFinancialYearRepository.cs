@@ -9,6 +9,8 @@ namespace AppraisalTool.Application.Contracts.Persistence
 {
     public interface IFinancialYearRepository: IAsyncRepository<FinancialYear>
     {
-        public Task<List<FinancialYear>> GetAllFinancialYears(); 
+        public Task<List<FinancialYear>> GetAllFinancialYears();
+
+        public Task<List<FinancialYear>> GetFinancialYearsByUserJoining(int userId);
     }
 }

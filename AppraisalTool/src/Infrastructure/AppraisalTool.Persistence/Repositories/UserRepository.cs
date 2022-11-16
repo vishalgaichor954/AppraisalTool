@@ -225,22 +225,6 @@ namespace AppraisalTool.Persistence.Repositories
         public async Task<IEnumerable<User>> GetAllUser()
         {
             IEnumerable<User> users = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).Where(u=>u.IsDeleted !=true).ToListAsync();
-            //var result = (from A in _dbContext.User
-            //              join B in _dbContext.Branch on A.BranchId equals B.Id
-            //              select new GetUserListQueryVm
-            //              {
-            //                  Id = A.Id,
-            //                  FirstName = A.FirstName,
-            //                  LastName = A.LastName,
-            //                  Email = A.Email,
-            //                  BranchName = B.BranchName,
-            //                  JoinDate = (DateTime)A.JoinDate,
-            //                  LastAppraisalDate = A.LastAppraisalDate
-
-
-            //              });
-            //var res = await res.OrderBy(x => x.Id).ToListAsync();
-
             return users;
             
         }
