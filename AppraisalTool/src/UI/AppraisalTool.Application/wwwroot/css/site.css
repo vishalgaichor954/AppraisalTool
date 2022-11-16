@@ -47,6 +47,14 @@ element.style {
 .DarkBlueP {
     color: #1746A2;
 }
+.DarkBlueReveiwingP {
+    color: #1746A2;
+    font-size:17px
+}
+.DarkBlueReveiwingP2 {
+    color: #1746A2;
+    font-size: 15px
+}
 .blueTheme {
     background-color: #1746A2;
     color:white;
@@ -255,6 +263,10 @@ legend {
     font-size: 14px;
 }
 
+.spanValidationFontSize {
+    /*color: red !important;*/
+    font-size: 12px !important;
+}
 ::-webkit-scrollbar {
     height: 6px;
     width: 6px;
