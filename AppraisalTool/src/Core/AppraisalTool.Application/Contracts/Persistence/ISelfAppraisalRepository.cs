@@ -17,5 +17,6 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<List<ReporteeAppraisalListVm>> GetReporteeAppraisalsByRepAuthority(int id);
         public Task<Appraisal> AddAppraisal(Appraisal addAppraisal);
         public Task<bool> UpdateAppraisalStatus(int appraisalId, int status);
+        public Task<Appraisal> GetAppraisalByUserAndFinancialYear(int fId, int userId);
     }
 }

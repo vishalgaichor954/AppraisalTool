@@ -156,5 +156,14 @@ namespace AppraisalTool.Persistence.Repositories
             return res.OrderByDescending(d => d.StartDate).ToList<ReporteeAppraisalListVm>();
         }
 
+        //Author : Ilyas Dabholkar
+        //Return Appraisal Object by financialayear and userid
+        public async Task<Appraisal> GetAppraisalByUserAndFinancialYear(int fId,int userId)
+        {
+            //item => item.UserId == userId && item.FinancialYearId == fId
+            Appraisal appraisal = await _dbContext.Appraisal.Include(item => item.FinancialYear).Where(item => item.UserId == userId && item.FinancialYearId == fId).FirstOrDefaultAsync();
+            return appraisal;
+        }
+
     }
 }

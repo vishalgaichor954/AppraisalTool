@@ -18,5 +18,7 @@ namespace AppraisalTool.Domain.Common
         public int BehaviouralMetricObtainedScore { get; set; }
         public int JobGroomingMetricWeightage { get; set; }
         public int JobGroomingMetricObtainedScore { get; set; }
+        public int FinancialStartYear { get; set; }
+        public int FinancialEndYear { get; set; }
     }
 }
