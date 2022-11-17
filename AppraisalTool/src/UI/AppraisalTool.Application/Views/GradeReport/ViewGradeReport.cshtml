@@ -1,0 +1,142 @@
+﻿@{
+    int score = 50;
+}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-linear-gauge.min.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['gauge'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Label', 'Score'],
+            ['Score', @score],
+        ]);
+
+        var options = {
+            width: 750, height: 350,
+            min: 0, max: 70,
+            redFrom: 0, redTo: 17.5,
+            greenFrom: 52.5, greenTo: 70,
+            yellowFrom: 17.6, yellowTo: 52.4,
+            minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+
+        anychart.onDocumentReady(function () {
+
+            // create data
+            var data = [63];
+
+            // set the gauge type
+            var gauge = anychart.gauges.linear();
+
+            // set the data for the gauge
+            gauge.data(data);
+
+            // set the layout
+            gauge.layout('horizontal');
+
+            // create a color scale
+            var scaleBarColorScale = anychart.scales.ordinalColor().ranges(
+                [
+                    {
+                        from: 0,
+                        to: 25,
+                        color: ['#D81E05', '#EB7A02']
+                    },
+                    {
+                        from: 25,
+                        to: 50,
+                        color: ['#EB7A02', '#FFD700']
+                    },
+                    {
+                        from: 50,
+                        to: 75,
+                        color: ['#FFD700', '#CAD70b']
+                    },
+                    {
+                        from: 75,
+                        to: 100,
+                        color: ['#CAD70b', '#2AD62A']
+                    }
+                ]
+            );
+
+            // create a Scale Bar
+            var scaleBar = gauge.scaleBar(0);
+
+            // set the height and offset of the Scale Bar (both as percentages of the gauge height)
+            scaleBar.width('20%');
+            scaleBar.offset('31.5%');
+
+            // use the color scale (defined earlier) as the color scale of the Scale Bar
+            scaleBar.colorScale(scaleBarColorScale);
+
+            // add a marker pointer
+            var marker = gauge.marker(0);
+
+            // set the offset of the pointer as a percentage of the gauge width
+            marker.offset('31.5%');
+            marker.width(15);
+
+            // set the marker type
+            marker.type('triangle-up');
+
+            // set the zIndex of the marker
+            marker.zIndex(10);
+
+            // configure the scale
+            var scale = gauge.scale();
+            scale.minimum(0);
+            scale.maximum(100);
+            scale.ticks().interval(10);
+
+            // configure the axis
+            var axis = gauge.axis();
+            axis.minorTicks(true)
+            axis.minorTicks().stroke('#cecece');
+            axis.width('2%');
+            axis.offset('29.5%');
+            axis.orientation('top');
+
+            // format axis labels
+            axis.labels().format('{%value}%');
+
+            // set paddings
+            gauge.padding([0, 50]);
+
+            // set the container id
+            gauge.container('container');
+
+            // initiate drawing the gauge
+            gauge.draw();
+        });
+    }
+</script>
+
+<style>
+    #container {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<div>
+    <div id="gauge-div" class="d-flex justify-content-center">
+        <div id="chart_div">
+        </div>
+    </div>
+    <div>
+        <div id="container">
+        </div>
+    </div>
+
+</div>
