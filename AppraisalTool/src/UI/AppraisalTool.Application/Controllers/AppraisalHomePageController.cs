@@ -120,12 +120,6 @@ namespace AppraisalTool.App.Controllers
                 }
                 catch (Exception e)
                 { }
-
-
-
-
-
-
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
 
@@ -212,6 +206,8 @@ namespace AppraisalTool.App.Controllers
             return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
         }
 
+
+        //@Author : Ilyas Dabholkar
         [HttpGet]
         public IActionResult AddSelfAppraisal(int? fid)
         {
@@ -305,6 +301,7 @@ namespace AppraisalTool.App.Controllers
             return View();
         }
 
+        //@Author : Ilyas Dabholkar
         [HttpPost]
         public IActionResult AddSelfAppraisal(List<MetricsDto> scores, int Fid)
         {
@@ -414,14 +411,6 @@ namespace AppraisalTool.App.Controllers
                 }
                 catch (Exception e)
                 { }
-
-
-
-
-
-
-
-
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
 
