@@ -313,6 +313,21 @@
         margin: 0;
         padding: 0;
     }
+     .Button {
+        background-color: #1746A2;
+        color: white;
+        /* border: 2px solid #E0144C;*/
+        border-radius: 0.3rem;
+        border: none;
+        padding: 13px 40px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: auto;
+    }
 </style>
 
 
@@ -324,18 +339,18 @@
 
                 
                 <div class="featureBackground ">
-                    <h1 class="card-title FormHeader">Grade Details</h1>
-                    <p>Your grade based on your relative performance in your cohort, which is a group of employees working in similar role as yours and under similar constraints, capacity and bussiness setting. The criteria used to create your cohort and cohort size is given below. Employees following this criteria are part of one cohort. </p>
+                    <h1 class="card-title FormHeader m-2">Grade Details</h1>
+                    <p style="color:#7D9D9C" class="mx-2 my-4">Your grade based on your relative performance in your cohort, which is a group of employees working in similar role as yours and under similar constraints, capacity and bussiness setting. The criteria used to create your cohort and cohort size is given below. Employees following this criteria are part of one cohort. </p>
                     <div class="alert-danger my-1 mx-2 p-2">
                         <p class="m-2">Total Score: @Model.totatScoredPercentage %</p>
                     </div>
-                    <p>The relative position in your cohort has been decided based on your overall score. to score well on the overall level, it is important to perform well on the KRAs as well as on overall level using following charts.</p>
+                    <p style="color:#7D9D9C" class="mx-2 my-4">The relative position in your cohort has been decided based on your overall score. to score well on the overall level, it is important to perform well on the KRAs as well as on overall level using following charts.</p>
                     <div id="gauge-div" class="d-flex justify-content-center">
                         <div id="chart_div">
                         </div>
                     </div>
                     <div>
-                        <h3>Performance in all metrics</h3>
+                        <h3 class="mt-4 mx-4">Performance in all metrics</h3>
                         <div class="m-4 DarkBlueGradeBorder" >
                             <h6 class="mx-4 mt-2 mb-0">Input & Effort metric score standing(Percentile Rank) </h6>
                             <div class="d-flex justify-content-center">
