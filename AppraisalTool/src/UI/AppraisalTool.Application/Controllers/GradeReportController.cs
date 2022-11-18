@@ -1,15 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AppraisalTool.App.Helpers;
+using AppraisalTool.App.Models;
+using AppraisalTool.App.Models.AppraisalToolAuth;
+using AppraisalTool.App.Models.GradeReport;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Syncfusion.EJ2.CircularGauge;
 
 namespace AppraisalTool.App.Controllers
 {
     public class GradeReportController : Controller
     {
+        private readonly ILogger<GradeReportController> _logger;
+        Uri baseAddress = new Uri("https://localhost:5000/api/v1");
+        HttpClient client;
+        //Uri baseAddress = new Uri("https://localhost:5000/api");
+        public GradeReportController(ILogger<GradeReportController> logger)
+        {
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            _logger = logger;
 
-        Uri baseAddress = new Uri("https://localhost:5000/api");
+        }
 
         //Author : Ilyas Dabholkar
-        public IActionResult ViewGradeReport()
+        public IActionResult ViewGradeReport(int Fid)
         {
             List<CircularGaugePointer> pointers = new List<CircularGaugePointer>();
             CircularGaugePointer pointer1 = new CircularGaugePointer();
@@ -93,6 +107,31 @@ namespace AppraisalTool.App.Controllers
             range8.LegendText = "Hurricane force";
             ranges.Add(range8);
             ViewBag.Ranges = ranges;
+
+            var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/GradeReport/GetChartsData?Fid={Fid}&userId=5").Result;
+
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                var res = JsonConvert.DeserializeObject<Response>(responseData);
+
+                GradeChartsData gradeData= JsonConvert.DeserializeObject<GradeChartsData>(JsonConvert.SerializeObject(res.Data));
+                double totalPercentageScored = (double)gradeData.TotalObtainedScore/gradeData.TotalWeightage;
+                double InputMetricPercentage= (double)gradeData.InputMetricObtainedScore / gradeData.InputMetricWeightage;
+                double BehavioralMetricPercentage = (double)gradeData.BehaviouralMetricObtainedScore / gradeData.BehaviouralMetricWeightage;
+                double JobGroomingMetricPercentage = (double)gradeData.JobGroomingMetricObtainedScore / gradeData.JobGroomingMetricWeightage;
+                gradeData.totatScoredPercentage =(int) Math.Round(totalPercentageScored*70);
+                gradeData.totatInputMetricScoredPercentage = (int)Math.Round(InputMetricPercentage*100);
+                gradeData.totatBehaviouralMetricScoredPercentage = (int)Math.Round(BehavioralMetricPercentage*100);
+                gradeData.totatJobGromingMetricScoredPercentage = (int)Math.Round(JobGroomingMetricPercentage*100);
+
+
+                Console.WriteLine(gradeData);
+
+                return View(gradeData);
+            }
 
             return View();
            

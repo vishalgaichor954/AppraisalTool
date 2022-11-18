@@ -20,5 +20,12 @@ namespace AppraisalTool.Domain.Common
         public int JobGroomingMetricObtainedScore { get; set; }
         public int FinancialStartYear { get; set; }
         public int FinancialEndYear { get; set; }
+        public int? totatScoredPercentage { get; set; }
+        public int? totatInputMetricScoredPercentage { get; set; }
+        public int? totatBehaviouralMetricScoredPercentage { get; set; }
+        public int? totatJobGromingMetricScoredPercentage { get; set; }
+
+
+
     }
 }

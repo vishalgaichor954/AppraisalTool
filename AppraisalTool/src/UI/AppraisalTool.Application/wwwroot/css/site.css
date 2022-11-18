@@ -47,6 +47,9 @@ element.style {
 .DarkBlueP {
     color: #1746A2;
 }
+.DarkBlueGradeBorder {
+    border: 2px solid #1746A2;
+}
 .blueTheme {
     background-color: #1746A2;
     color:white;
