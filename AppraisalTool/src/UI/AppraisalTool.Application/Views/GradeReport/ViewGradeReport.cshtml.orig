@@ -337,6 +337,7 @@
             <div class="card-body">
                 <input type="button" value="Back" class=" Button mb-4" onclick="history.back()" />
 
+<<<<<<< HEAD
                 
                 <div class="featureBackground ">
                     <h1 class="card-title FormHeader m-2">Grade Details</h1>
@@ -352,6 +353,30 @@
                     <div>
                         <h3 class="mt-4 mx-4">Performance in all metrics</h3>
                         <div class="m-4 DarkBlueGradeBorder" >
+=======
+                <div class="d-flex justify-content-end">
+                    <form method="post" asp-controller="GradeReport" asp-action="ExportPdf">
+                        <input type="hidden" name="ExportData" id="ExportData" />
+                        <input type="submit" id="btnSubmit" value="Download" class="btn btn-primary" />
+                    </form>
+                </div>
+                <div id="PrintPDF" class="featureBackground ">
+                    <div>
+                        <h1 class="card-title FormHeader">Grade Details</h1>
+                        <p>Your grade based on your relative performance in your cohort, which is a group of employees working in similar role as yours and under similar constraints, capacity and bussiness setting. The criteria used to create your cohort and cohort size is given below. Employees following this criteria are part of one cohort. </p>
+                        <div class="alert-danger my-1 mx-2 p-2">
+                            <p class="m-2">Total Score: @Model.totatScoredPercentage %</p>
+                        </div>
+                        <p>The relative position in your cohort has been decided based on your overall score. to score well on the overall level, it is important to perform well on the KRAs as well as on overall level using following charts.</p>
+                        <div id="gauge-div" class="d-flex justify-content-center" style="max-height:60%;">
+                            <div id="chart_div">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Performance in all metrics</h3>
+                        <div class="m-4 DarkBlueGradeBorder" style="max-height:20%;">
+>>>>>>> f305639f10d35c6ca478c7478bdf6ed71e1df08d
                             <h6 class="mx-4 mt-2 mb-0">Input & Effort metric score standing(Percentile Rank) </h6>
                             <div class="d-flex justify-content-center">
                                 <div style="width:85%;max-height:20%;" id="Linear-gauge">

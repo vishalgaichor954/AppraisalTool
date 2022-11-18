@@ -2,6 +2,7 @@
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.GradeReport;
+using IronPdf;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Syncfusion.EJ2.CircularGauge;
@@ -135,6 +136,18 @@ namespace AppraisalTool.App.Controllers
 
             return View();
            
+        }
+
+        [HttpPost]
+        public ActionResult ExportPdf(string ExportData)
+        {
+            var renderer = new HtmlToPdf();
+            var file = renderer.RenderHtmlAsPdf(ExportData).SaveAs("GradeReport.pdf");
+            string physicalPath = "GradeReport.pdf";
+            byte[] pdfBytes = System.IO.File.ReadAllBytes(physicalPath);
+            MemoryStream ms = new MemoryStream(pdfBytes);
+            return new FileStreamResult(ms, "application/pdf");
+
         }
     }
 }
