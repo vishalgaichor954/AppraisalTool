@@ -139,54 +139,6 @@ namespace AppraisalTool.App.Controllers
 
         }
 
-        //public IActionResult AddSelfAppraisal()
-        //{
-        //    HttpClient client = new HttpClient();
-        //    client.BaseAddress = baseAddress;
-        //    HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/v1/Metric/GetAllListOfMetric").Result;
-        //    if (cardResponse.IsSuccessStatusCode)
-        //    {
-        //        var responseData = cardResponse.Content.ReadAsStringAsync().Result;
-        //        var res = JsonConvert.DeserializeObject<Response>(responseData);
-
-        //        List<MetricsDto> mylist = JsonConvert.DeserializeObject<List<MetricsDto>>(JsonConvert.SerializeObject(res.Data));
-
-        //        List<MetricsDto> IMetric = new List<MetricsDto>();
-        //        List<MetricsDto> BevMetric = new List<MetricsDto>();
-        //        List<MetricsDto> JobMetric = new List<MetricsDto>();
-
-        //        mylist.ForEach(item =>
-        //        {
-        //            if (item.List_Id.Equals(1))
-        //            {
-        //                IMetric.Add(item);
-        //            }
-        //            else if (item.List_Id.Equals(3))
-        //            {
-        //                BevMetric.Add(item);
-        //            }
-        //            else if (item.List_Id.Equals(4))
-        //            {
-        //                JobMetric.Add(item);
-        //            }
-        //        });
-
-
-        //        SelfAppraisalMetricsModel model = new SelfAppraisalMetricsModel() { IMetric = IMetric, BevMetric = BevMetric, JobMetric = JobMetric };
-        //        Console.Write(model);
-        //        ViewBag.AppraisalFormModel = model;
-        //        return View();
-        //    }
-        //    return View();
-
-        //}
-
-        //[HttpPost]
-        //public IActionResult AddSelfAppraisal(IEnumerable<ScoreModel> scores)
-        //{
-        //    return RedirectToAction("AddSelfAppraisal");
-        //}
-
         [HttpGet]
         public IActionResult AddReportingAuthorityAppraisal(int Appraisald)
         {
@@ -203,7 +155,8 @@ namespace AppraisalTool.App.Controllers
 
                 List<ReportingMetricDto> mylist = JsonConvert.DeserializeObject<List<ReportingMetricDto>>(JsonConvert.SerializeObject(res.Data));
 
-                //List<MetricsDto> IMetric = new List<MetricsDto>();
+                //List<MetricsDto> IMetric = n
+                //ew List<MetricsDto>();
                 //List<MetricsDto> BevMetric = new List<MetricsDto>();
                 //List<MetricsDto> JobMetric = new List<MetricsDto>();
 
@@ -424,14 +377,6 @@ namespace AppraisalTool.App.Controllers
 
 
                 }
-
-
-
-
-
-
-
-
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
 
@@ -510,11 +455,7 @@ namespace AppraisalTool.App.Controllers
                 return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
                 //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
             }
-
-
             TempData["RepaError"] = "Error Occured";
-
-
             return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
         }
 
