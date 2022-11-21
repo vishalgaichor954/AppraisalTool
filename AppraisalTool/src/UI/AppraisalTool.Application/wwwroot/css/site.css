@@ -50,6 +50,11 @@ element.style {
 .DarkBlueGradeBorder {
     border: 2px solid #1746A2;
 }
+.blueThemeA {
+    background-color: #1746A2 !important;
+    color: white !important;
+    text-decoration: none !important;
+}
 .blueTheme {
     background-color: #1746A2;
     color:white;

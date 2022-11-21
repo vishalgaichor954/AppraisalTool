@@ -313,7 +313,8 @@
         margin: 0;
         padding: 0;
     }
-     .Button {
+
+    .Button {
         background-color: #1746A2;
         color: white;
         /* border: 2px solid #E0144C;*/
@@ -337,21 +338,28 @@
             <div class="card-body">
                 <input type="button" value="Back" class=" Button mb-4" onclick="history.back()" />
 
-                
-                <div class="featureBackground ">
-                    <h1 class="card-title FormHeader m-2">Grade Details</h1>
-                    <p style="color:#7D9D9C" class="mx-2 my-4">Your grade based on your relative performance in your cohort, which is a group of employees working in similar role as yours and under similar constraints, capacity and bussiness setting. The criteria used to create your cohort and cohort size is given below. Employees following this criteria are part of one cohort. </p>
-                    <div class="alert-danger my-1 mx-2 p-2">
-                        <p class="m-2">Total Score: @Model.totatScoredPercentage %</p>
-                    </div>
-                    <p style="color:#7D9D9C" class="mx-2 my-4">The relative position in your cohort has been decided based on your overall score. to score well on the overall level, it is important to perform well on the KRAs as well as on overall level using following charts.</p>
-                    <div id="gauge-div" class="d-flex justify-content-center">
-                        <div id="chart_div">
+                <div class="d-flex justify-content-end">
+                    @* <form method="post" asp-controller="GradeReport" asp-action="ExportPdf">
+                    <input type="hidden" name="ExportData" id="ExportData" />
+                    <button id="btnSubmit" value="Download" class="btn btn-primary" />
+                       </form>*@
+                </div>
+                <div id="PrintPDF" class="featureBackground p-4" >
+                    <div>
+                        <h1 class="card-title FormHeader my-4">Grade Details</h1>
+                        <p class="mx-2 my-4" style="color:#497174">Your grade based on your relative performance in your cohort, which is a group of employees working in similar role as yours and under similar constraints, capacity and bussiness setting. The criteria used to create your cohort and cohort size is given below. Employees following this criteria are part of one cohort. </p>
+                        <div class="alert-danger my-1 mx-1 p-2">
+                            <p class="m-2">Total Score: @Model.totatScoredPercentage %</p>
+                        </div>
+                        <p class="mx-2 my-4" style="color:#497174">The relative position in your cohort has been decided based on your overall score. to score well on the overall level, it is important to perform well on the KRAs as well as on overall level using following charts.</p>
+                        <div id="gauge-div" class="d-flex justify-content-center" style="max-height:60%;">
+                            <div id="chart_div">
+                            </div>
                         </div>
                     </div>
                     <div>
-                        <h3 class="mt-4 mx-4">Performance in all metrics</h3>
-                        <div class="m-4 DarkBlueGradeBorder" >
+                        <h3 class="mx-4 mt-5" style="color:#404258">Performance in all metrics</h3>
+                        <div class="m-4 DarkBlueGradeBorder" style="max-height:20%;">
                             <h6 class="mx-4 mt-2 mb-0">Input & Effort metric score standing(Percentile Rank) </h6>
                             <div class="d-flex justify-content-center">
                                 <div style="width:85%;max-height:20%;" id="Linear-gauge">
@@ -390,10 +398,47 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/pdfmake.min.js"></script>
 
 <script type="text/javascript">
-    $(function () {
-        $("#btnSubmit").click(function () {
-            console.log($("#PrintPDF").html());
-            $("input[name='ExportData']").val($("#PrintPDF").html());
-        });
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+        //const SubmitCall = () => {
+        //    data = document.querySelector("#PrintPDF").innerHTML;
+        //    document.querySelector("input[name='ExportData']").value = data;
+        //    console.log(data);
+        //    ExportData = {Data:data}
+        //    $.ajax('/GradeReport/ExportPdf', {
+        //        method: 'POST',
+        //        data: ExportData,
+        //        traditional: true,
+        //        success: function (d) {
+
+        //        }
+        //    });
+        //}
+
+        //document.querySelector("#btnSubmit").addEventListener('click',SubmitCall);
+
+
+
     });
+
+
+            //$(document).ready(function () {
+            //    const bars = document.querySelectorAll(".anychart-ui-support");
+            //    bars.forEach(item => item.setAttribute("height": "20%"));
+            //    //$(function () {
+            //    //    $("#btnSubmit").click(function () {
+
+            //    //        console.log($("#PrintPDF").html());
+            //    //        $("input[name='ExportData']").val($("#PrintPDF").html());
+            //    //    });
+            //    //});
+            //});
+
+
+
+
+
+
+
+
 </script>

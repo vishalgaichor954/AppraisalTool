@@ -6,115 +6,118 @@
 
 
 <style>
-            .Dash-Card {
-                height: 240px;
-            }
+    .Dash-Card {
+    height: 240px;
+    }
 
-            .Date-Badge {
-                margin-right: 0% !important;
-            }
+    .Date-Badge {
+    margin-right: 0% !important;
+    }
 
-            .roles {
-                display: inline;
-            }
+    .roles {
+    display: inline;
+    }
 
-            .Anchor-body {
-                text-decoration: none;
-                height: 240px;
-                width: 100%;
-            }
+    .Anchor-body {
+    text-decoration: none;
+    height: 240px;
+    width: 100%;
+    }
 
-            .icon-card {
-                font-size: 3rem;
-                font-weight: 300;
-            }
+    .icon-card {
+    font-size: 3rem;
+    font-weight: 300;
+    }
 
-            .role-div {
-                background-color: white;
-                border-radius: 0.5rem;
-            }
+    .role-div {
+    background-color: white;
+    border-radius: 0.5rem;
+    }
 
-            .user-roles {
-                margin-right: 18px;
-            }
+    .user-roles {
+    margin-right: 18px;
+    }
 
-            .appraisal-card {
-                padding: 0.2rem 0.5rem !important;
-            }
+    .appraisal-card {
+    padding: 0.2rem 0.5rem !important;
+    }
 
-            .appraisal > p {
-                margin-bottom: 0%;
-            }
+    .appraisal > p {
+    margin-bottom: 0%;
+    }
 
-            .Last-Date {
-                margin-right: 40px;
-            }
+    .Last-Date {
+    margin-right: 40px;
+    }
 
-            .gradient-1 {
-                background-image: linear-gradient(30deg, #316bfd, #6f1ef1);
-            }
+    .gradient-1 {
+    background-image: linear-gradient(30deg, #316bfd, #6f1ef1);
+    }
 
-            .date-p {
-                margin: 0% !important;
-            }
+    .date-p {
+    margin: 0% !important;
+    }
 
-            .gradient-2 {
-                background-image: linear-gradient(30deg, #fa1157, #fc4939);
-            }
+    .gradient-2 {
+    background-image: linear-gradient(30deg, #fa1157, #fc4939);
+    }
 
-            .gradient-3 {
-                background-image: linear-gradient(30deg, #fd9d2e, #ff550d);
-            }
+    .gradient-3 {
+    background-image: linear-gradient(30deg, #fd9d2e, #ff550d);
+    }
 
-         
 
-        .Button {
-          
-            background-color: #1746A2;
-           color: white;
-          /* border: 2px solid #E0144C;*/
-          border-radius:0.3rem;
-            border:none;
-            padding: 13px 40px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            width: auto;
-        }
 
-  a:link {
-  
-  background-color: transparent;
-  text-decoration: none;
-  color:grey;
+    .Button {
+
+    background-color: #1746A2;
+    color: white;
+    /* border: 2px solid #E0144C;*/
+    border-radius:0.3rem;
+    border:none;
+    padding: 13px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: auto;
+    }
+
+    a:link {
+
+    background-color: transparent;
+    text-decoration: none;
+    color:grey;
+    }
+    .BreadCrump > a:visited {
+    color: grey;
+    background-color: transparent;
+    text-decoration: none;
+    }
+    .BreadCrump > a:hover {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+    }
+    .BreadCrump > a:active {
+    color: grey;
+    background-color: transparent;
+    text-decoration: none;
+    }
+
+
+
+
+
+
+
+</style>
+@{
+    var check=ViewBag.fyear;
+    var checkFid = ViewBag.fid;
 }
-.BreadCrump > a:visited {
-  color: grey;
-  background-color: transparent;
-  text-decoration: none;
-}
-.BreadCrump > a:hover {
-  color: black;
-  background-color: transparent;
-  text-decoration: none;
-}
- .BreadCrump > a:active {
-  color: grey;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-
-
-
-
-
-
-    </style>
-
 
     <div class="container-scroller">
 
@@ -143,7 +146,7 @@
                             <div class=" row mt-4 mb-4  " role="alert" style="width:96%">
                                 <div class="col-md-5"> <p class="DarkBlueP">Your final grade for financial year @ViewBag.fyear  </p> </div>
                                 <div class="col-md-3"></div>
-                                <div class="col-md-4"><button  onclick="location.href='@Url.Action("GradeReport", "AppraisalHomePage")'" class="btn btn-icon-text blueTheme d-flex"><i class="mdi mdi-file-check btn-icon-prepend"></i>Download Grade Letter</button></div>
+                                <div class="col-md-4"><a href="/AppraisalHomePage/GradeReport?Fid=@ViewBag.Fid&Fyear=@ViewBag.fyear"  class="btn btn-icon-text blueThemeA d-flex"><i class="mdi mdi-file-check btn-icon-prepend"></i>Download Grade Letter</a></div>
                             </div>
                         </div>
                         <div style="display:flex;align-items: center;justify-content: center;">

@@ -2,10 +2,17 @@
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.GradeReport;
+using DinkToPdf;
 using IronPdf;
+using jsreport.Binary;
+using jsreport.Local;
+using jsreport.Types;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Syncfusion.EJ2.CircularGauge;
+using System.Drawing.Printing;
+using System.Runtime.InteropServices;
+using PaperKind = DinkToPdf.PaperKind;
 
 namespace AppraisalTool.App.Controllers
 {
@@ -111,22 +118,22 @@ namespace AppraisalTool.App.Controllers
 
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/GradeReport/GetChartsData?Fid={Fid}&userId=5").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/GradeReport/GetChartsData?Fid={Fid}&userId={user.UserId}").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var res = JsonConvert.DeserializeObject<Response>(responseData);
 
-                GradeChartsData gradeData= JsonConvert.DeserializeObject<GradeChartsData>(JsonConvert.SerializeObject(res.Data));
-                double totalPercentageScored = (double)gradeData.TotalObtainedScore/gradeData.TotalWeightage;
-                double InputMetricPercentage= (double)gradeData.InputMetricObtainedScore / gradeData.InputMetricWeightage;
+                GradeChartsData gradeData = JsonConvert.DeserializeObject<GradeChartsData>(JsonConvert.SerializeObject(res.Data));
+                double totalPercentageScored = (double)gradeData.TotalObtainedScore / gradeData.TotalWeightage;
+                double InputMetricPercentage = (double)gradeData.InputMetricObtainedScore / gradeData.InputMetricWeightage;
                 double BehavioralMetricPercentage = (double)gradeData.BehaviouralMetricObtainedScore / gradeData.BehaviouralMetricWeightage;
                 double JobGroomingMetricPercentage = (double)gradeData.JobGroomingMetricObtainedScore / gradeData.JobGroomingMetricWeightage;
-                gradeData.totatScoredPercentage =(int) Math.Round(totalPercentageScored*70);
-                gradeData.totatInputMetricScoredPercentage = (int)Math.Round(InputMetricPercentage*100);
-                gradeData.totatBehaviouralMetricScoredPercentage = (int)Math.Round(BehavioralMetricPercentage*100);
-                gradeData.totatJobGromingMetricScoredPercentage = (int)Math.Round(JobGroomingMetricPercentage*100);
+                gradeData.totatScoredPercentage = (int)Math.Round(totalPercentageScored * 70);
+                gradeData.totatInputMetricScoredPercentage = (int)Math.Round(InputMetricPercentage * 100);
+                gradeData.totatBehaviouralMetricScoredPercentage = (int)Math.Round(BehavioralMetricPercentage * 100);
+                gradeData.totatJobGromingMetricScoredPercentage = (int)Math.Round(JobGroomingMetricPercentage * 100);
 
 
                 Console.WriteLine(gradeData);
@@ -135,18 +142,39 @@ namespace AppraisalTool.App.Controllers
             }
 
             return View();
-           
+
         }
 
-        [HttpPost]
-        public ActionResult ExportPdf(string ExportData)
-        {
-            var renderer = new HtmlToPdf();
-            var file = renderer.RenderHtmlAsPdf(ExportData).SaveAs("GradeReport.pdf");
-            string physicalPath = "GradeReport.pdf";
-            byte[] pdfBytes = System.IO.File.ReadAllBytes(physicalPath);
-            MemoryStream ms = new MemoryStream(pdfBytes);
-            return new FileStreamResult(ms, "application/pdf");
+       [HttpPost]
+        public async Task<ActionResult> ExportPdf(string ExportData)
+       {
+
+
+            var rs = new LocalReporting()
+               .KillRunningJsReportProcesses()
+               .UseBinary(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? JsReportBinary.GetBinary() : jsreport.Binary.Linux.JsReportBinary.GetBinary())
+               .Configure(cfg => cfg.AllowedLocalFilesAccess().FileSystemStore().BaseUrlAsWorkingDirectory())
+               .AsUtility()
+               .Create();
+            var generatedPdf = await rs.RenderAsync(new RenderRequest
+            {
+                Template = new Template
+                {
+                    Recipe = Recipe.ChromePdf,
+                    Engine = Engine.None,
+                    Content = ExportData,
+                    Chrome = new Chrome
+                    {
+                        MarginTop = "10",
+                        MarginBottom = "10",
+                        MarginLeft = "50",
+                        MarginRight = "50"
+                    }
+                }
+            });
+            return File(generatedPdf.Content, generatedPdf.Meta.ContentType, "GeneratedPdfFile.pdf");
+
+
 
         }
     }
