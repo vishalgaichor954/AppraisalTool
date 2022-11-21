@@ -13,6 +13,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AppraisalTool.Application.Features.Users.Query.GetUserById;
+using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalList;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -106,9 +107,9 @@ namespace AppraisalTool.Api.Controllers.v1
         [HttpGet("GetAllCard")]
         public async Task<ActionResult> GetAllCard(int id)
         {
-            _logger.LogInformation("GetUserJobProfile Initiated");
+            _logger.LogInformation("GetAllCard Initiated");
             var dtos = await _mediator.Send(new GetMenuListQuery() { Id = id });
-            _logger.LogInformation("GetUserJobProfile Completed");
+            _logger.LogInformation("GetAllCard Completed");
             return Ok(dtos);
         }
 
@@ -118,6 +119,15 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("GetUserAsync Initiated");
             var dtos = await _mediator.Send(new GetUserByIdQuery() { Id = id });
             _logger.LogInformation("GetUserAsync Completed");
+            return Ok(dtos);
+        }
+
+        [HttpGet("ListOfAppraisal")]
+        public async Task<ActionResult> GetAllAppraisal()
+        {
+            _logger.LogInformation("GetAllAppraisal Initiated");
+            var dtos = await _mediator.Send(new GetAppraisalListQuery()) ;
+            _logger.LogInformation("GetAllAppraisal Completed");
             return Ok(dtos);
         }
     }

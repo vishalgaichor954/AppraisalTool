@@ -37,28 +37,73 @@ namespace AppraisalTool.App.Controllers
             SelfAppraisalHome model = new SelfAppraisalHome();
             HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome?userId={user.UserId}").Result;
             HttpResponseMessage cardResponse = client.GetAsync($"https://localhost:5000/api/User/GetAllCard?id={user.RoleId}&api-version=1").Result;
-            if (httpResponseMessage.IsSuccessStatusCode && cardResponse.IsSuccessStatusCode)
+            HttpResponseMessage reportResponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={user.UserId}").Result;
+            HttpResponseMessage reviewResponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetReviewAppraisalByRevAuthority?id={user.UserId}").Result;
+
+
+            if (httpResponseMessage.IsSuccessStatusCode && cardResponse.IsSuccessStatusCode && reportResponse.IsSuccessStatusCode && reviewResponse.IsSuccessStatusCode)
             {
+                int reporteeCompleted = 0;
+                int reporteeCount = 0;
+                int reviewCount = 0;
+                var responseData = reportResponse.Content.ReadAsStringAsync().Result;
+                var users = JsonConvert.DeserializeObject<Response>(responseData);
+                Console.WriteLine(users.Data);
+                foreach (var item in users.Data)
+                {
+
+
+                    if (item.status == 2)
+                    {
+                        reporteeCount = reporteeCount + 1;
+                    }
+                    if(item.status == 3)
+                    {
+                        reporteeCompleted= reporteeCompleted+1;
+                    }
+
+                }
+                ViewBag.PendingAtReportee = reporteeCount;
+                ViewBag.ReporteeCompleted = reporteeCompleted;
+
+
+                var reviewData = reviewResponse.Content.ReadAsStringAsync().Result;
+                var employees = JsonConvert.DeserializeObject<Response>(reviewData);
+                Console.WriteLine(employees.Data);
+
+                foreach(var item in employees.Data)
+                    {
+                    if (item.status == 3)
+                    {
+                        reviewCount = reviewCount + 1;
+                    }
+
+
+                }
+                
+                ViewBag.PendingAtReview = reviewCount;
+
+
                 var CardresponseData = cardResponse.Content.ReadAsStringAsync().Result;
                 var Cardres = JsonConvert.DeserializeObject<ForgetPasswordResponse>(CardresponseData);
                 dynamic json = JsonConvert.DeserializeObject(CardresponseData);
-                ViewBag.GetMenuCards = json.data; 
+                ViewBag.GetMenuCards = json.data;
                 Console.WriteLine(ViewBag.GetMenuCards);
-                var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
-                var data = JsonConvert.DeserializeObject<Response>(responseData);
+                var menuData = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<Response>(menuData);
                 Console.WriteLine(data.Data);
                 List<SelfAppraisalHome> mylist = JsonConvert.DeserializeObject<List<SelfAppraisalHome>>(JsonConvert.SerializeObject(data.Data));
                 List<SelectListItem> financialYearList = new List<SelectListItem>();
                 foreach (var item in data.Data)
                 {
 
-                    financialYearList.Add(new SelectListItem { Text ="FY" + item.startYear.ToString()+"-"+item.endYear.ToString(), Value = item.id.ToString(),Selected=true });
+                    financialYearList.Add(new SelectListItem { Text = "FY" + item.startYear.ToString() + "-" + item.endYear.ToString(), Value = item.id.ToString(), Selected = true });
 
 
                 }
                 financialYearList.Add(new SelectListItem { Text = "FY2022-2023", Value = "4" });
-    
-                ViewBag.financialYearList = financialYearList.DistinctBy(x=>x.Value);
+
+                ViewBag.financialYearList = financialYearList.DistinctBy(x => x.Value);
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
 
@@ -68,9 +113,9 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
                     ViewBag.PendingAppraisals = data.Data[0].pendingAppraisals;
                     ViewBag.LastDate = data.Data[0].lastDate;
-                    ViewBag.CurrentYear = data.Data[0].currentYear; 
+                    ViewBag.CurrentYear = data.Data[0].currentYear;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     ViewBag.CurrentYear = "FY2022-2023";
                     ViewBag.PendingAppraisals = 1;
@@ -80,16 +125,16 @@ namespace AppraisalTool.App.Controllers
                 ForgetPasswordResponse AuthData = JsonConvert.DeserializeObject<ForgetPasswordResponse>(response);
                 dynamic res = JsonConvert.SerializeObject(AuthData.Data);
                 var selfappraisal = JsonConvert.DeserializeObject<List<SelfAppraisalHome>>(res);
-               
-                 SessionHelper.SetObjectAsJson(HttpContext.Session, "year", selfappraisal);
-               
-                
+
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "year", selfappraisal);
+
+
                 return View();
             }
             return View();
 
         }
-        public IActionResult SelfAppraisalDashboard(int? Fid,string? Fyear)
+        public IActionResult SelfAppraisalDashboard(int? Fid, string? Fyear)
         {
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
@@ -197,7 +242,7 @@ namespace AppraisalTool.App.Controllers
             HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
             if (cardResponse.IsSuccessStatusCode)
             {
-               
+
                 var responseData = cardResponse.Content.ReadAsStringAsync().Result;
                 var res = JsonConvert.DeserializeObject<Response>(responseData);
 
@@ -237,7 +282,7 @@ namespace AppraisalTool.App.Controllers
         {
             Console.WriteLine(scores);
 
-            foreach(var item in scores)
+            foreach (var item in scores)
             {
                 item.RepaSelfCreatatedDate = DateTime.Now;
             }
@@ -256,18 +301,18 @@ namespace AppraisalTool.App.Controllers
                 return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
                 //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
             }
-        
 
-        TempData["RepaError"] = "Error Occured";
+
+            TempData["RepaError"] = "Error Occured";
 
 
             return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
         }
         [HttpGet]
-        public IActionResult AddSelfAppraisal( int? fid)
+        public IActionResult AddSelfAppraisal(int? fid)
         {
-           
-        //https://localhost:5000/api/v1/Metric/GetAllListOfMetric
+
+            //https://localhost:5000/api/v1/Metric/GetAllListOfMetric
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
             HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/Metric/GetAllListOfMetric").Result;
@@ -310,7 +355,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddSelfAppraisal(List<MetricsDto> scores,int Fid)
+        public IActionResult AddSelfAppraisal(List<MetricsDto> scores, int Fid)
         {
             Console.WriteLine(Fid);
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
@@ -326,7 +371,7 @@ namespace AppraisalTool.App.Controllers
 
             string Appraisaldata = JsonConvert.SerializeObject(appraisalViewModel);
             StringContent Appraisalcontent = new StringContent(Appraisaldata, Encoding.UTF8, "application/json");
-            int Appraisalid=0;
+            int Appraisalid = 0;
             HttpResponseMessage responseAppraisal = client.PostAsync(client.BaseAddress + "/AppraisalHome/AddAppraisal", Appraisalcontent).Result;
             if (responseAppraisal.IsSuccessStatusCode)
             {
@@ -336,50 +381,50 @@ namespace AppraisalTool.App.Controllers
                 var AppraisalresdATA = JsonConvert.DeserializeObject<AddAppraisalViewModel>(RESAppraisaldata);
                 Console.WriteLine(AppraisalresdATA.Id);
 
-                Appraisalid =(int) AppraisalresdATA.Id;
+                Appraisalid = (int)AppraisalresdATA.Id;
 
 
-            
-            List<AppraisalResultVM> appraisalResultsVm = new List<AppraisalResultVM>();
 
-            foreach(var metrics in scores)
-            {
-                appraisalResultsVm.Add(new AppraisalResultVM
+                List<AppraisalResultVM> appraisalResultsVm = new List<AppraisalResultVM>();
+
+                foreach (var metrics in scores)
                 {
-                    KraListId = metrics.List_Id,
-                    MetricId = metrics.Metric_ID,
-                    UserId = (int)user.UserId,
-                    MetricDescription = metrics.Metric_Description,
-                    MetricWeightage = metrics.metric_Weightage,
-                    SelfScore = metrics.Score,
-                    SelfComment = metrics.Comment,
-                    SelfCreatatedDate = DateTime.Now,
-                    AppraisalId = Appraisalid
+                    appraisalResultsVm.Add(new AppraisalResultVM
+                    {
+                        KraListId = metrics.List_Id,
+                        MetricId = metrics.Metric_ID,
+                        UserId = (int)user.UserId,
+                        MetricDescription = metrics.Metric_Description,
+                        MetricWeightage = metrics.metric_Weightage,
+                        SelfScore = metrics.Score,
+                        SelfComment = metrics.Comment,
+                        SelfCreatatedDate = DateTime.Now,
+                        AppraisalId = Appraisalid
 
 
 
 
-                }); ;
-            }
+                    }); ;
+                }
 
 
 
-            Console.WriteLine(appraisalResultsVm);
-            string data = JsonConvert.SerializeObject(appraisalResultsVm);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                Console.WriteLine(appraisalResultsVm);
+                string data = JsonConvert.SerializeObject(appraisalResultsVm);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-            //https://localhost:5000/api/v1/AppraisalHome/AddAppraisal
-            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/AppraisalHome/AddAppraisalResults", content).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string responseData = response.Content.ReadAsStringAsync().Result;
-                Console.WriteLine(responseData);
-                var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
-                Console.WriteLine(res);
-                TempData["SUCCESS"] = "Successfully Submited";
-                return RedirectToAction("AddSelfAppraisal");
-                //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
-            }
+                //https://localhost:5000/api/v1/AppraisalHome/AddAppraisal
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/AppraisalHome/AddAppraisalResults", content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = response.Content.ReadAsStringAsync().Result;
+                    Console.WriteLine(responseData);
+                    var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
+                    Console.WriteLine(res);
+                    TempData["SUCCESS"] = "Successfully Submited";
+                    return RedirectToAction("AddSelfAppraisal");
+                    //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
+                }
             }
 
             TempData["Error"] = "Error Occured";
@@ -416,7 +461,7 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
                     ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     ViewBag.ReportingAuthorityFirstName = "Not Assigned";
                     ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
