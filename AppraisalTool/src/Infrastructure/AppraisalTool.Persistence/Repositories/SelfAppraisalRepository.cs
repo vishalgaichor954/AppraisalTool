@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AutoMapper;
 using AppraisalTool.Domain.Common;
-using static System.Net.Mime.MediaTypeNames;
 using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 
 namespace AppraisalTool.Persistence.Repositories
