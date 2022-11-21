@@ -58,7 +58,7 @@ namespace AppraisalTool.App.Controllers
                 foreach (var item in yearResponseList)
                 {
 
-                    financialYearList.Add(new SelectListItem { Text = "FY" + item.startYear.ToString() + "-" + item.endYear.ToString(), Value = item.id.ToString(), Selected = true });
+                    financialYearList.Add(new SelectListItem { Text = "FY" + item.StartYear.ToString() + "-" + item.EndYear.ToString(), Value = item.Id.ToString(), Selected = true });
 
 
                 }

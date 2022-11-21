@@ -66,7 +66,7 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
             }
             bool authorityStatus = await _userRepository.AssignAuthority(5, 2, userDto.Id);
 
-            bool authorityStatus = await _userRepository.AssignAuthority(5, 2, userDto.Id);
+            //bool authorityStatus = await _userRepository.AssignAuthority(5, 2, userDto.Id);
 
             _logger.LogInformation("Hanlde Completed");
             if (userDto.Succeeded && authorityStatus == true)

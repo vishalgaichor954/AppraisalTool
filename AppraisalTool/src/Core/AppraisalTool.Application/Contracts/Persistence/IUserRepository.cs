@@ -28,7 +28,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<User> GetUserById(int id);
         public Task<List<MenuRoleMapping>> getAllCards(int id);
 
-        public Task<bool> AssignAuthority(int repaId, int revaId, int userId);
+        //public Task<bool> AssignAuthority(int repaId, int revaId, int userId);
     }
 
 }
