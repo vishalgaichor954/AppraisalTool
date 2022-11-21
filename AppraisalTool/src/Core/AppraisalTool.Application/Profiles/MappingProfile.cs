@@ -24,6 +24,9 @@ using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuById;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuList;
 using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResult;
+using AppraisalTool.Application.Features.Users.Query.GetUserByRoleId;
+using AppraisalTool.Application.Features.FinancialYears.Command.CreateFinancialYearCommand;
+using AppraisalTool.Application.Features.FinancialYears.Query.GetFinancialYearById;
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -80,6 +83,16 @@ namespace AppraisalTool.Application.Profiles
 
             CreateMap<MenuList, GetMenuListQueryVm>().ConvertUsing<GetMenuListVmCustomMapper>();
 
+            CreateMap<User, GetUserByRoleIdDto>().ReverseMap();
+
+            //CreateMap<IQueryable<GetUserListQueryVm>, GetUserListQueryVm>().ReverseMap();
+            
+            //Fy Mapping
+            CreateMap<FinancialYear, CreateFinancialYearCommand>().ReverseMap();
+
+            CreateMap<FinancialYear, CreateFinancialYearCommand>().ReverseMap();
+
+            CreateMap<FinancialYear, GetFinancialYearByIdDto>().ReverseMap();
 
 
         }

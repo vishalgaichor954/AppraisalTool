@@ -13,6 +13,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AppraisalTool.Application.Features.Users.Query.GetUserById;
+using AppraisalTool.Application.Features.Users.Query.GetUserByRoleId;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -120,5 +121,14 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("GetUserAsync Completed");
             return Ok(dtos);
         }
+        [HttpGet("getUserByRoleId")]
+        public async Task<ActionResult> GetUserByRoleId(int id)
+        {
+            _logger.LogInformation("GetUserByRoleId Initiated");
+            var dtos = await _mediator.Send(new GetUserByRoleIdQuery() { RoleId = id });
+            _logger.LogInformation("GetUserByRoleId Completed");
+            return Ok(dtos);
+        }
+
     }
 }

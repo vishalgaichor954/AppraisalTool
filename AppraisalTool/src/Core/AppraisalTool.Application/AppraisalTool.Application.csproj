@@ -36,6 +36,8 @@
   <ItemGroup>
     <Folder Include="Features\Metrics\Commands\" />
     <Folder Include="Features\ReporteeAppraisals\Commands\" />
+    <Folder Include="Features\Role\Command\" />
+    <Folder Include="Features\Role\Query\" />
   </ItemGroup>
 
 </Project>

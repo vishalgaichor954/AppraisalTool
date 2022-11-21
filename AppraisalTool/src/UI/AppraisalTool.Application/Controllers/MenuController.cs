@@ -68,7 +68,10 @@ namespace AppraisalTool.App.Controllers
             MenuModel menu = new MenuModel();
             client = new HttpClient();
             client.BaseAddress = baseAddress;
+            
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Menu/GetMenuById?id={id}&api-version=1").Result;
+            HttpResponseMessage response1 = client.GetAsync(client.BaseAddress + "Menu?api-version=1").Result;
+
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
@@ -76,11 +79,24 @@ namespace AppraisalTool.App.Controllers
                 var res = JsonConvert.DeserializeObject<Response>(data);
                 var serres = JsonConvert.SerializeObject(res.Data);
                 menu = JsonConvert.DeserializeObject<MenuModel>(serres);
-                ViewBag.Menu_Id = id;
-                Console.WriteLine(menu);
+                List<int> pllist = new List<int>();
+                pllist.AddRange(menu.RoleList);
+
+                var data1 = response1.Content.ReadAsStringAsync().Result;
+                var getallmenu = JsonConvert.DeserializeObject<Response>(data1);
+                foreach(var item in getallmenu.Data)
+                {
+
+                }
+                //ViewBag.RoleList = menu;
+                //ViewBag.RoleId=menu.RoleId;
+                //ViewBag.RoleName = menu.RoleName;
+                //Console.WriteLine(menu);
             }
             return View(menu);
         }
+
+       
         [HttpPost]
         public IActionResult UpdateMenu(MenuModel model, List<int> selectedRoles)
         {
@@ -159,5 +175,7 @@ namespace AppraisalTool.App.Controllers
             TempData["DeleteMenuFaild"] = "Menu to Delete User";
             return RedirectToAction("ListMenu");
         }
+
+       
     }
 }

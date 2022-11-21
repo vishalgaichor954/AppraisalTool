@@ -23,5 +23,8 @@ namespace AppraisalTool.Application.Features.Users.Query.GetUserList
         public string? SecondaryJobProfileName { get; set; }
         public int? PrimaryJobProfileId { get; set; }
         public int? SecondaryJobProfileId { get; set; }
+        public int RevaId { get; set; }
+
+        public int RepaId { get; set; }
     }
 }

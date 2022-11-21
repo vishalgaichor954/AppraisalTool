@@ -118,7 +118,7 @@
                            <div class="form-group row">
                                 <label asp-for="SecondaryRole" class="col-sm-4 col-form-label">
                                     Secondary Job Profile<span style="color: Red">&nbsp;*</span></label>
-                                </label>
+                                
                                 <div asp-for="SecondaryRole" class="col-sm-8">
                                     <select asp-for="SecondaryRole" asp-items="@ViewBag.JobProfileRolelist" class="form-control">
                                         <option value="">Select Secondary Job Profile</option>
@@ -128,9 +128,37 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            
+                             <div class="form-group row">
+                                <label asp-for="RepaId" class="col-sm-4 col-form-label">
+                                    Reporting Authority<span style="color: Red">&nbsp;*</span></label>
+                                
+                                <div asp-for="SecondaryRole" class="col-sm-8">
+                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control">
+                                        <option value="">Select Reporting Authority </option>
+                                    </select>
+                                    <span asp-validation-for="RepaId" class="text-danger mx-1 small"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                           <div class="form-group row">
+                                <label asp-for="RevaId" class="col-sm-4 col-form-label">
+                                    Reviewing Authority<span style="color: Red">&nbsp;*</span></label>
+                                
+                                <div asp-for="SecondaryRole" class="col-sm-8">
+                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control">
+                                        <option value="">Select Reviewing Authority</option>
+                                    </select>
+                                    <span asp-validation-for="RevaId" class="text-danger mx-1 small"></span>
+                                </div>
+                            </div>
+                        </div>
+                         
+                    </div>
+                    
+
                     <div class="row d-flex justify-content-center">
                         <div style="max-width:20%;">
                             <div style="align-items:center;">

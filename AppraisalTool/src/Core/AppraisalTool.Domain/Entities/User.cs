@@ -49,7 +49,7 @@ namespace AppraisalTool.Domain.Entities
         public virtual List<Appraisal>? UserAppraisals { get; set; }
 
 
-        //public virtual List<UserAuthorityMapping> UserAuthorities { get; set; }
+      // public virtual UserAuthorityMapping UserAuthorities { get; set; }
 
 
     }

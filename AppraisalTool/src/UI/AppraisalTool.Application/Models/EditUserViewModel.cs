@@ -5,18 +5,7 @@ namespace AppraisalTool.App.Models
 {
     public class EditUserViewModel
     {
-        //public int Id { get; set; }
-        //public string FirstName { get; set; }
-        //public string LastName { get; set; }
-        //public string Email { get; set; }
-        //public string ?Password { get; set; }
-        //public DateTime? LastAppraisalDate { get; set; }
-        //public DateTime? JoinDate { get; set; }
-        //public int? RoleId { get; set; }
-        //public int? BranchId { get; set; }
-
-        //public int? PrimaryJobProfileId { get; set; }
-        //public int? SecondaryJobProfileId { get; set; }
+        
 
         public int Id { get; set; }
 
@@ -65,6 +54,12 @@ namespace AppraisalTool.App.Models
 
         [Display(Name = "Branch Name")]
         public string? BranchName { get; set; }
+
+        [Required(ErrorMessage = "Please select a Reporting Authority Name")]
+        public int RepaId { get; set; }
+
+        [Required(ErrorMessage = "Please select a Reviewing Authority Name")]
+        public int RevaId { get; set; }
 
         public int? AddedBy { get; set; }
 

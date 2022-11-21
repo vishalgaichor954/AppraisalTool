@@ -28,8 +28,12 @@ namespace AppraisalTool.App.Controllers
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User/GetJobProfile?api-version=1").Result;
             HttpResponseMessage BranchReponse = client.GetAsync(client.BaseAddress + "User/GetBranch?api-version=1").Result;
             HttpResponseMessage RoleReponse = client.GetAsync(client.BaseAddress + "User/GetRole?api-version=1").Result;
+            HttpResponseMessage Reporting = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=2&api-version=1").Result;
+            HttpResponseMessage Reviewing = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=3&api-version=1").Result;
+            HttpResponseMessage admin = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=1&api-version=1").Result;
 
-            if (response.IsSuccessStatusCode && BranchReponse.IsSuccessStatusCode && RoleReponse.IsSuccessStatusCode)
+
+            if (response.IsSuccessStatusCode && BranchReponse.IsSuccessStatusCode && RoleReponse.IsSuccessStatusCode && Reporting.IsSuccessStatusCode && Reviewing.IsSuccessStatusCode)
             {
                 var responseData = response.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<Response>(responseData);
@@ -63,10 +67,40 @@ namespace AppraisalTool.App.Controllers
                     Rolelist.Add(new SelectListItem { Text = item.role.ToString(), Value = item.id.ToString() });
 
                 }
+                //Reporting Authority dropdown
+                var reportingData = Reporting.Content.ReadAsStringAsync().Result;
+                var repata = JsonConvert.DeserializeObject<Response>(reportingData);
+                Console.WriteLine(repata.Data);
+                List<SelectListItem> ReportingList = new List<SelectListItem>();
+
+
+                    ReportingList.Add(new SelectListItem { Text = repata.Data.firstName.ToString() + " " + repata.Data.lastName.ToString(), Value = repata.Data.id.ToString() });
+
+               
+                //reviewing authority dropdown
+                var ReviewingData = Reviewing.Content.ReadAsStringAsync().Result;
+                var Reviewingdata = JsonConvert.DeserializeObject<Response>(ReviewingData);
+                Console.WriteLine(Reviewingdata.Data);
+                List<SelectListItem> ReviewingList = new List<SelectListItem>();
+
+
+                ReviewingList.Add(new SelectListItem { Text = Reviewingdata.Data.firstName.ToString() + " " + Reviewingdata.Data.lastName.ToString(), Value = Reviewingdata.Data.id.ToString() });
+
+                //admin dropdown
+                var adminData = admin.Content.ReadAsStringAsync().Result;
+                var admindata = JsonConvert.DeserializeObject<Response>(adminData);
+                Console.WriteLine(admindata.Data);
+
+
+
+                ReportingList.Add(new SelectListItem { Text = admindata.Data.firstName.ToString() + " " + admindata.Data.lastName.ToString(), Value = admindata.Data.id.ToString() });
+                ReviewingList.Add(new SelectListItem { Text = admindata.Data.firstName.ToString() + " " + admindata.Data.lastName.ToString(), Value = admindata.Data.id.ToString() });
+
                 ViewBag.JobProfileRolelist = JobProfileRolelist;
                 ViewBag.branchlist = branchlist;
                 ViewBag.Rolelist = Rolelist;
-
+                ViewBag.ReportingList = ReportingList;
+                ViewBag.ReviewingList = ReviewingList;
 
 
                 return View();
@@ -113,8 +147,13 @@ namespace AppraisalTool.App.Controllers
             HttpResponseMessage jobProfileresponse = client.GetAsync(client.BaseAddress + "User/GetJobProfile?api-version=1").Result;
             HttpResponseMessage BranchReponse = client.GetAsync(client.BaseAddress + "User/GetBranch?api-version=1").Result;
             HttpResponseMessage RoleReponse = client.GetAsync(client.BaseAddress + "User/GetRole?api-version=1").Result;
+           
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"User/getUser?id={id}&api-version=1").Result;
-            if (response.IsSuccessStatusCode && jobProfileresponse.IsSuccessStatusCode && BranchReponse.IsSuccessStatusCode && RoleReponse.IsSuccessStatusCode)
+            HttpResponseMessage Reporting = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=2&api-version=1").Result;
+            HttpResponseMessage Reviewing = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=3&api-version=1").Result;
+            HttpResponseMessage admin = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=1&api-version=1").Result;
+
+            if (response.IsSuccessStatusCode && jobProfileresponse.IsSuccessStatusCode && BranchReponse.IsSuccessStatusCode && RoleReponse.IsSuccessStatusCode && Reporting.IsSuccessStatusCode && Reviewing.IsSuccessStatusCode)
             {
                 
                 var data = response.Content.ReadAsStringAsync().Result;
@@ -156,9 +195,41 @@ namespace AppraisalTool.App.Controllers
                     Rolelist.Add(new SelectListItem { Text = item.role.ToString(), Value = item.id.ToString(), Selected = user.Role==(int)item.id });
 
                 }
+
+                //Reporting Authority dropdown
+                var reportingData = Reporting.Content.ReadAsStringAsync().Result;
+                var repata = JsonConvert.DeserializeObject<Response>(reportingData);
+                Console.WriteLine(repata.Data);
+                List<SelectListItem> ReportingList = new List<SelectListItem>();
+
+
+                ReportingList.Add(new SelectListItem { Text = repata.Data.firstName.ToString() + " " + repata.Data.lastName.ToString(), Value = repata.Data.id.ToString(), Selected = user.RepaId == (int)repata.Data.id });
+
+
+                //reviewing authority dropdown
+                var ReviewingData = Reviewing.Content.ReadAsStringAsync().Result;
+                var Reviewingdata = JsonConvert.DeserializeObject<Response>(ReviewingData);
+                Console.WriteLine(Reviewingdata.Data);
+                List<SelectListItem> ReviewingList = new List<SelectListItem>();
+
+
+                ReviewingList.Add(new SelectListItem { Text = Reviewingdata.Data.firstName.ToString() + " " + Reviewingdata.Data.lastName.ToString(), Value = Reviewingdata.Data.id.ToString(), Selected = user.RepaId == (int)Reviewingdata.Data.id });
+
+                //admin dropdown
+                var adminData = admin.Content.ReadAsStringAsync().Result;
+                var admindata = JsonConvert.DeserializeObject<Response>(adminData);
+                Console.WriteLine(admindata.Data);
+
+
+
+                ReportingList.Add(new SelectListItem { Text = admindata.Data.firstName.ToString() + " " + admindata.Data.lastName.ToString(), Value = admindata.Data.id.ToString() });
+                ReviewingList.Add(new SelectListItem { Text = admindata.Data.firstName.ToString() + " " + admindata.Data.lastName.ToString(), Value = admindata.Data.id.ToString() });
+
                 ViewBag.JobProfileRolelist = JobProfileRolelist;
                 ViewBag.branchlist = branchlist;
                 ViewBag.Rolelist = Rolelist;
+                ViewBag.ReportingList = ReportingList;
+                ViewBag.ReviewingList = ReviewingList;
 
                 Console.WriteLine(user);
             }
@@ -172,20 +243,7 @@ namespace AppraisalTool.App.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            //model.upda = userSession.UserId;
-            //EditUserViewModel editmodel = new EditUserViewModel()
-            //{
-            //    Id=model.Id,
-            //    FirstName = model.FirstName,
-            //    LastName = model.LastName,
-            //    Email = model.Email,
-            //    JoinDate = model.JoinDate,
-            //    BranchId=model.BranchId,
-            //    RoleId=model.RoleId,
-            //    PrimaryJobProfileId = model.PrimaryJobProfileId,
-            //    SecondaryJobProfileId = model.SecondaryJobProfileId,
-
-            //};
+            
             model.UpdatedBy = userSession.UserId;
             string data = JsonConvert.SerializeObject(model);
 

@@ -110,6 +110,8 @@ namespace AppraisalTool.Persistence.Repositories
         {
             var result = from A in _dbContext.MenuLists
                          join B in _dbContext.MenuRoleMappings on A.Menu_Id equals B.Menu_id
+                         join C in _dbContext.UserRole on B.Role_id equals C.Id
+
                          //join C in _dbContext.UserRole on B.Role_id equals C.Id
                          select new GetMenuByIdDto
                          {
@@ -121,7 +123,8 @@ namespace AppraisalTool.Persistence.Repositories
                              MenuController = A.MenuController,
                              MenuAction = A.MenuAction,
                              MenuLink = A.MenuLink,
-                             RoleId = B.Role_id
+                             RoleId = B.Role_id,
+                             RoleName=C.Role
                          };
 
             var res = await result.Where(u => u.Menu_id == menu_Id).FirstOrDefaultAsync();
