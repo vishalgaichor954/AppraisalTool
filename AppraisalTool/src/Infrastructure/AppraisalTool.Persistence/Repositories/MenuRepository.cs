@@ -17,11 +17,11 @@ namespace AppraisalTool.Persistence.Repositories
 {
     public class MenuRepository : BaseRepository<MenuList>, IMenuRepository
     {
-        private readonly IUserRepository _userRepository;
+        
 
-        public MenuRepository(ApplicationDbContext dbContext, ILogger<MenuList> logger, IUserRepository userRepository) : base(dbContext, logger)
+        public MenuRepository(ApplicationDbContext dbContext, ILogger<MenuList> logger) : base(dbContext, logger)
         {
-            _userRepository=userRepository;
+           
         }
 
 
@@ -74,6 +74,7 @@ namespace AppraisalTool.Persistence.Repositories
                 menuToUpdate.MenuAction = request.MenuAction;
                 menuToUpdate.MenuController = request.MenuController;
                 menuToUpdate.MenuLink = request.MenuLink;
+                menuToUpdate.UpdatedBy = request.UpdatedBy;
                 List<MenuRoleMapping>  getmenurolemapping = await getMenuRolemapping(menuToUpdate.Menu_Id);
                 _dbContext.MenuRoleMappings.RemoveRange(getmenurolemapping);
                 for (int i = 0; i < request.RoleList.Count; i++)

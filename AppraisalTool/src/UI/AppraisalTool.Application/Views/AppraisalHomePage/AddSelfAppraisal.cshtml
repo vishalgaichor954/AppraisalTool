@@ -29,64 +29,14 @@
     var BevList = Model.Where(item => item.List_Id == 3).ToList().Count;
     var JobList = Model.Where(item => item.List_Id == 4).ToList().Count;
 }
-<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
-<script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
-<script src="~/lib/package/dist/sweetalert2.all.js"></script>
-<script src="~/lib/package/dist/sweetalert2.min.js"></script>
 
-@if (TempData["Error"] != null)
-{
-
-
-    <script>
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 5000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: 'error',
-            title: 'Oops ! something went wrong form was not submitted'
-        })
-    </script>
-}
-@if (TempData["SUCCESS"] != null)
-{
-    <script>
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 4000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: 'success',
-            title: 'Form was submitted successfully'
-        })
-    </script>
-}
 
 
 <div class="container d-flex justify-content-center">
     <div class="col-11">
         <div class="card content-wrapper-Blue">
             <div class="card-body">
-                <input type="button" value="Back" class=" Button mb-4" onclick="history.back()" />
+                <input type="button" value="Back" class=" Button mb-4" onclick="location.href='@Url.Action("SelfAppraisalDashboard", "AppraisalHomePage")'" />
 
                 <h1 class="card-title FormHeader">Self Appraisal</h1>
                 <div class="featureBackground ">
