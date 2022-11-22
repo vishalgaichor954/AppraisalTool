@@ -154,29 +154,68 @@ namespace AppraisalTool.App.Controllers
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<Response>(responseData);
                 Console.WriteLine(data.Data);
-                try
+                if(data.Data!=null )
                 {
-                    ViewBag.fyear = Fyear;
-                    ViewBag.Fid = Fid;
-                    ViewBag.ReportingAuthorityFirstName = data.Data[0].reportingAuthorityFirstName;
-                    Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
-                    ViewBag.ReviewingAuthorityFirstName = data.Data[0].reviewingAuthorityFirstName;
-                    Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
-                    ViewBag.Role = data.Data[0].role;
-                    ViewBag.AppraisalStatus = data.Data[0].appraisalStatus;
-                    ViewBag.Date = data.Data[0].date;
-                    ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
-                    ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
+                    foreach(var item in data.Data)
+                    {
+                        if(Convert.ToInt32(item.financialYearId)== Fid)
+                        {
+                            ViewBag.fyear = Fyear;
+                            ViewBag.Fid = Fid;
+                            ViewBag.ReportingAuthorityFirstName = item.reportingAuthorityFirstName;
+                            Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
+                            ViewBag.ReviewingAuthorityFirstName = item.reviewingAuthorityFirstName;
+                            Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
+                            ViewBag.Role = item.role;
+                            ViewBag.AppraisalStatus = item.appraisalStatus;
+                            ViewBag.Date = item.date;
+                            ViewBag.ReviewingAuthorityLastName = item.reviewingAuthorityLastName;
+                            ViewBag.ReportingAuthorityLastName = item.reportingAuthorityLastName;
+                        }
+                        else
+                        {
+                            ViewBag.ReportingAuthorityFirstName = item.reportingAuthorityFirstName;
+                            Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
+                            ViewBag.ReviewingAuthorityFirstName = item.reviewingAuthorityFirstName;
+                            Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
+                            ViewBag.Role = item.role;
+                            ViewBag.AppraisalStatus = "-";
+                            ViewBag.Date = item.date;
+                            ViewBag.ReviewingAuthorityLastName = item.reviewingAuthorityLastName;
+                            ViewBag.ReportingAuthorityLastName = item.reportingAuthorityLastName;
+                        }
+
+                    }
                 }
-                catch (Exception e)
+                else
                 {
                     ViewBag.ReportingAuthorityFirstName = "Not Assigned";
                     ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
-                    ViewBag.Date = "1st April 2022-31st March 2023";
-
-
-
+                    ViewBag.Date = "-";
                 }
+                //try
+                //{
+                //    ViewBag.fyear = Fyear;
+                //    ViewBag.Fid = Fid;
+                //    ViewBag.ReportingAuthorityFirstName = data.Data[0].reportingAuthorityFirstName;
+                //    Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
+                //    ViewBag.ReviewingAuthorityFirstName = data.Data[0].reviewingAuthorityFirstName;
+                //    Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
+                //    ViewBag.Role = data.Data[0].role;
+                //    ViewBag.AppraisalStatus = data.Data[0].appraisalStatus;
+                //    ViewBag.Date = data.Data[0].date;
+                //    ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
+                //    ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
+                //}
+                //catch (Exception e)
+                //{
+                //    ViewBag.ReportingAuthorityFirstName = "Not Assigned";
+                //    ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
+                //    ViewBag.Date = "1st April 2022-31st March 2023";
+
+
+
+                //}
 
 
 
