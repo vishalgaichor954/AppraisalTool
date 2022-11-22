@@ -45,26 +45,41 @@ element.style {
     border-radius:0.2rem;
 }
 .DarkBlueP {
-    color: #1746A2
+    color: #1746A2;
+}
+<<<<<<< HEAD
+.DarkBlueGradeBorder {
+    border: 2px solid #1746A2;
+}
+.blueThemeA {
+    background-color: #1746A2 !important;
+    color: white !important;
+    text-decoration: none !important;
+=======
+.DarkBlueReveiwingP {
+    color: #1746A2;
+    font-size:17px
+}
+.DarkBlueReveiwingP2 {
+    color: #1746A2;
+    font-size: 15px
+>>>>>>> AT-Dev
 }
 .blueTheme {
     background-color: #1746A2;
     color:white;
 }
-<<<<<<< HEAD
 .reporteeTagPara{
     color:black !important;
 }
 .reporteeTagSmall {
     color: darkgrey !important;
 }
-=======
     .blueTheme:hover {
         background-color: white;
         color: #1746A2;
         border: 2px solid #1746A2;
     }
->>>>>>> 496e310e8cae77f26abeed2dbeac4a2ceef27540
     .proceedBtn > span {
         font-size: 25px !important;
         color: white !important;
@@ -104,7 +119,19 @@ element.style {
     background-color: #E0144C;
     color: white;
 }
-
+.AddAppraisalBtn {
+    background-color: #1746A2;
+    color: white;
+}
+.ResetButton {
+    background-color: #E0144C;
+    color: white;
+}
+.LoginBtn:hover {
+    background-color: white;
+    color: #1746A2;
+    border: 2px solid #1746A2;
+}
 .ApprovalBtn {
     border: 2px solid #E0144C;
     background-color: white;
@@ -246,6 +273,10 @@ legend {
     font-size: 14px;
 }
 
+.spanValidationFontSize {
+    /*color: red !important;*/
+    font-size: 12px !important;
+}
 ::-webkit-scrollbar {
     height: 6px;
     width: 6px;
@@ -257,7 +288,7 @@ legend {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #E0144C
+    background: #1746A2
 }
 
     ::-webkit-scrollbar-thumb:hover {
