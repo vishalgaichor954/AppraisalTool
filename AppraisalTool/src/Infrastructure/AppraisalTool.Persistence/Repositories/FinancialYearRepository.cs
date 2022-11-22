@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AppraisalTool.Persistence.Repositories
 {
-    public class FinancialYearRepository : BaseRepository<FinancialYear>, IFinacialYearRepository
+    public class FinancialYearRepository : BaseRepository<FinancialYear>, IFinacialYearRepository, IFinancialYearRepository
     {
         public FinancialYearRepository(ApplicationDbContext dbContext, ILogger<FinancialYear> logger) : base(dbContext, logger)
         {

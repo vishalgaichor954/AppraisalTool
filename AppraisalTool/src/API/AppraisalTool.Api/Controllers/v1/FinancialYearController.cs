@@ -65,9 +65,10 @@ namespace AppraisalTool.Api.Controllers.v1
         public async Task<ActionResult> RemoveFinancialYear(int id)
         {
             _logger.LogInformation("RemoveAsync Initiated");
-            var dtos = await _mediator.Send(new RemoveFinancialYearCommand() { Id= id });
+            var dtos = await _mediator.Send(new RemoveFinancialYearCommand() { Id = id });
             _logger.LogInformation("RemoveAsync Completed");
-
+            return Ok(dtos);
+        }
         [HttpGet("GetAllFinancialYears")]
         public async Task<ActionResult> GetAllFinancialYears()
         {

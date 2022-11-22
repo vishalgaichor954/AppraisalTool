@@ -85,20 +85,20 @@ namespace AppraisalTool.Persistence.Repositories
 
         }
 
-        public async Task<bool> AssignAuthority(int repaId,int revaId,int userId)
-        {
-            try
-            {
-                await _dbContext.UserAuthorityMappings.AddAsync(new UserAuthorityMapping() { ReportingAuthorityId = repaId, ReviewingAuthorityId = revaId, UserId = userId });
-                await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            catch(Exception e)
-            {
-                return false;
-            }
+        //public async Task<bool> AssignAuthority(int repaId,int revaId,int userId)
+        //{
+        //    try
+        //    {
+        //        await _dbContext.UserAuthorityMappings.AddAsync(new UserAuthorityMapping() { ReportingAuthorityId = repaId, ReviewingAuthorityId = revaId, UserId = userId });
+        //        await _dbContext.SaveChangesAsync();
+        //        return true;
+        //    }
+        //    catch(Exception e)
+        //    {
+        //        return false;
+        //    }
 
-        }
+        //}
 
         //@Author : Ilyas Dabholkar
         public async Task<User> FindUserByEmail(string email)
