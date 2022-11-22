@@ -11,11 +11,12 @@ namespace AppraisalTool.App.Models.AppraisalToolAuth
 
 
         [Required (ErrorMessage = "Password is required")]
-        [RegularExpression(@"^[a-zA-z0-9@&*$]{8,}", ErrorMessage = "Please enter a valid password")]
         [DataType(DataType.Password)]
+        [RegularExpression(@"^[a-zA-z0-9@&*$]{8,}", ErrorMessage = "Please enter a valid password")]
+       
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = " Captcha code is required")]
         [StringLength(4)]
         public string CaptchaCode { get; set; }
     }

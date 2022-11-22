@@ -1,4 +1,5 @@
-﻿using AppraisalTool.Application.Features.Users.Command.CreateRoleCommand;
+﻿using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalList;
+using AppraisalTool.Application.Features.Users.Command.CreateRoleCommand;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
 using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
@@ -16,11 +17,13 @@ namespace AppraisalTool.Application.Contracts.Persistence
     {
         public Task<User> AddUser(User user);
         Task<CreateUserDto> RegisterUserAsync(User request);
+        public Task<bool> AssignAuthority(int repaId, int revaId, int userId);
         public Task<User> FindUserByEmail(string email);
         Task<RemoveUserCommandDto> RemoveUserAsync(int id);
         Task<UpdateUserCommandDto> UpdateUserAsync(int id, UpdateUserCommand request);
         Task<User> GetUserByRoleId(int roleId);
         public Task<bool> UpdateUser(User user);
+        public Task<IEnumerable<GetAppraisalDto>> GetAllAppraisals();
         public Task<IEnumerable<User>> GetAllUser();
         Task<CreateRoleCommandDto> CreateUserRole(UserJobRoles request);
         Task<bool> AssignAuthority(int repaId, int revaId, int userId);
@@ -31,6 +34,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<List<MenuRoleMapping>> getAllCards(int id);
 
         public Task<GetUserListQueryVm> GetUserbyid(int id);
+        //public Task<bool> AssignAuthority(int repaId, int revaId, int userId);
     }
 
 }

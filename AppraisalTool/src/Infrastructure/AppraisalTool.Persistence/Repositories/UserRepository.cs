@@ -1,4 +1,5 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
+using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalList;
 using AppraisalTool.Application.Features.Users.Command.CreateRoleCommand;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
@@ -78,6 +79,21 @@ namespace AppraisalTool.Persistence.Repositories
                 return true;
             }
             catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
+        public async Task<bool> AssignAuthority(int repaId,int revaId,int userId)
+        {
+            try
+            {
+                await _dbContext.UserAuthorityMappings.AddAsync(new UserAuthorityMapping() { ReportingAuthorityId = repaId, ReviewingAuthorityId = revaId, UserId = userId });
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception e)
             {
                 return false;
             }
@@ -218,25 +234,24 @@ namespace AppraisalTool.Persistence.Repositories
         public async Task<IEnumerable<User>> GetAllUser()
         {
             IEnumerable<User> users = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).Where(u=>u.IsDeleted !=true).ToListAsync();
-            //var result = (from A in _dbContext.User
-            //              join B in _dbContext.Branch on A.BranchId equals B.Id
-            //              select new GetUserListQueryVm
-            //              {
-            //                  Id = A.Id,
-            //                  FirstName = A.FirstName,
-            //                  LastName = A.LastName,
-            //                  Email = A.Email,
-            //                  BranchName = B.BranchName,
-            //                  JoinDate = (DateTime)A.JoinDate,
-            //                  LastAppraisalDate = A.LastAppraisalDate
-
-
-            //              });
-            //var res = await res.OrderBy(x => x.Id).ToListAsync();
-
             return users;
             
         }
+        //public async Task<bool> AssignAuthority(int repaId, int revaId, int userId)
+        //{
+        //    try
+        //    {
+        //        await _dbContext.UserAuthorityMappings.AddAsync(new UserAuthorityMapping() { ReportingAuthorityId = repaId, ReviewingAuthorityId = revaId, UserId = userId });
+        //        await _dbContext.SaveChangesAsync();
+        //        return true;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return false;
+        //    }
+
+        //}
+
         //@Author : Ilyas Dabholkar
         public async Task<User> GetUserById(int id)
         {
@@ -303,6 +318,39 @@ namespace AppraisalTool.Persistence.Repositories
                         
         }
        
+        public async Task<IEnumerable<GetAppraisalDto>> GetAllAppraisals()
+        {
+            //IEnumerable<Appraisal> appraisals = await _dbContext.Appraisal.Include(x => x.Id).
+            //    Include(x => x.UserId).
+            //    Include(x => x.StatusId).
+            //    Include(x => x.FinancialYearId).ToListAsync();
+            //return appraisals;
+
+            IEnumerable<GetAppraisalDto> res = (from A in _dbContext.User
+                                                join B in _dbContext.Appraisal on A.Id equals B.UserId
+
+
+
+                                                select new GetAppraisalDto
+                                                {
+                                                    AppraisalId = B.Id,
+                                                    UserId=B.UserId,
+                                                    Firstname=A.FirstName,
+                                                    LastName=A.LastName,
+                                                    FinanceYearId=B.FinancialYearId,
+                                                    StartYear=B.FinancialYear.StartYear,
+                                                    EndYear=B.FinancialYear.EndYear,
+                                                    StatusId=B.StatusId,
+                                                    StatusName = B.Status.StatusTitle,
+
+                                                }) ;
+            return res;
+
+
+
+        }
+
+
     }
 
        

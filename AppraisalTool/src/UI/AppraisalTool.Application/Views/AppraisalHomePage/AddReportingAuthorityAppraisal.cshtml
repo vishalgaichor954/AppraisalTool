@@ -3,7 +3,26 @@
     //ViewData["Title"] = "AppraisalTool";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
 
+      .Button {
+        background-color: #1746A2;
+        color: white;
+       /* display : inline;*/
+        width :100px;
+        /* border: 2px solid #E0144C;*/
+        border-radius: 0.3rem;
+        border: none;
+        padding: 13px 40px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: auto;
+    }
+</style>
 @{
     var EffortList1 = Model.Where(item => item.KraListId == 1).ToList();
     var EffortList = Model.Where(item => item.KraListId == 1).ToList().Count ;
@@ -64,9 +83,14 @@ Toast.fire({
 <div class="container d-flex justify-content-center">
     <div class="col-11">
         <div class="card content-wrapper-Blue">
+               <div class="d-flex p-4">
+                   <input type="button" value="Back" class="Button " onclick="location.href='@Url.Action("ReporteeAppraisalDashboard", "ReporteeAppraisalDashboard")'" />
+               </div>
             <div class="card-body">
-                <h1 class="card-title FormHeader">Reportee Appraisal</h1>
+                
                 <div class="featureBackground ">
+  <h1 class="card-title FormHeader px-5">Reportee Appraisal</h1>
+                  
                     <form asp-action="AddReportingAuthorityAppraisal" method="post" enctype="multipart/form-data">
                         <div class="text-danger"></div>
                            <input name="Fid" hidden value="@ViewBag.Fid"  type="number">
@@ -85,13 +109,13 @@ Toast.fire({
                                      <div style="width:10.833333329%">
                                         <h4 class="DarkBlueP "> Score</h4>
                                     </div>
-                                     <div class="col-3">
+                                     <div style="width:21.833333325%">
                                         <h4 class="DarkBlueP "> Self Comment</h4>
                                     </div>
-                                       <div class="col-2">
-                                        <h4 class="DarkBlueP ">Repa Score</h4>
+                                       <div style="padding-left:30px;padding-right:0px;width:20.833333325%">
+                                        <h4 class="DarkBlueP ">Repa Score<sup class="required">*</sup></h4>
                                     </div>
-                                     <div class="col-3">
+                                     <div style="width:22.499999991%">
                                         <h4 class="DarkBlueP "> Repa Comment</h4>
                                     </div>
                                 </div>
@@ -185,7 +209,7 @@ Toast.fire({
                                 Behavioral competencies
                             </legend>
                             <div class="row d-flex justify-content-center">
-                                 <div class="row pt-3 pb-1">
+                                  <div class="row pt-3 pb-1">
                                     @* /*20.833333325%*/*@
                                     <div style="width:22.499999991%">
                                         <h4 class="DarkBlueP "> Metric Name</h4>
@@ -195,13 +219,13 @@ Toast.fire({
                                      <div style="width:10.833333329%">
                                         <h4 class="DarkBlueP "> Score</h4>
                                     </div>
-                                     <div class="col-3">
+                                     <div style="width:21.833333325%">
                                         <h4 class="DarkBlueP "> Self Comment</h4>
                                     </div>
-                                       <div class="col-2">
-                                        <h4 class="DarkBlueP ">Repa Score</h4>
+                                       <div style="padding-left:30px;padding-right:0px;width:20.833333325%">
+                                        <h4 class="DarkBlueP ">Repa Score<sup class="required">*</sup></h4>
                                     </div>
-                                     <div class="col-3">
+                                     <div style="width:22.499999991%">
                                         <h4 class="DarkBlueP "> Repa Comment</h4>
                                     </div>
                                 </div>
@@ -277,13 +301,13 @@ Toast.fire({
                                      <div style="width:10.833333329%">
                                         <h4 class="DarkBlueP "> Score</h4>
                                     </div>
-                                     <div class="col-3">
+                                     <div style="width:21.833333325%">
                                         <h4 class="DarkBlueP "> Self Comment</h4>
                                     </div>
-                                       <div class="col-2">
-                                        <h4 class="DarkBlueP ">Repa Score</h4>
+                                       <div style="padding-left:30px;padding-right:0px;width:20.833333325%">
+                                        <h4 class="DarkBlueP ">Repa Score<sup class="required">*</sup></h4>
                                     </div>
-                                     <div class="col-3">
+                                     <div style="width:22.499999991%">
                                         <h4 class="DarkBlueP "> Repa Comment</h4>
                                     </div>
                                 </div>
@@ -338,7 +362,7 @@ Toast.fire({
                                            <div class="col-3 ml-2">
                                        
                                              
-                                               <textarea class="form-control " asp-for="@Model[temp].RepaSelfComment" placeholder="Add Comment"></textarea>
+                                               <textarea  class="form-control " asp-for="@Model[temp].RepaSelfComment" placeholder="Add Comment"></textarea>
                                          
                                            </div>
                                     </div>

@@ -13,6 +13,9 @@ using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetReporteeA
 using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByAppraisalId;
 using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResult;
+using AppraisalTool.Application.Features.ReviewAppraisals.Queries.GetReviewAppraisalsByRevAuthority;
+using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResultByReva;
+using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByFidAndUserId;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -136,6 +139,13 @@ namespace AppraisalTool.Api.Controllers.v1
             return Ok(response);
         }
 
+        [HttpGet("GetAppraisalResultsByFidAndUserId")]
+        public async Task<ActionResult> GetAppraisalResultsByFidAndUserId(int financialYearId,int userId)
+        {
+            var response = await _mediator.Send(new GetAppraisalResultsByFidAndUserIdQuery() { FinancialYearid = financialYearId, UserId = userId });
+            return Ok(response);
+        }
+
         [HttpPut("UpdateAppraisalResults")]
         public async Task<ActionResult> UpdateAppraisalResults(List<UpdateAppraisalResultDto> results,int statusId)
         {
@@ -149,6 +159,40 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("UpdateAppraisalResults Completed");
             return Ok(dtos);
         }
+
+
+        [HttpGet("GetReviewAppraisalByRevAuthority")]
+        public async Task<ActionResult> GetReviewAppraisalByRevAuthority(int id)
+        {
+            try
+            {
+                _logger.LogInformation("GetReviewAppraisalByRevAuthority Initiated");
+                var res = await _mediator.Send(new GetReviewAppraisalsByRevAuthorityQuery() { Id = id });
+                _logger.LogInformation("GetReviewAppraisalByRevAuthority Completed");
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+
+
+        [HttpPut("UpdateAppraisalResultsByReva")]
+        public async Task<ActionResult> UpdateAppraisalResultsByReva(List<UpdateAppraisalResultByRevaDto> results, int statusId)
+        {
+            if (results == null || statusId == null)
+            {
+                return BadRequest();
+            }
+            _logger.LogInformation("UpdateAppraisalResultsByReva Initiated");
+            int appraisalId = results[0].AppraisalId;
+            var dtos = await _mediator.Send(new UpdateAppraisalResultByRevaCommand() { DataList = results, AppraisalId = appraisalId, StatusId = statusId });
+            _logger.LogInformation("UpdateAppraisalResultsByReva Completed");
+            return Ok(dtos);
+        }
+
 
 
 
