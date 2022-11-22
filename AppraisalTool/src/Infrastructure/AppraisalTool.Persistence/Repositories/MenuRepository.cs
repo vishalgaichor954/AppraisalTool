@@ -128,6 +128,7 @@ namespace AppraisalTool.Persistence.Repositories
             return res;
             //List<MenuList> GetMenuById = await _dbContext.MenuLists.Include(x => x.RoleMapping).Where(u => u.Menu_Id == menu_Id && u.IsDeleted != true).ToListAsync();
             //return GetMenuById;
+
         }
 
         public async Task<IEnumerable<GetMenuListQueryVm>> GetAllMenuList()

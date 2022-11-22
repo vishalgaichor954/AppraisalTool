@@ -131,7 +131,7 @@
 
                     <select asp-for="StartYear" id="FincaialYear" class="form-control form-select FincaialYear" asp-items="@ViewBag.financialYearList">
 <<<<<<< HEAD
-                       
+                     
 =======
 >>>>>>> AT-Dev
                     </select>
@@ -193,10 +193,10 @@
                                                 <h2 class="font-weight-normal pt-2">
                                                     @item.menuList.menuText<br/>@item.menuList.menuIcon
                                                 </h2>
-                                                <h6>Total appraisal to be filled</h6>
-                                                <p>@ViewBag.AppraisalsToBeFilled</p>
+                                                <h6>Total appraisal filled</h6>
+                                                <p>@ViewBag.ReporteeCompleted</p>
                                                 <h6>Pending Appraisals</h6>
-                                                <p>@ViewBag.PendingAppraisals </p>
+                                                <p>@ViewBag.PendingAtReportee </p>
 
 
                                                 <div style="text-align:end ;" class="Last-Date">
@@ -229,7 +229,7 @@
                                                         <h6>Total appraisal to be filled</h6>
                                                         <p>@ViewBag.AppraisalsToBeFilled</p>
                                                         <h6>Pending Appraisals</h6>
-                                                        <p>@ViewBag.PendingAppraisals </p>
+                                                        <p>@ViewBag.PendingAtReview </p>
 
 
                                                         <div style="text-align:end ;" class="Last-Date">

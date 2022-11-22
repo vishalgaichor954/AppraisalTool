@@ -39,17 +39,64 @@ namespace AppraisalTool.App.Controllers
             SelfAppraisalHome model = new SelfAppraisalHome();
             HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome?userId={user.UserId}").Result;
             HttpResponseMessage cardResponse = client.GetAsync($"https://localhost:5000/api/User/GetAllCard?id={user.RoleId}&api-version=1").Result;
+            HttpResponseMessage reportResponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={user.UserId}").Result;
+            HttpResponseMessage reviewResponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetReviewAppraisalByRevAuthority?id={user.UserId}").Result;
             HttpResponseMessage yearResponse = client.GetAsync($"https://localhost:5000/api/v1/FinancialYear/GetFinancialYearsByUserJoining?userId={user.UserId}").Result;
-            if (httpResponseMessage.IsSuccessStatusCode && cardResponse.IsSuccessStatusCode && yearResponse.IsSuccessStatusCode)
+
+
+            if (httpResponseMessage.IsSuccessStatusCode && cardResponse.IsSuccessStatusCode && reportResponse.IsSuccessStatusCode && reviewResponse.IsSuccessStatusCode && yearResponse.IsSuccessStatusCode)
             {
+                int reporteeCompleted = 0;
+                int reporteeCount = 0;
+                int reviewCount = 0;
+                var responseData = reportResponse.Content.ReadAsStringAsync().Result;
+                var users = JsonConvert.DeserializeObject<Response>(responseData);
+                Console.WriteLine(users.Data);
+                foreach (var item in users.Data)
+                {
+
+
+                    if (item.status == 2)
+                    {
+                        reporteeCount = reporteeCount + 1;
+                    }
+                    if(item.status == 3)
+                    {
+                        reporteeCompleted= reporteeCompleted+1;
+                    }
+
+                }
+                ViewBag.PendingAtReportee = reporteeCount;
+                ViewBag.ReporteeCompleted = reporteeCompleted;
+
+
+                var reviewData = reviewResponse.Content.ReadAsStringAsync().Result;
+                var employees = JsonConvert.DeserializeObject<Response>(reviewData);
+                Console.WriteLine(employees.Data);
+
+                foreach(var item in employees.Data)
+                    {
+                    if (item.status == 3)
+                    {
+                        reviewCount = reviewCount + 1;
+                    }
+
+
+                }
+                
+                ViewBag.PendingAtReview = reviewCount;
+
+
                 var CardresponseData = cardResponse.Content.ReadAsStringAsync().Result;
                 //var Cardres = JsonConvert.DeserializeObject<ForgetPasswordResponse>(CardresponseData);
                 dynamic json = JsonConvert.DeserializeObject(CardresponseData);
                 ViewBag.GetMenuCards = json.data;
                 Console.WriteLine(ViewBag.GetMenuCards);
-                var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                var menuData = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                var menuResponseData= JsonConvert.DeserializeObject<Response>(menuData);
+                var resAppraisalData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var yearResponseData = yearResponse.Content.ReadAsStringAsync().Result;
-                var data = JsonConvert.DeserializeObject<Response>(responseData);
+                var data = JsonConvert.DeserializeObject<Response>(resAppraisalData);
                 Console.WriteLine(data.Data);
                 //List<SelfAppraisalHome> mylist = JsonConvert.DeserializeObject<List<SelfAppraisalHome>>(JsonConvert.SerializeObject(data.Data));
                 List<FinancialYear> yearResponseList = JsonConvert.DeserializeObject<List<FinancialYear>>(JsonConvert.SerializeObject(JsonConvert.DeserializeObject<Response>(yearResponseData).Data));
@@ -71,10 +118,10 @@ namespace AppraisalTool.App.Controllers
                 //HardCoded Values
                 try
                 {
-                    ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
-                    ViewBag.PendingAppraisals = data.Data[0].pendingAppraisals;
-                    ViewBag.LastDate = data.Data[0].lastDate;
-                    ViewBag.CurrentYear = data.Data[0].currentYear;
+                    ViewBag.AppraisalsToBeFilled = menuResponseData.Data[0].appraisalsToBeFilled;
+                    ViewBag.PendingAppraisals = menuResponseData.Data[0].pendingAppraisals;
+                    ViewBag.LastDate = menuResponseData.Data[0].lastDate;
+                    ViewBag.CurrentYear = menuResponseData.Data[0].currentYear;
                 }
                 catch (Exception e)
                 {

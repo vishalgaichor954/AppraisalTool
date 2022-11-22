@@ -39,17 +39,71 @@ namespace AppraisalTool.App.Controllers
             SelfAppraisalHome model = new SelfAppraisalHome();
             HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome?userId={user.UserId}").Result;
             HttpResponseMessage cardResponse = client.GetAsync($"https://localhost:5000/api/User/GetAllCard?id={user.RoleId}&api-version=1").Result;
+<<<<<<< HEAD
+            HttpResponseMessage reportResponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={user.UserId}").Result;
+            HttpResponseMessage reviewResponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetReviewAppraisalByRevAuthority?id={user.UserId}").Result;
+
+
+            if (httpResponseMessage.IsSuccessStatusCode && cardResponse.IsSuccessStatusCode && reportResponse.IsSuccessStatusCode && reviewResponse.IsSuccessStatusCode)
+=======
             HttpResponseMessage yearResponse = client.GetAsync($"https://localhost:5000/api/v1/FinancialYear/GetFinancialYearsByUserJoining?userId={user.UserId}").Result;
             if (httpResponseMessage.IsSuccessStatusCode && cardResponse.IsSuccessStatusCode && yearResponse.IsSuccessStatusCode)
+>>>>>>> AT-Dev
             {
+                int reporteeCompleted = 0;
+                int reporteeCount = 0;
+                int reviewCount = 0;
+                var responseData = reportResponse.Content.ReadAsStringAsync().Result;
+                var users = JsonConvert.DeserializeObject<Response>(responseData);
+                Console.WriteLine(users.Data);
+                foreach (var item in users.Data)
+                {
+
+
+                    if (item.status == 2)
+                    {
+                        reporteeCount = reporteeCount + 1;
+                    }
+                    if(item.status == 3)
+                    {
+                        reporteeCompleted= reporteeCompleted+1;
+                    }
+
+                }
+                ViewBag.PendingAtReportee = reporteeCount;
+                ViewBag.ReporteeCompleted = reporteeCompleted;
+
+
+                var reviewData = reviewResponse.Content.ReadAsStringAsync().Result;
+                var employees = JsonConvert.DeserializeObject<Response>(reviewData);
+                Console.WriteLine(employees.Data);
+
+                foreach(var item in employees.Data)
+                    {
+                    if (item.status == 3)
+                    {
+                        reviewCount = reviewCount + 1;
+                    }
+
+
+                }
+                
+                ViewBag.PendingAtReview = reviewCount;
+
+
                 var CardresponseData = cardResponse.Content.ReadAsStringAsync().Result;
                 //var Cardres = JsonConvert.DeserializeObject<ForgetPasswordResponse>(CardresponseData);
                 dynamic json = JsonConvert.DeserializeObject(CardresponseData);
                 ViewBag.GetMenuCards = json.data;
                 Console.WriteLine(ViewBag.GetMenuCards);
+<<<<<<< HEAD
+                var menuData = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<Response>(menuData);
+=======
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var yearResponseData = yearResponse.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<Response>(responseData);
+>>>>>>> AT-Dev
                 Console.WriteLine(data.Data);
                 //List<SelfAppraisalHome> mylist = JsonConvert.DeserializeObject<List<SelfAppraisalHome>>(JsonConvert.SerializeObject(data.Data));
                 List<FinancialYear> yearResponseList = JsonConvert.DeserializeObject<List<FinancialYear>>(JsonConvert.SerializeObject(JsonConvert.DeserializeObject<Response>(yearResponseData).Data));
@@ -59,20 +113,16 @@ namespace AppraisalTool.App.Controllers
                 {
 
 <<<<<<< HEAD
-                    financialYearList.Add(new SelectListItem { Text = "FY" + item.StartYear.ToString() + "-" + item.EndYear.ToString(), Value = item.Id.ToString(), Selected = true });
-
-                }
-                ViewBag.financialYearList = financialYearList;
-
-=======
                     financialYearList.Add(new SelectListItem { Text = "FY" + item.startYear.ToString() + "-" + item.endYear.ToString(), Value = item.id.ToString(), Selected = true });
+=======
+                    financialYearList.Add(new SelectListItem { Text = "FY" + item.StartYear.ToString() + "-" + item.EndYear.ToString(), Value = item.Id.ToString(), Selected = true });
+>>>>>>> AT-Dev
 
 
                 }
                 financialYearList.Add(new SelectListItem { Text = "FY2022-2023", Value = "4" });
 
                 ViewBag.financialYearList = financialYearList.DistinctBy(x => x.Value);
->>>>>>> AT-Dev
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
 
@@ -82,10 +132,7 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.AppraisalsToBeFilled = data.Data[0].appraisalsToBeFilled;
                     ViewBag.PendingAppraisals = data.Data[0].pendingAppraisals;
                     ViewBag.LastDate = data.Data[0].lastDate;
-<<<<<<< HEAD
-=======
                     ViewBag.CurrentYear = data.Data[0].currentYear;
->>>>>>> AT-Dev
                 }
                 catch (Exception e)
                 {
@@ -133,9 +180,6 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
                 }
                 catch (Exception e)
-<<<<<<< HEAD
-                { }
-=======
                 {
                     ViewBag.ReportingAuthorityFirstName = "Not Assigned";
                     ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
@@ -150,7 +194,6 @@ namespace AppraisalTool.App.Controllers
 
 
 
->>>>>>> AT-Dev
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
 
@@ -446,9 +489,6 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
                 }
                 catch (Exception e)
-<<<<<<< HEAD
-                { }
-=======
                 {
                     ViewBag.ReportingAuthorityFirstName = "Not Assigned";
                     ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
@@ -456,7 +496,6 @@ namespace AppraisalTool.App.Controllers
 
 
                 }
->>>>>>> AT-Dev
                 string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 Console.WriteLine(response);
 
