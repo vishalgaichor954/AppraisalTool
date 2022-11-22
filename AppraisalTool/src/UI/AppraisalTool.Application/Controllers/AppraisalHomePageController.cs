@@ -212,18 +212,9 @@ namespace AppraisalTool.App.Controllers
                 //    ViewBag.ReportingAuthorityFirstName = "Not Assigned";
                 //    ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
                 //    ViewBag.Date = "1st April 2022-31st March 2023";
-
-
-
                 //}
-
-
-
-
-
-
-                string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
-                Console.WriteLine(response);
+                //string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
+                //Console.WriteLine(response);
 
                 return View();
             }
