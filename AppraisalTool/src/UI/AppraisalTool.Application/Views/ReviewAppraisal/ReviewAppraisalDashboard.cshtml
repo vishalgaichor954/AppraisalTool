@@ -126,7 +126,7 @@
         <div class="content-wrapper content-wrapper-Blue">
             <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard"> Reportee Appraisal Dashboard   </a></h6>
             <br />
-            <input type="button" value="Back" class="Button mb-4" onclick="history.back()" />
+                   <input type="button" value="Back" class="Button " onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
             <br />
             <div style="  background-color: white;border-radius: 0.5rem;" class="container">
 
@@ -277,7 +277,7 @@
 
                        
 
-                        <a class="ReporteeAnchorTag" href="/AppraisalHomePage/AddReportingAuthorityAppraisal?Appraisald=@item.AppraisalId">
+                        <a class="ReviewAnchorTag" href="/AppraisalHomePage/AddReviewingAuthorityAppraisal?Appraisald=@item.AppraisalId">
                             <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1.5px solid #1746A2; border-radius: 0.3rem;">
                                 <div class="col-md-3">
 

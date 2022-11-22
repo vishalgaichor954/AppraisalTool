@@ -30,7 +30,7 @@ namespace AppraisalTool.Persistence.Repositories
         }
 
 
-        //public async Task<List<User>> GetDataById(int userId, int financialYearId)
+       
         public async Task<IQueryable<GetDataVM>> GetDataById(int userId)
         {
             var primaryRole = "";
@@ -68,13 +68,6 @@ namespace AppraisalTool.Persistence.Repositories
                                          }) ;   
 
             Console.WriteLine(res);
-
-            
-
-
-
-
-
             return res;
         }
         public async Task<Appraisal> AddAppraisal(Appraisal addAppraisal)

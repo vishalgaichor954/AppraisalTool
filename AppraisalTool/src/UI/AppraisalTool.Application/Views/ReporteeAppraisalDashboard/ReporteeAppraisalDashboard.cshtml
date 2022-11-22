@@ -71,18 +71,20 @@
     }
 
     .ApplyButton {
-        background-color: blue;
-        border: none;
-        color: white;
-        padding: 15px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 13px;
-        margin: 4px;
-        cursor: pointer;
-        width: auto;
-    }
+    background-color: #1746A2;
+    border: none;
+    color: white;
+    padding: 15px;
+    width: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 18px;
+    width: 10%;
+    cursor: pointer;
+    width: 15%;
+}
 
 </style>
 <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
@@ -149,7 +151,7 @@
         <div class="content-wrapper content-wrapper-Blue">
             <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard"> Reportee Appraisal Dashboard   </a></h6>
             <br />
-            <input type="button" value="Back" class="Button mb-4" onclick="history.back()" />
+            <input type="button" value="Back" class="Button mb-4" onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
             <br />
             <div style="  background-color: white;border-radius: 0.5rem;" class="container">
 
@@ -281,8 +283,8 @@
 
 
                         </div>
-                        <div class="d-flex justify-content-end">
-                            <input type="submit" class="inline btn btn-primary ApplyButton " value="Apply" />
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" class="inline btn  ApplyButton"  value="Apply" />
                             @* <input type="button" onclick="resetFilters()" class="inline btn btn-primary ApplyButton " value="Reset" />*@
                         </div>
 
@@ -297,76 +299,6 @@
                 {
                     @foreach (var item in ViewBag.UserList)
                     {
-
-                        @*      <a style="display:block" class="ReporteeAnchorTag" href="/AppraisalHomePage/AddReportingAuthorityAppraisal?Appraisald=@item.AppraisalId">*@
-                        @* <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1px solid #1746A2; border-radius: 0.3rem;">
-                <div class="col-md-3">
-
-                <div class="row">
-                <div class="col-md-2 Date-Badge">
-                <label style="font-size:1rem ;" class="badge badge-pill  user-roles LoginBtn " for=""><i class="mdi mdi-calendar-blank"></i></label>
-                </div>
-                <div class="col-md-10">
-                <div class="row d-flex row date-p">
-                <span style="display: inline-block;">Date</span>
-
-                <small asp-for="Date">@item.StartDate.ToString("dd MMM yyyy") to @item.EndDate.ToString("dd MMM yyyy") </small>
-
-                </div>
-                </div>
-                </div>
-                </div>
-                <div class="col-md-2">
-
-                <div class="row">
-                <div class="col-md-2 Date-Badge">
-                <label style="font-size:1rem ;" class="badge badge-pill user-roles  LoginBtn" for=""><i class=" mdi mdi-account-check"></i></label>
-                </div>
-                <div class="col-md-10">
-                <div class="row d-flex row date-p">
-                <span style="display: inline-block;">Employee Name</span>
-
-                <small asp-for="EmployeeName">@item.FirstName  @item.LastName </small>
-
-                </div>
-                </div>
-                </div>
-                </div>
-                <div class="col-md-2">
-
-                <div class="row">
-                <div class="col-md-2 Date-Badge">
-                <label style="font-size:1rem ;" class="badge badge-pill user-roles  LoginBtn" for=""><i class=" mdi mdi-account"></i></label>
-                </div>
-                <div class="col-md-10">
-                <div class="row d-flex row date-p">
-                <span style="display: inline-block;">Reviewing Authority</span>
-
-                <small asp-for="ReviewingAuthority">@item.RevaName </small>
-
-                </div>
-                </div>
-                </div>
-                </div>
-                <div class="col-md-3">
-
-                <div class="row">
-                <div class="col-md-10 row date-p">
-
-                <div class="row d-flex justify-content-center">
-                <span style="display: inline-block;">Appraisal Status</span>
-                </div>
-                <smaller style="border-radius: 0.5rem; font-size:12px ; background-color: rgb(245, 177, 138);" class="pt-1 pb-1"><asp-for ="AppraisalStatus">@item.AppraisalStatus</smaller>
-
-                </div>
-                </div>
-                </div>
-                <div class="col-md-2">
-
-                HELU
-                </div>
-                </div>*@
-                        @*</a>*@
 
                         <a class="ReporteeAnchorTag" href="/AppraisalHomePage/AddReportingAuthorityAppraisal?Appraisald=@item.AppraisalId">
                             <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1.5px solid #1746A2; border-radius: 0.3rem;">

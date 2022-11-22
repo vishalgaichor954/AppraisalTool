@@ -14,7 +14,7 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetYear
         public int EndYear { get; set; }
         public int AppraisalsToBeFilled { get; set; } = 1;
         public int PendingAppraisals { get; set; } = 0;
-        public string LastDate { get; set; } = "31st March 2022";
+        public string LastDate { get; set; } = "31st March 2023";
         public string CurrentYear { get; set; } = "FY2022-2023";
 
     }

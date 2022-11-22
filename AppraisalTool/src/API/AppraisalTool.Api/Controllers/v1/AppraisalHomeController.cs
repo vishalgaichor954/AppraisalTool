@@ -15,6 +15,7 @@ using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalRe
 using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResult;
 using AppraisalTool.Application.Features.ReviewAppraisals.Queries.GetReviewAppraisalsByRevAuthority;
 using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResultByReva;
+using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByFidAndUserId;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -138,6 +139,13 @@ namespace AppraisalTool.Api.Controllers.v1
             return Ok(response);
         }
 
+        [HttpGet("GetAppraisalResultsByFidAndUserId")]
+        public async Task<ActionResult> GetAppraisalResultsByFidAndUserId(int financialYearId,int userId)
+        {
+            var response = await _mediator.Send(new GetAppraisalResultsByFidAndUserIdQuery() { FinancialYearid = financialYearId, UserId = userId });
+            return Ok(response);
+        }
+
         [HttpPut("UpdateAppraisalResults")]
         public async Task<ActionResult> UpdateAppraisalResults(List<UpdateAppraisalResultDto> results,int statusId)
         {
@@ -184,6 +192,7 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("UpdateAppraisalResultsByReva Completed");
             return Ok(dtos);
         }
+
 
 
 
