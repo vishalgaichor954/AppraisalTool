@@ -287,5 +287,34 @@ namespace AppraisalTool.App.Controllers
         }
 
 
+
+        [HttpGet]
+        public IActionResult ListAppraisals()
+        {
+            var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            HttpResponseMessage response = client.GetAsync("https://localhost:5000/api/User/ListOfAppraisal?api-version=1").Result;
+            if (response.IsSuccessStatusCode)
+            {
+
+                string responseData = response.Content.ReadAsStringAsync().Result;
+                dynamic json = JsonConvert.DeserializeObject(responseData);
+                ViewBag.Appraisals = json.data;
+                return View();
+
+            }
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public IActionResult ListAppraisals(AllowAppraisalEditVm allowAppraisalEditVm, List<bool> allowEdit)
+        {
+            allowAppraisalEditVm.IsAllowed = allowEdit;
+            return View();
+        }
+
     }
 }

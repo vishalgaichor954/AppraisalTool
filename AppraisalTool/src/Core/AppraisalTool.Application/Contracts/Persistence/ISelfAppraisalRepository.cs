@@ -18,5 +18,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<Appraisal> AddAppraisal(Appraisal addAppraisal);
         public Task<bool> UpdateAppraisalStatus(int appraisalId, int status);
         public Task<Appraisal> GetAppraisalByUserAndFinancialYear(int fId, int userId);
+        public Task<List<ReviewAppraisalListVm>> GetReviewAppraisalsByRevAuthority(int id);
+        public Task<bool> UpdateAppraisalStatusByReva(int appraisalId, int statusId);
     }
 }

@@ -1,4 +1,4 @@
-﻿using AppraisalTool.App.Helpers;
+using AppraisalTool.App.Helpers;
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.GradeReport;
@@ -12,7 +12,9 @@ using Newtonsoft.Json;
 using Syncfusion.EJ2.CircularGauge;
 using System.Drawing.Printing;
 using System.Runtime.InteropServices;
-using PaperKind = DinkToPdf.PaperKind;
+using PaperKind.DinkToPdf.PaperKind;
+using Microsoft.AspNetCore.Mvc;
+using Syncfusion.EJ2.CircularGauge;
 
 namespace AppraisalTool.App.Controllers
 {

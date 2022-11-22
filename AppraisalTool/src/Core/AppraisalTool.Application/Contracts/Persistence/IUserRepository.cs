@@ -1,4 +1,5 @@
-﻿using AppraisalTool.Application.Features.Users.Command.CreateRoleCommand;
+﻿using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalList;
+using AppraisalTool.Application.Features.Users.Command.CreateRoleCommand;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
 using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
@@ -21,12 +22,15 @@ namespace AppraisalTool.Application.Contracts.Persistence
         Task<RemoveUserCommandDto> RemoveUserAsync(int id);
         Task<UpdateUserCommandDto> UpdateUserAsync(int id, UpdateUserCommand request);
         public Task<bool> UpdateUser(User user);
+        public Task<IEnumerable<GetAppraisalDto>> GetAllAppraisals();
         public Task<IEnumerable<User>> GetAllUser();
         Task<CreateRoleCommandDto> CreateUserRole(UserJobRoles request);
 
         //public Task<dynamic> getCards(int id);
         public Task<User> GetUserById(int id);
         public Task<List<MenuRoleMapping>> getAllCards(int id);
+
+        //public Task<bool> AssignAuthority(int repaId, int revaId, int userId);
     }
 
 }

@@ -20,12 +20,16 @@ using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetYear;
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
 using AppraisalTool.Application.Features.AppraisalResults.Commands.AddAppraisalResult;
 using AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand;
-<<<<<<< HEAD
 using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
-=======
 using AppraisalTool.Application.Features.Menu.Query.GetMenuById;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuList;
->>>>>>> a7105c5a6c816c2d8f0ac041a311bb483b89e608
+using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResult;
+<<<<<<< HEAD
+using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResultByReva;
+=======
+using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByFidAndUserId;
+using AppraisalTool.Application.Features.FinancialYears.Queries.GetAllFinancialYears;
+>>>>>>> AT-Dev
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -74,13 +78,21 @@ namespace AppraisalTool.Application.Profiles
             CreateMap<User, GetUserListQueryVm>().ConvertUsing<GetUserListVmCustomMapper>();
 
             CreateMap<AppraisalResult, AddAppraisalResultDto>().ReverseMap();
-
+            CreateMap<AppraisalResult, UpdateAppraisalResultDto>().ReverseMap();
+<<<<<<< HEAD
+            CreateMap<AppraisalResult, UpdateAppraisalResultByRevaDto>().ReverseMap(); 
+=======
+            CreateMap<AppraisalResult, GetAppraisalsByUidAndFidDto>().ReverseMap();
+>>>>>>> AT-Dev
             //menu mapping
 
             CreateMap<MenuList, CreateMenuCommand>().ReverseMap();
             CreateMap<MenuList, GetMenuByIdDto>().ReverseMap();
 
             CreateMap<MenuList, GetMenuListQueryVm>().ConvertUsing<GetMenuListVmCustomMapper>();
+
+            //Financial Year Mapping
+            CreateMap<FinancialYear, GetAllFinancialYearsVM>().ReverseMap();
 
 
 

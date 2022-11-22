@@ -23,6 +23,6 @@ namespace AppraisalTool.Application.Features.Menu.Query.GetMenuById
 
         public int RoleId {get; set; }
 
-        //public List<int> RoleList { get; set; }
+        public List<int> RoleList { get; set; }
     }
 }

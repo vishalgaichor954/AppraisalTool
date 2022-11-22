@@ -1,40 +1,17 @@
-﻿@model AppraisalTool.Application.Models.AppraisalTool.ReporteeAppraisalFilter
+﻿@model AppraisalTool.Application.Models.AppraisalTool.ReviewAppraisalFilter
 
 
 
 @{
-    ViewData["Title"] = "ReporteeAppraisalDashboard";
+    ViewData["Title"] = "ReviewAppraisalDashboard";
 }
 <style>
-    /* a:link {
-            color: green;
-            background-color: transparent;
-            text-decoration: none;
-        }*/
-
-    /*   a:visited {
-            color: pink;
-            background-color: transparent;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: red;
-            background-color: transparent;
-            text-decoration: underline;
-        }
-
-        a:active {
-            color: yellow;
-            background-color: transparent;
-            text-decoration: underline;
-        }*/
-
+   
 
     .Button {
         background-color: #1746A2;
         color: white;
-        /* border: 2px solid #E0144C;*/
+       
         border-radius: 0.3rem;
         border: none;
         padding: 13px 40px;
@@ -71,27 +48,25 @@
     }
 
     .ApplyButton {
-    background-color: #1746A2;
-    border: none;
-    color: white;
-    padding: 15px;
-    width: 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 13px;
-    margin: 18px;
-    width: 10%;
-    cursor: pointer;
-    width: 15%;
-}
+        background-color: blue;
+        border: none;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 13px;
+        margin: 4px;
+        cursor: pointer;
+        width: auto;
+    }
 
 </style>
 <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
 <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
 <script src="~/lib/package/dist/sweetalert2.all.js"></script>
 <script src="~/lib/package/dist/sweetalert2.min.js"></script>
-@if (TempData["RepaError"] != null)
+@*@if (TempData["RepaError"] != null)
 {
 
 
@@ -124,7 +99,7 @@
         <script>
             @*var check = @TempData["RepaSUCCESS"].ToString();
         console.log(@TempData["RepaSUCCESS"].ToString());*@
-                    const Toast = Swal.mixin({
+             @*       const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -143,7 +118,7 @@
         </script>
     }
 
-}
+}*@
 <div class="container-scroller">
 
     <div class="container-fluid page-body-wrapper">
@@ -151,19 +126,19 @@
         <div class="content-wrapper content-wrapper-Blue">
             <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard"> Reportee Appraisal Dashboard   </a></h6>
             <br />
-            <input type="button" value="Back" class="Button mb-4" onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
+                   <input type="button" value="Back" class="Button " onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
             <br />
             <div style="  background-color: white;border-radius: 0.5rem;" class="container">
 
 
                 <div>
-                    <h3 class="pt-4">Reportee Appraisal Dashboard</h3>
+                    <h3 class="pt-4">Review Appraisal Dashboard</h3>
                 </div>
                 <br />
 
 
 
-                <form method="get" id="filterForm" asp-action="ReporteeAppraisalDashboard">
+                <form method="get" id="filterForm" asp-action="ReviewAppraisalDashboard">
                     <div class=" row pt-2 ">
 
 
@@ -201,7 +176,7 @@
 
                         <div class="col-md-2">
                             <div class="row">
-                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Reviewing Authority</p>
+                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Reporting Authority</p>
                                 <div class="Dropdown">
                                 </div>
                             </div>
@@ -264,7 +239,7 @@
                         <div class="col-md-2">
                             <div class="row">
                                 <div class="Dropdown">
-                                    <select class="form-control form-select" asp-items="ViewBag.reviewingAuthority" asp-for="@Model.ReviewingAuthority">
+                                    <select class="form-control form-select" asp-items="ViewBag.reportingAuthority" asp-for="@Model.ReportingAuthority">
                                         <option class=" text-dropdown">-Select-</option>
                                     </select>
                                 </div>
@@ -283,8 +258,8 @@
 
 
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <input type="submit" class="inline btn  ApplyButton"  value="Apply" />
+                        <div class="d-flex justify-content-end">
+                            <input type="submit" class="inline btn btn-primary ApplyButton " value="Apply" />
                             @* <input type="button" onclick="resetFilters()" class="inline btn btn-primary ApplyButton " value="Reset" />*@
                         </div>
 
@@ -300,7 +275,9 @@
                     @foreach (var item in ViewBag.UserList)
                     {
 
-                        <a class="ReporteeAnchorTag" href="/AppraisalHomePage/AddReportingAuthorityAppraisal?Appraisald=@item.AppraisalId">
+                       
+
+                        <a class="ReviewAnchorTag" href="/AppraisalHomePage/AddReviewingAuthorityAppraisal?Appraisald=@item.AppraisalId">
                             <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1.5px solid #1746A2; border-radius: 0.3rem;">
                                 <div class="col-md-3">
 
@@ -342,9 +319,9 @@
                                         </div>
                                         <div class="col-md-10">
                                             <div class="row d-flex row date-p">
-                                                <span class="reporteeTagPara" style="display: inline-block;">Reviewing Authority</span>
+                                                <span class="reporteeTagPara" style="display: inline-block;">Reporting Authority</span>
 
-                                                <small class="reporteeTagSmall" asp-for="ReviewingAuthority">@item.RevaName </small>
+                                                <small class="reporteeTagSmall" asp-for="ReportingAuthority">@item.RepaName </small>
 
                                             </div>
                                         </div>

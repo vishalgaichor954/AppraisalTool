@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AutoMapper;
 using AppraisalTool.Domain.Common;
-using static System.Net.Mime.MediaTypeNames;
 using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 
 namespace AppraisalTool.Persistence.Repositories
@@ -89,9 +88,11 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<List<Appraisal>> GetYear(int userId)
         {
+            
             var years = await _dbContext.Appraisal.Include(x => x.FinancialYear).Where(x => x.UserId == userId)
                 .Include(x => x.FinancialYear)
                 .ToListAsync();
+
             return years;
         }
 
@@ -132,7 +133,7 @@ namespace AppraisalTool.Persistence.Repositories
         {
             List<UserAuthorityMapping> mappings = await _dbContext.UserAuthorityMappings.Include(x => x.ReviewingAuthority).ToListAsync();
             List<Appraisal> appraisals = await _dbContext.Appraisal.Include(x => x.Status).Include(x => x.User).Include(x => x.FinancialYear).ToListAsync();
-
+            
 
             var res = (from A in mappings
                        join B in appraisals on A.UserId equals B.UserId
@@ -151,7 +152,9 @@ namespace AppraisalTool.Persistence.Repositories
                            AppraisalStatus = B.Status.StatusTitle,
                            FinancialYearId = B.FinancialYear.Id,
                            FinancialStartYear = B.FinancialYear.StartYear,
-                           FinancialEndYear = B.FinancialYear.EndYear
+                           FinancialEndYear = B.FinancialYear.EndYear,
+                           Status=B.StatusId,
+                           
                        });
             return res.OrderByDescending(d => d.StartDate).ToList<ReporteeAppraisalListVm>();
         }
@@ -165,5 +168,41 @@ namespace AppraisalTool.Persistence.Repositories
             return appraisal;
         }
 
+        public async Task<List<ReviewAppraisalListVm>> GetReviewAppraisalsByRevAuthority(int id)
+        {
+            List<UserAuthorityMapping> mappings = await _dbContext.UserAuthorityMappings.Include(x => x.ReportingAuthority).ToListAsync();
+            List<Appraisal> appraisals = await _dbContext.Appraisal.Include(x => x.Status).Include(x => x.User).Include(x => x.FinancialYear).ToListAsync();
+
+
+            var res = (from A in mappings
+                       join B in appraisals on A.UserId equals B.UserId
+                       where A.ReviewingAuthorityId == id
+                       select new ReviewAppraisalListVm
+                       {
+                           AppraisalId = B.Id,
+                           StartDate = B.StartDate,
+                           EndDate = B.EndDate,
+                           FirstName = B.User.FirstName,
+                           EmployeeId = B.User.Id,
+                           LastName = B.User.LastName,
+                           RepaName = A.ReportingAuthority.FirstName + " " + A.ReportingAuthority.LastName,
+                           AppraisalStatusId = B.Status.Id,
+                           RepAuthorityId = A.ReportingAuthorityId,
+                           AppraisalStatus = B.Status.StatusTitle,
+                           FinancialYearId = B.FinancialYear.Id,
+                           FinancialStartYear = B.FinancialYear.StartYear,
+                           FinancialEndYear = B.FinancialYear.EndYear,
+                            Status = B.StatusId,
+                       });
+            return res.OrderByDescending(d => d.StartDate).ToList<ReviewAppraisalListVm>();
+        }
+
+        public async Task<bool> UpdateAppraisalStatusByReva(int appraisalId, int statusId)
+        {
+            Appraisal data = await _dbContext.Appraisal.FirstOrDefaultAsync(x => x.Id == appraisalId);
+            data.StatusId = statusId;
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
     }
 }

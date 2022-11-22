@@ -112,7 +112,7 @@ namespace AppraisalTool.Api.Controllers.v1
                 var targetEmail = new Email()
                 {
                     To = forgetPassword.email,
-                    Body = $"Dear User, <br/><br/>Your Password has been reset successfully<br/>\r\n  Use following credentials to Login.<br/>\r\nUsername : {forgetPassword.email} <br/>\r\nPassword : {newPassword}.<br /><br />Thanks <br/> <br/>Regards, <br/> Team. Support",
+                    Body = $"Dear User, <br/><br/>Your Password has been reset successfully<br/>\r\n  Use following credentials to Login.<br/>\r\nUsername : {forgetPassword.email} <br/>\r\nPassword : {newPassword}<br /><br />Thanks <br/> <br/>Regards, <br/> Team. Support",
                     Subject = "Password Reset Successfully !!"
                 };
                 await _emailservice.SendEmail(targetEmail);

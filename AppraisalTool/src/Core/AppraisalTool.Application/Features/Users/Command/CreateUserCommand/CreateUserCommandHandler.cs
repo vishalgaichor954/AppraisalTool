@@ -64,8 +64,9 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
                 };
                 await _roleRepository.AddJobRoles(jobList);
             }
-
             bool authorityStatus = await _userRepository.AssignAuthority(5, 2, userDto.Id);
+
+            //bool authorityStatus = await _userRepository.AssignAuthority(5, 2, userDto.Id);
 
             _logger.LogInformation("Hanlde Completed");
             if (userDto.Succeeded && authorityStatus == true)
@@ -73,7 +74,7 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
                 var email = new Email()
                 {
                     To = request.Email,
-                    Body = $"Dear User, <br/><br/>You application registered successfully on portal.<br/>\r\n  Kindly refer below credentials to Login.<br/>\r\nUsername : {request.Email} <br/>\r\nPassword : {request.Password}.<br /> <br/>Regards, <br/> Team. Support",
+                    Body = $"Dear User, <br/><br/>You application registered successfully on portal.<br/>\r\n  Kindly refer below credentials to Login.<br/>\r\nUsername : {request.Email} <br/>\r\nPassword :{request.Password}<br /> <br/>Regards, <br/> Team. Support",
                     Subject = "User Registered Successfully !!"
                 };
                 await _emailservice.SendEmail(email);
