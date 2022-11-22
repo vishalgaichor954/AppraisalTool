@@ -193,10 +193,10 @@ namespace AppraisalTool.App.Controllers
             HttpResponseMessage response = client.PutAsync("https://localhost:5000/api/User/UpdateUser?api-version=1", content).Result;
             if (response.IsSuccessStatusCode)
             {
-                TempData["Success"] = "User Update Successfully";
+                TempData["Success"] = "User Updated Successfully";
                 return RedirectToAction("ListUsers");
             }
-            TempData["editError"] = "Faild to Update User";
+            TempData["editError"] = "Failed to Update User";
             return RedirectToAction("ListUsers");
 
 
