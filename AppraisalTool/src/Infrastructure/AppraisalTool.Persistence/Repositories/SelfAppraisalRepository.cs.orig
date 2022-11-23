@@ -53,7 +53,6 @@ namespace AppraisalTool.Persistence.Repositories
             IQueryable<GetDataVM> res = (from A in _dbContext.User
                                          join B in _dbContext.UserAuthorityMappings on A.Id equals B.UserId
                                          join C in _dbContext.Appraisal on B.UserId equals C.UserId
-
                                          where A.Id == userId
 
                                          select new GetDataVM
@@ -66,7 +65,6 @@ namespace AppraisalTool.Persistence.Repositories
                                              ReviewingAuthorityFirstName = B.ReviewingAuthority.FirstName,
                                              ReviewingAuthorityLastName = B.ReviewingAuthority.LastName,
                                              AppraisalStatus = C.Status.StatusTitle,
-                                             FinancialYearId  = C.FinancialYear.Id,
                                          }) ;   
 
             Console.WriteLine(res);
@@ -161,6 +159,7 @@ namespace AppraisalTool.Persistence.Repositories
             return res.OrderByDescending(d => d.StartDate).ToList<ReporteeAppraisalListVm>();
         }
 
+<<<<<<< HEAD
         //Author : Ilyas Dabholkar
         //Return Appraisal Object by financialayear and userid
         public async Task<Appraisal> GetAppraisalByUserAndFinancialYear(int fId,int userId)
@@ -170,6 +169,7 @@ namespace AppraisalTool.Persistence.Repositories
             return appraisal;
         }
 
+=======
         public async Task<List<ReviewAppraisalListVm>> GetReviewAppraisalsByRevAuthority(int id)
         {
             List<UserAuthorityMapping> mappings = await _dbContext.UserAuthorityMappings.Include(x => x.ReportingAuthority).ToListAsync();
@@ -206,5 +206,6 @@ namespace AppraisalTool.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
             return true;
         }
+>>>>>>> AT-Dev
     }
 }

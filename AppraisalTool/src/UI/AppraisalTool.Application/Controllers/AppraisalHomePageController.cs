@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Text;
 using static System.Formats.Asn1.AsnWriter;
 using AppraisalTool.Domain.Entities;
+using System.Security.Cryptography;
 
 namespace AppraisalTool.App.Controllers
 {
@@ -34,6 +35,12 @@ namespace AppraisalTool.App.Controllers
 
         public IActionResult HomePageAppraisal()
         {
+            string x = HttpContext.Session.GetString("user");
+            if (x == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
             SelfAppraisalHome model = new SelfAppraisalHome();
@@ -144,6 +151,18 @@ namespace AppraisalTool.App.Controllers
         }
         public IActionResult SelfAppraisalDashboard(int? Fid, string? Fyear)
         {
+
+            string x = HttpContext.Session.GetString("user");
+            if (x == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            if (Fid == null || Fyear == null)
+            {
+                return RedirectToAction("HomePageAppraisal","AppraisalHomePage");
+            }
+
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
             HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/byYear?userId={user.UserId}").Result;
@@ -223,8 +242,18 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddReportingAuthorityAppraisal(int Appraisald)
+        public IActionResult AddReportingAuthorityAppraisal(int? Appraisald)
         {
+            string x = HttpContext.Session.GetString("user");
+            if (x == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            if (Appraisald == null)
+            {
+                return RedirectToAction("ReporteeAppraisalDashboard", "ReporteeAppraisalDashboard");
+            }
 
             ///AppraisalHome/GetAppraisalResultsByAppraisalId?id=40
             HttpClient client = new HttpClient();
@@ -305,6 +334,16 @@ namespace AppraisalTool.App.Controllers
         [HttpGet]
         public IActionResult AddSelfAppraisal(int? fid)
         {
+            string x = HttpContext.Session.GetString("user");
+            if (x == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            if(fid == null)
+            {
+                return RedirectToAction("HomePageAppraisal", "AppraisalHomePage");
+            }
 
             //https://localhost:5000/api/v1/Metric/GetAllListOfMetric
             HttpClient client = new HttpClient();
@@ -464,7 +503,7 @@ namespace AppraisalTool.App.Controllers
                     var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
                     Console.WriteLine(res);
                     TempData["SUCCESS"] = "Successfully Submited";
-                    return RedirectToAction("SelfAppraisalDashboard");
+                    return RedirectToAction("HomePageAppraisal");
                     //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
                 }
             }
@@ -472,7 +511,7 @@ namespace AppraisalTool.App.Controllers
             TempData["Error"] = "Error Occured";
 
 
-            return RedirectToAction("SelfAppraisalDashboard");
+            return RedirectToAction("HomePageAppraisal");
 
 
         }
@@ -522,8 +561,20 @@ namespace AppraisalTool.App.Controllers
 
 
         [HttpGet]
-        public IActionResult AddReviewingAuthorityAppraisal(int Appraisald)
+        public IActionResult AddReviewingAuthorityAppraisal(int? Appraisald)
         {
+
+            string x = HttpContext.Session.GetString("user");
+            if (x == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            if (Appraisald == null)
+            {
+                return RedirectToAction("ReviewAppraisalDashboard","ReviewAppraisal");
+            }
+
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
             HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
@@ -568,8 +619,6 @@ namespace AppraisalTool.App.Controllers
         [HttpPost]
         public IActionResult AddReviewingAuthorityAppraisal(List<ReviewingMetricDto> scores)
         {
-            Console.WriteLine(scores);
-
             foreach (var item in scores)
             {
                 item.RevaSelfCreatatedDate = DateTime.Now;
@@ -586,11 +635,11 @@ namespace AppraisalTool.App.Controllers
                 var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
                 Console.WriteLine(res);
                 TempData["RepaSUCCESS"] = "Successfully Submited";
-                return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
+                return RedirectToRoute(new { controller = "ReviewAppraisal", action = "ReviewAppraisalDashboard" });
                 //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
             }
             TempData["RepaError"] = "Error Occured";
-            return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
+            return RedirectToRoute(new { controller = "ReviewAppraisal", action = "ReviewAppraisalDashboard" });
         }
 
 
