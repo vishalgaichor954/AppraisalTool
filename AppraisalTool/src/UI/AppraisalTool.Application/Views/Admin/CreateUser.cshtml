@@ -11,10 +11,10 @@
         font-size : 14px;
     }
 </style>
-<div class="container">
+<div class="container content-wrapper-Blue">
 
-    <div class="col-11">
-        <div class="card">
+    <div class="col-11 p-3">
+        <div class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Create User</h4>
                 <form class="form-sample" asp-action="CreateUser">
@@ -131,10 +131,11 @@
                             
                         </div>
                     </div>
-                    <div class="row d-flex justify-content-center">
+                   @* <div class="row d-flex justify-content-center">
                         <div style="max-width:20%;">
                             <div style="align-items:center;">
-                                <input type="submit" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" />
+                                  <a asp-action="ListUsers" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a>
+                              
                               
 
                            </div>
@@ -142,10 +143,22 @@
                         </div>
                          <div style="max-width:20%;">
                         <div style="align-items:center;">
-                                <a asp-action="ListUsers" class="btn btn-outline-secondary btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a>
+                             <input type="submit" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> 
                         </div>
                        </div>
-                    </div>
+                    </div>*@
+                      <div class="form-group text-center">
+                           @* <input type="hidden" name="job" id="job" />*@
+                            <div class="row">
+                                <div class="col-4"></div>
+                                <div class="col-2">  <a asp-action="ListUsers" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
+                                <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+                                <div class="col-4"></div>
+                                @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
+                            <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
+                            </div>
+
+                        </div>
                 </form>
             </div>
         </div>
