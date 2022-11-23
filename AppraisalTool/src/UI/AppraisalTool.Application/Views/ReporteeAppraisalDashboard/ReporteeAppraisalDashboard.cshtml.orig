@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+﻿@model AppraisalTool.Application.Models.AppraisalTool.ReporteeAppraisalFilter@{    ViewData["Title"] = "ReporteeAppraisalDashboard";}<style>    /* a:link {            color: green;            background-color: transparent;            text-decoration: none;        }*/    /*   a:visited {            color: pink;            background-color: transparent;            text-decoration: none;        }        a:hover {            color: red;            background-color: transparent;            text-decoration: underline;        }        a:active {            color: yellow;            background-color: transparent;            text-decoration: underline;        }*/    .Button {        background-color: #1746A2;        color: white;        /* border: 2px solid #E0144C;*/        border-radius: 0.3rem;        border: none;        padding: 13px 40px;        text-align: center;        text-decoration: none;        display: inline-block;        font-size: 16px;        margin: 4px 2px;        cursor: pointer;        width: auto;    }    a:link {        background-color: transparent;        text-decoration: none;    }    .BreadCrump > a:visited {        color: grey;        background-color: transparent;        text-decoration: none;    }    .BreadCrump > a:hover {        color: black;        background-color: transparent;        text-decoration: underline;    }    .BreadCrump > a:active {        color: yellow;        background-color: transparent;        text-decoration: underline;    }    .ApplyButton {    background-color: #1746A2;    border: none;    color: white;    padding: 15px;    width: 15px;    text-align: center;    text-decoration: none;    display: inline-block;    font-size: 13px;    margin: 18px;    width: 10%;    cursor: pointer;    width: 15%;}</style><link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css"><script src="~/lib/package/dist/sweetalert2.all.min.js"></script><script src="~/lib/package/dist/sweetalert2.all.js"></script><script src="~/lib/package/dist/sweetalert2.min.js"></script>@if (TempData["RepaError"] != null){    <script>        const Toast = Swal.mixin({            toast: true,            position: 'top-end',            showConfirmButton: false,            timer: 5000,            timerProgressBar: true,            didOpen: (toast) => {                toast.addEventListener('mouseenter', Swal.stopTimer)                toast.addEventListener('mouseleave', Swal.resumeTimer)            }        })        Toast.fire({            icon: 'error',            title: 'Oops ! something went wrong form was not submitted'        })    </script>}@if (TempData["RepaSUCCESS"] != null){    string checksuccess = @TempData["RepaSUCCESS"].ToString();    if (checksuccess == "Successfully Submited")    {        <script>            @*var check = @TempData["RepaSUCCESS"].ToString();        console.log(@TempData["RepaSUCCESS"].ToString());*@                    const Toast = Swal.mixin({                    toast: true,                    position: 'top-end',                    showConfirmButton: false,                    timer: 4000,                    timerProgressBar: true,                    didOpen: (toast) => {                        toast.addEventListener('mouseenter', Swal.stopTimer)                        toast.addEventListener('mouseleave', Swal.resumeTimer)                    }                })            Toast.fire({                icon: 'success',                title: 'Form was submitted successfully'            })        </script>    }}<div class="container-scroller">    <div class="container-fluid page-body-wrapper">        <div class="content-wrapper content-wrapper-Blue">            <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard"> Reportee Appraisal Dashboard   </a></h6>            <br />            <input type="button" value="Back" class="Button mb-4" onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />            <br />            <div style="  background-color: white;border-radius: 0.5rem;" class="container">                <div>                    <h3 class="pt-4">Reportee Appraisal Dashboard</h3>                </div>                <br />                <form method="get" id="filterForm" asp-action="ReporteeAppraisalDashboard">                    <div class=" row pt-2 ">                        <div class="col-md-2">                            <div class="row">                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Primary Role</p>                            </div>                        </div>                        <div class="col-md-2">                            <div class="row">                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Start Date</p>                            </div>                        </div>                        <div class="col-md-2">                            <div class="row">                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">End Date</p>                            </div>                        </div>                        <div class="col-md-2">                            <div class="row">                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Employee Name</p>                            </div>                        </div>                        <div class="col-md-2">                            <div class="row">                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Reviewing Authority</p>                                <div class="Dropdown">                                </div>                            </div>                        </div>                        <div class="col-md-2">                            <div class="row">                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Status</p>                            </div>                        </div>                    </div>                    <div class="row pb-4">                        <div class="col-md-2">                            <div class="row">                                <div class="Dropdown">                                    <select class="form-control form-select" asp-for="@Model.PrimaryRole">                                        <option class=" text-dropdown">-Select- </option>                                        <option class=" text-dropdown" value="4">Employee </option>                                    </select>                                </div>                            </div>                        </div>                        <div class="col-md-2">                            <div class="row">                                <div class="Dropdown">                                    <input class="form-control p-2" type="date" asp-for="@Model.StartDate" />                                </div>                            </div>                        </div>                        <div class="col-md-2">                            <div class="row">                                <div class="Dropdown">                                    <input class="form-control p-2" type="date" asp-for="@Model.EndDate" />                                </div>                            </div>                        </div>                        <div class="col-md-2">                            <div class="row">                                <div class="Dropdown">                                    <select class="form-control form-select" asp-items="ViewBag.employeeName" asp-for="@Model.EmployeeName">                                        <option class=" text-dropdown ">-Select-</option>                                    </select>                                </div>                            </div>                        </div>                        <div class="col-md-2">                            <div class="row">                                <div class="Dropdown">                                    <select class="form-control form-select" asp-items="ViewBag.reviewingAuthority" asp-for="@Model.ReviewingAuthority">                                        <option class=" text-dropdown">-Select-</option>                                    </select>                                </div>                            </div>                        </div>                        <div class="col-md-2">                            <div class="row">                                <div class="Dropdown">                                    <select class="form-control form-select" asp-items="ViewBag.appraisalStatus" asp-for="@Model.Status">                                        <option class=" text-dropdown">-Select-</option>                                    </select>                                </div>                            </div>                        </div>                        <div class="d-flex justify-content-center">                            <input type="submit" class="inline btn  ApplyButton"  value="Apply" />                            @* <input type="button" onclick="resetFilters()" class="inline btn btn-primary ApplyButton " value="Reset" />*@                        </div>                </form>                @if (ViewBag.UserList != null)                {                    @foreach (var item in ViewBag.UserList)                    {                        <a class="ReporteeAnchorTag" href="/AppraisalHomePage/AddReportingAuthorityAppraisal?Appraisald=@item.AppraisalId">                            <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1.5px solid #1746A2; border-radius: 0.3rem;">                                <div class="col-md-3">                                    <div class="row">                                        <div class="col-md-2 Date-Badge">                                            <label style="font-size:1rem ;" class="badge badge-pill  user-roles blueTheme " for=""><i class="mdi mdi-calendar-blank"></i></label>                                        </div>                                        <div class="col-md-10">                                            <div class="row d-flex row date-p">                                                <span class="reporteeTagPara" style="display: inline-block;">Date</span>                                                <small class="reporteeTagSmall" asp-for="Date">@item.StartDate.ToString("dd MMM yyyy") to @item.EndDate.ToString("dd MMM yyyy") </small>                                            </div>                                        </div>                                    </div>                                </div>                                <div class="col-md-3">                                    <div class="row">                                        <div class="col-md-2 Date-Badge">                                            <label style="font-size:1rem ;" class="badge badge-pill user-roles blueTheme" for=""><i class=" mdi mdi-account-check"></i></label>                                        </div>                                        <div class="col-md-10">                                            <div class="row d-flex row date-p">                                                <span class="reporteeTagPara" style="display: inline-block;">Employee Name</span>                                                <small class="reporteeTagSmall" asp-for="EmployeeName">@item.FirstName  @item.LastName </small>                                            </div>                                        </div>                                    </div>                                </div>                                <div class="col-md-3">                                    <div class="row">                                        <div class="col-md-2 Date-Badge">                                            <label style="font-size:1rem ;" class="badge badge-pill user-roles blueTheme" for=""><i class=" mdi mdi-account"></i></label>                                        </div>                                        <div class="col-md-10">                                            <div class="row d-flex row date-p">                                                <span class="reporteeTagPara" style="display: inline-block;">Reviewing Authority</span>                                                <small class="reporteeTagSmall" asp-for="ReviewingAuthority">@item.RevaName </small>                                            </div>                                        </div>                                    </div>                                </div>                                <div class="col-md-3">                                    <div class="row">                                        <div class="col-md-10 row date-p">                                            <div class="row d-flex justify-content-center">                                                <span class=" reporteeTagPara" style="display: inline-block;">Appraisal Status</span>                                            </div>                                            <smaller class=" reporteeTagPara" style="border-radius: 0.5rem; font-size:12px ; background-color: rgb(245, 177, 138);" class="pt-1 pb-1"><asp-for ="AppraisalStatus">@item.AppraisalStatus</smaller>                                        </div>                                    </div>                                </div>                            </div>                        </a>                    }                }            </div>            <!-- page-body-wrapper ends -->        </div>        <script>            const resetFilters = () => {                const filterForm = document.querySelector("#filterForm");                filterForm.reset();            }        </script>        <!-- container-scroller -->        @section Scripts {            @{                await Html.RenderPartialAsync("_ValidationScriptsPartial");            }            <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>        }        <!-- endinject -->        <!-- Plugin js for this page -->        <!-- End plugin js for this page -->        <!-- inject:js -->        <script src="./lib/assets/js/off-canvas.js"></script>        <script src="./lib/assets/js/hoverable-collapse.js"></script>        <script src="./lib/assets/js/misc.js"></script>        <!-- endinject -->        <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>        @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@        <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>        @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@        <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>        @*<script src="assets/js/off-canvas.js"></script>        <script src="assets/js/hoverable-collapse.js"></script>        <script src="assets/js/misc.js"></script>*@        <script src=" ~/lib/assets/js/off-canvas.js"></script>        <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>        <script src=" ~/lib/assets/js/misc.js"></script>
+=======
 ﻿@model AppraisalTool.Application.Models.AppraisalTool.ReporteeAppraisalFilter
 
 
@@ -6,30 +9,6 @@
     ViewData["Title"] = "ReporteeAppraisalDashboard";
 }
 <style>
-    /* a:link {
-            color: green;
-            background-color: transparent;
-            text-decoration: none;
-        }*/
-
-    /*   a:visited {
-            color: pink;
-            background-color: transparent;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: red;
-            background-color: transparent;
-            text-decoration: underline;
-        }
-
-        a:active {
-            color: yellow;
-            background-color: transparent;
-            text-decoration: underline;
-        }*/
-
 
     .Button {
         background-color: #1746A2;
@@ -70,22 +49,6 @@
         text-decoration: underline;
     }
 
-    .ApplyButton {
-    background-color: #1746A2;
-    border: none;
-    color: white;
-    padding: 15px;
-    width: 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 13px;
-    margin: 18px;
-    width: 10%;
-    cursor: pointer;
-    width: 15%;
-}
-
 </style>
 <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
 <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
@@ -124,7 +87,7 @@
         <script>
             @*var check = @TempData["RepaSUCCESS"].ToString();
         console.log(@TempData["RepaSUCCESS"].ToString());*@
-                    const Toast = Swal.mixin({
+                                                                    const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -144,8 +107,10 @@
     }
 
 }
+
 <div class="container-scroller">
 
+    <!-- page-body-wrapper starts -->
     <div class="container-fluid page-body-wrapper">
 
         <div class="content-wrapper content-wrapper-Blue">
@@ -162,29 +127,77 @@
                 <br />
 
 
-
+                <!-- Filters form start -->
                 <form method="get" id="filterForm" asp-action="ReporteeAppraisalDashboard">
                     <div class=" row pt-2 ">
 
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="row">
                                 <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Primary Role</p>
-                                <div class="dropdown">
 
-                                    <select class="form-control form-select" asp-for="@Model.PrimaryRole">
-                                        <option class=" text-dropdown">-select- </option>
-                                        <option class=" text-dropdown" value="4">employee </option>
-                                    </select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="row">
+                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Start Date</p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-2">
+                            <div class="row">
+                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">End Date</p>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="row">
+                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Employee Name</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="row">
+                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Reviewing Authority</p>
+                                <div class="Dropdown">
                                 </div>
                             </div>
 
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="row">
-                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Start Date</p>
-                                  <div class="dropdown">
+                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Status</p>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row pb-4">
+                        <div class="col-md-2">
+                            <div class="row">
+                                <div class="Dropdown">
+
+                                    <select class="form-control form-select" asp-for="@Model.PrimaryRole">
+                                        <option class=" text-dropdown">-Select- </option>
+                                        <option class=" text-dropdown" value="4">Employee </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="row">
+                                <div class="Dropdown">
 
                                     <input class="form-control p-2" type="date" asp-for="@Model.StartDate" />
 
@@ -193,19 +206,17 @@
 
                         </div>
 
-
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="row">
-                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">End Date</p>
-                                 <div class="Dropdown">
+                                <div class="Dropdown">
                                     <input class="form-control p-2" type="date" asp-for="@Model.EndDate" />
                                 </div>
                             </div>
+
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="row">
-                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Employee Name</p>
                                 <div class="Dropdown">
                                     <select class="form-control form-select" asp-items="ViewBag.employeeName" asp-for="@Model.EmployeeName">
                                         <option class=" text-dropdown ">-Select-</option>
@@ -215,87 +226,7 @@
 
                         </div>
 
-                        <div class="col-md-3">
-                            <div class="row">
-                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Reviewing Authority</p>
-                                <div class="Dropdown">
-                                    <select class="form-control form-select" asp-items="ViewBag.reviewingAuthority" asp-for="@Model.ReviewingAuthority">
-                                        <option class=" text-dropdown">-Select-</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="row">
-                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Status</p>
-                                <div class="Dropdown">
-                                    <select class="form-control form-select" asp-items="ViewBag.appraisalStatus" asp-for="@Model.Status">
-                                        <option class=" text-dropdown">-Select-</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                        </div>
-                         <div class="col-md-3">
-                            <div class="row">
-                                  <div style="margin:30px;">
-                                      <p></p>
-                            <input type="submit" class="inline btn btn-primary btn-lg ApplyButton " style="padding:20px;" value="Apply" />
-                            @* <input type="button" onclick="resetFilters()" class="inline btn btn-primary ApplyButton " value="Reset" />*@
-                                </div>
-                            </div>
-
-                        </div>
-                      
-                    </div>
-
-                    <div class="row pb-4">
-                        @*<div class="col-md-2">
-                            <div class="row">
-                                <div class="dropdown">
-
-                                    <select class="form-control form-select" asp-for="@Model.primaryrole">
-                                        <option class=" text-dropdown">-select- </option>
-                                        <option class=" text-dropdown" value="4">employee </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>*@
-
-                       @* <div class="col-md-2">
-                            <div class="row">
-                                <div class="dropdown">
-
-                                    <input class="form-control p-2" type="date" asp-for="@model.startdate" />
-
-                                </div>
-                            </div>
-
-                        </div>
-*@
-                       @* <div class="col-md-2">
-                            <div class="row">
-                                <div class="Dropdown">
-                                    <input class="form-control p-2" type="date" asp-for="@Model.EndDate" />
-                                </div>
-                            </div>
-
-                        </div>*@
-
-                        @*<div class="col-md-2">
-                            <div class="row">
-                                <div class="Dropdown">
-                                    <select class="form-control form-select" asp-items="ViewBag.employeeName" asp-for="@Model.EmployeeName">
-                                        <option class=" text-dropdown ">-Select-</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                        </div>*@
-
-                        @*<div class="col-md-2">
+                        <div class="col-md-2">
                             <div class="row">
                                 <div class="Dropdown">
                                     <select class="form-control form-select" asp-items="ViewBag.reviewingAuthority" asp-for="@Model.ReviewingAuthority">
@@ -305,8 +236,8 @@
                             </div>
 
                         </div>
-*@
-                        @*<div class="col-md-2">
+
+                        <div class="col-md-2">
                             <div class="row">
                                 <div class="Dropdown">
                                     <select class="form-control form-select" asp-items="ViewBag.appraisalStatus" asp-for="@Model.Status">
@@ -316,24 +247,16 @@
                             </div>
 
 
-<<<<<<< HEAD
-                        </div>*@
-                       
-=======
                         </div>
                         <div class="d-flex justify-content-center">
-                            <input type="submit" class="inline btn  ApplyButton"  value="Apply" />
-                            @* <input type="button" onclick="resetFilters()" class="inline btn btn-primary ApplyButton " value="Reset" />*@
+                            <input type="submit" class="inline btn  ApplyButton" value="Apply" />
                         </div>
->>>>>>> 8be71fe271d27abbc3853a359a8126995945a3ff
 
 
 
                 </form>
-
-
-
-
+                <!-- Filter form end -->
+                <!-- Listing star -->
                 @if (ViewBag.UserList != null)
                 {
                     @foreach (var item in ViewBag.UserList)
@@ -393,11 +316,22 @@
 
                                     <div class="row">
                                         <div class="col-md-10 row date-p">
+                                                 @{
+                                        string ApprovedBadgeColor;
+                                        if (@item.AppraisalStatus=="Approved")
+                                        {
+                                        ApprovedBadgeColor = "ApprovedBadge";
+                                        }
+                                        else
+                                        {
+                                        ApprovedBadgeColor = "";
+                                         }
 
+                                    }
                                             <div class="row d-flex justify-content-center">
                                                 <span class=" reporteeTagPara" style="display: inline-block;">Appraisal Status</span>
                                             </div>
-                                            <smaller class=" reporteeTagPara" style="border-radius: 0.5rem; font-size:12px ; background-color: rgb(245, 177, 138);" class="pt-1 pb-1"><asp-for ="AppraisalStatus">@item.AppraisalStatus</smaller>
+                                            <smaller class=" reporteeTagPara @ApprovedBadgeColor pt-1 pb-1" style="border-radius: 0.5rem; font-size:12px ; background-color: rgb(245, 177, 138);" ><asp-for ="AppraisalStatus">@item.AppraisalStatus</smaller>
 
                                         </div>
                                     </div>
@@ -406,43 +340,53 @@
                         </a>
                     }
                 }
+                <!-- Listing End -->
+
             </div>
-            <!-- page-body-wrapper ends -->
+
         </div>
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
 
-        <script>
-            const resetFilters = () => {
-                const filterForm = document.querySelector("#filterForm");
-                filterForm.reset();
-            }
-        </script>
-        <!-- container-scroller -->
-        @section Scripts {
-            @{
-                await Html.RenderPartialAsync("_ValidationScriptsPartial");
-            }
-            <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+<script>
+    const resetFilters = () => {
+        const filterForm = document.querySelector("#filterForm");
+        filterForm.reset();
+    }
+</script>
+<!-- container-scroller -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
         }
-        <!-- endinject -->
-        <!-- Plugin js for this page -->
-        <!-- End plugin js for this page -->
-        <!-- inject:js -->
-        <script src="./lib/assets/js/off-canvas.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="./lib/assets/js/off-canvas.js"></script>
 
 
-        <script src="./lib/assets/js/hoverable-collapse.js"></script>
+<script src="./lib/assets/js/hoverable-collapse.js"></script>
 
-        <script src="./lib/assets/js/misc.js"></script>
-        <!-- endinject -->
-        <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="./lib/assets/js/misc.js"></script>
+<!-- endinject -->
+<script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
 
-        @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
-        <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
-        @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
-        <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
-        @*<script src="assets/js/off-canvas.js"></script>
+@*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
+<script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
+@*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
+<script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+@*<script src="assets/js/off-canvas.js"></script>
         <script src="assets/js/hoverable-collapse.js"></script>
         <script src="assets/js/misc.js"></script>*@
-        <script src=" ~/lib/assets/js/off-canvas.js"></script>
-        <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
-        <script src=" ~/lib/assets/js/misc.js"></script>
+<script src=" ~/lib/assets/js/off-canvas.js"></script>
+<script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
+<script src=" ~/lib/assets/js/misc.js"></script>
+
+
+
+>>>>>>> e3398a5b014ff8a517248dbd650748f4ee92e861

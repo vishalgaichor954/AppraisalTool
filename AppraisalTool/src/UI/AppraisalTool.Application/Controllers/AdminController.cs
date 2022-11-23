@@ -303,6 +303,11 @@ namespace AppraisalTool.App.Controllers
         [HttpGet]
         public IActionResult ConfigureSetting()
         {
+            string x = HttpContext.Session.GetString("user");
+            if (x == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
