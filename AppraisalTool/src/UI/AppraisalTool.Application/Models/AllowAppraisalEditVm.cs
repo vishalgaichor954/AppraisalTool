@@ -2,8 +2,8 @@
 {
     public class AllowAppraisalEditVm
     {
-        public List<bool> IsAllowed { get; set; } 
-        public List<int> AppraisalId { get; set; }
+        public bool IsAllowed { get; set; } 
+        public int AppraisalId { get; set; }
 
 
     }

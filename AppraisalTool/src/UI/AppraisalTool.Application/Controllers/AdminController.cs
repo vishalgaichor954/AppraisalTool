@@ -310,9 +310,9 @@ namespace AppraisalTool.App.Controllers
 
 
         [HttpPost]
-        public IActionResult ListAppraisals(AllowAppraisalEditVm allowAppraisalEditVm, List<bool> allowEdit)
+        public IActionResult ListAppraisals(List<AllowAppraisalEditVm> allowAppraisalEditVm)
         {
-            allowAppraisalEditVm.IsAllowed = allowEdit;
+           
             return View();
         }
 
