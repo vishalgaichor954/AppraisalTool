@@ -50,6 +50,9 @@ element.style {
 .DarkBlueGradeBorder {
     border: 2px solid #1746A2;
 }
+.ApprovedBadge {
+    background-color: #ADE792 !important;
+}
 .blueThemeA {
     background-color: #1746A2 !important;
     color: white !important;

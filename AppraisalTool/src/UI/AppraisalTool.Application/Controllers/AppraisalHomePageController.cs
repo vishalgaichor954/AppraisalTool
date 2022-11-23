@@ -555,12 +555,12 @@ namespace AppraisalTool.App.Controllers
                 Console.WriteLine(responseData);
                 var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
                 Console.WriteLine(res);
-                TempData["RepaSUCCESS"] = "Successfully Submited";
-                return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
+                TempData["RevaSUCCESS"] = "Successfully Submited";
+                return RedirectToRoute(new { controller = "ReviewAppraisal", action = "ReviewAppraisalDashboard" });
                 //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
             }
-            TempData["RepaError"] = "Error Occured";
-            return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
+            TempData["RevaError"] = "Error Occured";
+            return RedirectToRoute(new { controller = "ReviewAppraisal", action = "ReviewAppraisalDashboard" });
         }
 
 

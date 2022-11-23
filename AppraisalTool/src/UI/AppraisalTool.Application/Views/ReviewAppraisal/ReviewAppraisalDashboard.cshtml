@@ -66,6 +66,59 @@
 <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
 <script src="~/lib/package/dist/sweetalert2.all.js"></script>
 <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+@if (TempData["RepaError"] != null)
+{
+
+
+    <script>
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Oops ! something went wrong form was not submitted'
+        })
+    </script>
+}
+@if (TempData["RepaSUCCESS"] != null)
+{
+    string checksuccess = @TempData["RepaSUCCESS"].ToString();
+
+    if (checksuccess == "Successfully Submited")
+    {
+        <script>
+            @*var check = @TempData["RepaSUCCESS"].ToString();
+        console.log(@TempData["RepaSUCCESS"].ToString());*@
+                    const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 4000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Form was submitted successfully'
+            })
+        </script>
+    }
+
+}
 @*@if (TempData["RepaError"] != null)
 {
 
@@ -126,7 +179,7 @@
         <div class="content-wrapper content-wrapper-Blue">
             <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard"> Reportee Appraisal Dashboard   </a></h6>
             <br />
-                   <input type="button" value="Back" class="Button " onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
+                   <input type="button" value="Back" class="Button mb-4 " onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
             <br />
             <div style="  background-color: white;border-radius: 0.5rem;" class="container">
 
@@ -331,11 +384,22 @@
 
                                     <div class="row">
                                         <div class="col-md-10 row date-p">
+                                                @{
+                                        string ApprovedBadgeColor;
+                                        if (@item.AppraisalStatus=="Approved")
+                                        {
+                                        ApprovedBadgeColor = "ApprovedBadge";
+                                        }
+                                        else
+                                        {
+                                        ApprovedBadgeColor = "";
+                                         }
 
+                                    }
                                             <div class="row d-flex justify-content-center">
                                                 <span class=" reporteeTagPara" style="display: inline-block;">Appraisal Status</span>
                                             </div>
-                                            <smaller class=" reporteeTagPara" style="border-radius: 0.5rem; font-size:12px ; background-color: rgb(245, 177, 138);" class="pt-1 pb-1"><asp-for ="AppraisalStatus">@item.AppraisalStatus</smaller>
+                                            <smaller class=" reporteeTagPara  @ApprovedBadgeColor pt-1 pb-1" style="border-radius: 0.5rem; font-size:12px ; background-color: rgb(245, 177, 138);" ><asp-for ="AppraisalStatus">@item.AppraisalStatus</smaller>
 
                                         </div>
                                     </div>
