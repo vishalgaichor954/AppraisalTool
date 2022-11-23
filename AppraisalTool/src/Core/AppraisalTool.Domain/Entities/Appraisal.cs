@@ -22,13 +22,16 @@ namespace AppraisalTool.Domain.Entities
         public DateTime? ReviewedOn { get; set; }
         public DateTime? ApprovedOn { get; set; }
 
+        //New Added properties
+        public bool? Editable { get; set; } = false;
+        public bool? EditRequested { get; set; } = false;
+
         [ForeignKey("FinancialYearId")]
         public virtual FinancialYear? FinancialYear { get; set; }
 
         [ForeignKey("UserId")]
         public virtual User? User { get; set; }
 
-        
         [ForeignKey("StatusId")]
         public virtual Status? Status { get; set; }
         public virtual List<AppraisalResult>? AppraisalResults { get; set; }
