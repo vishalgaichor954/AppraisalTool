@@ -26,14 +26,18 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<IEnumerable<GetAppraisalDto>> GetAllAppraisals();
         public Task<IEnumerable<User>> GetAllUser();
         Task<CreateRoleCommandDto> CreateUserRole(UserJobRoles request);
+        Task<bool> AssignAuthority(int repaId, int revaId, int userId);
 
         //public Task<dynamic> getCards(int id);
         public Task<User> GetUserById(int id);
         //public Task<IQueryable<GetUserListQueryVm>> Getuserbyid(int id);
         public Task<List<MenuRoleMapping>> getAllCards(int id);
 
+<<<<<<<<< Temporary merge branch 1
         public Task<GetUserListQueryVm> GetUserbyid(int id);
+=========
         //public Task<bool> AssignAuthority(int repaId, int revaId, int userId);
+>>>>>>>>> Temporary merge branch 2
     }
 
 }

@@ -188,46 +188,10 @@ namespace AppraisalTool.App.Controllers
             TempData["DeleteMenuFaild"] = "Menu to Delete User";
             return RedirectToAction("ListMenu");
         }
-<<<<<<< HEAD
 
         
-=======
-        //[HttpGet]
-        //public ActionResult RemovePermissions(int? Id)
-        //{
-
-        //    HttpResponseMessage response1 = client.GetAsync(client.BaseAddress + $"/Permission/GetAllPermissionsByRole?RoleId={Id}").Result;
-        //    string data1 = response1.Content.ReadAsStringAsync().Result;
-        //    var getAllPermissions1 = JsonConvert.DeserializeObject<ResponseVM>(data1);
-        //    string check = JsonConvert.SerializeObject(getAllPermissions1.Data);
-        //    var getingData = JsonConvert.DeserializeObject<RemovepermisionVM>(check);
-        //    List<int> plist = new List<int>();
-        //    plist.AddRange(getingData.PermissionName);
+       
 
 
-        //    HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/Permission/GetAllPermissions").Result;
-        //    string data = response.Content.ReadAsStringAsync().Result;
-        //    var getAllPermissions = JsonConvert.DeserializeObject<ResponseVM>(data);
-        //    Dictionary<string, int> permissionDict1 = new Dictionary<string, int>();
-        //    foreach (var item in getAllPermissions.Data)
-        //    {
-        //        foreach (var i in plist)
-        //        {
-        //            if (i == (int)item.permissionId)
-        //            {
-
-        //                permissionDict1.Add((string)item.permissionDescription, (int)item.permissionId);
-        //            }
-        //        }
-
-        //    }
-
-        //    ViewBag.PermissionList1 = permissionDict1;
-        //    RemovepermisionVM removepermisionVM = new RemovepermisionVM();
-        //    removepermisionVM.RoleId = (int)Id;
-        //    return View(removepermisionVM);
-
-        //}
->>>>>>> 48281b234d7d14077e8d7d5d232a87a3eb1bddd7
     }
 }

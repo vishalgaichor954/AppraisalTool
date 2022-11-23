@@ -317,7 +317,7 @@ namespace AppraisalTool.Persistence.Repositories
             return res;
                         
         }
-        
+    
         public async Task<IEnumerable<GetAppraisalDto>> GetAllAppraisals()
         {
             //IEnumerable<Appraisal> appraisals = await _dbContext.Appraisal.Include(x => x.Id).

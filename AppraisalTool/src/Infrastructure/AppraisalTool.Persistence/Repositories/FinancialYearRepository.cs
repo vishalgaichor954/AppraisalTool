@@ -98,8 +98,7 @@ namespace AppraisalTool.Persistence.Repositories
                 return response;
             }
         }
-
-        public async Task<List<FinancialYear>> GetAllFinancialYears()
+         public async Task<List<FinancialYear>> GetAllFinancialYears()
         {
             List<FinancialYear> years = _dbContext.FinancialYear.ToList();
             return years;
