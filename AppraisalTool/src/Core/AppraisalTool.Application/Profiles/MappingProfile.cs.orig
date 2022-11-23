@@ -20,12 +20,19 @@ using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetYear;
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
 using AppraisalTool.Application.Features.AppraisalResults.Commands.AddAppraisalResult;
 using AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand;
-<<<<<<< HEAD
 using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
-=======
 using AppraisalTool.Application.Features.Menu.Query.GetMenuById;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuList;
->>>>>>> a7105c5a6c816c2d8f0ac041a311bb483b89e608
+using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResult;
+<<<<<<< HEAD
+using AppraisalTool.Application.Features.Users.Query.GetUserByRoleId;
+using AppraisalTool.Application.Features.FinancialYears.Command.CreateFinancialYearCommand;
+using AppraisalTool.Application.Features.FinancialYears.Query.GetFinancialYearById;
+=======
+using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResultByReva;
+using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByFidAndUserId;
+using AppraisalTool.Application.Features.FinancialYears.Queries.GetAllFinancialYears;
+>>>>>>> 48281b234d7d14077e8d7d5d232a87a3eb1bddd7
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -74,7 +81,9 @@ namespace AppraisalTool.Application.Profiles
             CreateMap<User, GetUserListQueryVm>().ConvertUsing<GetUserListVmCustomMapper>();
 
             CreateMap<AppraisalResult, AddAppraisalResultDto>().ReverseMap();
-
+            CreateMap<AppraisalResult, UpdateAppraisalResultDto>().ReverseMap();
+            CreateMap<AppraisalResult, UpdateAppraisalResultByRevaDto>().ReverseMap(); 
+            CreateMap<AppraisalResult, GetAppraisalsByUidAndFidDto>().ReverseMap();
             //menu mapping
 
             CreateMap<MenuList, CreateMenuCommand>().ReverseMap();
@@ -82,6 +91,22 @@ namespace AppraisalTool.Application.Profiles
 
             CreateMap<MenuList, GetMenuListQueryVm>().ConvertUsing<GetMenuListVmCustomMapper>();
 
+<<<<<<< HEAD
+            CreateMap<User, GetUserByRoleIdDto>().ReverseMap();
+
+            //CreateMap<IQueryable<GetUserListQueryVm>, GetUserListQueryVm>().ReverseMap();
+            
+            //Fy Mapping
+            CreateMap<FinancialYear, CreateFinancialYearCommand>().ReverseMap();
+
+            CreateMap<FinancialYear, CreateFinancialYearCommand>().ReverseMap();
+
+            CreateMap<FinancialYear, GetFinancialYearByIdDto>().ReverseMap();
+=======
+            //Financial Year Mapping
+            CreateMap<FinancialYear, GetAllFinancialYearsVM>().ReverseMap();
+
+>>>>>>> 48281b234d7d14077e8d7d5d232a87a3eb1bddd7
 
 
         }

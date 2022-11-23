@@ -56,6 +56,7 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
             var userDto = await _userRepository.RegisterUserAsync(user);
             if (userDto != null)
             {
+
                 List<UserJobRoles> jobList = new List<UserJobRoles>()
                 {
                     new UserJobRoles(){UserId = userDto.Id,JobRoleId=request.PrimaryRole,IsPrimary=true,IsSecondary=false},
@@ -66,7 +67,7 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
             bool authorityStatus = await _userRepository.AssignAuthority(request.RepaId,request.RevaId, userDto.Id);
 
             _logger.LogInformation("Hanlde Completed");
-            if (userDto.Succeeded)
+            if (userDto.Succeeded && authorityStatus == true)
             {
                 var email = new Email()
                 {

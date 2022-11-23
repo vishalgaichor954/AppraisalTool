@@ -21,14 +21,20 @@ namespace AppraisalTool.Persistence
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthenticationService,AuthenticationService>();
-<<<<<<< HEAD
             services.AddScoped<ISelfAppraisalRepository, SelfAppraisalRepository>();
-=======
             services.AddScoped<IRoleRepository,RoleRepository>();
             services.AddScoped<IBranchRepository, BranchRepository>();
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+            services.AddScoped<IMetricRepository, MetricRepository>();
+            services.AddScoped<IAppraisalResultRepository, AppraiasalResultRepository>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
+<<<<<<< HEAD
+            services.AddScoped<IFinacialYearRepository, FinancialYearRepository>();
 
->>>>>>> b8b21865b4d71b27971604aa3a1f7c3040f00fea
+=======
+            services.AddScoped<IFinancialYearRepository, FinancialYearRepository>();
+>>>>>>> 48281b234d7d14077e8d7d5d232a87a3eb1bddd7
+
 
             return services;
         }

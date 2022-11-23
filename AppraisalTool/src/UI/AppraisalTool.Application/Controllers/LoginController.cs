@@ -80,6 +80,7 @@ namespace AppraisalTool.App.Controllers
             return RedirectToAction("Login");
         }
 
+        //@Author : Abhishek Singh
         [HttpGet]
         public IActionResult ForgotPassword()
         {
@@ -91,6 +92,7 @@ namespace AppraisalTool.App.Controllers
             return View();
         }
 
+        //@Author : Abhishek Singh
         [HttpPost]
         public IActionResult ForgotPassword(ForgotPasswordViewModel forgotPasswordView)
         {
@@ -117,7 +119,7 @@ namespace AppraisalTool.App.Controllers
             return View();
         }
 
-
+        //@Author : Abhishek Singh
         [HttpGet]
         public JsonResult UserExistsEmail(string email)
         {

@@ -21,5 +21,7 @@ namespace AppraisalTool.Domain.Common
         public int? FinancialStartYear { get; set; }
         public int? FinancialEndYear { get; set; }
         public int? FinancialYearId { get; set; }
+        //public int? PendingReportee { get; set; }
+        public int? Status { get; set; }
     }
 }

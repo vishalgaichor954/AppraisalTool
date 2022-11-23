@@ -1,0 +1,477 @@
+﻿@model AppraisalTool.App.Models.GradeReport.GradeChartsData
+
+@{
+    int? score = @Model.totatScoredPercentage;
+}
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-linear-gauge.min.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['gauge'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Label', 'Score'],
+            ['Score', @score],
+        ]);
+
+        var options = {
+            width: 250, height: 250,
+            min: @Model.GaugeMinValue, max: @Model.GaugeMaxValue,
+            redFrom: 0, redTo: 17.5,
+            greenFrom: 52.5, greenTo: 70,
+            yellowFrom: 17.6, yellowTo: 52.4,
+            minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+
+        const drawInputMetrics = () => {
+            // create data
+            var data = [@Model.totatInputMetricScoredPercentage];
+
+            // set the gauge type
+            var gauge = anychart.gauges.linear();
+
+            // set the data for the gauge
+            gauge.data(data);
+
+            // set the layout
+            gauge.layout('horizontal');
+
+            // create a color scale
+            var scaleBarColorScale = anychart.scales.ordinalColor().ranges(
+                [
+                    {
+                        from: 0,
+                        to: 25,
+                        color: ['#D81E05', '#EB7A02']
+                    },
+                    {
+                        from: 25,
+                        to: 50,
+                        color: ['#EB7A02', '#FFD700']
+                    },
+                    {
+                        from: 50,
+                        to: 75,
+                        color: ['#FFD700', '#CAD70b']
+                    },
+                    {
+                        from: 75,
+                        to: 100,
+                        color: ['#CAD70b', '#2AD62A']
+                    }
+                ]
+            );
+
+            // create a Scale Bar
+            var scaleBar = gauge.scaleBar(0);
+
+            // set the height and offset of the Scale Bar (both as percentages of the gauge height)
+            scaleBar.width('20%');
+            scaleBar.offset('31.5%');
+
+            // use the color scale (defined earlier) as the color scale of the Scale Bar
+            scaleBar.colorScale(scaleBarColorScale);
+
+            // add a marker pointer
+            var marker = gauge.marker(0);
+
+            // set the offset of the pointer as a percentage of the gauge width
+            marker.offset('31.5%');
+            marker.width(15);
+
+            // set the marker type
+            marker.type('triangle-up');
+
+            // set the zIndex of the marker
+            marker.zIndex(10);
+
+            // configure the scale
+            var scale = gauge.scale();
+            scale.minimum(0);
+            scale.maximum(100);
+            scale.ticks().interval(10);
+
+            // configure the axis
+            var axis = gauge.axis();
+            axis.minorTicks(true)
+            axis.minorTicks().stroke('#cecece');
+            axis.width('2%');
+            axis.offset('29.5%');
+            axis.orientation('top');
+
+            // format axis labels
+            axis.labels().format('{%value}%');
+
+            // set paddings
+            gauge.padding([0, 50]);
+
+            // set the container id
+            gauge.container('Linear-gauge');
+
+            // initiate drawing the gauge
+            gauge.draw();
+        }
+
+        const drawInputMetrics2 = () => {
+            // create data
+            var data = [@Model.totatBehaviouralMetricScoredPercentage];
+
+            // set the gauge type
+            var gauge = anychart.gauges.linear();
+
+            // set the data for the gauge
+            gauge.data(data);
+
+            // set the layout
+            gauge.layout('horizontal');
+
+            // create a color scale
+            var scaleBarColorScale = anychart.scales.ordinalColor().ranges(
+                [
+                    {
+                        from: 0,
+                        to: 25,
+                        color: ['#D81E05', '#EB7A02']
+                    },
+                    {
+                        from: 25,
+                        to: 50,
+                        color: ['#EB7A02', '#FFD700']
+                    },
+                    {
+                        from: 50,
+                        to: 75,
+                        color: ['#FFD700', '#CAD70b']
+                    },
+                    {
+                        from: 75,
+                        to: 100,
+                        color: ['#CAD70b', '#2AD62A']
+                    }
+                ]
+            );
+
+            // create a Scale Bar
+            var scaleBar = gauge.scaleBar(0);
+
+            // set the height and offset of the Scale Bar (both as percentages of the gauge height)
+            scaleBar.width('20%');
+            scaleBar.offset('31.5%');
+
+            // use the color scale (defined earlier) as the color scale of the Scale Bar
+            scaleBar.colorScale(scaleBarColorScale);
+
+            // add a marker pointer
+            var marker = gauge.marker(0);
+
+            // set the offset of the pointer as a percentage of the gauge width
+            marker.offset('31.5%');
+            marker.width(15);
+
+            // set the marker type
+            marker.type('triangle-up');
+
+            // set the zIndex of the marker
+            marker.zIndex(10);
+
+            // configure the scale
+            var scale = gauge.scale();
+            scale.minimum(0);
+            scale.maximum(100);
+            scale.ticks().interval(10);
+
+            // configure the axis
+            var axis = gauge.axis();
+            axis.minorTicks(true)
+            axis.minorTicks().stroke('#cecece');
+            axis.width('2%');
+            axis.offset('29.5%');
+            axis.orientation('top');
+
+            // format axis labels
+            axis.labels().format('{%value}%');
+
+            // set paddings
+            gauge.padding([0, 50]);
+
+            // set the container id
+            gauge.container('Linear-gauge2');
+
+            // initiate drawing the gauge
+            gauge.draw();
+        }
+        const drawInputMetrics3 = () => {
+            // create data
+            var data = [@Model.totatJobGromingMetricScoredPercentage];
+
+            // set the gauge type
+            var gauge = anychart.gauges.linear();
+
+            // set the data for the gauge
+            gauge.data(data);
+
+            // set the layout
+            gauge.layout('horizontal');
+
+            // create a color scale
+            var scaleBarColorScale = anychart.scales.ordinalColor().ranges(
+                [
+                    {
+                        from: 0,
+                        to: 25,
+                        color: ['#D81E05', '#EB7A02']
+                    },
+                    {
+                        from: 25,
+                        to: 50,
+                        color: ['#EB7A02', '#FFD700']
+                    },
+                    {
+                        from: 50,
+                        to: 75,
+                        color: ['#FFD700', '#CAD70b']
+                    },
+                    {
+                        from: 75,
+                        to: 100,
+                        color: ['#CAD70b', '#2AD62A']
+                    }
+                ]
+            );
+
+            // create a Scale Bar
+            var scaleBar = gauge.scaleBar(0);
+
+            // set the height and offset of the Scale Bar (both as percentages of the gauge height)
+            scaleBar.width('20%');
+            scaleBar.offset('31.5%');
+
+            // use the color scale (defined earlier) as the color scale of the Scale Bar
+            scaleBar.colorScale(scaleBarColorScale);
+
+            // add a marker pointer
+            var marker = gauge.marker(0);
+
+            // set the offset of the pointer as a percentage of the gauge width
+            marker.offset('31.5%');
+            marker.width(15);
+
+            // set the marker type
+            marker.type('triangle-up');
+
+            // set the zIndex of the marker
+            marker.zIndex(10);
+
+            // configure the scale
+            var scale = gauge.scale();
+            scale.minimum(0);
+            scale.maximum(100);
+            scale.ticks().interval(10);
+
+            // configure the axis
+            var axis = gauge.axis();
+            axis.minorTicks(true)
+            axis.minorTicks().stroke('#cecece');
+            axis.width('2%');
+            axis.offset('29.5%');
+            axis.orientation('top');
+
+            // format axis labels
+            axis.labels().format('{%value}%');
+
+            // set paddings
+            gauge.padding([0, 50]);
+
+            // set the container id
+            gauge.container('Linear-gauge3');
+
+            // initiate drawing the gauge
+            gauge.draw();
+        }
+        anychart.onDocumentReady(function () {
+
+            drawInputMetrics();
+            drawInputMetrics2();
+            drawInputMetrics3();
+
+
+        });
+    }
+</script>
+
+<style>
+    #container {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .Button {
+        background-color: #1746A2;
+        color: white;
+        /* border: 2px solid #E0144C;*/
+        border-radius: 0.3rem;
+        border: none;
+        padding: 13px 40px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: auto;
+    }
+</style>
+
+
+<div class="container d-flex justify-content-center">
+    <div class="col-11">
+        <div class="card content-wrapper-Blue">
+            <div class="card-body">
+                <input type="button" value="Back" class=" Button mb-4" onclick="history.back()" />
+
+                <div class="d-flex justify-content-end">
+                    @* <form method="post" asp-controller="GradeReport" asp-action="ExportPdf">
+                    <input type="hidden" name="ExportData" id="ExportData" />
+                    <button id="btnSubmit" value="Download" class="btn btn-primary" />
+                       </form>*@
+                </div>
+                <div id="PrintPDF" class="featureBackground p-4" >
+                    <div>
+                        <h1 class="card-title FormHeader my-4">Grade Details</h1>
+                        <p class="mx-2 my-4" style="color:#497174">Your grade based on your relative performance in your cohort, which is a group of employees working in similar role as yours and under similar constraints, capacity and bussiness setting. The criteria used to create your cohort and cohort size is given below. Employees following this criteria are part of one cohort. </p>
+                        <div class="alert-danger my-1 mx-1 p-2">
+                            <p class="m-2">Total Score: @Model.totatScoredPercentage %</p>
+                        </div>
+                        <p class="mx-2 my-4" style="color:#497174">The relative position in your cohort has been decided based on your overall score. to score well on the overall level, it is important to perform well on the KRAs as well as on overall level using following charts.</p>
+                        <div id="gauge-div" class="d-flex justify-content-center" style="max-height:60%;">
+                            <div id="chart_div">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="mx-4 mt-5" style="color:#404258">Performance in all metrics</h3>
+                        <div class="m-4 DarkBlueGradeBorder" style="max-height:20%;">
+                            <h6 class="mx-4 mt-2 mb-0">Input & Effort metric score standing(Percentile Rank) </h6>
+                            <div class="d-flex justify-content-center">
+                                <div style="width:85%;max-height:20%;" id="Linear-gauge">
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="m-4 DarkBlueGradeBorder" style="max-height:20%;">
+                            <h6 class="mx-4 mt-2 mb-0">Behavioral competencies score standing(Percentile Rank) </h6>
+                            <div class="d-flex justify-content-center">
+                                <div style="width:85%;max-height:20%;" id="Linear-gauge2">
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="m-4 DarkBlueGradeBorder" style="max-height:20%;">
+                            <h6 class="mx-4 mt-2 mb-0">Job family grooming score standing(Percentile Rank) </h6>
+                            <div class="d-flex justify-content-center">
+                                <div style="width:85%;max-height:20%;" id="Linear-gauge3">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/pdfmake.min.js"></script>
+
+@*<script type="text/javascript">
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+        //const SubmitCall = () => {
+        //    data = document.querySelector("#PrintPDF").innerHTML;
+        //    document.querySelector("input[name='ExportData']").value = data;
+        //    console.log(data);
+        //    ExportData = {Data:data}
+        //    $.ajax('/GradeReport/ExportPdf', {
+        //        method: 'POST',
+        //        data: ExportData,
+        //        traditional: true,
+        //        success: function (d) {
+
+        //        }
+        //    });
+        //}
+
+        //document.querySelector("#btnSubmit").addEventListener('click',SubmitCall);
+
+
+
+    });
+
+
+            //$(document).ready(function () {
+            //    const bars = document.querySelectorAll(".anychart-ui-support");
+            //    bars.forEach(item => item.setAttribute("height": "20%"));
+            //    //$(function () {
+            //    //    $("#btnSubmit").click(function () {
+
+            //    //        console.log($("#PrintPDF").html());
+            //    //        $("input[name='ExportData']").val($("#PrintPDF").html());
+            //    //    });
+            //    //});
+            //});
+
+
+
+
+
+
+
+
+</script>*@
+   @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+    <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="./lib/assets/js/off-canvas.js"></script>
+
+
+    <script src="./lib/assets/js/hoverable-collapse.js"></script>
+
+    <script src="./lib/assets/js/misc.js"></script>
+    <!-- endinject -->
+
+    <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+    @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
+    <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
+    @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
+    <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+    @*<script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>*@
+    <script src=" ~/lib/assets/js/off-canvas.js"></script>
+    <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
+    <script src=" ~/lib/assets/js/misc.js"></script>
+

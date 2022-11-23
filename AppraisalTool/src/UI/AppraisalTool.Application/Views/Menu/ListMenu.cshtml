@@ -329,13 +329,14 @@
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" defer></script>
 <script>
+
     $(document).ready(function () {
         $('#myTable').DataTable({
             'columnDefs': [{
                 'targets': [4, 5], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             },
-            { visible: false, targets: [1,2] },
+            { visible: false, targets: [1, 2] },
             ],
             dom: 'lBfrtip',
             responsive: true,
@@ -357,6 +358,7 @@
 
 
         });
+
 
     });
 </script>

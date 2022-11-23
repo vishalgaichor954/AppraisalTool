@@ -16,6 +16,7 @@ html {
 body {
     margin-bottom: 60px;
 }
+
 .blueTheme
 
 .Dash-Card {
@@ -28,6 +29,7 @@ element.style {
 .content-wrapper-Blue {
     background-color: #c7cff82f !important;
 }
+
 .proceedBtn {
     background-color: #1746A2 !important;
     text-decoration: none !important;
@@ -35,40 +37,70 @@ element.style {
     height: 40px !important;
     width: 40px !important;
 }
+
 .ReporteeAnchorTag {
-    background-color:none !important ;
+    background-color: none !important;
     text-decoration: none !important;
-   
 }
+
 .LightBlueTheme {
     background-color: #EEF1FF;
-    border-radius:0.2rem;
+    border-radius: 0.2rem;
 }
+
 .DarkBlueP {
-    color: #1746A2
+    color: #1746A2;
 }
-.blueTheme {
-    background-color: #1746A2;
-    color:white;
+
+.DarkBlueGradeBorder {
+    border: 2px solid #1746A2;
 }
 <<<<<<< HEAD
-.reporteeTagPara{
-    color:black !important;
+.ApprovedBadge {
+    background-color: #ADE792 !important;
 }
+=======
+
+>>>>>>> 3c0c21b452a472a3fb1fb22fe7780377420624cd
+.blueThemeA {
+    background-color: #1746A2 !important;
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.DarkBlueReveiwingP {
+    color: #1746A2;
+    font-size: 17px
+}
+
+.DarkBlueReveiwingP2 {
+    color: #1746A2;
+    font-size: 15px
+}
+
+.blueTheme {
+    background-color: #1746A2;
+    color: white;
+}
+
+.reporteeTagPara {
+    color: black !important;
+}
+
 .reporteeTagSmall {
     color: darkgrey !important;
 }
-=======
-    .blueTheme:hover {
-        background-color: white;
-        color: #1746A2;
-        border: 2px solid #1746A2;
-    }
->>>>>>> 496e310e8cae77f26abeed2dbeac4a2ceef27540
-    .proceedBtn > span {
-        font-size: 25px !important;
-        color: white !important;
-    }
+
+.blueTheme:hover {
+    background-color: white;
+    color: #1746A2;
+    border: 2px solid #1746A2;
+}
+
+.proceedBtn > span {
+    font-size: 25px !important;
+    color: white !important;
+}
 /*.proceedBtn:hover {
         text-decoration: none !important;
     } */
@@ -103,6 +135,22 @@ element.style {
 .LoginBtn {
     background-color: #E0144C;
     color: white;
+}
+
+.AddAppraisalBtn {
+    background-color: #1746A2;
+    color: white;
+}
+
+.ResetButton {
+    background-color: #E0144C;
+    color: white;
+}
+
+.LoginBtn:hover {
+    background-color: white;
+    color: #1746A2;
+    border: 2px solid #1746A2;
 }
 
 .ApprovalBtn {
@@ -156,14 +204,17 @@ fieldset.scheduler-border {
     font-weight: 400 !important;
     color: gray;
 }
+
 .HEADMetricsReportee {
     font-size: 14px !important;
     font-weight: 400 !important;
     color: gray;
 }
-.labelfont{
-    font-size:15px;
+
+.labelfont {
+    font-size: 15px;
 }
+
 .FormHeader {
     color: #1746A2 !important;
     font-size: 28px !important;
@@ -246,6 +297,11 @@ legend {
     font-size: 14px;
 }
 
+.spanValidationFontSize {
+    /*color: red !important;*/
+    font-size: 12px !important;
+}
+
 ::-webkit-scrollbar {
     height: 6px;
     width: 6px;
@@ -257,9 +313,30 @@ legend {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #E0144C
+    background: #1746A2
 }
 
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+
+.header-icon {
+    background-color: #1746A2;
+    color: white;
+}
+
+.ApplyButton {
+    background-color: #1746A2;
+    border: none;
+    color: white;
+    padding: 15px;
+    width: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 18px;
+    width: 10%;
+    cursor: pointer;
+    width: 15%;
+}

@@ -7,33 +7,33 @@
     //ViewData["Title"] = "AppraisalTool";
 }
 
- <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
-   <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
-   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
-     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
+<script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+<script src="~/lib/package/dist/sweetalert2.all.js"></script>
+<script src="~/lib/package/dist/sweetalert2.min.js"></script>
 
 @if (TempData["Error"] != null)
 {
-  
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'error',
-  title: 'Invalid Login Credentials'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Invalid Login Credentials'
+        })
     </script>
 }
 <div class="container-scroller">
@@ -48,7 +48,7 @@ Toast.fire({
                         <h2 style="font-weight:500 ;padding-left:6rem" class=" LoginHeader pt-0" asp-action="Login">LogIn</h2>
                         <form class="pt-3" asp-action="Login">
                             <div class="form-group">
-                                <label asp-for="Email" class="control-label"></label>
+                                <label asp-for="Email" class="control-label">Email</label>
                                 <input asp-for="Email" type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" required>
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
@@ -74,21 +74,10 @@ Toast.fire({
                                     }
                                 </span>
                             </div>
-                              <div class="my-1 mb-2 d-flex justify-content-between align-items-center">
-                   @* <div class="form-check">
-                      <label class="form-check-label text-muted">
-                        <input type="checkbox" class="form-check-input"> Keep me signed in </label>
-                    </div>*@
-                   <!-- Button trigger modal -->
-@*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>*@
-
-<!-- Modal -->
-
-                    <a    asp-controller="Login" asp-action="ForgotPassword" class="auth-link text-black">Forgot password?</a>
-                  </div>
-                           <div class="form-group">
+                            <div class="my-1 mb-2 d-flex justify-content-between align-items-center">
+                                <a asp-controller="Login" asp-action="ForgotPassword" class="auth-link text-black">Forgot password?</a>
+                            </div>
+                            <div class="form-group">
                                 <div style="align-items:center ;">
                                     <input type="submit" value="Login" class="btn btn-block LoginBtn btn-lg font-weight-medium auth-form-btn" />
                                 </div>
@@ -116,11 +105,11 @@ Toast.fire({
                     <div class="form-outline mb-4">
                         <label class="form-label" for="email1">Email address</label>
                         <input type="email" id="email" name="email" class="form-control" />
-                   
+
                     </div>
 
                     <!-- password input -->
-                   
+
 
                     <!-- Submit button -->
                     <button  asp-action="ForgotPassword" type="submit" class="btn btn-primary btn-block">Reset Password</button>
@@ -134,41 +123,36 @@ Toast.fire({
   </div>
 </div>*@
 <!-- Button trigger modal -->
-
-
 <!-- Modal -->
-
 <!-- Modal -->
-
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     }
-    <!-- plugins:js -->
-    <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+<!-- plugins:js -->
+<script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
 
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="./lib/assets/js/off-canvas.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="./lib/assets/js/off-canvas.js"></script>
 
 
-    <script src="./lib/assets/js/hoverable-collapse.js"></script>
+<script src="./lib/assets/js/hoverable-collapse.js"></script>
 
-    <script src="./lib/assets/js/misc.js"></script>
+<script src="./lib/assets/js/misc.js"></script>
 
-    <!-- endinject -->
+<!-- endinject -->
 
-    <script>
-        $("#img-captcha").click(function () {
-            resetCaptchaImage();
-        });
+<script>
+    $("#img-captcha").click(function () {
+        resetCaptchaImage();
+    });
 
-        function resetCaptchaImage() {
-            d = new Date();
-            $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
-        }
-    </script>
+    function resetCaptchaImage() {
+        d = new Date();
+        $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
+    }
+</script>

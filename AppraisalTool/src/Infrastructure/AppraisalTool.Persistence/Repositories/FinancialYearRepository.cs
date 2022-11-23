@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace AppraisalTool.Persistence.Repositories
 {
-    public class FinancialYearRepository : BaseRepository<FinancialYear>, IFinacialYearRepository
+    public class FinancialYearRepository : BaseRepository<FinancialYear>, IFinacialYearRepository,IFinancialYearRepository
     {
         public FinancialYearRepository(ApplicationDbContext dbContext, ILogger<FinancialYear> logger) : base(dbContext, logger)
         {
@@ -97,6 +97,20 @@ namespace AppraisalTool.Persistence.Repositories
                 response.Succeeded = false;
                 return response;
             }
+        }
+
+        public async Task<List<FinancialYear>> GetAllFinancialYears()
+        {
+            List<FinancialYear> years = _dbContext.FinancialYear.ToList();
+            return years;
+        }
+
+        public async Task<List<FinancialYear>> GetFinancialYearsByUserJoining(int userId)
+        {
+            User user = await _dbContext.User.FirstOrDefaultAsync(u => u.Id == userId);
+            int year = DateTime.Parse(user.JoinDate.ToString()).Year;
+            List<FinancialYear> years = await _dbContext.FinancialYear.Where(item =>item.StartYear >= year).ToListAsync();
+            return years;
         }
     }
 }
