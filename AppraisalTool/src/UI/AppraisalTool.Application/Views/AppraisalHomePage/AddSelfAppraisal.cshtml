@@ -36,9 +36,16 @@
     <div class="col-11">
         <div class="card content-wrapper-Blue">
             <div class="card-body">
-                <input type="button" value="Back" class=" Button mb-4" onclick="location.href='@Url.Action("SelfAppraisalDashboard", "AppraisalHomePage")'" />
+                @*<input type="button" value="Back" class=" Button mb-4" onclick="location.href='@Url.Action("SelfAppraisalDashboard", "AppraisalHomePage")'" />
 
-                <h1 class="card-title FormHeader">Self Appraisal</h1>
+                <h1 class="card-title FormHeader">Self Appraisal</h1>*@
+
+                <div class="d-flex justify-content-between">
+                    <h1 class="card-title FormHeader" style="display:inline">Self Appraisal</h1>
+                    <input type="button" value="Back" class=" Button mb-4" onclick="history.back()" />
+                </div>
+
+
                 <div class="featureBackground ">
                     <form asp-action="AddSelfAppraisal" method="post" enctype="multipart/form-data">
                         <div class="text-danger"></div>

@@ -31,6 +31,12 @@ namespace AppraisalTool.App.Controllers
 
         public IActionResult ReporteeAppraisalDashboard( ReporteeAppraisalFilter? reporteeAppraisalFilter)
         {
+            string x = HttpContext.Session.GetString("user");
+            if (x == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
             Console.WriteLine("ReporteeAppraisalDashboard");
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             //List<ReporteeAppraisalDashboard> modellist = new List<ReporteeAppraisalDashboard>();
