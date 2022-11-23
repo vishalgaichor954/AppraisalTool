@@ -6,12 +6,11 @@
     ViewData["Title"] = "ReviewAppraisalDashboard";
 }
 <style>
-   
+
 
     .Button {
         background-color: #1746A2;
         color: white;
-       
         border-radius: 0.3rem;
         border: none;
         padding: 13px 40px;
@@ -47,26 +46,12 @@
         text-decoration: underline;
     }
 
-    .ApplyButton {
-        background-color: blue;
-        border: none;
-        color: white;
-        padding: 15px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 13px;
-        margin: 4px;
-        cursor: pointer;
-        width: auto;
-    }
-
 </style>
 <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
 <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
 <script src="~/lib/package/dist/sweetalert2.all.js"></script>
 <script src="~/lib/package/dist/sweetalert2.min.js"></script>
-@*@if (TempData["RepaError"] != null)
+@if (TempData["RepaError"] != null)
 {
 
 
@@ -97,19 +82,17 @@
     if (checksuccess == "Successfully Submited")
     {
         <script>
-            @*var check = @TempData["RepaSUCCESS"].ToString();
-        console.log(@TempData["RepaSUCCESS"].ToString());*@
-             @*       const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 4000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
 
             Toast.fire({
                 icon: 'success',
@@ -118,7 +101,7 @@
         </script>
     }
 
-}*@
+}
 <div class="container-scroller">
 
     <div class="container-fluid page-body-wrapper">
@@ -126,7 +109,7 @@
         <div class="content-wrapper content-wrapper-Blue">
             <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard"> Reportee Appraisal Dashboard   </a></h6>
             <br />
-                   <input type="button" value="Back" class="Button " onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
+            <input type="button" value="Back" class="Button " onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
             <br />
             <div style="  background-color: white;border-radius: 0.5rem;" class="container">
 
@@ -258,11 +241,9 @@
 
 
                         </div>
-                        <div class="d-flex justify-content-end">
-                            <input type="submit" class="inline btn btn-primary ApplyButton " value="Apply" />
-                            @* <input type="button" onclick="resetFilters()" class="inline btn btn-primary ApplyButton " value="Reset" />*@
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" class="inline btn  ApplyButton" value="Apply" />
                         </div>
-
 
 
                 </form>
@@ -275,7 +256,7 @@
                     @foreach (var item in ViewBag.UserList)
                     {
 
-                       
+
 
                         <a class="ReviewAnchorTag" href="/AppraisalHomePage/AddReviewingAuthorityAppraisal?Appraisald=@item.AppraisalId">
                             <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1.5px solid #1746A2; border-radius: 0.3rem;">
