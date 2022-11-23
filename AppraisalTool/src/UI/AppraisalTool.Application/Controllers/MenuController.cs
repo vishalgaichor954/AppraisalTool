@@ -101,27 +101,10 @@ namespace AppraisalTool.App.Controllers
 
                 }
                 ViewBag.roldict=roledict;
-                Dictionary<string, int> roledict3 = new Dictionary<string, int>();
-                foreach (var item in roledict)
-                {
-                    foreach (var i in roleDict2)
-                    {
-                        if (item.Value != i.Value)
-                        {
-
-                            roledict3.Add((string)i.Key, (int)i.Value);
-                            roledict3.Distinct();
-                        }
-                    }
-
-                }
+  
+                var roledict3 = roledict.Except(roleDict2).Concat(roleDict2.Except(roledict));
                 ViewBag.roledict3 = roledict3;
-                
-
-                //ViewBag.RoleList = menu;
-                //ViewBag.RoleId=menu.RoleId;
-                //ViewBag.RoleName = menu.RoleName;
-                //Console.WriteLine(menu);
+              
             }
             return View(menu);
         }

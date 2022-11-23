@@ -169,8 +169,21 @@
 
             <div>
                 <div class="content-wrapper">
-                  <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard" >Dashboard</a>  /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal" > Home   </a>  /<a asp-controller="AppraisalHomePage" asp-action="SelfAppraisalDashboard" >  Self Appraisal Dashboard </a> /<a asp-controller="AppraisalHomePage" asp-action="GradeReport" > GradeReport </a>   </h6>
-
+                  @*<h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard" >Dashboard</a>  /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal" > Home   </a>  /<a asp-controller="AppraisalHomePage" asp-action="SelfAppraisalDashboard" >  Self Appraisal Dashboard </a> /<a asp-controller="AppraisalHomePage" asp-action="GradeReport" > GradeReport </a>   </h6>*@
+                   <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" style="border:none">
+                            <li class="breadcrumb-item">
+                                <a asp-controller="Dashboard" class="active" asp-action="Dashboard" style=" text-decoration: none;">Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a asp-controller="AppraisalHomePage" class="active" asp-action="HomePageAppraisal" style=" text-decoration: none;">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a asp-controller="AppraisalHomePage" class="active" asp-action="SelfAppraisalDashboard" style=" text-decoration: none;">Self Appraisal Dashboard </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">GradeReport</li>
+                        </ol>
+                    </nav>
                     <div style="  background-color: white;border-radius: 0.5rem;" class="container">
                             <input type="button" value="Back" class=" Button mb-4" onclick="history.back()" />
 

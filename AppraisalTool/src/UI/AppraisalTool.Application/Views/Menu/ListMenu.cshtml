@@ -162,7 +162,7 @@
 }
 
 <head>
-    <style>
+   @* <style>
         .BreadCrump > a:link {
             color: grey;
             background-color: transparent;
@@ -187,11 +187,20 @@
             background-color: transparent;
             text-decoration: none;
         }
-    </style>
+    </style>*@
 </head>
 <div class="container">
-    <h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting">Configure Settings</a>  /<a asp-controller="Admin" asp-action="ListMenu">  Menu Management </a></h6>
-
+    @*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting">Configure Settings</a>  /<a asp-controller="Admin" asp-action="ListMenu">  Menu Management </a></h6>*@
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="border:none">
+            <li class="breadcrumb-item">
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Menu Management</li>
+        </ol>
+    </nav>
+       
+   
     @*@if (TempData["AddMenuSuccess"] != null)
     {
     <div class="container">

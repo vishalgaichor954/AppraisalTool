@@ -114,8 +114,17 @@
 
 
 <div class="content-wrapper main-panel content-wrapper-Blue">
-     <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard" >Dashboard</a>  /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal" > Home   </a>   </h6>
-    <div style="height:100vh ;width:100%; background-color: white;border-radius: 0.5rem;" class="container">
+     @*<h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard" >Dashboard</a>  /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal" > Home   </a>   </h6>*@
+     <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="border:none">
+            <li class="breadcrumb-item">
+                <a asp-controller="Dashboard" class="active" asp-action="Dashboard" style=" text-decoration: none;">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Home</li>
+        </ol>
+    </nav>
+       
+     <div style="height:100vh ;width:100%; background-color: white;border-radius: 0.5rem;" class="container">
        
         <!-- <h2 >Appraisal Home</h2> -->
         <div>
