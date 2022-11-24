@@ -81,6 +81,7 @@ namespace AppraisalTool.App.Controllers
             }
             return View(menu);
         }
+
         [HttpPost]
         public IActionResult UpdateMenu(MenuModel model, List<int> selectedRoles)
         {
