@@ -22,6 +22,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<User> FindUserByEmail(string email);
         Task<RemoveUserCommandDto> RemoveUserAsync(int id);
         Task<UpdateUserCommandDto> UpdateUserAsync(int id, UpdateUserCommand request);
+        Task<User> GetUserByRoleId(int roleId);
         public Task<bool> UpdateUser(User user);
         public Task<IEnumerable<GetAppraisalDto>> GetAllAppraisals();
         public Task<IEnumerable<User>> GetAllUser();
@@ -29,12 +30,14 @@ namespace AppraisalTool.Application.Contracts.Persistence
 
         //public Task<dynamic> getCards(int id);
         public Task<User> GetUserById(int id);
+        //public Task<IQueryable<GetUserListQueryVm>> Getuserbyid(int id);
         public Task<List<MenuRoleMapping>> getAllCards(int id);
         public Task<bool> AllowEdit(AppraisalForEditVm appraisalForEditVm);
         public Task<bool> RequestEdit(AppraisalForEditVm appraisalForEditVm);
         public Task<bool> RequestToEdit(int? fId, int? userId);
 
 
+        public Task<GetUserListQueryVm> GetUserbyid(int id);
         //public Task<bool> AssignAuthority(int repaId, int revaId, int userId);
     }
 

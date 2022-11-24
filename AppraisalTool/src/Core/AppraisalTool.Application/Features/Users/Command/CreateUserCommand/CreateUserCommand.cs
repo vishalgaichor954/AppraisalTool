@@ -20,6 +20,9 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
         public int BranchId { get; set; }
         public int PrimaryRole { get; set; }
         public int SecondaryRole { get; set; }
+
+        public int RepaId { get; set; }
+        public int RevaId { get; set; }
         public int? AddedBy { get; set; }
 
 

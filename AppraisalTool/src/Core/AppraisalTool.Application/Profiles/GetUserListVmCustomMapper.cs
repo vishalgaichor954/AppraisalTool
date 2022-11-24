@@ -40,6 +40,8 @@ namespace AppraisalTool.Application.Profiles
 
             GetUserListQueryVm dest = new GetUserListQueryVm()
             {
+
+
                 Id = source.Id,
                 FirstName = source.FirstName,
                 LastName = source.LastName,
@@ -54,6 +56,9 @@ namespace AppraisalTool.Application.Profiles
                 PrimaryJobProfileName = primaryRole,
                 SecondaryJobProfileId = secondaryRoleId,
                 SecondaryJobProfileName = secondaryRole
+                //RepaId=source.Id,
+                //RevaId=source.Id
+
             };
             return dest;
 

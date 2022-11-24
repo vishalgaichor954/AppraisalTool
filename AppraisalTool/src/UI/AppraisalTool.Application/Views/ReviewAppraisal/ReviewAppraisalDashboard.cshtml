@@ -160,7 +160,18 @@
     <div class="container-fluid page-body-wrapper">
 
         <div class="content-wrapper content-wrapper-Blue">
-            <h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard"> Reportee Appraisal Dashboard   </a></h6>
+            @*<h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard"> Reportee Appraisal Dashboard   </a></h6>*@
+            <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a asp-controller="Dashboard" class="active" asp-action="Dashboard">Dashboard</a>
+                            </li>
+                             <li class="breadcrumb-item">
+                                <a asp-controller="AppraisalHomePage" class="active" asp-action="HomePageAppraisal">Appraisal Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Review Appraisal Dashboard    </li>
+                        </ol>
+                    </nav>
             <br />
             <input type="button" value="Back" class="Button " onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
             <br />
