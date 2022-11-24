@@ -143,12 +143,17 @@ element.style {
     background-color: #E0144C;
     color: white;
 }
+    .ResetButton:hover {
+        background-color: white;
+        color: #E0144C;
+        border: 2px solid #E0144C;
+    }
 
-.LoginBtn:hover {
-    background-color: white;
-    color: #1746A2;
-    border: 2px solid #1746A2;
-}
+    .LoginBtn:hover {
+        background-color: white;
+        color: #1746A2;
+        border: 2px solid #1746A2;
+    }
 
 .ApprovalBtn {
     border: 2px solid #E0144C;
