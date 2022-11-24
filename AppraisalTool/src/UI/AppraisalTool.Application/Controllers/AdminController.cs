@@ -77,7 +77,7 @@ namespace AppraisalTool.App.Controllers
             }
         }
 
-        
+
         [HttpPost]
         public IActionResult CreateUser(UserViewModel model)
         {
@@ -104,7 +104,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
-        public IActionResult  UpdateUser(int id)
+        public IActionResult UpdateUser(int id)
         {
             client = new HttpClient();
             client.BaseAddress = baseAddress;
@@ -116,7 +116,7 @@ namespace AppraisalTool.App.Controllers
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"User/getUser?id={id}&api-version=1").Result;
             if (response.IsSuccessStatusCode && jobProfileresponse.IsSuccessStatusCode && BranchReponse.IsSuccessStatusCode && RoleReponse.IsSuccessStatusCode)
             {
-                
+
                 var data = response.Content.ReadAsStringAsync().Result;
 
                 var res = JsonConvert.DeserializeObject<Response>(data);
@@ -131,7 +131,7 @@ namespace AppraisalTool.App.Controllers
                 foreach (var item in data1.Data)
                 {
 
-                    JobProfileRolelist.Add(new SelectListItem { Text = item.name.ToString(), Value = item.id.ToString(), Selected = user.PrimaryJobProfileId==(int)item.id });
+                    JobProfileRolelist.Add(new SelectListItem { Text = item.name.ToString(), Value = item.id.ToString(), Selected = user.PrimaryJobProfileId == (int)item.id });
 
                 }
                 var branchresponseData = BranchReponse.Content.ReadAsStringAsync().Result;
@@ -143,7 +143,7 @@ namespace AppraisalTool.App.Controllers
                 foreach (var item in branchdata.Data)
                 {
 
-                    branchlist.Add(new SelectListItem { Text = item.branchName.ToString(), Value = item.id.ToString(), Selected = user.BranchId==(int)item.id });
+                    branchlist.Add(new SelectListItem { Text = item.branchName.ToString(), Value = item.id.ToString(), Selected = user.BranchId == (int)item.id });
 
                 }
                 var RoleResponseData = RoleReponse.Content.ReadAsStringAsync().Result;
@@ -153,7 +153,7 @@ namespace AppraisalTool.App.Controllers
                 foreach (var item in Roledata.Data)
                 {
 
-                    Rolelist.Add(new SelectListItem { Text = item.role.ToString(), Value = item.id.ToString(), Selected = user.Role==(int)item.id });
+                    Rolelist.Add(new SelectListItem { Text = item.role.ToString(), Value = item.id.ToString(), Selected = user.Role == (int)item.id });
 
                 }
                 ViewBag.JobProfileRolelist = JobProfileRolelist;
@@ -229,7 +229,7 @@ namespace AppraisalTool.App.Controllers
             client.BaseAddress = baseAddress;
             //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             //model.upda = userSession.UserId;
-           UserViewModel user = new UserViewModel();
+            UserViewModel user = new UserViewModel();
             HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + $"User/removeUser?id={id}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -260,7 +260,7 @@ namespace AppraisalTool.App.Controllers
                 var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
                 dynamic json = JsonConvert.DeserializeObject(responseData);
                 ViewBag.GetMenuCards = json.data;
-                
+
 
             }
             return View();
@@ -306,6 +306,7 @@ namespace AppraisalTool.App.Controllers
                 string responseData = response.Content.ReadAsStringAsync().Result;
                 dynamic json = JsonConvert.DeserializeObject(responseData);
                 ViewBag.Appraisals = json.data;
+
                 return View();
 
             }
@@ -317,9 +318,29 @@ namespace AppraisalTool.App.Controllers
         [HttpPost]
         public IActionResult ListAppraisals(List<AllowAppraisalEditVm> allowAppraisalEditVm)
         {
-           
-            return View();
-        }
+            AllowEditViewModel model = new AllowEditViewModel();
+           foreach(var item in allowAppraisalEditVm)
+            {
+                model.AppraisalId = item.AppraisalId;
+                model.Editable = item.IsAllowed;
+            }
+            Console.WriteLine(model);
+            string data = JsonConvert.SerializeObject(model);
+            
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PutAsync("https://localhost:5000/api/v1/AppraisalHome/AllowEdit", content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["Success"] = "User Updated Successfully";
+                return RedirectToAction("ListAppraisals");
+            }
+            TempData["editError"] = "Failed to Update User";
+            return RedirectToAction("ListAppraisals");
 
+
+
+        }
     }
+
 }
+

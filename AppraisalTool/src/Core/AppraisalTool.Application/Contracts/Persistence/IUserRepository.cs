@@ -4,6 +4,7 @@ using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
 using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
+using AppraisalTool.Application.Models.AppraisalTool;
 using AppraisalTool.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,9 @@ namespace AppraisalTool.Application.Contracts.Persistence
         //public Task<dynamic> getCards(int id);
         public Task<User> GetUserById(int id);
         public Task<List<MenuRoleMapping>> getAllCards(int id);
+        public Task<bool> AllowEdit(AppraisalForEditVm appraisalForEditVm);
+        public Task<bool> RequestEdit(AppraisalForEditVm appraisalForEditVm);
+
 
         //public Task<bool> AssignAuthority(int repaId, int revaId, int userId);
     }

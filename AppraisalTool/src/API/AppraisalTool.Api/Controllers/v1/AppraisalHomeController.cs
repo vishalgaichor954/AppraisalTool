@@ -16,6 +16,8 @@ using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateApprais
 using AppraisalTool.Application.Features.ReviewAppraisals.Queries.GetReviewAppraisalsByRevAuthority;
 using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResultByReva;
 using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByFidAndUserId;
+using AppraisalTool.Application.Models.AppraisalTool;
+using AppraisalTool.Application.Contracts.Persistence;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -26,11 +28,13 @@ namespace AppraisalTool.Api.Controllers.v1
     {
         private readonly IMediator _mediator;
         private readonly ILogger<AppraisalHomeController> _logger;
+        private readonly IUserRepository _userRepository;
 
-        public AppraisalHomeController(IMediator mediator, ILogger<AppraisalHomeController> logger)
+        public AppraisalHomeController(IMediator mediator, ILogger<AppraisalHomeController> logger, IUserRepository userRepository)
         {
             _logger = logger;
             _mediator = mediator;
+            _userRepository= userRepository;
 
 
         }
@@ -132,6 +136,7 @@ namespace AppraisalTool.Api.Controllers.v1
             return Ok(response);
         }
 
+
         [HttpGet("GetAppraisalResultsByAppraisalId")]
         public async Task<ActionResult> GetAppraisalResultsByAppraisalId(int id)
         {
@@ -192,6 +197,27 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("UpdateAppraisalResultsByReva Completed");
             return Ok(dtos);
         }
+
+
+        [HttpPut("AllowEdit")]
+        public async Task<ActionResult> AllowEdit (AppraisalForEditVm appraisalForEditVm)
+        {
+            _logger.LogInformation("AllowEdit Initiated");
+            var dtos =await _userRepository.AllowEdit(appraisalForEditVm);
+            _logger.LogInformation("AllowEdit Completed");
+            return Ok(dtos);
+
+        }
+        [HttpPut("RequestEdit")]
+        public async Task<ActionResult> RequestEdit(AppraisalForEditVm appraisalForEditVm)
+        {
+            _logger.LogInformation("RequestEdit Initiated");
+            var dtos = await _userRepository.RequestEdit(appraisalForEditVm);
+            _logger.LogInformation("RequestEdit Completed");
+            return Ok(dtos);
+
+        }
+
 
 
 
