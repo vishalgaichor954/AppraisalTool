@@ -24,7 +24,7 @@ namespace AppraisalTool.Infrastructure.Mail
         public EmailService(IOptions<EmailSettings> mailSettings, ILogger<EmailService> logger/*, ISendGridClient sendGridClient*/)
 =======
         public EmailService(IOptions<EmailSettings> mailSettings, ILogger<EmailService> logger /*ISendGridClient sendGridClient*/)
->>>>>>> 7670406584541f9f80fefc28757fe991f61f806f
+>>>>>>> AT-Dev
         {
             _emailSettings = mailSettings.Value;
             _logger = logger;
