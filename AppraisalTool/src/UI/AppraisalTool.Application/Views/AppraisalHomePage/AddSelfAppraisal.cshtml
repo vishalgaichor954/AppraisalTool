@@ -1,4 +1,8 @@
-﻿
+﻿@using Newtonsoft.Json;
+
+  @{
+        dynamic json = JsonConvert.DeserializeObject(Context.Session.GetString("navbarViewModel"));
+    }
 
 
 <style>
@@ -50,6 +54,7 @@
                     <form asp-action="AddSelfAppraisal" method="post" enctype="multipart/form-data">
                         <div class="text-danger"></div>
                         <input name="Fid" hidden value="@ViewBag.Fid" type="number">
+                        <p>@ViewBag.Fid// @ViewBag.fid</p>
                         <fieldset class="border p-2 m-5 " style="display:flex;justify-content:center;">
                             <legend class="float-none HEADdata w-auto">
                                 Input & Effort metric
@@ -230,8 +235,14 @@
                                     {
                                         <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " disabled /></div>
                                         <div class="col-3"><input id="submit" type="submit" value="Update" class="   btn btn-block AddAppraisalBtn btn-lg " disabled /></div>
-                                        <div class="col-3"><input id="submit" type="submit" value="Request To Edit" class="   btn btn-block AddAppraisalBtn btn-lg "  /></div>
-
+                                        //<div class="col-3"><input id="submit" type="submit" value="Request To Edit" class="   btn btn-block AddAppraisalBtn btn-lg "  /></div>
+                                        <br />
+                                         <div class="m-5">
+                                         <p> Note: You cannot update this appraisal, Raise a update request. To raise a request <a href="RequestForEdit?fId=@ViewBag.fid&userId=@ViewBag.uid " >Click here..</a> </p>
+                                         
+                                        </div>
+                                         //@ViewBag.Fid  
+                                         //@json.userId
                                     }
                                     else
                                     {

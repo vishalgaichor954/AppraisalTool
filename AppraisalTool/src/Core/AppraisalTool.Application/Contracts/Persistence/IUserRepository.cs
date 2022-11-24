@@ -32,6 +32,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<List<MenuRoleMapping>> getAllCards(int id);
         public Task<bool> AllowEdit(AppraisalForEditVm appraisalForEditVm);
         public Task<bool> RequestEdit(AppraisalForEditVm appraisalForEditVm);
+        public Task<bool> RequestToEdit(int? fId, int? userId);
 
 
         //public Task<bool> AssignAuthority(int repaId, int revaId, int userId);

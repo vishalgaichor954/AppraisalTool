@@ -344,6 +344,9 @@ namespace AppraisalTool.App.Controllers
             {
                 return RedirectToAction("HomePageAppraisal", "AppraisalHomePage");
             }
+            var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            ViewBag.fid = fid;
+            ViewBag.uid = user.UserId;
 
             //https://localhost:5000/api/v1/Metric/GetAllListOfMetric
             HttpClient client = new HttpClient();
@@ -388,6 +391,7 @@ namespace AppraisalTool.App.Controllers
                     Console.Write(model);
                     ViewBag.AppraisalFormModel = model;
                     ViewBag.ReadOnlyForm = false;
+                    
                     //[] bindingModel = new MetricsDto[mylist.Count()];
                     return View(mylist);
                 }
@@ -454,7 +458,9 @@ namespace AppraisalTool.App.Controllers
             StringContent Appraisalcontent = new StringContent(Appraisaldata, Encoding.UTF8, "application/json");
             int Appraisalid = 0;
             HttpResponseMessage responseAppraisal = client.PostAsync(client.BaseAddress + "/AppraisalHome/AddAppraisal", Appraisalcontent).Result;
-            if (responseAppraisal.IsSuccessStatusCode)
+            //HttpResponseMessage requestEdit = client.PostAsync("://localhost:5000/api/v1/AppraisalHome/RequestEdit", Appraisalcontent).Result;
+
+            if (responseAppraisal.IsSuccessStatusCode /*&& requestEdit.IsSuccessStatusCode*/)
             {
                 string AppraisalresponseData = responseAppraisal.Content.ReadAsStringAsync().Result;
                 var Appraisalres = JsonConvert.DeserializeObject<ForgetPasswordResponse>(AppraisalresponseData);
@@ -641,6 +647,26 @@ namespace AppraisalTool.App.Controllers
             TempData["RepaError"] = "Error Occured";
             return RedirectToRoute(new { controller = "ReviewAppraisal", action = "ReviewAppraisalDashboard" });
         }
+
+        [HttpGet]
+        public IActionResult  RequestForEdit(int? fId, int? userId)
+        {
+                        HttpResponseMessage requestresponse = client.GetAsync( $" https://localhost:5000/api/v1/AppraisalHome/RequestToEdit?fId={fId}&userId={userId}").Result;
+
+        //https://localhost:5000/api/v1/AppraisalHome/RequestToEdit?fId=4&userId=5
+        if(requestresponse.IsSuccessStatusCode)
+            {
+                TempData["RequestSuccess"] = "Your Request for updation was raised successfully";
+                return RedirectToAction("HomePageAppraisal");
+            }
+            TempData["RequestError"] = "Oops!! Something Went Wrong";
+            return RedirectToAction("HomePageAppraisal");
+
+
+        }
+
+
+        
 
 
     }

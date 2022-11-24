@@ -321,6 +321,27 @@ namespace AppraisalTool.Persistence.Repositories
             }
             return false;
         }
+
+        public async Task<bool> RequestToEdit(int? fId, int? userId)
+        {
+            Appraisal appraisal = await _dbContext.Appraisal.Where(x => x.UserId == userId && x.FinancialYearId == fId).FirstOrDefaultAsync();
+            if (appraisal != null)
+            {
+                try
+                {
+                    appraisal.EditRequested = true;
+                    _dbContext.Entry(appraisal).State = EntityState.Modified;
+                    await _dbContext.SaveChangesAsync();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+
+                return true;
+            }
+            return false;
+        }
     }
 
        

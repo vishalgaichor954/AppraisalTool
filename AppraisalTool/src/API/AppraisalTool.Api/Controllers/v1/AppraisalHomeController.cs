@@ -132,6 +132,8 @@ namespace AppraisalTool.Api.Controllers.v1
 
         public async Task<ActionResult> AddAppraisal( AddAppraisalVM addAppraisalVM)
         {
+        
+
             var response = await _mediator.Send(new AddAppraisalCommand() { addAppraisal = addAppraisalVM });
             return Ok(response);
         }
@@ -218,6 +220,15 @@ namespace AppraisalTool.Api.Controllers.v1
 
         }
 
+        [HttpGet("RequestToEdit")]
+        public async Task<ActionResult> RequestToEdit(int? fId,int? userId)
+        {
+            _logger.LogInformation("RequestToEdit Initiated");
+            var dtos = await _userRepository.RequestToEdit(fId,userId);
+            _logger.LogInformation("RequestToEdit Completed");
+            return Ok(dtos);
+
+        }
 
 
 

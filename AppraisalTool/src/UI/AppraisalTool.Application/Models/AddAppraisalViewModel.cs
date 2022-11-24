@@ -11,5 +11,6 @@
         public int? KraId { get; set; }
         public DateTime? ReviewedOn { get; set; }
         public DateTime? ApprovedOn { get; set; }
+       
     }
 }
