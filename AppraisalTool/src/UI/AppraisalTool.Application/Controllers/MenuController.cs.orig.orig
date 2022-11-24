@@ -109,7 +109,10 @@ namespace AppraisalTool.App.Controllers
             return View(menu);
         }
 
+<<<<<<< HEAD
        
+=======
+>>>>>>> e6b9f959216535e5ff3d8d550ad546a3178913cd
         [HttpPost]
         public IActionResult UpdateMenu(MenuModel model, List<int> selectedRoles)
         {
@@ -191,7 +194,11 @@ namespace AppraisalTool.App.Controllers
 
         
        
+<<<<<<< HEAD
 
 
+=======
+       
+>>>>>>> AT-Dev
     }
 }
