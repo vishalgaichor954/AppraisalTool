@@ -141,6 +141,7 @@
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
                     <div class="row">
                         <div class="col-md-6">
                            <div class="form-group row">
@@ -160,6 +161,9 @@
                     
 
                     <div class="row d-flex justify-content-center">
+=======
+                   @* <div class="row d-flex justify-content-center">
+>>>>>>> e6b9f959216535e5ff3d8d550ad546a3178913cd
                         <div style="max-width:20%;">
                             <div style="align-items:center;">
                                   <a asp-action="ListUsers" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a>

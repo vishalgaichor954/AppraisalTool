@@ -224,6 +224,7 @@ namespace AppraisalTool.App.Controllers
                 {
                     return RedirectToAction("ListUsers", "Admin");
                 }
+<<<<<<< HEAD
                 var RoleResponseData = RoleReponse.Content.ReadAsStringAsync().Result;
                 var Roledata = JsonConvert.DeserializeObject<Response>(RoleResponseData);
                 Console.WriteLine(Roledata.Data);
@@ -271,6 +272,8 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.ReviewingList = ReviewingList;
 
                 Console.WriteLine(user);
+=======
+>>>>>>> e6b9f959216535e5ff3d8d550ad546a3178913cd
             }
             return View(user);
         }
