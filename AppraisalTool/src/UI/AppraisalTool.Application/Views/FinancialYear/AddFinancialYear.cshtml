@@ -73,28 +73,18 @@
                         </div>
                        
                     </div>
-                   
+                     <div class="form-group text-center">
+                           @* <input type="hidden" name="job" id="job" />*@
+                            <div class="row">
+                                <div class="col-4"></div>
+                                <div class="col-2">  <a asp-action="ListFinancialYear" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
+                                <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+                                <div class="col-4"></div>
+                                @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
+                            <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
+                            </div>
 
-                    <div class="row d-flex justify-content-center">
-                        <div style="max-width:20%;">
-                            <div style="align-items:center;">
-                                <input type="submit" value="Save" class="btn btn-block @*LoginBtn*@ blueTheme btn-md font-weight-medium auth-form-btn" />
-                              
-
-                           </div>
-                           
                         </div>
-                     @*    <div style="max-width:20%;">
-                        <div style="align-items:center;">
-                                <a asp-action="ListFinancialYear" class="btn btn-outline-secondary btn-block btn-md font-weight-medium auth-form-btn">Cancel</a>
-                        </div>
-                       </div>*@
-                        <div style="max-width:20%;">
-                        <div style="align-items:center;">
-                                <a asp-action="ListFinancialYear" class="btn btn-outline-secondary btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a>
-                        </div>
-                       </div>
-                    </div>
                 </form>
             </div>
         </div>
