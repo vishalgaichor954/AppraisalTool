@@ -22,7 +22,7 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<CreateFinancialYearDto> AddFY(FinancialYear Fy)
         {
-            var FyResponse = await _dbContext.FinancialYear.Where(x => x.Id == Fy.Id).FirstOrDefaultAsync();
+           var FyResponse = await _dbContext.FinancialYear.Where(x => x.Id == Fy.Id).FirstOrDefaultAsync();
             CreateFinancialYearDto response = new CreateFinancialYearDto();
             if (FyResponse != null)
             {
@@ -48,7 +48,9 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<IEnumerable<FinancialYear>> ListFinancialYear()
         {
-            return await ListAllAsync();
+            IEnumerable<FinancialYear> financialYears = await _dbContext.FinancialYear.Where(x => x.IsDeleted != true).ToListAsync();
+            return financialYears;
+            //return await ListAllAsync();
         }
 
         public async Task<UpdateFinancialYearCommandDto> UpdateFinancialYearAsync(int id, UpdateFinanacialYearCommand request)
@@ -59,6 +61,9 @@ namespace AppraisalTool.Persistence.Repositories
             {
                 FytoUpdate.StartYear=request.StartYear;
                 FytoUpdate.EndYear = request.EndYear;
+                FytoUpdate.IsActive = request.IsActive;
+                FytoUpdate.StartDate = request.StartDate;
+                FytoUpdate.EndDate = request.EndDate;
                 //FytoUpdate.StartDate = request.StartDate;
                 //FytoUpdate.EndDate = request.EndDate;
                 await _dbContext.SaveChangesAsync();
@@ -82,7 +87,7 @@ namespace AppraisalTool.Persistence.Repositories
 
             if (fyresult != null)
             {
-                //fyresult.IsDeleted = true;
+                fyresult.IsDeleted = true;
                 //await DeleteAsync(user);
                 await _dbContext.SaveChangesAsync();
                 response.Id = id;

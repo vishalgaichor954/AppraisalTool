@@ -28,10 +28,11 @@ namespace AppraisalTool.Api.Controllers.v1
         }
         [HttpPost]
         [Route("AddFinancialYear")]
-        public IActionResult AddFinancialYear(CreateFinancialYearCommand request)
+        public async Task<ActionResult> AddFinancialYear(CreateFinancialYearCommand request)
         {
-            _logger.LogInformation("AddFinancialYear Initiated ");
-             var dtos= _mediator.Send(request);
+            _logger.LogInformation("AddFinancialYear Initiated");
+            var dtos = await _mediator.Send(request);
+
             _logger.LogInformation("AddFinancialYear Completed");
             return Ok(dtos);
 

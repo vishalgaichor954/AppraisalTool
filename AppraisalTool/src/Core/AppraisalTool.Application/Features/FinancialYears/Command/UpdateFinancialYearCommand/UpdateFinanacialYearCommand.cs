@@ -16,5 +16,9 @@ namespace AppraisalTool.Application.Features.FinancialYears.Command.UpdateFinanc
 
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+
+        public bool IsActive { get; set; }
+
+         public int? UpdatedBy { get; set; } 
     }
 }

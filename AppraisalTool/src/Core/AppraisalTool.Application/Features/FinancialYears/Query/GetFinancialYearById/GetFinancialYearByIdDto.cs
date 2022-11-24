@@ -12,7 +12,9 @@ namespace AppraisalTool.Application.Features.FinancialYears.Query.GetFinancialYe
         public int StartYear { get; set; }
         public int EndYear { get; set; }
 
-        //public string StartDate { get; set; }
-        //public string EndDate { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

@@ -12,9 +12,9 @@ namespace AppraisalTool.Application.Features.FinancialYears.Command.CreateFinanc
         public int StartYear { get; set; }
         public int EndYear { get; set; }
 
-        public DateOnly StartDate { get; set; }
-        public DateOnly EndDate { get; set; }
-
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public bool IsActive { get; set; }
         public string Message { get; set; }
         public bool Succeeded { get; set; }
 

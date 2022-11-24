@@ -13,6 +13,6 @@
 
         public int? UpdatedBy { get; set; }
 
-        public bool IsActive { get;set; }=false;
+        public bool IsActive { get;set; }
     }
 }

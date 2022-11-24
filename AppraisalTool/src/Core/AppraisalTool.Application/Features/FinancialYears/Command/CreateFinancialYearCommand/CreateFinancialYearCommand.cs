@@ -16,12 +16,11 @@ namespace AppraisalTool.Application.Features.FinancialYears.Command.CreateFinanc
         public string StartDate { get; set; }
         public string EndDate { get; set;  }
 
-        public bool IsActive { get; set; } = false;
+        public bool IsActive { get; set; } 
         public int? AddedBy { get; set; }
         
        
-        public int? DeletedBy { get; set; }
-        public int? UpdatedBy { get; set; }
+        
         
 
        

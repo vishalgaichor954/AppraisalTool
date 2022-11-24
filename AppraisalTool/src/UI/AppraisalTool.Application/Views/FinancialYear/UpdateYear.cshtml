@@ -60,6 +60,19 @@
                             </div>
                         </div>
                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="IsActive" class="col-sm-4 col-form-label">Active Status@*<sup class="required">*</sup>*@</label>
+                                <div class="col-sm-8">
+@*                                    <input asp-for="IsActive" type="hidden" name="status" value="0" />
+*@                                    <input asp-for="IsActive" type="checkbox" value="True" name="status" class="form-check-input"/>    
+                                    <span asp-validation-for="IsActive" class="text-danger mx-1 small"></span>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
                    
 
                     <div class="row d-flex justify-content-center">
@@ -71,9 +84,14 @@
                            </div>
                            
                         </div>
-                         <div style="max-width:20%;">
+                       @*  <div style="max-width:20%;">
                         <div style="align-items:center;">
                                 <a asp-action="ListFinancialYear" class="btn btn-outline-secondary btn-block btn-md font-weight-medium auth-form-btn">Cancel</a>
+                        </div>
+                       </div>*@
+                        <div style="max-width:20%;">
+                        <div style="align-items:center;">
+                                <a asp-action="ListFinancialYear" class="btn btn-outline-secondary btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a>
                         </div>
                        </div>
                     </div>

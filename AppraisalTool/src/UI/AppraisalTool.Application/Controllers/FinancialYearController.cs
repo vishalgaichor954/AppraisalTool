@@ -83,7 +83,7 @@ namespace AppraisalTool.App.Controllers
             return View(financialYear);
         }
         [HttpPost]
-        public IActionResult UpdateYear(FinancialYear model)
+        public IActionResult UpdateYear(FinancialYear model, bool status)
         {
 
             Console.WriteLine("PostMethod hit");
@@ -92,6 +92,7 @@ namespace AppraisalTool.App.Controllers
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
             model.UpdatedBy = userSession.UserId;
+            model.IsActive = status;
             string data = JsonConvert.SerializeObject(model);
 
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
@@ -115,7 +116,7 @@ namespace AppraisalTool.App.Controllers
             client.BaseAddress = baseAddress;
             //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             //model.upda = userSession.UserId;
-            HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + $"FinancialYear/removeFinancialYear?id={id}api-version=1").Result;
+            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/FinancialYear/removeFinancialYear?id={id}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
