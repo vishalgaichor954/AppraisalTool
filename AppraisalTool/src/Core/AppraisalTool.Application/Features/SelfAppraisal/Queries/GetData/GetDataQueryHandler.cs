@@ -1,4 +1,4 @@
-﻿using AppraisalTool.Application.Contracts.Persistence;
+﻿ using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Response;
 
 using AppraisalTool.Domain.Entities;

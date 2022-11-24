@@ -19,7 +19,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<UpdateMenuCommandDto> UpdateMenuAsync(int id, UpdateMenuCommand request);
         //public Task<List<MenuList>> GetMenuById(int menu_Id);
         public Task<GetMenuByIdDto> GetMenuById(int menu_Id);
-
+        //public Task<GetMenuByIdDto> GetMenubyId(int menu_Id);
         public Task<IEnumerable<GetMenuListQueryVm>> GetAllMenuList();
         public Task<RemoveMenuCommandDto> RemoveMenuAsync(int menu_Id);
     }

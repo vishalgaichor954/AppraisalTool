@@ -97,13 +97,31 @@
                             <div class="form-group row">
                                <label class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>                  
                                <div class="form-check">
-                                    @foreach (var item in ViewBag.Rolelist)
+                                    @foreach (var item in ViewBag.roldict)
+                                    {
+                                        @foreach (var i in ViewBag.RoleList)
+                                        {
+                                        @if(item.Value == i.Value)
+                                        {
+                                             <input type="checkbox" value="@i.Value" name="selectedRoles" id="check" class="form-check-input" checked>
+                                            <label class="form-check-label">@i.Key</label>
+                                        }
+                                      
+                                       
+                                      
+                                        }
+                                      
+                                    }
+
+                                    @foreach (var role in ViewBag.roledict3)
                                     {
                                         
-                                        <input type="checkbox" value="@item.Value" name="selectedRoles" class="form-check-input">
-                                        <label class="form-check-label">@item.Key</label>
+                                             <input type="checkbox" value="@role.Value" name="selectedRoles" id="check" class="form-check-input">
+                                            <label class="form-check-label">@role.Key</label>
+                                        
                                        
 
+                                     
                                     }
                                     
 
@@ -147,6 +165,8 @@
     }
     }
     <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+    
 
     <!-- endinject -->
     <!-- Plugin js for this page -->
