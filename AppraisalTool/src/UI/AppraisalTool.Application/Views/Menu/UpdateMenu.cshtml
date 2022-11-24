@@ -4,8 +4,8 @@
     ViewData["Title"] = "Add Menu";
 }
 <style>
-    .checkbox{
-        disply:flex;
+    .checkbox {
+        disply: flex;
     }
 </style>
 <div class="container">
@@ -89,69 +89,65 @@
                                 </div>
                             </div>
                         </div>
-                        
 
-                        </div>
 
-                        <div>
-                            <div class="form-group row">
-                               <label class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>                  
-                               <div class="form-check">
-                                    @foreach (var item in ViewBag.roldict)
+                    </div>
+
+                    <div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
+                            <div class="form-check">
+                                @foreach (var item in ViewBag.roldict)
+                                {
+                                    @foreach (var i in ViewBag.RoleList)
                                     {
-                                        @foreach (var i in ViewBag.RoleList)
+                                        @if (item.Value == i.Value)
                                         {
-                                        @if(item.Value == i.Value)
-                                        {
-                                             <input type="checkbox" value="@i.Value" name="selectedRoles" id="check" class="form-check-input" checked>
+                                            <input type="checkbox" value="@i.Value" name="selectedRoles" id="check" class="form-check-input" checked>
                                             <label class="form-check-label">@i.Key</label>
                                         }
-                                      
-                                       
-                                      
-                                        }
-                                      
+
+
+
                                     }
 
-                                    @foreach (var role in ViewBag.roledict3)
-                                    {
-                                        
-                                             <input type="checkbox" value="@role.Value" name="selectedRoles" id="check" class="form-check-input">
-                                            <label class="form-check-label">@role.Key</label>
-                                        
-                                       
+                                }
 
-                                     
-                                    }
-                                    
+                                @foreach (var role in ViewBag.roledict3)
+                                {
 
-                                    
-                                </div>
-                            </div>
-                        </div>
-
-                        
-                        
-                  
+                                    <input type="checkbox" value="@role.Value" name="selectedRoles" id="check" class="form-check-input">
+                                    <label class="form-check-label">@role.Key</label>
 
 
 
 
+                                }
 
-                    <div class="row d-flex justify-content-center">
-                        <div style="max-width:20%;">
-                            <div style="align-items:center;">
-                                <input type="submit" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" />
 
 
                             </div>
+                        </div>
+                    </div>
 
+
+
+
+
+
+
+
+                    <div class="form-group text-center">
+                        @* <input type="hidden" name="job" id="job" />*@
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-2">  <a asp-action="ListMenu" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
+                            <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+                            <div class="col-4"></div>
+                            @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
+                            <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
                         </div>
-                        <div style="max-width:20%;">
-                            <div style="align-items:center;">
-                                <a asp-action="ListMenu" class="btn btn-outline-secondary btn-block btn-md font-weight-medium auth-form-btn">Cancel</a>
-                            </div>
-                        </div>
+
                     </div>
                 </form>
             </div>
@@ -166,7 +162,7 @@
     }
     <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
 
-    
+
 
     <!-- endinject -->
     <!-- Plugin js for this page -->
