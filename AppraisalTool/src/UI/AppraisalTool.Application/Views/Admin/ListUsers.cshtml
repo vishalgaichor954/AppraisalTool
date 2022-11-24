@@ -10,7 +10,12 @@
    <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
    <script src="~/lib/package/dist/sweetalert2.all.js"></script>
      <script src="~/lib/package/dist/sweetalert2.min.js"></script>
-
+<style>
+    .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+    color: #333;
+    margin-right: 15px;
+}
+</style>
 
 
        @if (TempData["editError"] != null)
@@ -111,80 +116,67 @@ Toast.fire({
     }
 
     @*add user end*@
-       @if (TempData["DeleteUserFaild"] != null)
-{
+           @if (TempData["DeleteUserFaild"] != null)
+    {
   
 
-    <script>
+        <script>
                              
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
+            const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
 
-Toast.fire({
-  icon: 'error',
-  title: 'Oops ! something went wrong user was not Deleted'
-})
-    </script>
-}
-    @if (TempData["DeleteuserSuccess"] != null)
-    {
-          <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 4000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
-
-Toast.fire({
-  icon: 'success',
-  title: 'User Deleted Successfully'
-})
-    </script>
+    Toast.fire({
+      icon: 'error',
+      title: 'Oops ! something went wrong user was not Deleted'
+    })
+        </script>
     }
+        @if (TempData["DeleteuserSuccess"] != null)
+        {
+              <script>
+                             
+            const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 4000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
 
-        <style>
- .BreadCrump>a:link {
-            color: grey;
-      background-color: transparent;
-      text-decoration: none;
+    Toast.fire({
+      icon: 'success',
+      title: 'User Deleted Successfully'
+    })
+        </script>
         }
-        
 
-.BreadCrump > a:visited {
-  color: grey;
-  background-color: transparent;
-  text-decoration: none;
-}
-.BreadCrump > a:hover {
-  color: black;
-  background-color: transparent;
-  text-decoration: none;
-}
- .BreadCrump > a:active {
-  color: grey;
-  background-color: transparent;
-  text-decoration: none;
-}
-</style>
-
+   
 <div class="container">
-<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting" >Configure Settings</a>  /<a asp-controller="Admin" asp-action="ListUsers" >  User Management </a></h6>
+@*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting" >Configure Settings</a>  /<a asp-controller="Admin" asp-action="ListUsers" > 
+    User Management </a></h6>*@
+<nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="border:none">
+            <li class="breadcrumb-item">
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting"  style=" text-decoration: none;">Configure Settings</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">User Management</li>
+        </ol>
+    </nav>
+       
+   
 
     @*@if (TempData["AddUserSuccess"] != null)
     {

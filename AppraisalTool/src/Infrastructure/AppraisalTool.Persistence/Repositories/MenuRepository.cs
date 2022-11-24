@@ -108,8 +108,19 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<GetMenuByIdDto> GetMenuById(int menu_Id)
         {
+            List<int> permissionDesc = new List<int>();
+
+            List<MenuRoleMapping> menuList = await _dbContext.MenuRoleMappings.Where(x => x.Menu_id == menu_Id).Include(x => x.UserRole).ToListAsync();
+
+            foreach (var menus in menuList)
+            {
+                permissionDesc.Add(menus.UserRole.Id);
+
+            }
             var result = from A in _dbContext.MenuLists
                          join B in _dbContext.MenuRoleMappings on A.Menu_Id equals B.Menu_id
+                         join C in _dbContext.UserRole on B.Role_id equals C.Id
+
                          //join C in _dbContext.UserRole on B.Role_id equals C.Id
                          select new GetMenuByIdDto
                          {
@@ -121,9 +132,12 @@ namespace AppraisalTool.Persistence.Repositories
                              MenuController = A.MenuController,
                              MenuAction = A.MenuAction,
                              MenuLink = A.MenuLink,
-                             RoleId = B.Role_id
+                             RoleId = B.Role_id,
+                             RoleName=C.Role,
+                             RoleList=permissionDesc
+                             
                          };
-
+           
             var res = await result.Where(u => u.Menu_id == menu_Id).FirstOrDefaultAsync();
             return res;
             //List<MenuList> GetMenuById = await _dbContext.MenuLists.Include(x => x.RoleMapping).Where(u => u.Menu_Id == menu_Id && u.IsDeleted != true).ToListAsync();
@@ -149,7 +163,9 @@ namespace AppraisalTool.Persistence.Repositories
                              MenuController = A.MenuController,
                              MenuAction = A.MenuAction,
                              MenuLink = A.MenuLink,
-                             RoleName = C.Role
+                             RoleName = C.Role,
+                             RoleId=C.Id
+                             
                          };
 
             //var res = await result.Where(u=>u.i).FirstOrDefaultAsync();
@@ -181,5 +197,20 @@ namespace AppraisalTool.Persistence.Repositories
                 return response;
             }
         }
+        //public async Task<GetMenuByIdDto> GetMenubyId(int menuId)
+        //{
+        //    GetMenuByIdDto getPermissionByRoleDto = new GetMenuByIdDto();
+        //    List<int> permissionDesc = new List<int>();
+
+        //    List<MenuRoleMapping> menuList = await _dbContext.MenuRoleMappings.Where(x => x.Menu_id == menuId).Include(x => x.UserRole).ToListAsync();
+
+        //    foreach (var menus in menuList)
+        //    {
+        //        permissionDesc.Add(menus.UserRole.Id);
+
+        //    }
+        //    return new GetMenuByIdDto { Menu_id = menuId, RoleList = permissionDesc};
+
+        //}
     }
 }

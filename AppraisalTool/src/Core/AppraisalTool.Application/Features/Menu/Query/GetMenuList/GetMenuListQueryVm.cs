@@ -21,6 +21,8 @@ namespace AppraisalTool.Application.Features.Menu.Query.GetMenuList
 
         public string? MenuLink { get; set; }
 
+        public int RoleId { get; set; }
         public string RoleName { get; set; }
+       
     }
 }

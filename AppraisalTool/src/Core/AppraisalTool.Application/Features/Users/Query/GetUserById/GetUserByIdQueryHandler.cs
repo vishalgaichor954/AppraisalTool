@@ -29,10 +29,10 @@ namespace AppraisalTool.Application.Features.Users.Query.GetUserById
         public async Task<Response<GetUserListQueryVm>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("GetUserByIdQueryHandler Initiated");
-            var user = await _userRepository.GetUserById(request.Id);
-            var mappeduser = _mapper.Map<GetUserListQueryVm>(user);
+            var user = await _userRepository.GetUserbyid(request.Id);
+           // var mappeduser = _mapper.Map<GetUserListQueryVm>(user);
             _logger.LogInformation("GetUserByIdQueryHandler completed");
-            return new Response<GetUserListQueryVm>(mappeduser,"success");
+            return new Response<GetUserListQueryVm>(user, "success");
 
 
         }

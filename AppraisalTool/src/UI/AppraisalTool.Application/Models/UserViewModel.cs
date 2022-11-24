@@ -51,6 +51,12 @@ namespace AppraisalTool.App.Models
         [Required(ErrorMessage = "Branch is required")]
         public int ?BranchId { get; set; }
 
+        [Required(ErrorMessage = "Please select a Reporting Authority Name")]
+        public string RepaId { get; set; }
+
+        [Required(ErrorMessage = "Please select a Reviewing Authority Name")]
+        public string RevaId { get; set; }
+
         [Display(Name = "Branch Name")]
         public string? BranchName { get; set; }
 
