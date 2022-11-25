@@ -24,5 +24,6 @@ namespace AppraisalTool.Application.Features.AppraisalResults.Queries.GetApprais
         public double? RevaSelfScore { get; set; }
         public string? RevaSelfComment { get; set; }
         public DateTime? RevaSelfCreatatedDate { get; set; }
+        public bool? Editable { get; set; }
     }
 }

@@ -53,6 +53,7 @@ namespace AppraisalTool.Persistence.Repositories
             IQueryable<GetDataVM> res = (from A in _dbContext.User
                                          join B in _dbContext.UserAuthorityMappings on A.Id equals B.UserId
                                          join C in _dbContext.Appraisal on B.UserId equals C.UserId
+
                                          where A.Id == userId
 
                                          select new GetDataVM
@@ -65,6 +66,7 @@ namespace AppraisalTool.Persistence.Repositories
                                              ReviewingAuthorityFirstName = B.ReviewingAuthority.FirstName,
                                              ReviewingAuthorityLastName = B.ReviewingAuthority.LastName,
                                              AppraisalStatus = C.Status.StatusTitle,
+                                             FinancialYearId  = C.FinancialYear.Id,
                                          }) ;   
 
             Console.WriteLine(res);
