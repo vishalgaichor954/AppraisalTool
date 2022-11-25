@@ -31,7 +31,7 @@ namespace AppraisalTool.Persistence.Repositories
 
 
        
-        public async Task<IQueryable<GetDataVM>> GetDataById(int userId)
+        public async Task<IQueryable<GetDataVM>> GetDataById(int userId, int fyId)
         {
             var primaryRole = "";
 
@@ -53,7 +53,12 @@ namespace AppraisalTool.Persistence.Repositories
             IQueryable<GetDataVM> res = (from A in _dbContext.User
                                          join B in _dbContext.UserAuthorityMappings on A.Id equals B.UserId
                                          join C in _dbContext.Appraisal on B.UserId equals C.UserId
+<<<<<<< HEAD
+                                         where A.Id == userId && C.FinancialYear.Id==fyId
+=======
+
                                          where A.Id == userId
+>>>>>>> Feature/ReviewDashboard
 
                                          select new GetDataVM
                                          {
@@ -65,6 +70,11 @@ namespace AppraisalTool.Persistence.Repositories
                                              ReviewingAuthorityFirstName = B.ReviewingAuthority.FirstName,
                                              ReviewingAuthorityLastName = B.ReviewingAuthority.LastName,
                                              AppraisalStatus = C.Status.StatusTitle,
+<<<<<<< HEAD
+                                             Date=C.FinancialYear.StartDate + " " + C.FinancialYear.StartYear + " " + "to" + " " + C.FinancialYear.EndDate + " "+ C.FinancialYear.EndYear
+=======
+                                             FinancialYearId  = C.FinancialYear.Id,
+>>>>>>> Feature/ReviewDashboard
                                          }) ;   
 
             Console.WriteLine(res);
@@ -88,7 +98,7 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<List<Appraisal>> GetYear(int userId)
         {
-            
+
             var years = await _dbContext.Appraisal.Include(x => x.FinancialYear).Where(x => x.UserId == userId)
                 .Include(x => x.FinancialYear)
                 .ToListAsync();
@@ -159,7 +169,6 @@ namespace AppraisalTool.Persistence.Repositories
             return res.OrderByDescending(d => d.StartDate).ToList<ReporteeAppraisalListVm>();
         }
 
-<<<<<<< HEAD
         //Author : Ilyas Dabholkar
         //Return Appraisal Object by financialayear and userid
         public async Task<Appraisal> GetAppraisalByUserAndFinancialYear(int fId,int userId)
@@ -169,7 +178,6 @@ namespace AppraisalTool.Persistence.Repositories
             return appraisal;
         }
 
-=======
         public async Task<List<ReviewAppraisalListVm>> GetReviewAppraisalsByRevAuthority(int id)
         {
             List<UserAuthorityMapping> mappings = await _dbContext.UserAuthorityMappings.Include(x => x.ReportingAuthority).ToListAsync();
@@ -206,6 +214,5 @@ namespace AppraisalTool.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
             return true;
         }
->>>>>>> AT-Dev
     }
 }
