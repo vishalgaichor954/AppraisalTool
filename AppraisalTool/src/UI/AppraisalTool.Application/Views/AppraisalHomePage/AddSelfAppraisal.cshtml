@@ -1,8 +1,8 @@
 ﻿@using Newtonsoft.Json;
-
-  @{
-        dynamic json = JsonConvert.DeserializeObject(Context.Session.GetString("navbarViewModel"));
-    }
+@model List<AppraisalTool.App.Models.updateSelfAppraisalVM>
+@{
+    dynamic json = JsonConvert.DeserializeObject(Context.Session.GetString("navbarViewModel"));
+}
 
 
 <style>
@@ -21,7 +21,7 @@
         cursor: pointer;
         width: auto;
     }</style>
-@model List<AppraisalTool.App.Models.MetricsDto>
+
 @{
     //ViewData["Title"] = "AppraisalTool";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -54,7 +54,16 @@
                     <form asp-action="AddSelfAppraisal" method="post" enctype="multipart/form-data">
                         <div class="text-danger"></div>
                         <input name="Fid" hidden value="@ViewBag.Fid" type="number">
-                        <p>@ViewBag.Fid// @ViewBag.fid</p>
+                        
+                      @if (ViewBag.IsEditable != 0)
+                      {
+                          <input name="IsEditable" hidden value="@ViewBag.IsEditable" type="number">
+                           <input name="AppraisalID" hidden value="@ViewBag.appraisalData.Id" type="number">
+                          
+                      }
+                            
+                        
+                        
                         <fieldset class="border p-2 m-5 " style="display:flex;justify-content:center;">
                             <legend class="float-none HEADdata w-auto">
                                 Input & Effort metric
@@ -90,6 +99,7 @@
                                         </div>
                                         <div class="col-6">
                                             <input asp-for="@Model[i].Metric_ID" hidden value="@Model[i].Metric_ID" type="number">
+                                              <input asp-for="@Model[i].Id" hidden value="@Model[i].Id" type="number">
                                             <input asp-for="@Model[i].List_Id" hidden value="@Model[i].List_Id" type="number">
                                             <input asp-for="@Model[i].metric_Weightage" hidden value="@Model[i].metric_Weightage" type="number">
                                             <input asp-for="@Model[i].Metric_Description" hidden value="@Model[i].Metric_Description" type="text">
@@ -166,6 +176,7 @@
                                         <div class="col-6">
                                             <input asp-for="@Model[temp].Metric_ID" hidden value="@Model[temp].Metric_ID" type="number">
                                             <input asp-for="@Model[temp].List_Id" hidden value="@Model[temp].List_Id" type="number">
+                                            <input asp-for="@Model[temp].Id" hidden value="@Model[temp].Id" type="number">
                                             <input asp-for="@Model[temp].metric_Weightage" hidden value="@Model[temp].metric_Weightage" type="number">
                                             <input asp-for="@Model[temp].Metric_Description" hidden value="@Model[temp].Metric_Description" type="text">
                                             <div class="col-12">
@@ -214,6 +225,8 @@
                                         <div class="col-6">
                                             <input asp-for="@Model[temp].Metric_ID" hidden value="@Model[temp].Metric_ID" type="number">
                                             <input asp-for="@Model[temp].List_Id" hidden value="@Model[temp].List_Id" type="number">
+
+                                              <input asp-for="@Model[temp].Id" hidden value="@Model[temp].Id" type="number">
                                             <input asp-for="@Model[temp].metric_Weightage" hidden value="@Model[temp].metric_Weightage" type="number">
                                             <input asp-for="@Model[temp].Metric_Description" hidden value="@Model[temp].Metric_Description" type="text">
                                             <div class="col-12">
@@ -231,18 +244,50 @@
                             <div class="row">
                                 <div class="col-3"></div>
                                 @{
-                                    if (ViewBag.ReadOnlyForm == true)
-                                    {
+                                    if (ViewBag.ReadOnlyForm == true) {
+
+                                        if (ViewBag.ReadOnlyForm == true && ViewBag.IsEditable== 1)
+                                        {
+
+                                              <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " /></div>
+                                        <div class="col-3"><input id="submit" type="submit" value="Update" class="   btn btn-block AddAppraisalBtn btn-lg " /></div>
+
+                                        }
+                                        else
+                                        {
+
+                                            
                                         <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " disabled /></div>
-                                        <div class="col-3"><input id="submit" type="submit" value="Update" class="   btn btn-block AddAppraisalBtn btn-lg " disabled /></div>
+                                            <div class="col-3"><input id="submit" type="submit" value="Update" class="   btn btn-block AddAppraisalBtn btn-lg " disabled /></div>
+
+                                        }
+
                                         //<div class="col-3"><input id="submit" type="submit" value="Request To Edit" class="   btn btn-block AddAppraisalBtn btn-lg "  /></div>
                                         <br />
-                                         <div class="m-5">
-                                         <p> Note: You cannot update this appraisal, Raise a update request. To raise a request <a href="RequestForEdit?fId=@ViewBag.fid&userId=@ViewBag.uid " >Click here..</a> </p>
-                                         
-                                        </div>
-                                         //@ViewBag.Fid  
-                                         //@json.userId
+
+
+                                        if (ViewBag.appraisalStatus == 2)
+                                        {
+                                            
+                                       
+                                        @if (ViewBag.appraisalData.Editable == false || ViewBag.appraisalData.Editable==null)
+                                            
+                                            {
+                                                <div class="m-5">
+                                                    <p> Note: You cannot update this appraisal, Raise a update request. To raise a request <a href="RequestForEdit?fId=@ViewBag.fid&userId=@ViewBag.uid ">Click here..</a> </p>
+
+                                                </div>
+                                            }
+
+                                             }
+
+                                        
+
+
+
+
+                                        //@ViewBag.Fid
+                                        //@json.userId
                                     }
                                     else
                                     {
@@ -319,7 +364,7 @@
     <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
     <script src=" ~/lib/assets/js/misc.js"></script>
 
-    @if (ViewBag.ReadOnlyForm == true)
+    @if (ViewBag.ReadOnlyForm == true && ViewBag.IsEditable== 0)
 {
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {

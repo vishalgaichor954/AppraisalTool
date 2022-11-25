@@ -2,9 +2,9 @@
 {
     public class SelfAppraisalMetricsModel
     {
-        public List<MetricsDto> IMetric { get; set; }
-        public List<MetricsDto> BevMetric { get; set; }
-        public List<MetricsDto> JobMetric { get; set; }
+        public List<updateSelfAppraisalVM> IMetric { get; set; }
+        public List<updateSelfAppraisalVM> BevMetric { get; set; }
+        public List<updateSelfAppraisalVM> JobMetric { get; set; }
 
     }
 }

@@ -230,6 +230,15 @@ namespace AppraisalTool.Api.Controllers.v1
 
         }
 
+        [HttpGet("GetAppraisalByFidandUserId")]
+        public async Task<ActionResult> GetAppraisalByFidAndUserId(int? fId, int? userId)
+        {
+            _logger.LogInformation("RequestToEdit Initiated");
+            var dtos = await _userRepository.GetAppraisalByFidAndUserId(fId, userId);
+            _logger.LogInformation("RequestToEdit Completed");
+            return Ok(dtos);
+        }
+
 
 
 

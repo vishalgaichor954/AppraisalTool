@@ -38,7 +38,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
 
 
         public Task<GetUserListQueryVm> GetUserbyid(int id);
-        //public Task<bool> AssignAuthority(int repaId, int revaId, int userId);
+        public Task<Appraisal> GetAppraisalByFidAndUserId(int? fId, int? userId);
     }
 
 }

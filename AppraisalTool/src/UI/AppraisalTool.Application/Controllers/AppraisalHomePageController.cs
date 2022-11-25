@@ -173,7 +173,7 @@ namespace AppraisalTool.App.Controllers
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<Response>(responseData);
                 Console.WriteLine(data.Data);
-                if(data.Data!=null )
+                if(data.Data.Count!=0 )
                 {
                     foreach(var item in data.Data)
                     {
@@ -195,6 +195,7 @@ namespace AppraisalTool.App.Controllers
                         {
                             ViewBag.ReportingAuthorityFirstName = item.reportingAuthorityFirstName;
                             Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
+                            ViewBag.Fid = Fid;
                             ViewBag.ReviewingAuthorityFirstName = item.reviewingAuthorityFirstName;
                             Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
                             ViewBag.Role = item.role;
@@ -208,9 +209,11 @@ namespace AppraisalTool.App.Controllers
                 }
                 else
                 {
+                    ViewBag.Fid = Fid;
                     ViewBag.ReportingAuthorityFirstName = "Not Assigned";
                     ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
                     ViewBag.Date = "-";
+
                 }
                 //try
                 //{
@@ -347,7 +350,7 @@ namespace AppraisalTool.App.Controllers
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             ViewBag.fid = fid;
             ViewBag.uid = user.UserId;
-
+            AppraisalResponseVm appraisalResult = new AppraisalResponseVm();
             //https://localhost:5000/api/v1/Metric/GetAllListOfMetric
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
@@ -356,20 +359,32 @@ namespace AppraisalTool.App.Controllers
             var apiResponseData = appraisalResultResponse.Content.ReadAsStringAsync().Result;
             var apiResponse = JsonConvert.DeserializeObject<Response>(apiResponseData);
 
-            List<MetricsDto> IMetric = new List<MetricsDto>();
-            List<MetricsDto> BevMetric = new List<MetricsDto>();
-            List<MetricsDto> JobMetric = new List<MetricsDto>();
+            List<updateSelfAppraisalVM> IMetric = new List<updateSelfAppraisalVM>();
+            List<updateSelfAppraisalVM> BevMetric = new List<updateSelfAppraisalVM>();
+            List<updateSelfAppraisalVM> JobMetric = new List<updateSelfAppraisalVM>();
+
+            HttpResponseMessage appraisalResponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetAppraisalByFidandUserId?fId={fid}&userId={sessionUser.UserId}").Result;
+            if(appraisalResponse.IsSuccessStatusCode)
+            {
+                var appraisal  = appraisalResponse.Content.ReadAsStringAsync().Result;
+
+                appraisalResult = JsonConvert.DeserializeObject<AppraisalResponseVm>(appraisal);
+                ViewBag.appraisalData = appraisalResult;
+               
+
+            }
 
             if (apiResponse.Data == null)
             {
                 HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/Metric/GetAllListOfMetric").Result;
-                if (cardResponse.IsSuccessStatusCode)
+
+                if (cardResponse.IsSuccessStatusCode )
                 {
                     ViewBag.Fid = fid;
                     var responseData = cardResponse.Content.ReadAsStringAsync().Result;
                     var res = JsonConvert.DeserializeObject<Response>(responseData);
 
-                    List<MetricsDto> mylist = JsonConvert.DeserializeObject<List<MetricsDto>>(JsonConvert.SerializeObject(res.Data));
+                    List<updateSelfAppraisalVM> mylist = JsonConvert.DeserializeObject<List<updateSelfAppraisalVM>>(JsonConvert.SerializeObject(res.Data));
 
                     mylist.ForEach(item =>
                     {
@@ -391,8 +406,7 @@ namespace AppraisalTool.App.Controllers
                     Console.Write(model);
                     ViewBag.AppraisalFormModel = model;
                     ViewBag.ReadOnlyForm = false;
-                    
-                    //[] bindingModel = new MetricsDto[mylist.Count()];
+                    ViewBag.IsEditable = 0;
                     return View(mylist);
                 }
 
@@ -400,11 +414,12 @@ namespace AppraisalTool.App.Controllers
             else
             {
                 List<AppraisalResultVM> resultData = JsonConvert.DeserializeObject<List<AppraisalResultVM>>(JsonConvert.SerializeObject(apiResponse.Data));
-                List<MetricsDto> metricListData = new List<MetricsDto>();
+                List<updateSelfAppraisalVM> metricListData = new List<updateSelfAppraisalVM>();
                 resultData.ForEach(item =>
                 {
-                    MetricsDto tempObject = new MetricsDto()
+                    updateSelfAppraisalVM tempObject = new updateSelfAppraisalVM()
                     {
+                        Id=(int)item.ID,
                         Metric_ID = item.MetricId,
                         List_Id = item.KraListId,
                         Metric_Description = item.MetricDescription,
@@ -432,6 +447,20 @@ namespace AppraisalTool.App.Controllers
                 Console.Write(model);
                 ViewBag.AppraisalFormModel = model;
                 ViewBag.ReadOnlyForm = true;
+                ViewBag.appraisalStatus = appraisalResult.StatusId;
+                if (appraisalResult.Editable == true)
+                {
+                    ViewBag.IsEditable = 1;
+                }
+                else
+                {
+                    ViewBag.IsEditable = 0;
+                }
+
+
+
+
+
                 //[] bindingModel = new MetricsDto[mylist.Count()];
                 return View(metricListData);
             }
@@ -440,10 +469,70 @@ namespace AppraisalTool.App.Controllers
 
         //@Author : Ilyas Dabholkar
         [HttpPost]
-        public IActionResult AddSelfAppraisal(List<MetricsDto> scores, int Fid)
+        public IActionResult AddSelfAppraisal(List<updateSelfAppraisalVM> scores, int Fid,int IsEditable,int AppraisalID)
         {
-            Console.WriteLine(Fid);
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            Console.WriteLine(IsEditable);
+            if (IsEditable == 1)
+            {
+
+                List<AppraisalResultVM> appraisal = new List<AppraisalResultVM>();
+
+                foreach (var item in scores)
+                {
+                    AppraisalResultVM appraisalResultVM = new AppraisalResultVM();
+                    appraisalResultVM.AppraisalId = AppraisalID;
+                    appraisalResultVM.MetricId = item.Metric_ID;
+                    appraisalResultVM.KraListId = item.List_Id;
+                    appraisalResultVM.MetricDescription = item.Metric_Description;
+                    appraisalResultVM.MetricWeightage = item.metric_Weightage;
+                    appraisalResultVM.SelfScore = item.Score;
+                    appraisalResultVM.SelfComment = item.Comment;
+                    appraisalResultVM.UserId =(int) user.UserId;
+                    appraisalResultVM.ID = item.Id;
+                    appraisal.Add(appraisalResultVM);
+
+
+                }
+
+                Console.WriteLine(appraisal);
+                string data = JsonConvert.SerializeObject(appraisal);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                //https://localhost:5000/api/v1/AppraisalHome/UpdateAppraisalResults?statusId=1
+                //https://localhost:5000/api/v1/AppraisalHome/AddAppraisal
+                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/AppraisalHome/UpdateAppraisalResults?statusId=2", content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseData = response.Content.ReadAsStringAsync().Result;
+                    Console.WriteLine(responseData);
+                    var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
+                    Console.WriteLine(res);
+                    TempData["UpdateSUCCESS"] = " Updated Successfully";
+                    
+
+                    //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
+                    AllowAppraisalEditVm allowAppraisalEditVm = new AllowAppraisalEditVm();
+                    allowAppraisalEditVm.AppraisalId = AppraisalID;
+                    allowAppraisalEditVm.IsAllowed = false;
+                    string Editdata = JsonConvert.SerializeObject(allowAppraisalEditVm);
+
+                    StringContent Editcontent = new StringContent(Editdata, Encoding.UTF8, "application/json");
+                    HttpResponseMessage Editresponse = client.PutAsync("https://localhost:5000/api/v1/AppraisalHome/AllowEdit", Editcontent).Result;
+
+                   
+                        return RedirectToAction("HomePageAppraisal");
+                    
+                   
+                }
+                TempData["UpdateError"] = " Oops!! something went wrong";
+                return RedirectToAction("HomePageAppraisal");
+            }
+            else
+            {
+
+            
+            Console.WriteLine(Fid);
+       
             AddAppraisalViewModel appraisalViewModel = new AddAppraisalViewModel();
             appraisalViewModel.UserId = (int)user.UserId;
             appraisalViewModel.FinancialYearId = Fid;
@@ -519,7 +608,7 @@ namespace AppraisalTool.App.Controllers
 
             return RedirectToAction("HomePageAppraisal");
 
-
+            }
         }
 
         [HttpGet]

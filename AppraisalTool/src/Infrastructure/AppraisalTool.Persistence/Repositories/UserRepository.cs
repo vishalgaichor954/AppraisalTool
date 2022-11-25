@@ -409,6 +409,12 @@ namespace AppraisalTool.Persistence.Repositories
             }
             return false;
         }
+
+        public async Task<Appraisal> GetAppraisalByFidAndUserId(int? fId, int? userId)
+        {
+            Appraisal appraisal = await _dbContext.Appraisal.Where(x => x.UserId == userId && x.FinancialYearId == fId).FirstOrDefaultAsync();
+            return appraisal;
+        }
     }
 
        

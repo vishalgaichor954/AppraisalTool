@@ -414,11 +414,11 @@ namespace AppraisalTool.App.Controllers
             HttpResponseMessage response = client.PutAsync("https://localhost:5000/api/v1/AppraisalHome/AllowEdit", content).Result;
             if (response.IsSuccessStatusCode)
             {
-                TempData["Success"] = "User Updated Successfully";
-                return RedirectToAction("ListAppraisals");
+                TempData["AllowSuccess"] = "Allowed To Edit Successfully";
+                return RedirectToAction("ConfigureSetting");
             }
-            TempData["editError"] = "Failed to Update User";
-            return RedirectToAction("ListAppraisals");
+            TempData["AllowFailed"] = "Oops!! Something Went Wrong";
+            return RedirectToAction("ConfigureSetting");
 
 
 
