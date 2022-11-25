@@ -30,7 +30,7 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData
         public async Task<Response<IEnumerable<GetDataVM>>> Handle(GetDataQuery request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("GetDataQuery Initiated");
-            IQueryable<GetDataVM> appraisals = await _selfAppraisalRepository.GetDataById(request.UserId);
+            IQueryable<GetDataVM> appraisals = await _selfAppraisalRepository.GetDataById(request.UserId,request.FyId);
 
 
             Console.WriteLine("tt");

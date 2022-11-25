@@ -14,5 +14,6 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData
     {
        
         public int UserId { get; set; }
+        public int FyId { get; set; }
     }
 }

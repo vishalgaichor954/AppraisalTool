@@ -165,7 +165,7 @@ namespace AppraisalTool.App.Controllers
 
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/byYear?userId={user.UserId}").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/byYear?userId={user.UserId}&FyId={Fid}").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -191,7 +191,7 @@ namespace AppraisalTool.App.Controllers
                 {
                     ViewBag.ReportingAuthorityFirstName = "Not Assigned";
                     ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
-                    ViewBag.Date = "1st April 2022-31st March 2023";
+                    ViewBag.Date = "Not Applicable";
 
 
 

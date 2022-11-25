@@ -11,7 +11,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
 {
     public interface ISelfAppraisalRepository
     {
-        public  Task<IQueryable<GetDataVM>> GetDataById(int userId);
+        public  Task<IQueryable<GetDataVM>> GetDataById(int userId,int fyId);
         public  Task<List<Appraisal>> GetYear(int userId);
         public Task<List<ReporteeAppraisalListVm>> GetAllReporteeAppraisals();
         public Task<List<ReporteeAppraisalListVm>> GetReporteeAppraisalsByRepAuthority(int id);
