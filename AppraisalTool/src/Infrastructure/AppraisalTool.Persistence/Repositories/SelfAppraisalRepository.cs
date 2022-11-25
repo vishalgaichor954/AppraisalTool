@@ -65,7 +65,8 @@ namespace AppraisalTool.Persistence.Repositories
                                              ReviewingAuthorityFirstName = B.ReviewingAuthority.FirstName,
                                              ReviewingAuthorityLastName = B.ReviewingAuthority.LastName,
                                              AppraisalStatus = C.Status.StatusTitle,
-                                             Date=C.FinancialYear.StartDate + " " + C.FinancialYear.StartYear + " " + "to" + " " + C.FinancialYear.EndDate + " "+ C.FinancialYear.EndYear
+                                             Date=C.FinancialYear.StartDate + " " + C.FinancialYear.StartYear + " " + "to" + " " + C.FinancialYear.EndDate + " "+ C.FinancialYear.EndYear,
+                                             FinancialYearId=C.FinancialYearId
                                          }) ;   
 
             Console.WriteLine(res);
