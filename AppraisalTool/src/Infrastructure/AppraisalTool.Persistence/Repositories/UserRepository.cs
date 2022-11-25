@@ -5,6 +5,7 @@ using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
 using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
+using AppraisalTool.Application.Models.AppraisalTool;
 using AppraisalTool.Application.Models.Mail;
 using AppraisalTool.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -328,6 +329,7 @@ namespace AppraisalTool.Persistence.Repositories
 
             IEnumerable<GetAppraisalDto> res = (from A in _dbContext.User
                                                 join B in _dbContext.Appraisal on A.Id equals B.UserId
+                                                where B.EditRequested==true
 
 
 
@@ -342,6 +344,9 @@ namespace AppraisalTool.Persistence.Repositories
                                                     EndYear=B.FinancialYear.EndYear,
                                                     StatusId=B.StatusId,
                                                     StatusName = B.Status.StatusTitle,
+                                                    Editable =B.Editable,
+                                                    EditRequested=B.EditRequested,
+
 
                                                 }) ;
             return res;
@@ -350,7 +355,66 @@ namespace AppraisalTool.Persistence.Repositories
 
         }
 
+        public async Task<bool>  AllowEdit(AppraisalForEditVm appraisalForEditVm)
+        {
+            Appraisal appraisal = await _dbContext.Appraisal.Where(x => x.Id == appraisalForEditVm.AppraisalId ).FirstOrDefaultAsync();
+            appraisal.Id = appraisalForEditVm.AppraisalId;
+            appraisal.Editable = appraisalForEditVm.Editable;
+            if(appraisal.Editable==true)
+            {
+                appraisal.EditRequested = false;
+            }
+            await _dbContext.SaveChangesAsync();
+            if(appraisal != null)
+            {
+                return true;
+            }
+            return false;
 
+           
+           
+
+        }
+
+        public async Task<bool> RequestEdit(AppraisalForEditVm appraisalForEditVm)
+        {
+            Appraisal appraisal = await _dbContext.Appraisal.Where(x => x.Id == appraisalForEditVm.AppraisalId).FirstOrDefaultAsync();
+            appraisal.Id = appraisalForEditVm.AppraisalId;
+            appraisal.EditRequested = appraisalForEditVm.Editable;
+            await _dbContext.SaveChangesAsync();
+            if (appraisal != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> RequestToEdit(int? fId, int? userId)
+        {
+            Appraisal appraisal = await _dbContext.Appraisal.Where(x => x.UserId == userId && x.FinancialYearId == fId).FirstOrDefaultAsync();
+            if (appraisal != null)
+            {
+                try
+                {
+                    appraisal.EditRequested = true;
+                    _dbContext.Entry(appraisal).State = EntityState.Modified;
+                    await _dbContext.SaveChangesAsync();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<Appraisal> GetAppraisalByFidAndUserId(int? fId, int? userId)
+        {
+            Appraisal appraisal = await _dbContext.Appraisal.Where(x => x.UserId == userId && x.FinancialYearId == fId).FirstOrDefaultAsync();
+            return appraisal;
+        }
     }
 
        

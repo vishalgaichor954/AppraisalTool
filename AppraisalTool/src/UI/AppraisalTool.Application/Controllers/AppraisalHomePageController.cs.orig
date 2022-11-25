@@ -212,9 +212,13 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.Fid = Fid;
                     ViewBag.ReportingAuthorityFirstName = "Not Assigned";
                     ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
+<<<<<<< HEAD
                     ViewBag.Date = "Not Applicable";
 
 
+=======
+                    ViewBag.Date = "-";
+>>>>>>> Feature/ReviewDashboard
 
                 }
                 //try
@@ -448,7 +452,6 @@ namespace AppraisalTool.App.Controllers
                 SelfAppraisalMetricsModel model = new SelfAppraisalMetricsModel() { IMetric = IMetric, BevMetric = BevMetric, JobMetric = JobMetric };
                 Console.Write(model);
                 ViewBag.AppraisalFormModel = model;
-
                 ViewBag.ReadOnlyForm = true;
                 ViewBag.appraisalStatus = appraisalResult.StatusId;
                 if (appraisalResult.Editable == true)

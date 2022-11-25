@@ -21,6 +21,8 @@ namespace AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalList
 
         public int? StatusId { get; set; }
         public string? StatusName { get; set; }
+        public bool? Editable { get; set; } 
+        public bool? EditRequested { get; set; } 
 
 
     }

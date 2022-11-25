@@ -268,10 +268,10 @@ namespace AppraisalTool.App.Controllers
             HttpResponseMessage response = client.PutAsync("https://localhost:5000/api/User/UpdateUser?api-version=1", content).Result;
             if (response.IsSuccessStatusCode)
             {
-                TempData["Success"] = "User Update Successfully";
+                TempData["Success"] = "User Updated Successfully";
                 return RedirectToAction("ListUsers");
             }
-            TempData["editError"] = "Faild to Update User";
+            TempData["editError"] = "Failed to Update User";
             return RedirectToAction("ListUsers");
 
 
@@ -389,6 +389,7 @@ namespace AppraisalTool.App.Controllers
                 string responseData = response.Content.ReadAsStringAsync().Result;
                 dynamic json = JsonConvert.DeserializeObject(responseData);
                 ViewBag.Appraisals = json.data;
+
                 return View();
 
             }
@@ -398,11 +399,31 @@ namespace AppraisalTool.App.Controllers
 
 
         [HttpPost]
-        public IActionResult ListAppraisals(AllowAppraisalEditVm allowAppraisalEditVm, List<bool> allowEdit)
+        public IActionResult ListAppraisals(List<AllowAppraisalEditVm> allowAppraisalEditVm)
         {
-            allowAppraisalEditVm.IsAllowed = allowEdit;
-            return View();
-        }
+            AllowEditViewModel model = new AllowEditViewModel();
+           foreach(var item in allowAppraisalEditVm)
+            {
+                model.AppraisalId = item.AppraisalId;
+                model.Editable = item.IsAllowed;
+            }
+            Console.WriteLine(model);
+            string data = JsonConvert.SerializeObject(model);
+            
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PutAsync("https://localhost:5000/api/v1/AppraisalHome/AllowEdit", content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["AllowSuccess"] = "Allowed To Edit Successfully";
+                return RedirectToAction("ConfigureSetting");
+            }
+            TempData["AllowFailed"] = "Oops!! Something Went Wrong";
+            return RedirectToAction("ConfigureSetting");
 
+
+
+        }
     }
+
 }
+

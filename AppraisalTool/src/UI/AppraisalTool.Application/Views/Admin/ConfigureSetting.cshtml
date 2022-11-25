@@ -4,6 +4,56 @@
     //ViewData["Title"] = "AppraisalTool";
 }
 
+@if (TempData["AllowSuccess"] != null)
+{
+    
+
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: '  @TempData["AllowSuccess"]'
+})
+    </script>
+}
+@if (TempData["AllowFailed"] != null)
+{
+    
+
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: '@TempData["AllowFailed"]'
+})
+    </script>
+}
+
+
 
 
 <div class="main-panel">

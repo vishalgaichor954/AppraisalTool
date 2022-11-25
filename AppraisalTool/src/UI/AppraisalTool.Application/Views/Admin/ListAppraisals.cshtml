@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<AllowAppraisalEditVm>
+
+@{
     //ViewData["Title"] = "AppraisalTool";
 }
 
@@ -40,13 +42,37 @@
         background-color: transparent;
         text-decoration: none;
     }
-  
+
     .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
-    color: #333;
-    margin-right: 15px;
+        color: #333;
+        margin-right: 15px;
+    }
+
+    table.dataTable tbody th, table.dataTable tbody td {
+        padding: 15px;
+    }
+
+    .Button {
+        background-color: #1746A2;
+        color: white;
+        /* border: 2px solid #E0144C;*/
+        border-radius: 0.3rem;
+        border: none;
+        padding: 13px 40px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: auto;
+        margin-left:850px;
+      
+    }
+    div.dataTables_wrapper div.dataTables_info {
+    padding-top: 0.85em;
+    visibility: hidden;
 }
-
-
 
 </style>
 
@@ -68,66 +94,75 @@
         <div>
             <div class="row">
                 <div class="col-lg-12 grid-margin">
-                    <div class="card" style="width:80% ; margin-left:50px">
+                    <div class="card" style="max-width:95% ; margin-left:50px">
                         <div class="card-body">
                             <div class="page-header">
                                 <h3 class="page-title"> Appraisal List </h3>
 
                             </div>
+                            @{
+                               
+                            }
                             <form method="post" asp-action="ListAppraisals">
 
-                                <div style="overflow:scroll;">
+                                
 
-                                    <table class="table table-bordered display" id="myTable" style="width:80% ">
+                                    <table class="table table-bordered display" id="myTable" style="max-width:95% ">
                                         <thead>
                                             <tr>
-                                                <th width="100px"> Appraisal Id </th>
+                                                <th width="150px">Sr. No</th>
+                                                <th style="display:none" width="1px"> Appraisal Id </th>
                                                 <th> Name </th>
-                                                <th width="100px"> Appraisal Cycle </th>
+                                                <th> Appraisal Cycle </th>
                                                 <th width="100px">Allow Edits</th>
 
 
                                             </tr>
-                                           
+
                                         </thead>
                                         <tbody>
                                             @if (ViewBag.Appraisals != null)
                                             {
-                                                @foreach (var item in ViewBag.Appraisals)
+                                                @for (int i = 0; i < ViewBag.Appraisals.Count; i++)
                                                 {
+                                                    var item = ViewBag.Appraisals[i];
                                                     <tr>
-                                                        <td> @item.appraisalId </td>
-                                                        <td style="text-transform:Capatilize"> @item.firstname @item.lastName </td>
+                                                        <td>@(i+1)</td>
 
+                                                        <td style="display:none">
+                                                            <span>@(item.appraisalId)</span>
+                                                            <input asp-for="@Model[i].AppraisalId" value="@item.appraisalId" readonly hidden />
+                                                        </td>
+
+                                                        <td style="text-transform:Capatilize"> @item.firstname @item.lastName </td>
                                                         <td> @item.startYear @item.endYear </td>
                                                         <td>
                                                             <label class="switch">
-                                                                <input type="checkbox" name="allowEdit" value="true">
-
+                                                                <input type="checkbox" asp-for="@Model[i].IsAllowed" value="true">
                                                             </label>
                                                         </td>
                                                         <td> @item.primaryJobProfileName </td>
                                                         <td> @item.secondaryJobProfileName </td>
 
                                                     </tr>
-                                                      
+
                                                 }
-                                                
-                                               
+
+
 
                                             }
-                                          
+
 
                                         </tbody>
                                     </table>
-                                     
-                                </div>
-                              <div class="allow" style="max-width:15%; margin-left:700px; ">
-                            <input type="submit" value="Allow" style="padding: 16px 32px;margin: 4px 2px;" />                                                  
+                                 
+                                
+                                <div >
+                                    <input type="submit" value="Allow" class=" Button mb-4" />
 
-                             </div>
+                                </div>
                             </form>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -146,15 +181,16 @@
 <script>
     $(document).ready(function() {
         $('#myTable').DataTable({
+            "bPaginate": false,
             'columnDefs': [{
-                
-                'targets': [4,5], // column index (start from 0)
+
+                'targets': [0, 3, 4, 5], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             },
-            { visible: false, targets: [4, 5] },
+            { visible: false, targets: [5,6] },
             ],
-            
-          
+
+
 
         });
 

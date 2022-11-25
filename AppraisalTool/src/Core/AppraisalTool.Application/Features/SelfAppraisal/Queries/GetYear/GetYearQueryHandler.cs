@@ -33,10 +33,12 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetYear
 
             var dataVM = appraisals.Select(x => new GetYearVm()
             {
-                Id =x.FinancialYear.Id,
+                Id = x.FinancialYear.Id,
                 StartYear = x.FinancialYear.StartYear,
                 EndYear = x.FinancialYear.EndYear,
-            });
+                
+
+            }) ;
             _logger.LogInformation("GetDataQuery Completed");
 
             var response = new Response<IEnumerable<GetYearVm>>(dataVM);
