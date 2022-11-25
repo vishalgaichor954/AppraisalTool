@@ -80,9 +80,9 @@ namespace AppraisalTool.App.Controllers
                 List<SelectListItem> ReportingList = new List<SelectListItem>();
 
 
-                    ReportingList.Add(new SelectListItem { Text = repata.Data.firstName.ToString() + " " + repata.Data.lastName.ToString(), Value = repata.Data.id.ToString() });
+                ReportingList.Add(new SelectListItem { Text = repata.Data.firstName.ToString() + " " + repata.Data.lastName.ToString(), Value = repata.Data.id.ToString() });
 
-               
+
                 //reviewing authority dropdown
                 var ReviewingData = Reviewing.Content.ReadAsStringAsync().Result;
                 var Reviewingdata = JsonConvert.DeserializeObject<Response>(ReviewingData);
@@ -156,7 +156,6 @@ namespace AppraisalTool.App.Controllers
             {
                 return RedirectToAction("ListUsers", "Admin");
             }
-
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             EditUserViewModel user = new EditUserViewModel();
@@ -164,7 +163,7 @@ namespace AppraisalTool.App.Controllers
             HttpResponseMessage jobProfileresponse = client.GetAsync(client.BaseAddress + "User/GetJobProfile?api-version=1").Result;
             HttpResponseMessage BranchReponse = client.GetAsync(client.BaseAddress + "User/GetBranch?api-version=1").Result;
             HttpResponseMessage RoleReponse = client.GetAsync(client.BaseAddress + "User/GetRole?api-version=1").Result;
-           
+
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"User/getUser?id={id}&api-version=1").Result;
             HttpResponseMessage Reporting = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=2&api-version=1").Result;
             HttpResponseMessage Reviewing = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=3&api-version=1").Result;
@@ -177,52 +176,30 @@ namespace AppraisalTool.App.Controllers
 
                 var res = JsonConvert.DeserializeObject<Response>(data);
                 var serres = JsonConvert.SerializeObject(res.Data);
-                if (serres != null)
+                user = JsonConvert.DeserializeObject<EditUserViewModel>(serres);
+
+                //bind data from database
+                var responseData = jobProfileresponse.Content.ReadAsStringAsync().Result;
+                var data1 = JsonConvert.DeserializeObject<Response>(responseData);
+                Console.WriteLine(data1.Data);
+                List<SelectListItem> JobProfileRolelist = new List<SelectListItem>();
+                foreach (var item in data1.Data)
                 {
-                    user = JsonConvert.DeserializeObject<EditUserViewModel>(serres);
 
-                    //bind data from database
-                    var responseData = jobProfileresponse.Content.ReadAsStringAsync().Result;
-                    var data1 = JsonConvert.DeserializeObject<Response>(responseData);
-                    Console.WriteLine(data1.Data);
-                    List<SelectListItem> JobProfileRolelist = new List<SelectListItem>();
-                    foreach (var item in data1.Data)
-                    {
+                    JobProfileRolelist.Add(new SelectListItem { Text = item.name.ToString(), Value = item.id.ToString(), Selected = user.PrimaryJobProfileId == (int)item.id });
 
-                        JobProfileRolelist.Add(new SelectListItem { Text = item.name.ToString(), Value = item.id.ToString(), Selected = user.PrimaryJobProfileId == (int)item.id });
-
-                    }
-                    var branchresponseData = BranchReponse.Content.ReadAsStringAsync().Result;
-
-                    var branchdata = JsonConvert.DeserializeObject<Response>(branchresponseData);
-                    Console.WriteLine(branchdata.Data);
-
-                    List<SelectListItem> branchlist = new List<SelectListItem>();
-                    foreach (var item in branchdata.Data)
-                    {
-
-                        branchlist.Add(new SelectListItem { Text = item.branchName.ToString(), Value = item.id.ToString(), Selected = user.BranchId == (int)item.id });
-
-                    }
-                    var RoleResponseData = RoleReponse.Content.ReadAsStringAsync().Result;
-                    var Roledata = JsonConvert.DeserializeObject<Response>(RoleResponseData);
-                    Console.WriteLine(Roledata.Data);
-                    List<SelectListItem> Rolelist = new List<SelectListItem>();
-                    foreach (var item in Roledata.Data)
-                    {
-
-                        Rolelist.Add(new SelectListItem { Text = item.role.ToString(), Value = item.id.ToString(), Selected = user.Role == (int)item.id });
-
-                    }
-                    ViewBag.JobProfileRolelist = JobProfileRolelist;
-                    ViewBag.branchlist = branchlist;
-                    ViewBag.Rolelist = Rolelist;
-
-                    Console.WriteLine(user);
                 }
-                else
+                var branchresponseData = BranchReponse.Content.ReadAsStringAsync().Result;
+
+                var branchdata = JsonConvert.DeserializeObject<Response>(branchresponseData);
+                Console.WriteLine(branchdata.Data);
+
+                List<SelectListItem> branchlist = new List<SelectListItem>();
+                foreach (var item in branchdata.Data)
                 {
-                    return RedirectToAction("ListUsers", "Admin");
+
+                    branchlist.Add(new SelectListItem { Text = item.branchName.ToString(), Value = item.id.ToString(), Selected = user.BranchId == (int)item.id });
+
                 }
                 var RoleResponseData = RoleReponse.Content.ReadAsStringAsync().Result;
                 var Roledata = JsonConvert.DeserializeObject<Response>(RoleResponseData);
@@ -231,7 +208,7 @@ namespace AppraisalTool.App.Controllers
                 foreach (var item in Roledata.Data)
                 {
 
-                    Rolelist.Add(new SelectListItem { Text = item.role.ToString(), Value = item.id.ToString(), Selected = user.Role==(int)item.id });
+                    Rolelist.Add(new SelectListItem { Text = item.role.ToString(), Value = item.id.ToString(), Selected = user.Role == (int)item.id });
 
                 }
 
@@ -283,7 +260,7 @@ namespace AppraisalTool.App.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            
+
             model.UpdatedBy = userSession.UserId;
             string data = JsonConvert.SerializeObject(model);
 
