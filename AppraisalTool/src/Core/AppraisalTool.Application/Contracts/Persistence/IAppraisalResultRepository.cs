@@ -14,5 +14,6 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<List<AppraisalResult>> GetAppraisalResultsByApppraisalId(int id);
         public Task<bool> UpdateAprraisalResultData(List<AppraisalResult> appraisalResult);
         public Task<List<AppraisalResult>> GetAprraisalResultData(int fYearId, int userId);
+        public Task<bool> UpdateSelfAppraisalResultData(List<AppraisalResult> appraisalResult);
     }
 }

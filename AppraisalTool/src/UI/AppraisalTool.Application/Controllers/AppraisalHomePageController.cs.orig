@@ -212,9 +212,13 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.Fid = Fid;
                     ViewBag.ReportingAuthorityFirstName = "Not Assigned";
                     ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
+<<<<<<< HEAD
                     ViewBag.Date = "Not Applicable";
 
 
+=======
+                    ViewBag.Date = "-";
+>>>>>>> Feature/ReviewDashboard
 
                 }
                 //try
