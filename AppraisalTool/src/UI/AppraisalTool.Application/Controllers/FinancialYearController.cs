@@ -77,6 +77,7 @@ namespace AppraisalTool.App.Controllers
 
                 string responseData = response.Content.ReadAsStringAsync().Result;
                 dynamic json = JsonConvert.DeserializeObject(responseData);
+                
                 ViewBag.FinancialYearList = json.data;
                 return View();
 
