@@ -36,13 +36,11 @@ namespace AppraisalTool.App.Controllers
                 //Console.WriteLine( model.StartDate.ToString("dd MMMM "));
                 string startDate = model.StartDate.ToString();
                 string endDate = model.EndDate.ToString();
-                startDate = startDate.Substring(5,6);
+                string startyear = DateTime.Parse(model.StartDate.ToString()).Year.ToString();
+               string endyear= DateTime.Parse(model.EndDate.ToString()).Year.ToString();
+                model.StartYear = Int32.Parse(startyear);
+                model.EndYear = Int32.Parse(endyear);
                
-                model.StartYear = Int32.Parse(startDate);
-                model.StartYear = model.StartYear * (-1);
-                endDate = endDate.Substring(5, 6);
-                model.EndYear = Int32.Parse(endDate);
-                model.EndYear = model.EndYear * (-1);
 
 
 
@@ -119,13 +117,14 @@ namespace AppraisalTool.App.Controllers
             model.IsActive = status;
             string startDate = model.StartDate.ToString();
             string endDate = model.EndDate.ToString();
-            startDate = startDate.Substring(5, 6);
+            string startyear = DateTime.Parse(model.StartDate.ToString()).Year.ToString();
+            string endyear = DateTime.Parse(model.EndDate.ToString()).Year.ToString();
 
-            model.StartYear = Int32.Parse(startDate);
-            model.StartYear = model.StartYear * (-1);
-            endDate = endDate.Substring(5, 6);
-            model.EndYear = Int32.Parse(endDate);
-            model.EndYear = model.EndYear * (-1);
+
+            model.StartYear = Int32.Parse(startyear);
+           
+            model.EndYear = Int32.Parse(endyear);
+           
             string data = JsonConvert.SerializeObject(model);
 
 
