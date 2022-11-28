@@ -105,7 +105,7 @@ namespace AppraisalTool.Persistence.Repositories
         }
          public async Task<List<FinancialYear>> GetAllFinancialYears()
         {
-            List<FinancialYear> years = _dbContext.FinancialYear.ToList();
+            List<FinancialYear> years = _dbContext.FinancialYear.Where(item=>item.IsDeleted != true).ToList();
             return years;
         }
 
