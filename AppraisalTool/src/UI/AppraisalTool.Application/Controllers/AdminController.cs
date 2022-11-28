@@ -80,9 +80,9 @@ namespace AppraisalTool.App.Controllers
                 List<SelectListItem> ReportingList = new List<SelectListItem>();
 
 
-                    ReportingList.Add(new SelectListItem { Text = repata.Data.firstName.ToString() + " " + repata.Data.lastName.ToString(), Value = repata.Data.id.ToString() });
+                ReportingList.Add(new SelectListItem { Text = repata.Data.firstName.ToString() + " " + repata.Data.lastName.ToString(), Value = repata.Data.id.ToString() });
 
-               
+
                 //reviewing authority dropdown
                 var ReviewingData = Reviewing.Content.ReadAsStringAsync().Result;
                 var Reviewingdata = JsonConvert.DeserializeObject<Response>(ReviewingData);
@@ -260,7 +260,7 @@ namespace AppraisalTool.App.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            
+
             model.UpdatedBy = userSession.UserId;
             string data = JsonConvert.SerializeObject(model);
 
