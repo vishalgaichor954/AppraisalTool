@@ -117,7 +117,17 @@ namespace AppraisalTool.App.Controllers
 
             model.UpdatedBy = userSession.UserId;
             model.IsActive = status;
+            string startDate = model.StartDate.ToString();
+            string endDate = model.EndDate.ToString();
+            startDate = startDate.Substring(5, 6);
+
+            model.StartYear = Int32.Parse(startDate);
+            model.StartYear = model.StartYear * (-1);
+            endDate = endDate.Substring(5, 6);
+            model.EndYear = Int32.Parse(endDate);
+            model.EndYear = model.EndYear * (-1);
             string data = JsonConvert.SerializeObject(model);
+
 
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PutAsync("FinancialYear/UpdateFinanacialYear?api-version=1", content).Result;
