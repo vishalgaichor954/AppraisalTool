@@ -20,32 +20,13 @@
                 <h4 class="card-title">Add New Year</h4>
                 <form class="form-sample" asp-action="AddFinancialYear">
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label asp-for="StartYear" class="col-sm-4 col-form-label">Start Year<sup class="required">*</sup></label>
-                                <div class="col-sm-8">
-                                    <input asp-for="StartYear" type="text" class="form-control" placeholder="2021" />
-                                    <span asp-validation-for="StartYear" class="text-danger mx-1 small"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label asp-for="EndYear" class="col-sm-4 col-form-label">End Year<sup class="required">*</sup></label>
-                                <div class="col-sm-8">
-                                    <input asp-for="EndYear" type="text" class="form-control" placeholder="2022" />
-                                    <span asp-validation-for="EndYear" class="text-danger mx-1 small"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="StartDate" class="col-sm-4 col-form-label">Start Date<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="StartDate" type="text" class="form-control" placeholder="1st April" />
+                                    <input asp-for="StartDate" type="date" id="to" asp-format="{0:dd/MM/yyyy}" class="form-control" />
                                     <span asp-validation-for="StartDate" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -54,7 +35,7 @@
                             <div class="form-group row">
                                 <label asp-for="EndDate" class="col-sm-4 col-form-label">End Date<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="EndDate" type="text" class="form-control" placeholder="31st April" />
+                                    <input asp-for="EndDate" type="date" id="from"  asp-format="{0:dd/MM/yyyy}"   class="form-control" />
                                     <span asp-validation-for="EndDate" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -138,3 +119,15 @@
     <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
     <script src=" ~/lib/assets/js/misc.js"></script>
 
+
+
+<script>
+$("#from").datepicker();
+    $("#to").datepicker({
+        onSelect:function(){
+            var date=$(this).datepicker('getDate');
+            date.setDate(date.getDate()+7); // Add 7 days to the selected day
+            $("#from").datepicker("setDate", date);
+        }
+});
+</script>

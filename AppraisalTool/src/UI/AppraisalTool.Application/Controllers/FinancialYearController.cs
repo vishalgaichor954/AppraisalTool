@@ -23,11 +23,34 @@ namespace AppraisalTool.App.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-
+            ModelState.Remove("StartYear");
+            ModelState.Remove("EndYear");
             if (ModelState.IsValid)
             {
                 model.AddedBy = userSession.UserId;
                 model.IsActive = Convert.ToBoolean(status);
+                //string start = model.StartDate.ToString("dd MMMM ");
+                
+                //model.EndDate.ToString("dd MMMM ");
+
+                //Console.WriteLine( model.StartDate.ToString("dd MMMM "));
+                string startDate = model.StartDate.ToString();
+                string endDate = model.EndDate.ToString();
+                startDate = startDate.Substring(5,6);
+               
+                model.StartYear = Int32.Parse(startDate);
+                model.StartYear = model.StartYear * (-1);
+                endDate = endDate.Substring(5, 6);
+                model.EndYear = Int32.Parse(endDate);
+                model.EndYear = model.EndYear * (-1);
+
+
+
+
+
+
+                Console.WriteLine(model);
+                
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(client.BaseAddress + "FinancialYear/AddFinancialYear?api-version=1", content).Result;
@@ -37,7 +60,7 @@ namespace AppraisalTool.App.Controllers
                     return RedirectToAction("ListFinancialYear");
                 }
             }
-            TempData["AddUserFailed"] = "Faild to Add Finaincial Year";
+            TempData["AddUserFailed"] = "Failed to Add Finaincial Year";
             return RedirectToAction("ListFinancialYear");
 
         }
@@ -135,3 +158,10 @@ namespace AppraisalTool.App.Controllers
         }
     }
 }
+
+
+//var dt = DateTime.Now;
+
+//Console.WriteLine("dddd, dd MMMM yyyy Format: " + dt.ToString("dddd, dd MMMM yyyy")); //e.g. Friday, 18 June 2021
+
+
