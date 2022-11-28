@@ -98,10 +98,10 @@
     }
 </style>
 
- <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
-   <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
-   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
-     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
+<script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+<script src="~/lib/package/dist/sweetalert2.all.js"></script>
+<script src="~/lib/package/dist/sweetalert2.min.js"></script>
 
 @* <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
    <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
@@ -109,52 +109,52 @@
      <script src="~/lib/package/dist/sweetalert2.min.js"></script>*@
 
 
-     @if (TempData["UpdateSUCCESS"] != null)
+@if (TempData["UpdateSUCCESS"] != null)
 {
-    
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'success',
-  title: '  @TempData["UpdateSUCCESS"]'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: '  @TempData["UpdateSUCCESS"]'
+        })
     </script>
 }
 @if (TempData["UpdateError"] != null)
 {
-    
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'error',
-  title: '@TempData["UpdateError"]'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: '@TempData["UpdateError"]'
+        })
     </script>
 }
 
@@ -164,99 +164,99 @@ Toast.fire({
 
 @if (TempData["RequestSuccess"] != null)
 {
-    
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'success',
-  title: '  @TempData["RequestSuccess"]'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: '  @TempData["RequestSuccess"]'
+        })
     </script>
 }
 @if (TempData["RequestError"] != null)
 {
-    
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'error',
-  title: '@TempData["RequestError"]'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: '@TempData["RequestError"]'
+        })
     </script>
 }
 
 @if (TempData["SUCCESS"] != null)
 {
-    
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'success',
-  title: '  @TempData["SUCCESS"]'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: '  @TempData["SUCCESS"]'
+        })
     </script>
 }
 @if (TempData["Error"] != null)
 {
-    
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'error',
-  title: 'Error occured while submiting'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Error occured while submiting'
+        })
     </script>
 }
 <div class="content-wrapper main-panel content-wrapper-Blue">

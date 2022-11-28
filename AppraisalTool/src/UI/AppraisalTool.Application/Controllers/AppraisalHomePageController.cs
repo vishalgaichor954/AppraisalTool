@@ -448,6 +448,7 @@ namespace AppraisalTool.App.Controllers
                 SelfAppraisalMetricsModel model = new SelfAppraisalMetricsModel() { IMetric = IMetric, BevMetric = BevMetric, JobMetric = JobMetric };
                 Console.Write(model);
                 ViewBag.AppraisalFormModel = model;
+
                 ViewBag.ReadOnlyForm = true;
                 ViewBag.appraisalStatus = appraisalResult.StatusId;
                 if (appraisalResult.Editable == true)

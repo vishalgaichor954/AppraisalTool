@@ -156,11 +156,14 @@
                                         </tbody>
                                     </table>
                                  
-                                
-                                <div >
+                                @if (ViewBag.Empty==false)
+                                {
+                                 <div >
                                     <input type="submit" value="Allow" class=" Button mb-4" />
 
                                 </div>
+                                }
+                                
                             </form>
 
                         </div>
