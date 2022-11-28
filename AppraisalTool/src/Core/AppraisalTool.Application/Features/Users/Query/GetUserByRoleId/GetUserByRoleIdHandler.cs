@@ -1,5 +1,6 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Response;
+using AppraisalTool.Domain.Entities;
 using AutoMapper;
 using MediatR;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AppraisalTool.Application.Features.Users.Query.GetUserByRoleId
 {
-    public class GetUserByRoleIdHandler:IRequestHandler<GetUserByRoleIdQuery,Response<GetUserByRoleIdDto>>
+    public class GetUserByRoleIdHandler:IRequestHandler<GetUserByRoleIdQuery,Response<IEnumerable<GetUserByRoleIdDto>>>
     {
         private readonly IUserRepository _userrepository;
         private readonly IMapper _mapper;
@@ -20,11 +21,15 @@ namespace AppraisalTool.Application.Features.Users.Query.GetUserByRoleId
             _mapper = mapper;
         }
 
-        public async Task<Response<GetUserByRoleIdDto>> Handle(GetUserByRoleIdQuery request, CancellationToken cancellationToken)
+        public async Task<Response<IEnumerable<GetUserByRoleIdDto>>> Handle(GetUserByRoleIdQuery request, CancellationToken cancellationToken)
         {
             var user = await _userrepository.GetUserByRoleId(request.RoleId);
-            var userresponse = _mapper.Map<GetUserByRoleIdDto>(user);
-            return new Response<GetUserByRoleIdDto>(userresponse, "Success");
+            var userresponse = _mapper.Map<IEnumerable<GetUserByRoleIdDto>>(user);
+            return new Response<IEnumerable<GetUserByRoleIdDto>>(userresponse, "Success");
         }
+
+       
+
+
     }
 }

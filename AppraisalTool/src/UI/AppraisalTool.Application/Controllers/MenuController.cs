@@ -114,7 +114,7 @@ namespace AppraisalTool.App.Controllers
         public IActionResult UpdateMenu(MenuModel model, List<int> selectedRoles)
         {
           var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-
+            
             Console.WriteLine("PostMethod hit");
             client = new HttpClient();
             client.BaseAddress = baseAddress;
@@ -122,7 +122,7 @@ namespace AppraisalTool.App.Controllers
             //model.upda = userSession.UserId;
             EditMenuModel editmodel = new EditMenuModel()
             {
-                Menu_Id = model.Menu_Id,
+                Menu_Id = model.menu_Id,
                 MenuText=model.MenuText,
                 MenuClass=model.MenuClass,
                 MenuIcon=model.MenuIcon,

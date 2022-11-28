@@ -23,11 +23,32 @@ namespace AppraisalTool.App.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-
+            ModelState.Remove("StartYear");
+            ModelState.Remove("EndYear");
             if (ModelState.IsValid)
             {
                 model.AddedBy = userSession.UserId;
                 model.IsActive = Convert.ToBoolean(status);
+                //string start = model.StartDate.ToString("dd MMMM ");
+                
+                //model.EndDate.ToString("dd MMMM ");
+
+                //Console.WriteLine( model.StartDate.ToString("dd MMMM "));
+                string startDate = model.StartDate.ToString();
+                string endDate = model.EndDate.ToString();
+                string startyear = DateTime.Parse(model.StartDate.ToString()).Year.ToString();
+               string endyear= DateTime.Parse(model.EndDate.ToString()).Year.ToString();
+                model.StartYear = Int32.Parse(startyear);
+                model.EndYear = Int32.Parse(endyear);
+               
+
+
+
+
+
+
+                Console.WriteLine(model);
+                
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(client.BaseAddress + "FinancialYear/AddFinancialYear?api-version=1", content).Result;
@@ -37,7 +58,7 @@ namespace AppraisalTool.App.Controllers
                     return RedirectToAction("ListFinancialYear");
                 }
             }
-            TempData["AddUserFailed"] = "Faild to Add Finaincial Year";
+            TempData["AddUserFailed"] = "Failed to Add Finaincial Year";
             return RedirectToAction("ListFinancialYear");
 
         }
@@ -54,6 +75,7 @@ namespace AppraisalTool.App.Controllers
 
                 string responseData = response.Content.ReadAsStringAsync().Result;
                 dynamic json = JsonConvert.DeserializeObject(responseData);
+                
                 ViewBag.FinancialYearList = json.data;
                 return View();
 
@@ -93,7 +115,18 @@ namespace AppraisalTool.App.Controllers
 
             model.UpdatedBy = userSession.UserId;
             model.IsActive = status;
+            string startDate = model.StartDate.ToString();
+            string endDate = model.EndDate.ToString();
+            string startyear = DateTime.Parse(model.StartDate.ToString()).Year.ToString();
+            string endyear = DateTime.Parse(model.EndDate.ToString()).Year.ToString();
+
+
+            model.StartYear = Int32.Parse(startyear);
+           
+            model.EndYear = Int32.Parse(endyear);
+           
             string data = JsonConvert.SerializeObject(model);
+
 
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PutAsync("FinancialYear/UpdateFinanacialYear?api-version=1", content).Result;
@@ -135,3 +168,10 @@ namespace AppraisalTool.App.Controllers
         }
     }
 }
+
+
+//var dt = DateTime.Now;
+
+//Console.WriteLine("dddd, dd MMMM yyyy Format: " + dt.ToString("dddd, dd MMMM yyyy")); //e.g. Friday, 18 June 2021
+
+

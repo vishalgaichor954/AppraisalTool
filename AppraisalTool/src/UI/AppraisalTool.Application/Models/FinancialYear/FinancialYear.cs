@@ -6,8 +6,8 @@
         public int StartYear { get; set ; }
         public int EndYear { get; set; }
 
-        public string StartDate { get; set; }
-        public string EndDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         public int? AddedBy { get; set; }
 

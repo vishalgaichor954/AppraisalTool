@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AppraisalTool.Application.Features.Users.Query.GetUserByRoleId
 {
-    public class GetUserByRoleIdQuery:IRequest<Response<GetUserByRoleIdDto>>
+    public class GetUserByRoleIdQuery:IRequest<Response<IEnumerable<GetUserByRoleIdDto>>>
     {
         public GetUserByRoleIdQuery()
         {

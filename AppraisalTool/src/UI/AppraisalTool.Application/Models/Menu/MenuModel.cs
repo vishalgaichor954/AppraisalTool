@@ -5,7 +5,7 @@ namespace AppraisalTool.App.Models.Menu
     public class MenuModel
     {
 
-        public int Menu_Id { get; set; }
+        public int menu_Id { get; set; }
 
         [Required(ErrorMessage = "Menu name is required")]
         public string MenuText { get; set; }

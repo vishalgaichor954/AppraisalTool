@@ -644,7 +644,7 @@ namespace AppraisalTool.App.Controllers
                 {
                     ViewBag.ReportingAuthorityFirstName = "Not Assigned";
                     ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
-                    ViewBag.Date = "1-April-2022 to 31-March-2023 ";
+                    //ViewBag.Date = "1-April-2022 to 31-March-2023 ";
 
 
                 }

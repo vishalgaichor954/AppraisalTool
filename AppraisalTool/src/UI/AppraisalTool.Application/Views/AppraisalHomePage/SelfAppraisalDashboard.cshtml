@@ -173,7 +173,7 @@
                             <li class="breadcrumb-item">
                                 <a asp-controller="Dashboard" class="active" asp-action="Dashboard">Dashboard</a>
                             </li>
-                             <li class="breadcrumb-item">
+                            <li class="breadcrumb-item">
                                 <a asp-controller="AppraisalHomePage" class="active" asp-action="HomePageAppraisal">Appraisal Home</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Self Appraisal Dashboard</li>
@@ -475,29 +475,53 @@
     
     
     </script>
-                <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+                <!-- <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
 
-                <!-- endinject -->
-                <!-- Plugin js for this page -->
-                <!-- End plugin js for this page -->
-                <!-- inject:js -->
-                <script src="./lib/assets/js/off-canvas.js"></script>
+            <script type="text/javascript">
 
 
-                <script src="./lib/assets/js/hoverable-collapse.js"></script>
+                let btn_element = document.getElementById("GradeReportBtn");
+                btn_element.addEventListener("click", () => {
 
-                <script src="./lib/assets/js/misc.js"></script>
-                <!-- endinject -->
 
-                <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+                    let check = document.getElementById("GradeReportBtn").getAttribute("href");
 
-                @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
-                <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
-                @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
-                <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
-                @*<script src="assets/js/off-canvas.js"></script>
+                    console.log(check);
+                    if (check == "#") {
+                        Swal.fire(
+                            'Unable to view',
+                            'Your Appraisal is under Review cannot view Grade report at this moment',
+                            'error'
+                        )
+                    }
+                })
+
+
+            </script> -->
+
+            <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+            <!-- endinject -->
+            <!-- Plugin js for this page -->
+            <!-- End plugin js for this page -->
+            <!-- inject:js -->
+            <script src="./lib/assets/js/off-canvas.js"></script>
+
+
+            <script src="./lib/assets/js/hoverable-collapse.js"></script>
+
+            <script src="./lib/assets/js/misc.js"></script>
+            <!-- endinject -->
+
+            <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+            @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
+            <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
+            @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
+            <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+            @*<script src="assets/js/off-canvas.js"></script>
             <script src="assets/js/hoverable-collapse.js"></script>
             <script src="assets/js/misc.js"></script>*@
-                <script src=" ~/lib/assets/js/off-canvas.js"></script>
-                <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
-                <script src=" ~/lib/assets/js/misc.js"></script>
+            <script src=" ~/lib/assets/js/off-canvas.js"></script>
+            <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
+            <script src=" ~/lib/assets/js/misc.js"></script>

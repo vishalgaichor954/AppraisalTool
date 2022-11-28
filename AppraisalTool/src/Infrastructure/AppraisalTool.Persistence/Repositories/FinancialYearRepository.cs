@@ -105,7 +105,7 @@ namespace AppraisalTool.Persistence.Repositories
         }
          public async Task<List<FinancialYear>> GetAllFinancialYears()
         {
-            List<FinancialYear> years = _dbContext.FinancialYear.ToList();
+            List<FinancialYear> years = _dbContext.FinancialYear.Where(item=>item.IsDeleted != true).ToList();
             return years;
         }
 
@@ -113,7 +113,7 @@ namespace AppraisalTool.Persistence.Repositories
         {
             User user = await _dbContext.User.FirstOrDefaultAsync(u => u.Id == userId);
             int year = DateTime.Parse(user.JoinDate.ToString()).Year;
-            List<FinancialYear> years = await _dbContext.FinancialYear.Where(item =>item.StartYear >= year).ToListAsync();
+            List<FinancialYear> years = await _dbContext.FinancialYear.Where(item =>item.StartYear >= year && item.IsDeleted != true).ToListAsync();
             return years;
         }
     }

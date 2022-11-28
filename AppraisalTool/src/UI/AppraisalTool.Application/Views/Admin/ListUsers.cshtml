@@ -304,9 +304,11 @@ Toast.fire({
         $(document).ready( function () {
             $('#myTable').DataTable({
                  'columnDefs': [ {
-        'targets': [4,5], // column index (start from 0)
+        'targets': [6], // column index (start from 0)
         'orderable': false, // set orderable false for selected columns
-            }],
+            },
+             { visible: false, targets: [5] },
+            ],
             dom: 'lBfrtip',
             responsive: true,
         buttons: [

@@ -22,7 +22,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<User> FindUserByEmail(string email);
         Task<RemoveUserCommandDto> RemoveUserAsync(int id);
         Task<UpdateUserCommandDto> UpdateUserAsync(int id, UpdateUserCommand request);
-        Task<User> GetUserByRoleId(int roleId);
+        Task<IEnumerable<User>> GetUserByRoleId(int roleId);
         public Task<bool> UpdateUser(User user);
         public Task<IEnumerable<GetAppraisalDto>> GetAllAppraisals();
         public Task<IEnumerable<User>> GetAllUser();
