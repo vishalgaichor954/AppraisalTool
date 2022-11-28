@@ -150,25 +150,26 @@ namespace AppraisalTool.Persistence.Repositories
             //var menu = await _dbContext.MenuLists.Include(x => x.RoleMapping).ThenInclude(x => x.UserRole).Where(u => u.IsDeleted != true).ToListAsync();
             //return menu;
 
-            var result = from A in _dbContext.MenuLists
-                         join B in _dbContext.MenuRoleMappings on A.Menu_Id equals B.Menu_id
-                         join C in _dbContext.UserRole on B.Role_id equals C.Id where A.IsDeleted !=true
-                         select new GetMenuListQueryVm
-                         {
-                             Menu_Id = A.Menu_Id,
-                             MenuText = A.MenuText,
-                             MenuClass = A.MenuClass,
-                             MenuIcon = A.MenuIcon,
-                             MenuFlag = A.MenuFlag,
-                             MenuController = A.MenuController,
-                             MenuAction = A.MenuAction,
-                             MenuLink = A.MenuLink,
-                             RoleName = C.Role,
-                             RoleId=C.Id
-                             
-                         };
+            var result =(from A in _dbContext.MenuLists
+                          join B in _dbContext.MenuRoleMappings on A.Menu_Id equals B.Menu_id
+                          join C in _dbContext.UserRole on B.Role_id equals C.Id
+                          where A.IsDeleted != true
+                          
+                          select new GetMenuListQueryVm
+                          {
+                              Menu_Id = A.Menu_Id,
+                              MenuText = A.MenuText,
+                              MenuClass = A.MenuClass,
+                              MenuIcon = A.MenuIcon,
+                              MenuFlag = A.MenuFlag,
+                              MenuController = A.MenuController,
+                              MenuAction = A.MenuAction,
+                              MenuLink = A.MenuLink,
+                              RoleName = C.Role,
+                              RoleId = C.Id
 
-            //var res = await result.Where(u=>u.i).FirstOrDefaultAsync();
+                          });
+
             return result;
         }
 
