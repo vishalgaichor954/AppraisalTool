@@ -78,30 +78,34 @@ namespace AppraisalTool.App.Controllers
                 var repata = JsonConvert.DeserializeObject<Response>(reportingData);
                 Console.WriteLine(repata.Data);
                 List<SelectListItem> ReportingList = new List<SelectListItem>();
+                foreach (var item in repata.Data)
+                {
 
+                    ReportingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.id.ToString() });
 
-                ReportingList.Add(new SelectListItem { Text = repata.Data.firstName.ToString() + " " + repata.Data.lastName.ToString(), Value = repata.Data.id.ToString() });
-
+                }
 
                 //reviewing authority dropdown
                 var ReviewingData = Reviewing.Content.ReadAsStringAsync().Result;
                 var Reviewingdata = JsonConvert.DeserializeObject<Response>(ReviewingData);
                 Console.WriteLine(Reviewingdata.Data);
                 List<SelectListItem> ReviewingList = new List<SelectListItem>();
+                foreach (var item in Reviewingdata.Data)
+                {
 
-
-                ReviewingList.Add(new SelectListItem { Text = Reviewingdata.Data.firstName.ToString() + " " + Reviewingdata.Data.lastName.ToString(), Value = Reviewingdata.Data.id.ToString() });
-
+                    ReviewingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.id.ToString() });
+                }
                 //admin dropdown
                 var adminData = admin.Content.ReadAsStringAsync().Result;
                 var admindata = JsonConvert.DeserializeObject<Response>(adminData);
                 Console.WriteLine(admindata.Data);
 
+                foreach (var item in admindata.Data)
+                {
 
-
-                ReportingList.Add(new SelectListItem { Text = admindata.Data.firstName.ToString() + " " + admindata.Data.lastName.ToString(), Value = admindata.Data.id.ToString() });
-                ReviewingList.Add(new SelectListItem { Text = admindata.Data.firstName.ToString() + " " + admindata.Data.lastName.ToString(), Value = admindata.Data.id.ToString() });
-
+                    ReportingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.id.ToString() });
+                    ReviewingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.ToString() });
+                }
                 ViewBag.JobProfileRolelist = JobProfileRolelist;
                 ViewBag.branchlist = branchlist;
                 ViewBag.Rolelist = Rolelist;

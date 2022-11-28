@@ -151,11 +151,12 @@ namespace AppraisalTool.Persistence.Repositories
             //return menu;
 
             var result =(from A in _dbContext.MenuLists
-                          join B in _dbContext.MenuRoleMappings on A.Menu_Id equals B.Menu_id
-                          join C in _dbContext.UserRole on B.Role_id equals C.Id
-                          where A.IsDeleted != true
-                          
-                          select new GetMenuListQueryVm
+                       
+                         join B in _dbContext.MenuRoleMappings on A.Menu_Id equals B.Menu_id
+                          join C in _dbContext.UserRole on B.Role_id equals C.Id 
+                          where A.IsDeleted != true 
+                         
+                         select new GetMenuListQueryVm
                           {
                               Menu_Id = A.Menu_Id,
                               MenuText = A.MenuText,
@@ -169,7 +170,7 @@ namespace AppraisalTool.Persistence.Repositories
                               RoleId = C.Id
 
                           });
-
+            
             return result;
         }
 

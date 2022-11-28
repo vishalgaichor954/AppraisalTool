@@ -262,9 +262,9 @@ namespace AppraisalTool.Persistence.Repositories
 
         }
 
-        public async Task<User> GetUserByRoleId(int roleId)
+        public async Task<IEnumerable<User>> GetUserByRoleId(int roleId)
         {
-            var user = await _dbContext.User.Where(u => u.RoleId == roleId).FirstOrDefaultAsync();
+            var user =await _dbContext.User.Where(u => u.RoleId == roleId).ToListAsync();
             return user;
         }
 
