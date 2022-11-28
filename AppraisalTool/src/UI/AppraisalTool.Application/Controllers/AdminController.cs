@@ -4,7 +4,9 @@ using AppraisalTool.App.Models.AppraisalToolAuth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Text;
+using System.Text.Json.Nodes;
 
 namespace AppraisalTool.App.Controllers
 {
@@ -393,7 +395,8 @@ namespace AppraisalTool.App.Controllers
                 string responseData = response.Content.ReadAsStringAsync().Result;
                 dynamic json = JsonConvert.DeserializeObject(responseData);
                 ViewBag.Appraisals = json.data;
-
+                JArray items = (JArray)json.data;
+                ViewBag.Empty= items.Count > 0 ? false :true;
                 return View();
 
             }

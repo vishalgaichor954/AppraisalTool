@@ -113,7 +113,7 @@ namespace AppraisalTool.Persistence.Repositories
         {
             User user = await _dbContext.User.FirstOrDefaultAsync(u => u.Id == userId);
             int year = DateTime.Parse(user.JoinDate.ToString()).Year;
-            List<FinancialYear> years = await _dbContext.FinancialYear.Where(item =>item.StartYear >= year).ToListAsync();
+            List<FinancialYear> years = await _dbContext.FinancialYear.Where(item =>item.StartYear >= year && item.IsDeleted != true).ToListAsync();
             return years;
         }
     }

@@ -121,7 +121,8 @@ namespace AppraisalTool.Persistence.Repositories
         public async Task<List<MenuRoleMapping>> getAllCards(int id)
         {
             List<MenuRoleMapping> menu = _dbContext.MenuRoleMappings.Where(x => x.Role_id == id).Include(y => y.MenuList).ToList();
-            return menu;
+            return menu.Where(x=>x.MenuList.IsDeleted != true).ToList();
+            //return menu;
         }
 
 
