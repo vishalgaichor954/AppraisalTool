@@ -154,7 +154,6 @@ namespace AppraisalTool.Persistence.Repositories
                           join B in _dbContext.MenuRoleMappings on A.Menu_Id equals B.Menu_id
                           join C in _dbContext.UserRole on B.Role_id equals C.Id
                           where A.IsDeleted != true
-                          
                           select new GetMenuListQueryVm
                           {
                               Menu_Id = A.Menu_Id,
@@ -168,8 +167,8 @@ namespace AppraisalTool.Persistence.Repositories
                               RoleName = C.Role,
                               RoleId = C.Id
 
-                          });
-
+                          }); 
+          
             return result;
         }
 
