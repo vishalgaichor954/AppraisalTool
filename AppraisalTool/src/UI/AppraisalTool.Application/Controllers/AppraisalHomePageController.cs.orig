@@ -187,7 +187,7 @@ namespace AppraisalTool.App.Controllers
                             Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
                             ViewBag.Role = item.role;
                             ViewBag.AppraisalStatus = item.appraisalStatus;
-                            ViewBag.Date = item.date;
+                            ViewBag.Date = item.startDate + " " + " " + "to" + " " +item.endDate;
                             ViewBag.ReviewingAuthorityLastName = item.reviewingAuthorityLastName;
                             ViewBag.ReportingAuthorityLastName = item.reportingAuthorityLastName;
                         }
@@ -212,13 +212,9 @@ namespace AppraisalTool.App.Controllers
                     ViewBag.Fid = Fid;
                     ViewBag.ReportingAuthorityFirstName = "Not Assigned";
                     ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
-<<<<<<< HEAD
                     ViewBag.Date = "Not Applicable";
 
 
-=======
-                    ViewBag.Date = "-";
->>>>>>> Feature/ReviewDashboard
 
                 }
                 //try
@@ -452,6 +448,7 @@ namespace AppraisalTool.App.Controllers
                 SelfAppraisalMetricsModel model = new SelfAppraisalMetricsModel() { IMetric = IMetric, BevMetric = BevMetric, JobMetric = JobMetric };
                 Console.Write(model);
                 ViewBag.AppraisalFormModel = model;
+
                 ViewBag.ReadOnlyForm = true;
                 ViewBag.appraisalStatus = appraisalResult.StatusId;
                 if (appraisalResult.Editable == true)
@@ -622,7 +619,7 @@ namespace AppraisalTool.App.Controllers
         {
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/byYear?userId={user.UserId}").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/byYear?userId={user.UserId}&FyId={Fid}").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -639,7 +636,11 @@ namespace AppraisalTool.App.Controllers
                     Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
                     ViewBag.Role = data.Data[0].role;
                     ViewBag.AppraisalStatus = data.Data[0].appraisalStatus;
-                    ViewBag.Date = data.Data[0].date;
+<<<<<<< HEAD
+                    ViewBag.Date = data.Data[0].date ;
+=======
+                    ViewBag.Date = data.Data[0].startDate + " " + " " + "to" + " " + data.Data[0].endDate;
+>>>>>>> ee072ce6b6cf12233e587b360ceb0a11967b5434
                     ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
                     ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
                 }
@@ -647,7 +648,7 @@ namespace AppraisalTool.App.Controllers
                 {
                     ViewBag.ReportingAuthorityFirstName = "Not Assigned";
                     ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
-                    ViewBag.Date = "1-April-2022 to 31-March-2023 ";
+                    //ViewBag.Date = "1-April-2022 to 31-March-2023 ";
 
 
                 }

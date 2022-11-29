@@ -187,7 +187,7 @@ namespace AppraisalTool.App.Controllers
                             Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
                             ViewBag.Role = item.role;
                             ViewBag.AppraisalStatus = item.appraisalStatus;
-                            ViewBag.Date = item.date;
+                            ViewBag.Date = item.startDate + " " + " " + "to" + " " +item.endDate;
                             ViewBag.ReviewingAuthorityLastName = item.reviewingAuthorityLastName;
                             ViewBag.ReportingAuthorityLastName = item.reportingAuthorityLastName;
                         }
@@ -636,7 +636,7 @@ namespace AppraisalTool.App.Controllers
                     Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
                     ViewBag.Role = data.Data[0].role;
                     ViewBag.AppraisalStatus = data.Data[0].appraisalStatus;
-                    ViewBag.Date = data.Data[0].date ;
+                    ViewBag.Date = data.Data[0].startDate + " " + " " + "to" + " " + data.Data[0].endDate;
                     ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
                     ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
                 }

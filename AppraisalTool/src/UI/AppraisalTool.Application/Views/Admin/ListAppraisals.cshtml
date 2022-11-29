@@ -15,6 +15,68 @@
 
 
 
+@if (TempData["AllowSuccess"] != null)
+{
+    
+
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Allowed To Edit Successfully'
+})
+    </script>
+}
+@if (TempData["AllowFailed"] != null)
+{
+    
+
+    <script>
+                             
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: 'Oops!! Something Went Wrong'
+})
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <style>
@@ -138,7 +200,7 @@
                                                         <td> @item.startYear @item.endYear </td>
                                                         <td>
                                                             <label class="switch">
-                                                                <input type="checkbox" asp-for="@Model[i].IsAllowed" value="true">
+                                                                <input type="checkbox" asp-for="@Model[i].IsAllowed" value="true" onclick="checker(this)">
                                                             </label>
                                                         </td>
                                                         <td> @item.primaryJobProfileName </td>
@@ -159,7 +221,7 @@
                                 @if (ViewBag.Empty==false)
                                 {
                                  <div >
-                                    <input type="submit" value="Allow" class=" Button mb-4" />
+                                    <input type="submit" value="Allow" class=" Button mb-4"  id="btn" style="display:none; margin-inline: auto; margin-left: 850px"/>
 
                                 </div>
                                 }
@@ -201,7 +263,17 @@
 </script>
 
 
+ <script language="javascript" type="text/javascript">
 
+function checker(that) {
+if (that.checked) {
+btn.style.display = "";
+} else {
+btn.style.display = "none";
+}
+}
+
+</script>
 
 
 @*<script src="assets/vendors/js/vendor.bundle.base.js"></script>*@
@@ -237,4 +309,4 @@
     <script src=" ~/lib/assets/js/misc.js"></script>
 
 
-
+   
