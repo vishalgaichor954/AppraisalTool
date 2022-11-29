@@ -422,10 +422,10 @@ namespace AppraisalTool.App.Controllers
             if (response.IsSuccessStatusCode)
             {
                 TempData["AllowSuccess"] = "Allowed To Edit Successfully";
-                return RedirectToAction("ConfigureSetting");
+                return RedirectToAction("ListAppraisals");
             }
             TempData["AllowFailed"] = "Oops!! Something Went Wrong";
-            return RedirectToAction("ConfigureSetting");
+            return RedirectToAction("ListAppraisals");
 
 
 
