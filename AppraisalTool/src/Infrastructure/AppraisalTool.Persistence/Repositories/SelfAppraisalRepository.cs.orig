@@ -53,12 +53,10 @@ namespace AppraisalTool.Persistence.Repositories
             IQueryable<GetDataVM> res = (from A in _dbContext.User
                                          join B in _dbContext.UserAuthorityMappings on A.Id equals B.UserId
                                          join C in _dbContext.Appraisal on B.UserId equals C.UserId
-<<<<<<< HEAD
-                                         where A.Id == userId && C.FinancialYear.Id==fyId
-=======
+                                         where A.Id == userId && C.FinancialYear.Id == fyId
 
-                                         where A.Id == userId
->>>>>>> Feature/ReviewDashboard
+                                       
+
 
                                          select new GetDataVM
                                          {
@@ -71,11 +69,26 @@ namespace AppraisalTool.Persistence.Repositories
                                              ReviewingAuthorityLastName = B.ReviewingAuthority.LastName,
                                              AppraisalStatus = C.Status.StatusTitle,
 <<<<<<< HEAD
-                                             Date=C.FinancialYear.StartDate + " " + C.FinancialYear.StartYear + " " + "to" + " " + C.FinancialYear.EndDate + " "+ C.FinancialYear.EndYear
+                                            StartDate=DateTime.Parse(C.FinancialYear.StartDate).ToString("dd MMMM yyyy"),
+                                           EndDate=DateTime.Parse(C.FinancialYear.EndDate).ToString("dd MMMM yyyy"),
+
+                                            
+
+                                             FinancialYearId = C.FinancialYearId,
+                                            
+                                         }); 
+
 =======
-                                             FinancialYearId  = C.FinancialYear.Id,
->>>>>>> Feature/ReviewDashboard
-                                         }) ;   
+                                             StartDate=DateTime.Parse(C.FinancialYear.StartDate).ToString("dd MMMM yyyy"),
+                                             
+                                             EndDate= DateTime.Parse(C.FinancialYear.EndDate).ToString("dd MMMM yyyy"),
+                                             StartYear=C.FinancialYear.StartYear,
+                                             EndYear=C.FinancialYear.EndYear,
+                                             //Date= StartDate + " " + "to" + " " + C.FinancialYear.EndDate + " "+ C.FinancialYear.EndYear,
+                                             FinancialYearId=C.FinancialYearId
+                                         }) ;
+            
+>>>>>>> ee072ce6b6cf12233e587b360ceb0a11967b5434
 
             Console.WriteLine(res);
             return res;
@@ -99,7 +112,7 @@ namespace AppraisalTool.Persistence.Repositories
         public async Task<List<Appraisal>> GetYear(int userId)
         {
 
-            var years = await _dbContext.Appraisal.Include(x => x.FinancialYear).Where(x => x.UserId == userId)
+            var years = await _dbContext.Appraisal.Include(x => x.FinancialYear).Where(x => x.UserId == userId && x.FinancialYear.IsDeleted==false)
                 .Include(x => x.FinancialYear)
                 .ToListAsync();
 

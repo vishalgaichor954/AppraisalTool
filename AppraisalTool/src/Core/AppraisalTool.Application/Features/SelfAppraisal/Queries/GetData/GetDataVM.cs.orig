@@ -28,16 +28,21 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData
         //public int StartYear { get; set; }
         //public int EndYear { get; set; }
         public string? Role { get; set; }
-<<<<<<< HEAD
         public string? AppraisalStatus { get; set; } /*= "Pending at Authority Level";*/
-        public string? Date { get; set; } 
-        //public int FinancialYearId { get; set; }  
+<<<<<<< HEAD
+        public string? StartDate { get; set; } 
+        public string? EndDate { get; set; } 
+        public int FinancialYearId { get; set; }  
 =======
-        public string? AppraisalStatus { get; set; }
+        public string? Date { get; set; } 
         public int FinancialYearId { get; set; }
-        public string? Date { get; set; } = "1-APRIL-2021 to 30-MARCH-2022";
-        
->>>>>>> Feature/ReviewDashboard
+
+        public int StartYear { get; set; }
+        public int EndYear { get; set; }
+
+        public string? StartDate { get; set; }
+        public string? EndDate { get; set; }
+>>>>>>> ee072ce6b6cf12233e587b360ceb0a11967b5434
 
 
     }

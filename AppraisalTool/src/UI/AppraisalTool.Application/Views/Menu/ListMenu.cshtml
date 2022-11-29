@@ -2,6 +2,14 @@
     ViewData["Title"] = "ListUsers";
 }
 
+
+<div class="loader">
+    <div class="d-flex justify-content-center align-items-center" style="height:100vh;">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        </div>
+    </div>
+</div>
+
 @*<link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
 <link rel="stylesheet" href="~/css/dataTables.bootstrap5.min.css" />*@
 @*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"/>*@
@@ -333,7 +341,7 @@
     $(document).ready(function () {
         $('#myTable').DataTable({
             'columnDefs': [{
-                'targets': [4, 5], // column index (start from 0)
+                'targets': [6], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             },
             { visible: false, targets: [1, 2] },
@@ -358,7 +366,7 @@
 
 
         });
-
+        $(".loader").fadeOut("slow");
 
     });
 </script>

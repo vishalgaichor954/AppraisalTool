@@ -223,30 +223,34 @@ namespace AppraisalTool.App.Controllers
                 var repata = JsonConvert.DeserializeObject<Response>(reportingData);
                 Console.WriteLine(repata.Data);
                 List<SelectListItem> ReportingList = new List<SelectListItem>();
+                foreach (var item in repata.Data)
+                {
 
+                    ReportingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.id.ToString() });
 
-                ReportingList.Add(new SelectListItem { Text = repata.Data.firstName.ToString() + " " + repata.Data.lastName.ToString(), Value = repata.Data.id.ToString(), Selected = user.RepaId == (int)repata.Data.id });
-
+                }
 
                 //reviewing authority dropdown
                 var ReviewingData = Reviewing.Content.ReadAsStringAsync().Result;
                 var Reviewingdata = JsonConvert.DeserializeObject<Response>(ReviewingData);
                 Console.WriteLine(Reviewingdata.Data);
                 List<SelectListItem> ReviewingList = new List<SelectListItem>();
+                foreach (var item in Reviewingdata.Data)
+                {
 
-
-                ReviewingList.Add(new SelectListItem { Text = Reviewingdata.Data.firstName.ToString() + " " + Reviewingdata.Data.lastName.ToString(), Value = Reviewingdata.Data.id.ToString(), Selected = user.RepaId == (int)Reviewingdata.Data.id });
-
+                    ReviewingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.id.ToString() });
+                }
                 //admin dropdown
                 var adminData = admin.Content.ReadAsStringAsync().Result;
                 var admindata = JsonConvert.DeserializeObject<Response>(adminData);
                 Console.WriteLine(admindata.Data);
 
+                foreach (var item in admindata.Data)
+                {
 
-
-                ReportingList.Add(new SelectListItem { Text = admindata.Data.firstName.ToString() + " " + admindata.Data.lastName.ToString(), Value = admindata.Data.id.ToString() });
-                ReviewingList.Add(new SelectListItem { Text = admindata.Data.firstName.ToString() + " " + admindata.Data.lastName.ToString(), Value = admindata.Data.id.ToString() });
-
+                    ReportingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.id.ToString() });
+                    ReviewingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.ToString() });
+                }
                 ViewBag.JobProfileRolelist = JobProfileRolelist;
                 ViewBag.branchlist = branchlist;
                 ViewBag.Rolelist = Rolelist;
@@ -396,7 +400,7 @@ namespace AppraisalTool.App.Controllers
                 dynamic json = JsonConvert.DeserializeObject(responseData);
                 ViewBag.Appraisals = json.data;
                 JArray items = (JArray)json.data;
-                ViewBag.Empty= items.Count > 0 ? false :true;
+                ViewBag.Empty = items.Count > 0 ? false : true;
                 return View();
 
             }
@@ -409,23 +413,23 @@ namespace AppraisalTool.App.Controllers
         public IActionResult ListAppraisals(List<AllowAppraisalEditVm> allowAppraisalEditVm)
         {
             AllowEditViewModel model = new AllowEditViewModel();
-           foreach(var item in allowAppraisalEditVm)
+            foreach (var item in allowAppraisalEditVm)
             {
                 model.AppraisalId = item.AppraisalId;
                 model.Editable = item.IsAllowed;
             }
             Console.WriteLine(model);
             string data = JsonConvert.SerializeObject(model);
-            
+
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PutAsync("https://localhost:5000/api/v1/AppraisalHome/AllowEdit", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 TempData["AllowSuccess"] = "Allowed To Edit Successfully";
-                return RedirectToAction("ConfigureSetting");
+                return RedirectToAction("ListAppraisals");
             }
             TempData["AllowFailed"] = "Oops!! Something Went Wrong";
-            return RedirectToAction("ConfigureSetting");
+            return RedirectToAction("ListAppraisals");
 
 
 

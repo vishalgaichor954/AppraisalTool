@@ -27,6 +27,7 @@ namespace AppraisalTool.Infrastructure.Mail
             //_sendGridClient = sendGridClient;
         }
 
+
         public async Task<bool> SendEmail(Email email)
         {
             //    var subject = email.Subject;

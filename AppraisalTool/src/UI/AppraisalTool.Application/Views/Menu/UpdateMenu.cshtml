@@ -18,7 +18,7 @@
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
-                            <input asp-for="menu_Id" type="hidden"/>
+                            <input asp-for="menu_Id" type="hidden" />
                             <div class="form-group row">
                                 <label asp-for="MenuText" class="col-sm-4 col-form-label">Menu<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
@@ -113,7 +113,26 @@
 
                                 }
 
-                                @foreach (var role in ViewBag.roledict3)
+
+                                @foreach (var item in ViewBag.RoleList)
+                                {
+                                    @foreach (var i in ViewBag.roldict)
+                                    {
+                                        @if (item.Value == i.Value)
+                                        {
+                                            ViewBag.RoleList.Remove(item.Key);
+                                        }
+
+
+
+
+
+                                    }
+
+                                }
+
+
+                                @foreach (var role in ViewBag.RoleList)
                                 {
 
                                     <input type="checkbox" value="@role.Value" name="selectedRoles" id="check" class="form-check-input">
@@ -124,6 +143,20 @@
 
                                 }
 
+
+
+
+                                @* @foreach (var role in ViewBag.roledict3)
+                                {
+
+                                <input type="checkbox" value="@role.Value" name="selectedRoles" id="check" class="form-check-input">
+                                <label class="form-check-label">@role.Key</label>
+
+
+
+
+                                }
+                                *@
 
 
                             </div>

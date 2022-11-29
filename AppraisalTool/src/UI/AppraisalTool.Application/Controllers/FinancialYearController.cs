@@ -40,13 +40,6 @@ namespace AppraisalTool.App.Controllers
                string endyear= DateTime.Parse(model.EndDate.ToString()).Year.ToString();
                 model.StartYear = Int32.Parse(startyear);
                 model.EndYear = Int32.Parse(endyear);
-               
-
-
-
-
-
-
                 Console.WriteLine(model);
                 
                 string data = JsonConvert.SerializeObject(model);
