@@ -636,7 +636,7 @@ namespace AppraisalTool.App.Controllers
                     Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
                     ViewBag.Role = data.Data[0].role;
                     ViewBag.AppraisalStatus = data.Data[0].appraisalStatus;
-                    ViewBag.Date = data.Data[0].date;
+                    ViewBag.Date = data.Data[0].date ;
                     ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
                     ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
                 }

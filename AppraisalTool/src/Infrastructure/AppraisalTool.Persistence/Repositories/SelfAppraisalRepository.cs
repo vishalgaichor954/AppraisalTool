@@ -53,7 +53,10 @@ namespace AppraisalTool.Persistence.Repositories
             IQueryable<GetDataVM> res = (from A in _dbContext.User
                                          join B in _dbContext.UserAuthorityMappings on A.Id equals B.UserId
                                          join C in _dbContext.Appraisal on B.UserId equals C.UserId
-                                         where A.Id == userId && C.FinancialYear.Id==fyId
+                                         where A.Id == userId && C.FinancialYear.Id == fyId
+
+                                       
+
 
                                          select new GetDataVM
                                          {
@@ -65,9 +68,15 @@ namespace AppraisalTool.Persistence.Repositories
                                              ReviewingAuthorityFirstName = B.ReviewingAuthority.FirstName,
                                              ReviewingAuthorityLastName = B.ReviewingAuthority.LastName,
                                              AppraisalStatus = C.Status.StatusTitle,
-                                             Date=C.FinancialYear.StartDate + " " + C.FinancialYear.StartYear + " " + "to" + " " + C.FinancialYear.EndDate + " "+ C.FinancialYear.EndYear,
-                                             FinancialYearId=C.FinancialYearId
-                                         }) ;   
+                                            StartDate=DateTime.Parse(C.FinancialYear.StartDate).ToString("dd MMMM yyyy"),
+                                           EndDate=DateTime.Parse(C.FinancialYear.EndDate).ToString("dd MMMM yyyy"),
+
+                                            
+
+                                             FinancialYearId = C.FinancialYearId,
+                                            
+                                         }); 
+
 
             Console.WriteLine(res);
             return res;

@@ -29,7 +29,8 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData
         //public int EndYear { get; set; }
         public string? Role { get; set; }
         public string? AppraisalStatus { get; set; } /*= "Pending at Authority Level";*/
-        public string? Date { get; set; } 
+        public string? StartDate { get; set; } 
+        public string? EndDate { get; set; } 
         public int FinancialYearId { get; set; }  
 
 
