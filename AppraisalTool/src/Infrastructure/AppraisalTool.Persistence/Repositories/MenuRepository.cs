@@ -167,8 +167,8 @@ namespace AppraisalTool.Persistence.Repositories
                               RoleName = C.Role,
                               RoleId = C.Id
 
-                          }); 
-          
+                          });
+            
             return result;
         }
 
