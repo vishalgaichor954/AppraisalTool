@@ -340,10 +340,10 @@
                 <input type="button" value="Back" class=" Button mb-4" onclick="history.back()" />
 
                 <div class="d-flex justify-content-end">
-                    @* <form method="post" asp-controller="GradeReport" asp-action="ExportPdf">
-                    <input type="hidden" name="ExportData" id="ExportData" />
-                    <button id="btnSubmit" value="Download" class="btn btn-primary" />
-                       </form>*@
+                    
+                 
+                    <button id="btnSubmit"  value="Download" class="btn btn-icon-text GradeReportDownloadBtn"> <i class="mdi mdi-file-check btn-icon-prepend"></i>Download Grade Letter </button>
+                      
                 </div>
                 <div id="PrintPDF" class="featureBackground p-4" >
                     <div>
@@ -363,7 +363,7 @@
                         <div class="m-4 DarkBlueGradeBorder" style="max-height:20%;">
                             <h6 class="mx-4 mt-2 mb-0">Input & Effort metric score standing(Percentile Rank) </h6>
                             <div class="d-flex justify-content-center">
-                                <div style="width:85%;max-height:20%;" id="Linear-gauge">
+                                <div style="width:100%;max-height:20%;" id="Linear-gauge">
                                 </div>
                             </div>
 
@@ -372,7 +372,7 @@
                         <div class="m-4 DarkBlueGradeBorder" style="max-height:20%;">
                             <h6 class="mx-4 mt-2 mb-0">Behavioral competencies score standing(Percentile Rank) </h6>
                             <div class="d-flex justify-content-center">
-                                <div style="width:85%;max-height:20%;" id="Linear-gauge2">
+                                <div style="width:100%;max-height:20%;" id="Linear-gauge2">
                                 </div>
                             </div>
 
@@ -381,7 +381,7 @@
                         <div class="m-4 DarkBlueGradeBorder" style="max-height:20%;">
                             <h6 class="mx-4 mt-2 mb-0">Job family grooming score standing(Percentile Rank) </h6>
                             <div class="d-flex justify-content-center">
-                                <div style="width:85%;max-height:20%;" id="Linear-gauge3">
+                                <div style="width:100%;max-height:20%;" id="Linear-gauge3">
                                 </div>
                             </div>
 
@@ -397,7 +397,23 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/pdfmake.min.js"></script>
+<script>
+$("#btnSubmit").click(function() {
+   
+    var element = document.getElementById('PrintPDF');
+var opt = {
+  margin:       [0.9, 0, 0.9, 0],
+  filename:     'GradeRepot.pdf',
+  image:        { type: 'jpeg', quality: 0.98 },
+  html2canvas:  { scale: 2 },
+  jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+};
 
+// New Promise-based usage:
+html2pdf().set(opt).from(element).save();
+});
+
+    </script>
 @*<script type="text/javascript">
 
     window.addEventListener('DOMContentLoaded', (event) => {
