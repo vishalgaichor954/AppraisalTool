@@ -211,7 +211,7 @@ Toast.fire({
                                 <label asp-for="RevaId" class="col-sm-4 col-form-label">
                                     Reviewing Authority<span style="color: Red">&nbsp;*</span></label>
                                 
-                                <div asp-for="SecondaryRole" class="col-sm-8">
+                                <div asp-for="RevaId" class="col-sm-8">
                                     <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control">
                                         <option value="">Select Reviewing Authority</option>
                                     </select>
@@ -224,7 +224,7 @@ Toast.fire({
                                 <label asp-for="RepaId" class="col-sm-4 col-form-label">
                                     Reporting Authority<span style="color: Red">&nbsp;*</span></label>
                                 
-                                <div asp-for="SecondaryRole" class="col-sm-8">
+                                <div asp-for="RepaId" class="col-sm-8">
                                     <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control">
                                         <option value="">Select Reporting Authority </option>
                                     </select>

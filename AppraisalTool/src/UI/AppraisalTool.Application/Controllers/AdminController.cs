@@ -256,8 +256,10 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.Rolelist = Rolelist;
                 ViewBag.ReportingList = ReportingList;
                 ViewBag.ReviewingList = ReviewingList;
-
                 Console.WriteLine(user);
+
+
+
             }
             return View(user);
         }

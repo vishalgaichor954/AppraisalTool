@@ -84,7 +84,7 @@
         <script>
             @*var check = @TempData["RepaSUCCESS"].ToString();
         console.log(@TempData["RepaSUCCESS"].ToString());*@
-                                                                    const Toast = Swal.mixin({
+                                                                                            const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -113,16 +113,16 @@
         <div class="content-wrapper content-wrapper-Blue">
             @*<h6 class="BreadCrump"><a asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a>    /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal"> Home</a>    /<a asp-controller="ReporteeAppraisalDashboard" asp-action="ReporteeAppraisalDashboard"> Reportee Appraisal Dashboard   </a></h6>*@
             <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a asp-controller="Dashboard" class="active" asp-action="Dashboard">Dashboard</a>
-                            </li>
-                             <li class="breadcrumb-item">
-                                <a asp-controller="AppraisalHomePage" class="active" asp-action="HomePageAppraisal">Appraisal Home</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Reportee Appraisal Dashboard    </li>
-                        </ol>
-                    </nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a asp-controller="Dashboard" class="active" asp-action="Dashboard">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a asp-controller="AppraisalHomePage" class="active" asp-action="HomePageAppraisal">Appraisal Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Reportee Appraisal Dashboard    </li>
+                </ol>
+            </nav>
             <br />
             <input type="button" value="Back" class="Button mb-4" onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
             <br />
@@ -248,8 +248,8 @@
                         <div class="col-md-2">
                             <div class="row">
                                 <div class="Dropdown">
-                                    <select class="form-control form-select" asp-items="ViewBag.appraisalStatus" asp-for="@Model.Status">
-                                        <option class=" text-dropdown">-Select-</option>
+                                    <select class="form-control form-select" asp-items="ViewBag.appraisalStatus" asp-for="@Model.Status" onchange="checker()">
+                                        <option id="default" class=" text-dropdown">-Select-</option>
                                     </select>
                                 </div>
                             </div>
@@ -257,14 +257,24 @@
 
                         </div>
                         <div class="d-flex justify-content-center">
-                            <input type="submit" class="inline btn  ApplyButton" value="Apply" />
+                            <input type="submit" class="inline btn  ApplyButton" value="Apply" @*id="displayonclick" style="display:none;"*@ />
                         </div>
 
 
 
+
                 </form>
+                <br />
                 <!-- Filter form end -->
                 <!-- Listing star -->
+                @if (ViewBag.UserList.Count == 0)
+                {
+                    <div class="text-center" style="margin-top:20px;">
+
+                        <h3 >No records found</h3>
+                    </div>
+
+                }
                 @if (ViewBag.UserList != null)
                 {
                     @foreach (var item in ViewBag.UserList)
@@ -324,22 +334,22 @@
 
                                     <div class="row">
                                         <div class="col-md-10 row date-p">
-                                                 @{
-                                        string ApprovedBadgeColor;
-                                        if (@item.AppraisalStatus=="Approved")
-                                        {
-                                        ApprovedBadgeColor = "ApprovedBadge";
-                                        }
-                                        else
-                                        {
-                                        ApprovedBadgeColor = "";
-                                         }
+                                            @{
+                                                string ApprovedBadgeColor;
+                                                if (@item.AppraisalStatus == "Approved")
+                                                {
+                                                    ApprovedBadgeColor = "ApprovedBadge";
+                                                }
+                                                else
+                                                {
+                                                    ApprovedBadgeColor = "";
+                                                }
 
-                                    }
+                                            }
                                             <div class="row d-flex justify-content-center">
                                                 <span class=" reporteeTagPara" style="display: inline-block;">Appraisal Status</span>
                                             </div>
-                                            <smaller class=" reporteeTagPara @ApprovedBadgeColor pt-1 pb-1" style="border-radius: 0.5rem; font-size:12px ; background-color: rgb(245, 177, 138);" ><asp-for ="AppraisalStatus">@item.AppraisalStatus</smaller>
+                                            <smaller class=" reporteeTagPara @ApprovedBadgeColor pt-1 pb-1" style="border-radius: 0.5rem; font-size:12px ; background-color: rgb(245, 177, 138);"><asp-for ="AppraisalStatus">@item.AppraisalStatus</smaller>
 
                                         </div>
                                     </div>
@@ -348,6 +358,8 @@
                         </a>
                     }
                 }
+
+
                 <!-- Listing End -->
 
             </div>
@@ -365,35 +377,54 @@
     }
 </script>
 <!-- container-scroller -->
+
+<script language="javascript" type="text/javascript">
+
+    function checker(that) {
+        console.log("Hello ")
+
+        var drop = document.getElementById("default").value;
+        console.log(drop);
+        if (drop == "default") {
+            console.log("hello");
+            //drop.style = "display:none;"
+            document.getElementById("displayonclick").style = "display:none;"
+        }
+        var btn = document.getElementById("displayonclick").style = "display:block;"
+    }
+</script>
+
+
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
         }
-<!-- endinject -->
-<!-- Plugin js for this page -->
-<!-- End plugin js for this page -->
-<!-- inject:js -->
-<script src="./lib/assets/js/off-canvas.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="./lib/assets/js/off-canvas.js"></script>
 
 
-<script src="./lib/assets/js/hoverable-collapse.js"></script>
+    <script src="./lib/assets/js/hoverable-collapse.js"></script>
 
-<script src="./lib/assets/js/misc.js"></script>
-<!-- endinject -->
-<script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="./lib/assets/js/misc.js"></script>
+    <!-- endinject -->
+    <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
 
-@*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
-<script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
-@*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
-<script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
-@*<script src="assets/js/off-canvas.js"></script>
+    @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
+    <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
+    @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
+    <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+    @*<script src="assets/js/off-canvas.js"></script>
         <script src="assets/js/hoverable-collapse.js"></script>
         <script src="assets/js/misc.js"></script>*@
-<script src=" ~/lib/assets/js/off-canvas.js"></script>
-<script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
-<script src=" ~/lib/assets/js/misc.js"></script>
+    <script src=" ~/lib/assets/js/off-canvas.js"></script>
+    <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
+    <script src=" ~/lib/assets/js/misc.js"></script>
 
 
 
