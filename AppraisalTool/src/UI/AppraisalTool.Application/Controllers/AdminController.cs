@@ -249,7 +249,7 @@ namespace AppraisalTool.App.Controllers
                 {
 
                     ReportingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.id.ToString() });
-                    ReviewingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.ToString() });
+                    ReviewingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.id.ToString() });
                 }
                 ViewBag.JobProfileRolelist = JobProfileRolelist;
                 ViewBag.branchlist = branchlist;
