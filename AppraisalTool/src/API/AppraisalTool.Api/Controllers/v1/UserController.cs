@@ -30,7 +30,8 @@ namespace AppraisalTool.Api.Controllers.v1
             _mediator = mediator;
             _logger=logger;
         }
-        
+
+       
         [HttpPost("RegisterUser")]
         public async Task<ActionResult> RegisterAsync(CreateUserCommand request)
         {
@@ -140,5 +141,10 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("GetAllAppraisal Completed");
             return Ok(dtos);
         }
+
+        #region UserJobProfile Mangement
+
+
+        #endregion
     }
 }

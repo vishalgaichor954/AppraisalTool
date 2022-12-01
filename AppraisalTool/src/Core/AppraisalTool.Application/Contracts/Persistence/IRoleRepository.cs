@@ -1,4 +1,7 @@
-﻿using AppraisalTool.Domain.Entities;
+﻿using AppraisalTool.Application.Features.UserJobProfileRoles.Command.CreateJobProfileRoleCommand;
+using AppraisalTool.Application.Features.UserJobProfileRoles.Command.RemoveJobProfileRoleCommand;
+using AppraisalTool.Application.Features.UserJobProfileRoles.Command.UpdateJobProfileRoleCommand;
+using AppraisalTool.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +14,10 @@ namespace AppraisalTool.Application.Contracts.Persistence
     {
         public Task<IEnumerable<JobRoles>> GetAllJobRoles();
         public Task<bool> AddJobRoles(List<UserJobRoles> userJobRoles);
+        public Task<CreateJobProfileCommandDto> AddJobProfileRole(JobRoles result);
+        public Task<UpdateJobProfileCommandDto> UpdatejobProfileRole(UpdateJobProfileCommand request, int id);
+        public Task<RemoveJobProfileCommandDto> RemoveJobProfileRole(int id);
+        public Task<JobRoles> GetJobProfileById(int id);
     }
 
 }

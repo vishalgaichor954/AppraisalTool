@@ -30,6 +30,8 @@ using AppraisalTool.Application.Features.FinancialYears.Query.GetFinancialYearBy
 using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResultByReva;
 using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByFidAndUserId;
 using AppraisalTool.Application.Features.FinancialYears.Queries.GetAllFinancialYears;
+using AppraisalTool.Application.Features.UserJobProfileRoles.Command.CreateJobProfileRoleCommand;
+using AppraisalTool.Application.Features.UserJobProfileRoles.Query.GetJobProfileRoleByIdQuery;
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -101,7 +103,9 @@ namespace AppraisalTool.Application.Profiles
             //Financial Year Mapping
             CreateMap<FinancialYear, GetAllFinancialYearsVM>().ReverseMap();
 
-
+            //job profile role mapping
+            CreateMap<JobRoles, CreateJobProfileCommand>().ReverseMap();
+            CreateMap<JobRoles, GetJobRoleByIdQueryDto>().ReverseMap();
 
         }
     }
