@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.Mvc;
 using AppraisalTool.Application.Features.Users.Query.GetUserById;
 using AppraisalTool.Application.Features.Users.Query.GetUserByRoleId;
 using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalList;
+using AppraisalTool.Application.Features.Branches.Command.AddBranchCommand;
+using AppraisalTool.Application.Features.Branches.Command.UpdateBranchCommand;
+using AppraisalTool.Application.Contracts.Persistence;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -24,9 +27,11 @@ namespace AppraisalTool.Api.Controllers.v1
     {
         private readonly IMediator _mediator;
         private readonly ILogger<UserController> _logger;
+        private readonly IBranchRepository _branchRepository;
         
-        public UserController(IMediator mediator, ILogger<UserController> logger)
+        public UserController(IMediator mediator, ILogger<UserController> logger, IBranchRepository branchRepository)
         {
+            _branchRepository = branchRepository;
             _mediator = mediator;
             _logger=logger;
         }
@@ -140,5 +145,45 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("GetAllAppraisal Completed");
             return Ok(dtos);
         }
+
+
+
+        [HttpGet("ListOfBranch")]
+        public async Task<ActionResult> GetAllBranch()
+        {
+            _logger.LogInformation("GetAllBranch Initiated");
+            var dtos = await _mediator.Send(new GetBranchListQuery());
+            _logger.LogInformation("GetAllBranch Completed");
+            return Ok(dtos);
+        }
+
+
+        [HttpPost("AddBranch")]
+        public async Task<ActionResult> AddBranch(AddBranchCommand request)
+        {
+            _logger.LogInformation("AddBranch Initiated");
+            var dtos = await _mediator.Send(request);
+
+            _logger.LogInformation("AddBranch Completed");
+            return Ok(dtos);
+        }
+
+        [HttpPut("UpdateBranch")]
+        public async Task<ActionResult> UpdateBranch(UpdateBranchCommand request)
+        {
+            _logger.LogInformation("UpdateBranch Initiated");
+            var dtos = await _mediator.Send(request);
+
+            _logger.LogInformation("UpdateBranch Completed");
+            return Ok(dtos);
+        }
+
+        [HttpGet("GetBranchById")]
+        public async Task<ActionResult> GetBranchById(int id)
+        {
+            var dtos = await _branchRepository.GetBranchById(id);
+            return Ok(dtos);
+        }
+
     }
 }

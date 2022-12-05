@@ -30,6 +30,7 @@ using AppraisalTool.Application.Features.FinancialYears.Query.GetFinancialYearBy
 using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResultByReva;
 using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByFidAndUserId;
 using AppraisalTool.Application.Features.FinancialYears.Queries.GetAllFinancialYears;
+using AppraisalTool.Application.Features.Branches.Command.AddBranchCommand;
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -100,6 +101,11 @@ namespace AppraisalTool.Application.Profiles
             CreateMap<FinancialYear, GetFinancialYearByIdDto>().ReverseMap();
             //Financial Year Mapping
             CreateMap<FinancialYear, GetAllFinancialYearsVM>().ReverseMap();
+
+
+            //Branch Mapping
+            CreateMap<Branch, AddBranchCommand>().ReverseMap();
+
 
 
 

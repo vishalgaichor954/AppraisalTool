@@ -10,7 +10,7 @@ namespace AppraisalTool.App.Controllers
 {
     public class LoginController : Controller
     {
-       Uri baseAddress = new Uri("https://localhost:5000/api");
+        Uri baseAddress = new Uri("https://localhost:5000/api");
         public IActionResult Index()
         {
             return View();
@@ -50,18 +50,15 @@ namespace AppraisalTool.App.Controllers
 
                 string data = JsonConvert.SerializeObject(login);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-
                 HttpClient client = new HttpClient();
                 client.BaseAddress = baseAddress;
                 HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/Auth/Login?api-version=1", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string responseData = response.Content.ReadAsStringAsync().Result;
-                    Console.WriteLine(responseData);
                     LoginResponseDto AuthData = JsonConvert.DeserializeObject<LoginResponseDto>(responseData);
-
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "user", AuthData);
-                    TempData["Sucess"] = AuthData.Name ;
+                    TempData["Sucess"] = AuthData.Name;
                     return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
                 }
                 TempData["Error"] = "Failed to Login User";
@@ -73,10 +70,8 @@ namespace AppraisalTool.App.Controllers
         //@Author : Ilyas Dabholkar
         [HttpGet]
         public IActionResult UserLogout()
-        {
-            Console.WriteLine(HttpContext.Session.GetString("user"));
+        {           
             HttpContext.Session.Remove("user");
-            Console.WriteLine($"NUll : {HttpContext.Session.GetString("user")}");
             return RedirectToAction("Login");
         }
 
@@ -98,19 +93,16 @@ namespace AppraisalTool.App.Controllers
         {
             string data = JsonConvert.SerializeObject(forgotPasswordView);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
             HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/Auth/ForgotPassword?api-version=1", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 string responseData = response.Content.ReadAsStringAsync().Result;
-                Console.WriteLine(responseData);
-
                 var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
                 if (res.Succeeded)
                 {
-                    TempData["PassReset"] = "Check your Email for new Login Credentails";
+                    TempData["PassReset"] = "Check your Email for new Login Credentials";
                 }
 
                 return View();
@@ -123,8 +115,7 @@ namespace AppraisalTool.App.Controllers
         [HttpGet]
         public JsonResult UserExistsEmail(string email)
         {
-            //https://localhost:5000/api/Auth?email=ssabhishek00%40gmail.com&api-version=1
-                HttpClient client = new HttpClient();
+            HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"/Auth?email={email}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
@@ -142,9 +133,6 @@ namespace AppraisalTool.App.Controllers
             }
             return Json(false);
         }
-
-
-
     }
 }
 
