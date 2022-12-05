@@ -1,5 +1,6 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Branches.Command.AddBranchCommand;
+using AppraisalTool.Application.Features.Branches.Command.RemoveBranchCommand;
 using AppraisalTool.Application.Features.Branches.Command.UpdateBranchCommand;
 using AppraisalTool.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -39,13 +40,34 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<IEnumerable<Branch>> GetAllBranch()
         {
-            return await ListAllAsync();
+            var res =await _dbContext.Branch.Where(x => x.IsDeleted!=true).ToListAsync();
+            return res;
         }
 
         public async Task<Branch> GetBranchById(int id)
         {
             var branch = await _dbContext.Branch.Where(x => x.Id == id).FirstOrDefaultAsync();
             return branch;
+        }
+
+        public async Task<RemoveBranchesCommandDto> RemoveBranch(int id)
+        {
+            RemoveBranchesCommandDto Response = new RemoveBranchesCommandDto();
+            var res = await _dbContext.Branch.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (res != null)
+            {
+                res.IsDeleted = true;
+                await _dbContext.SaveChangesAsync();
+                Response.Succeeded = true;
+                Response.Message = $"Id{id} deleted Successfully";
+                return Response;
+            }
+            else
+            {
+                Response.Succeeded = false;
+                Response.Message = "Id Doesn'nt Exist";
+                return Response;
+            }
         }
 
         public async Task<UpdateBranchCommandDto> UpdateBranchAsync(int id, UpdateBranchCommand request)

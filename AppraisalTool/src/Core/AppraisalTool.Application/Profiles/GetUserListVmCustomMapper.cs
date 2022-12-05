@@ -56,8 +56,8 @@ namespace AppraisalTool.Application.Profiles
                 PrimaryJobProfileName = primaryRole,
                 SecondaryJobProfileId = secondaryRoleId,
                 SecondaryJobProfileName = secondaryRole
-                //RepaId=source.Id,
-                //RevaId=source.Id
+                //RepaId = sourc,
+                //RevaId = source.Id
 
             };
             return dest;

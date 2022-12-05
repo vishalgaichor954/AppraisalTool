@@ -29,10 +29,10 @@ namespace AppraisalTool.Application.Features.Users.Query.GetUserList
             var allusers = await _userRepository.GetAllUser();
             if (allusers != null)
             {
-                var dataVM = _mapper.Map<IEnumerable<GetUserListQueryVm>>(allusers);
-                return new Response<IEnumerable<GetUserListQueryVm>>(dataVM, "success");
+                //var dataVM = _mapper.Map<IEnumerable<GetUserListQueryVm>>(allusers);
+                return new Response<IEnumerable<GetUserListQueryVm>>(allusers, "success");
             }
-            return new Response<IEnumerable<GetUserListQueryVm>>(null, "Failed");
+            return new Response<IEnumerable<GetUserListQueryVm>>(allusers, "Failed");
         }
     }
 }

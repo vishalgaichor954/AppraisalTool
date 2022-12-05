@@ -1,4 +1,6 @@
-﻿using AppraisalTool.App.Models;
+﻿using AppraisalTool.App.Helpers;
+using AppraisalTool.App.Models;
+using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.JobRoles;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -24,7 +26,8 @@ namespace AppraisalTool.App.Controllers
             
             if (ModelState.IsValid)
             {
-                
+                var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+                model.AddedBy= userSession.UserId;
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(client.BaseAddress + "Role/AddJobProfileRole?api-version=1", content).Result;
@@ -89,6 +92,8 @@ namespace AppraisalTool.App.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            model.UpdatedBy = userSession.UserId;
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PutAsync("Role/UpdateJobProfileRole?api-version=1", content).Result;

@@ -26,7 +26,7 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<IEnumerable<JobRoles>> GetAllJobRoles()
         {
-            var res=_dbContext.JobRoles.Where(x=>x.IsActive==true);
+            var res = await _dbContext.JobRoles.Where(x => x.IsDeleted != true).ToListAsync();
             return res;
         }
 
@@ -85,7 +85,7 @@ namespace AppraisalTool.Persistence.Repositories
             var res = await _dbContext.JobRoles.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (res != null)
             {
-                res.IsActive = false;
+                res.IsDeleted= true;
                 await _dbContext.SaveChangesAsync();
                 Response.Succeeded=true;
                 Response.Message = $"Id{id} deleted Successfully";
@@ -146,7 +146,7 @@ namespace AppraisalTool.Persistence.Repositories
             var res = await _dbContext.UserRole.Where(x => x.Id == id).FirstOrDefaultAsync();
             if (res != null)
             {
-                //res.IsDeleted = false;
+                res.IsDeleted = true;
                 await _dbContext.SaveChangesAsync();
                 Response.Succeeded = true;
                 Response.Message = $"Id{id} deleted Successfully";
@@ -160,27 +160,7 @@ namespace AppraisalTool.Persistence.Repositories
             }
         }
 
-        //public async Task<RemoveUserRoleCommandDto> RemoveUserRole(int id)
-        //{
-        //    RemoveUserRolesCommandDto Response = new RemoveUserRolesCommandDto();
-        //    var res = await _dbContext.JobRoles.Where(x => x.Id == id).FirstOrDefaultAsync();
-        //    if (res != null)
-        //    {
-        //        //res.IsDeleted = false;
-        //        await _dbContext.SaveChangesAsync();
-        //        Response.Succeeded = true;
-        //        Response.Message = $"Id{id} deleted Successfully";
-        //        return Response;
-        //    }
-        //    else
-        //    {
-        //        Response.Succeeded = false;
-        //        Response.Message = "Id Doesn'nt Exist";
-        //        return Response;
-        //    }
-        //}
-
-
+       
 
 
         #endregion

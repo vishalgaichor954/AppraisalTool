@@ -1,4 +1,6 @@
-﻿using AppraisalTool.App.Models;
+﻿using AppraisalTool.App.Helpers;
+using AppraisalTool.App.Models;
+using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.UserRole;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -20,11 +22,11 @@ namespace AppraisalTool.App.Controllers
         {
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
             if (ModelState.IsValid)
             {
-
+                model.AddedBy = userSession.UserId;
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(client.BaseAddress + "Role/AddUserRole?api-version=1", content).Result;
@@ -88,7 +90,8 @@ namespace AppraisalTool.App.Controllers
             Console.WriteLine("PostMethod hit");
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            model.UpdatedBy = userSession.UserId;
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PutAsync("Role/UpdateUserRole?api-version=1", content).Result;
@@ -111,7 +114,7 @@ namespace AppraisalTool.App.Controllers
             client.BaseAddress = baseAddress;
             //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             //model.upda = userSession.UserId;
-            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/Role/RemoveJobProfileRole?id={id}&api-version=1").Result;
+            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/Role/RemoveUserRole?id={id}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;

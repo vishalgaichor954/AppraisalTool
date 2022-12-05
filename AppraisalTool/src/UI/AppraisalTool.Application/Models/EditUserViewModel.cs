@@ -55,11 +55,11 @@ namespace AppraisalTool.App.Models
         [Display(Name = "Branch Name")]
         public string? BranchName { get; set; }
 
-        [Required(ErrorMessage = "Please select a Reporting Authority Name")]
-        public int RepaId { get; set; }
+        //[Required(ErrorMessage = "Please select a Reporting Authority Name")]
+        //public int RepaId { get; set; }
 
-        [Required(ErrorMessage = "Please select a Reviewing Authority Name")]
-        public int RevaId { get; set; }
+        //[Required(ErrorMessage = "Please select a Reviewing Authority Name")]
+        //public int RevaId { get; set; }
 
         public int? AddedBy { get; set; }
 
@@ -70,5 +70,7 @@ namespace AppraisalTool.App.Models
         public string? SecondaryJobProfileName { get; set; }
         public int? SecondaryJobProfileId { get; set; }
         public int? PrimaryJobProfileId { get; set; }
+
+        public string Name { get; set; }
     }
 }

@@ -21,8 +21,8 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
         public int PrimaryRole { get; set; }
         public int SecondaryRole { get; set; }
 
-        public int RepaId { get; set; }
-        public int RevaId { get; set; }
+        public int RepaId { get; set; } = 0;
+        public int RevaId { get; set; } = 0;
         public int? AddedBy { get; set; }
 
 

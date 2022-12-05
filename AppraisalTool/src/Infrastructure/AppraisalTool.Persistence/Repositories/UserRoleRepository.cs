@@ -20,7 +20,8 @@ namespace AppraisalTool.Persistence.Repositories
         #region UserRole Crud
         public async Task<IEnumerable<UserRole>> GetAllRole()
         {
-            return await ListAllAsync();
+            var res = await _dbContext.UserRole.Where(x => x.IsDeleted !=true).ToListAsync();
+            return res;
         }
 
        

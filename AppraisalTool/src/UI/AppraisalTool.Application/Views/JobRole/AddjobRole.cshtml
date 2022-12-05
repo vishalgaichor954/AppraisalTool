@@ -18,7 +18,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Add Job Role</h4>
-                <form class="form-sample" asp-action="AddjobRole">
+                <form class="form-sample needs-validation" asp-action="AddjobRole" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                    
                     <div class="row">
@@ -26,8 +26,8 @@
                             <div class="form-group row">
                                 <label asp-for="Name" class="col-sm-4 col-form-label">Name<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input  asp-for="Name" type="Text" class="form-control" />
-                                    <span asp-validation-for="Name" class="text-danger mx-1 small"></span>
+                                    <input  asp-for="Name" type="Text" class="form-control" required/>
+                                    @*<span asp-validation-for="Name" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
@@ -75,6 +75,27 @@ function xyz() {
 }
     </script>
     
+<script>
+      (function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+   </script>
 
 @*<script language="javascript">
         var today = new Date();

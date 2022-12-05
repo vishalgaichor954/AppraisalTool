@@ -133,8 +133,7 @@ namespace AppraisalTool.App.Controllers
             client.BaseAddress = baseAddress;
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-            if (ModelState.IsValid)
-            {
+           
                 model.AddedBy = userSession.UserId;
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
@@ -144,7 +143,7 @@ namespace AppraisalTool.App.Controllers
                     TempData["AddUserSuccess"] = "User Created Successfully";
                     return RedirectToAction("ListUsers");
                 }
-            }
+            
             TempData["AddUserFailed"] = "Faild to Register User";
             return RedirectToAction("ListUsers");
         }

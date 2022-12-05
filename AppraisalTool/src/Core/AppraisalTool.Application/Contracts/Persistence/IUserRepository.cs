@@ -1,4 +1,5 @@
 ﻿using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalList;
+using AppraisalTool.Application.Features.Users.Command.AssignAuthorityCommand;
 using AppraisalTool.Application.Features.Users.Command.CreateRoleCommand;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
@@ -25,7 +26,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
         Task<IEnumerable<User>> GetUserByRoleId(int roleId);
         public Task<bool> UpdateUser(User user);
         public Task<IEnumerable<GetAppraisalDto>> GetAllAppraisals();
-        public Task<IEnumerable<User>> GetAllUser();
+        public Task<IEnumerable<GetUserListQueryVm>> GetAllUser();
         Task<CreateRoleCommandDto> CreateUserRole(UserJobRoles request);
 
         //public Task<dynamic> getCards(int id);
@@ -36,7 +37,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<bool> RequestEdit(AppraisalForEditVm appraisalForEditVm);
         public Task<bool> RequestToEdit(int? fId, int? userId);
 
-
+        public Task<AssignAuthorityCommandDto> AssignAuthority(int id, AssignAuthorityCommand request);
         public Task<GetUserListQueryVm> GetUserbyid(int id);
         public Task<Appraisal> GetAppraisalByFidAndUserId(int? fId, int? userId);
     }

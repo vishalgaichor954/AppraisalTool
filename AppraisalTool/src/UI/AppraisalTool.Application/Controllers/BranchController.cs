@@ -99,7 +99,7 @@ namespace AppraisalTool.App.Controllers
             client.BaseAddress = baseAddress;
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-            //model.UpdatedBy = userSession.UserId;
+            model.UpdatedBy = userSession.UserId;
             //model.IsActive = status;
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
@@ -112,5 +112,27 @@ namespace AppraisalTool.App.Controllers
             TempData["BranchError"] = "Failed To Update Branch";
             return RedirectToAction("ListBranches");
         }
+        public IActionResult DeleteBranch(int id)
+        {
+            //User/removeUser?id=9&api-version=1
+            Console.WriteLine("PostMethod hit");
+            Uri baseAddress = new Uri("https://localhost:5000/api/");
+            HttpClient client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            //model.upda = userSession.UserId;
+            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/User/RemoveBranch?id={id}&api-version=1").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var data = response.Content.ReadAsStringAsync().Result;
+                var res = JsonConvert.DeserializeObject<Response>(data);
+
+                TempData["DeleteMenuSuccess"] = "User Id Deleted Successfully";
+                return RedirectToAction("ListBranches");
+            }
+            TempData["DeleteMenuFaild"] = "Failed To delete User Role";
+            return RedirectToAction("ListBranches");
+        }
+
     }
 }

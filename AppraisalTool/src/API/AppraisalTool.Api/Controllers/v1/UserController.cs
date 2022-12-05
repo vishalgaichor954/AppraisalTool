@@ -18,6 +18,8 @@ using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalList;
 using AppraisalTool.Application.Features.Branches.Command.AddBranchCommand;
 using AppraisalTool.Application.Features.Branches.Command.UpdateBranchCommand;
 using AppraisalTool.Application.Contracts.Persistence;
+using AppraisalTool.Application.Features.Branches.Command.RemoveBranchCommand;
+using AppraisalTool.Application.Features.Users.Command.AssignAuthorityCommand;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -184,6 +186,26 @@ namespace AppraisalTool.Api.Controllers.v1
             var dtos = await _branchRepository.GetBranchById(id);
             return Ok(dtos);
         }
+
+        [HttpDelete("RemoveBranch")]
+        public async Task<ActionResult> RemoveBranch(int id)
+        {
+            _logger.LogInformation("RemoveUserRole Initiated");
+            var dtos = await _mediator.Send(new RemoveBranchesCommand() { Id = id });
+
+            _logger.LogInformation("RemoveUserRole Completed");
+            return Ok(dtos);
+        }
+        [HttpPut("AssignAuthority")]
+        public async Task<ActionResult> AssignAuthority(AssignAuthorityCommand request)
+        {
+            _logger.LogInformation("AssignAuthority Initiated");
+            var dtos = await _mediator.Send(request);
+
+            _logger.LogInformation("AssignAuthority Completed");
+            return Ok(dtos);
+        }
+
 
     }
 }

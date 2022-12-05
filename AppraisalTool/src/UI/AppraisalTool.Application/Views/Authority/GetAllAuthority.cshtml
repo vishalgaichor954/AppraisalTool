@@ -208,7 +208,7 @@
             <li class="breadcrumb-item">
                 <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Branch Management</li>
+            <li class="breadcrumb-item active" aria-current="page">Assign Authority</li>
         </ol>
     </nav>
 
@@ -224,9 +224,9 @@
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item active" aria-current="page">
-                                            <div style="align-items:center;">
-                                                <a class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" asp-action="AddBranch">Add New Branch</a>
-                                            </div>
+                                          @*  <div style="align-items:center;">
+                                                <a class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" asp-action="AddBranch">Assign Authority</a>
+                                            </div>*@
                                         </li>
                                     </ol>
                                 </nav>
@@ -235,22 +235,24 @@
                                 <table class="table table-bordered display" id="table" style="max-width:95%">
                                     <thead>
                                         <tr>
-                                            <th> Branch Code </th>
-                                            <th> Branch Name </th>
+                                            <th> Name </th>
+                                            <th> Reporting Authority </th>
+                                            <th>Reviewing Authority</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (ViewBag.BranchList != null)
+                                        @if ( ViewBag.UserList != null)
                                         {
-                                            @foreach (var item in ViewBag.BranchList)
+                                            @foreach (var item in  ViewBag.UserList)
                                             {
                                                 <tr>
-                                                    <td> @item.branchCode </td>
-                                                    <td> @item.branchName</td>
+                                                    <td> @item.firstName  @item.lastName </td>
+                                                    <td> @item.repaName</td>
+                                                     <td> @item.revaName</td>
                                                     <td>
-                                                        <a asp-action="UpdateBranch" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
-                                                        <a asp-action="DeleteBranch" asp-route-id="@item.id" class="btn btn-sm   btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
+                                                        <a asp-action="AssignAuthority" asp-route-id="@item.id" class="btn btn-sm blueTheme"><i class="mdi mdi-table-edit"></i></a>
+                                                        @*<a asp-action="DeleteBranch" asp-route-id="@item.id" class="btn btn-sm LoginBtn" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>*@
                                                     </td>
                                                     <td> @item.test</td>
                                                     <td> @item.test</td>
@@ -290,7 +292,7 @@
                 'targets': [2], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             },
-            { visible: false, targets: [3, 4, 5, 6, 7, 8, 9] },
+            { visible: false, targets: [4, 5, 6, 7, 8, 9,10] },
 
             ],
             dom: 'lBfrtip',

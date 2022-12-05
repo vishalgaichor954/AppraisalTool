@@ -56,7 +56,7 @@
                             <div class="form-group row">
                                 <label asp-for="Password" class="col-sm-4 col-form-label">Password<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter Password"  pattern="^[a-zA-z0-9&*$]{8,}"  title="Please Enter Valid Password" required/>
+                                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter Password" required/>
                                        <br />
                                     @*<span asp-validation-for="Password" class="text-danger mx-1 small"></span>*@
                                 </div>
@@ -125,7 +125,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        @*<div class="col-md-6">
                              <div class="form-group row">
                                 <label asp-for="RepaId" class="col-sm-4 col-form-label">
                                     Reporting Authority<span style="color: Red">&nbsp;*</span></label>
@@ -137,9 +137,9 @@
                                       <br />
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
-                    <div class="row">
+                   @* <div class="row">
                         <div class="col-md-6">
                            <div class="form-group row">
                                 <label asp-for="RevaId" class="col-sm-4 col-form-label">
@@ -154,7 +154,7 @@
                             </div>
                         </div>
                          
-                    </div>
+                    </div>*@
                     
                       <div class="form-group text-center">
                            @* <input type="hidden" name="job" id="job" />*@
