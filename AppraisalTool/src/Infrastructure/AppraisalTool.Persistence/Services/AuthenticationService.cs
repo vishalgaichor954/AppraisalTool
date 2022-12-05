@@ -69,17 +69,27 @@ namespace AppraisalTool.Persistence.Services
             }
             else
             {
-                bool isAuthenticated = VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt);
-                if (isAuthenticated)
-                {
-                    string name = $"{user.FirstName} {user.LastName}";
-                    string token = GenerateToken(user.Id, user.Email, user.Role.Role, name);
-                    return new AuthenticationResponse() { IsAuthenticated = true, Token = token, Role = user.Role.Role, Message = null, Name = name,RoleId=user.RoleId,UserId=user.Id };
-                }
-                else
+                if (user.IsDeleted == true)
                 {
                     return null;
                 }
+                else
+                {
+
+                    bool isAuthenticated = VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt);
+                    if (isAuthenticated)
+                    {
+                        string name = $"{user.FirstName} {user.LastName}";
+                        string token = GenerateToken(user.Id, user.Email, user.Role.Role, name);
+                        return new AuthenticationResponse() { IsAuthenticated = true, Token = token, Role = user.Role.Role, Message = null, Name = name, RoleId = user.RoleId, UserId = user.Id };
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+
             }
         }
 
@@ -175,7 +185,7 @@ namespace AppraisalTool.Persistence.Services
             _logger.LogInformation("Email Does not exists intiated");
             var user = await _userRepository.FindUserByEmail(email);
 
-            if(user != null)
+            if (user != null)
             {
                 return true;
             }
@@ -186,8 +196,8 @@ namespace AppraisalTool.Persistence.Services
 
 
         }
-       
-    
+
+
         //public async Task<dynamic> GetCards(int id)
         //{
 

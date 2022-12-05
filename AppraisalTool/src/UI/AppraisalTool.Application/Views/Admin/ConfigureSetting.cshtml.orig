@@ -125,12 +125,21 @@
         <div class="col-md-12">
             <div class="row justify-content-center">
                 <!-- <div class="col-md-1"></div> -->
-<<<<<<< Updated upstream
+<<<<<<< HEAD
                     @{
                         foreach (var item in ViewBag.GetMenuCards)
                         { 
                             if(item.menuList.menuFlag=="ConfigureSettings"){
-                            <div class="col-md-4 stretch-card grid-margin Dash-Card">
+                        <div class="col-md-4 stretch-card grid-margin Dash-Card">
+                            <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="Anchor-body">
+                                <div class="card @item.menuList.menuClass card-img-holder text-white Dash-Card">
+                                    <div class="card-body">
+                                        <img src="~/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                                        <h5 class="font-weight-normal mb-3">
+                                                @item.menuList.menuText
+                                                <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                                        </h5>
+                                        <i class=" @item.menuList.menuIcon"></i>
 =======
                 @{
                     foreach (var item in ViewBag.GetMenuCards)
@@ -138,23 +147,16 @@
                         if (item.menuList.menuFlag == "ConfigureSettings")
                         {
                             <div class="col-md-4 stretch-card ">
->>>>>>> Stashed changes
                                 <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="Anchor-body">
                                     <div class="card @item.menuList.menuClass card-img-holder text-white Dash-Card">
                                         <div class="card-body">
                                             <img src="~/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-<<<<<<< Updated upstream
-                                            <h5 class="font-weight-normal mb-3">
-                                                 <h4>@item.menuList.menuText</h4> 
-                                                    <br>
-                                            </h5>
-=======
                                             <h4 class="font-weight-normal mb-3">
                                                 @item.menuList.menuText
                                                 <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                                             </h4>
->>>>>>> Stashed changes
                                             <i class=" @item.menuList.menuIcon"></i>
+>>>>>>> AT-Dev
 
                                             <!-- <h2 class="mb-5">$ 15,0000</h2>
                                             <h6 class="card-text">Increased by 60%</h6> -->
