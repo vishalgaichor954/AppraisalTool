@@ -288,10 +288,10 @@
                                             <th> Name </th>
                                             <th> Class Name </th>
                                             <th> Icon Name </th>
-                                            <th> Flag Name </th>
+                                            <th> Model </th>
                                             @* <th> Controller Name</th>
                                             <th> Action Name </th>*@
-                                            <th> Link Name </th>
+                                            <th> Link </th>
                                             <th> Role </th>
                                             <th>Action</th>
                                         </tr>
@@ -311,8 +311,8 @@
                                                     <td> @item.menuLink </td>
                                                     <td> @item.roleName </td>
                                                     <td>
-                                                        <a asp-action="UpdateMenu" asp-route-id="@item.menu_Id" class="btn btn-sm blueTheme"><i class="mdi mdi-table-edit"></i></a>
-                                                        <a asp-action="DeleteMenu" asp-route-id="@item.menu_Id" class="btn btn-sm LoginBtn" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
+                                                        <a asp-action="UpdateMenu" asp-route-id="@item.menu_Id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
+                                                        <a asp-action="DeleteMenu" asp-route-id="@item.menu_Id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>
                                                 </tr>
                                             }

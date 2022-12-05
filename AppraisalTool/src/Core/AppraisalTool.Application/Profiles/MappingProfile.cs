@@ -32,6 +32,8 @@ using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalRe
 using AppraisalTool.Application.Features.FinancialYears.Queries.GetAllFinancialYears;
 using AppraisalTool.Application.Features.UserJobProfileRoles.Command.CreateJobProfileRoleCommand;
 using AppraisalTool.Application.Features.UserJobProfileRoles.Query.GetJobProfileRoleByIdQuery;
+using AppraisalTool.Application.Features.UserRoles.Command.CreateUserRoleCommand;
+using AppraisalTool.Application.Features.UserRoles.Query.GetUserRoleById;
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -107,6 +109,10 @@ namespace AppraisalTool.Application.Profiles
             CreateMap<JobRoles, CreateJobProfileCommand>().ReverseMap();
             CreateMap<JobRoles, GetJobRoleByIdQueryDto>().ReverseMap();
 
+
+            //user role mapping
+            CreateMap<UserRole, CreateUserRolesCommand>().ReverseMap();
+            CreateMap<UserRole, GetUserRoleByIdQueryDto>().ReverseMap();
         }
     }
 }

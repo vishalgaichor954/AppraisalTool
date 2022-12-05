@@ -1,80 +1,80 @@
 ﻿using AppraisalTool.App.Models;
-using AppraisalTool.App.Models.JobRoles;
+using AppraisalTool.App.Models.UserRole;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace AppraisalTool.App.Controllers
 {
-    public class JobRoleController : Controller
+    public class UserRoleController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:5000/api/");
         HttpClient client = new HttpClient();
 
-        public IActionResult AddjobRole()
+        public IActionResult AddUserRole()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult AddjobRole(JobRoles model)
+        public IActionResult AddUserRole(UserRole model)
         {
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            
+
             if (ModelState.IsValid)
             {
-                
+
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "Role/AddJobProfileRole?api-version=1", content).Result;
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "Role/AddUserRole?api-version=1", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    TempData["AddUserSuccess"] = "Job Role Added Successfully";
-                    return RedirectToAction("ListJobRole");
+                    TempData["AddUserSuccess"] = "User Role Added Successfully";
+                    return RedirectToAction("ListUserRole");
                 }
             }
-            TempData["AddUserFailed"] = "Failed to Add Job Role";
-            return RedirectToAction("ListJobRole");
+            TempData["AddUserFailed"] = "Failed to Add User Role";
+            return RedirectToAction("ListUserRole");
 
         }
         [HttpGet]
-        public IActionResult ListJobRole()
+        public IActionResult ListUserRole()
         {
             client = new HttpClient();
             client.BaseAddress = baseAddress;
 
 
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User/GetJobProfile?api-version=1").Result;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "Role/GetUserRole?api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
 
                 string responseData = response.Content.ReadAsStringAsync().Result;
-                
+
                 dynamic json = JsonConvert.DeserializeObject(responseData);
 
-                ViewBag.JobProfileRole = json.data;
+                ViewBag.Role = json.data;
                 return View();
 
             }
             return View();
         }
         [HttpGet]
-        public IActionResult UpdateJobRole(int id)
+        public IActionResult UpdateUserRole(int id)
         {
 
 
-            JobRoles financialYear = new JobRoles();
+            UserRole financialYear = new UserRole();
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Role/GetJobRoleById?id={id}&api-version=1").Result;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Role/GetUserRoleById?id={id}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
 
                 var res = JsonConvert.DeserializeObject<Response>(data);
                 var serres = JsonConvert.SerializeObject(res.Data);
-                financialYear = JsonConvert.DeserializeObject<JobRoles>(serres);
+                financialYear = JsonConvert.DeserializeObject<UserRole>(serres);
                 //ViewBag.RoleList = menu;
 
                 Console.WriteLine(financialYear);
@@ -82,7 +82,7 @@ namespace AppraisalTool.App.Controllers
             return View(financialYear);
         }
         [HttpPost]
-        public IActionResult UpdateJobRole(JobRoles model)
+        public IActionResult UpdateUserRole(UserRole model)
         {
 
             Console.WriteLine("PostMethod hit");
@@ -91,19 +91,19 @@ namespace AppraisalTool.App.Controllers
             //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PutAsync("Role/UpdateJobProfileRole?api-version=1", content).Result;
+            HttpResponseMessage response = client.PutAsync("Role/UpdateUserRole?api-version=1", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 TempData["Success"] = "Role Update Successfully";
-                return RedirectToAction("ListJobRole");
+                return RedirectToAction("ListUserRole");
             }
-            TempData["editError"] = "Faild to Update Role";
-            return RedirectToAction("ListJobRole");
+            TempData["editError"] = "Failed to Update Role";
+            return RedirectToAction("ListUserRole");
 
 
 
         }
-        public IActionResult DeleteJobRole(int id)
+        public IActionResult DeleteUserRole(int id)
         {
             //User/removeUser?id=9&api-version=1
             Console.WriteLine("PostMethod hit");
@@ -117,11 +117,12 @@ namespace AppraisalTool.App.Controllers
                 var data = response.Content.ReadAsStringAsync().Result;
                 var res = JsonConvert.DeserializeObject<Response>(data);
 
-                TempData["DeleteMenuSuccess"] = "Role Id Deleted Successfully";
-                return RedirectToAction("ListJobRole");
+                TempData["DeleteMenuSuccess"] = "User Id Deleted Successfully";
+                return RedirectToAction("ListUserRole");
             }
-            TempData["DeleteMenuFaild"] = "Failed To delete Role";
-            return RedirectToAction("ListJobRole");
+            TempData["DeleteMenuFaild"] = "Failed To delete User Role";
+            return RedirectToAction("ListUserRole");
         }
+
     }
 }

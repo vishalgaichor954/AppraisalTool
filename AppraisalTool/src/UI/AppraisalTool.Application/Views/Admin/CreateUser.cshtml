@@ -17,14 +17,15 @@
         <div class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Create User</h4>
-                <form class="form-sample" asp-action="CreateUser">
+                <form class="form-sample needs-validation" asp-action="CreateUser" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="FirstName" class="col-sm-4 col-form-label">First Name<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="FirstName" type="text" class="form-control" placeholder="Enter First Name" />
+                                    <input asp-for="FirstName" type="text" class="form-control" placeholder="Enter First Name"  pattern="[a-zA-z]{2,10}"  title="First Name Should Contain only Alphabet" required/>
+                                    <br />
                                     <span asp-validation-for="FirstName" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -33,7 +34,8 @@
                             <div class="form-group row">
                                 <label asp-for="LastName" class="col-sm-4 col-form-label">Last Name<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="LastName" type="text" class="form-control" placeholder="Enter Last Name" />
+                                    <input asp-for="LastName" type="text" class="form-control" placeholder="Enter Last Name" pattern="[a-zA-z]{2,10}"  title="Last Name Should Contain only Alphabet" required/>
+                                       <br />
                                     <span asp-validation-for="LastName" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -44,7 +46,8 @@
                             <div class="form-group row">
                                 <label asp-for="Email" class="col-sm-4 col-form-label">Email Address<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="Email" type="text" class="form-control" placeholder="Enter Email Address" />
+                                    <input asp-for="Email" type="text" class="form-control" placeholder="Enter Email Address" pattern="^[0-9a-zA-z]+[.+-_$]{0,1}[0-9a-zA-z]+[a-zA-z]+[.][a-zA-z]{2,3}$" title="Please Enter Valid Email" required/>
+                                       <br />
                                     <span asp-validation-for="Email" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -53,7 +56,8 @@
                             <div class="form-group row">
                                 <label asp-for="Password" class="col-sm-4 col-form-label">Password<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter Password"/>
+                                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter Password" required/>
+                                       <br />
                                     <span asp-validation-for="Password" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -64,7 +68,8 @@
                             <div class="form-group row">
                                 <label asp-for="JoinDate" class="col-sm-4 col-form-label">Joining Date<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="JoinDate" type="date" class="form-control" id="date_picker" />
+                                    <input asp-for="JoinDate" type="date" class="form-control" id="date_picker" required />
+                                       <br />
                                     <span asp-validation-for="JoinDate" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -80,9 +85,10 @@
                             <div class="form-group row">
                                 <label asp-for="RoleId" class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="RoleId" class="form-control" asp-items="@ViewBag.Rolelist">
+                                    <select asp-for="RoleId" class="form-control" asp-items="@ViewBag.Rolelist" required>
                                         <option value="">Select Role</option>
                                     </select>
+                                       <br />
                                     <span asp-validation-for="RoleId" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -94,9 +100,10 @@
                             <div class="form-group row">
                                 <label asp-for="BranchId" class="col-sm-4 col-form-label">Branch<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="BranchId" class="form-control" asp-items="@ViewBag.branchlist">
+                                    <select asp-for="BranchId" class="form-control" asp-items="@ViewBag.branchlist" required>
                                         <option value="">Select Branch</option>
                                     </select>
+                                       <br />
                                     <span asp-validation-for="BranchId" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -105,9 +112,10 @@
                             <div class="form-group row">
                                 <label asp-for="PrimaryRole" class="col-sm-4 col-form-label">Primary Job Profile<span style="color: Red">&nbsp;*</span></label></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="PrimaryRole" class="form-control" asp-items="@ViewBag.JobProfileRolelist">
+                                    <select asp-for="PrimaryRole" class="form-control" asp-items="@ViewBag.JobProfileRolelist" required>
                                         <option value="">Select Primary Job Profile</option>
                                     </select>
+                                       <br />
                                     <span asp-validation-for="PrimaryRole" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -120,9 +128,10 @@
                                     Secondary Job Profile<span style="color: Red">&nbsp;*</span></label>
                                 
                                 <div asp-for="SecondaryRole" class="col-sm-8">
-                                    <select asp-for="SecondaryRole" asp-items="@ViewBag.JobProfileRolelist" class="form-control">
+                                    <select asp-for="SecondaryRole" asp-items="@ViewBag.JobProfileRolelist" class="form-control" required>
                                         <option value="">Select Secondary Job Profile</option>
                                     </select>
+                                       <br />
                                     <span asp-validation-for="SecondaryRole" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -133,9 +142,10 @@
                                     Reporting Authority<span style="color: Red">&nbsp;*</span></label>
                                 
                                 <div asp-for="SecondaryRole" class="col-sm-8">
-                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control">
+                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control"required>
                                         <option value="">Select Reporting Authority </option>
                                     </select>
+                                      <br />
                                     <span asp-validation-for="RepaId" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -148,9 +158,10 @@
                                     Reviewing Authority<span style="color: Red">&nbsp;*</span></label>
                                 
                                 <div asp-for="SecondaryRole" class="col-sm-8">
-                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control">
+                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control" required>
                                         <option value="">Select Reviewing Authority</option>
                                     </select>
+                                      <br />
                                     <span asp-validation-for="RevaId" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
@@ -205,6 +216,28 @@
         today = yyyy + '-' + mm + '-' + dd;
         $('#date_picker').attr('min',today);
     </script>
+
+     <script>
+      (function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+   </script>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

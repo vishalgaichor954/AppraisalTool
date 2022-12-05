@@ -1,6 +1,7 @@
 ﻿@{
-    //ViewData["Title"] = "AppraisalTool";
+    ViewData["Title"] = "AppraisalTool";
 }
+
 <div class="loader">
     <div class="d-flex justify-content-center align-items-center" style="height:100vh;">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -16,13 +17,13 @@
 <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
 <script src="~/lib/package/dist/sweetalert2.all.js"></script>
 <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+
 <style>
     .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
-        color: #333;
-        margin-right: 15px;
-    }
+    color: #333;
+    margin-right: 15px;
+}
 </style>
-
 
 @if (TempData["editError"] != null)
 {
@@ -44,7 +45,7 @@
 
         Toast.fire({
             icon: 'error',
-            title: 'Oops ! something went wrong user was not Updated'
+            title: 'Oops ! something went wrong Role was not Updated'
         })
     </script>
 }
@@ -66,7 +67,7 @@
 
         Toast.fire({
             icon: 'success',
-            title: 'User updated Successfully'
+            title: 'User Role updated Successfully'
         })
     </script>
 }
@@ -74,7 +75,7 @@
 
 @*add user*@
 
-@if (TempData["AAddUserFailed"] != null)
+@if (TempData["AddUserFailed"] != null)
 {
 
 
@@ -94,7 +95,7 @@
 
         Toast.fire({
             icon: 'error',
-            title: 'Oops ! something went wrong user was not Added'
+            title: 'Oops ! something went wrong Role was not Added'
         })
     </script>
 }
@@ -116,13 +117,13 @@
 
         Toast.fire({
             icon: 'success',
-            title: 'User Added Successfully'
+            title: 'User Role Added Successfully'
         })
     </script>
 }
 
 @*add user end*@
-@if (TempData["DeleteUserFaild"] != null)
+@if (TempData["DeleteMenuFaild"] != null)
 {
 
 
@@ -142,11 +143,11 @@
 
         Toast.fire({
             icon: 'error',
-            title: 'Oops ! something went wrong user was not Deleted'
+            title: 'Oops ! something went wrong Role was not Deleted'
         })
     </script>
 }
-@if (TempData["DeleteuserSuccess"] != null)
+@if (TempData["DeleteMenuSuccess"] != null)
 {
     <script>
 
@@ -164,78 +165,50 @@
 
         Toast.fire({
             icon: 'success',
-            title: 'User Deleted Successfully'
+            title: 'JobProfile Role Deleted Successfully'
         })
     </script>
 }
 
+<head>
+    <style>
+        .BreadCrump > a:link {
+            color: grey;
+            background-color: transparent;
+            text-decoration: none;
+        }
 
+
+        .BreadCrump > a:visited {
+            color: grey;
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        .BreadCrump > a:hover {
+            color: black;
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        .BreadCrump > a:active {
+            color: grey;
+            background-color: transparent;
+            text-decoration: none;
+        }
+    </style>
+</head>
 <div class="container">
-    @*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting" >Configure Settings</a>  /<a asp-controller="Admin" asp-action="ListUsers" >
-    User Management </a></h6>*@
-    <nav aria-label="breadcrumb">
+    @*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting">Configure Settings</a>  /<a asp-controller="FinancialYear" asp-action="ListFinancialYear">Financial Year Management </a></h6>*@
+
+ <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style="border:none">
             <li class="breadcrumb-item">
-                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting"  style=" text-decoration: none;">Configure Settings</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">User Management</li>
+            <li class="breadcrumb-item active" aria-current="page">Job Role Management</li>
         </ol>
     </nav>
-
-
-
-    @*@if (TempData["AddUserSuccess"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["AddUserSuccess"]
-    </div>
-    </div>
-    }*@
-    @*    @if (TempData["AAddUserFailed"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["AddUserFailed"]
-    </div>
-    </div>
-    }
-    @if (TempData["DeleteuserSuccess"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["DeleteuserSuccess"]
-    </div>
-    </div>
-    }
-
-
-    @if (TempData["DeleteUserFaild"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["DeleteUserFaild"]
-    </div>
-    </div>
-    }*@
-
-    @* @if (TempData["editError"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-danger mt-5" role="alert">
-    @TempData["editError"]
-    </div>
-    </div>
-    }
-    @if (TempData["Success"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["Success"]
-    </div>
-    </div>
-    }*@
-
 
     <div class="container-scroller ">
         <!-- partial -->
@@ -245,45 +218,51 @@
                     <div class="card" style="max-width:95%">
                         <div class="card-body">
                             <div class="page-header">
-                                <h3 class="page-title"> Users </h3>
-                                <nav aria-label="breadcrumb">
+@*                                <h3 class="page-title"> Menu </h3>*@  
+                              <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item active" aria-current="page">
                                             <div style="align-items:center;">
-                                                <a class="btn btn-block @*LoginBtn*@  blueTheme btn-md font-weight-medium auth-form-btn" asp-action="CreateUser">Create User</a>
+                                                <a class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" asp-action="AddUserRole">Add New UserRole</a>
                                             </div>
                                         </li>
                                     </ol>
                                 </nav>
                             </div>
                             <div style="overflow:scroll;">
-                                <table class="table table-bordered display" id="myTable" style="max-width:95%">
+                                <table class="table table-bordered display" id="table" style="max-width:95%">
                                     <thead>
                                         <tr>
-                                            <th> Name </th>
-                                            <th> Branch </th>
                                             <th> Role </th>
-                                            <th> Join Date </th>
-                                            <th> Primary Profile </th>
-                                            <th> Secondary Profile </th>
-                                            <th> Actions </th>
+                                            <th> End Year </th>
+                                            <th> Start Date</th>
+                                            <th> End Date </th>
+                                            <th>Active Status</th>
+                                             <th> Controller Name</th>
+                                            <th> Action Name </th>
+                                            <th> Link Name </th>
+                                            <th> Role </th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (ViewBag.UserList != null)
+                                        @if ( ViewBag.Role != null)
                                         {
-                                            @foreach (var item in ViewBag.UserList)
+                                            @foreach (var item in  ViewBag.Role)
                                             {
                                                 <tr>
-                                                    <td style="text-transform:'Capatilize';"> @item.firstName @item.lastName </td>
-                                                    <td> @item.branchName </td>
-                                                    <td> @item.roleName </td>
-                                                    <td> @item.joinDate </td>
-                                                    <td> @item.primaryJobProfileName </td>
-                                                    <td> @item.secondaryJobProfileName </td>
+                                                    <td> @item.role </td>
+                                                    <td> </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                   <td>  </td>
+                                                   <td>  </td>
+                                                     <td>  </td>
+                                                    <td>  </td>
                                                     <td>
-                                                        <a asp-action="UpdateUser" asp-route-id="@item.id" class="btn btn-sm  btn-outline-info @*LoginBtn*@"><i class="mdi mdi-table-edit"></i></a>
-                                                        <a asp-action="DeleteUser" asp-route-id="@item.id" class="btn btn-sm  btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
+                                                        <a asp-action="UpdateUserRole" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
+                                                        <a asp-action="DeleteUserRole" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>
                                                 </tr>
                                             }
@@ -309,12 +288,13 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" defer></script>
 <script>
     $(document).ready(function () {
-        $('#myTable').DataTable({
+        $('#table').DataTable({
             'columnDefs': [{
-                'targets': [6], // column index (start from 0)
+                'targets': [9], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             },
-            { visible: false, targets: [5] },
+             { visible: false, targets: [1,2,3,4,5,6,7,8] },
+            
             ],
             dom: 'lBfrtip',
             responsive: true,
@@ -333,6 +313,8 @@
 
 
             ]
+
+
         });
         $(".loader").fadeOut("slow");
     });
@@ -340,7 +322,7 @@
 
 <script>
     function loadDelete() {
-        let r = confirm("Are you sure you want to delete User?");
+        let r = confirm("Are you sure you want to delete?");
         if (r == false) {
             return event.preventDefault();
         }
