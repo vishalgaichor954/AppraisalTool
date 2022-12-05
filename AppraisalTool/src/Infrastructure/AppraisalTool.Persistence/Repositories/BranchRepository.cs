@@ -1,5 +1,8 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
+using AppraisalTool.Application.Features.Branches.Command.AddBranchCommand;
+using AppraisalTool.Application.Features.Branches.Command.UpdateBranchCommand;
 using AppraisalTool.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -15,9 +18,55 @@ namespace AppraisalTool.Persistence.Repositories
         {
         }
 
+        public async Task<AddBranchCommandDto> AddBranch(Branch branch)
+        {
+            var branchResponse = await _dbContext.Branch.Where(x => x.Id == branch.Id).FirstOrDefaultAsync();
+            AddBranchCommandDto response = new AddBranchCommandDto();
+            if (branchResponse != null)
+            {
+                response.Message = "Failed to add Branch";
+                response.Succeeded = false;
+                return response;
+            }
+            var result= await _dbContext.Branch.AddAsync(branch);
+
+           await _dbContext.SaveChangesAsync();
+            response.Id = branch.Id;
+            response.Message = "Branch Added Successfully";
+            response.Succeeded = true;
+            return response;
+        }
+
         public async Task<IEnumerable<Branch>> GetAllBranch()
         {
             return await ListAllAsync();
+        }
+
+        public async Task<Branch> GetBranchById(int id)
+        {
+            var branch = await _dbContext.Branch.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return branch;
+        }
+
+        public async Task<UpdateBranchCommandDto> UpdateBranchAsync(int id, UpdateBranchCommand request)
+        {
+            UpdateBranchCommandDto Response = new UpdateBranchCommandDto();
+            var branchtoUpdate = await _dbContext.Branch.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (branchtoUpdate != null)
+            {
+                branchtoUpdate.BranchName=request.BranchName;
+                branchtoUpdate.BranchCode = request.BranchCode;
+                await _dbContext.SaveChangesAsync();
+                Response.Message = "Update Successfully";
+                Response.Succeeded = true;
+                Response.Id = branchtoUpdate.Id;
+                return Response;
+            }
+            else
+            {
+                Response.Succeeded = false;
+                return Response;
+            }
         }
     }
 }
