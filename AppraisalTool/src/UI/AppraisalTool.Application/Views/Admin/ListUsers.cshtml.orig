@@ -282,8 +282,13 @@
                                                     <td> @item.primaryJobProfileName </td>
                                                     <td> @item.secondaryJobProfileName </td>
                                                     <td>
+<<<<<<< HEAD
+                                                        <a asp-action="UpdateUser" asp-route-id="@item.id" class="btn btn-sm  btn-outline-info @*LoginBtn*@"><i class="mdi mdi-table-edit"></i></a>
+                                                        <a asp-action="DeleteUser" asp-route-id="@item.id" class="btn btn-sm  btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
+=======
                                                         <a asp-action="UpdateUser" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
                                                         <a asp-action="DeleteUser" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
+>>>>>>> aa1b1e6714830fa440e57ebeeb16d93eac8ca5cd
                                                     </td>
                                                 </tr>
                                             }

@@ -11,18 +11,62 @@
 
 @*<link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
 <link rel="stylesheet" href="~/css/dataTables.bootstrap5.min.css" />*@
-@*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"/>*@
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
 <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
 <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
 <script src="~/lib/package/dist/sweetalert2.all.js"></script>
 <script src="~/lib/package/dist/sweetalert2.min.js"></script>
 
 <style>
+
     .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
-    color: #333;
-    margin-right: 15px;
-}
+        color: #333;
+        margin-right: 15px;
+    }
+
+    thead {
+        background-color: #1746A2;
+    }
+
+    table.dataTable {
+        box-shadow: #bbbbbb 0px 0px 5px 0px;
+    }
+
+    thead > tr,
+    thead > tr > th {
+        background-color: transparent;
+        color: #fff;
+        font-weight: normal;
+        text-align: start;
+    }
+
+    table.dataTable thead th,
+    table.dataTable thead td {
+        border-bottom: 0px solid #111 !important;
+    }
+
+    .dataTables_filter {
+        text-align: left !important;
+    }
+
+    #myTable_length label select {
+        width: 75px;
+    }
+
+    #myTable_length {
+        margin-left: 2%;
+        margin-bottom: 2%;
+    }
+
+    #myTable_filter {
+        margin-bottom: 2%;
+    }
+
+        #myTable_filter label input {
+            width: 75%;
+            margin-right: 3%;
+        }
+
 </style>
 
 @if (TempData["editError"] != null)
@@ -201,10 +245,10 @@
 <div class="container">
     @*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting">Configure Settings</a>  /<a asp-controller="FinancialYear" asp-action="ListFinancialYear">Financial Year Management </a></h6>*@
 
- <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style="border:none">
             <li class="breadcrumb-item">
-                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting"  style=" text-decoration: none;">Configure Settings</a>
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Finanacial Year Management</li>
         </ol>
@@ -218,8 +262,8 @@
                     <div class="card" style="max-width:95%">
                         <div class="card-body">
                             <div class="page-header">
-@*                                <h3 class="page-title"> Menu </h3>*@  
-                              <nav aria-label="breadcrumb">
+                                @*                                <h3 class="page-title"> Menu </h3>*@
+                                <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item active" aria-current="page">
                                             <div style="align-items:center;">
@@ -238,7 +282,7 @@
                                             <th> Start Date</th>
                                             <th> End Date </th>
                                             <th>Active Status</th>
-                                             <th> Controller Name</th>
+                                            <th> Controller Name</th>
                                             <th> Action Name </th>
                                             <th> Link Name </th>
                                             <th> Role </th>
@@ -256,9 +300,9 @@
                                                     <td> @item.startDate.ToString("dd MMMM")</td>
                                                     <td> @item.endDate.ToString("dd MMMM")</td>
                                                     <td>@item.isActive</td>
-                                                       <td> @item.menuController </td>
-                                            <td> @item.menuAction </td>
-                                                <td> @item.menuLink </td>
+                                                    <td> @item.menuController </td>
+                                                    <td> @item.menuAction </td>
+                                                    <td> @item.menuLink </td>
                                                     <td> @item.roleName </td>
                                                     <td>
                                                         <a asp-action="UpdateYear" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
@@ -293,8 +337,8 @@
                 'targets': [9], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             },
-             { visible: false, targets: [5,6,7,8] },
-            
+            { visible: false, targets: [5, 6, 7, 8] },
+
             ],
             dom: 'lBfrtip',
             responsive: true,
