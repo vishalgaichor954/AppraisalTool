@@ -20,9 +20,17 @@
 <script src="~/lib/package/dist/sweetalert2.min.js"></script>
 <style>
     .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
-    color: #333;
-    margin-right: 15px;
-}
+        color: #333;
+        margin-right: 15px;
+    }
+
+    .width-25 {
+        width: 25%;
+    }
+
+    .drpLength {
+        width: 35%;
+    }
 </style>
 @if (TempData["editError"] != null)
 {
@@ -170,31 +178,31 @@
 }
 
 <head>
-   @* <style>
-        .BreadCrump > a:link {
-            color: grey;
-            background-color: transparent;
-            text-decoration: none;
-        }
+    @* <style>
+    .BreadCrump > a:link {
+    color: grey;
+    background-color: transparent;
+    text-decoration: none;
+    }
 
 
-        .BreadCrump > a:visited {
-            color: grey;
-            background-color: transparent;
-            text-decoration: none;
-        }
+    .BreadCrump > a:visited {
+    color: grey;
+    background-color: transparent;
+    text-decoration: none;
+    }
 
-        .BreadCrump > a:hover {
-            color: black;
-            background-color: transparent;
-            text-decoration: none;
-        }
+    .BreadCrump > a:hover {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+    }
 
-        .BreadCrump > a:active {
-            color: grey;
-            background-color: transparent;
-            text-decoration: none;
-        }
+    .BreadCrump > a:active {
+    color: grey;
+    background-color: transparent;
+    text-decoration: none;
+    }
     </style>*@
 </head>
 <div class="container">
@@ -207,8 +215,8 @@
             <li class="breadcrumb-item active" aria-current="page">Menu Management</li>
         </ol>
     </nav>
-       
-   
+
+
     @*@if (TempData["AddMenuSuccess"] != null)
     {
     <div class="container">
@@ -366,9 +374,23 @@
 
 
         });
+
+        const lengthDrpdwn = document.querySelector(".dataTables_length");
+        lengthDrpdwn.setAttribute("style", "width:200px");
+        lengthDrpdwn.classList.add("mx-4");
+        console.log(lengthDrpdwn)
+
+        const drpdown = document.querySelector('[name="myTable_length"]');
+        drpdown.setAttribute("style", "width:50px");
+        console.log(drpdown)
+
+        //lengthDrpdwn.insertBefore(lbl1, lengthDrpdwn.children[0])
         $(".loader").fadeOut("slow");
 
     });
+
+
+
 </script>
 
 <script>
