@@ -259,14 +259,14 @@
         })
     </script>
 }
-<div class="content-wrapper main-panel content-wrapper-Blue">
+<div class="content-wrapper main-panel content-wrapper-red">
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a asp-controller="Dashboard" class="active" asp-action="Dashboard">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Appraisal Home</li>
+            <li class="breadcrumb-item active" aria-current="page">Appraisal</li>
         </ol>
     </nav>
 
@@ -274,7 +274,7 @@
 
         <!-- <h2 >Appraisal Home</h2> -->
         <div>
-            <h2 style="padding-top:30px;padding-left: 20px;">Appraisal Home</h2>
+            <h2 style="padding-top:30px;padding-left: 20px;">Appraisal</h2>
         </div>
         <div>
             @{
@@ -284,7 +284,7 @@
                 <h1>@fid @fyear</h1>
                 <div class="Dropdown">
 
-                    <select asp-for="StartYear" id="FincaialYear" class="form-control form-select FincaialYear" asp-items="@ViewBag.financialYearList">
+                    <select asp-for="StartYear" id="FincaialYear" class="form-control form-select FincaialYear color-black" asp-items="@ViewBag.financialYearList">
                     </select>
 
 
