@@ -24,19 +24,20 @@ using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuById;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuList;
 using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResult;
-<<<<<<< HEAD
 using AppraisalTool.Application.Features.Users.Query.GetUserByRoleId;
 using AppraisalTool.Application.Features.FinancialYears.Command.CreateFinancialYearCommand;
 using AppraisalTool.Application.Features.FinancialYears.Query.GetFinancialYearById;
-=======
 using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResultByReva;
 using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByFidAndUserId;
 using AppraisalTool.Application.Features.FinancialYears.Queries.GetAllFinancialYears;
 <<<<<<< HEAD
->>>>>>> 48281b234d7d14077e8d7d5d232a87a3eb1bddd7
+using AppraisalTool.Application.Features.UserJobProfileRoles.Command.CreateJobProfileRoleCommand;
+using AppraisalTool.Application.Features.UserJobProfileRoles.Query.GetJobProfileRoleByIdQuery;
+using AppraisalTool.Application.Features.UserRoles.Command.CreateUserRoleCommand;
+using AppraisalTool.Application.Features.UserRoles.Query.GetUserRoleById;
 =======
->>>>>>> 8be71fe271d27abbc3853a359a8126995945a3ff
->>>>>>> AT-Dev
+using AppraisalTool.Application.Features.Branches.Command.AddBranchCommand;
+>>>>>>> 369c9a9973047f88b93cf6894ada4f9ffa9de95e
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -95,7 +96,6 @@ namespace AppraisalTool.Application.Profiles
 
             CreateMap<MenuList, GetMenuListQueryVm>().ConvertUsing<GetMenuListVmCustomMapper>();
 
-<<<<<<< HEAD
             CreateMap<User, GetUserByRoleIdDto>().ReverseMap();
 
             //CreateMap<IQueryable<GetUserListQueryVm>, GetUserListQueryVm>().ReverseMap();
@@ -106,17 +106,22 @@ namespace AppraisalTool.Application.Profiles
             CreateMap<FinancialYear, CreateFinancialYearCommand>().ReverseMap();
 
             CreateMap<FinancialYear, GetFinancialYearByIdDto>().ReverseMap();
-=======
             //Financial Year Mapping
             CreateMap<FinancialYear, GetAllFinancialYearsVM>().ReverseMap();
 
-<<<<<<< HEAD
->>>>>>> 48281b234d7d14077e8d7d5d232a87a3eb1bddd7
-=======
->>>>>>> 8be71fe271d27abbc3853a359a8126995945a3ff
->>>>>>> AT-Dev
+            //job profile role mapping
+            CreateMap<JobRoles, CreateJobProfileCommand>().ReverseMap();
+            CreateMap<JobRoles, GetJobRoleByIdQueryDto>().ReverseMap();
+
+            //Branch Mapping
+            CreateMap<Branch, AddBranchCommand>().ReverseMap();
 
 
+
+
+            //user role mapping
+            CreateMap<UserRole, CreateUserRolesCommand>().ReverseMap();
+            CreateMap<UserRole, GetUserRoleByIdQueryDto>().ReverseMap();
         }
     }
 }

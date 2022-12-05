@@ -225,6 +225,15 @@
 
                                         </tbody>
                                     </table>
+<<<<<<< HEAD
+                                 
+                                @if (ViewBag.Empty==false)
+                                {
+                                 <div >
+                                    <input type="submit" value="Allow" class=" Button mb-4"  id="btn" style="display:none; margin-inline: auto; margin-left: 800px"/>
+
+=======
+>>>>>>> 369c9a9973047f88b93cf6894ada4f9ffa9de95e
                                 </div>
 
                                 @if (ViewBag.Empty == false)

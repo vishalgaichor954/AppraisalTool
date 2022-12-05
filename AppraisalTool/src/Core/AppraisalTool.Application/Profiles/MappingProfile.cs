@@ -34,6 +34,7 @@ using AppraisalTool.Application.Features.UserJobProfileRoles.Command.CreateJobPr
 using AppraisalTool.Application.Features.UserJobProfileRoles.Query.GetJobProfileRoleByIdQuery;
 using AppraisalTool.Application.Features.UserRoles.Command.CreateUserRoleCommand;
 using AppraisalTool.Application.Features.UserRoles.Query.GetUserRoleById;
+using AppraisalTool.Application.Features.Branches.Command.AddBranchCommand;
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -108,6 +109,11 @@ namespace AppraisalTool.Application.Profiles
             //job profile role mapping
             CreateMap<JobRoles, CreateJobProfileCommand>().ReverseMap();
             CreateMap<JobRoles, GetJobRoleByIdQueryDto>().ReverseMap();
+
+            //Branch Mapping
+            CreateMap<Branch, AddBranchCommand>().ReverseMap();
+
+
 
 
             //user role mapping

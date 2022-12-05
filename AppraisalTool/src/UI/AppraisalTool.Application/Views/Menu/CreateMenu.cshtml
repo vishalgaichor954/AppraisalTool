@@ -10,15 +10,14 @@
         <div class="card p-4 ">
             <div class="card-body">
                 <h4 class="card-title">Create Menu</h4>
-                <form class="form-sample" asp-action="CreateMenu">
+                <form class="form-sample needs-validation" asp-action="CreateMenu" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="MenuText" class="col-sm-4 col-form-label">Menu<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuText" type="text" class="form-control" placeholder="Enter Menu Text" />
-                                    <span asp-validation-for="MenuText" class="text-danger mx-1 small"></span>
+                                    <input asp-for="MenuText" type="text" class="form-control" placeholder="Enter Menu Text" required/>
                                 </div>
                             </div>
                         </div>
@@ -26,8 +25,7 @@
                             <div class="form-group row">
                                 <label asp-for="MenuClass" class="col-sm-4 col-form-label">Class<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuClass" type="text" class="form-control" placeholder="Enter Menu Class" />
-                                    <span asp-validation-for="MenuClass" class="text-danger mx-1 small"></span>
+                                    <input asp-for="MenuClass" type="text" class="form-control" placeholder="Enter Menu Class" required />
                                 </div>
                             </div>
                         </div>
@@ -37,8 +35,7 @@
                             <div class="form-group row">
                                 <label asp-for="MenuIcon" class="col-sm-4 col-form-label">Icon<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuIcon" type="text" class="form-control" placeholder="Enter Menu Icon" />
-                                    <span asp-validation-for="MenuIcon" class="text-danger mx-1 small"></span>
+                                    <input asp-for="MenuIcon" type="text" class="form-control" placeholder="Enter Menu Icon" required/>
                                 </div>
                             </div>
                         </div>
@@ -46,8 +43,7 @@
                             <div class="form-group row">
                                 <label asp-for="MenuFlag" class="col-sm-4 col-form-label">Model<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuFlag" type="text" class="form-control" placeholder="Enter Menu Flag" />
-                                    <span asp-validation-for="MenuFlag" class="text-danger mx-1 small"></span>
+                                    <input asp-for="MenuFlag" type="text" class="form-control" placeholder="Enter Menu Flag" required/>
                                 </div>
                             </div>
                         </div>
@@ -58,8 +54,7 @@
                             <div class="form-group row">
                                 <label asp-for="MenuAction" class="col-sm-4 col-form-label">Action<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuAction" type="text" class="form-control" placeholder="Enter Menu Action" />
-                                    <span asp-validation-for="MenuAction" class="text-danger mx-1 small"></span>
+                                    <input asp-for="MenuAction" type="text" class="form-control" placeholder="Enter Menu Action" required/>
                                 </div>
                             </div>
                         </div>
@@ -67,8 +62,7 @@
                             <div class="form-group row">
                                 <label asp-for="MenuController" class="col-sm-4 col-form-label">Controller<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuController" type="text" class="form-control" placeholder="Enter Menu Controller" />
-                                    <span asp-validation-for="MenuController" class="text-danger mx-1 small"></span>
+                                    <input asp-for="MenuController" type="text" class="form-control" placeholder="Enter Menu Controller" required />
                                 </div>
                             </div>
                         </div>
@@ -79,8 +73,7 @@
                             <div class="form-group row">
                                 <label asp-for="MenuLink" class="col-sm-4 col-form-label">Link<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuLink" type="text" class="form-control" placeholder="Enter Menu Link" />
-                                    <span asp-validation-for="MenuLink" class="text-danger mx-1 small"></span>
+                                    <input asp-for="MenuLink" type="text" class="form-control" placeholder="Enter Menu Link" required/>
                                 </div>
                             </div>
                         </div>
@@ -88,15 +81,15 @@
 
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12"  >
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
-                            <div class="form-check d-flex justify-content-around">
+                            <div class="form-check d-flex justify-content-around" >
                                 @foreach (var item in ViewBag.Rolelist)
                                 {
                                     <span>
 
-                                        <input type="checkbox" value="@item.Value" name="selectedRoles" class="form-check-input">
+                                        <input type="checkbox" value="@item.Value" name="selectedRoles" class="form-check-input" >
                                         <label class="form-check-label">@item.Key</label>
                                     </span>
 
@@ -150,6 +143,31 @@
     </div>
 
 </div>
+
+ <script>
+      (function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+   </script>
+
+
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

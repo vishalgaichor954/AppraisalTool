@@ -40,19 +40,16 @@ namespace AppraisalTool.Domain.Entities
         public virtual UserRole? Role { get; set; }
         [ForeignKey("BranchId")]
         public virtual Branch? Branch { get; set; }
-        
         public virtual List<UserJobRoles> JobRoles { get; set; }
 <<<<<<< HEAD
         
-
-
 =======
 
+>>>>>>> 369c9a9973047f88b93cf6894ada4f9ffa9de95e
         public virtual List<Appraisal>? UserAppraisals { get; set; }
->>>>>>> 7670e6e170591c161a91b5a194ef9576ef77e4b2
 
 
-        //public virtual List<UserAuthorityMapping> UserAuthorities { get; set; }
+      // public virtual UserAuthorityMapping UserAuthorities { get; set; }
 
 
     }

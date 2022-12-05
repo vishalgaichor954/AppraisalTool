@@ -1,4 +1,6 @@
-﻿using AppraisalTool.Domain.Entities;
+﻿using AppraisalTool.Application.Features.Branches.Command.AddBranchCommand;
+using AppraisalTool.Application.Features.Branches.Command.UpdateBranchCommand;
+using AppraisalTool.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +12,8 @@ namespace AppraisalTool.Application.Contracts.Persistence
     public interface IBranchRepository
     {
         public Task<IEnumerable<Branch>> GetAllBranch();
+        Task<AddBranchCommandDto> AddBranch(Branch branch);
+        Task <UpdateBranchCommandDto> UpdateBranchAsync(int id, UpdateBranchCommand request);
+        public Task<Branch> GetBranchById(int id);
     }
 }

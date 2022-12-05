@@ -50,7 +50,7 @@ namespace AppraisalTool.App.Controllers
                     return RedirectToAction("ListMenu");
                 }
             }
-            TempData["AddMenuFaild"] = "Faild to Add Menu";
+            TempData["AddMenuFaild"] = "Failed to Add Menu";
             return RedirectToAction("ListMenu");
             
         }

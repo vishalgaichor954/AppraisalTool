@@ -50,10 +50,10 @@ namespace AppraisalTool.Api.Controllers.v1
         [HttpPut("UpdateFinanacialYear")]
         public async Task<ActionResult> UpdateFinanacialYear(UpdateFinanacialYearCommand request)
         {
-            _logger.LogInformation("UpdateMenu Initiated");
+            _logger.LogInformation("UpdateFinanacialYear Initiated");
             var dtos = await _mediator.Send(request);
 
-            _logger.LogInformation("UpdateMenu Completed");
+            _logger.LogInformation("UpdateFinanacialYear Completed");
             return Ok(dtos);
         }
         [HttpGet("GetFinancialYearById")]
