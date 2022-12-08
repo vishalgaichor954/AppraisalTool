@@ -217,7 +217,7 @@ fieldset.scheduler-border {
 .HEADMetrics {
     font-size: 17px !important;
     font-weight: 400 !important;
-    color: gray;
+    color: black;
 }
 
 .HEADMetricsReportee {
@@ -368,4 +368,8 @@ legend {
     z-index: 9999;
     background: url('images/pageLoader.gif') 50% 50% no-repeat rgb(249,249,249);
     opacity: .8;
+}
+
+select {
+    color: black !important;
 }
