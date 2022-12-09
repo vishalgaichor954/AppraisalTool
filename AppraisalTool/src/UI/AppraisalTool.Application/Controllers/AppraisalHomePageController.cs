@@ -13,8 +13,10 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Text;
 using static System.Formats.Asn1.AsnWriter;
-using AppraisalTool.Domain.Entities;
+//using AppraisalTool.Domain.Entities;
 using System.Security.Cryptography;
+using AppraisalTool.App.Models.FinancialYear;
+using AppraisalTool.Domain.Common;
 
 namespace AppraisalTool.App.Controllers
 {
@@ -42,7 +44,7 @@ namespace AppraisalTool.App.Controllers
             }
 
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-
+            ViewBag.UserId = user.UserId;
             SelfAppraisalHome model = new SelfAppraisalHome();
             HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome?userId={user.UserId}").Result;
             HttpResponseMessage cardResponse = client.GetAsync($"https://localhost:5000/api/User/GetAllCard?id={user.RoleId}&api-version=1").Result;
@@ -53,7 +55,8 @@ namespace AppraisalTool.App.Controllers
 
             if (httpResponseMessage.IsSuccessStatusCode && cardResponse.IsSuccessStatusCode && reportResponse.IsSuccessStatusCode && reviewResponse.IsSuccessStatusCode && yearResponse.IsSuccessStatusCode)
             {
-                int reporteeCompleted = 0;
+                int totalReportee = 0;
+                int totalReview = 0;
                 int reporteeCount = 0;
                 int reviewCount = 0;
                 var responseData = reportResponse.Content.ReadAsStringAsync().Result;
@@ -67,19 +70,23 @@ namespace AppraisalTool.App.Controllers
                     {
                         reporteeCount = reporteeCount + 1;
                     }
-                    if(item.status == 3)
+                    if(item.status != 1)
                     {
-                        reporteeCompleted= reporteeCompleted+1;
+                        totalReportee = totalReportee + 1;
                     }
+
 
                 }
                 ViewBag.PendingAtReportee = reporteeCount;
-                ViewBag.ReporteeCompleted = reporteeCompleted;
+                //ViewBag.ReporteeCompleted = reporteeCompleted;
+               
+                ViewBag.ReporteeCompleted = totalReportee;
 
 
                 var reviewData = reviewResponse.Content.ReadAsStringAsync().Result;
                 var employees = JsonConvert.DeserializeObject<Response>(reviewData);
                 Console.WriteLine(employees.Data);
+                
 
                 foreach(var item in employees.Data)
                     {
@@ -87,11 +94,16 @@ namespace AppraisalTool.App.Controllers
                     {
                         reviewCount = reviewCount + 1;
                     }
+                    if(item.status!=1 && item.status!=2)
+                    {
+                        totalReview = totalReview + 1;
+                    }
 
 
                 }
                 
                 ViewBag.PendingAtReview = reviewCount;
+                ViewBag.ReviewCompleted = totalReview;
 
 
                 var CardresponseData = cardResponse.Content.ReadAsStringAsync().Result;
@@ -302,6 +314,7 @@ namespace AppraisalTool.App.Controllers
             }
             return View();
         }
+
         [HttpPost]
         public IActionResult AddReportingAuthorityAppraisal(List<ReportingMetricDto> scores)
         {
@@ -756,9 +769,99 @@ namespace AppraisalTool.App.Controllers
 
 
         }
+        [HttpGet]
+        public JsonResult startDateEndDate(int id)
+        {
+            
+            HttpResponseMessage requestresponse = client.GetAsync($"https://localhost:5000/api/FinancialYear/GetFinancialYearById?id={id}&api-version=1").Result;
+            
+            //https://localhost:5000/api/v1/AppraisalHome/RequestToEdit?fId=4&userId=5
+            if (requestresponse.IsSuccessStatusCode)
+            {
+                string responseData = requestresponse.Content.ReadAsStringAsync().Result;
+                Console.WriteLine(responseData);
+                var res = JsonConvert.DeserializeObject<financialResponse>(responseData);
+                return Json(res.Data);
+            }
+            else
+            {
+                return (null);
+            }
+            
+            
+        }
 
 
-        
+        [HttpGet]
+        public JsonResult PendingAppriasalCount(int id,int userId)
+        {
+
+            HttpResponseMessage requestresponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetAppraisalByFidandUserId?fId={id}&userId={userId}").Result;
+
+        https://localhost:5000/api/v1/AppraisalHome/GetAppraisalByFidandUserId?fId=4&userId=47
+            if (requestresponse.IsSuccessStatusCode)
+            {
+
+                
+                string responseData = requestresponse.Content.ReadAsStringAsync().Result;
+                if (responseData == string.Empty)
+                {
+                    return Json(1);
+                }
+                Console.WriteLine(responseData);
+                var res = JsonConvert.DeserializeObject<pendingAppraisalVm>(responseData);
+                Console.WriteLine(res.statusId);
+                return Json(res.statusId);
+            }
+            else
+            {
+                return (null);
+            }
+
+
+        }
+
+        [HttpGet]
+        public JsonResult GetPendingAppraisalCount( int userId)
+        {
+
+            HttpResponseMessage requestresponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={userId}").Result;
+
+       
+            if (requestresponse.IsSuccessStatusCode)
+            {
+
+
+                string responseData = requestresponse.Content.ReadAsStringAsync().Result;
+                if (responseData == string.Empty)
+                {
+                    return Json(1);
+                }
+                Console.WriteLine(responseData);
+                var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
+                List<ReporteeAppraisalListVm> resdata= JsonConvert.DeserializeObject<List<ReporteeAppraisalListVm>>(JsonConvert.SerializeObject(res.Data));
+                Console.WriteLine(resdata.Count);
+                int countOfpendingReport = 0;
+                foreach (var item in resdata)
+                {
+                    
+                    if (item.Status == 2)
+                    {
+                        countOfpendingReport++; 
+                    }
+                    
+                }
+                return Json(countOfpendingReport);
+            }
+            else
+            {
+                return Json(0);
+            }
+
+
+        }
+
+
 
 
     }

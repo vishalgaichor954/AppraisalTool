@@ -1,5 +1,6 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalList;
+using AppraisalTool.Application.Features.Authority.Query.GetAllAuthority;
 using AppraisalTool.Application.Features.Users.Command.AssignAuthorityCommand;
 using AppraisalTool.Application.Features.Users.Command.CreateRoleCommand;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
@@ -217,14 +218,14 @@ namespace AppraisalTool.Persistence.Repositories
         }
 
 
-        //public async Task<IEnumerable<User>> GetAllUser()
-        //{
-        //    IEnumerable<User> users = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).Where(u => u.IsDeleted != true).ToListAsync();
-        //    return users;
+        public async Task<IEnumerable<User>> GetAllUser()
+        {
+            IEnumerable<User> users = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).Where(u => u.IsDeleted != true).ToListAsync();
+            return users;
 
-        //}
-       
-        public async Task<IEnumerable<GetUserListQueryVm>> GetAllUser()
+        }
+
+        public async Task<IEnumerable<GetAllAuthorityQueryVm>> GetAllUserList()
         {
             var users = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).Where(u => u.IsDeleted != true).FirstOrDefaultAsync();
 
@@ -250,9 +251,10 @@ namespace AppraisalTool.Persistence.Repositories
 
             var result = (from A in _dbContext.User
                           join B in _dbContext.UserAuthorityMappings on A.Id equals B.UserId
-                          into auth from authority in auth.DefaultIfEmpty()
-                          where A.IsDeleted !=true
-                          select new GetUserListQueryVm
+                          into auth
+                          from authority in auth.DefaultIfEmpty()
+                          where A.IsDeleted != true
+                          select new GetAllAuthorityQueryVm
                           {
                               Id = A.Id,
                               FirstName = A.FirstName,
@@ -270,15 +272,15 @@ namespace AppraisalTool.Persistence.Repositories
                               SecondaryJobProfileName = secondaryRole,
                               RepaName = authority.ReportingAuthority.FirstName,
                               RevaName = authority.ReviewingAuthority.FirstName,
-                              Name=A.FirstName + " " + A.LastName
+                              Name = A.FirstName + " " + A.LastName
 
-                          }).OrderByDescending(x=>x.Id);
-           
+                          }).OrderByDescending(x => x.Id);
+
             return result;
 
         }
 
-        
+
 
         //@Author : Ilyas Dabholkar
         public async Task<User> GetUserById(int id)

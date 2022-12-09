@@ -17,10 +17,26 @@ body {
     margin-bottom: 60px;
 }
 
+.GradeReportDownloadBtn {
+    width: 270px;
+    margin-bottom: 20px;
+    background-color: #c7cff82f;
+    color: #1746A2;
+    border: 2px solid #1746A2;
+}
+
+    .GradeReportDownloadBtn:hover {
+        width: 270px;
+        margin-bottom: 20px;
+        background-color: #1746A2;
+        color: white;
+        /*border: 2px solid #1746A2;*/
+    }
+
 .blueTheme
 
 .Dash-Card {
-    height: 200px;
+    height: 250px;
 }
 
 element.style {
@@ -28,6 +44,10 @@ element.style {
 
 .content-wrapper-Blue {
     background-color: #c7cff82f !important;
+}
+
+.content-wrapper-red {
+    background-color: #f2edf3 !important;
 }
 
 .proceedBtn {
@@ -55,13 +75,11 @@ element.style {
 .DarkBlueGradeBorder {
     border: 2px solid #1746A2;
 }
-<<<<<<< HEAD
+
 .ApprovedBadge {
     background-color: #ADE792 !important;
 }
-=======
 
->>>>>>> 3c0c21b452a472a3fb1fb22fe7780377420624cd
 .blueThemeA {
     background-color: #1746A2 !important;
     color: white !important;
@@ -147,6 +165,12 @@ element.style {
     color: white;
 }
 
+    .ResetButton:hover {
+        background-color: white;
+        color: #E0144C;
+        border: 2px solid #E0144C;
+    }
+
 .LoginBtn:hover {
     background-color: white;
     color: #1746A2;
@@ -202,7 +226,7 @@ fieldset.scheduler-border {
 .HEADMetrics {
     font-size: 17px !important;
     font-weight: 400 !important;
-    color: gray;
+    color: black;
 }
 
 .HEADMetricsReportee {
@@ -310,14 +334,17 @@ legend {
 
 ::-webkit-scrollbar-track {
     background: #fff;
+    /* background: #DDD;*/
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #1746A2
+    /*background: #1746A2*/
+    background: #DDD;
 }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        /*background: #555;*/
+        background: #DDD;
     }
 
 .header-icon {
@@ -339,4 +366,112 @@ legend {
     width: 10%;
     cursor: pointer;
     width: 15%;
+}
+
+.loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('images/pageLoader.gif') 50% 50% no-repeat rgb(249,249,249);
+    opacity: .8;
+}
+
+<<<<<<< HEAD
+=======
+thead {
+    background-color: #1746A2;
+}
+
+table.dataTable {
+    box-shadow: #bbbbbb 0px 0px 5px 0px;
+}
+
+thead > tr,
+thead > tr > th {
+    background-color: transparent;
+    color: #fff;
+    font-weight: normal;
+    text-align: start;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+    border-bottom: 0px solid #111 !important;
+}
+
+.dataTables_filter {
+    text-align: left !important;
+}
+
+#myTable_length {
+    width: 250px;
+}
+
+    #myTable_length label {
+        width: 100%;
+    }
+
+#myTable_length label select {
+    width: 40%;
+}
+
+#myTable_length {
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
+
+#myTable_filter {
+    margin-bottom: 2%;
+}
+
+    #myTable_filter label input {
+        width: 75%;
+        margin-right: 3%;
+    }
+
+#table_length label select {
+    width: 100px;
+}
+
+#table_length {
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
+
+#table_filter {
+    margin-bottom: 2%;
+}
+
+    #table_filter label input {
+        width: 75%;
+        margin-right: 3%;
+    }
+
+#table_length label select {
+    width: 100px;
+}
+
+#table_length {
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
+
+#table_length {
+    width: 250px;
+}
+
+    #table_length label {
+        width: 100%;
+    }
+
+        #table_length label select {
+            width: 40%;
+        }
+
+>>>>>>> aa1b1e6714830fa440e57ebeeb16d93eac8ca5cd
+select {
+    color: black !important;
 }

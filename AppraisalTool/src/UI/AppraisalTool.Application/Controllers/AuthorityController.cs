@@ -25,10 +25,10 @@ namespace AppraisalTool.App.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             List<UserViewModel> modellist = new List<UserViewModel>(); ;
-            
-            
-            
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User?api-version=1").Result;
+
+
+
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User/GetALlUserList?api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
 

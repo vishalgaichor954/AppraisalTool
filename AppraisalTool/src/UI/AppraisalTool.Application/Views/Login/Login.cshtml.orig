@@ -126,12 +126,18 @@
         d = new Date();
         $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
     }
+<<<<<<< HEAD
 </script>
 
 
  
     <script>
       (function () {
+=======
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+>>>>>>> 7a3cc3fc8abc807e811f44d29838f66fc9f0844f
   'use strict'
 
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -150,5 +156,9 @@
       }, false)
     })
 })()
+<<<<<<< HEAD
    </script>
 
+=======
+</script>
+>>>>>>> 7a3cc3fc8abc807e811f44d29838f66fc9f0844f

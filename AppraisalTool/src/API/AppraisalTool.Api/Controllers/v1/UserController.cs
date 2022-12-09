@@ -20,6 +20,7 @@ using AppraisalTool.Application.Features.Branches.Command.UpdateBranchCommand;
 using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Branches.Command.RemoveBranchCommand;
 using AppraisalTool.Application.Features.Users.Command.AssignAuthorityCommand;
+using AppraisalTool.Application.Features.Authority.Query.GetAllAuthority;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -97,6 +98,14 @@ namespace AppraisalTool.Api.Controllers.v1
         public async Task<ActionResult> GetAllUserList()
         {
             var res = await _mediator.Send(new GetUserListQuery());
+            return Ok(res);
+        }
+
+        [HttpGet("GetALlUserList")]
+
+        public async Task<ActionResult> GetAllUser()
+        {
+            var res = await _mediator.Send(new GetAllAuthorityQuery());
             return Ok(res);
         }
 
