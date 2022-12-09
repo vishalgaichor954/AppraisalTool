@@ -63,6 +63,13 @@
         height: 40px !important;
     }
 
+
+
+<<<<<<< HEAD
+=======
+  
+>>>>>>> d382efc4370394372706b5f0a04ee981e3973a27
+
     .appraisal-dash-card {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -98,252 +105,337 @@
     }
 </style>
 
- <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
-   <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
-   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
-     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
+<script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+<script src="~/lib/package/dist/sweetalert2.all.js"></script>
+<script src="~/lib/package/dist/sweetalert2.min.js"></script>
 
-<<<<<<< HEAD
- <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
-   <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
-   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
-     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+
+
+
+@if (TempData["UpdateSUCCESS"] != null)
+{
+
+
+    <script>
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: '  @TempData["UpdateSUCCESS"]'
+        })
+    </script>
+}
+@if (TempData["UpdateError"] != null)
+{
+
+
+    <script>
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: '@TempData["UpdateError"]'
+        })
+    </script>
+}
+
+
+
+
 
 @if (TempData["RequestSuccess"] != null)
 {
-    
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'success',
-  title: '  @TempData["RequestSuccess"]'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: '  @TempData["RequestSuccess"]'
+        })
     </script>
 }
 @if (TempData["RequestError"] != null)
 {
-    
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'error',
-  title: '@TempData["RequestError"]'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: '@TempData["RequestError"]'
+        })
     </script>
 }
 
-=======
 @if (TempData["SUCCESS"] != null)
 {
-    
->>>>>>> AT-Dev
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'success',
-  title: '  @TempData["SUCCESS"]'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: '  @TempData["SUCCESS"]'
+        })
     </script>
 }
 @if (TempData["Error"] != null)
 {
-    
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'error',
-  title: 'Error occured while submiting'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Error occured while submiting'
+        })
     </script>
 }
-<div class="content-wrapper main-panel content-wrapper-Blue">
+<div class="content-wrapper main-panel content-wrapper-red">
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <a asp-controller="Dashboard" class="active" asp-action="Dashboard">Dashboard</a>
+                <input hidden  id="userId" value=@ViewBag.UserId type="number" />
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Appraisal Home</li>
+            <li class="breadcrumb-item active" aria-current="page">Appraisal</li>
         </ol>
     </nav>
 
-    <div style="height:100vh ;width:100%; background-color: white;border-radius: 0.5rem;" class="container">
+    <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="container">
 
         <!-- <h2 >Appraisal Home</h2> -->
-        <div>
-            <h2 style="padding-top:30px;padding-left: 20px;">Appraisal Home</h2>
+        <div class="ml-5">
+            <h2 style="padding-top:30px;padding-left: 20px;">Appraisal</h2>
         </div>
         <div>
             @{
                 string fid = "";
                 string fyear = "";
-                <p style="padding-top:30px" class="mx-1">FY Selection</p>
+<<<<<<< HEAD
+                <p style="padding-top:30px" class="mx-5">FY Selection</p>
                 <h1>@fid @fyear</h1>
-                <div class="Dropdown">
+                <div class="Dropdown mx-5">
+=======
+                                <p style="padding-top:30px" class="mx-5">FY Selection</p>
+                                <h1>@fid @fyear</h1>
+                                <div class="Dropdown mx-5">
+>>>>>>> d382efc4370394372706b5f0a04ee981e3973a27
 
-                    <select asp-for="StartYear" id="FincaialYear" class="form-control form-select FincaialYear" asp-items="@ViewBag.financialYearList">
+                    <select asp-for="StartYear" id="FincaialYear" class="form-control form-select FincaialYear color-black" asp-items="@ViewBag.financialYearList">
                     </select>
 
 
-                </div>
+                                </div>
             }
-            <div class="mt-5 col-xs-4">
+            <div class="m-5">
 
-                <div class="appraisal-dash-card">
+<<<<<<< HEAD
+                <div class="appraisal-dash-card d-flex" style="overflow:auto;">
+=======
+                <div class="appraisal-dash-card" style="overflow:auto;">
+>>>>>>> d382efc4370394372706b5f0a04ee981e3973a27
                     <!-- <div class="col-md-1"></div> -->
                     @foreach (var item in ViewBag.GetMenuCards)
                     {
-                        if (item.menuList.menuFlag == "SelfAppraisal")
+                        if (item.menuList.menuFlag == "AppraisalHome")
                         {
-                            <div class="dash-card">
-                                <a id="SelfAppraisal" class="Anchor-body">
-
-                                    <div class="@item.menuList.menuClass card-img-holder text-white card-menu">
-                                        <div class="card-body appraisal-card">
-                                            <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
-                                            <h2 class="font-weight-normal pt-2">
-
-                                                @item.menuList.menuText<br />@item.menuList.menuIcon
-                                            </h2>
-                                            <h6>Total appraisal to be filled</h6>
-                                            <p>@ViewBag.AppraisalsToBeFilled</p>
+                            if (item.menuList.menuAction == "SelfAppraisalDashboard")
+                            {
+<<<<<<< HEAD
+                                <div style="min-width:280px;max-width:500px;max-height:500px;">
+=======
+                                <div style="max-width:500px;max-height:500px;">
+>>>>>>> d382efc4370394372706b5f0a04ee981e3973a27
+                                    <a id="SelfAppraisal" class="@item.menuList.menuClass">
+                                        <div class="card-body">
+                                            <img src="/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                                            <h4 class="font-weight-normal mb-3">
+<<<<<<< HEAD
+                                                @item.menuList.menuText
+                                            </h4>
+=======
+                                                @item.menuList.menuText @item.menuList.menuIcon
+                                            </h4>
+                                                        <h6>Total appraisal to be filled</h6>
+                                            <p>1</p>
                                             <h6>Pending Appraisals</h6>
-                                            <p>@ViewBag.PendingAppraisals </p>
-
-
+                                            <p id="pendingAppraisal">@ViewBag.PendingAppraisals </p>
                                             <div style="text-align:end ;" class="Last-Date">
                                                 <h6>Last date</h6>
-                                                <h4>@ViewBag.LastDate </h4>
+                                               <h4 id="self-AppraisalEndDate" class="lastDate">@ViewBag.LastDate </h4>
                                             </div>
-
-
+                                            <!-- <h2 class="mb-5">$ 15,0000</h2>
+                                            <h6 class="card-text">Increased by 60%</h6> -->
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
 
-                        }
-                    }
-
-
-
-
-                    @foreach (var item in ViewBag.GetMenuCards)
-                    {
-                        if (item.menuList.menuFlag == "ReporteeAppraisal")
-                        {
-                            <div class="dash-card">
-                                <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="Anchor-body">
-                                    <div class="@item.menuList.menuClass card-img-holder text-white card-menu">
-                                        <div class="card-body appraisal-card">
-                                            <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
-                                            <h2 class="font-weight-normal pt-2">
-                                                @item.menuList.menuText<br />@item.menuList.menuIcon
-                                            </h2>
-                                            <h6>Total appraisal filled</h6>
+                                <div style="max-width:500px;max-height:500px;">
+                                    <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="@item.menuList.menuClass">
+                                        <div class="card-body">
+                                            <img src="/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                                            <h4 class="font-weight-normal mb-3">
+                                                @item.menuList.menuText @item.menuList.menuIcon
+                                            </h4>
+                                            <h6>Total appraisal to be filled</h6>
+>>>>>>> d382efc4370394372706b5f0a04ee981e3973a27
                                             <p>@ViewBag.ReporteeCompleted</p>
                                             <h6>Pending Appraisals</h6>
                                             <p>@ViewBag.PendingAtReportee </p>
-
-
                                             <div style="text-align:end ;" class="Last-Date">
                                                 <h6>Last date</h6>
-                                                <h4>@ViewBag.LastDate </h4>
+                                                <h4 class="lastDate">@ViewBag.LastDate </h4>
                                             </div>
+                                            <!-- <h2 class="mb-5">$ 15,0000</h2>
+                                            <h6 class="card-text">Increased by 60%</h6> -->
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
-                        }
-                    }
+                                    </a>
+                                </div>
+<<<<<<< HEAD
+                            }
+                            else
+                            {
 
-
-
-                    @foreach (var item in ViewBag.GetMenuCards)
-                    {
-                        if (item.menuList.menuFlag == "ReviewAppraisal")
-                        {
-                            <div class="dash-card">
-                                <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="Anchor-body">
-
-                                    <div class="@item.menuList.menuClass card-img-holder text-white card-menu">
-                                        <div class="card-body appraisal-card">
-                                            <img src="../../assets/images/dashboard/circle.svg" class="card-img-absolute" alt="" />
-                                            <h2 class="font-weight-normal pt-2">
-
-                                                @item.menuList.menuText<br />@item.menuList.menuIcon
-                                            </h2>
-                                            <h6>Total appraisal to be filled</h6>
-                                            <p>@ViewBag.AppraisalsToBeFilled</p>
+                                <div style="min-width:300px;max-width:500px;max-height:500px;">
+                                    <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="@item.menuList.menuClass">
+                                        <div class="card-body">
+                                            <img src="/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                                            <h4 class="font-weight-normal mb-3">
+                                                @item.menuList.menuText 
+                                            </h4>
+                                            <p>@ViewBag.ReporteeCompleted</p>
                                             <h6>Pending Appraisals</h6>
-                                            <p>@ViewBag.PendingAtReview </p>
-
-
+                                            <p>@ViewBag.PendingAtReportee </p>
                                             <div style="text-align:end ;" class="Last-Date">
                                                 <h6>Last date</h6>
                                                 <h4>@ViewBag.LastDate </h4>
                                             </div>
-
-
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
+                                    </a>
+                                </div>
+
+                            }
                         }
                     }
 
+=======
+
+                            }
+                        }
+                    }
+
+
+
+
+
+
+                    @* <div class="card bg-gradient-info card-img-holder text-white Dash-Card">
+                    <div class="card-body">
+                    <img src="/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                    <h4 class="font-weight-normal mb-3">
+                    Appraisal Tool <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                    </h4>
+                    <i class=" icon-card mdi mdi-trophy-outline"></i>
+
+                    <!-- <h2 class="mb-5">$ 15,0000</h2>
+                    <h6 class="card-text">Increased by 60%</h6> -->
+                    </div>
+                    </div>*@
+>>>>>>> d382efc4370394372706b5f0a04ee981e3973a27
+
+
+
+
+
+                    @* <div class="card bg-gradient-info card-img-holder text-white Dash-Card">
+                    <div class="card-body">
+                    <img src="/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                    <h4 class="font-weight-normal mb-3">
+                    Appraisal Tool <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+                    </h4>
+                    <i class=" icon-card mdi mdi-trophy-outline"></i>
+
+                    <!-- <h2 class="mb-5">$ 15,0000</h2>
+                    <h6 class="card-text">Increased by 60%</h6> -->
+                    </div>
+                    </div>*@
 
                 </div>
             </div>
@@ -358,12 +450,48 @@ Toast.fire({
     </div>
     <!-- page-body-wrapper ends -->
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
 
     document.addEventListener("DOMContentLoaded", function (event) {
         const SelectDrp = document.querySelector('#FincaialYear');
         const SelfAppraisalDashboard = document.querySelector("#SelfAppraisal");
         let text = SelectDrp.options[SelectDrp.selectedIndex].text;
+        let userId = document.getElementById('userId').value;
+        //alert(userId);
+          fetch('/AppraisalHomePage/PendingAppriasalCount?id='+SelectDrp.value+'&userId='+userId)
+            .then(res =>  res.json())
+             .then(data => { 
+                 //console.log(data);
+                 //alert(data);
+                  if(data>1){
+                 document.getElementById('pendingAppraisal').innerText ="0";
+              }
+              else{
+                   document.getElementById('pendingAppraisal').innerText ="1";
+            }
+                
+
+             })
+               fetch('/AppraisalHomePage/startDateEndDate?id=' + SelectDrp.value)
+            .then(res =>  res.json())
+             .then(data => { 
+                 //console.log(data);
+                  let endDateOfYear = data.endDate;
+                let currentEndDate = new Date(endDateOfYear);
+                let datearray = currentEndDate.toString().split(" ");
+                let endDateArray = datearray.splice(1, 3);
+                let finalEnddateFormat = `${endDateArray[1]}st  ${endDateArray[0]}  ${endDateArray[2]} `;
+                //alert(finalEnddateFormat);
+                //console.log(endDateArray);
+                document.querySelectorAll(".lastDate").forEach(ele=>{
+                    ele.innerText =finalEnddateFormat;
+                })
+         @*        document.getElementById('self-AppraisalEndDate').innerText =finalEnddateFormat;
+                 document.getElementById('Report-AppraisalEndDate').innerText =finalEnddateFormat;
+                 document.getElementById('Review-AppraisalEndDate').innerText =finalEnddateFormat;*@
+
+             })
         console.log("On Load + ", text);
         SelfAppraisalDashboard.setAttribute("href", `/AppraisalHomePage/SelfAppraisalDashboard?Fyear=${text}&Fid=${SelectDrp.value}`);
 
@@ -386,7 +514,56 @@ Toast.fire({
 
         //var valueHref = document.getElementById("SelfAppraisal").href = "/AppraisalHomePage/SelfAppraisalDashboard?Fyear=" + text + "&Fid=" + d";
     });
+      $('#FincaialYear').change(function() {
+        @*  alert("heluuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");*@
+          console.log("inside change financial");
+        var id = $(this).val();
+        var userId = $('#userId').val();
+        //alert("id===" + id);
+        $.ajax({
 
+            url: '/AppraisalHomePage/startDateEndDate?id=' + id,
+            success: function(response) {
+                console.log("inside success");
+                let endDateOfYear = response.endDate;
+                let currentEndDate = new Date(endDateOfYear);
+                let datearray = currentEndDate.toString().split(" ");
+                let endDateArray = datearray.splice(1, 3);
+                let finalEnddateFormat = `${endDateArray[1]}st ${endDateArray[0]}  ${endDateArray[2]} `;
+                console.log("finalEnddateFormat",finalEnddateFormat)
+                document.querySelectorAll(".lastDate").forEach(ele=>{
+                    console.log("inside foreach")
+                    ele.innerText =finalEnddateFormat;
+                    console.log(ele);
+          
+                })
+             @*   $('#self-AppraisalEndDate').text(finalEnddateFormat);
+                 $('#Report-AppraisalEndDate').text(finalEnddateFormat);
+                  $('#Review-AppraisalEndDate').text(finalEnddateFormat);*@
+             
+            }
+
+        })
+         $.ajax({
+
+            url: '/AppraisalHomePage/PendingAppriasalCount?id='+id+'&userId='+userId,
+            success: function(response) {
+
+                //alert(response);
+              if(response>1){
+                 $('#pendingAppraisal').text("0");
+              }
+              else{
+                   $('#pendingAppraisal').text("1");
+            }
+
+                
+                
+            }
+            
+
+        })
+    });
 
 
 
