@@ -23,12 +23,12 @@ namespace AppraisalTool.App.Models
         [Display(Name = "Email Id")]
         [DataType(DataType.EmailAddress)]
         [Remote("UserExistsEmail", "Admin", HttpMethod = "GET", ErrorMessage = "User with this Email exists")]
-        [Required(ErrorMessage = "Email address is required")]
+        //[Required(ErrorMessage = "Email address is required")]
         [RegularExpression(@"^[0-9a-zA-z]+[.+-_$]{0,1}[0-9a-zA-z]+[@][a-zA-z]+[.][a-zA-z]{2,3}$", ErrorMessage = "Please Enter Valid Email")]
         public string ?Email { get; set; }
 
-        [Required]
-        [RegularExpression(@"^[a-zA-z0-9@&*$]{8,}", ErrorMessage = "Enter a strong password")]
+        [Required(ErrorMessage = "Password is required")]
+        [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,32}$", ErrorMessage = "Enter a strong password")]
         public string ?Password { get; set; }
 
         [Display(Name = "Join Date")]

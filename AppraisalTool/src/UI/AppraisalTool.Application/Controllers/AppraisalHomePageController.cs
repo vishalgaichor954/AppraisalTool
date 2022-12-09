@@ -53,7 +53,8 @@ namespace AppraisalTool.App.Controllers
 
             if (httpResponseMessage.IsSuccessStatusCode && cardResponse.IsSuccessStatusCode && reportResponse.IsSuccessStatusCode && reviewResponse.IsSuccessStatusCode && yearResponse.IsSuccessStatusCode)
             {
-                int reporteeCompleted = 0;
+                int totalReportee = 0;
+                int totalReview = 0;
                 int reporteeCount = 0;
                 int reviewCount = 0;
                 var responseData = reportResponse.Content.ReadAsStringAsync().Result;
@@ -67,19 +68,23 @@ namespace AppraisalTool.App.Controllers
                     {
                         reporteeCount = reporteeCount + 1;
                     }
-                    if(item.status == 3)
+                    if(item.status != 1)
                     {
-                        reporteeCompleted= reporteeCompleted+1;
+                        totalReportee = totalReportee + 1;
                     }
+
 
                 }
                 ViewBag.PendingAtReportee = reporteeCount;
-                ViewBag.ReporteeCompleted = reporteeCompleted;
+                //ViewBag.ReporteeCompleted = reporteeCompleted;
+               
+                ViewBag.ReporteeCompleted = totalReportee;
 
 
                 var reviewData = reviewResponse.Content.ReadAsStringAsync().Result;
                 var employees = JsonConvert.DeserializeObject<Response>(reviewData);
                 Console.WriteLine(employees.Data);
+                
 
                 foreach(var item in employees.Data)
                     {
@@ -87,11 +92,16 @@ namespace AppraisalTool.App.Controllers
                     {
                         reviewCount = reviewCount + 1;
                     }
+                    if(item.status!=1 && item.status!=2)
+                    {
+                        totalReview = totalReview + 1;
+                    }
 
 
                 }
                 
                 ViewBag.PendingAtReview = reviewCount;
+                ViewBag.ReviewCompleted = totalReview;
 
 
                 var CardresponseData = cardResponse.Content.ReadAsStringAsync().Result;

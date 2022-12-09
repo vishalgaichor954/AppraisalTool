@@ -40,9 +40,7 @@
     <div class="col-11">
         <div class="card content-wrapper-Blue">
             <div class="card-body">
-                @*<input type="button" value="Back" class=" Button mb-4" onclick="location.href='@Url.Action("SelfAppraisalDashboard", "AppraisalHomePage")'" />
 
-                <h1 class="card-title FormHeader">Self Appraisal</h1>*@
 
                 <div class="d-flex justify-content-between">
                     <h1 class="card-title FormHeader" style="display:inline">Self Appraisal</h1>
@@ -51,19 +49,19 @@
 
 
                 <div class="featureBackground ">
-                    <form asp-action="AddSelfAppraisal" method="post" enctype="multipart/form-data">
+                    <form class="needs-validation" asp-action="AddSelfAppraisal" method="post" enctype="multipart/form-data" novalidate>
                         <div class="text-danger"></div>
                         <input name="Fid" hidden value="@ViewBag.Fid" type="number">
-                        
-                      @if (ViewBag.IsEditable != 0)
-                      {
-                          <input name="IsEditable" hidden value="@ViewBag.IsEditable" type="number">
-                           <input name="AppraisalID" hidden value="@ViewBag.appraisalData.Id" type="number">
-                          
-                      }
-                            
-                        
-                        
+
+                        @if (ViewBag.IsEditable != 0)
+                        {
+                            <input name="IsEditable" hidden value="@ViewBag.IsEditable" type="number">
+                            <input name="AppraisalID" hidden value="@ViewBag.appraisalData.Id" type="number">
+
+                        }
+
+
+
                         <fieldset class="border p-2 m-5 " style="display:flex;justify-content:center;">
                             <legend class="float-none HEADdata w-auto">
                                 Input & Effort metric
@@ -88,18 +86,17 @@
                                         <div class="col-3"><h4 class="HEADMetrics">@Model[i].Metric_Description </h4><span style="color:black;font-style:italic;font-size:11px"> (Weightage @Model[i].metric_Weightage pts) </span></div>
                                         <div class="col-3">
                                             <div class="row d-flex justify-content-center align-items-center">
-                                                @*<div class="col-5">
-                                            <label>Score<sup class="required">*</sup></label>
-                                            </div>*@
+
                                                 <div class="col-12">
-                                                    <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number" />
+                                                    <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number" required />
                                                 </div>
-                                                <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
+                                                @*  <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
+                                            *@
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <input asp-for="@Model[i].Metric_ID" hidden value="@Model[i].Metric_ID" type="number">
-                                              <input asp-for="@Model[i].Id" hidden value="@Model[i].Id" type="number">
+                                            <input asp-for="@Model[i].Id" hidden value="@Model[i].Id" type="number">
                                             <input asp-for="@Model[i].List_Id" hidden value="@Model[i].List_Id" type="number">
                                             <input asp-for="@Model[i].metric_Weightage" hidden value="@Model[i].metric_Weightage" type="number">
                                             <input asp-for="@Model[i].Metric_Description" hidden value="@Model[i].Metric_Description" type="text">
@@ -110,32 +107,7 @@
 
                                         </div>
                                     </div>
-                                    @* <div class="row pt-2">
-                                <div class="row">
-                                <div class="col-9"><h4 class="HEADMetrics">@Model[i].Metric_Description</h4></div>
-                                <div class="col-3">
-                                <div class="row d-flex justify-content-center align-items-center">
-                                <div class="col-5">
-                                <label>Score<sup class="required">*</sup></label>
-                                </div>
-                                <div class="col-7">
-                                <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number">
-                                </div>
-                                </div>
-                                </div>
 
-                                </div>
-                                <div class="row">
-                                <input asp-for="@Model[i].Metric_ID" hidden value="@Model[i].Metric_ID"  type="number">
-                                <input asp-for="@Model[i].List_Id" hidden value="@Model[i].List_Id"   type="number">
-                                <input asp-for="@Model[i].metric_Weightage" hidden value="@Model[i].metric_Weightage"   type="number">
-                                <input asp-for="@Model[i].Metric_Description" hidden  value="@Model[i].Metric_Description"  type="text">
-                                <div class="col-12"> <textarea class="form-control " asp-for="@Model[i].Comment" placeholder="Add Comment"></textarea></div>
-
-                                </div>
-                                <span asp-validation-for="@Model[i].Comment" class="text-danger   mx-1 small"></span>
-                                <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
-                                </div>*@
 
                                 }
                             </div>
@@ -164,13 +136,11 @@
                                         <div class="col-3"><h4 class="HEADMetrics">@Model[temp].Metric_Description</h4><span style="color:black;font-style:italic;font-size:11px"> (Weightage @Model[i].metric_Weightage pts) </span></div>
                                         <div class="col-3">
                                             <div class="row d-flex justify-content-center align-items-center">
-                                                @* <div class="col-5">
-                                            <label>Score<sup class="required">*</sup></label>
-                                            </div>*@
+
                                                 <div class="col-12">
-                                                    <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" min="1" max="5" type="number">
+                                                    <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" min="1" max="5" type="number" required>
                                                 </div>
-                                                <span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>
+                                                @*<span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>*@
                                             </div>
                                         </div>
                                         <div class="col-6">
@@ -213,25 +183,23 @@
                                         <div class="col-3"><h4 class="HEADMetrics">@Model[temp].Metric_Description</h4><span style="color:black;font-style:italic;font-size:11px"> (Weightage @Model[i].metric_Weightage pts) </span></div>
                                         <div class="col-3">
                                             <div class="row d-flex justify-content-center align-items-center">
-                                                @*  <div class="col-5">
-                                            <label>Score<sup class="required">*</sup></label>
-                                            </div>*@
+
                                                 <div class="col-12">
-                                                    <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" min="1" max="5" type="number">
+                                                    <input class=" form-control my-2 kra-score" asp-for="@Model[temp].Score" min="1" max="5" type="number" required>
                                                 </div>
-                                                <span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>
+                                                @*<span asp-validation-for="@Model[temp].Score" class="text-danger mx-1 small"></span>*@
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <input asp-for="@Model[temp].Metric_ID" hidden value="@Model[temp].Metric_ID" type="number">
                                             <input asp-for="@Model[temp].List_Id" hidden value="@Model[temp].List_Id" type="number">
 
-                                              <input asp-for="@Model[temp].Id" hidden value="@Model[temp].Id" type="number">
+                                            <input asp-for="@Model[temp].Id" hidden value="@Model[temp].Id" type="number">
                                             <input asp-for="@Model[temp].metric_Weightage" hidden value="@Model[temp].metric_Weightage" type="number">
                                             <input asp-for="@Model[temp].Metric_Description" hidden value="@Model[temp].Metric_Description" type="text">
                                             <div class="col-12">
                                                 <textarea required rows="5" class="form-control " asp-for="@Model[temp].Comment" placeholder="Add Comment"></textarea>
-                                                <span asp-validation-for="@Model[temp].Comment" class="text-danger   mx-1 small"></span>
+                                                @*<span asp-validation-for="@Model[temp].Comment" class="text-danger   mx-1 small"></span>*@
                                             </div>
 
                                         </div>
@@ -244,21 +212,22 @@
                             <div class="row">
                                 <div class="col-3"></div>
                                 @{
-                                    if (ViewBag.ReadOnlyForm == true) {
+                                    if (ViewBag.ReadOnlyForm == true)
+                                    {
 
-                                        if (ViewBag.ReadOnlyForm == true && ViewBag.IsEditable== 1)
+                                        if (ViewBag.ReadOnlyForm == true && ViewBag.IsEditable == 1)
                                         {
 
-                                              <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " /></div>
-                                        <div class="col-3"><input id="submit" type="submit" value="Update" class="   btn btn-block AddAppraisalBtn btn-lg " /></div>
+                                            <div class="col-3"><input id="submit" type="submit" value="Update" class="   btn btn-block AddAppraisalBtn btn-lg " /></div>
+                                            <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " /></div>
 
                                         }
                                         else
                                         {
 
-                                            
-                                        <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " disabled /></div>
                                             <div class="col-3"><input id="submit" type="submit" value="Update" class="   btn btn-block AddAppraisalBtn btn-lg " disabled /></div>
+
+                                            <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " disabled /></div>
 
                                         }
 
@@ -268,10 +237,10 @@
 
                                         if (ViewBag.appraisalStatus == 2)
                                         {
-                                            
-                                       
-                                        @if (ViewBag.appraisalData.Editable == false || ViewBag.appraisalData.Editable==null)
-                                            
+
+
+                                            @if (ViewBag.appraisalData.Editable == false || ViewBag.appraisalData.Editable == null)
+
                                             {
                                                 <div class="m-5">
                                                     <p> Note: You cannot update this appraisal, Raise a update request. To raise a request <a href="RequestForEdit?fId=@ViewBag.fid&userId=@ViewBag.uid ">Click here..</a> </p>
@@ -279,9 +248,9 @@
                                                 </div>
                                             }
 
-                                             }
+                                        }
 
-                                        
+
 
 
 
@@ -291,8 +260,9 @@
                                     }
                                     else
                                     {
-                                        <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " /></div>
                                         <div class="col-3"><input id="submit" type="submit" value="Proceed" class="   btn btn-block AddAppraisalBtn btn-lg " /></div>
+                                        <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " /></div>
+
                                     }
                                 }
 
@@ -309,6 +279,9 @@
         </div>
     </div>
 </div>
+
+
+
 <script>
 
     const json = []
@@ -330,6 +303,31 @@
         console.log(json);
     }
 </script>
+
+
+
+<script>
+    (function() {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+
 
 
 @section Scripts {
@@ -364,7 +362,7 @@
     <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
     <script src=" ~/lib/assets/js/misc.js"></script>
 
-    @if (ViewBag.ReadOnlyForm == true && ViewBag.IsEditable== 0)
+    @if (ViewBag.ReadOnlyForm == true && ViewBag.IsEditable == 0)
 {
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {

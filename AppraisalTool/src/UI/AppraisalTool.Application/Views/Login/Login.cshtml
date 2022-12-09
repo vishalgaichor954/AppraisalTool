@@ -38,15 +38,15 @@
 }
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="content-wrapper d-flex align-items-center auth">
+        <div class="content-wrapper d-flex align-items-center">
             <div class="row flex-grow">
                 <div class="col-lg-4 mx-auto">
-                    <div class="auth-form-light text-left p-5">
+                    <div style="background-color:white" class="auth-form-light text-left p-5">
                         <div class="brand-logo logoImgLogin">
                             <img src="~/lib/assets/images/AppraisalToolLogo_adobe_express.svg">
                         </div>
                         <h2 style="font-weight:500 ;padding-left:6rem" class=" LoginHeader pt-0" asp-action="Login">LogIn</h2>
-                        <form class="pt-3" asp-action="Login">
+                        <form class="pt-3 needs-validation" asp-action="Login" novalidate>
                             <div class="form-group">
                                 <label asp-for="Email" class="control-label">Email</label>
                                 <input asp-for="Email" type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" required>
@@ -64,7 +64,7 @@
                                     <div class="input-group-prepend">
                                         <img id="img-captcha" src="~/get-captcha-image" />
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Captcha Code" asp-for="CaptchaCode" maxlength="4" />
+                                    <input type="text" class="form-control" placeholder="Captcha Code" asp-for="CaptchaCode" maxlength="4" required/>
                                 </div>
                                 <span asp-validation-for="CaptchaCode" class="text-danger">
                                     @if (TempData["msg"] != null)
@@ -92,36 +92,7 @@
     </div>
     <!-- page-body-wrapper ends -->
 </div>
-@*<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form asp-action="ForgotPassword" method="post">
-                    <!-- Email input -->
-                    <div class="form-outline mb-4">
-                        <label class="form-label" for="email1">Email address</label>
-                        <input type="email" id="email" name="email" class="form-control" />
 
-                    </div>
-
-                    <!-- password input -->
-
-
-                    <!-- Submit button -->
-                    <button  asp-action="ForgotPassword" type="submit" class="btn btn-primary btn-block">Reset Password</button>
-         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-       <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>*@
 <!-- Button trigger modal -->
 <!-- Modal -->
 <!-- Modal -->
@@ -156,3 +127,28 @@
         $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
     }
 </script>
+
+
+ 
+    <script>
+      (function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+   </script>
+

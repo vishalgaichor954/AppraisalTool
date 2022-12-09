@@ -17,7 +17,7 @@
                             <div class="form-group row">
                                 <label asp-for="MenuText" class="col-sm-4 col-form-label">Menu<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuText" type="text" class="form-control" placeholder="Enter Menu Text" required/>
+                                    <input asp-for="MenuText" type="text" class="form-control" placeholder="Enter Menu Text" required />
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             <div class="form-group row">
                                 <label asp-for="MenuIcon" class="col-sm-4 col-form-label">Icon<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuIcon" type="text" class="form-control" placeholder="Enter Menu Icon" required/>
+                                    <input asp-for="MenuIcon" type="text" class="form-control" placeholder="Enter Menu Icon" required />
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                             <div class="form-group row">
                                 <label asp-for="MenuFlag" class="col-sm-4 col-form-label">Model<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuFlag" type="text" class="form-control" placeholder="Enter Menu Flag" required/>
+                                    <input asp-for="MenuFlag" type="text" class="form-control" placeholder="Enter Menu Flag" required />
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                             <div class="form-group row">
                                 <label asp-for="MenuAction" class="col-sm-4 col-form-label">Action<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuAction" type="text" class="form-control" placeholder="Enter Menu Action" required/>
+                                    <input asp-for="MenuAction" type="text" class="form-control" placeholder="Enter Menu Action" required />
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                             <div class="form-group row">
                                 <label asp-for="MenuLink" class="col-sm-4 col-form-label">Link<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuLink" type="text" class="form-control" placeholder="Enter Menu Link" required/>
+                                    <input asp-for="MenuLink" type="text" class="form-control" placeholder="Enter Menu Link" required />
                                 </div>
                             </div>
                         </div>
@@ -81,16 +81,19 @@
 
                     </div>
 
-                    <div class="col-md-12"  >
+                    <div class="col-md-12">
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
-                            <div class="form-check d-flex justify-content-around" >
+                            <div class="form-check d-flex justify-content-around">
                                 @foreach (var item in ViewBag.Rolelist)
                                 {
                                     <span>
 
-                                        <input type="checkbox" value="@item.Value" name="selectedRoles" class="form-check-input" >
+
+
+                                        <input type="checkbox" value="@item.Value" name="selectedRoles" class="form-check-input acb " required onclick='deRequire("acb")'>
                                         <label class="form-check-label">@item.Key</label>
+
                                     </span>
 
 
@@ -102,41 +105,19 @@
                         </div>
                     </div>
 
+                    <div class="form-group text-center">
+                        @* <input type="hidden" name="job" id="job" />*@
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /></div>
+                            <div class="col-2"> <a asp-action="ListMenu" class="btn  btn-block btn-md font-weight-medium auth-form-btn  ResetButton ">Cancel</a></div>
 
-
-
-
-
-
-
-
-
-
-                    @*<div class="row d-flex justify-content-center">
-                        <div style="max-width:20%;">
-                            <div style="align-items:center;">
-                                <input type="submit" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" />
-                            </div>
-
-                        </div>
-                        <div style="max-width:20%;">
-                            <div style="align-items:center;">
-                                <a asp-action="ListMenu" class="btn btn-block btn-md font-weight-medium auth-form-btn ResetButton ">Cancel</a>
-                            </div>
-                        </div>
-                    </div>*@
-                     <div class="form-group text-center">
-                           @* <input type="hidden" name="job" id="job" />*@
-                            <div class="row">
-                                <div class="col-4"></div>
-                                <div class="col-2"> <a asp-action="ListMenu" class="btn  btn-block btn-md font-weight-medium auth-form-btn  ResetButton ">Cancel</a></div>
-                                <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /></div>
-                                <div class="col-4"></div>
-                                @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
+                            <div class="col-4"></div>
+                            @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
                             <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
-                            </div>
-
                         </div>
+
+                    </div>
                 </form>
             </div>
         </div>
@@ -144,27 +125,54 @@
 
 </div>
 
- <script>
-      (function () {
-  'use strict'
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
+<script type="text/javascript">
+    function deRequire(elClass) {
+        el = document.getElementsByClassName(elClass);
+        console.log(el)
+        var atLeastOneChecked = false; //at least one cb is checked
+        for (i = 0; i < el.length; i++) {
+            if (el[i].checked === true) {
+                atLeastOneChecked = true;
+            }
         }
 
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-   </script>
+        if (atLeastOneChecked === true) {
+            for (i = 0; i < el.length; i++) {
+                el[i].required = false;
+            }
+        } else {
+            for (i = 0; i < el.length; i++) {
+                el[i].required = true;
+            }
+        }
+    }
+</script>
+
+
+
+
+<script>
+    (function() {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
 
 
 

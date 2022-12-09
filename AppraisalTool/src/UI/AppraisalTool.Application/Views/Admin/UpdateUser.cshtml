@@ -62,35 +62,20 @@ Toast.fire({
 
 
 <div class="container">
-   @* @if (TempData["editError"] != null)
-    {
-        <div class="container">
-            <div class="alert alert-danger mt-5" role="alert">
-                @TempData["editError"]
-            </div>
-        </div>
-    }*@
-   @* @if (TempData["Success"] != null)
-    {
-        <div class="container">
-            <div class="alert alert-success mt-5" role="alert">
-                @TempData["Success"]
-            </div>
-        </div>
-    }*@
+  
     <div class="col-11">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title"> Update User</h4>
-                <form class="form-sample" asp-action="UpdateUser" method="post">
+                <form class="form-sample needs-validation" asp-action="UpdateUser" method="post" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="FirstName" class="col-sm-4 col-form-label">First Name<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="FirstName" type="text" class="form-control" placeholder="Enter First Name" />
-                                    <span asp-validation-for="FirstName" class="text-danger mx-1 small"></span>
+                                    <input asp-for="FirstName" type="text" class="form-control" placeholder="Enter First Name" required />
+                                    @*<span asp-validation-for="FirstName" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
@@ -98,8 +83,8 @@ Toast.fire({
                             <div class="form-group row">
                                 <label asp-for="LastName" class="col-sm-4 col-form-label">Last Name<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="LastName" type="text" class="form-control" placeholder="Enter Last Name" />
-                                    <span asp-validation-for="LastName" class="text-danger mx-1 small"></span>
+                                    <input asp-for="LastName" type="text" class="form-control" placeholder="Enter Last Name" required/>
+                                    @*<span asp-validation-for="LastName" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
@@ -109,8 +94,8 @@ Toast.fire({
                             <div class="form-group row">
                                 <label asp-for="Email" class="col-sm-4 col-form-label">Email Address<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="Email" type="text" class="form-control" placeholder="Enter Email Address" />
-                                    <span asp-validation-for="Email" class="text-danger mx-1 small"></span>
+                                    <input asp-for="Email" type="text" class="form-control" placeholder="Enter Email Address" required/>
+                                    @*<span asp-validation-for="Email" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
@@ -119,51 +104,24 @@ Toast.fire({
                             <div class="form-group row">
                                 <label asp-for="JoinDate" class="col-sm-4 col-form-label">Joining Date<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="JoinDate" type="date" class="form-control" />
-                                    <span asp-validation-for="JoinDate" class="text-danger mx-1 small"></span>
+                                    <input asp-for="JoinDate" type="date" class="form-control" required />
+                                    @*<span asp-validation-for="JoinDate" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
-                       @* <div class="col-md-6">
-                            <div class="form-group row">
-                                <label asp-for="Password" class="col-sm-4 col-form-label">Password<sup class="required">*</sup></label>
-                                <div class="col-sm-8">
-                                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter Password"/>
-                                    <span asp-validation-for="Password" class="text-danger mx-1 small"></span>
-                                </div>
-                            </div>
-                        </div>*@
+                      
                     </div>
-                   @* <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label asp-for="JoinDate" class="col-sm-4 col-form-label">Joining Date<sup class="required">*</sup></label>
-                                <div class="col-sm-8">
-                                    <input asp-for="JoinDate" type="date" class="form-control" />
-                                    <span asp-validation-for="JoinDate" class="text-danger mx-1 small"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label asp-for="LastAppraisalDate" class="col-sm-4 col-form-label">Last Appraisal Date<sup class="required">*</sup></label>
-                                <div class="col-sm-8">
-                                    <input asp-for="LastAppraisalDate" type="date" class="form-control" />
-                                    <span asp-validation-for="LastAppraisalDate" class="text-danger mx-1 small"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>*@
+                   
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="BranchId" class="col-sm-4 col-form-label">Branch<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="BranchId" class="form-control" asp-items="@ViewBag.branchlist">
+                                    <select asp-for="BranchId" class="form-control" asp-items="@ViewBag.branchlist" required>
                                         <option value="">Select Branch</option>
                                     </select>
-                                    <span asp-validation-for="BranchId" class="text-danger mx-1 small"></span>
+                                    @*<span asp-validation-for="BranchId" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
@@ -171,10 +129,10 @@ Toast.fire({
                             <div class="form-group row">
                                 <label asp-for="RoleId" class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="RoleId" class="form-control" asp-items="@ViewBag.Rolelist" >
+                                    <select asp-for="RoleId" class="form-control" asp-items="@ViewBag.Rolelist" required >
                                         <option value="">Select Role</option>
                                     </select>
-                                    <span asp-validation-for="RoleId" class="text-danger mx-1 small"></span>
+                                    @*<span asp-validation-for="RoleId" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
@@ -184,10 +142,10 @@ Toast.fire({
                             <div class="form-group row">
                                 <label asp-for="PrimaryJobProfileId" class="col-sm-4 col-form-label">Primary Job Profile<span style="color: Red">&nbsp;*</span></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="PrimaryJobProfileId" class="form-control" asp-items="@ViewBag.JobProfileRolelist">
+                                    <select asp-for="PrimaryJobProfileId" class="form-control" asp-items="@ViewBag.JobProfileRolelist" required>
                                         <option value="">Select Primary Job Profile</option>
                                     </select>
-                                    <span asp-validation-for="PrimaryJobProfileId" class="text-danger mx-1 small"></span>
+                                    @*<span asp-validation-for="PrimaryJobProfileId" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
@@ -197,10 +155,10 @@ Toast.fire({
                                     Secondary Job Profile<span style="color: Red">&nbsp;*</span>
                                 </label>
                                 <div asp-for="SecondaryRole" class="col-sm-8">
-                                    <select asp-for="SecondaryJobProfileId" asp-items="@ViewBag.JobProfileRolelist" class="form-control">
+                                    <select asp-for="SecondaryJobProfileId" asp-items="@ViewBag.JobProfileRolelist" class="form-control" required>
                                         <option value="">Select Secondary Job Profile</option>
                                     </select>
-                                    <span asp-validation-for="SecondaryJobProfileId" class="text-danger mx-1 small"></span>
+                                    @*<span asp-validation-for="SecondaryJobProfileId" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
@@ -208,24 +166,24 @@ Toast.fire({
                      <div class="row">
                         <div class="col-md-6">
                            <div class="form-group row">
-                                <label asp-for="RevaId" class="col-sm-4 col-form-label">
+                                <label asp-for="RevaId" class="col-sm-4 col-form-label" >
                                     Reviewing Authority<span style="color: Red">&nbsp;*</span></label>
                                 
                                 <div asp-for="RevaId" class="col-sm-8">
-                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control">
+                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control" required>
                                         <option value="">Select Reviewing Authority</option>
                                     </select>
-                                    <span asp-validation-for="RevaId" class="text-danger mx-1 small"></span>
+                                    @*<span asp-validation-for="RevaId" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
                          <div class="col-md-6">
                              <div class="form-group row">
-                                <label asp-for="RepaId" class="col-sm-4 col-form-label">
+                                <label asp-for="RepaId" class="col-sm-4 col-form-label" >
                                     Reporting Authority<span style="color: Red">&nbsp;*</span></label>
                                 
                                 <div asp-for="RepaId" class="col-sm-8">
-                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control">
+                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control" required>
                                         <option value="">Select Reporting Authority </option>
                                     </select>
                                     <span asp-validation-for="RepaId" class="text-danger mx-1 small"></span>
@@ -239,8 +197,9 @@ Toast.fire({
                            @* <input type="hidden" name="job" id="job" />*@
                             <div class="row">
                                 <div class="col-4"></div>
-                                <div class="col-2">  <a asp-action="ListUsers" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
                                 <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+
+                                <div class="col-2">  <a asp-action="ListUsers" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
                                 <div class="col-4"></div>
                                 @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
                             <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
@@ -253,6 +212,30 @@ Toast.fire({
     </div>
 
 </div>
+
+<script>
+    (function() {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
