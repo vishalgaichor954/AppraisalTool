@@ -165,7 +165,7 @@
     <div class="container-fluid page-body-wrapper">
 
         <div>
-            <div class="content-wrapper content-wrapper-Blue">
+            <div class="content-wrapper content-wrapper-red w-100 h-100">
                 <div>
                     @*<h6 class="BreadCrump"><a class="" asp-controller="Dashboard" asp-action="Dashboard" >Dashboard</a>  /<a asp-controller="AppraisalHomePage" asp-action="HomePageAppraisal" > Home   </a>  /<a asp-controller="AppraisalHomePage" asp-action="SelfAppraisalDashboard" >  Self Appraisal Dashboard </a>  </h6>*@
                     <nav aria-label="breadcrumb">
@@ -179,20 +179,16 @@
                             <li class="breadcrumb-item active" aria-current="page">Self Appraisal Dashboard</li>
                         </ol>
                     </nav>
-                    <h3 style="text-align:right;color:darkgrey ">@ViewBag.fyear  </h3>
-                    <input type="button" value="Back" class=" Button mb-4" onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
+                   
+                   @* <input type="button" value="Back" class=" Button mb-4" onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />*@
                     <div style="  background-color: white;border-radius: 0.5rem;" class="container">
-
-
-
-
-
                         <!-- <h2 >Appraisal Home</h2> -->
-                        <div>
-                            <h2 style="padding-top:30px;padding-left: 44px ;">Self Appraisal Dashboard</h2>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 class="d-inline-block p-2 m-3 mt-5">Self Appraisal Dashboard</h2>
+                            <h3 style="color:darkgrey;" class="d-inline-block p-2 m-3 mt-5">@ViewBag.fyear  </h3>
                         </div>
 
-                        <div style="background-color:#1746A2;margin-top: 2rem;" class="row justify-content-center mt-5">
+                        <div style="background-color:#1746A2;" class="row justify-content-center mt-3">
                         </div>
                         <div class="LightBlueTheme mb-3" style="display:flex;align-items: center;justify-content: center;">
 
