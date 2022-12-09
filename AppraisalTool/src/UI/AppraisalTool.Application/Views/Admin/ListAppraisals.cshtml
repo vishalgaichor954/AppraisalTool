@@ -25,50 +25,50 @@
 
 @if (TempData["AllowSuccess"] != null)
 {
-    
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'success',
-  title: 'Allowed To Edit Successfully'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Allowed To Edit Successfully'
+        })
     </script>
 }
 @if (TempData["AllowFailed"] != null)
 {
-    
+
 
     <script>
-                             
-        const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
-Toast.fire({
-  icon: 'error',
-  title: 'Oops!! Something Went Wrong'
-})
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Oops!! Something Went Wrong'
+        })
     </script>
 }
 
@@ -136,13 +136,13 @@ Toast.fire({
         margin: 4px 2px;
         cursor: pointer;
         width: auto;
-        margin-left:850px;
-      
+        margin-left: 850px;
     }
+
     div.dataTables_wrapper div.dataTables_info {
-    padding-top: 0.85em;
-    visibility: hidden;
-}
+        padding-top: 0.85em;
+        visibility: hidden;
+    }
 
 </style>
 
@@ -151,7 +151,7 @@ Toast.fire({
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style="border:none">
             <li class="breadcrumb-item">
-                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting"  style=" text-decoration: none;">Configure Settings</a>
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Appraisal List</li>
         </ol>
@@ -171,11 +171,11 @@ Toast.fire({
 
                             </div>
                             @{
-                               
+
                             }
                             <form method="post" asp-action="ListAppraisals">
 
-                                
+                                <div style="overflow:scroll;">
 
                                     <table class="table table-bordered display" id="myTable" style="max-width:95% ">
                                         <thead>
@@ -225,15 +225,16 @@ Toast.fire({
 
                                         </tbody>
                                     </table>
-                                 
-                                @if (ViewBag.Empty==false)
-                                {
-                                 <div >
-                                    <input type="submit" value="Allow" class=" Button mb-4"  id="btn" style="display:none; margin-inline: auto; margin-left: 850px"/>
-
                                 </div>
+
+                                @if (ViewBag.Empty == false)
+                                {
+                                    <div>
+                                        <input type="submit" value="Allow" class=" Button mb-4" id="btn" style="display:none; margin-inline: auto; margin-left: 800px" />
+
+                                    </div>
                                 }
-                                
+
                             </form>
 
                         </div>
@@ -260,7 +261,7 @@ Toast.fire({
                 'targets': [0, 3, 4, 5], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             },
-            { visible: false, targets: [5,6] },
+            { visible: false, targets: [5, 6] },
             ],
 
 
@@ -271,15 +272,15 @@ Toast.fire({
 </script>
 
 
- <script language="javascript" type="text/javascript">
+<script language="javascript" type="text/javascript">
 
-function checker(that) {
-if (that.checked) {
-btn.style.display = "";
-} else {
-btn.style.display = "none";
-}
-}
+    function checker(that) {
+        if (that.checked) {
+            btn.style.display = "";
+        } else {
+            btn.style.display = "none";
+        }
+    }
 
 </script>
 
@@ -317,4 +318,4 @@ btn.style.display = "none";
     <script src=" ~/lib/assets/js/misc.js"></script>
 
 
-   
+

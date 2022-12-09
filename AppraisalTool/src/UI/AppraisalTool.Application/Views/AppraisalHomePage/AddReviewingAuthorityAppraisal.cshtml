@@ -82,7 +82,7 @@ Toast.fire({
     }*@
 <div class="container d-flex justify-content-center">
     <div class="col-11">
-        <div class="card content-wrapper-Blue" style="width:1020px">
+        <div class="card content-wrapper-red" style="width:1020px">
                <div class="d-flex p-4">
                    <input type="button" value="Back" class="Button " onclick="location.href='@Url.Action("ReviewAppraisalDashboard", "ReviewAppraisal")'" />
                </div>
@@ -173,11 +173,11 @@ Toast.fire({
                                             </div>*@
                                              <div class="row pt-3 pb-1">
                                     <div class="col-3">
-                                        <h4 class="DarkBlueP "> Repa Score</h4>
+                                        <h4 class="DarkBlueP "> RepA Score</h4>
 
                                     </div>
                                     <div class="col-9">
-                                       <h4 class="DarkBlueP "> Repa Comment</h4>
+                                       <h4 class="DarkBlueP "> RepA Comment</h4>
                                     </div>
                                     
                                 </div>
@@ -215,11 +215,11 @@ Toast.fire({
                                             </div>
                                              <div class="row pt-3 pb-1">
                                     <div class="col-3">
-                                        <h4 class="DarkBlueP ">Reva Score<sup class="required">*</sup></h4>
+                                        <h4 class="DarkBlueP ">RevA Score<sup class="required">*</sup></h4>
 
                                     </div>
                                     <div class="col-9">
-                                       <h4 class="DarkBlueP "> Reva Comment<sup class="required">*</sup></h4>
+                                       <h4 class="DarkBlueP "> RevA Comment</h4>
                                     </div>
                                     
                                 </div>
@@ -231,7 +231,7 @@ Toast.fire({
                                                         </div>*@
                                                         <div class="col-12">
                                                            @* <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number" />*@
-                                                                <select  asp-for="@Model[i].RevaSelfScore" class="form-control p-3"  required >
+                                                                <select  asp-for="@Model[i].RevaSelfScore" class="form-control form-select p-3"  required >
                                                                  <option  value="">Pts</option>
                                                                   <option  value="1">1</option>
                                                                     <option value="2">2</option>
@@ -359,11 +359,11 @@ Toast.fire({
                                             </div>*@
                                              <div class="row pt-3 pb-1">
                                     <div class="col-3">
-                                        <h4 class="DarkBlueP "> Repa Score</h4>
+                                        <h4 class="DarkBlueP "> RepA Score</h4>
 
                                     </div>
                                     <div class="col-9">
-                                       <h4 class="DarkBlueP "> Repa Comment</h4>
+                                       <h4 class="DarkBlueP "> RepA Comment</h4>
                                     </div>
                                     
                                 </div>
@@ -401,11 +401,11 @@ Toast.fire({
                                             </div>
                                              <div class="row pt-3 pb-1">
                                     <div class="col-3">
-                                        <h4 class="DarkBlueP ">Reva Score<sup class="required">*</sup></h4>
+                                        <h4 class="DarkBlueP ">RevA Score<sup class="required">*</sup></h4>
 
                                     </div>
                                     <div class="col-9">
-                                       <h4 class="DarkBlueP "> Reva Comment<sup class="required">*</sup></h4>
+                                       <h4 class="DarkBlueP "> RevA Comment</h4>
                                     </div>
                                     
                                 </div>
@@ -417,7 +417,7 @@ Toast.fire({
                                                         </div>*@
                                                         <div class="col-12">
                                                            @* <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number" />*@
-                                                                <select  asp-for="@Model[temp].RevaSelfScore" class="form-control p-3"  required >
+                                                                <select  asp-for="@Model[temp].RevaSelfScore" class="form-control form-select p-3"  required >
                                                                  <option  value="">Pts</option>
                                                                   <option  value="1">1</option>
                                                                        <option value="2">2</option>
@@ -518,11 +518,11 @@ Toast.fire({
                                             </div>*@
                                              <div class="row pt-3 pb-1">
                                     <div class="col-3">
-                                        <h4 class="DarkBlueP "> Repa Score</h4>
+                                        <h4 class="DarkBlueP "> RepA Score</h4>
 
                                     </div>
                                     <div class="col-9">
-                                       <h4 class="DarkBlueP "> Repa Comment</h4>
+                                       <h4 class="DarkBlueP "> RepA Comment</h4>
                                     </div>
                                     
                                 </div>
@@ -560,11 +560,11 @@ Toast.fire({
                                             </div>
                                              <div class="row pt-3 pb-1">
                                     <div class="col-3">
-                                        <h4 class="DarkBlueP ">Reva Score<sup class="required">*</sup></h4>
+                                        <h4 class="DarkBlueP ">RevA Score<sup class="required">*</sup></h4>
 
                                     </div>
                                     <div class="col-9">
-                                       <h4 class="DarkBlueP "> Reva Comment<sup class="required">*</sup></h4>
+                                       <h4 class="DarkBlueP "> RevA Comment<sup class="required">*</sup></h4>
                                     </div>
                                     
                                 </div>
@@ -576,7 +576,7 @@ Toast.fire({
                                                         </div>*@
                                                         <div class="col-12">
                                                            @* <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number" />*@
-                                                                <select  asp-for="@Model[temp].RevaSelfScore" class="form-control p-3"  required >
+                                                                <select  asp-for="@Model[temp].RevaSelfScore" class="form-control form-select p-3"  required >
                                                                  <option  value="">Pts</option>
                                                                   <option  value="1">1</option>
                                                                     <option value="2">2</option>

@@ -304,6 +304,7 @@ namespace AppraisalTool.App.Controllers
             }
             return View();
         }
+
         [HttpPost]
         public IActionResult AddReportingAuthorityAppraisal(List<ReportingMetricDto> scores)
         {

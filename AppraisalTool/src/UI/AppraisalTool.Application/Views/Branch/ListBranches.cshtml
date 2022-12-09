@@ -1,6 +1,9 @@
 ﻿@{
-    //ViewData["Title"] = "AppraisalTool";
+    ViewData["Title"] = "ListBranches";
 }
+
+
+
 <div class="loader">
     <div class="d-flex justify-content-center align-items-center" style="height:100vh;">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -16,6 +19,7 @@
 <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
 <script src="~/lib/package/dist/sweetalert2.all.js"></script>
 <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+
 <style>
     .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
         color: #333;
@@ -23,8 +27,7 @@
     }
 </style>
 
-
-@if (TempData["editError"] != null)
+@if (TempData["AddBranchFailed"] != null)
 {
 
 
@@ -44,11 +47,11 @@
 
         Toast.fire({
             icon: 'error',
-            title: 'Oops ! something went wrong user was not Updated'
+            title: 'Failed to Add Branch'
         })
     </script>
 }
-@if (TempData["Success"] != null)
+@if (TempData["AddBranchSuccess"] != null)
 {
     <script>
 
@@ -66,7 +69,7 @@
 
         Toast.fire({
             icon: 'success',
-            title: 'User updated Successfully'
+            title: 'Branch Added Successfully'
         })
     </script>
 }
@@ -74,7 +77,7 @@
 
 @*add user*@
 
-@if (TempData["AAddUserFailed"] != null)
+@if (TempData["SuccessBranch"] != null)
 {
 
 
@@ -93,12 +96,12 @@
         })
 
         Toast.fire({
-            icon: 'error',
-            title: 'Oops ! something went wrong user was not Added'
+            icon: 'success',
+            title: 'Branch Updated Successfully'
         })
     </script>
 }
-@if (TempData["AddUserSuccess"] != null)
+@if (TempData["BranchError"] != null)
 {
     <script>
 
@@ -115,14 +118,14 @@
         })
 
         Toast.fire({
-            icon: 'success',
-            title: 'User Added Successfully'
+            icon: 'error',
+            title: 'Failed To Update Branch'
         })
     </script>
 }
 
 @*add user end*@
-@if (TempData["DeleteUserFaild"] != null)
+@if (TempData["DeleteMenuFaild"] != null)
 {
 
 
@@ -142,11 +145,11 @@
 
         Toast.fire({
             icon: 'error',
-            title: 'Oops ! something went wrong user was not Deleted'
+            title: 'Oops ! something went wrong Menu was not Deleted'
         })
     </script>
 }
-@if (TempData["DeleteuserSuccess"] != null)
+@if (TempData["DeleteMenuSuccess"] != null)
 {
     <script>
 
@@ -164,78 +167,50 @@
 
         Toast.fire({
             icon: 'success',
-            title: 'User Deleted Successfully'
+            title: 'Financial Year Deleted Successfully'
         })
     </script>
 }
 
+<head>
+    <style>
+        .BreadCrump > a:link {
+            color: grey;
+            background-color: transparent;
+            text-decoration: none;
+        }
 
+
+        .BreadCrump > a:visited {
+            color: grey;
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        .BreadCrump > a:hover {
+            color: black;
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        .BreadCrump > a:active {
+            color: grey;
+            background-color: transparent;
+            text-decoration: none;
+        }
+    </style>
+</head>
 <div class="container">
-    @*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting" >Configure Settings</a>  /<a asp-controller="Admin" asp-action="ListUsers" >
-    User Management </a></h6>*@
+    @*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting">Configure Settings</a>  /<a asp-controller="FinancialYear" asp-action="ListFinancialYear">Financial Year Management </a></h6>*@
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style="border:none">
             <li class="breadcrumb-item">
                 <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">User Management</li>
+            <li class="breadcrumb-item active" aria-current="page">Branch Management</li>
         </ol>
     </nav>
-
-
-
-    @*@if (TempData["AddUserSuccess"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["AddUserSuccess"]
-    </div>
-    </div>
-    }*@
-    @*    @if (TempData["AAddUserFailed"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["AddUserFailed"]
-    </div>
-    </div>
-    }
-    @if (TempData["DeleteuserSuccess"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["DeleteuserSuccess"]
-    </div>
-    </div>
-    }
-
-
-    @if (TempData["DeleteUserFaild"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["DeleteUserFaild"]
-    </div>
-    </div>
-    }*@
-
-    @* @if (TempData["editError"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-danger mt-5" role="alert">
-    @TempData["editError"]
-    </div>
-    </div>
-    }
-    @if (TempData["Success"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["Success"]
-    </div>
-    </div>
-    }*@
-
 
     <div class="container-scroller ">
         <!-- partial -->
@@ -245,46 +220,47 @@
                     <div class="card" style="max-width:95%">
                         <div class="card-body">
                             <div class="page-header">
-                                <h3 class="page-title"> Users </h3>
+                                @*                                <h3 class="page-title"> Menu </h3>*@
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item active" aria-current="page">
                                             <div style="align-items:center;">
-                                                <a class="btn btn-block @*LoginBtn*@  blueTheme btn-md font-weight-medium auth-form-btn" asp-action="CreateUser">Create User</a>
+                                                <a class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" asp-action="AddBranch">Add New Branch</a>
                                             </div>
                                         </li>
                                     </ol>
                                 </nav>
                             </div>
                             <div style="overflow:scroll;">
-                                <table class="table table-bordered display" id="myTable" style="max-width:95%">
+                                <table class="table table-bordered display" id="table" style="max-width:95%">
                                     <thead>
                                         <tr>
-                                            <th> Name </th>
-                                            <th> Branch </th>
-                                            <th> Role </th>
-                                            <th> Join Date </th>
-                                            <th> Primary Profile </th>
-                                            <th> Secondary Profile </th>
-                                            <th> Actions </th>
+                                            <th> Branch Code </th>
+                                            <th> Branch Name </th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (ViewBag.UserList != null)
+                                        @if (ViewBag.BranchList != null)
                                         {
-                                            @foreach (var item in ViewBag.UserList)
+                                            @foreach (var item in ViewBag.BranchList)
                                             {
                                                 <tr>
-                                                    <td style="text-transform:'Capatilize';"> @item.firstName @item.lastName </td>
-                                                    <td> @item.branchName </td>
-                                                    <td> @item.roleName </td>
-                                                    <td> @item.joinDate </td>
-                                                    <td> @item.primaryJobProfileName </td>
-                                                    <td> @item.secondaryJobProfileName </td>
+                                                    <td> @item.branchCode </td>
+                                                    <td> @item.branchName</td>
                                                     <td>
-                                                        <a asp-action="UpdateUser" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
-                                                        <a asp-action="DeleteUser" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
+                                                        <a asp-action="UpdateBranch" asp-route-id="@item.id" class="btn btn-sm blueTheme"><i class="mdi mdi-table-edit"></i></a>
+                                                        <a asp-action="DeleteBranch" asp-route-id="@item.id" class="btn btn-sm LoginBtn" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>
+                                                    <td> @item.test</td>
+                                                    <td> @item.test</td>
+                                                    <td>@item.test</td>
+                                                     
+                                                    <td> @item.test</td>
+                                                    <td> @item.test</td>
+                                                    <td>@item.test </td>
+                                                    <td>@item.test</td>
+
                                                 </tr>
                                             }
                                         }
@@ -308,13 +284,14 @@
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js" defer></script>
 <script>
-    $(document).ready(function () {
-        $('#myTable').DataTable({
+    $(document).ready(function() {
+        $('#table').DataTable({
             'columnDefs': [{
-                'targets': [6], // column index (start from 0)
+                'targets': [2], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             },
-            { visible: false, targets: [5] },
+            { visible: false, targets: [3, 4, 5, 6, 7, 8, 9] },
+
             ],
             dom: 'lBfrtip',
             responsive: true,
@@ -333,14 +310,19 @@
 
 
             ]
+
+
         });
-        $(".loader").fadeOut("slow");
+        console.log("data table loaded");
+        console.log(document.querySelector(".loader"));
+        document.querySelector(".loader").remove();
+        //$(".loader").fadeOut("slow");
     });
 </script>
 
 <script>
     function loadDelete() {
-        let r = confirm("Are you sure you want to delete User?");
+        let r = confirm("Are you sure you want to delete?");
         if (r == false) {
             return event.preventDefault();
         }
@@ -355,31 +337,34 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     }
-<script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
 
-<!-- endinject -->
-<!-- Plugin js for this page -->
-<!-- End plugin js for this page -->
-<!-- inject:js -->
-<script src="./lib/assets/js/off-canvas.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="./lib/assets/js/off-canvas.js"></script>
 
 
-<script src="./lib/assets/js/hoverable-collapse.js"></script>
+    <script src="./lib/assets/js/hoverable-collapse.js"></script>
 
-<script src="./lib/assets/js/misc.js"></script>
-<!-- endinject -->
-<script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="./lib/assets/js/misc.js"></script>
+    <!-- endinject -->
+    <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
 
-@*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
-<script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
-@*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
-<script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
-@*<script src="assets/js/off-canvas.js"></script>
+    @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
+    <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
+    @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
+    <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+    @*<script src="assets/js/off-canvas.js"></script>
     <script src="assets/js/hoverable-collapse.js"></script>
     <script src="assets/js/misc.js"></script>*@
-<script src=" ~/lib/assets/js/off-canvas.js"></script>
-<script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
-<script src=" ~/lib/assets/js/misc.js"></script>
+    <script src=" ~/lib/assets/js/off-canvas.js"></script>
+    <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
+    <script src=" ~/lib/assets/js/misc.js"></script>
+
+
+
 
 
 

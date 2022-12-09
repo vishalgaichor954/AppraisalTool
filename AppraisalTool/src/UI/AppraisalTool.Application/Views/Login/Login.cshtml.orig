@@ -48,14 +48,24 @@
                         <h2 style="font-weight:500 ;padding-left:6rem" class=" LoginHeader pt-0" asp-action="Login">LogIn</h2>
                         <form class="pt-3 needs-validation" asp-action="Login" novalidate>
                             <div class="form-group">
+<<<<<<< HEAD
+                                <label asp-for="Email" class="control-label">Email</label>
+                                <input asp-for="Email" type="email" class="form-control form-control-lg" id="Email" placeholder="Email" required>
+=======
                                 <label asp-for="Email" class="control-label">Email<sup class="required">*</sup></label>
                                 <input asp-for="Email" type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" required>
+>>>>>>> aa1b1e6714830fa440e57ebeeb16d93eac8ca5cd
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
+<<<<<<< HEAD
+                                <label asp-for="Password" class="control-label"></label>
+                                <input asp-for="Password" type="Password" class="form-control form-control-lg" id="Password" placeholder="Password" required>
+=======
                                 <label asp-for="Password" class="control-label">Password<sup class="required">*</sup></label>
                                 <input asp-for="Password" type="Password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" required>
+>>>>>>> aa1b1e6714830fa440e57ebeeb16d93eac8ca5cd
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
 
