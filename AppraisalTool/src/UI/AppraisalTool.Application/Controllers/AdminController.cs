@@ -141,11 +141,11 @@ namespace AppraisalTool.App.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["AddUserSuccess"] = "User Created Successfully";
-                    return RedirectToAction("ListUsers");
+                    return RedirectToAction("GetAllAuthority", "Authority");
                 }
             
             TempData["AddUserFailed"] = "Faild to Register User";
-            return RedirectToAction("ListUsers");
+            return RedirectToAction("GetAllAuthority", "Authority");
         }
 
         [HttpGet]

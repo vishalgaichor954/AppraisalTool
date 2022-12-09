@@ -45,7 +45,7 @@
 
         Toast.fire({
             icon: 'error',
-            title: 'Oops ! something went wrong Menu was not Updated'
+            title: 'Oops ! something went wrong Job Role was not Updated'
         })
     </script>
 }
@@ -233,16 +233,16 @@
                                 <table class="table table-bordered display" id="table" style="max-width:95%">
                                     <thead>
                                         <tr>
-                                            <th> Name </th>
-                                            <th> End Year </th>
-                                            <th> Start Date</th>
-                                            <th> End Date </th>
-                                            <th>Active Status</th>
-                                             <th> Controller Name</th>
-                                            <th> Action Name </th>
-                                            <th> Link Name </th>
-                                            <th> Role </th>
-                                            <th>Action</th>
+                                            <th class="text-center"> Name </th>
+                                            <th></th>
+                                            <th></th>
+                                            <th>  </th>
+                                            <th></th>
+                                             <th></th>
+                                            <th>  </th>
+                                            <th> </th>
+                                            <th>  </th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -250,8 +250,8 @@
                                         {
                                             @foreach (var item in ViewBag.JobProfileRole)
                                             {
-                                                <tr>
-                                                    <td> @item.name </td>
+                                                <tr style="width:30%">
+                                                    <td class="text-center"> @item.name </td>
                                                     <td> </td>
                                                     <td></td>
                                                     <td></td>
@@ -260,7 +260,7 @@
                                                    <td>  </td>
                                                      <td>  </td>
                                                     <td>  </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <a asp-action="UpdateJobRole" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
                                                         <a asp-action="DeleteJobRole" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>
@@ -289,10 +289,18 @@
 <script>
     $(document).ready(function () {
         $('#table').DataTable({
-            'columnDefs': [{
+            'columnDefs': [
+                
+                {
                 'targets': [9], // column index (start from 0)
-                'orderable': false, // set orderable false for selected columns
+                 
+                'orderable': false,
+
+                 
+               
+                // set orderable false for selected columns
             },
+           
              { visible: false, targets: [1,2,3,4,5,6,7,8] },
             
             ],

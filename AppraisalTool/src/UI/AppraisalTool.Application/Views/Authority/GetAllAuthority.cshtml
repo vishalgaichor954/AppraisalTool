@@ -27,57 +27,12 @@
     }
 </style>
 
-@if (TempData["AddBranchFailed"] != null)
-{
 
-
-    <script>
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: 'error',
-            title: 'Failed to Add Branch'
-        })
-    </script>
-}
-@if (TempData["AddBranchSuccess"] != null)
-{
-    <script>
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 4000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: 'success',
-            title: 'Branch Added Successfully'
-        })
-    </script>
-}
 
 
 @*add user*@
 
-@if (TempData["SuccessBranch"] != null)
+@if (TempData["Authority"] != null)
 {
 
 
@@ -97,11 +52,11 @@
 
         Toast.fire({
             icon: 'success',
-            title: 'Branch Updated Successfully'
+            title: 'Updated Successfully'
         })
     </script>
 }
-@if (TempData["BranchError"] != null)
+@if (TempData["AuthorityError"] != null)
 {
     <script>
 
@@ -119,58 +74,11 @@
 
         Toast.fire({
             icon: 'error',
-            title: 'Failed To Update Branch'
+            title: 'Failed To Update User'
         })
     </script>
 }
 
-@*add user end*@
-@if (TempData["DeleteMenuFaild"] != null)
-{
-
-
-    <script>
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: 'error',
-            title: 'Oops ! something went wrong Menu was not Deleted'
-        })
-    </script>
-}
-@if (TempData["DeleteMenuSuccess"] != null)
-{
-    <script>
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 4000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: 'success',
-            title: 'Financial Year Deleted Successfully'
-        })
-    </script>
-}
 
 <head>
     <style>
@@ -232,13 +140,15 @@
                                 </nav>
                             </div>
                             <div style="overflow:scroll;">
-                                <table class="table table-bordered display" id="table" style="max-width:95%">
+                                <table class="table table-bordered display" id="table" style="max-width:95%" data-order='[[ 4, "desc" ]]'>
                                     <thead>
                                         <tr>
-                                            <th> Name </th>
-                                            <th> Reporting Authority </th>
-                                            <th>Reviewing Authority</th>
-                                            <th>Action</th>
+                                            <th class="text-center"> Name </th>
+                                            <th class="text-center"> Reporting Authority </th>
+                                            <th class="text-center">Reviewing Authority</th>
+                                            
+                                            <th class="text-center">Action</th>
+                                            <th>ID</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -247,14 +157,15 @@
                                             @foreach (var item in  ViewBag.UserList)
                                             {
                                                 <tr>
-                                                    <td> @item.firstName  @item.lastName </td>
-                                                    <td> @item.repaName</td>
-                                                     <td> @item.revaName</td>
-                                                    <td>
-                                                        <a asp-action="AssignAuthority" asp-route-id="@item.id" class="btn btn-sm blueTheme"><i class="mdi mdi-table-edit"></i></a>
+                                                    
+                                                    <td class="text-center"> @item.firstName  @item.lastName </td>
+                                                    <td class="text-center"> @item.repaName</td>
+                                                     <td class="text-center"> @item.revaName</td>
+                                                    <td class="text-center">
+                                                        <a asp-action="AssignAuthority" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
                                                         @*<a asp-action="DeleteBranch" asp-route-id="@item.id" class="btn btn-sm LoginBtn" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>*@
                                                     </td>
-                                                    <td> @item.test</td>
+                                                    <td> @item.id</td>
                                                     <td> @item.test</td>
                                                     <td>@item.test</td>
                                                      
@@ -289,7 +200,7 @@
     $(document).ready(function() {
         $('#table').DataTable({
             'columnDefs': [{
-                'targets': [2], // column index (start from 0)
+                'targets': [3], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             },
             { visible: false, targets: [4, 5, 6, 7, 8, 9,10] },

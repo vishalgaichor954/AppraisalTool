@@ -71,9 +71,10 @@ namespace AppraisalTool.App.Controllers
             
             //getmenubyid api
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Menu/GetMenuById?id={id}&api-version=1").Result;
-            
+
+       
             //getallmenus api
-            HttpResponseMessage response1 = client.GetAsync(client.BaseAddress + "Menu?api-version=1").Result;
+            HttpResponseMessage response1 = client.GetAsync(client.BaseAddress + "Menu/ListAllMenu?api-version=1").Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -83,8 +84,16 @@ namespace AppraisalTool.App.Controllers
                 var serres = JsonConvert.SerializeObject(res.Data);
                 menu = JsonConvert.DeserializeObject<MenuModel>(serres);
                 List<int> rolelist = new List<int>();
+                //foreach (var item in res.Data)
+                //{
+                    
+                //    rolelist.Add(item.roleList);
+                //    Console.WriteLine(item.roleList);
+                    
+                //}
+                
                 rolelist.AddRange(menu.RoleList);
-
+                
                 var data1 = response1.Content.ReadAsStringAsync().Result;
                 var getallmenu = JsonConvert.DeserializeObject<Response>(data1);
                 Dictionary<string, int> roledict = new Dictionary<string, int>();
@@ -162,8 +171,10 @@ namespace AppraisalTool.App.Controllers
 
                 string responseData = response.Content.ReadAsStringAsync().Result;
                 dynamic json = JsonConvert.DeserializeObject(responseData);
+               
                 ViewBag.MenuList = json.data;
                 return View();
+                //[...new Set(varjson.DATA.map(({ name })=>name))]
 
             }
             return View();

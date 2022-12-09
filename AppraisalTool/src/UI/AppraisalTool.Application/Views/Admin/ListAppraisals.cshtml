@@ -180,11 +180,11 @@
                                     <table class="table table-bordered display" id="myTable" style="max-width:95% ">
                                         <thead>
                                             <tr>
-                                                <th width="150px">Sr. No</th>
-                                                <th style="display:none" width="1px"> Appraisal Id </th>
-                                                <th> Name </th>
-                                                <th> Appraisal Cycle </th>
-                                                <th width="100px">Allow Edits</th>
+                                                <th class="text-center" width="150px">Sr. No</th>
+                                                <th class="text-center" style="display:none" width="1px"> Appraisal Id </th>
+                                                <th class="text-center"> Name </th>
+                                                <th class="text-center"> Appraisal Cycle </th>
+                                                <th class="text-center" width="100px">Allow Edits</th>
 
 
                                             </tr>
@@ -197,22 +197,22 @@
                                                 {
                                                     var item = ViewBag.Appraisals[i];
                                                     <tr>
-                                                        <td>@(i+1)</td>
+                                                        <td class="text-center">@(i+1)</td>
 
-                                                        <td style="display:none">
+                                                        <td class="text-center" style="display:none">
                                                             <span>@(item.appraisalId)</span>
                                                             <input asp-for="@Model[i].AppraisalId" value="@item.appraisalId" readonly hidden />
                                                         </td>
 
-                                                        <td style="text-transform:Capatilize"> @item.firstname @item.lastName </td>
-                                                        <td> @item.startYear @item.endYear </td>
-                                                        <td>
+                                                        <td class="text-center" style="text-transform:Capatilize"> @item.firstname @item.lastName </td>
+                                                        <td class="text-center"> @item.startYear @item.endYear </td>
+                                                        <td class="text-center">
                                                             <label class="switch">
                                                                 <input type="checkbox" asp-for="@Model[i].IsAllowed" value="true" onclick="checker(this)">
                                                             </label>
                                                         </td>
-                                                        <td> @item.primaryJobProfileName </td>
-                                                        <td> @item.secondaryJobProfileName </td>
+                                                        <td class="text-center"> @item.primaryJobProfileName </td>
+                                                        <td class="text-center"> @item.secondaryJobProfileName </td>
 
                                                     </tr>
 

@@ -272,7 +272,7 @@ namespace AppraisalTool.Persistence.Repositories
                               RevaName = authority.ReviewingAuthority.FirstName,
                               Name=A.FirstName + " " + A.LastName
 
-                          });
+                          }).OrderByDescending(x=>x.Id);
            
             return result;
 

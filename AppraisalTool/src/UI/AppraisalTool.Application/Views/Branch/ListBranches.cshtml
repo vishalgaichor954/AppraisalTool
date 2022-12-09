@@ -145,7 +145,7 @@
 
         Toast.fire({
             icon: 'error',
-            title: 'Oops ! something went wrong Menu was not Deleted'
+            title: 'Oops ! something went wrong Branch was not Deleted'
         })
     </script>
 }
@@ -167,7 +167,7 @@
 
         Toast.fire({
             icon: 'success',
-            title: 'Financial Year Deleted Successfully'
+            title: 'Branch  Deleted Successfully'
         })
     </script>
 }
@@ -235,9 +235,9 @@
                                 <table class="table table-bordered display" id="table" style="max-width:95%">
                                     <thead>
                                         <tr>
-                                            <th> Branch Code </th>
-                                            <th> Branch Name </th>
-                                            <th>Action</th>
+                                            <th class="text-center"> Branch Code </th>
+                                            <th class="text-center"> Branch </th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -246,9 +246,9 @@
                                             @foreach (var item in ViewBag.BranchList)
                                             {
                                                 <tr>
-                                                    <td> @item.branchCode </td>
-                                                    <td> @item.branchName</td>
-                                                    <td>
+                                                    <td class="text-center"> @item.branchCode </td>
+                                                    <td class="text-center"> @item.branchName</td>
+                                                    <td class="text-center">
                                                         <a asp-action="UpdateBranch" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
                                                         <a asp-action="DeleteBranch" asp-route-id="@item.id" class="btn btn-sm   btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>

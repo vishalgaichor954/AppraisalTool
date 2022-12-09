@@ -134,10 +134,10 @@ namespace AppraisalTool.App.Controllers
             HttpResponseMessage response = client.PutAsync("https://localhost:5000/api/User/AssignAuthority?api-version=1", content).Result;
             if (response.IsSuccessStatusCode)
             {
-                TempData["Success"] = "Updated Successfully";
+                TempData["Authority"] = "Updated Successfully";
                 return RedirectToAction("GetAllAuthority");
             }
-            TempData["editError"] = "Failed to Update User";
+            TempData["AuthorityError"] = "Failed to Update User";
             return RedirectToAction("GetAllAuthority");
 
 

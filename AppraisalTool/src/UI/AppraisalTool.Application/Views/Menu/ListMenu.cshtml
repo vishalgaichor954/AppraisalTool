@@ -293,15 +293,15 @@
                                 <table class="table table-bordered display" id="myTable" style="max-width:95%">
                                     <thead>
                                         <tr>
-                                            <th> Name </th>
-                                            <th> Class Name </th>
-                                            <th> Icon Name </th>
-                                            <th> Model </th>
+                                            <th class="text-center"> Name </th>
+                                            <th class="text-center"> Class Name </th>
+                                            <th class="text-center"> Icon Name </th>
+                                            <th class="text-center"> Model </th>
                                             @* <th> Controller Name</th>
                                             <th> Action Name </th>*@
-                                            <th> Link </th>
-                                            <th> Role </th>
-                                            <th>Action</th>
+                                            <th class="text-center"> Link </th>
+                                            <th class="text-center"> Role </th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -310,15 +310,15 @@
                                             @foreach (var item in ViewBag.MenuList)
                                             {
                                                 <tr>
-                                                    <td> @item.menuText </td>
-                                                    <td> @item.menuClass </td>
+                                                    <td class="text-center"> @item.menuText</td>
+                                                    <td > @item.menuClass </td>
                                                     <td> @item.menuIcon </td>
                                                     <td> @item.menuFlag</td>
                                                     @*   <td> @item.menuController </td>
                                             <td> @item.menuAction </td>*@
-                                                    <td> @item.menuLink </td>
+                                                    <td class="text-center"> @item.menuLink </td>
                                                     <td> @item.roleName </td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <a asp-action="UpdateMenu" asp-route-id="@item.menu_Id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
                                                         <a asp-action="DeleteMenu" asp-route-id="@item.menu_Id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>
@@ -352,7 +352,7 @@
                 'targets': [6], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
             },
-            { visible: false, targets: [1, 2] },
+            { visible: false, targets: [1, 2,5] },
             ],
             dom: 'lBfrtip',
             responsive: true,

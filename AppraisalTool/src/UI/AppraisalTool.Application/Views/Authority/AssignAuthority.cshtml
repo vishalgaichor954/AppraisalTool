@@ -37,7 +37,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title"> Assign Authority</h4>
-                <form class="form-sample" asp-action="AssignAuthority" method="post">
+                <form class="form-sample needs-validation" asp-action="AssignAuthority" method="post" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
@@ -65,20 +65,7 @@
                     
                   
                      <div class="row">
-                        <div class="col-md-6">
-                           <div class="form-group row">
-                                <label asp-for="RevaId" class="col-sm-4 col-form-label">
-                                    Reviewing Authority<span style="color: Red">&nbsp;*</span></label>
-                                
-                                <div asp-for="RevaId" class="col-sm-8">
-                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control">
-                                        <option value="">Select Reviewing Authority</option>
-                                    </select>
-                                    <span asp-validation-for="RevaId" class="text-danger mx-1 small"></span>
-                                </div>
-                            </div>
-                        </div>
-                         <div class="col-md-6">
+                          <div class="col-md-6">
                              <div class="form-group row">
                                 <label asp-for="RepaId" class="col-sm-4 col-form-label">
                                     Reporting Authority<span style="color: Red">&nbsp;*</span></label>
@@ -91,6 +78,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                           <div class="form-group row">
+                                <label asp-for="RevaId" class="col-sm-4 col-form-label">
+                                    Reviewing Authority<span style="color: Red">&nbsp;*</span></label>
+                                
+                                <div asp-for="RevaId" class="col-sm-8">
+                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control" required>
+                                        <option value="">Select Reviewing Authority</option>
+                                    </select>
+                                    <span asp-validation-for="RevaId" class="text-danger mx-1 small"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
                        
                     </div>
                    
@@ -98,8 +99,9 @@
                            @* <input type="hidden" name="job" id="job" />*@
                             <div class="row">
                                 <div class="col-4"></div>
-                                <div class="col-2">  <a asp-action="ListUsers" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
                                 <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+                                <div class="col-2"> <a asp-action="GetAllAuthority" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
+
                                 <div class="col-4"></div>
                                 @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
                             <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
