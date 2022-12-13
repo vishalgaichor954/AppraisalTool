@@ -39,11 +39,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="MenuFlag" class="col-sm-4 col-form-label">Model<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuFlag" type="text" class="form-control" placeholder="Enter Menu Flag" required />
+                                    <select asp-for="MenuFlag" class="form-control p-3" asp-items="@ViewBag.flaglist" required>
+                                        <option value="">Select MenuFlag</option>
+                                    </select>
+                                    <br />
                                 </div>
                             </div>
                         </div>

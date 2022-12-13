@@ -3,6 +3,7 @@ using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.Menu;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -19,12 +20,28 @@ namespace AppraisalTool.App.Controllers
 
         public IActionResult CreateMenu()
         {
+            client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "Menu?api-version=1").Result;
+            var responseData = response.Content.ReadAsStringAsync().Result;
+
+            var Flagdata = JsonConvert.DeserializeObject<Response>(responseData);
+            Console.WriteLine(Flagdata.Data);
+
+            List<SelectListItem> flaglist = new List<SelectListItem>();
+            foreach (var item in Flagdata.Data)
+            {
+
+                flaglist.Add(new SelectListItem { Text = item.menuFlag.ToString(), Value = item.menuFlag.ToString() });
+
+            }
             Dictionary<string, int> roleDict = new Dictionary<string, int>();
             roleDict.Add("Admin", 1);
             roleDict.Add("Reporting Authority", 2);
             roleDict.Add("Reviewing Authority", 3);
             roleDict.Add("Employee", 4);
             ViewBag.RoleList = roleDict;
+            ViewBag.flaglist = flaglist.DistinctBy(x=>x.Text);
             return View();
         }
 
@@ -76,6 +93,9 @@ namespace AppraisalTool.App.Controllers
             //getallmenus api
             HttpResponseMessage response1 = client.GetAsync(client.BaseAddress + "Menu/ListAllMenu?api-version=1").Result;
 
+            //listmenu for dropdown
+            HttpResponseMessage listmenu = client.GetAsync(client.BaseAddress + "Menu?api-version=1").Result;
+
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
@@ -109,8 +129,20 @@ namespace AppraisalTool.App.Controllers
                     }
 
                 }
+                var responseData = listmenu.Content.ReadAsStringAsync().Result;
+
+                var Flagdata = JsonConvert.DeserializeObject<Response>(responseData);
+                Console.WriteLine(Flagdata.Data);
+
+                List<SelectListItem> flaglist = new List<SelectListItem>();
+                foreach (var item in Flagdata.Data)
+                {
+
+                    flaglist.Add(new SelectListItem { Text = item.menuFlag.ToString(), Value = item.menuFlag.ToString() });
+
+                }
                 ViewBag.roldict=roledict;
-  
+                ViewBag.flaglist = flaglist.DistinctBy(x => x.Text);
                 var roledict3 = roledict.Except(roleDict2).Concat(roleDict2.Except(roledict));
                 ViewBag.roledict3 = roledict3;
               
