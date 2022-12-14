@@ -4,6 +4,7 @@ using AppraisalTool.Application.Features.Menu.Command.RemoveMenuCommand;
 using AppraisalTool.Application.Features.Menu.Command.UpdateMenuCommand;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuById;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuList;
+using AppraisalTool.Application.Features.Menu.Query.ListMenu;
 using AppraisalTool.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -110,7 +111,7 @@ namespace AppraisalTool.Persistence.Repositories
         {
             List<int> permissionDesc = new List<int>();
 
-            List<MenuRoleMapping> menuList = await _dbContext.MenuRoleMappings.Where(x => x.Menu_id == menu_Id).Include(x => x.UserRole).ToListAsync();
+            List<MenuRoleMapping> menuList =await _dbContext.MenuRoleMappings.Where(x => x.Menu_id == menu_Id).Include(x => x.UserRole).ToListAsync();
 
             foreach (var menus in menuList)
             {
@@ -137,8 +138,8 @@ namespace AppraisalTool.Persistence.Repositories
                              RoleList=permissionDesc
                              
                          };
-           
-            var res = await result.Where(u => u.Menu_id == menu_Id).FirstOrDefaultAsync();
+
+             var res = await result.Where(u => u.Menu_id == menu_Id).FirstOrDefaultAsync();
             return res;
             //List<MenuList> GetMenuById = await _dbContext.MenuLists.Include(x => x.RoleMapping).Where(u => u.Menu_Id == menu_Id && u.IsDeleted != true).ToListAsync();
             //return GetMenuById;
@@ -154,6 +155,7 @@ namespace AppraisalTool.Persistence.Repositories
                           join B in _dbContext.MenuRoleMappings on A.Menu_Id equals B.Menu_id
                           join C in _dbContext.UserRole on B.Role_id equals C.Id
                           where A.IsDeleted != true
+                        
                           select new GetMenuListQueryVm
                           {
                               Menu_Id = A.Menu_Id,
@@ -167,11 +169,38 @@ namespace AppraisalTool.Persistence.Repositories
                               RoleName = C.Role,
                               RoleId = C.Id
 
-                          }); 
-          
+                          }).AsEnumerable().DistinctBy(x=>x.Menu_Id);
+            
             return result;
         }
 
+        public async Task<IEnumerable<ListMenuQueryVm>> ListAllmenu()
+        {
+            //var menu = await _dbContext.MenuLists.Include(x => x.RoleMapping).ThenInclude(x => x.UserRole).Where(u => u.IsDeleted != true).ToListAsync();
+            //return menu;
+
+            var result = (from A in _dbContext.MenuLists
+                          join B in _dbContext.MenuRoleMappings on A.Menu_Id equals B.Menu_id
+                          join C in _dbContext.UserRole on B.Role_id equals C.Id
+                          where A.IsDeleted != true
+
+                          select new ListMenuQueryVm
+                          {
+                              Menu_Id = A.Menu_Id,
+                              MenuText = A.MenuText,
+                              MenuClass = A.MenuClass,
+                              MenuIcon = A.MenuIcon,
+                              MenuFlag = A.MenuFlag,
+                              MenuController = A.MenuController,
+                              MenuAction = A.MenuAction,
+                              MenuLink = A.MenuLink,
+                              RoleName = C.Role,
+                              RoleId = C.Id
+
+                          });
+
+            return result;
+        }
         public async Task<RemoveMenuCommandDto> RemoveMenuAsync(int menu_Id)
         {
             var menu = await _dbContext.MenuLists.Where(u => u.Menu_Id == menu_Id).FirstOrDefaultAsync();

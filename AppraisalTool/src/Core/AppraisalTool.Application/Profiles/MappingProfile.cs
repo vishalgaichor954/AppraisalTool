@@ -30,6 +30,10 @@ using AppraisalTool.Application.Features.FinancialYears.Query.GetFinancialYearBy
 using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResultByReva;
 using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByFidAndUserId;
 using AppraisalTool.Application.Features.FinancialYears.Queries.GetAllFinancialYears;
+using AppraisalTool.Application.Features.UserJobProfileRoles.Command.CreateJobProfileRoleCommand;
+using AppraisalTool.Application.Features.UserJobProfileRoles.Query.GetJobProfileRoleByIdQuery;
+using AppraisalTool.Application.Features.UserRoles.Command.CreateUserRoleCommand;
+using AppraisalTool.Application.Features.UserRoles.Query.GetUserRoleById;
 using AppraisalTool.Application.Features.Branches.Command.AddBranchCommand;
 
 namespace AppraisalTool.Application.Profiles
@@ -102,6 +106,9 @@ namespace AppraisalTool.Application.Profiles
             //Financial Year Mapping
             CreateMap<FinancialYear, GetAllFinancialYearsVM>().ReverseMap();
 
+            //job profile role mapping
+            CreateMap<JobRoles, CreateJobProfileCommand>().ReverseMap();
+            CreateMap<JobRoles, GetJobRoleByIdQueryDto>().ReverseMap();
 
             //Branch Mapping
             CreateMap<Branch, AddBranchCommand>().ReverseMap();
@@ -109,6 +116,9 @@ namespace AppraisalTool.Application.Profiles
 
 
 
+            //user role mapping
+            CreateMap<UserRole, CreateUserRolesCommand>().ReverseMap();
+            CreateMap<UserRole, GetUserRoleByIdQueryDto>().ReverseMap();
         }
     }
 }

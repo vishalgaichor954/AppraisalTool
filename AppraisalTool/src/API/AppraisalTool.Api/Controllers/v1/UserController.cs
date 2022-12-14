@@ -18,6 +18,9 @@ using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalList;
 using AppraisalTool.Application.Features.Branches.Command.AddBranchCommand;
 using AppraisalTool.Application.Features.Branches.Command.UpdateBranchCommand;
 using AppraisalTool.Application.Contracts.Persistence;
+using AppraisalTool.Application.Features.Branches.Command.RemoveBranchCommand;
+using AppraisalTool.Application.Features.Users.Command.AssignAuthorityCommand;
+using AppraisalTool.Application.Features.Authority.Query.GetAllAuthority;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -35,7 +38,8 @@ namespace AppraisalTool.Api.Controllers.v1
             _mediator = mediator;
             _logger=logger;
         }
-        
+
+       
         [HttpPost("RegisterUser")]
         public async Task<ActionResult> RegisterAsync(CreateUserCommand request)
         {
@@ -97,6 +101,14 @@ namespace AppraisalTool.Api.Controllers.v1
             return Ok(res);
         }
 
+        [HttpGet("GetALlUserList")]
+
+        public async Task<ActionResult> GetAllUser()
+        {
+            var res = await _mediator.Send(new GetAllAuthorityQuery());
+            return Ok(res);
+        }
+
         //@Author : Ilyas Dabholkar
         [HttpGet("GetUserJobProfile")]
         public async Task<ActionResult> GetUserJobProfile(int id)
@@ -146,8 +158,7 @@ namespace AppraisalTool.Api.Controllers.v1
             return Ok(dtos);
         }
 
-
-
+        
         [HttpGet("ListOfBranch")]
         public async Task<ActionResult> GetAllBranch()
         {
@@ -184,6 +195,26 @@ namespace AppraisalTool.Api.Controllers.v1
             var dtos = await _branchRepository.GetBranchById(id);
             return Ok(dtos);
         }
+
+        [HttpDelete("RemoveBranch")]
+        public async Task<ActionResult> RemoveBranch(int id)
+        {
+            _logger.LogInformation("RemoveUserRole Initiated");
+            var dtos = await _mediator.Send(new RemoveBranchesCommand() { Id = id });
+
+            _logger.LogInformation("RemoveUserRole Completed");
+            return Ok(dtos);
+        }
+        [HttpPut("AssignAuthority")]
+        public async Task<ActionResult> AssignAuthority(AssignAuthorityCommand request)
+        {
+            _logger.LogInformation("AssignAuthority Initiated");
+            var dtos = await _mediator.Send(request);
+
+            _logger.LogInformation("AssignAuthority Completed");
+            return Ok(dtos);
+        }
+
 
     }
 }

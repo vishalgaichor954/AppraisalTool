@@ -25,7 +25,7 @@ namespace AppraisalTool.Application.Features.Users.Command.UpdateUserCommand
         //public int? SecondaryRole { get; set; }
         public int? SecondaryJobProfileId { get; set; }
         public int? PrimaryJobProfileId { get; set; }
-        public int RepaId { get; set; }
-        public int RevaId { get; set; }
+        //public int RepaId { get; set; }
+        //public int RevaId { get; set; }
     }
 }

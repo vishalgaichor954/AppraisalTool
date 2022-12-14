@@ -315,7 +315,9 @@ legend {
     margin: 0% !important;
     padding: 0% !important;
 }
-
+.dropdownRequired {
+    border: 1px solid #dc3545 !important;
+}
 .required {
     color: red;
     font-size: 14px;

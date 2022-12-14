@@ -1,8 +1,10 @@
-﻿using AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand;
+﻿using AppraisalTool.Application.Contracts.Persistence;
+using AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand;
 using AppraisalTool.Application.Features.Menu.Command.RemoveMenuCommand;
 using AppraisalTool.Application.Features.Menu.Command.UpdateMenuCommand;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuById;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuList;
+using AppraisalTool.Application.Features.Menu.Query.ListMenu;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +17,13 @@ namespace AppraisalTool.Api.Controllers.v1
     {
         private readonly IMediator _mediator;
         private readonly ILogger<MenuController> _logger;
+        private readonly IMenuRepository _menrepository;
 
-        public MenuController(IMediator mediator, ILogger<MenuController> logger)
+        public MenuController(IMediator mediator, ILogger<MenuController> logger, IMenuRepository menuRepository)
         {
             _mediator = mediator;
             _logger = logger;
+            _menrepository = menuRepository;
         }
         //@Author : Triveni patil
         [HttpPost("AddMenu")]
@@ -64,6 +68,13 @@ namespace AppraisalTool.Api.Controllers.v1
             var dtos = await _mediator.Send(new RemoveMenuCommand() { Menu_Id = id });
             _logger.LogInformation("RemoveAsync Completed");
             return Ok(dtos);
+        }
+        
+        [HttpGet("ListAllMenu")]
+        public async Task<ActionResult> ListAllMenu()
+        {
+            var res = await _mediator.Send(new ListMenuQuery());
+            return Ok(res);
         }
 
     }

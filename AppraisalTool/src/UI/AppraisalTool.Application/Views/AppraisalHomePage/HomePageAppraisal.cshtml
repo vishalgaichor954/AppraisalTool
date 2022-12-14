@@ -1,4 +1,23 @@
-﻿@model AppraisalTool.App.Models.SelfAppraisal.SelfAppraisalHome
+@model AppraisalTool.App.Models.SelfAppraisal.SelfAppraisalHome    
+
+
+
+
+@*<script src="assets/vendors/chart.js/Chart.min.js"></script>
+    <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
+    @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
+<script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+@*<script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>*@
+<script src=" ~/lib/assets/js/off-canvas.js"></script>
+<script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
+<script src=" ~/lib/assets/js/misc.js"></script>
+
+
+
+
+
 @{
     //ViewData["Title"] = "AppraisalTool";
 }
@@ -275,7 +294,7 @@
     <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="container">
 
         <!-- <h2 >Appraisal Home</h2> -->
-        <div>
+        <div class="ml-5">
             <h2 style="padding-top:30px;padding-left: 20px;">Appraisal</h2>
         </div>
         <div>
@@ -294,7 +313,7 @@
             }
             <div class="m-5">
 
-                <div class="appraisal-dash-card" style="overflow:auto;">
+                <div class="appraisal-dash-card d-flex" style="overflow:auto;">
                     <!-- <div class="col-md-1"></div> -->
                     @foreach (var item in ViewBag.GetMenuCards)
                     {
@@ -302,36 +321,34 @@
                         {
                             if (item.menuList.menuAction == "SelfAppraisalDashboard")
                             {
-                                <div style="max-width:500px;max-height:500px;">
+                                <div style="min-width:280px;max-width:500px;max-height:500px;">
                                     <a id="SelfAppraisal" class="@item.menuList.menuClass">
                                         <div class="card-body">
                                             <img src="/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
                                             <h4 class="font-weight-normal mb-3">
-                                                @item.menuList.menuText @item.menuList.menuIcon
+                                                @item.menuList.menuText 
                                             </h4>
-                                                        <h6>Total appraisal to be filled</h6>
+                                            <h6>Total appraisal to be filled</h6>
                                             <p>1</p>
                                             <h6>Pending Appraisals</h6>
                                             <p id="pendingAppraisal">@ViewBag.PendingAppraisals </p>
                                             <div style="text-align:end ;" class="Last-Date">
                                                 <h6>Last date</h6>
-                                               <h4 id="self-AppraisalEndDate" class="lastDate">@ViewBag.LastDate </h4>
+                                                <h4 id="self-AppraisalEndDate" class="lastDate">@ViewBag.LastDate </h4>
                                             </div>
-                                            <!-- <h2 class="mb-5">$ 15,0000</h2>
-                                            <h6 class="card-text">Increased by 60%</h6> -->
                                         </div>
                                     </a>
                                 </div>
                             }
-                            else
+                            else if(item.menuList.menuAction == "ReporteeAppraisalDashboard")
                             {
 
-                                <div style="max-width:500px;max-height:500px;">
+                                <div style="min-width:300px;max-width:500px;max-height:500px;">
                                     <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="@item.menuList.menuClass">
                                         <div class="card-body">
                                             <img src="/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
                                             <h4 class="font-weight-normal mb-3">
-                                                @item.menuList.menuText @item.menuList.menuIcon
+                                                @item.menuList.menuText
                                             </h4>
                                             <h6>Total appraisal to be filled</h6>
                                             <p>@ViewBag.ReporteeCompleted</p>
@@ -346,6 +363,29 @@
                                 </div>
 
                             }
+                             else
+                             {
+                                   <div style="min-width:300px;max-width:500px;max-height:500px;">
+                                    <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="@item.menuList.menuClass">
+                                        <div class="card-body">
+                                            <img src="/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                                            <h4 class="font-weight-normal mb-3">
+                                                @item.menuList.menuText
+                                            </h4>
+                                            <h6>Total appraisal to be filled</h6>
+                                            <p>@ViewBag.ReviewCompleted</p>
+                                            <h6>Pending Appraisals</h6>
+                                            <p>@ViewBag.PendingAtReview </p>
+                                            <div style="text-align:end ;" class="Last-Date">
+                                                <h6>Last date</h6>
+                                                <h4 class="lastDate">@ViewBag.LastDate </h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                
+                             }
                         }
                     }
 
@@ -383,7 +423,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-    document.addEventListener("DOMContentLoaded", function(event) {
+    document.addEventListener("DOMContentLoaded", function (event) {
         const SelectDrp = document.querySelector('#FincaialYear');
         const SelfAppraisalDashboard = document.querySelector("#SelfAppraisal");
         let text = SelectDrp.options[SelectDrp.selectedIndex].text;
@@ -504,41 +544,42 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     }
-    <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
 
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="./lib/assets/js/off-canvas.js"></script>
-
-
-    <script src="./lib/assets/js/hoverable-collapse.js"></script>
-
-    <script src="./lib/assets/js/misc.js"></script>
-    <!-- endinject -->
-
-    <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="./lib/assets/js/off-canvas.js"></script>
 
 
-    @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
-    <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
-    @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
-    <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+<script src="./lib/assets/js/hoverable-collapse.js"></script>
 
-    @*<script src="assets/js/off-canvas.js"></script>
+<script src="./lib/assets/js/misc.js"></script>
+<!-- endinject -->
+
+<script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+
+@*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
+<script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
+@*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
+<script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+
+@*<script src="assets/js/off-canvas.js"></script>
 =======
     @*<script src="assets/vendors/chart.js/Chart.min.js"></script>
     <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
     @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
-    <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
-    @*<script src="assets/js/off-canvas.js"></script>
+<script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+@*<script src="assets/js/off-canvas.js"></script>
 >>>>>>> 138aacca1a1b878c3f8d332e5f2f8f1a4631e48b
     <script src="assets/js/hoverable-collapse.js"></script>
     <script src="assets/js/misc.js"></script>*@
-    <script src=" ~/lib/assets/js/off-canvas.js"></script>
-    <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
-    <script src=" ~/lib/assets/js/misc.js"></script>
+<script src=" ~/lib/assets/js/off-canvas.js"></script>
+<script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
+<script src=" ~/lib/assets/js/misc.js"></script>
+
 
 
 

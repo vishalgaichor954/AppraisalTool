@@ -1,1 +1,267 @@
-﻿@model AppraisalTool.App.Models.UserViewModel@{    //ViewData["Title"] = "AppraisalTool";}<style>    .small{        font-size : 14px;    }</style><div class="container content-wrapper-Blue">    <div class="col-11 p-3">        <div class="card p-4">            <div class="card-body">                <h4 class="card-title">Create User</h4>                <form class="form-sample needs-validation" asp-action="CreateUser" novalidate>                    <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>                    <div class="row">                        <div class="col-md-6">                            <div class="form-group row">                                <label asp-for="FirstName" class="col-sm-4 col-form-label">First Name<sup class="required">*</sup></label>                                <div class="col-sm-8">                                    <input asp-for="FirstName" type="text" class="form-control" placeholder="Enter First Name"  pattern="[a-zA-z]{2,10}"  title="First Name Should Contain only Alphabet" required/>                                    <br />                                                                   </div>                            </div>                        </div>                        <div class="col-md-6">                            <div class="form-group row">                                <label asp-for="LastName" class="col-sm-4 col-form-label">Last Name<sup class="required">*</sup></label>                                <div class="col-sm-8">                                    <input asp-for="LastName" type="text" class="form-control" placeholder="Enter Last Name" pattern="[a-zA-z]{2,10}"  title="Last Name Should Contain only Alphabet" required/>                                       <br />                                                                   </div>                            </div>                        </div>                    </div>                    <div class="row">                        <div class="col-md-6">                            <div class="form-group row">                                <label asp-for="Email" class="col-sm-4 col-form-label">Email Address<sup class="required">*</sup></label>                                <div class="col-sm-8">                                    <input asp-for="Email" type="text" class="form-control" placeholder="Enter Email Address" pattern="^[0-9a-zA-z]+[.+-_$]{0,1}[0-9a-zA-z]+[a-zA-z]+[.][a-zA-z]{2,3}$" title="Please Enter Valid Email" required/>                                       <br />                                    @*<span asp-validation-for="Email" class="text-danger mx-1 small"></span>*@                                </div>                            </div>                        </div>                        <div class="col-md-6">                            <div class="form-group row">                                <label asp-for="Password" class="col-sm-4 col-form-label">Password<sup class="required">*</sup></label>                                <div class="col-sm-8">                                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter Password"  pattern="^[a-zA-z0-9&*$]{8,}"  title="Please Enter Valid Password" required/>                                       <br />                                    @*<span asp-validation-for="Password" class="text-danger mx-1 small"></span>*@                                </div>                            </div                        </div>                    </div>                    <div class="row">                        <div class="col-md-6">                            <div class="form-group row">                                <label asp-for="JoinDate" class="col-sm-4 col-form-label">Joining Date<sup class="required">*</sup></label>                                <div class="col-sm-8">                                    <input asp-for="JoinDate" type="date" class="form-control" id="date_picker" required />                                       <br />                                </div>                            </div>                        </div>                        <div class="col-md-6">                                                       <div class="form-group row">                                <label asp-for="RoleId" class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>                                <div class="col-sm-8">                                    <select asp-for="RoleId" class="form-control" asp-items="@ViewBag.Rolelist" required>                                        <option value="">Select Role</option>                                    </select>                                       <br />                                </div>                            </div>                        </div>                    </div>                    <div class="row">                        <div class="col-md-6">                            <div class="form-group row">                                <label asp-for="BranchId" class="col-sm-4 col-form-label">Branch<sup class="required">*</sup></label>                                <div class="col-sm-8">                                    <select asp-for="BranchId" class="form-control" asp-items="@ViewBag.branchlist" required>                                        <option value="">Select Branch</option>                                    </select>                                       <br />                                </div>                            </div>                        </div>                        <div class="col-md-6">                            <div class="form-group row">                                <label asp-for="PrimaryRole" class="col-sm-4 col-form-label">Primary Job Profile<span style="color: Red">&nbsp;*</span></label></label>                                <div class="col-sm-8">                                    <select asp-for="PrimaryRole" class="form-control" asp-items="@ViewBag.JobProfileRolelist" required>                                        <option value="">Select Primary Job Profile</option>                                    </select>                                       <br />                                </div>                            </div>                        </div>                    </div>                    <div class="row">                        <div class="col-md-6">                           <div class="form-group row">                                <label asp-for="SecondaryRole" class="col-sm-4 col-form-label">                                    Secondary Job Profile<span style="color: Red">&nbsp;*</span></label>                                                                <div asp-for="SecondaryRole" class="col-sm-8">                                    <select asp-for="SecondaryRole" asp-items="@ViewBag.JobProfileRolelist" class="form-control" required>                                        <option value="">Select Secondary Job Profile</option>                                    </select>                                       <br />                                </div>                            </div>                        </div>                        <div class="col-md-6">                             <div class="form-group row">                                <label asp-for="RepaId" class="col-sm-4 col-form-label">                                    Reporting Authority<span style="color: Red">&nbsp;*</span></label>                                                                <div asp-for="SecondaryRole" class="col-sm-8">                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control"required>                                        <option value="">Select Reporting Authority </option>                                    </select>                                      <br />                                </div>                            </div>                        </div>                    </div>                    <div class="row">                        <div class="col-md-6">                           <div class="form-group row">                                <label asp-for="RevaId" class="col-sm-4 col-form-label">                                    Reviewing Authority<span style="color: Red">&nbsp;*</span></label>                                                                <div asp-for="SecondaryRole" class="col-sm-8">                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control" required>                                        <option value="">Select Reviewing Authority</option>                                    </select>                                      <br />                                </div>                            </div>                        </div>                                             </div>                                          <div class="form-group text-center">                           @* <input type="hidden" name="job" id="job" />*@                            <div class="row">                                <div class="col-4"></div>                                <div class="col-2">  <a asp-action="ListUsers" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>                                <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>                                <div class="col-4"></div>                                @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />                            <input type="reset" value="reset" class="btn btn-danger mt-4" />*@                            </div>                        </div>                </form>            </div>        </div>    </div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script><script language="javascript">        var today = new Date();        var dd = String(today.getDate()).padStart(2, '0');        var mm = String(today.getMonth() + 1).padStart(2, '0');        var yyyy = today.getFullYear();        today = yyyy + '-' + mm + '-' + dd;        $('#date_picker').attr('min',today);    </script>                    <script>      (function () {  'use strict'  // Fetch all the forms we want to apply custom Bootstrap validation styles to  var forms = document.querySelectorAll('.needs-validation')  // Loop over them and prevent submission  Array.prototype.slice.call(forms)    .forEach(function (form) {      form.addEventListener('submit', function (event) {        if (!form.checkValidity()) {          event.preventDefault()          event.stopPropagation()        }        form.classList.add('was-validated')      }, false)    })})()   </script>@section Scripts {    @{        await Html.RenderPartialAsync("_ValidationScriptsPartial");    }    }    <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>    <!-- endinject -->    <!-- Plugin js for this page -->    <!-- End plugin js for this page -->    <!-- inject:js -->    <script src="./lib/assets/js/off-canvas.js"></script>    <script src="./lib/assets/js/hoverable-collapse.js"></script>    <script src="./lib/assets/js/misc.js"></script>    <!-- endinject -->    <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>    @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@    <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>    @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@    <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>    @*<script src="assets/js/off-canvas.js"></script>    <script src="assets/js/hoverable-collapse.js"></script>    <script src="assets/js/misc.js"></script>*@    <script src=" ~/lib/assets/js/off-canvas.js"></script>    <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>    <script src=" ~/lib/assets/js/misc.js"></script>
+﻿@model AppraisalTool.App.Models.UserViewModel
+
+@{
+    //ViewData["Title"] = "AppraisalTool";
+}
+
+
+
+<style>
+    .small{
+        font-size : 14px;
+    }
+</style>
+<div class="container content-wrapper-Blue">
+
+    <div class="col-11 p-3">
+        <div class="card p-4">
+            <div class="card-body">
+                <h4 class="card-title">Create User</h4>
+                <form class="form-sample needs-validation" asp-action="CreateUser" novalidate>
+                    <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="FirstName" class="col-sm-4 col-form-label">First Name<sup class="required">*</sup></label>
+                                <div class="col-sm-8">
+                                    <input asp-for="FirstName" type="text" class="form-control" placeholder="Enter First Name" pattern="[a-zA-z]{2,10}" title="First Name Should Contain only Alphabet" required />
+                                    <br />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="LastName" class="col-sm-4 col-form-label">Last Name<sup class="required">*</sup></label>
+                                <div class="col-sm-8">
+                                    <input asp-for="LastName" type="text" class="form-control" placeholder="Enter Last Name" pattern="[a-zA-z]{2,10}" title="Last Name Should Contain only Alphabet" required />
+                                    <br />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="Email" class="col-sm-4 col-form-label">Email Address<sup class="required">*</sup></label>
+                                <div class="col-sm-8">
+                                    <input asp-for="Email" type="text" class="form-control" placeholder="Enter Email Address" pattern="^[0-9a-zA-z]+[.+-_$]{0,1}[0-9a-zA-z]+[a-zA-z]+[.][a-zA-z]{2,3}$" title="Please Enter Valid Email" required />
+                                    <br />
+                                    <span asp-validation-for="Email" class="text-danger mx-1 small"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="Password" class="col-sm-4 col-form-label">Password<sup class="required">*</sup></label>
+                                <div class="col-sm-8">
+                                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter Password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,32}$" required />
+                                    <br />
+                                    <span asp-validation-for="Password" class="text-danger mx-1 small"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="JoinDate" class="col-sm-4 col-form-label">Joining Date<sup class="required">*</sup></label>
+                                <div class="col-sm-8">
+                                    <input asp-for="JoinDate" type="date" class="form-control" id="date_picker" required />
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="form-group row">
+                                <label asp-for="RoleId" class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
+                                <div class="col-sm-8">
+                                    <select asp-for="RoleId" class="form-control p-3 form-select" asp-items="@ViewBag.Rolelist"  required>
+                                        <option value="">Select Role</option>
+                                    </select>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="BranchId" class="col-sm-4 col-form-label">Branch<sup class="required">*</sup></label>
+                                <div class="col-sm-8">
+                                    <select asp-for="BranchId" class="form-control p-3 form-select" asp-items="@ViewBag.branchlist"  required>
+                                        <option value="">Select Branch</option>
+                                    </select>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="PrimaryRole" class="col-sm-4 col-form-label">Primary Job Profile<span style="color: Red">&nbsp;*</span></label></label>
+                                <div class="col-sm-8">
+                                    <select asp-for="PrimaryRole" class="form-control p-3 form-select" asp-items="@ViewBag.JobProfileRolelist"  required>
+                                        <option value="">Select Primary Job Profile</option>
+                                    </select>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="SecondaryRole" class="col-sm-4 col-form-label">
+                                    Secondary Job Profile<span style="color: Red">&nbsp;*</span>
+                                </label>
+
+                                <div asp-for="SecondaryRole" class="col-sm-8">
+                                    <select asp-for="SecondaryRole" asp-items="@ViewBag.JobProfileRolelist" class="form-control p-3 form-select"  required>
+                                        <option value="">Select Secondary Job Profile</option>
+                                    </select>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="RepaId" class="col-sm-4 col-form-label">
+                                    Reporting Authority<span style="color: Red">&nbsp;*</span>
+                                </label>
+
+                                <div asp-for="SecondaryRole" class="col-sm-8">
+                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control" required>
+                                        <option value="">Select Reporting Authority </option>
+                                    </select>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
+                  @*  <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="RevaId" class="col-sm-4 col-form-label">
+                                    Reviewing Authority<span style="color: Red">&nbsp;*</span>
+                                </label>
+
+                                <div asp-for="SecondaryRole" class="col-sm-8">
+                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control" required>
+                                        <option value="">Select Reviewing Authority</option>
+                                    </select>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>*@
+
+                    <div class="form-group text-center">
+                        @* <input type="hidden" name="job" id="job" />*@
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+
+                            <div class="col-2">  <a asp-action="ListUsers" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
+                            <div class="col-4"></div>
+                            @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
+                            <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="~/js/DropdownValidator.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#date_picker').attr('min', today);
+</script>
+
+
+
+
+
+<script>
+    (function() {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    let Dropdowns=document.querySelectorAll("select");
+                    Dropdowns.forEach((item)=>{
+                    if(item.value==null || item.value== undefined || item.value=="" ){
+                       item.classList.add('dropdownRequired');
+                    }
+                    else{
+                            item.classList.remove('dropdownRequired');
+                    }
+                    })
+                    
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+
+
+
+
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+    <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="./lib/assets/js/off-canvas.js"></script>
+
+
+    <script src="./lib/assets/js/hoverable-collapse.js"></script>
+
+    <script src="./lib/assets/js/misc.js"></script>
+    <!-- endinject -->
+
+    <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+    @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
+    <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
+    @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
+    <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+    @*<script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>*@
+    <script src=" ~/lib/assets/js/off-canvas.js"></script>
+    <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
+    <script src=" ~/lib/assets/js/misc.js"></script>
+

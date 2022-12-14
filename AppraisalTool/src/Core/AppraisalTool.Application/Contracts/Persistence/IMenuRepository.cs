@@ -3,6 +3,7 @@ using AppraisalTool.Application.Features.Menu.Command.RemoveMenuCommand;
 using AppraisalTool.Application.Features.Menu.Command.UpdateMenuCommand;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuById;
 using AppraisalTool.Application.Features.Menu.Query.GetMenuList;
+using AppraisalTool.Application.Features.Menu.Query.ListMenu;
 using AppraisalTool.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace AppraisalTool.Application.Contracts.Persistence
         public Task<GetMenuByIdDto> GetMenuById(int menu_Id);
         //public Task<GetMenuByIdDto> GetMenubyId(int menu_Id);
         public Task<IEnumerable<GetMenuListQueryVm>> GetAllMenuList();
+
+        public Task<IEnumerable<ListMenuQueryVm>> ListAllmenu();
         public Task<RemoveMenuCommandDto> RemoveMenuAsync(int menu_Id);
     }
 }

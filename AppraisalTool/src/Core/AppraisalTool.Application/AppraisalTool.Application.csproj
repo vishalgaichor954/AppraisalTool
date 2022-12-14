@@ -9,12 +9,18 @@
   <ItemGroup>
     <Compile Remove="Features\AppraisalResult\**" />
     <Compile Remove="Features\FinancialYear\**" />
+    <Compile Remove="Features\JobRoles\**" />
+    <Compile Remove="Features\Role\**" />
     <Compile Remove="Features\User\**" />
     <EmbeddedResource Remove="Features\AppraisalResult\**" />
     <EmbeddedResource Remove="Features\FinancialYear\**" />
+    <EmbeddedResource Remove="Features\JobRoles\**" />
+    <EmbeddedResource Remove="Features\Role\**" />
     <EmbeddedResource Remove="Features\User\**" />
     <None Remove="Features\AppraisalResult\**" />
     <None Remove="Features\FinancialYear\**" />
+    <None Remove="Features\JobRoles\**" />
+    <None Remove="Features\Role\**" />
     <None Remove="Features\User\**" />
   </ItemGroup>
 
@@ -40,8 +46,6 @@
     <Folder Include="Features\GradeReports\Commands\" />
     <Folder Include="Features\Metrics\Commands\" />
     <Folder Include="Features\ReporteeAppraisals\Commands\" />
-    <Folder Include="Features\Role\Command\" />
-    <Folder Include="Features\Role\Query\" />
   </ItemGroup>
 
 </Project>

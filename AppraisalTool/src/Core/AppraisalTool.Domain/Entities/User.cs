@@ -41,7 +41,7 @@ namespace AppraisalTool.Domain.Entities
         [ForeignKey("BranchId")]
         public virtual Branch? Branch { get; set; }
         public virtual List<UserJobRoles> JobRoles { get; set; }
-
+        
         public virtual List<Appraisal>? UserAppraisals { get; set; }
 
 

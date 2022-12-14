@@ -25,7 +25,7 @@
 </style>
 @{
     var EffortList1 = Model.Where(item => item.KraListId == 1).ToList();
-    var EffortList = Model.Where(item => item.KraListId == 1).ToList().Count ;
+    var EffortList = Model.Where(item => item.KraListId == 1).ToList().Count;
     var BevList = Model.Where(item => item.KraListId == 3).ToList().Count;
     var JobList = Model.Where(item => item.KraListId == 4).ToList().Count;
 }
@@ -36,10 +36,10 @@
 
        @if ( TempData["Error"] != null)
 {
-  
+
 
     <script>
-                             
+
         const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
@@ -61,7 +61,7 @@ Toast.fire({
     @if (TempData["SUCCESS"] != null)
     {
           <script>
-                             
+
         const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
@@ -87,7 +87,7 @@ Toast.fire({
                    <input type="button" value="Back" class="Button " onclick="location.href='@Url.Action("ReviewAppraisalDashboard", "ReviewAppraisal")'" />
                </div>
             <div class="card-body">
-                
+
                 <div class="featureBackground " @*style="overflow-x:scroll"*@>
                     <div class="text-center pt-3 pb-4"><h1 class="card-title FormHeader px-5">Review Appraisal</h1></div>
   
@@ -599,20 +599,20 @@ Toast.fire({
                                 }
                             </div>
                         </fieldset>
-                          <div class="form-group text-center">
+                        <div class="form-group text-center">
                             <input type="hidden" name="job" id="job" />
                             <div class="row">
                                 <div class="col-3"></div>
+                                <div class="col-3"><input id="submit" type="submit" value="Proceed" class="   btn btn-block AddAppraisalBtn btn-lg " /></div>
                                 <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " /></div>
-                                <div class="col-3"><input id="submit" type="submit" value="Procced" class="   btn btn-block AddAppraisalBtn btn-lg " /></div>
+
                                 <div class="col-3"></div>
-                                @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
-                            <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
+                              
                             </div>
 
                         </div>
                     </form>
-                  
+
                 </div>
             </div>
         </div>
@@ -640,6 +640,27 @@ Toast.fire({
     }
 </script>
 
+<script>
+    (function() {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
 
 @section Scripts {
     @{

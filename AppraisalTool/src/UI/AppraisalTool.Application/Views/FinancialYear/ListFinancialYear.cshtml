@@ -89,7 +89,7 @@
 
         Toast.fire({
             icon: 'error',
-            title: 'Oops ! something went wrong Menu was not Updated'
+            title: 'Oops ! something went wrong Financial year was not Updated'
         })
     </script>
 }
@@ -139,7 +139,7 @@
 
         Toast.fire({
             icon: 'error',
-            title: 'Oops ! something went wrong Menu was not Added'
+            title: 'Oops ! something went wrong Financial Year was not Added'
         })
     </script>
 }
@@ -187,7 +187,7 @@
 
         Toast.fire({
             icon: 'error',
-            title: 'Oops ! something went wrong Menu was not Deleted'
+            title: 'Oops ! something went wrong Financial Year was not Deleted'
         })
     </script>
 }
@@ -277,16 +277,16 @@
                                 <table class="table table-bordered display" id="table" style="max-width:95%">
                                     <thead>
                                         <tr>
-                                            <th> Start Year </th>
-                                            <th> End Year </th>
-                                            <th> Start Date</th>
-                                            <th> End Date </th>
-                                            <th>Active Status</th>
-                                            <th> Controller Name</th>
-                                            <th> Action Name </th>
-                                            <th> Link Name </th>
-                                            <th> Role </th>
-                                            <th>Action</th>
+                                            <th class="text-center"> Start Year </th>
+                                            <th class="text-center"> End Year </th>
+                                            <th class="text-center"> Start Date</th>
+                                            <th class="text-center"> End Date </th>
+                                            <th class="text-center">Active Status</th>
+                                            <th class="text-center"> Controller Name</th>
+                                            <th class="text-center"> Action Name </th>
+                                            <th class="text-center"> Link Name </th>
+                                            <th class="text-center"> Role </th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -295,16 +295,16 @@
                                             @foreach (var item in ViewBag.FinancialYearList)
                                             {
                                                 <tr>
-                                                    <td> @item.startYear </td>
-                                                    <td> @item.endYear </td>
-                                                    <td> @item.startDate.ToString("dd MMMM")</td>
-                                                    <td> @item.endDate.ToString("dd MMMM")</td>
-                                                    <td>@item.isActive</td>
-                                                    <td> @item.menuController </td>
-                                                    <td> @item.menuAction </td>
-                                                    <td> @item.menuLink </td>
-                                                    <td> @item.roleName </td>
-                                                    <td>
+                                                    <td class="text-center"> @item.startYear </td>
+                                                    <td class="text-center"> @item.endYear </td>
+                                                    <td class="text-center"> @item.startDate.ToString("dd MMMM")</td>
+                                                    <td class="text-center"> @item.endDate.ToString("dd MMMM")</td>
+                                                    <td class="text-center">@item.isActive</td>
+                                                    <td class="text-center"> @item.menuController </td>
+                                                    <td class="text-center"> @item.menuAction </td>
+                                                    <td class="text-center"> @item.menuLink </td>
+                                                    <td class="text-center"> @item.roleName </td>
+                                                    <td class="text-center">
                                                         <a asp-action="UpdateYear" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
                                                         <a asp-action="DeleteYear" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>

@@ -98,7 +98,7 @@
         })
     </script>
 }
-@if (TempData["AddUserSuccess"] != null)
+@*@if (TempData["AddUserSuccess"] != null)
 {
     <script>
 
@@ -119,7 +119,7 @@
             title: 'User Added Successfully'
         })
     </script>
-}
+}*@
 
 @*add user end*@
 @if (TempData["DeleteUserFaild"] != null)
@@ -260,13 +260,13 @@
                                 <table class="table table-bordered display" id="myTable" style="max-width:95%">
                                     <thead>
                                         <tr>
-                                            <th> Name </th>
-                                            <th> Branch </th>
-                                            <th> Role </th>
-                                            <th> Join Date </th>
-                                            <th> Primary Profile </th>
-                                            <th> Secondary Profile </th>
-                                            <th> Actions </th>
+                                            <th class="text-center"> Name </th>
+                                            <th class="text-center"> Branch </th>
+                                            <th class="text-center"> Role </th>
+                                            <th class="text-center"> Join Date </th>
+                                            <th class="text-center"> Primary Profile </th>
+                                            <th class="text-center"> Secondary Profile </th>
+                                            <th class="text-center"> Action </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -275,13 +275,13 @@
                                             @foreach (var item in ViewBag.UserList)
                                             {
                                                 <tr>
-                                                    <td style="text-transform:'Capatilize';"> @item.firstName @item.lastName </td>
-                                                    <td> @item.branchName </td>
-                                                    <td> @item.roleName </td>
-                                                    <td> @item.joinDate </td>
-                                                    <td> @item.primaryJobProfileName </td>
-                                                    <td> @item.secondaryJobProfileName </td>
-                                                    <td>
+                                                    <td class="text-center" style="text-transform:'Capatilize';"> @item.firstName @item.lastName </td>
+                                                    <td class="text-center"> @item.branchName </td>
+                                                    <td class="text-center"> @item.roleName </td>
+                                                    <td class="text-center"> @item.joinDate </td>
+                                                    <td class="text-center"> @item.primaryJobProfileName </td>
+                                                    <td class="text-center"> @item.secondaryJobProfileName </td>
+                                                    <td class="text-center">
                                                         <a asp-action="UpdateUser" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
                                                         <a asp-action="DeleteUser" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>

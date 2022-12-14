@@ -1,0 +1,1054 @@
+﻿@model List<AppraisalTool.App.Models.ReviewingMetricDto>
+@{
+    //ViewData["Title"] = "AppraisalTool";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+      .Button {
+        background-color: #1746A2;
+        color: white;
+       /* display : inline;*/
+        width :100px;
+        /* border: 2px solid #E0144C;*/
+        border-radius: 0.3rem;
+        border: none;
+        padding: 13px 40px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: auto;
+    }
+</style>
+@{
+    var EffortList1 = Model.Where(item => item.KraListId == 1).ToList();
+    var EffortList = Model.Where(item => item.KraListId == 1).ToList().Count;
+    var BevList = Model.Where(item => item.KraListId == 3).ToList().Count;
+    var JobList = Model.Where(item => item.KraListId == 4).ToList().Count;
+}
+@*<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
+   <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
+     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+
+       @if ( TempData["Error"] != null)
+{
+
+
+    <script>
+
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 5000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'error',
+  title: 'Oops ! something went wrong form was not submitted'
+})
+    </script>
+}
+    @if (TempData["SUCCESS"] != null)
+    {
+          <script>
+
+        const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: 'Form was submitted successfully'
+})
+    </script>
+    }*@
+<div class="container d-flex justify-content-center">
+    <div class="col-11">
+<<<<<<< HEAD
+        <div class="card content-wrapper-Blue" style="width:1020px">
+            <div class="d-flex p-4">
+                <input type="button" value="Back" class="Button " onclick="location.href='@Url.Action("ReviewAppraisalDashboard", "ReviewAppraisal")'" />
+            </div>
+=======
+        <div class="card content-wrapper-red" style="width:1020px">
+               <div class="d-flex p-4">
+                   <input type="button" value="Back" class="Button " onclick="location.href='@Url.Action("ReviewAppraisalDashboard", "ReviewAppraisal")'" />
+               </div>
+>>>>>>> 7a3cc3fc8abc807e811f44d29838f66fc9f0844f
+            <div class="card-body">
+
+                <div class="featureBackground " @*style="overflow-x:scroll"*@>
+                    <div class="text-center pt-3 pb-4"><h1 class="card-title FormHeader px-5">Review Appraisal</h1></div>
+<<<<<<< HEAD
+
+
+                    <form class="needs-validation" asp-action="AddReviewingAuthorityAppraisal" method="post" enctype="multipart/form-data" novalidate>
+                        <div class="text-danger"></div>
+                        <input name="Fid" hidden value="@ViewBag.Fid" type="number">
+                        <fieldset class="border p-2 mx-1 my-5 " style="display:flex;justify-content:center;">
+                            <legend style="overflow-x: scroll; " class="float-none HEADdata w-auto mx-4">
+                                Input & Effort metric
+                            </legend>
+                            <div class="row d-flex justify-content-center">
+                                <div class="row pt-3 pb-1">
+                                    @* /*20.833333325%*/*@
+                                    <div class="p-0" style="width:15%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Metric Name</h4>
+
+                                    </div>
+                                    @* /*12.499999995%*/*@
+                                    <div class="p-0" style="width:5%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Score</h4>
+                                    </div>
+                                    <div class="px-5" style="width:21.5%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Self Comment</h4>
+                                    </div>
+                                    <div class="p-0" style="width:5%">
+                                        <h4 class="DarkBlueReveiwingP2 ">Repa Score</h4>
+                                    </div>
+                                    <div class="px-5" style="width:21.5%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Repa Comment</h4>
+                                    </div>
+                                    <div class="p-0" style="width:10%">
+                                        <h4 class="DarkBlueReveiwingP2 ">Reva Score<sup class="required">*</sup></h4>
+                                    </div>
+                                    <div class="px-5" style="width:21.5%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Reva Comment</h4>
+                                    </div>
+                                </div>
+                                @for (int i = 0; i < EffortList; i++)
+                                {
+
+                                    <div class="row pt-1 pb-5">
+                                        <div style="width:15%"><h4 class="HEADMetricsReportee">@Model[i].MetricDescription</h4><span style="color:black;font-style:italic;font-size:11px"> (Weightage @Model[i].MetricWeightage pts) </span></div>
+                                        <div style="width:5%">
+                                            <div class="row d-flex justify-content-center align-items-center">
+
+
+
+
+
+                                                <input class=" form-control my-2 kra-score px-2 py-3" readonly value="@Model[i].SelfScore" asp-for="@Model[i].SelfScore" min="1" max="5" type="number">
+                                                <span asp-validation-for="@Model[i].SelfScore" class="text-danger mx-1 small"></span>
+                                            </div>
+                                        </div>
+                                        <div style="width:21.5%">
+                                            <div class="row d-flex justify-content-center align-items-center">
+                                                <input asp-for="@Model[i].MetricId" hidden value="@Model[i].MetricId" type="number">
+                                                <input asp-for="@Model[i].ID" hidden value="@Model[i].ID" type="number">
+                                                <input asp-for="@Model[i].SelfCreatatedDate" hidden value="@Model[i].SelfCreatatedDate" type="datetime">
+                                                <input asp-for="@Model[i].RepaSelfCreatatedDate" hidden value="@Model[i].RepaSelfCreatatedDate" type="datetime">
+                                                <input asp-for="@Model[i].UserId" hidden value="@Model[i].UserId" type="number">
+                                                <input asp-for="@Model[i].AppraisalId" hidden value="@Model[i].AppraisalId" type="number">
+                                                <input asp-for="@Model[i].KraListId" hidden value="@Model[i].KraListId" type="number">
+                                                <input asp-for="@Model[i].MetricWeightage" hidden value="@Model[i].MetricWeightage" type="number">
+                                                <input asp-for="@Model[i].MetricDescription" hidden value="@Model[i].MetricDescription" type="text">
+
+                                                <div class="col-12">
+                                                    <textarea readonly rows="4" class="form-control " asp-for="@Model[i].SelfComment" placeholder="Add Comment">@Model[i].SelfComment</textarea>
+                                                    <span asp-validation-for="@Model[i].SelfComment" class="text-danger   mx-1 small"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="width:5%">
+                                            <div class="row d-flex justify-content-center align-items-center">
+
+
+
+
+
+                                                <input readonly class=" form-control my-2 kra-score px-2 py-3" asp-for="@Model[i].RepaSelfScore" min="1" max="5" type="number">
+
+
+
+
+                                                <span asp-validation-for="@Model[i].RepaSelfScore" class="text-danger mx-1 small"></span>
+                                            </div>
+                                            @* <input  class=" form-control my-2 kra-score" asp-for="@Model[i].RepaSelfScore" min="1" max="5" type="number">*@
+                                        </div>
+                                        <div style="width:21.5%">
+
+
+                                            <textarea readonly rows="4" class="form-control " asp-for="@Model[i].RepaSelfComment" placeholder="Add Comment"></textarea>
+
+                                        </div>
+                                        <div style="width:10%">
+                                            <div class="row d-flex justify-content-center align-items-center">
+
+
+
+
+
+                                                <input class=" form-control my-2 kra-score px-3 py-3" asp-for="@Model[i].RevaSelfScore" min="1" max="5" type="number" required>
+
+
+
+
+                                                @*<span asp-validation-for="@Model[i].RevaSelfScore" class="   spanValidationFontSize text-danger p-0"></span>*@
+                                            </div>
+                                            @* <input  class=" form-control my-2 kra-score" asp-for="@Model[i].RepaSelfScore" min="1" max="5" type="number">*@
+                                        </div>
+                                        <div style="width:21.5%">
+
+
+                                            <textarea rows="4" class="form-control " asp-for="@Model[i].RevaSelfComment" placeholder="Add Comment"></textarea>
+
+                                        </div>
+                                    </div>
+
+=======
+  
+                  
+                    <form class="form-sample needs-validation"  asp-action="AddReviewingAuthorityAppraisal" method="post" enctype="multipart/form-data" novalidate>
+                        <div class="text-danger"></div>
+                           <input name="Fid" hidden value="@ViewBag.Fid"  type="number">
+                        <fieldset class="border p-2 mx-1 my-3 " style="display:flex;justify-content:center;">
+                            <legend style="overflow-x: scroll; " class="float-none HEADdata w-auto mx-4">
+                                Input & Effort metric
+                            </legend>
+                            <div  class="row d-flex justify-content-center">
+                   
+                                @for (int i = 0; i < EffortList; i++)
+                                {
+
+                                    int count = i + 1;
+                                    <div  class="row pt-3 m-3 " style="border:1px solid lightgrey;width:93%;border-radius:0.2rem" >
+                                            <div class="row">
+                                                <div class="col-9"><h4 class="HEADMetrics"> @count .  @Model[i].MetricDescription </h4></div>
+                                                <div class="col-3"> <span style="color:black;font-style:italic;font-size:13px"> (Weightage @Model[i].MetricWeightage pts) </span> </div>
+                                               @* <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                        <div class="col-5">
+                                                            <label>Score</label> 
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number" />
+                                                        </div>
+                                                          <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
+                                                    </div>
+                                                </div>*@
+                                            </div>
+                                              <div class="row pt-3 pb-1">
+                                    <div class="col-3">
+                                        <h4 class="DarkBlueP "> Score</h4>
+
+                                    </div>
+                                    <div class="col-9">
+                                       <h4 class="DarkBlueP "> Self Comment</h4>
+                                    </div>
+                                    
+                                </div>
+                                            <div class="row">
+                                                  <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                       @* <div class="col-5">
+                                                            <label>Score</label>
+                                                        </div>*@
+                                                        <div class="col-12">
+                                                           <input class=" form-control my-2 kra-score" asp-for="@Model[i].SelfScore" min="1" max="5" type="number" readonly />
+                                                               @* <select  asp-for="@Model[i].SelfScore" class="form-control p-3" disabled  required >
+                                                                 <option  value="">Pts</option>
+                                                                  <option  value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                       <option value="3">3</option>
+                                                                    <option  value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                     </select>*@
+                                                                    
+                                                                
+                                                        </div>
+                                                          
+                                                    </div>
+                                                </div>
+                                                <div class="col-9">    <input asp-for="@Model[i].MetricId" hidden value="@Model[i].MetricId"  type="number">
+                                                <input asp-for="@Model[i].ID" hidden value="@Model[i].ID"  type="number">
+                                                 <input asp-for="@Model[i].SelfCreatatedDate" hidden value="@Model[i].SelfCreatatedDate"  type="datetime">
+                                                 <input asp-for="@Model[i].RepaSelfCreatatedDate" hidden value="@Model[i].RepaSelfCreatatedDate"  type="datetime">
+                                                <input asp-for="@Model[i].UserId" hidden value="@Model[i].UserId"  type="number">
+                                                <input asp-for="@Model[i].AppraisalId" hidden value="@Model[i].AppraisalId"  type="number">
+                                              <input asp-for="@Model[i].KraListId" hidden value="@Model[i].KraListId"   type="number">
+                                                <input asp-for="@Model[i].MetricWeightage" hidden value="@Model[i].MetricWeightage"   type="number">
+                                              <input asp-for="@Model[i].MetricDescription" hidden  value="@Model[i].MetricDescription"  type="text">
+                                                      <textarea readonly class="form-control " asp-for="@Model[i].SelfComment" placeholder="Add Comment"></textarea>
+                                                
+                                        </div>
+                                            </div>
+                                     @*       <div class="row"> 
+
+                                                <div class="col-3">  <span asp-validation-for="@Model[i].SelfScore" class="text-danger mx-1 small"></span></div>
+                                                 <div class="col-9"><span asp-validation-for="@Model[i].SelfComment" class="text-danger   mx-1 small"></span></div>
+                                            </div>*@
+                                             <div class="row pt-3 pb-1">
+                                    <div class="col-3">
+                                        <h4 class="DarkBlueP "> RepA Score</h4>
+
+                                    </div>
+                                    <div class="col-9">
+                                       <h4 class="DarkBlueP "> RepA Comment</h4>
+                                    </div>
+                                    
+                                </div>
+                                            <div class="row">
+                                                  <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                       @* <div class="col-5">
+                                                            <label>Score</label>
+                                                        </div>*@
+                                                        <div class="col-12">
+                                                           <input class=" form-control my-2 kra-score" asp-for="@Model[i].RepaSelfScore" min="1" max="5" type="number" readonly />
+                                                                @*<select  asp-for="@Model[i].RepaSelfScore" class="form-control p-3" disabled  required >
+                                                                 <option  value="">Pts</option>
+                                                                  <option  value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                       <option value="3">3</option>
+                                                                    <option  value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                     </select>*@
+                                                                    
+                                                                
+                                                        </div>
+                                                          
+                                                    </div>
+                                                </div>
+                                                <div class="col-9">    
+                                                      <textarea readonly class="form-control " asp-for="@Model[i].RepaSelfComment" placeholder="Add Comment"></textarea>
+                                                
+                                        </div>
+                                       @*   <div class="row"> 
+
+                                                <div class="col-3">  <span asp-validation-for="@Model[i].SelfScore" class="text-danger mx-1 small"></span></div>
+                                                 <div class="col-9"><span asp-validation-for="@Model[i].SelfComment" class="text-danger   mx-1 small"></span></div>
+                                            </div>*@
+                                            </div>
+                                             <div class="row pt-3 pb-1">
+                                    <div class="col-3">
+                                        <h4 class="DarkBlueP ">RevA Score<sup class="required">*</sup></h4>
+
+                                    </div>
+                                    <div class="col-9">
+                                       <h4 class="DarkBlueP "> RevA Comment</h4>
+                                    </div>
+                                    
+                                </div>
+                                            <div class="row">
+                                                  <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                       @* <div class="col-5">
+                                                            <label>Score</label>
+                                                        </div>*@
+                                                        <div class="col-12">
+                                                           @* <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number" />*@
+                                                                <select  asp-for="@Model[i].RevaSelfScore" class="form-control form-select p-3"  required >
+                                                                 <option  value="">Pts</option>
+                                                                  <option  value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                       <option value="3">3</option>
+                                                                    <option  value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                     </select>
+                                                                    
+                                                                
+                                                        </div>
+                                                          
+                                                    </div>
+                                                </div>
+                                                <div class="col-9 pb-2">    
+                                                      <textarea  class="form-control " asp-for="@Model[i].RevaSelfComment" placeholder="Add Comment"></textarea>
+                                                
+                                        </div>
+                                            </div>
+                                        </div>
+                                   @* <div class="row pt-2">
+                                        <div class="row">
+                                            <div class="col-9"><h4 class="HEADMetrics">@Model[i].Metric_Description</h4></div>
+                                            <div class="col-3">
+                                                <div class="row d-flex justify-content-center align-items-center">
+                                                    <div class="col-5">
+                                                        <label>Score<sup class="required">*</sup></label>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          
+                                        </div>
+                                        <div class="row">
+                                             <input asp-for="@Model[i].Metric_ID" hidden value="@Model[i].Metric_ID"  type="number">
+                                              <input asp-for="@Model[i].List_Id" hidden value="@Model[i].List_Id"   type="number">
+                                                <input asp-for="@Model[i].metric_Weightage" hidden value="@Model[i].metric_Weightage"   type="number">
+                                              <input asp-for="@Model[i].Metric_Description" hidden  value="@Model[i].Metric_Description"  type="text">
+                                            <div class="col-12"> <textarea class="form-control " asp-for="@Model[i].Comment" placeholder="Add Comment"></textarea></div>
+                                            
+                                        </div>
+                                        <span asp-validation-for="@Model[i].Comment" class="text-danger   mx-1 small"></span>
+                                        <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
+                                    </div>*@
+                                   
+>>>>>>> 7a3cc3fc8abc807e811f44d29838f66fc9f0844f
+                                }
+                            </div>
+                        </fieldset>
+                        <fieldset class="border p-2 mx-1 my-5" style="display:flex;justify-content:center;">
+                            <legend class="float-none HEADdata w-auto mx-4">
+                                Behavioral competencies
+                            </legend>
+                            <div class="row d-flex justify-content-center">
+<<<<<<< HEAD
+                                <div class="row pt-3 pb-1">
+                                    @* /*20.833333325%*/*@
+                                    <div class="p-0" style="width:15%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Metric Name</h4>
+
+                                    </div>
+                                    @* /*12.499999995%*/*@
+                                    <div class="p-0" style="width:5%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Score</h4>
+                                    </div>
+                                    <div class="px-5" style="width:21.5%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Self Comment</h4>
+                                    </div>
+                                    <div class="p-0" style="width:5%">
+                                        <h4 class="DarkBlueReveiwingP2 ">Repa Score</h4>
+                                    </div>
+                                    <div class="px-5" style="width:21.5%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Repa Comment</h4>
+                                    </div>
+                                    <div class="p-0" style="width:10%">
+                                        <h4 class="DarkBlueReveiwingP2 ">Reva Score<sup class="required">*</sup></h4>
+                                    </div>
+                                    <div class="px-5" style="width:21.5%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Reva Comment</h4>
+                                    </div>
+                                </div>
+                                @for (int i = EffortList - 1; i < EffortList + BevList - 1; i++)
+                                {
+                                    var temp = i + 1;
+                                    <div class="row pt-1 pb-5">
+                                        <div style="width:15%"><h4 class="HEADMetricsReportee">@Model[temp].MetricDescription</h4><span style="color:black;font-style:italic;font-size:11px"> (Weightage @Model[temp].MetricWeightage pts) </span></div>
+                                        <div style="width:5%">
+                                            <div class="row d-flex justify-content-center align-items-center">
+
+
+
+
+
+                                                <input class=" form-control my-2 kra-score px-2 py-3" readonly value="@Model[temp].SelfScore" asp-for="@Model[temp].SelfScore" min="1" max="5" type="number">
+                                                <span asp-validation-for="@Model[temp].SelfScore" class="text-danger mx-1 small"></span>
+                                            </div>
+                                        </div>
+                                        <div style="width:21.5%">
+                                            <div class="row d-flex justify-content-center align-items-center">
+                                                <input asp-for="@Model[temp].MetricId" hidden value="@Model[temp].MetricId" type="number">
+                                                <input asp-for="@Model[temp].ID" hidden value="@Model[temp].ID" type="number">
+                                                <input asp-for="@Model[temp].SelfCreatatedDate" hidden value="@Model[temp].SelfCreatatedDate" type="datetime">
+                                                <input asp-for="@Model[temp].RepaSelfCreatatedDate" hidden value="@Model[temp].RepaSelfCreatatedDate" type="datetime">
+                                                <input asp-for="@Model[temp].UserId" hidden value="@Model[temp].UserId" type="number">
+                                                <input asp-for="@Model[temp].AppraisalId" hidden value="@Model[temp].AppraisalId" type="number">
+                                                <input asp-for="@Model[temp].KraListId" hidden value="@Model[temp].KraListId" type="number">
+                                                <input asp-for="@Model[temp].MetricWeightage" hidden value="@Model[temp].MetricWeightage" type="number">
+                                                <input asp-for="@Model[temp].MetricDescription" hidden value="@Model[temp].MetricDescription" type="text">
+
+                                                <div class="col-12">
+                                                    <textarea readonly rows="4" class="form-control " asp-for="@Model[temp].SelfComment" placeholder="Add Comment">@Model[temp].SelfComment</textarea>
+                                                    <span asp-validation-for="@Model[temp].SelfComment" class="text-danger   mx-1 small"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="width:5%">
+                                            <div class="row d-flex justify-content-center align-items-center">
+
+
+
+
+
+                                                <input readonly class=" form-control my-2 kra-score px-2 py-3" asp-for="@Model[temp].RepaSelfScore" min="1" max="5" type="number" required>
+
+
+
+
+                                                @*<span asp-validation-for="@Model[temp].RepaSelfScore" class="text-danger mx-1 small"></span>*@
+                                            </div>
+                                            @* <input  class=" form-control my-2 kra-score" asp-for="@Model[i].RepaSelfScore" min="1" max="5" type="number">*@
+                                        </div>
+                                        <div style="width:21.5%">
+
+
+                                            <textarea readonly rows="4" class="form-control " asp-for="@Model[temp].RepaSelfComment" placeholder="Add Comment"></textarea>
+
+                                        </div>
+                                        <div style="width:10%">
+                                            <div class="row d-flex justify-content-center align-items-center">
+
+
+
+
+
+                                                <input class=" form-control my-2 kra-score px-3 py-3" asp-for="@Model[temp].RevaSelfScore" min="1" max="5" type="number" required>
+
+
+
+
+                                                @*<span asp-validation-for="@Model[temp].RevaSelfScore" class="   spanValidationFontSize text-danger p-0"></span>*@
+                                            </div>
+                                            @* <input  class=" form-control my-2 kra-score" asp-for="@Model[i].RepaSelfScore" min="1" max="5" type="number">*@
+                                        </div>
+                                        <div style="width:21.5%">
+
+
+                                            <textarea rows="4" class="form-control " asp-for="@Model[temp].RevaSelfComment" placeholder="Add Comment"></textarea>
+
+                                        </div>
+=======
+                                
+                                @for (int i = EffortList -1; i < EffortList+BevList-1; i++)
+                                {
+                                    var temp = i + 1;
+                                    int count = i + 2;
+                                    <div  class="row pt-3 m-3 " style="border:1px solid lightgrey;width:93%;border-radius:0.2rem" >
+                                            <div class="row">
+                                                <div class="col-9"><h4 class="HEADMetrics"> @count .  @Model[temp].MetricDescription </h4></div>
+                                                <div class="col-3"> <span style="color:black;font-style:italic;font-size:13px"> (Weightage @Model[temp].MetricWeightage pts) </span> </div>
+                                               @* <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                        <div class="col-5">
+                                                            <label>Score</label> 
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number" />
+                                                        </div>
+                                                          <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
+                                                    </div>
+                                                </div>*@
+                                            </div>
+                                              <div class="row pt-3 pb-1">
+                                    <div class="col-3">
+                                        <h4 class="DarkBlueP "> Score</h4>
+
+                                    </div>
+                                    <div class="col-9">
+                                       <h4 class="DarkBlueP "> Self Comment</h4>
+                                    </div>
+                                    
+                                </div>
+                                            <div class="row">
+                                                  <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                       @* <div class="col-5">
+                                                            <label>Score</label>
+                                                        </div>*@
+                                                        <div class="col-12">
+                                                           <input class=" form-control my-2 kra-score" asp-for="@Model[temp].SelfScore" min="1" max="5" type="number" readonly />
+                                                               @* <select  asp-for="@Model[temp].SelfScore" class="form-control p-3" disabled  required >
+                                                                 <option  value="">Pts</option>
+                                                                  <option  value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                       <option value="3">3</option>
+                                                                    <option  value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                     </select>*@
+                                                                    
+                                                                
+                                                        </div>
+                                                          
+                                                    </div>
+                                                </div>
+                                                <div class="col-9">    <input asp-for="@Model[temp].MetricId" hidden value="@Model[temp].MetricId"  type="number">
+                                                <input asp-for="@Model[temp].ID" hidden value="@Model[temp].ID"  type="number">
+                                                 <input asp-for="@Model[temp].SelfCreatatedDate" hidden value="@Model[temp].SelfCreatatedDate"  type="datetime">
+                                                 <input asp-for="@Model[temp].RepaSelfCreatatedDate" hidden value="@Model[temp].RepaSelfCreatatedDate"  type="datetime">
+                                                <input asp-for="@Model[temp].UserId" hidden value="@Model[temp].UserId"  type="number">
+                                                <input asp-for="@Model[temp].AppraisalId" hidden value="@Model[temp].AppraisalId"  type="number">
+                                              <input asp-for="@Model[temp].KraListId" hidden value="@Model[temp].KraListId"   type="number">
+                                                <input asp-for="@Model[temp].MetricWeightage" hidden value="@Model[temp].MetricWeightage"   type="number">
+                                              <input asp-for="@Model[temp].MetricDescription" hidden  value="@Model[temp].MetricDescription"  type="text">
+                                                      <textarea readonly class="form-control " asp-for="@Model[temp].SelfComment" placeholder="Add Comment"></textarea>
+                                                
+                                        </div>
+                                            </div>
+                                     @*       <div class="row"> 
+
+                                                <div class="col-3">  <span asp-validation-for="@Model[i].SelfScore" class="text-danger mx-1 small"></span></div>
+                                                 <div class="col-9"><span asp-validation-for="@Model[i].SelfComment" class="text-danger   mx-1 small"></span></div>
+                                            </div>*@
+                                             <div class="row pt-3 pb-1">
+                                    <div class="col-3">
+                                        <h4 class="DarkBlueP "> RepA Score</h4>
+
+>>>>>>> 7a3cc3fc8abc807e811f44d29838f66fc9f0844f
+                                    </div>
+                                    <div class="col-9">
+                                       <h4 class="DarkBlueP "> RepA Comment</h4>
+                                    </div>
+                                    
+                                </div>
+                                            <div class="row">
+                                                  <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                       @* <div class="col-5">
+                                                            <label>Score</label>
+                                                        </div>*@
+                                                        <div class="col-12">
+                                                            <input class=" form-control my-2 kra-score" asp-for="@Model[temp].RepaSelfScore" min="1" max="5" type="number" readonly />
+                                                               @* <select  asp-for="@Model[temp].RepaSelfScore" class="form-control p-3" disabled  required >
+                                                                 <option  value="">Pts</option>
+                                                                  <option  value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                       <option value="3">3</option>
+                                                                    <option  value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                     </select>*@
+                                                                    
+                                                                
+                                                        </div>
+                                                          
+                                                    </div>
+                                                </div>
+                                                <div class="col-9">    
+                                                      <textarea readonly class="form-control " asp-for="@Model[temp].RepaSelfComment" placeholder="Add Comment"></textarea>
+                                                
+                                        </div>
+                                       @*   <div class="row"> 
+
+                                                <div class="col-3">  <span asp-validation-for="@Model[i].SelfScore" class="text-danger mx-1 small"></span></div>
+                                                 <div class="col-9"><span asp-validation-for="@Model[i].SelfComment" class="text-danger   mx-1 small"></span></div>
+                                            </div>*@
+                                            </div>
+                                             <div class="row pt-3 pb-1">
+                                    <div class="col-3">
+                                        <h4 class="DarkBlueP ">RevA Score<sup class="required">*</sup></h4>
+
+                                    </div>
+                                    <div class="col-9">
+                                       <h4 class="DarkBlueP "> RevA Comment</h4>
+                                    </div>
+                                    
+                                </div>
+                                            <div class="row">
+                                                  <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                       @* <div class="col-5">
+                                                            <label>Score</label>
+                                                        </div>*@
+                                                        <div class="col-12">
+                                                           @* <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number" />*@
+                                                                <select  asp-for="@Model[temp].RevaSelfScore" class="form-control form-select p-3"  required >
+                                                                 <option  value="">Pts</option>
+                                                                  <option  value="1">1</option>
+                                                                       <option value="2">2</option>
+                                                                     <option value="3">3</option>
+                                                                    <option  value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                     </select>
+                                                                    
+                                                                
+                                                        </div>
+                                                          
+                                                    </div>
+                                                </div>
+                                                <div class="col-9 pb-2">    
+                                                      <textarea  class="form-control " asp-for="@Model[temp].RevaSelfComment" placeholder="Add Comment"></textarea>
+                                                
+                                        </div>
+                                            </div>
+                                        </div>
+                                }
+                            </div>
+                        </fieldset>
+                        <fieldset class="border  p-2 mx-1 my-5" style="display:flex;justify-content:center;">
+                            <legend class="float-none HEADdata w-auto mx-4">
+                                Job family grooming
+                            </legend>
+                            <div class="row d-flex justify-content-center">
+<<<<<<< HEAD
+                                <div class="row pt-3 pb-1">
+                                    @* /*20.833333325%*/*@
+                                    <div class="p-0" style="width:15%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Metric Name</h4>
+
+                                    </div>
+                                    @* /*12.499999995%*/*@
+                                    <div class="p-0" style="width:5%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Score</h4>
+                                    </div>
+                                    <div class="px-5" style="width:21.5%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Self Comment</h4>
+                                    </div>
+                                    <div class="p-0" style="width:5%">
+                                        <h4 class="DarkBlueReveiwingP2 ">Repa Score</h4>
+                                    </div>
+                                    <div class="px-5" style="width:21.5%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Repa Comment</h4>
+                                    </div>
+                                    <div class="p-0" style="width:10%">
+                                        <h4 class="DarkBlueReveiwingP2 ">Reva Score<sup class="required">*</sup></h4>
+                                    </div>
+                                    <div class="px-5" style="width:21.5%">
+                                        <h4 class="DarkBlueReveiwingP2 "> Reva Comment</h4>
+                                    </div>
+                                </div>
+                                @for (int i = EffortList + BevList - 1; i < EffortList + BevList + JobList - 1; i++)
+                                {
+                                    var temp = i + 1;
+                                    <div class="row pt-1 pb-5">
+                                        <div style="width:15%"><h4 class="HEADMetricsReportee">@Model[temp].MetricDescription</h4><span style="color:black;font-style:italic;font-size:11px"> (Weightage @Model[temp].MetricWeightage pts) </span></div>
+                                        <div style="width:5%">
+                                            <div class="row d-flex justify-content-center align-items-center">
+
+
+
+
+
+                                                <input class=" form-control my-2 kra-score px-2 py-3" readonly value="@Model[temp].SelfScore" asp-for="@Model[temp].SelfScore" min="1" max="5" type="number" required>
+                                                @*<span  asp-validation-for="@Model[temp].SelfScore"  class="text-danger mx-1 small"></span>*@
+                                            </div>
+                                        </div>
+                                        <div style="width:21.5%">
+                                            <div class="row d-flex justify-content-center align-items-center">
+                                                <input asp-for="@Model[temp].MetricId" hidden value="@Model[temp].MetricId" type="number">
+                                                <input asp-for="@Model[temp].ID" hidden value="@Model[temp].ID" type="number">
+                                                <input asp-for="@Model[temp].SelfCreatatedDate" hidden value="@Model[temp].SelfCreatatedDate" type="datetime">
+                                                <input asp-for="@Model[temp].RepaSelfCreatatedDate" hidden value="@Model[temp].RepaSelfCreatatedDate" type="datetime">
+                                                <input asp-for="@Model[temp].UserId" hidden value="@Model[temp].UserId" type="number">
+                                                <input asp-for="@Model[temp].AppraisalId" hidden value="@Model[temp].AppraisalId" type="number">
+                                                <input asp-for="@Model[temp].KraListId" hidden value="@Model[temp].KraListId" type="number">
+                                                <input asp-for="@Model[temp].MetricWeightage" hidden value="@Model[temp].MetricWeightage" type="number">
+                                                <input asp-for="@Model[temp].MetricDescription" hidden value="@Model[temp].MetricDescription" type="text">
+
+                                                <div class="col-12">
+                                                    <textarea readonly rows="4" class="form-control " asp-for="@Model[temp].SelfComment" placeholder="Add Comment">@Model[temp].SelfComment</textarea>
+                                                    <span asp-validation-for="@Model[temp].SelfComment" class="text-danger   mx-1 small"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="width:5%">
+                                            <div class="row d-flex justify-content-center align-items-center">
+
+
+
+
+
+                                                <input readonly class=" form-control my-2 kra-score px-2 py-3" asp-for="@Model[temp].RepaSelfScore" min="1" max="5" type="number" required>
+
+
+
+
+                                                @*<span asp-validation-for="@Model[temp].RepaSelfScore" class="text-danger mx-1 small"></span>*@
+                                            </div>
+                                            @* <input  class=" form-control my-2 kra-score" asp-for="@Model[i].RepaSelfScore" min="1" max="5" type="number">*@
+                                        </div>
+                                        <div style="width:21.5%">
+
+
+                                            <textarea readonly rows="4" class="form-control " asp-for="@Model[temp].RepaSelfComment" placeholder="Add Comment"></textarea>
+
+                                        </div>
+                                        <div style="width:10%">
+                                            <div class="row d-flex justify-content-center align-items-center">
+
+
+                                                <input class=" form-control my-2 kra-score px-3 py-3" asp-for="@Model[temp].RevaSelfScore" min="1" max="5" type="number" required>
+
+
+
+
+                                                @*<span asp-validation-for="@Model[temp].RevaSelfScore" class="   spanValidationFontSize text-danger p-0"></span>*@
+                                            </div>
+                                            @* <input  class=" form-control my-2 kra-score" asp-for="@Model[i].RepaSelfScore" min="1" max="5" type="number">*@
+                                        </div>
+                                        <div style="width:21.5%">
+
+
+                                            <textarea rows="4" class="form-control " asp-for="@Model[temp].RevaSelfComment" placeholder="Add Comment"></textarea>
+
+                                        </div>
+=======
+                                 
+                                @for (int i = EffortList + BevList - 1; i < EffortList + BevList + JobList - 1; i++)
+                                {
+                                    var temp = i + 1;
+                                      int count = i + 2;
+                                    <div  class="row pt-3 m-3 " style="border:1px solid lightgrey;width:93%;border-radius:0.2rem" >
+                                            <div class="row">
+                                                <div class="col-9"><h4 class="HEADMetrics"> @count .  @Model[temp].MetricDescription </h4></div>
+                                                <div class="col-3"> <span style="color:black;font-style:italic;font-size:13px"> (Weightage @Model[temp].MetricWeightage pts) </span> </div>
+                                               @* <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                        <div class="col-5">
+                                                            <label>Score</label> 
+                                                        </div>
+                                                        <div class="col-7">
+                                                            <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number" />
+                                                        </div>
+                                                          <span asp-validation-for="@Model[i].Score" class="text-danger mx-1 small"></span>
+                                                    </div>
+                                                </div>*@
+                                            </div>
+                                              <div class="row pt-3 pb-1">
+                                    <div class="col-3">
+                                        <h4 class="DarkBlueP "> Score</h4>
+
+                                    </div>
+                                    <div class="col-9">
+                                       <h4 class="DarkBlueP "> Self Comment</h4>
+                                    </div>
+                                    
+                                </div>
+                                            <div class="row">
+                                                  <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                       @* <div class="col-5">
+                                                            <label>Score</label>
+                                                        </div>*@
+                                                        <div class="col-12">
+                                                            <input class=" form-control my-2 kra-score" asp-for="@Model[temp].SelfScore" min="1" max="5" type="number" readonly />
+                                                              @*  <select  asp-for="@Model[temp].SelfScore" class="form-control p-3" disabled  required >
+                                                                 <option  value="">Pts</option>
+                                                                  <option  value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                       <option value="3">3</option>
+                                                                    <option  value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                     </select>*@
+                                                                    
+                                                                
+                                                        </div>
+                                                          
+                                                    </div>
+                                                </div>
+                                                <div class="col-9">    <input asp-for="@Model[temp].MetricId" hidden value="@Model[temp].MetricId"  type="number">
+                                                <input asp-for="@Model[temp].ID" hidden value="@Model[temp].ID"  type="number">
+                                                 <input asp-for="@Model[temp].SelfCreatatedDate" hidden value="@Model[temp].SelfCreatatedDate"  type="datetime">
+                                                 <input asp-for="@Model[temp].RepaSelfCreatatedDate" hidden value="@Model[temp].RepaSelfCreatatedDate"  type="datetime">
+                                                <input asp-for="@Model[temp].UserId" hidden value="@Model[temp].UserId"  type="number">
+                                                <input asp-for="@Model[temp].AppraisalId" hidden value="@Model[temp].AppraisalId"  type="number">
+                                              <input asp-for="@Model[temp].KraListId" hidden value="@Model[temp].KraListId"   type="number">
+                                                <input asp-for="@Model[temp].MetricWeightage" hidden value="@Model[temp].MetricWeightage"   type="number">
+                                              <input asp-for="@Model[temp].MetricDescription" hidden  value="@Model[temp].MetricDescription"  type="text">
+                                                      <textarea readonly class="form-control " asp-for="@Model[temp].SelfComment" placeholder="Add Comment"></textarea>
+                                                
+                                        </div>
+                                            </div>
+                                     @*       <div class="row"> 
+
+                                                <div class="col-3">  <span asp-validation-for="@Model[i].SelfScore" class="text-danger mx-1 small"></span></div>
+                                                 <div class="col-9"><span asp-validation-for="@Model[i].SelfComment" class="text-danger   mx-1 small"></span></div>
+                                            </div>*@
+                                             <div class="row pt-3 pb-1">
+                                    <div class="col-3">
+                                        <h4 class="DarkBlueP "> RepA Score</h4>
+
+>>>>>>> 7a3cc3fc8abc807e811f44d29838f66fc9f0844f
+                                    </div>
+                                    <div class="col-9">
+                                       <h4 class="DarkBlueP "> RepA Comment</h4>
+                                    </div>
+                                    
+                                </div>
+                                            <div class="row">
+                                                  <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                       @* <div class="col-5">
+                                                            <label>Score</label>
+                                                        </div>*@
+                                                        <div class="col-12">
+                                                          <input class=" form-control my-2 kra-score" asp-for="@Model[temp].RepaSelfScore" min="1" max="5" type="number" readonly />
+                                                                @*<select  asp-for="@Model[temp].RepaSelfScore" class="form-control p-3" disabled  required >
+                                                                 <option  value="">Pts</option>
+                                                                  <option  value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                       <option value="3">3</option>
+                                                                    <option  value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                     </select>*@
+                                                                    
+                                                                
+                                                        </div>
+                                                          
+                                                    </div>
+                                                </div>
+                                                <div class="col-9">    
+                                                      <textarea readonly class="form-control " asp-for="@Model[temp].RepaSelfComment" placeholder="Add Comment"></textarea>
+                                                
+                                        </div>
+                                       @*   <div class="row"> 
+
+                                                <div class="col-3">  <span asp-validation-for="@Model[i].SelfScore" class="text-danger mx-1 small"></span></div>
+                                                 <div class="col-9"><span asp-validation-for="@Model[i].SelfComment" class="text-danger   mx-1 small"></span></div>
+                                            </div>*@
+                                            </div>
+                                             <div class="row pt-3 pb-1">
+                                    <div class="col-3">
+                                        <h4 class="DarkBlueP ">RevA Score<sup class="required">*</sup></h4>
+
+                                    </div>
+                                    <div class="col-9">
+                                       <h4 class="DarkBlueP "> RevA Comment<sup class="required">*</sup></h4>
+                                    </div>
+                                    
+                                </div>
+                                            <div class="row">
+                                                  <div class="col-3">
+                                                    <div class="row d-flex justify-content-center align-items-center">
+                                                       @* <div class="col-5">
+                                                            <label>Score</label>
+                                                        </div>*@
+                                                        <div class="col-12">
+                                                           @* <input class=" form-control my-2 kra-score" asp-for="@Model[i].Score" min="1" max="5" type="number" />*@
+                                                                <select  asp-for="@Model[temp].RevaSelfScore" class="form-control form-select p-3"  required >
+                                                                 <option  value="">Pts</option>
+                                                                  <option  value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                       <option value="3">3</option>
+                                                                    <option  value="4">4</option>
+                                                                    <option value="5">5</option>
+                                                                     </select>
+                                                                    
+                                                                
+                                                        </div>
+                                                          
+                                                    </div>
+                                                </div>
+                                                <div class="col-9 pb-2">    
+                                                      <textarea required class="form-control " asp-for="@Model[temp].RevaSelfComment" placeholder="Add Comment"></textarea>
+                                                
+                                        </div>
+                                            </div>
+                                        </div>
+                                }
+                            </div>
+                        </fieldset>
+                        <div class="form-group text-center">
+                            <input type="hidden" name="job" id="job" />
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-3"><input id="submit" type="submit" value="Proceed" class="   btn btn-block AddAppraisalBtn btn-lg " /></div>
+                                <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " /></div>
+
+                                <div class="col-3"></div>
+                              
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    const json = []
+    const submit = () => {
+        event.preventDefault();
+        const scoresClassList = document.querySelectorAll(".kra-score");
+        scoresClassList.forEach(item => {
+            let comment = document.getElementById(item.getAttribute("name"));
+            let obj = {
+                MetricId: item.dataset.id,
+                KraListId: item.dataset.kraid,
+                MetricDescription: item.getAttribute("name"),
+                MetricWeihtage: item.dataset.weightage,
+                Score: item.value,
+                Comment: comment.value
+            }
+            json.push(obj);
+        })
+        console.log(json);
+    }
+</script>
+
+<script>
+    (function() {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+      <script>
+      (function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+   </script>
+    <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="./lib/assets/js/off-canvas.js"></script>
+
+
+    <script src="./lib/assets/js/hoverable-collapse.js"></script>
+
+    <script src="./lib/assets/js/misc.js"></script>
+    <!-- endinject -->
+
+    <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+    @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
+    <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
+    @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
+    <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+    @*<script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>*@
+    <script src=" ~/lib/assets/js/off-canvas.js"></script>
+    <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
+    <script src=" ~/lib/assets/js/misc.js"></script>
+

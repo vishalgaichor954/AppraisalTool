@@ -1,5 +1,7 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalList;
+using AppraisalTool.Application.Features.Authority.Query.GetAllAuthority;
+using AppraisalTool.Application.Features.Users.Command.AssignAuthorityCommand;
 using AppraisalTool.Application.Features.Users.Command.CreateRoleCommand;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
@@ -8,6 +10,7 @@ using AppraisalTool.Application.Features.Users.Query.GetUserList;
 using AppraisalTool.Application.Models.AppraisalTool;
 using AppraisalTool.Application.Models.Mail;
 using AppraisalTool.Domain.Entities;
+using FakeItEasy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -86,21 +89,7 @@ namespace AppraisalTool.Persistence.Repositories
 
         }
 
-        //public async Task<bool> AssignAuthority(int repaId,int revaId,int userId)
-        //{
-        //    try
-        //    {
-        //        await _dbContext.UserAuthorityMappings.AddAsync(new UserAuthorityMapping() { ReportingAuthorityId = repaId, ReviewingAuthorityId = revaId, UserId = userId });
-        //        await _dbContext.SaveChangesAsync();
-        //        return true;
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        return false;
-        //    }
-
-        //}
-
+      
         //@Author : Ilyas Dabholkar
         public async Task<User> FindUserByEmail(string email)
         {
@@ -111,11 +100,7 @@ namespace AppraisalTool.Persistence.Repositories
             }
             return user;
         }
-        //public async Task<dynamic> getCards(int id)
-        //{
-        //   var  menu = _dbContext.MenuRoleMappings.Where(x => x.Role_id == id).Include(y => y.MenuList).ToList();
-        //    return menu;
-        //}
+       
 
         //@Author : Abhishek Singh
         public async Task<List<MenuRoleMapping>> getAllCards(int id)
@@ -185,12 +170,12 @@ namespace AppraisalTool.Persistence.Repositories
                         item.JobRoleId = (int)request.SecondaryJobProfileId;
                     }
                 }
-                var authority = await _dbContext.UserAuthorityMappings.Where(x => x.UserId == userToUpdate.Id).FirstOrDefaultAsync();
-                if (authority != null)
-                {
-                    authority.ReportingAuthorityId = request.RepaId;
-                    authority.ReviewingAuthorityId = request.RevaId;
-                }
+                //var authority = await _dbContext.UserAuthorityMappings.Where(x => x.UserId == userToUpdate.Id).FirstOrDefaultAsync();
+                //if (authority != null)
+                //{
+                //    authority.ReportingAuthorityId = request.RepaId;
+                //    authority.ReviewingAuthorityId = request.RevaId;
+                //}
              
                 await _dbContext.SaveChangesAsync();
                 response.Message = "User Details Update Successfully";
@@ -235,24 +220,67 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<IEnumerable<User>> GetAllUser()
         {
-            IEnumerable<User> users = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).Where(u=>u.IsDeleted !=true).ToListAsync();
+            IEnumerable<User> users = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).Where(u => u.IsDeleted != true).ToListAsync();
             return users;
-            
-        }
-        //public async Task<bool> AssignAuthority(int repaId, int revaId, int userId)
-        //{
-        //    try
-        //    {
-        //        await _dbContext.UserAuthorityMappings.AddAsync(new UserAuthorityMapping() { ReportingAuthorityId = repaId, ReviewingAuthorityId = revaId, UserId = userId });
-        //        await _dbContext.SaveChangesAsync();
-        //        return true;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return false;
-        //    }
 
-        //}
+        }
+
+        public async Task<IEnumerable<GetAllAuthorityQueryVm>> GetAllUserList()
+        {
+            var users = await _dbContext.User.Include(x => x.Branch).Include(x => x.Role).Include(x => x.JobRoles).ThenInclude(x => x.JobRole).Where(u => u.IsDeleted != true).FirstOrDefaultAsync();
+
+            string primaryRole = "";
+            string secondaryRole = "";
+            int primaryRoleId = 0;
+            int secondaryRoleId = 0;
+
+            foreach (UserJobRoles item in users.JobRoles)
+            {
+                if (item.IsPrimary)
+                {
+                    primaryRole = item.JobRole.Name;
+                    primaryRoleId = item.JobRole.Id;
+
+                }
+                else if (item.IsSecondary)
+                {
+                    secondaryRole = item.JobRole.Name;
+                    secondaryRoleId = item.JobRole.Id;
+                }
+            }
+
+            var result = (from A in _dbContext.User
+                          join B in _dbContext.UserAuthorityMappings on A.Id equals B.UserId
+                          into auth
+                          from authority in auth.DefaultIfEmpty()
+                          where A.IsDeleted != true
+                          select new GetAllAuthorityQueryVm
+                          {
+                              Id = A.Id,
+                              FirstName = A.FirstName,
+                              LastName = A.LastName,
+                              Email = A.Email,
+                              BranchId = A.BranchId,
+                              BranchName = A.Branch.BranchName,
+                              JoinDate = A.JoinDate,
+                              LastAppraisalDate = A.LastAppraisalDate,
+                              Role = A.RoleId,
+                              RoleName = A.Role.Role,
+                              PrimaryJobProfileId = primaryRoleId,
+                              PrimaryJobProfileName = primaryRole,
+                              SecondaryJobProfileId = secondaryRoleId,
+                              SecondaryJobProfileName = secondaryRole,
+                              RepaName = authority.ReportingAuthority.FirstName,
+                              RevaName = authority.ReviewingAuthority.FirstName,
+                              Name = A.FirstName + " " + A.LastName
+
+                          }).OrderByDescending(x => x.Id);
+
+            return result;
+
+        }
+
+
 
         //@Author : Ilyas Dabholkar
         public async Task<User> GetUserById(int id)
@@ -295,6 +323,8 @@ namespace AppraisalTool.Persistence.Repositories
 
             var result = (from A in _dbContext.User
                           join B in _dbContext.UserAuthorityMappings on A.Id equals B.UserId
+                          into auth from authority in auth.DefaultIfEmpty()
+                          
                           select new GetUserListQueryVm
                           {
                               Id = A.Id,
@@ -311,8 +341,12 @@ namespace AppraisalTool.Persistence.Repositories
                               PrimaryJobProfileName = primaryRole,
                               SecondaryJobProfileId = secondaryRoleId,
                               SecondaryJobProfileName = secondaryRole,
-                              RepaId = B.ReportingAuthorityId,
-                              RevaId = B.ReviewingAuthorityId
+                              RepaId = authority.ReportingAuthorityId,
+                              RevaId = authority.ReviewingAuthorityId,
+                              Name = A.FirstName + " " + A.LastName,
+                              RepaName = authority.ReportingAuthority.FirstName,
+                              RevaName = authority.ReviewingAuthority.FirstName,
+                             
 
                           });
             var res = await result.Where(u => u.Id == id).FirstOrDefaultAsync();
@@ -416,11 +450,50 @@ namespace AppraisalTool.Persistence.Repositories
             Appraisal appraisal = await _dbContext.Appraisal.Where(x => x.UserId == userId && x.FinancialYearId == fId).FirstOrDefaultAsync();
             return appraisal;
         }
+        public async Task<AssignAuthorityCommandDto> AssignAuthority(int id, AssignAuthorityCommand request)
+        {
+
+
+            AssignAuthorityCommandDto response = new AssignAuthorityCommandDto();
+              var userToUpdate = await _dbContext.User.Where(u => u.Id == id).FirstOrDefaultAsync();
+            if (userToUpdate != null)
+            {
+
+                
+               
+                var authority = await _dbContext.UserAuthorityMappings.Where(x => x.UserId == userToUpdate.Id).FirstOrDefaultAsync();
+                if (authority != null)
+                {
+                    authority.ReportingAuthorityId = request.RepaId;
+                    authority.ReviewingAuthorityId = request.RevaId;
+                }
+                else
+                {
+                    await AssignAuthority(request.RepaId, request.RevaId, userToUpdate.Id);
+                }
+                //authority.UserId = userToUpdate.Id;
+                //authority.ReportingAuthorityId = request.RepaId;
+                //authority.ReviewingAuthorityId = request.RevaId;
+                
+                await _dbContext.SaveChangesAsync();
+                response.Message = "User Details Update Successfully";
+                response.Succeeded = true;
+                response.Id = userToUpdate.Id;
+                return response;
+            }
+            else
+            {
+                response.Message = "User Doesnt Exist";
+                response.Succeeded = false;
+                return response;
+            }
+        }
+
     }
 
-       
-        
-  } 
+
+
+} 
 
 
         

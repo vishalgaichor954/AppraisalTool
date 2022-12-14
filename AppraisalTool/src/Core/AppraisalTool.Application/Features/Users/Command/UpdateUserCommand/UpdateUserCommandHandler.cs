@@ -55,3 +55,4 @@ namespace AppraisalTool.Application.Features.Users.Command.UpdateUserCommand
         #endregion
     }
 }
+
