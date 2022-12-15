@@ -17,7 +17,7 @@
         <div class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Create User</h4>
-                <form class="form-sample needs-validation" asp-action="CreateUser" novalidate>
+                <form class="form-sample needs-validation" asp-action="CreateUser" id="formABC" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
@@ -220,13 +220,27 @@
                     }
                     })
                     
+
+                    
                     form.classList.add('was-validated')
                 }, false)
-            })
+                
+             })
     })()
+   
 </script>
 
-
+@*<script>
+   function submitClicked(){
+    setTimeout(function(){
+        $("#submit-button").prop("disabled", true).val("Save");
+    }, 100);
+    
+    setTimeout(function(){
+        $("#submit-button").prop("disabled", false).val("Save");
+    }, 15000);
+}
+</script>*@
 
 
 

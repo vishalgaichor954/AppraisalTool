@@ -14,7 +14,9 @@ namespace AppraisalTool.Application.Features.Menu.Query.GetMenuList
         public string MenuClass { get; set; }
         public string MenuIcon { get; set; }
 
-        public string? MenuFlag { get; set; }
+        public int? MenuFlagId { get; set; }
+
+        public string MenuFlag { get; set; }
         public string? MenuController { get; set; }
 
         public string? MenuAction { get; set; }
