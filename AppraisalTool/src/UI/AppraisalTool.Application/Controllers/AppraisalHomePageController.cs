@@ -350,9 +350,23 @@ namespace AppraisalTool.App.Controllers
             }
 
             ///AppraisalHome/GetAppraisalResultsByAppraisalId?id=40
+            ///https://localhost:5000/api/v1/AppraisalHome/GetAppraisalById?Id=52
+            ///AppraisalHome/GetAppraisalById?Id=52
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
+            HttpResponseMessage Appraisal= client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalById?Id={Appraisald}").Result;
+            if (Appraisal.IsSuccessStatusCode)
+            {
+                var responseData = Appraisal.Content.ReadAsStringAsync().Result;
+                var res = JsonConvert.DeserializeObject<Response>(responseData);
+                AppraisalResponseVm appraisalResponseVm = JsonConvert.DeserializeObject<AppraisalResponseVm>(JsonConvert.SerializeObject(res.Data));
+                ViewBag.ReadOnlyForm = true;
+                ViewBag.appraisalStatus = appraisalResponseVm.StatusId;
+
+            }
+
+
+                HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
             if (cardResponse.IsSuccessStatusCode)
             {
 
@@ -410,6 +424,24 @@ namespace AppraisalTool.App.Controllers
             ///AppraisalHome/GetAppraisalResultsByAppraisalId?id=40
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
+            HttpResponseMessage Appraisal = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalById?Id={Appraisald}").Result;
+            if (Appraisal.IsSuccessStatusCode)
+            {
+                var responseData = Appraisal.Content.ReadAsStringAsync().Result;
+                var res = JsonConvert.DeserializeObject<Response>(responseData);
+                AppraisalResponseVm appraisalResponseVm = JsonConvert.DeserializeObject<AppraisalResponseVm>(JsonConvert.SerializeObject(res.Data));
+                if (appraisalResponseVm.StatusId == 2)
+                {
+                    ViewBag.ReadOnlyForm = false;
+                }
+                else
+                {
+                    ViewBag.ReadOnlyForm = true;
+                }
+                
+                ViewBag.appraisalStatus = appraisalResponseVm.StatusId;
+
+            }
             HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
             if (cardResponse.IsSuccessStatusCode)
             {
