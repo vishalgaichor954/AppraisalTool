@@ -10,6 +10,7 @@ using AppraisalTool.Application.Features.Events.Queries.GetEventDetail;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsExport;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsList;
 using AppraisalTool.Application.Features.Orders.GetOrdersForMonth;
+using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AppraisalTool.Application.Response;
 using MediatR;
 using Moq;
@@ -40,7 +41,10 @@ namespace AppraisalTool.API.UnitTests.Mocks
             mockMediator.Setup(m => m.Send(It.IsAny<TransactionCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<Guid>());
 
             mockMediator.Setup(m => m.Send(It.IsAny<GetOrdersForMonthQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new PagedResponse<IEnumerable<OrdersForMonthDto>>(null, 10, 1, 2));
-            
+
+            //apprisalhome page 
+            mockMediator.Setup(m => m.Send(It.IsAny<GetDataQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<IEnumerable<GetDataVM>>());
+
             return mockMediator;
         }
     }

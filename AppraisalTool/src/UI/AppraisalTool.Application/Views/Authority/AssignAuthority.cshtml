@@ -63,7 +63,7 @@
                                     Reporting Authority<span style="color: Red">&nbsp;*</span></label>
                                 
                                 <div asp-for="RepaId" class="col-sm-8">
-                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control">
+                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control p-3 form-select" required>
                                         <option value="">Select Reporting Authority </option>
                                     </select>
                                     <span asp-validation-for="RepaId" class="text-danger mx-1 small"></span>
@@ -76,7 +76,7 @@
                                     Reviewing Authority<span style="color: Red">&nbsp;*</span></label>
                                 
                                 <div asp-for="RevaId" class="col-sm-8">
-                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control" required>
+                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control p-3 form-select" required>
                                         <option value="">Select Reviewing Authority</option>
                                     </select>
                                     <span asp-validation-for="RevaId" class="text-danger mx-1 small"></span>
