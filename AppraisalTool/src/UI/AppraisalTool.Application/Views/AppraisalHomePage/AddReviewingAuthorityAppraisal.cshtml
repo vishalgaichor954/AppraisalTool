@@ -155,7 +155,8 @@ Toast.fire({
                                                 </div>
                                                 <div class="col-9">    <input asp-for="@Model[i].MetricId" hidden value="@Model[i].MetricId"  type="number">
                                                 <input asp-for="@Model[i].ID" hidden value="@Model[i].ID"  type="number">
-                                                 <input asp-for="@Model[i].SelfCreatatedDate" hidden value="@Model[i].SelfCreatatedDate"  type="datetime">
+                                                 <input asp-for="@Model[i].SelfCreatatedDate" 
+                                                 value="@Model[i].SelfCreatatedDate"  type="datetime">
                                                  <input asp-for="@Model[i].RepaSelfCreatatedDate" hidden value="@Model[i].RepaSelfCreatatedDate"  type="datetime">
                                                 <input asp-for="@Model[i].UserId" hidden value="@Model[i].UserId"  type="number">
                                                 <input asp-for="@Model[i].AppraisalId" hidden value="@Model[i].AppraisalId"  type="number">

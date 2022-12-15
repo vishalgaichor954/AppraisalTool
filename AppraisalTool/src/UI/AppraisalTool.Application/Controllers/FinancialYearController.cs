@@ -2,6 +2,7 @@
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.FinancialYear;
+using AppraisalTool.App.Services.CustomAttributes;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -13,6 +14,7 @@ namespace AppraisalTool.App.Controllers
         Uri baseAddress = new Uri("https://localhost:5000/api/");
         HttpClient client = new HttpClient();
 
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult AddFinancialYear()
         {
             return View();
@@ -50,6 +52,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult ListFinancialYear()
         {
             client = new HttpClient();
@@ -66,6 +69,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult UpdateYear(int id)
         {
             FinancialYear financialYear = new FinancialYear();
@@ -82,6 +86,7 @@ namespace AppraisalTool.App.Controllers
             }
             return View(financialYear);
         }
+
         [HttpPost]
         public IActionResult UpdateYear(FinancialYear model, bool status)
         {
@@ -108,6 +113,7 @@ namespace AppraisalTool.App.Controllers
             return RedirectToAction("ListFinancialYear");
         }
 
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult DeleteYear(int id)
         {
             client = new HttpClient();
@@ -129,6 +135,7 @@ namespace AppraisalTool.App.Controllers
 
 
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult ListAppraisal()
         {
             return View();

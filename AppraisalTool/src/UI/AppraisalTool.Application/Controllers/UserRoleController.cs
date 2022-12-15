@@ -2,6 +2,7 @@
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.UserRole;
+using AppraisalTool.App.Services.CustomAttributes;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -13,10 +14,12 @@ namespace AppraisalTool.App.Controllers
         Uri baseAddress = new Uri("https://localhost:5000/api/");
         HttpClient client = new HttpClient();
 
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult AddUserRole()
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult AddUserRole(UserRole model)
         {
@@ -40,7 +43,9 @@ namespace AppraisalTool.App.Controllers
             return RedirectToAction("ListUserRole");
 
         }
+
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult ListUserRole()
         {
             client = new HttpClient();
@@ -61,7 +66,9 @@ namespace AppraisalTool.App.Controllers
             }
             return View();
         }
+
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult UpdateUserRole(int id)
         {
 
@@ -83,6 +90,7 @@ namespace AppraisalTool.App.Controllers
             }
             return View(financialYear);
         }
+
         [HttpPost]
         public IActionResult UpdateUserRole(UserRole model)
         {
@@ -106,6 +114,8 @@ namespace AppraisalTool.App.Controllers
 
 
         }
+
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult DeleteUserRole(int id)
         {
             //User/removeUser?id=9&api-version=1
