@@ -13,7 +13,7 @@ using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 
 namespace AppraisalTool.Persistence.Repositories
 {
-    public class SelfAppraisalRepository : ISelfAppraisalRepository
+    public class SelfAppraisalRepository :ISelfAppraisalRepository
     {
 
 
@@ -21,7 +21,9 @@ namespace AppraisalTool.Persistence.Repositories
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
 
-        public SelfAppraisalRepository(ApplicationDbContext dbContext,IMapper mapper,IUserRepository userRepository)
+
+
+        public SelfAppraisalRepository(ApplicationDbContext dbContext, IMapper mapper, IUserRepository userRepository)
         {
             _mapper = mapper;
             _userRepository = userRepository;
@@ -30,7 +32,7 @@ namespace AppraisalTool.Persistence.Repositories
         }
 
 
-       
+
         public async Task<IQueryable<GetDataVM>> GetDataById(int userId, int fyId)
         {
             var primaryRole = "";

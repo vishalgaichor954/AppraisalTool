@@ -1,4 +1,7 @@
-﻿using AppraisalTool.Application.Features.Categories.Commands.CreateCategory;
+﻿using AppraisalTool.Application.Features.AppraisalResults.Commands.AddAppraisalResult;
+using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResult;
+using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByFidAndUserId;
+using AppraisalTool.Application.Features.Categories.Commands.CreateCategory;
 using AppraisalTool.Application.Features.Categories.Commands.StoredProcedure;
 using AppraisalTool.Application.Features.Categories.Queries.GetCategoriesList;
 using AppraisalTool.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
@@ -9,9 +12,12 @@ using AppraisalTool.Application.Features.Events.Commands.UpdateEvent;
 using AppraisalTool.Application.Features.Events.Queries.GetEventDetail;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsExport;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsList;
+using AppraisalTool.Application.Features.Metrics.Queries.GetAllMetricsList;
 using AppraisalTool.Application.Features.Orders.GetOrdersForMonth;
+using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AppraisalTool.Application.Response;
+using AppraisalTool.Domain.Entities;
 using MediatR;
 using Moq;
 using System;
@@ -44,6 +50,13 @@ namespace AppraisalTool.API.UnitTests.Mocks
 
             //apprisalhome page 
             mockMediator.Setup(m => m.Send(It.IsAny<GetDataQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<IEnumerable<GetDataVM>>());
+            mockMediator.Setup(m => m.Send(It.IsAny<GetAppraisalResultsByFidAndUserIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<List<GetAppraisalsByUidAndFidDto>>());
+            mockMediator.Setup(m => m.Send(It.IsAny<GetAllMetricsListQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<IEnumerable<ListOfMetrics>>());
+            mockMediator.Setup(m => m.Send(It.IsAny<AddAppraisalCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<Appraisal>());
+
+            mockMediator.Setup(m => m.Send(It.IsAny<AddAppraisalResultCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<string>());
+            mockMediator.Setup(m => m.Send(It.IsAny<UpdateAppraisalResultCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<string>());
+
 
             return mockMediator;
         }

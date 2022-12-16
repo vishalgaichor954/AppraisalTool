@@ -16,20 +16,20 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData
 {
     public class GetDataQueryHandler : IRequestHandler<GetDataQuery, Response<IEnumerable<GetDataVM>>>
     {
-        private readonly ILogger<GetDataQuery> _logger;
+        //private readonly ILogger<GetDataQuery> _logger;
         private IMapper _mapper;
         private readonly ISelfAppraisalRepository _selfAppraisalRepository;
-        public GetDataQueryHandler(ILogger<GetDataQuery> logger, IMapper mapper, ISelfAppraisalRepository selfAppraisalRepository)
+        public GetDataQueryHandler(/*ILogger<GetDataQuery> logger,*/ IMapper mapper, ISelfAppraisalRepository selfAppraisalRepository)
 
         {
-            _logger = logger;
+            //_logger = logger;
             _mapper = mapper;
             _selfAppraisalRepository = selfAppraisalRepository;
         }
 
         public async Task<Response<IEnumerable<GetDataVM>>> Handle(GetDataQuery request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("GetDataQuery Initiated");
+            //_logger.LogInformation("GetDataQuery Initiated");
             IQueryable<GetDataVM> appraisals = await _selfAppraisalRepository.GetDataById(request.UserId,request.FyId);
 
 
@@ -41,7 +41,7 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData
             
            
            
-            _logger.LogInformation("GetDataQuery Completed");
+            //_logger.LogInformation("GetDataQuery Completed");
 
             var response = new Response<IEnumerable<GetDataVM>>(dataVM);
 
