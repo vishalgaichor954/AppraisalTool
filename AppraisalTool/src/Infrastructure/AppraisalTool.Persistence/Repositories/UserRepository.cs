@@ -10,7 +10,6 @@ using AppraisalTool.Application.Features.Users.Query.GetUserList;
 using AppraisalTool.Application.Models.AppraisalTool;
 using AppraisalTool.Application.Models.Mail;
 using AppraisalTool.Domain.Entities;
-using FakeItEasy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;

@@ -4,13 +4,26 @@
     ViewData["Title"] = "Add Menu";
 }
 
+<style>
+    .loading {
+        display : block;
+    }
+
+</style>
+<div class="loader" style="display:none;">
+    <div class="d-flex justify-content-center align-items-center" style="height:100vh ;">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        </div>
+    </div>
+</div>
+
 <div class="container content-wrapper-Blue">
 
     <div class="col-12 p-3">
         <div class="card p-4 ">
             <div class="card-body">
                 <h4 class="card-title">Create Menu</h4>
-                <form class="form-sample needs-validation" asp-action="CreateMenu" novalidate>
+                <form class="form-sample needs-validation" asp-action="CreateMenu" id="myForm" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
@@ -109,7 +122,7 @@
                         @* <input type="hidden" name="job" id="job" />*@
                         <div class="row">
                             <div class="col-4"></div>
-                            <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /></div>
+                            <div class="col-2"> <input type="submit" id="buttonID" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /></div>
                             <div class="col-2"> <a asp-action="ListMenu" class="btn  btn-block btn-md font-weight-medium auth-form-btn  ResetButton ">Cancel</a></div>
 
                             <div class="col-4"></div>
@@ -152,27 +165,67 @@
 
 
 
-<script>
-    (function() {
-        'use strict'
 
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
 
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
-</script>
+
+
+@*<script>
+    document.getElementById("buttonID").onclick = function() {
+        let allAreFilled = true;
+        document.getElementById("myForm").querySelectorAll("[required]").forEach(function(i) {
+            if (!allAreFilled) return;
+            if (i.type === "checkbox") {
+                let radioValueCheck = false;
+                document.getElementById("myForm").querySelectorAll(`[name=${i.name}]`).forEach(function(r) {
+                    if (r.checked) radioValueCheck = true;
+                })
+                allAreFilled = radioValueCheck;
+                return;
+            }
+            if (!i.value) { allAreFilled = false; return; }
+        })
+        if (!allAreFilled) {
+
+
+            (function() {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+            console.log(allAreFilled);
+
+        }
+        else {
+
+            document.getElementById("buttonID").onclick = function() {
+
+                this.disabled = true;
+            }
+        }
+    }
+
+
+
+</script>*@
+
+
+
 
 
 

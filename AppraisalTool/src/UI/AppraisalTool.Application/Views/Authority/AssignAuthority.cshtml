@@ -1,43 +1,31 @@
-﻿
-@model AppraisalTool.App.Models.AssignAuthorityVm
+﻿@model AppraisalTool.App.Models.AssignAuthorityVm
 
-@{
-    //ViewData["Title"] = "AppraisalTool";
-}
- <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
-   <script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
-   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
-     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+<div class="loader" style="display:none;">
+    <div class="d-flex justify-content-center align-items-center" style="height:100vh ;">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
+<script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+<script src="~/lib/package/dist/sweetalert2.all.js"></script>
+<script src="~/lib/package/dist/sweetalert2.min.js"></script>
 
 <style>
-    .small{
-        font-size : 14px;
+    .small {
+        font-size: 14px;
     }
 </style>
 
 
 <div class="container">
-   @* @if (TempData["editError"] != null)
-    {
-        <div class="container">
-            <div class="alert alert-danger mt-5" role="alert">
-                @TempData["editError"]
-            </div>
-        </div>
-    }*@
-   @* @if (TempData["Success"] != null)
-    {
-        <div class="container">
-            <div class="alert alert-success mt-5" role="alert">
-                @TempData["Success"]
-            </div>
-        </div>
-    }*@
     <div class="col-11">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title"> Assign Authority</h4>
-                <form class="form-sample needs-validation" asp-action="AssignAuthority" method="post" novalidate>
+                <form class="form-sample needs-validation" asp-action="AssignAuthority" id="myForm" method="post" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
@@ -49,29 +37,22 @@
                                 </div>
                             </div>
                         </div>
-                      @*  <div class="col-md-6">
-                            <div class="form-group row">
-                                <label asp-for="LastName" class="col-sm-4 col-form-label">Last Name<sup class="required">*</sup></label>
-                                <div class="col-sm-8">
-                                    <input asp-for="LastName" type="text" class="form-control" placeholder="Enter Last Name" readonly/>
-                                    <span asp-validation-for="LastName" class="text-danger mx-1 small"></span>
-                                </div>
-                            </div>
-                        </div>*@
-                    </div>
-                    
-                  
 
-                    
-                  
-                     <div class="row">
-                          <div class="col-md-6">
-                             <div class="form-group row">
+                    </div>
+
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
                                 <label asp-for="RepaId" class="col-sm-4 col-form-label">
-                                    Reporting Authority<span style="color: Red">&nbsp;*</span></label>
-                                
+                                    Reporting Authority<span style="color: Red">&nbsp;*</span>
+                                </label>
+
                                 <div asp-for="RepaId" class="col-sm-8">
-                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control">
+                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control" required>
                                         <option value="">Select Reporting Authority </option>
                                     </select>
                                     <span asp-validation-for="RepaId" class="text-danger mx-1 small"></span>
@@ -79,10 +60,11 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                           <div class="form-group row">
+                            <div class="form-group row">
                                 <label asp-for="RevaId" class="col-sm-4 col-form-label">
-                                    Reviewing Authority<span style="color: Red">&nbsp;*</span></label>
-                                
+                                    Reviewing Authority<span style="color: Red">&nbsp;*</span>
+                                </label>
+
                                 <div asp-for="RevaId" class="col-sm-8">
                                     <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control" required>
                                         <option value="">Select Reviewing Authority</option>
@@ -91,29 +73,86 @@
                                 </div>
                             </div>
                         </div>
-                        
-                       
+
+
                     </div>
-                   
-                     <div class="form-group text-center">
-                           @* <input type="hidden" name="job" id="job" />*@
-                            <div class="row">
-                                <div class="col-4"></div>
-                                <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
-                                <div class="col-2"> <a asp-action="GetAllAuthority" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
 
-                                <div class="col-4"></div>
-                                @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
+                    <div class="form-group text-center">
+                        @* <input type="hidden" name="job" id="job" />*@
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-2"> <input type="submit" style="width:130px" id="buttonID" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+                            <div class="col-2"> <a asp-action="GetAllAuthority" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
+
+                            <div class="col-4"></div>
+                            @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
                             <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
-                            </div>
-
                         </div>
-                 </form>
+
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+@*<script>
+    document.getElementById("buttonID").onclick = function() {
+        let allAreFilled = true;
+        document.getElementById("myForm").querySelectorAll("[required]").forEach(function(i) {
+            if (!allAreFilled) return;
+            if (i.type === "checkbox") {
+                let radioValueCheck = false;
+                document.getElementById("myForm").querySelectorAll(`[name=${i.name}]`).forEach(function(r) {
+                    if (r.checked) radioValueCheck = true;
+                })
+                allAreFilled = radioValueCheck;
+                return;
+            }
+            if (!i.value) { allAreFilled = false; return; }
+        })
+        if (!allAreFilled) {
+
+
+            (function() {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+            console.log(allAreFilled);
+
+        }
+        else {
+
+            document.getElementById("buttonID").onclick = function() {
+
+                this.disabled = true;
+            }
+        }
+    }
+
+
+
+</script>*@
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

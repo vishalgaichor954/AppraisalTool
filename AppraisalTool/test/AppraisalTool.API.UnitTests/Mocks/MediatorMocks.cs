@@ -10,6 +10,11 @@ using AppraisalTool.Application.Features.Events.Queries.GetEventDetail;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsExport;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsList;
 using AppraisalTool.Application.Features.Orders.GetOrdersForMonth;
+using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
+using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
+using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
+using AppraisalTool.Application.Features.Users.Query.GetUserById;
+using AppraisalTool.Application.Features.Users.Query.GetUserList;
 using AppraisalTool.Application.Response;
 using MediatR;
 using Moq;
@@ -40,7 +45,12 @@ namespace AppraisalTool.API.UnitTests.Mocks
             mockMediator.Setup(m => m.Send(It.IsAny<TransactionCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<Guid>());
 
             mockMediator.Setup(m => m.Send(It.IsAny<GetOrdersForMonthQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new PagedResponse<IEnumerable<OrdersForMonthDto>>(null, 10, 1, 2));
-            
+            mockMediator.Setup(m => m.Send(It.IsAny<GetUserListQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<IEnumerable<GetUserListQueryVm>>());
+            mockMediator.Setup(m => m.Send(It.IsAny<GetUserByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<GetUserListQueryVm>());
+            mockMediator.Setup(m => m.Send(It.IsAny<RemoveUserCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<RemoveUserCommandDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<UpdateUserCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<UpdateUserCommandDto>());
+            mockMediator.Setup(m => m.Send(It.IsAny<CreateUserCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<CreateUserDto>());
+
             return mockMediator;
         }
     }

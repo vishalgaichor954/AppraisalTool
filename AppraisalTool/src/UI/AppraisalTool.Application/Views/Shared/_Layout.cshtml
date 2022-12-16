@@ -1,5 +1,4 @@
-﻿
-@using Microsoft.AspNetCore.Http;
+﻿@using Microsoft.AspNetCore.Http;
 @using Newtonsoft.Json;
 <!DOCTYPE html>
 <html lang="en">
@@ -7,15 +6,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]  AppraisalTool</title>
-    
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/assets/vendors//mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/lib/assets/vendors/css/vendor.bundle.base.css">
-    
-     <link rel="stylesheet" href="~/lib/assets/css/style.css">
+
+    <link rel="stylesheet" href="~/lib/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="~/lib/assets/images/favicon.ico" />
-   
+
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AppraisalTool.App.styles.css" asp-append-version="true" />
@@ -23,26 +22,26 @@
 </head>
 <body>
     <header>
-       @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AppraisalTool.App</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AppraisalTool.App</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </li>
+        </ul>
+        </div>
+        </div>
         </nav>*@
-      @*  @Html.Partial("_LoggedIn")*@
+        @*  @Html.Partial("_LoggedIn")*@
     </header>
     <div class="container-fluid m-0">
         <main role="main" class="pb-3">
@@ -51,52 +50,249 @@
                 string x = Context.Session.GetString("user");
                 if (x != null)
                 {
-                        @Html.Partial("_LoggedIn")
+                    @Html.Partial("_LoggedIn")
                 }
             }
-       
-                    
-            
-                @RenderBody()
-               @* @{
-                         if (x == "User")
-                    {
-                            <!-- main-panel ends -->
-                       </div>
-                        <!-- page-body-wrapper ends -->
-                        </div>
-                    }
-                }*@
-                  
-    
-           
+
+
+
+            @RenderBody()
+            @* @{
+            if (x == "User")
+            {
+            <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+            </div>
+            }
+            }*@
+
+
+
         </main>
     </div>
 
     @*<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - AppraisalTool.App - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <div class="container">
+    &copy; 2022 - AppraisalTool.App - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
     </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-  @*<script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
-   <script src="~/lib/package/dist/sweetalert2.all.js"></script>
-     <script src="~/lib/package/dist/sweetalert2.min.js"></script>
+
+  @*  <script>
+        //document.addEventListener('DOMContentLoaded', (event) => {
+        //    const checkboxes = document.querySelectorAll(".changeChecker");
+        //    let checkedBoxes = 0;
+        //    checkboxes.forEach(ele => {
+        //        checkboxes.forEach(box => {
+        //            box.setAttribute("required", true);
+        //        })
+        //    });
+            $("#buttonID").click(function() {
+                console.log("Hello world")
+                var valid = $("#myForm").valid();
+                console.log(valid);
+
+                if (valid === true) {
+
+                    var tt = setInterval(function() {
+
+                        $(".loader").show();
+                    }, 10);
+                    setTimeout(function() {
+                        clearInterval(tt);
+                        $(".loader").hide();
+                    }, 7000);
+                    console.log("inside if");
+                }
+                else {
+                    (function() {
+                        'use strict'
+
+                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                        var forms = document.querySelectorAll('.needs-validation')
+
+                        // Loop over them and prevent submission
+                        Array.prototype.slice.call(forms)
+                            .forEach(function(form) {
+                                form.addEventListener('submit', function(event) {
+                                    if (!form.checkValidity()) {
+                                        event.preventDefault()
+                                        event.stopPropagation()
+                                    }
+
+                                    form.classList.add('was-validated')
+                                }, false)
+                            })
+
+
+                        console.log("Inside checker");
+                        document.querySelectorAll(".changeChecker").forEach(element => {
+
+                            element.addEventListener("change", () => {
+                                const checkboxes = document.querySelectorAll(".changeChecker");
+                                let checkedBoxes = 0;
+                                checkboxes.forEach(ele => {
+                                    //checkboxes.forEach(box => {
+                                    //    box.setAttribute("required", true);
+                                    //})
+                                    console.log("between checker");
+                                    if (ele.checked) {
+                                        checkedBoxes += 1;
+                                    }
+
+                                });
+                                if (checkedBoxes == 0) {
+                                    checkboxes.forEach(box => {
+                                        box.setAttribute("required", true);
+                                    })
+                                }
+                                if (checkedBoxes != 0) {
+                                    checkboxes.forEach(box => {
+                                        box.removeAttribute("required");
+                                    })
+                                }
+                                console.log("CB" = checkedBoxes);
+
+                            });
+
+                        })
+                        console.log("Outside checker");
+
+                    })()
+                }
+            })
+
+
+    </script>*@
+
+    <script>
+    document.querySelectorAll(".changeChecker").forEach(element => {
+
+        element.addEventListener("change", () => {
+            const checkboxes = document.querySelectorAll(".changeChecker");
+            let checkedBoxes = 0;
+            checkboxes.forEach(ele => {
+
+                if (ele.checked) {
+                    checkedBoxes += 1;
+                }
+
+            });
+            if (checkedBoxes == 0) {
+                checkboxes.forEach(box => {
+                    box.setAttribute("required", true);
+                })
+            }
+            if (checkedBoxes != 0) {
+                checkboxes.forEach(box => {
+                    box.removeAttribute("required");
+                })
+            }
+
+        });
+    })
+
+
+    $("#buttonID").click(function() {
+
+        //alert("inside btn click func");
+        var valid = $("#myForm").valid();
+
+
+
+        if (valid === true) {
+
+            var tt = setInterval(function() {
+
+                $(".loader").show();
+            }, 10);
+            setTimeout(function() {
+                clearInterval(tt);
+                $(".loader").hide();
+            }, 7000);
+            console.log("inside if");
+        }
+        console.log(valid);
+
+    })
+    console.log(valid);
+
+    console.log("hello hi");
+</script>
+
+
+<script>
+
+
+    (function() {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+
+    document.querySelectorAll(".changeChecker").forEach(element => {
+
+        element.addEventListener("change", () => {
+            const checkboxes = document.querySelectorAll(".changeChecker");
+            let checkedBoxes = 0;
+            checkboxes.forEach(ele => {
+
+                if (ele.checked) {
+                    checkedBoxes += 1;
+                }
+
+            });
+            if (checkedBoxes == 0) {
+                checkboxes.forEach(box => {
+                    box.setAttribute("required", true);
+                })
+            }
+            if (checkedBoxes != 0) {
+                checkboxes.forEach(box => {
+                    box.removeAttribute("required");
+                })
+            }
+
+        });
+    })
+</script>
+
+
+
+    @*<script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
+    <script src="~/lib/package/dist/sweetalert2.all.js"></script>
+    <script src="~/lib/package/dist/sweetalert2.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
-@*    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    
-*@    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @*    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    *@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/html2pdf.js/html2pdf.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-     <script src="~/js/misc.js" asp-append-version="true"></script>
-     <script src="~/js/hoverable-collapse.js" asp-append-version="true"></script>
-     <script src="~/js/off-canvas.js" asp-append-version="true"></script>
-      <script src="~/js/jquery.cookie.js" asp-append-version="true"></script>
-     <script src="~/js/vendor.bundle.base.js" asp-append-version="true"></script>
-@*     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-*@
+    <script src="~/js/misc.js" asp-append-version="true"></script>
+    <script src="~/js/hoverable-collapse.js" asp-append-version="true"></script>
+    <script src="~/js/off-canvas.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.cookie.js" asp-append-version="true"></script>
+    <script src="~/js/vendor.bundle.base.js" asp-append-version="true"></script>
+    @*     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    *@
     @await RenderSectionAsync("Scripts", required: false)
-    
+
 </body>
 </html>
-  

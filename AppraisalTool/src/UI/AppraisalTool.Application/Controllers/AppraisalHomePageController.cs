@@ -1,22 +1,14 @@
 ﻿using AppraisalTool.App.Helpers;
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
+//using AppraisalTool.Domain.Entities;
+using AppraisalTool.App.Models.FinancialYear;
 using AppraisalTool.App.Models.SelfAppraisal;
+using AppraisalTool.Domain.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
-using AppraisalTool.App.Models.Navbar;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using NuGet.Protocol;
-using System.ComponentModel;
-using System.Reflection;
 using System.Text;
-using static System.Formats.Asn1.AsnWriter;
-//using AppraisalTool.Domain.Entities;
-using System.Security.Cryptography;
-using AppraisalTool.App.Models.FinancialYear;
-using AppraisalTool.Domain.Common;
 
 namespace AppraisalTool.App.Controllers
 {
@@ -477,7 +469,6 @@ namespace AppraisalTool.App.Controllers
 
 
 
-                //[] bindingModel = new MetricsDto[mylist.Count()];
                 return View(metricListData);
             }
             return View();

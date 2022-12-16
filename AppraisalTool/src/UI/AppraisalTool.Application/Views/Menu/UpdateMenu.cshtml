@@ -1,11 +1,17 @@
 ﻿@model AppraisalTool.App.Models.Menu.MenuModel
 
 @{
-    ViewData["Title"] = "Add Menu";
+    ViewData["Title"] = "Update Menu";
 }
+<div class="loader" style="display:none;">
+    <div class="d-flex justify-content-center align-items-center" style="height:100vh ;">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        </div>
+    </div>
+</div>
 <style>
     .checkbox {
-        disply: flex;
+        display: flex;
     }
 </style>
 <div class="container">
@@ -49,10 +55,12 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="MenuFlag" class="col-sm-4 col-form-label">Flag<sup class="required">*</sup></label>
+                                <label asp-for="MenuFlag" class="col-sm-4 col-form-label">Model<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuFlag" type="text" class="form-control" placeholder="Enter Menu Flag" required />
-                                    @*<span asp-validation-for="MenuFlag" class="text-danger mx-1 small"></span>*@
+                                    <input asp-for="MenuFlag" type="text" class="form-control" placeholder="Enter Menu Flag" required>
+
+
+                                    <br />
                                 </div>
                             </div>
                         </div>
@@ -104,7 +112,7 @@
                                     {
                                         @if (item.Value == i.Value)
                                         {
-                                            <input type="checkbox" value="@i.Value" name="selectedRoles" id="check" class="form-check-input changeChecker" checked  >
+                                            <input type="checkbox" value="@i.Value" name="selectedRoles" id="check" class="form-check-input changeChecker" checked>
                                             <label class="form-check-label">@i.Key</label>
                                         }
 
@@ -122,8 +130,8 @@
                                         {
                                             ViewBag.RoleList.Remove(item.Key);
                                         }
-                                      
-                                        
+
+
 
 
 
@@ -134,10 +142,10 @@
                                 }
 
 
-                             @foreach (var role in ViewBag.RoleList)
+                                @foreach (var role in ViewBag.RoleList)
                                 {
 
-                                    <input type="checkbox" value="@role.Value" name="selectedRoles" id="check" class="form-check-input chk[]">
+                                    <input type="checkbox" value="@role.Value" name="selectedRoles" id="check" class="form-check-input  changeChecker">
                                     <label class="form-check-label">@role.Key</label>
 
 
@@ -146,19 +154,19 @@
                                 }
 
 
-   
 
-                               @* @foreach (var role in ViewBag.roledict3)
+
+                                @*@foreach (var role in ViewBag.roledict3)
                                 {
 
-                                    <input type="checkbox" value="@role.Value" name="selectedRoles" id="check" class="form-check-input  changeChecker ">
-                                    <label class="form-check-label">@role.Key</label>
+                                <input type="checkbox" value="@role.Value" name="selectedRoles" id="check" class="form-check-input  changeChecker ">
+                                <label class="form-check-label">@role.Key</label>
 
 
 
 
-                                }
-*@
+                                }*@
+
 
                             </div>
                         </div>
@@ -168,7 +176,7 @@
                         @* <input type="hidden" name="job" id="job" />*@
                         <div class="row">
                             <div class="col-4"></div>
-                            <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+                            <div class="col-2"> <input type="submit" id="buttonID" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
 
                             <div class="col-2">  <a asp-action="ListMenu" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
                             <div class="col-4"></div>
@@ -185,10 +193,121 @@
 </div>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+
+@*<script>
+    document.querySelectorAll(".changeChecker").forEach(element => {
+
+        element.addEventListener("change", () => {
+            const checkboxes = document.querySelectorAll(".changeChecker");
+            let checkedBoxes = 0;
+            checkboxes.forEach(ele => {
+
+                if (ele.checked) {
+                    checkedBoxes += 1;
+                }
+
+            });
+            if (checkedBoxes == 0) {
+                checkboxes.forEach(box => {
+                    box.setAttribute("required", true);
+                })
+            }
+            if (checkedBoxes != 0) {
+                checkboxes.forEach(box => {
+                    box.removeAttribute("required");
+                })
+            }
+
+        });
+    })
+
+
+    $("#buttonID").click(function() {
+
+        alert("inside btn click func");
+        var valid = $("#myForm").valid();
+
+
+
+        if (valid === true) {
+
+            var tt = setInterval(function() {
+
+                $(".loader").show();
+            }, 10);
+            setTimeout(function() {
+                clearInterval(tt);
+                $(".loader").hide();
+            }, 7000);
+            console.log("inside if");
+        }
+        console.log(valid);
+</script>*@
+
+
+
+
+@*<script>
+    document.querySelectorAll(".changeChecker").forEach(element => {
+
+        element.addEventListener("change", () => {
+            const checkboxes = document.querySelectorAll(".changeChecker");
+            let checkedBoxes = 0;
+            checkboxes.forEach(ele => {
+
+                if (ele.checked) {
+                    checkedBoxes += 1;
+                }
+
+            });
+            if (checkedBoxes == 0) {
+                checkboxes.forEach(box => {
+                    box.setAttribute("required", true);
+                })
+            }
+            if (checkedBoxes != 0) {
+                checkboxes.forEach(box => {
+                    box.removeAttribute("required");
+                })
+            }
+
+        });
+    })
+
+
+    $("#buttonID").click(function() {
+
+        //alert("inside btn click func");
+        var valid = $("#myForm").valid();
+
+
+
+        if (valid === true) {
+
+            var tt = setInterval(function() {
+
+                $(".loader").show();
+            }, 10);
+            setTimeout(function() {
+                clearInterval(tt);
+                $(".loader").hide();
+            }, 7000);
+            console.log("inside if");
+        }
+        console.log(valid);
+
+    })
+    console.log(valid);
+
+    console.log("hello hi");
+</script>
 
 
 <script>
+
+
     (function() {
         'use strict'
 
@@ -209,32 +328,36 @@
             })
     })()
 
-   
-    document.querySelectorAll(".changeChecker").forEach(element=>{
+
+    document.querySelectorAll(".changeChecker").forEach(element => {
 
         element.addEventListener("change", () => {
             const checkboxes = document.querySelectorAll(".changeChecker");
             let checkedBoxes = 0;
             checkboxes.forEach(ele => {
-              
-                 if(ele.checked){
-                     checkedBoxes += 1;
-                 }
+
+                if (ele.checked) {
+                    checkedBoxes += 1;
+                }
 
             });
-            if(checkedBoxes == 0){
+            if (checkedBoxes == 0) {
                 checkboxes.forEach(box => {
                     box.setAttribute("required", true);
                 })
             }
-            if(checkedBoxes != 0){
+            if (checkedBoxes != 0) {
                 checkboxes.forEach(box => {
                     box.removeAttribute("required");
                 })
             }
+
         });
     })
-</script>
+</script>*@
+
+
+
 
 
 

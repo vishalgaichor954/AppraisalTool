@@ -472,3 +472,7 @@ table.dataTable thead td {
 select {
     color: black !important;
 }
+
+label.error {
+    display: none !important;
+}
