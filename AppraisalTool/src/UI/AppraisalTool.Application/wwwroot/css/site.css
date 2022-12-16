@@ -418,8 +418,13 @@ table.dataTable thead td {
     width: 40%;
 }
 
+.dataTables_length {
+    margin-left: 3%;
+    margin-bottom: 2%;
+}
+
 #myTable_length {
-    margin-left: 2%;
+    margin-left: 3%;
     margin-bottom: 2%;
 }
 
@@ -437,7 +442,7 @@ table.dataTable thead td {
 }
 
 #table_length {
-    margin-left: 2%;
+    margin-left: 3%;
     margin-bottom: 2%;
 }
 
@@ -455,7 +460,7 @@ table.dataTable thead td {
 }
 
 #table_length {
-    margin-left: 2%;
+    margin-left: 3%;
     margin-bottom: 2%;
 }
 
@@ -473,4 +478,12 @@ table.dataTable thead td {
 
 select {
     color: black !important;
+}
+
+.dataTables_info {
+    margin-left: 3%;
+}
+
+select[name="myTable_length"] {
+   width:100px;
 }
