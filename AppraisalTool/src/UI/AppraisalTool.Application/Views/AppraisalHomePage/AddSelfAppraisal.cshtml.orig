@@ -380,22 +380,26 @@
 
 
 
+
                                         //@ViewBag.Fid
                                         //@json.userId
                                     }
                                     else
                                     {
-                                        <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " /></div>
+<<<<<<< HEAD
                                         <div class="col-3"><input id="submit" type="submit" value="Proceed" class="   btn btn-block AddAppraisalBtn btn-lg " /></div>
+                                        <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " /></div>
+=======
+                                         <div class="col-3"><input id="submit" type="submit" value="Proceed" class="   btn btn-block AddAppraisalBtn btn-lg " /></div>
+                                        <div class="col-3"><input id="reset" type="reset" value="Reset" class=" btn btn-block ResetButton  btn-lg " /></div>
+                                       
+>>>>>>> 8b2fe2b32193c9445099711dc8f72620c8685488
                                     }
                                 }
 
                                 <div class="col-3"></div>
-<<<<<<< HEAD
                                
-=======
 
->>>>>>> e1053d637dbdc7fd975177ebe62373417608f64d
                             </div>
 
                         </div>

@@ -98,7 +98,7 @@
         })
     </script>
 }
-@if (TempData["AddUserSuccess"] != null)
+@*@if (TempData["AddUserSuccess"] != null)
 {
     <script>
 
@@ -119,7 +119,7 @@
             title: 'User Added Successfully'
         })
     </script>
-}
+}*@
 
 @*add user end*@
 @if (TempData["DeleteUserFaild"] != null)
@@ -169,8 +169,13 @@
     </script>
 }
 
+<div class="content-wrapper main-panel content-wrapper-red">
 
-<div class="container">
+<<<<<<< HEAD
+<div class="content-wrapper main-panel content-wrapper-red">
+=======
+@*<div class="container">*@
+>>>>>>> 8b2fe2b32193c9445099711dc8f72620c8685488
     @*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting" >Configure Settings</a>  /<a asp-controller="Admin" asp-action="ListUsers" >
     User Management </a></h6>*@
     <nav aria-label="breadcrumb">
@@ -182,6 +187,8 @@
         </ol>
     </nav>
 
+<<<<<<< HEAD
+=======
 
 
     @*@if (TempData["AddUserSuccess"] != null)
@@ -237,7 +244,8 @@
     }*@
 
 
-    <div class="container-scroller ">
+>>>>>>> 8b2fe2b32193c9445099711dc8f72620c8685488
+    <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="container-scroller ">
         <!-- partial -->
         <div>
             <div class="row">
@@ -245,7 +253,7 @@
                     <div class="card" style="max-width:95%">
                         <div class="card-body">
                             <div class="page-header">
-                                <h3 class="page-title"> Users </h3>
+                                <h3 class="page-title" style="margin-left:2%;"> Users </h3>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item active" aria-current="page">
@@ -260,13 +268,13 @@
                                 <table class="table table-bordered display" id="myTable" style="max-width:95%">
                                     <thead>
                                         <tr>
-                                            <th> Name </th>
-                                            <th> Branch </th>
-                                            <th> Role </th>
-                                            <th> Join Date </th>
-                                            <th> Primary Profile </th>
-                                            <th> Secondary Profile </th>
-                                            <th> Actions </th>
+                                            <th class="text-center"> Name </th>
+                                            <th class="text-center"> Branch </th>
+                                            <th class="text-center"> Role </th>
+                                            <th class="text-center"> Join Date </th>
+                                            <th class="text-center"> Primary Profile </th>
+                                            <th class="text-center"> Secondary Profile </th>
+                                            <th class="text-center"> Action </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -275,20 +283,15 @@
                                             @foreach (var item in ViewBag.UserList)
                                             {
                                                 <tr>
-                                                    <td style="text-transform:'Capatilize';"> @item.firstName @item.lastName </td>
-                                                    <td> @item.branchName </td>
-                                                    <td> @item.roleName </td>
-                                                    <td> @item.joinDate </td>
-                                                    <td> @item.primaryJobProfileName </td>
-                                                    <td> @item.secondaryJobProfileName </td>
-                                                    <td>
-<<<<<<< HEAD
-                                                        <a asp-action="UpdateUser" asp-route-id="@item.id" class="btn btn-sm  btn-outline-info @*LoginBtn*@"><i class="mdi mdi-table-edit"></i></a>
-                                                        <a asp-action="DeleteUser" asp-route-id="@item.id" class="btn btn-sm  btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
-=======
+                                                    <td class="text-center" style="text-transform:'Capatilize';"> @item.firstName @item.lastName </td>
+                                                    <td class="text-center"> @item.branchName </td>
+                                                    <td class="text-center"> @item.roleName </td>
+                                                    <td class="text-center"> @item.joinDate </td>
+                                                    <td class="text-center"> @item.primaryJobProfileName </td>
+                                                    <td class="text-center"> @item.secondaryJobProfileName </td>
+                                                    <td class="text-center">
                                                         <a asp-action="UpdateUser" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
                                                         <a asp-action="DeleteUser" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
->>>>>>> aa1b1e6714830fa440e57ebeeb16d93eac8ca5cd
                                                     </td>
                                                 </tr>
                                             }

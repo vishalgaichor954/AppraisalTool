@@ -2,6 +2,7 @@
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.Branches;
+using AppraisalTool.App.Services.CustomAttributes;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -12,6 +13,7 @@ namespace AppraisalTool.App.Controllers
     public class BranchController : Controller
     {
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult ListBranches()
         {
 
@@ -33,6 +35,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult AddBranch()
         {
             return View();
@@ -69,6 +72,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult UpdateBranch(int id)
         {
             Uri baseAddress = new Uri("https://localhost:5000/api/");
@@ -112,6 +116,8 @@ namespace AppraisalTool.App.Controllers
             TempData["BranchError"] = "Failed To Update Branch";
             return RedirectToAction("ListBranches");
         }
+
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult DeleteBranch(int id)
         {
             //User/removeUser?id=9&api-version=1

@@ -34,6 +34,21 @@ namespace AppraisalTool.Persistence.Repositories
             }
         }
 
+        public async Task<Appraisal> GetAppraisalById(int id)
+        {
+
+            try
+            {
+                Appraisal appraisal = await _dbContext.Appraisal.FirstOrDefaultAsync(item => item.Id == id);
+               
+                return appraisal;
+            }
+            catch (Exception e)
+            {
+                Console.Write(e);
+                return null;
+            }
+        }
         //Author : Ilyas Dabholkar
         //Returns List of AppraisalResults with provided appraisalId
         public async Task<List<AppraisalResult>> GetAppraisalResultsByApppraisalId(int id)

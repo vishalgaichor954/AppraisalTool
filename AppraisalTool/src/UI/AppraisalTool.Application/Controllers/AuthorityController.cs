@@ -1,7 +1,7 @@
 ﻿using AppraisalTool.App.Helpers;
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
-
+using AppraisalTool.App.Services.CustomAttributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -13,7 +13,10 @@ namespace AppraisalTool.App.Controllers
     {
         Uri baseAddress = new Uri("https://localhost:5000/api/");
         HttpClient client = new HttpClient();
+
+
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult GetAllAuthority()
         {
             string x = HttpContext.Session.GetString("user");
@@ -40,7 +43,9 @@ namespace AppraisalTool.App.Controllers
             }
             return View();
         }
+
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult AssignAuthority(int? id)
         {
             string x = HttpContext.Session.GetString("user");
