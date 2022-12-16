@@ -61,10 +61,20 @@ Toast.fire({
 </style>
 
 
-<div class="container">
-  
+<div class="content-wrapper main-panel content-wrapper-red">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="border:none">
+            <li class="breadcrumb-item">
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a asp-controller="Admin" class="active" asp-action="ListUsers" style=" text-decoration: none;">User Management</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Update User</li>
+        </ol>
+    </nav>
     <div class="col-11">
-        <div class="card">
+        <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
                 <h4 class="card-title"> Update User</h4>
                 <form class="form-sample needs-validation" asp-action="UpdateUser" method="post" novalidate>
@@ -118,7 +128,7 @@ Toast.fire({
                             <div class="form-group row">
                                 <label asp-for="BranchId" class="col-sm-4 col-form-label">Branch<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="BranchId" class="form-control" asp-items="@ViewBag.branchlist" required>
+                                    <select asp-for="BranchId" class="form-control p-3 form-select" asp-items="@ViewBag.branchlist" required>
                                         <option value="">Select Branch</option>
                                     </select>
                                     @*<span asp-validation-for="BranchId" class="text-danger mx-1 small"></span>*@
@@ -129,7 +139,11 @@ Toast.fire({
                             <div class="form-group row">
                                 <label asp-for="RoleId" class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="RoleId" class="form-control" asp-items="@ViewBag.Rolelist" required >
+<<<<<<< HEAD
+                                    <select asp-for="RoleId" class="form-control p-3 form-select" asp-items="@ViewBag.Rolelist" required>
+=======
+                                    <select asp-for="RoleId" class="form-control p-3 form-select" asp-items="@ViewBag.Rolelist" required >
+>>>>>>> df8618782d696942561c0491f40c179eb66d02e6
                                         <option value="">Select Role</option>
                                     </select>
                                     @*<span asp-validation-for="RoleId" class="text-danger mx-1 small"></span>*@
@@ -142,7 +156,7 @@ Toast.fire({
                             <div class="form-group row">
                                 <label asp-for="PrimaryJobProfileId" class="col-sm-4 col-form-label">Primary Job Profile<span style="color: Red">&nbsp;*</span></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="PrimaryJobProfileId" class="form-control" asp-items="@ViewBag.JobProfileRolelist" required>
+                                    <select asp-for="PrimaryJobProfileId" class="form-control p-3 form-select" asp-items="@ViewBag.JobProfileRolelist" required>
                                         <option value="">Select Primary Job Profile</option>
                                     </select>
                                     @*<span asp-validation-for="PrimaryJobProfileId" class="text-danger mx-1 small"></span>*@
@@ -155,7 +169,7 @@ Toast.fire({
                                     Secondary Job Profile<span style="color: Red">&nbsp;*</span>
                                 </label>
                                 <div asp-for="SecondaryRole" class="col-sm-8">
-                                    <select asp-for="SecondaryJobProfileId" asp-items="@ViewBag.JobProfileRolelist" class="form-control" required>
+                                    <select asp-for="SecondaryJobProfileId" asp-items="@ViewBag.JobProfileRolelist" class="form-control p-3 form-select" required>
                                         <option value="">Select Secondary Job Profile</option>
                                     </select>
                                     @*<span asp-validation-for="SecondaryJobProfileId" class="text-danger mx-1 small"></span>*@
@@ -174,10 +188,10 @@ Toast.fire({
                                         <option value="">Select Reviewing Authority</option>
                                     </select>
                                     @*<span asp-validation-for="RevaId" class="text-danger mx-1 small"></span>*@
-                                </div>
+                                @*</div>
                             </div>
-                        </div>
-                         <div class="col-md-6">
+                        </div>*@
+                         @*<div class="col-md-6">
                              <div class="form-group row">
                                 <label asp-for="RepaId" class="col-sm-4 col-form-label" >
                                     Reporting Authority<span style="color: Red">&nbsp;*</span></label>
@@ -189,20 +203,15 @@ Toast.fire({
                                     <span asp-validation-for="RepaId" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
                        
-                    </div>*@
+                    @*</div>*@
                    
                      <div class="form-group text-center">
                            @* <input type="hidden" name="job" id="job" />*@
                             <div class="row">
                                 <div class="col-4"></div>
                                 <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
-<<<<<<< HEAD
-                 
-=======
-
->>>>>>> 73b52320a37e27acff8493e7103a7843aab3a23a
                                 <div class="col-2">  <a asp-action="ListUsers" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
                                 <div class="col-4"></div>
                                 @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
