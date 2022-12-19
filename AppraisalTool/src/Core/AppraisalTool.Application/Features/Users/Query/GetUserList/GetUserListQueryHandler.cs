@@ -19,10 +19,10 @@ namespace AppraisalTool.Application.Features.Users.Query.GetUserList
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public GetUserListQueryHandler(IUserRepository userRepository,IMapper mapper)
+        public GetUserListQueryHandler(IUserRepository userRepository, IMapper mapper)
         {
-            _userRepository=userRepository;
-            _mapper=mapper;
+            _userRepository = userRepository;
+            _mapper = mapper;
         }
         public async Task<Response<IEnumerable<GetUserListQueryVm>>> Handle(GetUserListQuery request, CancellationToken cancellationToken)
         {

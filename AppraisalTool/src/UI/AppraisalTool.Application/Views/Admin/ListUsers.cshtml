@@ -276,15 +276,15 @@
                                             @foreach (var item in ViewBag.UserList)
                                             {
                                                 <tr>
-                                                    <td class="text-center" style="text-transform:'Capatilize';"> @item.firstName @item.lastName </td>
-                                                    <td class="text-center"> @item.branchName </td>
-                                                    <td class="text-center"> @item.roleName </td>
-                                                    <td class="text-center"> @item.joinDate </td>
-                                                    <td class="text-center"> @item.primaryJobProfileName </td>
-                                                    <td class="text-center"> @item.secondaryJobProfileName </td>
+                                                    <td class="text-center" style="text-transform:'Capatilize';"> @item.FirstName @item.LastName </td>
+                                                    <td class="text-center"> @item.BranchName </td>
+                                                    <td class="text-center"> @item.RoleName </td>
+                                                    <td class="text-center"> @item.JoinDate </td>
+                                                    <td class="text-center"> @item.PrimaryJobProfileName </td>
+                                                    <td class="text-center"> @item.SecondaryJobProfileName </td>
                                                     <td class="text-center">
-                                                        <a asp-action="UpdateUser" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
-                                                        <a asp-action="DeleteUser" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
+                                                        <a asp-action="UpdateUser" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
+                                                        <a asp-action="DeleteUser" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>
                                                 </tr>
                                             }

@@ -1,7 +1,11 @@
-﻿using AppraisalTool.App.Helpers;
+﻿using AppraisalTool.App.Dtos;
+using AppraisalTool.App.Helpers;
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Services.CustomAttributes;
+using AppraisalTool.Application.Features.Users.Query.GetUserList;
+using AutoMapper;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -17,9 +21,14 @@ namespace AppraisalTool.App.Controllers
     {
         Uri baseAddress = new Uri("https://localhost:5000/api/");
         HttpClient client = new HttpClient();
-        public AdminController()
-        {
+        private readonly IMapper _mapper;
 
+        private readonly IDataProtector _protector;
+
+        public AdminController(IMapper mapper, IDataProtectionProvider provider)
+        {
+            _mapper = mapper;
+            _protector = provider.CreateProtector("");
         }
 
         [HttpGet]
@@ -152,7 +161,7 @@ namespace AppraisalTool.App.Controllers
 
         [HttpGet]
         [RouteAccess(Roles = "ADMINISTRATOR")]
-        public IActionResult UpdateUser(int? id)
+        public IActionResult UpdateUser(string? id)
         {
             string x = HttpContext.Session.GetString("user");
             if (x == null)
@@ -164,6 +173,8 @@ namespace AppraisalTool.App.Controllers
             {
                 return RedirectToAction("ListUsers", "Admin");
             }
+
+            int unprotectedId = int.Parse(_protector.Unprotect(id));
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             EditUserViewModel user = new EditUserViewModel();
@@ -172,7 +183,7 @@ namespace AppraisalTool.App.Controllers
             HttpResponseMessage BranchReponse = client.GetAsync(client.BaseAddress + "User/GetBranch?api-version=1").Result;
             HttpResponseMessage RoleReponse = client.GetAsync(client.BaseAddress + "User/GetRole?api-version=1").Result;
 
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"User/getUser?id={id}&api-version=1").Result;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"User/getUser?id={unprotectedId}&api-version=1").Result;
             HttpResponseMessage Reporting = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=2&api-version=1").Result;
             HttpResponseMessage Reviewing = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=3&api-version=1").Result;
             HttpResponseMessage admin = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=1&api-version=1").Result;
@@ -185,6 +196,7 @@ namespace AppraisalTool.App.Controllers
                 var res = JsonConvert.DeserializeObject<Response>(data);
                 var serres = JsonConvert.SerializeObject(res.Data);
                 user = JsonConvert.DeserializeObject<EditUserViewModel>(serres);
+                user.Id = unprotectedId;
 
                 //bind data from database
                 var responseData = jobProfileresponse.Content.ReadAsStringAsync().Result;
@@ -280,7 +292,7 @@ namespace AppraisalTool.App.Controllers
             string data = JsonConvert.SerializeObject(model);
 
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PutAsync("https://localhost:5000/api/User/UpdateUser?api-version=1", content).Result;
+            HttpResponseMessage response = client.PutAsync($"https://localhost:5000/api/User/UpdateUser?api-version=1", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 TempData["Success"] = "User Updated Successfully";
@@ -305,16 +317,17 @@ namespace AppraisalTool.App.Controllers
 
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            List<UserViewModel> modellist = new List<UserViewModel>(); ;
+            List<UserViewModel> modellist = new List<UserViewModel>(); 
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User?api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
 
                 string responseData = response.Content.ReadAsStringAsync().Result;
-                dynamic json = JsonConvert.DeserializeObject(responseData);
-                ViewBag.UserList = json.data;
-                return View();
+                var res = JsonConvert.DeserializeObject<Response>(responseData);
 
+                List<UserViewModel> mylist = JsonConvert.DeserializeObject<List<UserViewModel>>(JsonConvert.SerializeObject(res.Data));
+                ViewBag.UserList = _mapper.Map<IEnumerable<UserEncodeDto>>(mylist); 
+                return View();
             }
             return View();
         }
