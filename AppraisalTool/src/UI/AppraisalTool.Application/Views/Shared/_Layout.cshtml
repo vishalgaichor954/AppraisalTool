@@ -79,199 +79,209 @@
     </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-  @*  <script>
-        //document.addEventListener('DOMContentLoaded', (event) => {
-        //    const checkboxes = document.querySelectorAll(".changeChecker");
-        //    let checkedBoxes = 0;
-        //    checkboxes.forEach(ele => {
-        //        checkboxes.forEach(box => {
-        //            box.setAttribute("required", true);
-        //        })
-        //    });
-            $("#buttonID").click(function() {
-                console.log("Hello world")
-                var valid = $("#myForm").valid();
-                console.log(valid);
+    @*  <script>
+    //document.addEventListener('DOMContentLoaded', (event) => {
+    //    const checkboxes = document.querySelectorAll(".changeChecker");
+    //    let checkedBoxes = 0;
+    //    checkboxes.forEach(ele => {
+    //        checkboxes.forEach(box => {
+    //            box.setAttribute("required", true);
+    //        })
+    //    });
+    $("#buttonID").click(function() {
+    console.log("Hello world")
+    var valid = $("#myForm").valid();
+    console.log(valid);
 
-                if (valid === true) {
+    if (valid === true) {
 
-                    var tt = setInterval(function() {
+    var tt = setInterval(function() {
 
-                        $(".loader").show();
-                    }, 10);
-                    setTimeout(function() {
-                        clearInterval(tt);
-                        $(".loader").hide();
-                    }, 7000);
-                    console.log("inside if");
-                }
-                else {
-                    (function() {
-                        'use strict'
+    $(".loader").show();
+    }, 10);
+    setTimeout(function() {
+    clearInterval(tt);
+    $(".loader").hide();
+    }, 7000);
+    console.log("inside if");
+    }
+    else {
+    (function() {
+    'use strict'
 
-                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                        var forms = document.querySelectorAll('.needs-validation')
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
 
-                        // Loop over them and prevent submission
-                        Array.prototype.slice.call(forms)
-                            .forEach(function(form) {
-                                form.addEventListener('submit', function(event) {
-                                    if (!form.checkValidity()) {
-                                        event.preventDefault()
-                                        event.stopPropagation()
-                                    }
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+    .forEach(function(form) {
+    form.addEventListener('submit', function(event) {
+    if (!form.checkValidity()) {
+    event.preventDefault()
+    event.stopPropagation()
+    }
 
-                                    form.classList.add('was-validated')
-                                }, false)
-                            })
+    form.classList.add('was-validated')
+    }, false)
+    })
 
 
-                        console.log("Inside checker");
-                        document.querySelectorAll(".changeChecker").forEach(element => {
+    console.log("Inside checker");
+    document.querySelectorAll(".changeChecker").forEach(element => {
 
-                            element.addEventListener("change", () => {
-                                const checkboxes = document.querySelectorAll(".changeChecker");
-                                let checkedBoxes = 0;
-                                checkboxes.forEach(ele => {
-                                    //checkboxes.forEach(box => {
-                                    //    box.setAttribute("required", true);
-                                    //})
-                                    console.log("between checker");
-                                    if (ele.checked) {
-                                        checkedBoxes += 1;
-                                    }
+    element.addEventListener("change", () => {
+    const checkboxes = document.querySelectorAll(".changeChecker");
+    let checkedBoxes = 0;
+    checkboxes.forEach(ele => {
+    //checkboxes.forEach(box => {
+    //    box.setAttribute("required", true);
+    //})
+    console.log("between checker");
+    if (ele.checked) {
+    checkedBoxes += 1;
+    }
 
-                                });
-                                if (checkedBoxes == 0) {
-                                    checkboxes.forEach(box => {
-                                        box.setAttribute("required", true);
-                                    })
-                                }
-                                if (checkedBoxes != 0) {
-                                    checkboxes.forEach(box => {
-                                        box.removeAttribute("required");
-                                    })
-                                }
-                                console.log("CB" = checkedBoxes);
+    });
+    if (checkedBoxes == 0) {
+    checkboxes.forEach(box => {
+    box.setAttribute("required", true);
+    })
+    }
+    if (checkedBoxes != 0) {
+    checkboxes.forEach(box => {
+    box.removeAttribute("required");
+    })
+    }
+    console.log("CB" = checkedBoxes);
 
-                            });
+    });
 
-                        })
-                        console.log("Outside checker");
+    })
+    console.log("Outside checker");
 
-                    })()
-                }
-            })
+    })()
+    }
+    })
 
 
     </script>*@
 
     <script>
-    document.querySelectorAll(".changeChecker").forEach(element => {
+        document.querySelectorAll(".changeChecker").forEach(element => {
 
-        element.addEventListener("change", () => {
-            const checkboxes = document.querySelectorAll(".changeChecker");
-            let checkedBoxes = 0;
-            checkboxes.forEach(ele => {
+            element.addEventListener("change", () => {
+                const checkboxes = document.querySelectorAll(".changeChecker");
+                let checkedBoxes = 0;
+                checkboxes.forEach(ele => {
 
-                if (ele.checked) {
-                    checkedBoxes += 1;
-                }
-
-            });
-            if (checkedBoxes == 0) {
-                checkboxes.forEach(box => {
-                    box.setAttribute("required", true);
-                })
-            }
-            if (checkedBoxes != 0) {
-                checkboxes.forEach(box => {
-                    box.removeAttribute("required");
-                })
-            }
-
-        });
-    })
-
-
-    $("#buttonID").click(function() {
-
-        //alert("inside btn click func");
-        var valid = $("#myForm").valid();
-
-
-
-        if (valid === true) {
-
-            var tt = setInterval(function() {
-
-                $(".loader").show();
-            }, 10);
-            setTimeout(function() {
-                clearInterval(tt);
-                $(".loader").hide();
-            }, 7000);
-            console.log("inside if");
-        }
-        console.log(valid);
-
-    })
-    console.log(valid);
-
-    console.log("hello hi");
-</script>
-
-
-<script>
-
-
-    (function() {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
+                    if (ele.checked) {
+                        checkedBoxes += 1;
                     }
 
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
-
-
-    document.querySelectorAll(".changeChecker").forEach(element => {
-
-        element.addEventListener("change", () => {
-            const checkboxes = document.querySelectorAll(".changeChecker");
-            let checkedBoxes = 0;
-            checkboxes.forEach(ele => {
-
-                if (ele.checked) {
-                    checkedBoxes += 1;
+                });
+                if (checkedBoxes == 0) {
+                    checkboxes.forEach(box => {
+                        box.setAttribute("required", true);
+                    })
+                }
+                if (checkedBoxes != 0) {
+                    checkboxes.forEach(box => {
+                        box.removeAttribute("required");
+                    })
                 }
 
             });
-            if (checkedBoxes == 0) {
-                checkboxes.forEach(box => {
-                    box.setAttribute("required", true);
-                })
-            }
-            if (checkedBoxes != 0) {
-                checkboxes.forEach(box => {
-                    box.removeAttribute("required");
-                })
-            }
+        })
 
-        });
-    })
-</script>
+
+        $("#buttonID").click(function() {
+
+            //alert("inside btn click func");
+            var valid = $("#myForm").valid();
+
+
+
+            if (valid === true) {
+
+                var tt = setInterval(function() {
+
+                    $(".loader").show();
+                }, 10);
+                setTimeout(function() {
+                    clearInterval(tt);
+                    $(".loader").hide();
+                }, 7000);
+                console.log("inside if");
+            }
+            console.log(valid);
+
+        })
+        console.log(valid);
+
+        console.log("hello hi");
+    </script>
+
+
+    <script>
+
+
+        (function() {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        let Dropdowns = document.querySelectorAll("select");
+                        Dropdowns.forEach((item) => {
+                            if (item.value == null || item.value == undefined || item.value == "") {
+                                item.classList.add('dropdownRequired');
+                            }
+                            else {
+                                item.classList.remove('dropdownRequired');
+                            }
+                        })
+
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
+
+        document.querySelectorAll(".changeChecker").forEach(element => {
+
+            element.addEventListener("change", () => {
+                const checkboxes = document.querySelectorAll(".changeChecker");
+                let checkedBoxes = 0;
+                checkboxes.forEach(ele => {
+
+                    if (ele.checked) {
+                        checkedBoxes += 1;
+                    }
+
+                });
+                if (checkedBoxes == 0) {
+                    checkboxes.forEach(box => {
+                        box.setAttribute("required", true);
+                    })
+                }
+                if (checkedBoxes != 0) {
+                    checkboxes.forEach(box => {
+                        box.removeAttribute("required");
+                    })
+                }
+
+            });
+        })
+    </script>
 
 
 

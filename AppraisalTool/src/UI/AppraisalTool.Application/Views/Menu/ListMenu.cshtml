@@ -177,35 +177,7 @@
     </script>
 }
 
-<head>
-    @* <style>
-    .BreadCrump > a:link {
-    color: grey;
-    background-color: transparent;
-    text-decoration: none;
-    }
-
-
-    .BreadCrump > a:visited {
-    color: grey;
-    background-color: transparent;
-    text-decoration: none;
-    }
-
-    .BreadCrump > a:hover {
-    color: black;
-    background-color: transparent;
-    text-decoration: none;
-    }
-
-    .BreadCrump > a:active {
-    color: grey;
-    background-color: transparent;
-    text-decoration: none;
-    }
-    </style>*@
-</head>
-<div class="container">
+<div class="content-wrapper main-panel content-wrapper-red">
     @*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting">Configure Settings</a>  /<a asp-controller="Admin" asp-action="ListMenu">  Menu Management </a></h6>*@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style="border:none">
@@ -216,61 +188,7 @@
         </ol>
     </nav>
 
-
-    @*@if (TempData["AddMenuSuccess"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["AddMenuSuccess"]
-    </div>
-    </div>
-    }
-    @if (TempData["AddMenuFaild"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["AddMenuFaild"]
-    </div>
-    </div>
-    }
-    @if (TempData["DeleteMenuSuccess"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["DeleteuserSuccess"]
-    </div>
-    </div>
-    }
-
-
-    @if (TempData["DeleteMenuFaild"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["DeleteUserFaild"]
-    </div>
-    </div>
-    }
-
-    @if (TempData["editError"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-danger mt-5" role="alert">
-    @TempData["editError"]
-    </div>
-    </div>
-    }
-    @if (TempData["Success"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["Success"]
-    </div>
-    </div>
-    }*@
-
-
-    <div class="container-scroller ">
+    <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="container-scroller ">
         <!-- partial -->
         <div>
             <div class="row">
@@ -278,8 +196,8 @@
                     <div class="card" style="max-width:95%">
                         <div class="card-body">
                             <div class="page-header">
-                                <h3 class="page-title"> Menu </h3>
-                                <nav aria-label="breadcrumb">
+                                <h2 class="page-title" style="margin-left:3%;"> Menu </h2>
+                                <nav aria-label="breadcrumb" style="margin-right:2%;">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item active" aria-current="page">
                                             <div style="align-items:center;">

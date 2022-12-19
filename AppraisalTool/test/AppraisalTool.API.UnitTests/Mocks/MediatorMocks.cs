@@ -15,6 +15,7 @@ using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
 using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
 using AppraisalTool.Application.Features.Users.Query.GetUserById;
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
+using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AppraisalTool.Application.Response;
 using MediatR;
 using Moq;
@@ -50,6 +51,9 @@ namespace AppraisalTool.API.UnitTests.Mocks
             mockMediator.Setup(m => m.Send(It.IsAny<RemoveUserCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<RemoveUserCommandDto>());
             mockMediator.Setup(m => m.Send(It.IsAny<UpdateUserCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<UpdateUserCommandDto>());
             mockMediator.Setup(m => m.Send(It.IsAny<CreateUserCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<CreateUserDto>());
+
+            //apprisalhome page 
+            mockMediator.Setup(m => m.Send(It.IsAny<GetDataQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<IEnumerable<GetDataVM>>());
 
             return mockMediator;
         }

@@ -56,8 +56,13 @@
 
 
 
-<div class="main-panel">
-    <div class="content-wrapper">
+<<<<<<< HEAD
+=======
+<div class="content-wrapper main-panel content-wrapper-red">
+@*    <div class="content-wrapper">
+*@            
+
+
         <div class="page-header">
             <h3 class="page-title">
                 <span class="page-title-icon header-icon text-white m-2 header-icon">
@@ -72,75 +77,35 @@
             </ul>
             </nav>*@
         </div>
+        <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="container">
+            <br />
         <!-- <div  style="margin-left:200px ;" class="container1"> -->
         @* <div class="row ">
         <div class="col-md-4 role-div">
         <h3 style="color: grey; font-family: sans-serif;margin-left: 20px;" class="mt-5 ">My Role</h3>
+>>>>>>> 8b2fe2b32193c9445099711dc8f72620c8685488
 
-        @{
-        if (Model.PrimaryRole!=null && Model.PrimaryRole!="")
-        {
-        <ul>
-
-        <div class=" mt-3">
-
-        <label class="badge badge-pill badge-primary user-roles" for="">1</label>
-        <li class="roles">@Model.PrimaryRole</li>
-
-        </div>
-
-
-        <div class=" mt-3">
-
-        <label class="badge badge-pill badge-gradient-info user-roles" for="">2</label>
-        <li class="roles">@Model.SecondaryRole</li>
-
-
-        </div>
-
-        @{
-        int temp = 2;
-        for (int i = 0; i < Model.Roles.Count(); i++)
-        {
-        temp = temp + int.Parse("1");
-        <div class=" mt-3">
-        <label class="badge badge-pill badge-gradient-danger user-roles" for=""> @temp</label>
-        <li class="roles">@Model.Roles.ElementAt(i)</li>
-        </div>
-
-        }
-
-        }
+<div class="content-wrapper main-panel content-wrapper-red">
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon header-icon text-white m-2 header-icon">
+                <i class="mdi mdi-settings d-flex justify-content-center "></i>
+            </span>Configure Settings
+        </h3>
+        @* <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+        <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+        </li>
         </ul>
-        }
-        }
+        </nav>*@
+    </div>
+    <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="container p-2">
 
-
-
-
-        </div>
-        *@
-
-
+        <br/>
         <div class="col-md-12">
-            <div class="row justify-content-center">
+            <div class="row">
                 <!-- <div class="col-md-1"></div> -->
-<<<<<<< HEAD
-                    @{
-                        foreach (var item in ViewBag.GetMenuCards)
-                        { 
-                            if(item.menuList.menuFlag=="ConfigureSettings"){
-                        <div class="col-md-4 stretch-card grid-margin Dash-Card">
-                            <a asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction" class="Anchor-body">
-                                <div class="card @item.menuList.menuClass card-img-holder text-white Dash-Card">
-                                    <div class="card-body">
-                                        <img src="~/lib/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                                        <h5 class="font-weight-normal mb-3">
-                                                @item.menuList.menuText
-                                                <i class="mdi mdi-chart-line mdi-24px float-right"></i>
-                                        </h5>
-                                        <i class=" @item.menuList.menuIcon"></i>
-=======
                 @{
                     foreach (var item in ViewBag.GetMenuCards)
                     {
@@ -156,7 +121,6 @@
                                                 <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                                             </h4>
                                             <i class=" @item.menuList.menuIcon"></i>
->>>>>>> AT-Dev
 
                                             <!-- <h2 class="mb-5">$ 15,0000</h2>
                                             <h6 class="card-text">Increased by 60%</h6> -->
@@ -188,7 +152,6 @@
 <footer class="footer">
 </footer>
 <!-- partial -->
-</div>
         </div>
 <!-- container-scroller -->
 <!-- plugins:js -->

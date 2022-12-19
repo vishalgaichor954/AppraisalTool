@@ -14,10 +14,23 @@
         display: flex;
     }
 </style>
-<div class="container">
+
+<div class="content-wrapper main-panel content-wrapper-red">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="border:none">
+            <li class="breadcrumb-item">
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a asp-controller="Menu" class="active" asp-action="ListMenu" style=" text-decoration: none;">Menu Management</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Update Menu</li>
+        </ol>
+    </nav>
 
     <div class="col-11">
-        <div class="card">
+        <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Update Menu</h4>
                 <form class="form-sample form-inline needs-validation" asp-action="UpdateMenu" method="post" id="myForm" novalidate>
@@ -53,13 +66,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="MenuFlag" class="col-sm-4 col-form-label">Model<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuFlag" type="text" class="form-control" placeholder="Enter Menu Flag" required>
-
-
+                                    <select asp-for="MenuFlag" class="form-control form-select p-3" asp-items="@ViewBag.flaglist" required>
+                                        <option value="">Select MenuFlag</option>
+                                    </select>
                                     <br />
                                 </div>
                             </div>
@@ -323,6 +336,15 @@
                         event.stopPropagation()
                     }
 
+                    let Dropdowns=document.querySelectorAll("select");
+                    Dropdowns.forEach((item)=>{
+                    if(item.value==null || item.value== undefined || item.value=="" ){
+                       item.classList.add('dropdownRequired');
+                    }
+                    else{
+                            item.classList.remove('dropdownRequired');
+                    }
+                    })
                     form.classList.add('was-validated')
                 }, false)
             })

@@ -20,6 +20,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace AppraisalTool.Persistence.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
@@ -151,6 +152,7 @@ namespace AppraisalTool.Persistence.Repositories
                 userToUpdate.Email = request.Email;
                 userToUpdate.RoleId = (int)request.RoleId;
                 userToUpdate.BranchId = (int)request.BranchId;
+                userToUpdate.JoinDate = request.JoinDate;
                 var Getuserrole = await GetUserById(userToUpdate.Id);
                 
 

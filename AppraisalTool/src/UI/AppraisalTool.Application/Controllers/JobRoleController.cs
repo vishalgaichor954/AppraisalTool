@@ -2,6 +2,7 @@
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.JobRoles;
+using AppraisalTool.App.Services.CustomAttributes;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -13,10 +14,12 @@ namespace AppraisalTool.App.Controllers
         Uri baseAddress = new Uri("https://localhost:5000/api/");
         HttpClient client = new HttpClient();
 
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult AddjobRole()
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult AddjobRole(JobRoles model)
         {
@@ -41,7 +44,9 @@ namespace AppraisalTool.App.Controllers
             return RedirectToAction("ListJobRole");
 
         }
+
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR,REPORTING AUTHORITY,REVIEWING AUTHORITY,EMPLOYEE")]
         public IActionResult ListJobRole()
         {
             client = new HttpClient();
@@ -62,7 +67,9 @@ namespace AppraisalTool.App.Controllers
             }
             return View();
         }
+
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR,REPORTING AUTHORITY,REVIEWING AUTHORITY,EMPLOYEE")]
         public IActionResult UpdateJobRole(int id)
         {
 
@@ -108,6 +115,8 @@ namespace AppraisalTool.App.Controllers
 
 
         }
+
+        [RouteAccess(Roles = "ADMINISTRATOR,REPORTING AUTHORITY,REVIEWING AUTHORITY,EMPLOYEE")]
         public IActionResult DeleteJobRole(int id)
         {
             //User/removeUser?id=9&api-version=1

@@ -10,6 +10,8 @@ namespace AppraisalTool.Application.Features.Users.Command.RemoveUserCommand
     {
         public int Id { get; set; }
         public string Message { get; set; }
-        public bool Succeeded { get; set; } 
+        public bool Succeeded { get; set; }
+
+       
     }
 }

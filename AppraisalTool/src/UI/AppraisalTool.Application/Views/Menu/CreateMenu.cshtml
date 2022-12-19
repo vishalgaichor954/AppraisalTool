@@ -18,9 +18,22 @@
 </div>
 
 <div class="container content-wrapper-Blue">
+<div class="content-wrapper main-panel content-wrapper-red">
 
-    <div class="col-12 p-3">
-        <div class="card p-4 ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="border:none">
+            <li class="breadcrumb-item">
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a asp-controller="Menu" class="active" asp-action="ListMenu" style=" text-decoration: none;">Menu Management</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Create Menu</li>
+        </ol>
+    </nav>
+
+    <div class="col-11">
+        <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Create Menu</h4>
                 <form class="form-sample needs-validation" asp-action="CreateMenu" id="myForm" novalidate>
@@ -52,11 +65,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="MenuFlag" class="col-sm-4 col-form-label">Model<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="MenuFlag" type="text" class="form-control" placeholder="Enter Menu Flag" required />
+                                    <select asp-for="MenuFlag" class="form-control form-select p-3" asp-items="@ViewBag.flaglist" required>
+                                        <option value="">Select MenuFlag</option>
+                                    </select>
+                                    <br />
                                 </div>
                             </div>
                         </div>
@@ -138,7 +154,7 @@
 
 </div>
 
-
+<script src="~/js/DropdownValidator.js"></script>
 <script type="text/javascript">
     function deRequire(elClass) {
         el = document.getElementsByClassName(elClass);
@@ -223,7 +239,6 @@
 
 
 </script>*@
-
 
 
 

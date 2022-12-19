@@ -1,6 +1,7 @@
 ﻿using AppraisalTool.App.Helpers;
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
+using AppraisalTool.App.Services.CustomAttributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -22,6 +23,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult CreateUser()
         {
             string x = HttpContext.Session.GetString("user");
@@ -149,6 +151,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult UpdateUser(int? id)
         {
             string x = HttpContext.Session.GetString("user");
@@ -291,6 +294,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult ListUsers()
         {
             string x = HttpContext.Session.GetString("user");
@@ -315,6 +319,7 @@ namespace AppraisalTool.App.Controllers
             return View();
         }
 
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult DeleteUser(int id)
         {
             //User/removeUser?id=9&api-version=1
@@ -338,6 +343,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult ConfigureSetting()
         {
             string x = HttpContext.Session.GetString("user");
@@ -389,6 +395,7 @@ namespace AppraisalTool.App.Controllers
 
 
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult ListAppraisals()
         {
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");

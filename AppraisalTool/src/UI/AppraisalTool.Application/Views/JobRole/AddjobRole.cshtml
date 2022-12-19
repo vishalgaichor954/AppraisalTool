@@ -19,10 +19,22 @@
     }
 
 </style>
-<div class="container">
+<div class="content-wrapper main-panel content-wrapper-red">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="border:none">
+            <li class="breadcrumb-item">
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a asp-controller="JobRole" class="active" asp-action="ListJobRole" style=" text-decoration: none;">Job Role Management</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Create Job Role</li>
+        </ol>
+    </nav>
 
     <div class="col-11">
-        <div class="card">
+        <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Add Job Role</h4>
                 <form class="form-sample needs-validation" asp-action="AddjobRole" id="myForm" novalidate>
