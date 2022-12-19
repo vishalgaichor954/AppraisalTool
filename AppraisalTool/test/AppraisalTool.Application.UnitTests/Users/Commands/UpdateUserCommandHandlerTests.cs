@@ -37,7 +37,7 @@ namespace AppraisalTool.Application.UnitTests.Users.Commands
             _mapper = configurationProvider.CreateMapper();
             _logger = new Mock<ILogger<UpdateUserCommandHandler>>();
             _authService = new Mock<IAuthenticationService>();
-            _roleRepository = new Mock<IRoleRepository>();
+            _roleRepository = RoleRepositoryMocks.GetAllRole();
         }
 
         [Fact]

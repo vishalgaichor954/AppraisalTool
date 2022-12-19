@@ -30,6 +30,7 @@ namespace AppraisalTool.Application.UnitTests.Users.Commands
 
         public CreateUserCommandHandlerTests()
         {
+
             _userRepository = UserRepositoryMocks.UserRepository();
             var configurationProvider = new MapperConfiguration(cfg =>
             {
@@ -38,16 +39,33 @@ namespace AppraisalTool.Application.UnitTests.Users.Commands
 
             _mapper = configurationProvider.CreateMapper();
             _logger = new Mock<ILogger<CreateUserCommandHandler>>();
-            _emailservice = new Mock<IEmailService>();
+            _emailservice = EmailServiceMocks.Emailservice();
             _authService = new Mock<IAuthenticationService>();
-            _roleRepository = new Mock<IRoleRepository>();
+            _roleRepository = RoleRepositoryMocks.GetAllRole();
         }
         [Fact]
         public async Task Create_User()
         {
             var handler = new CreateUserCommandHandler(_authService.Object,_userRepository.Object, _logger.Object, _mapper,_emailservice.Object,_roleRepository.Object);
-            var result = await handler.Handle(new CreateUserCommand()
-            {FirstName = "test",LastName = "test",Email = "test",Password = "test",JoinDate = DateTime.Now,LastAppraisalDate = DateTime.Now,RoleId = 1,BranchId = 1,PrimaryRole=1,SecondaryRole=1,RevaId=1,RepaId=1,AddedBy=1 }, CancellationToken.None);
+            var command = new CreateUserCommand
+            {
+                
+                FirstName = "test",
+                LastName = "test",
+                Email = "test",
+                Password = "test",
+                JoinDate = DateTime.Now,
+                LastAppraisalDate = DateTime.Now,
+                RoleId = 1,
+                BranchId = 1,
+                PrimaryRole = 1,
+                SecondaryRole = 1,
+                RevaId = 1,
+                RepaId = 1,
+                AddedBy = 1
+            };
+            var result = await handler.Handle(command, CancellationToken.None);
+            //{FirstName = "test",LastName = "test",Email = "test",Password = "test",JoinDate = DateTime.Now,LastAppraisalDate = DateTime.Now,RoleId = 1,BranchId = 1,PrimaryRole=1,SecondaryRole=1,RevaId=1,RepaId=1,AddedBy=1 }, CancellationToken.None);
 
             result.ShouldBeOfType<Response<CreateUserDto>>();
             result.Data.ShouldBeOfType<CreateUserDto>();
