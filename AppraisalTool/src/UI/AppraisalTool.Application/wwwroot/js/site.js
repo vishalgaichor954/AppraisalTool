@@ -23,6 +23,10 @@
 
                 let email = document.getElementById("exampleInputEmail1");
                 let EMAILpattern = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})*$/;
+                if (email.value == null || email.value == undefined || email.value == "") {
+
+                    email.classList.add('is-invalid');
+                }
                 if (!EMAILpattern.test(email.value)) {
                     form.classList.remove('was-validated')
                     email.classList.remove('is-valid');
