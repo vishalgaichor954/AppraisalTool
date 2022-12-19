@@ -7,6 +7,7 @@ using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalRe
 using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AppraisalTool.Application.Response;
+using AppraisalTool.Domain.Common;
 using AppraisalTool.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -35,17 +36,18 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
             _mockMediator = MediatorMocks.GetMediator();
             _userRepository= new Mock<IUserRepository>();
         }
+        #region Self Appraisal Process
         [Fact]
         public async Task Get_Data_ByYear()
         {
             var controller = new AppraisalHomeController(_mockMediator.Object,_mockLogger.Object,_userRepository.Object);
             var result = await controller.GetDataByYear(1, 5);
             
-            result.ShouldBeOfType<OkObjectResult>();
-            var okObjectResult = result as OkObjectResult;
+            result.ShouldBeOfType<OkResult>();
+            var okObjectResult = result as OkResult;
             okObjectResult.StatusCode.ShouldBe(200);
-            okObjectResult.Value.ShouldNotBeNull();
-            okObjectResult.Value.ShouldBeOfType<Response<IEnumerable<GetDataVM>>>();
+            okObjectResult.ShouldNotBeNull();
+            okObjectResult.ShouldBeOfType<Response<IEnumerable<GetDataVM>>>();
 
             
         }
@@ -153,12 +155,28 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
         public async Task Request_ToEdit()
         {
             var controller = new AppraisalHomeController(_mockMediator.Object, _mockLogger.Object, _userRepository.Object);
-            var result = await controller.RequestToEdit(2, 1);
+            var result = await controller.RequestToEdit(7, 1);
             result.ShouldBeOfType<OkObjectResult>();
             var okObjectResult = result as OkObjectResult;
             okObjectResult.StatusCode.ShouldBe(200);
             result.ShouldNotBeNull();
         }
+        #endregion
+
+        #region Reportee Appraisal Process
+        public async Task Get_Reportee_Appraisal_ByRepAuthority()
+        {
+            var controller = new AppraisalHomeController(_mockMediator.Object, _mockLogger.Object, _userRepository.Object);
+            var result = await controller.GetReporteeAppraisalByRepAuthority(5);
+            result.ShouldBeOfType<OkResult>();
+            var okObjectResult = result as OkResult;
+            okObjectResult.StatusCode.ShouldBe(200);
+            okObjectResult.ShouldNotBeNull();
+            okObjectResult.ShouldBeOfType<Response<List<ReporteeAppraisalListVm>>>();
+            
+        }
+
+        #endregion
 
     }
 }

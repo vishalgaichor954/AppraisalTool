@@ -14,9 +14,11 @@ using AppraisalTool.Application.Features.Events.Queries.GetEventsExport;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsList;
 using AppraisalTool.Application.Features.Metrics.Queries.GetAllMetricsList;
 using AppraisalTool.Application.Features.Orders.GetOrdersForMonth;
+using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetReporteeAppraisalsByRevAuthority;
 using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AppraisalTool.Application.Response;
+using AppraisalTool.Domain.Common;
 using AppraisalTool.Domain.Entities;
 using MediatR;
 using Moq;
@@ -57,6 +59,7 @@ namespace AppraisalTool.API.UnitTests.Mocks
             mockMediator.Setup(m => m.Send(It.IsAny<AddAppraisalResultCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<string>());
             mockMediator.Setup(m => m.Send(It.IsAny<UpdateAppraisalResultCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<string>());
 
+            mockMediator.Setup(m => m.Send(It.IsAny<GetReporteeAppraisalsByRepAuthorityQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<List<ReporteeAppraisalListVm>>());
 
             return mockMediator;
         }

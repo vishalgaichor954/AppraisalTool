@@ -1,5 +1,6 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
+using AppraisalTool.Domain.Common;
 using AppraisalTool.Domain.Entities;
 using Moq;
 using System;
@@ -77,6 +78,26 @@ namespace AppraisalTool.Application.UnitTests.Mocks
 
                 }
             };
+            var reporteeAppraisal=new List<ReporteeAppraisalListVm>
+            {
+                new ReporteeAppraisalListVm
+                {
+                    StartDate=DateTime.Now,
+                    EndDate=DateTime.Now,
+                    AppraisalId=96,
+                    EmployeeId=5,
+                    FirstName="HariKrishanan",
+                    LastName="Nair",
+                    RevAuthorityId=2,
+                    RevaName="abhishek",
+                    AppraisalStatusId=2,
+                    AppraisalStatus="Pending At Reporting Authority",
+                    FinancialStartYear=2019,
+                    FinancialEndYear=2020,
+                    Status=2,
+
+                }
+            }
             var mockSelfAppraisalRepository = new Mock<ISelfAppraisalRepository>();
             mockSelfAppraisalRepository.Setup(repo => repo.GetDataById(1, 2)).ReturnsAsync(data.Where(x => x.Id == 1 && x.FinancialYearId == 2).AsQueryable());
             mockSelfAppraisalRepository.Setup(repo => repo.AddAppraisal(It.IsAny<Appraisal>())).ReturnsAsync(
