@@ -430,13 +430,14 @@ namespace AppraisalTool.App.Controllers
                 var responseData = Appraisal.Content.ReadAsStringAsync().Result;
                 var res = JsonConvert.DeserializeObject<Response>(responseData);
                 AppraisalResponseVm appraisalResponseVm = JsonConvert.DeserializeObject<AppraisalResponseVm>(JsonConvert.SerializeObject(res.Data));
-                if (appraisalResponseVm.StatusId == 2)
+                if (appraisalResponseVm.StatusId == 4)
                 {
-                    ViewBag.ReadOnlyForm = false;
+                    ViewBag.ReadOnlyForm = true;
+                    
                 }
                 else
                 {
-                    ViewBag.ReadOnlyForm = true;
+                    ViewBag.ReadOnlyForm = false;
                 }
                 
                 ViewBag.appraisalStatus = appraisalResponseVm.StatusId;

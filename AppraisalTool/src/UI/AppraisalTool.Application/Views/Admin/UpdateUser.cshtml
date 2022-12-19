@@ -139,7 +139,7 @@ Toast.fire({
                             <div class="form-group row">
                                 <label asp-for="RoleId" class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="RoleId" class="form-control p-3 form-select" asp-items="@ViewBag.Rolelist" required>
+                                    <select asp-for="RoleId" class="form-control p-3 form-select" asp-items="@ViewBag.Rolelist" required >
                                         <option value="">Select Role</option>
                                     </select>
                                     @*<span asp-validation-for="RoleId" class="text-danger mx-1 small"></span>*@
