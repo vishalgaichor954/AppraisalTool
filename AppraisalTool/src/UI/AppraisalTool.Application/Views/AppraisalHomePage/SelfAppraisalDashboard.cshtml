@@ -179,8 +179,8 @@
                             <li class="breadcrumb-item active" aria-current="page">Self Appraisal Dashboard</li>
                         </ol>
                     </nav>
-                   
-                   @* <input type="button" value="Back" class=" Button mb-4" onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />*@
+
+                    @* <input type="button" value="Back" class=" Button mb-4" onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />*@
                     <div style="  background-color: white;border-radius: 0.5rem;" class="container">
                         <!-- <h2 >Appraisal Home</h2> -->
                         <div class="d-flex justify-content-between align-items-center">
@@ -210,9 +210,21 @@
                                     }
 
                                 }
+                                @*<div class="col-md-4"><a href=@GradeReportUrl id="GradeReportBtn" class="btn btn-icon-text blueThemeA d-flex"><i class="mdi mdi-file-check btn-icon-prepend"></i>View Grade Letter</a></div>*@
 
-                                <div class="col-md-4"><a href=@GradeReportUrl id="GradeReportBtn" class="btn btn-icon-text blueThemeA d-flex"><i class="mdi mdi-file-check btn-icon-prepend"></i>View Grade Letter</a></div>
+                                @if (ViewBag.AppraisalStatus != "Approved")
+                                {
+                                    <div class="col-md-4"><a href=@GradeReportUrl id="GradeReportBtn" href="#" class="btn btn-icon-text blueThemeA d-flex"><i class="mdi mdi-file-check btn-icon-prepend"></i>View Grade Letter</a></div>
+                                }
+                                else
+                                {
 
+                                    <form method="post" action="/AppraisalHomePage/GradeReport" class="p-0 m-0" style="display:inline;width:25%">
+                                        <input type="hidden" name="Fid" value="@ViewBag.Fid" />
+                                        <input type="hidden" name="Fyear" value="@ViewBag.fyear" />
+                                        <button type="submit" post class="btn btn-icon-text blueThemeA d-flex"><i class="mdi mdi-file-check btn-icon-prepend"></i>View Grade Letter</button>
+                                    </form>
+                                }
 
 
                             </div>
@@ -222,7 +234,7 @@
                             <div class="row pt-2 mb-4  pb-2 p-2" style=" width:100%; border: 1px solid #1746A2; border-radius: 0.3rem;">
                                 <div class="col-md-11">
                                     <div class=" row pt-2 mb-4  pb-2 p-2" role="alert">
-                                      
+
                                         <div class="col-md-4">
 
                                             <div class="row">
@@ -313,7 +325,11 @@
                                 </div>
                                 <div class="col-md-1">
                                     <div class=" mt-5">
-                                        <a href="/AppraisalHomePage/AddSelfAppraisal?Fid=@ViewBag.Fid" style="border-radius:50%" class="btn proceedBtn   btn-sm mt-2"><span>></span></a>
+                                        <form method="post" action="/AppraisalHomePage/AddSelfAppraisalPost" class="m-0 p-0" style="display:inline;width:25%;">
+                                            <input type="hidden" name="fid" value="@ViewBag.Fid" />
+                                            <button type="submit" style="border-radius:50%" class="btn proceedBtn   btn-sm mt-2"><span>></span></button>
+                                        </form>
+@*                                        <a href="/AppraisalHomePage/AddSelfAppraisal?Fid=@ViewBag.Fid" style="border-radius:50%" class="btn proceedBtn   btn-sm mt-2"><span>></span></a>*@
                                     </div>
 
                                 </div>
@@ -326,116 +342,6 @@
                         <!-- partial -->
                     </div>
 
-                    @*  <div style="background-color:#1746A2;margin-top: 2rem;" class="row justify-content-center mt-5">
-                    </div>
-                    <div class="LightBlueTheme mb-3" style="display:flex;align-items: center;justify-content: center;">
-
-                    <div class=" row mt-4 mb-4  " role="alert" style="width:96%">
-                    <div class="col-md-5"> <p class="DarkBlueP">Your final grade for financial year @ViewBag.fyear  </p> </div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-4"><button  onclick="location.href='@Url.Action("GradeReport", "AppraisalHomePage")'" class="btn downloadbtn blueTheme"><i class="mdi mdi-file-check btn-icon-prepend"></i>Download Grade Letter</button></div>
-
-                    </div>
-                    </div>
-                    <div style="display:flex;align-items: center;justify-content: center;">
-                    <div class="row pt-2 mb-4  pb-2 p-2" style=" width:100%; border: 1px solid #1746A2; border-radius: 0.3rem;">
-                    <div class="col-md-11">
-                    <div class=" row pt-2 mb-4  pb-2 p-2" role="alert">
-                    <div class="col-md-4">
-
-                    <div class="row">
-                    <div class="col-md-2 Date-Badge">
-                    <label style="font-size:1rem ;" class="badge badge-pill  user-roles blueTheme " for=""><i class="mdi mdi-calendar-blank"></i></label>
-                    </div>
-                    <div class="col-md-10">
-                    <div class="row d-flex row date-p">
-                    <span style="display: inline-block;">Date</span>
-
-                    <small asp-for="Date">@ViewBag.Date </small>
-
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <div class="col-md-4">
-                    <div class="row">
-                    <div class="col-md-2 Date-Badge">
-                    <label style="font-size:1rem ;" class="badge badge-pill user-roles  blueTheme" for=""><i class=" mdi mdi-account-check"></i></label>
-                    </div>
-                    <div class="col-md-10">
-                    <div class="row d-flex justify-content-center">
-                    <span style="display: inline-block;">Reporting Authority</span>
-                    </div>
-                    <div class="row date-p ">
-                    <asp-for ="ReportingAuthority">@ViewBag.ReportingAuthorityFirstName  @ViewBag.ReportingAuthorityLastName
-
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <div class="col-md-4">
-                    <div class="col-md-10 row date-p">
-                    <div class="row d-flex justify-content-center">
-                    <span style="display: inline-block;">Apprasial Status</span>
-                    </div>
-
-                    <small style="border-radius: 0.5rem; font-size:13px ; background-color: rgb(245, 177, 138);" class="pt-1 pb-1"><asp-for ="AppraisalStatus">@ViewBag.AppraisalStatus</small>
-
-                    </div>
-                    </div>
-                    <div class="col-md-4 mt-4">
-                    <div class="row">
-                    <div class="col-md-2 Date-Badge">
-                    <label style="font-size:1rem ;" class="badge badge-pill user-roles  blueTheme" for=""><i class=" mdi mdi-account-box-outline"></i></label>
-                    </div>
-                    <div class="col-md-10">
-                    <div class="row d-flex row date-p">
-                    <span style="display: inline-block;">Primary Role</span>
-
-
-                    <asp-for ="Role">  @ViewBag.Role
-
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-
-                    <div class="col-md-4 mt-4">
-                    <div class="row">
-                    <div class="col-md-2 Date-Badge">
-                    <label style="font-size:1rem ;" class="badge badge-pill user-roles  blueTheme" for=""><i class=" mdi mdi-account-circle"></i></label>
-                    </div>
-                    <div class="col-md-10">
-                    <div class="row d-flex justify-content-center">
-                    <span style="display: inline-block;">Reviewing Authority</span>
-                    </div>
-                    <div class="row date-p ">
-                    <asp-for ="ReviewingAuthority">@ViewBag.ReviewingAuthorityFirstName  @ViewBag.ReviewingAuthorityLastName
-
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    <div class="col-md-4 mt-4">
-                    <div class="col-md-10">
-                    <div class="row d-flex justify-content-center">
-                    <span style="display: inline-block;"> </span>
-                    </div>
-                    <div class="row date-p ">
-                    </div>
-                    </div>
-                    </div>
-
-                    </div>
-                    </div>
-                    <div class="col-md-1">
-                    <div class=" mt-5">
-                    <a href="/AppraisalHomePage/AddSelfAppraisal?Fid=@ViewBag.Fid" style="border-radius:50%" class="btn proceedBtn   btn-sm mt-2"><span>></span></a>
-                    </div>
-
-                    </div>
-                    </div>
-                    </div>*@
 
 
 
@@ -451,28 +357,29 @@
                     await Html.RenderPartialAsync("_ValidationScriptsPartial");
                 }
             }
-              <script type="text/javascript">
-        
-    
-    let btn_element = document.getElementById("GradeReportBtn");
-      btn_element.addEventListener("click", () => {
-         
-          
-        let check= document.getElementById("GradeReportBtn").getAttribute("href");
-      
-          console.log(check);
-        if(check=="#"){
-            Swal.fire(
-           'Unable to view',
-             'You can view Grade Report only when your appraisal is Approved ',
-              'error'
-)
-        }
-      })
-    
-    
-    </script>
-                <!-- <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+            <script type="text/javascript">
+
+
+
+                let btn_element = document.getElementById("GradeReportBtn");
+                btn_element.addEventListener("click", () => {
+
+
+                    let check = document.getElementById("GradeReportBtn").getAttribute("href");
+
+                    console.log(check);
+                    if (check == "#") {
+                        Swal.fire(
+                            'Unable to view',
+                            'You can view Grade Report only when your appraisal is Approved ',
+                            'error'
+                        )
+                    }
+                })
+
+
+            </script>
+            <!-- <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
 
             <script type="text/javascript">
 

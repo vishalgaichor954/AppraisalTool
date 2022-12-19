@@ -454,6 +454,11 @@
                         </fieldset>
                           <div class="form-group text-center">
                             <input type="hidden" name="job" id="job" />
+                            @{
+                                if (ViewBag.appraisalStatus!=4)
+                                {
+                                    
+                              
                             <div class="row">
                                 <div class="col-3"></div>
                                 <div class="col-3"><input id="submit" type="submit" value="Proceed" class="   btn btn-block AddAppraisalBtn btn-lg " /></div>
@@ -463,6 +468,8 @@
                                 @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
                                 <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
                             </div>
+                              }
+                            }
 
                         </div>
                     </form>
@@ -538,7 +545,22 @@
     })()
 </script>
 
+    @if (ViewBag.ReadOnlyForm == true)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            const inputs = document.querySelectorAll('select');
+            const comments = document.querySelectorAll('textarea');
+            inputs.forEach(input => {
+                input.setAttribute("disabled", "true");
+            });
+            comments.forEach(input => {
+                input.readOnly = true;
+            })
 
+        });
+    </script>
+}
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

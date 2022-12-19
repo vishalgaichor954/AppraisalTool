@@ -152,7 +152,7 @@ namespace AppraisalTool.Persistence.Repositories
                 userToUpdate.Email = request.Email;
                 userToUpdate.RoleId = (int)request.RoleId;
                 userToUpdate.BranchId = (int)request.BranchId;
-                userToUpdate.JoinDate= request.JoinDate;
+                userToUpdate.JoinDate = request.JoinDate;
                 var Getuserrole = await GetUserById(userToUpdate.Id);
                 
 

@@ -20,9 +20,9 @@
 
 <style>
     .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
-    color: #333;
-    margin-right: 15px;
-}
+        color: #333;
+        margin-right: 15px;
+    }
 </style>
 
 @if (TempData["editError"] != null)
@@ -198,19 +198,19 @@
         }
     </style>
 </head>
-<div class="container">
+<div class="content-wrapper main-panel content-wrapper-red">
     @*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting">Configure Settings</a>  /<a asp-controller="FinancialYear" asp-action="ListFinancialYear">Financial Year Management </a></h6>*@
 
- <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style="border:none">
             <li class="breadcrumb-item">
-                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting"  style=" text-decoration: none;">Configure Settings</a>
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Job Role Management</li>
         </ol>
     </nav>
 
-    <div class="container-scroller ">
+    <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="container-scroller ">
         <!-- partial -->
         <div>
             <div class="row">
@@ -218,12 +218,12 @@
                     <div class="card" style="max-width:95%">
                         <div class="card-body">
                             <div class="page-header">
-@*                                <h3 class="page-title"> Menu </h3>*@  
-                              <nav aria-label="breadcrumb">
+                                <h3 class="page-title" style="margin-left:3%;">Job Profiles</h3>
+                                <nav aria-label="breadcrumb" style="margin-right:2%;">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item active" aria-current="page">
                                             <div style="align-items:center;">
-                                                <a class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" asp-action="AddjobRole">Add New JobRole</a>
+                                                <a class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" asp-action="AddjobRole">Create Job Role</a>
                                             </div>
                                         </li>
                                     </ol>
@@ -238,7 +238,7 @@
                                             <th></th>
                                             <th>  </th>
                                             <th></th>
-                                             <th></th>
+                                            <th></th>
                                             <th>  </th>
                                             <th> </th>
                                             <th>  </th>
@@ -256,9 +256,9 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                   <td>  </td>
-                                                   <td>  </td>
-                                                     <td>  </td>
+                                                    <td>  </td>
+                                                    <td>  </td>
+                                                    <td>  </td>
                                                     <td>  </td>
                                                     <td class="text-center">
                                                         <a asp-action="UpdateJobRole" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
@@ -290,19 +290,19 @@
     $(document).ready(function () {
         $('#table').DataTable({
             'columnDefs': [
-                
-                {
-                'targets': [9], // column index (start from 0)
-                 
-                'orderable': false,
 
-                 
-               
-                // set orderable false for selected columns
-            },
-           
-             { visible: false, targets: [1,2,3,4,5,6,7,8] },
-            
+                {
+                    'targets': [9], // column index (start from 0)
+
+                    'orderable': false,
+
+
+
+                    // set orderable false for selected columns
+                },
+
+                { visible: false, targets: [1, 2, 3, 4, 5, 6, 7, 8] },
+
             ],
             dom: 'lBfrtip',
             responsive: true,

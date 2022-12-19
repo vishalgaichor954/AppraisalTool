@@ -1,6 +1,7 @@
 ﻿using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetReporteeAppraisalsByRevAuthority;
 using AppraisalTool.Application.Response;
+using AppraisalTool.Application.UnitTests.Mocks;
 using AppraisalTool.Domain.Common;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -22,7 +23,7 @@ namespace AppraisalTool.Application.UnitTests.ReporteeAppraisal.GetReporteeByRep
 
         public GetReporteeAppraisalsByRepAuthorityQueryHandlerTest()
         {
-            _selfAppraisalRepository = new Mock<ISelfAppraisalRepository>();
+            _selfAppraisalRepository = SelfAppraisalRepositoryMocks.GetSelfAppraisalRepositoryMocks();
             _logger = new Mock<ILogger<GetReporteeAppraisalsByRepAuthorityQueryHandler>>();
 
         }

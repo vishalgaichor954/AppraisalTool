@@ -242,7 +242,7 @@
         }
     </style>
 </head>
-<div class="container">
+<div class="content-wrapper main-panel content-wrapper-red">
     @*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting">Configure Settings</a>  /<a asp-controller="FinancialYear" asp-action="ListFinancialYear">Financial Year Management </a></h6>*@
 
     <nav aria-label="breadcrumb">
@@ -254,7 +254,8 @@
         </ol>
     </nav>
 
-    <div class="container-scroller ">
+
+    <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="container-scroller ">
         <!-- partial -->
         <div>
             <div class="row">
@@ -262,12 +263,12 @@
                     <div class="card" style="max-width:95%">
                         <div class="card-body">
                             <div class="page-header">
-                                @*                                <h3 class="page-title"> Menu </h3>*@
-                                <nav aria-label="breadcrumb">
+                                <h3 class="page-title" style="margin-left:3%;"> Financial Years</h3>
+                                <nav aria-label="breadcrumb" style="margin-right:2%;">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item active" aria-current="page">
                                             <div style="align-items:center;">
-                                                <a class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" asp-action="AddFinancialYear">Add New Year</a>
+                                                <a class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" asp-action="AddFinancialYear">Create New Year</a>
                                             </div>
                                         </li>
                                     </ol>

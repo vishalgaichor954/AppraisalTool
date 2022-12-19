@@ -78,7 +78,7 @@ namespace AppraisalTool.Application.UnitTests.Mocks
 
                 }
             };
-            var reporteeAppraisal=new List<ReporteeAppraisalListVm>
+            var reporteeAppraisal = new List<ReporteeAppraisalListVm>
             {
                 new ReporteeAppraisalListVm
                 {
@@ -97,7 +97,7 @@ namespace AppraisalTool.Application.UnitTests.Mocks
                     Status=2,
 
                 }
-            }
+            };
             var mockSelfAppraisalRepository = new Mock<ISelfAppraisalRepository>();
             mockSelfAppraisalRepository.Setup(repo => repo.GetDataById(1, 2)).ReturnsAsync(data.Where(x => x.Id == 1 && x.FinancialYearId == 2).AsQueryable());
             mockSelfAppraisalRepository.Setup(repo => repo.AddAppraisal(It.IsAny<Appraisal>())).ReturnsAsync(
@@ -107,6 +107,7 @@ namespace AppraisalTool.Application.UnitTests.Mocks
                     return appraisal;
                 }
             );
+            mockSelfAppraisalRepository.Setup(repo => repo.GetReporteeAppraisalsByRepAuthority(5)).ReturnsAsync(reporteeAppraisal);
             return mockSelfAppraisalRepository;
         }
     }

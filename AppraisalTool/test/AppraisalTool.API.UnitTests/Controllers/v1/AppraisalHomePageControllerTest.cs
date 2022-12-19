@@ -43,8 +43,8 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
             var controller = new AppraisalHomeController(_mockMediator.Object,_mockLogger.Object,_userRepository.Object);
             var result = await controller.GetDataByYear(1, 5);
             
-            result.ShouldBeOfType<OkResult>();
-            var okObjectResult = result as OkResult;
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
             okObjectResult.StatusCode.ShouldBe(200);
             okObjectResult.ShouldNotBeNull();
             okObjectResult.ShouldBeOfType<Response<IEnumerable<GetDataVM>>>();
@@ -163,16 +163,17 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
         }
         #endregion
 
+        [Fact]
         #region Reportee Appraisal Process
         public async Task Get_Reportee_Appraisal_ByRepAuthority()
         {
             var controller = new AppraisalHomeController(_mockMediator.Object, _mockLogger.Object, _userRepository.Object);
             var result = await controller.GetReporteeAppraisalByRepAuthority(5);
-            result.ShouldBeOfType<OkResult>();
-            var okObjectResult = result as OkResult;
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
             okObjectResult.StatusCode.ShouldBe(200);
-            okObjectResult.ShouldNotBeNull();
-            okObjectResult.ShouldBeOfType<Response<List<ReporteeAppraisalListVm>>>();
+            okObjectResult.Value.ShouldNotBeNull();
+            okObjectResult.Value.ShouldBeOfType<Response<List<ReporteeAppraisalListVm>>>();
             
         }
 

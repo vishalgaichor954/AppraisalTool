@@ -18,6 +18,8 @@ using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateApprais
 using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByFidAndUserId;
 using AppraisalTool.Application.Models.AppraisalTool;
 using AppraisalTool.Application.Contracts.Persistence;
+using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalById;
+using AppraisalTool.Application.Response;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -237,6 +239,16 @@ namespace AppraisalTool.Api.Controllers.v1
             var dtos = await _userRepository.GetAppraisalByFidAndUserId(fId, userId);
             _logger.LogInformation("RequestToEdit Completed");
             return Ok(dtos);
+        }
+
+        [HttpGet("GetAppraisalById")]
+        public async Task<ActionResult> GetAppraisalById(int Id)
+        {
+
+            _logger.LogInformation("GetAppraisalById Initiated");
+            Response<Appraisal> appraisal = await _mediator.Send(new GetAppraisalByIdQuery(){ Id = Id });
+            _logger.LogInformation("GetAppraisalById Completed");
+            return Ok(appraisal);
         }
 
 

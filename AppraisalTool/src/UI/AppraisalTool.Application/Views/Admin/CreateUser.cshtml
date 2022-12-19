@@ -11,13 +11,25 @@
         font-size : 14px;
     }
 </style>
-<div class="container content-wrapper-Blue">
+<div class="content-wrapper main-panel content-wrapper-red">
 
-    <div class="col-11 p-3">
-        <div class="card p-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="border:none">
+            <li class="breadcrumb-item">
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a asp-controller="Admin" class="active" asp-action="ListUsers" style=" text-decoration: none;">User Management</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Create User</li>
+        </ol>
+    </nav>
+
+    <div class="col-11">
+        <div  style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Create User</h4>
-                <form class="form-sample needs-validation" asp-action="CreateUser" id="formABC" novalidate>
+                <form class="form-sample needs-validation" asp-action="CreateUser" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
@@ -78,7 +90,7 @@
                             <div class="form-group row">
                                 <label asp-for="RoleId" class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="RoleId" class="form-control" asp-items="@ViewBag.Rolelist" required>
+                                    <select asp-for="RoleId" class="form-control p-3 form-select" asp-items="@ViewBag.Rolelist"  required>
                                         <option value="">Select Role</option>
                                     </select>
                                     <br />
@@ -92,7 +104,7 @@
                             <div class="form-group row">
                                 <label asp-for="BranchId" class="col-sm-4 col-form-label">Branch<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="BranchId" class="form-control" asp-items="@ViewBag.branchlist" required>
+                                    <select asp-for="BranchId" class="form-control p-3 form-select" asp-items="@ViewBag.branchlist"  required>
                                         <option value="">Select Branch</option>
                                     </select>
                                     <br />
@@ -103,7 +115,7 @@
                             <div class="form-group row">
                                 <label asp-for="PrimaryRole" class="col-sm-4 col-form-label">Primary Job Profile<span style="color: Red">&nbsp;*</span></label></label>
                                 <div class="col-sm-8">
-                                    <select asp-for="PrimaryRole" class="form-control" asp-items="@ViewBag.JobProfileRolelist" required>
+                                    <select asp-for="PrimaryRole" class="form-control p-3 form-select" asp-items="@ViewBag.JobProfileRolelist"  required>
                                         <option value="">Select Primary Job Profile</option>
                                     </select>
                                     <br />
@@ -119,7 +131,7 @@
                                 </label>
 
                                 <div asp-for="SecondaryRole" class="col-sm-8">
-                                    <select asp-for="SecondaryRole" asp-items="@ViewBag.JobProfileRolelist" class="form-control" required>
+                                    <select asp-for="SecondaryRole" asp-items="@ViewBag.JobProfileRolelist" class="form-control p-3 form-select"  required>
                                         <option value="">Select Secondary Job Profile</option>
                                     </select>
                                     <br />
@@ -178,7 +190,7 @@
     </div>
 
 </div>
-
+<script src="~/js/DropdownValidator.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <script language="javascript">
@@ -210,6 +222,15 @@
                         event.preventDefault()
                         event.stopPropagation()
                     }
+                    let Dropdowns=document.querySelectorAll("select");
+                    Dropdowns.forEach((item)=>{
+                    if(item.value==null || item.value== undefined || item.value=="" ){
+                       item.classList.add('dropdownRequired');
+                    }
+                    else{
+                            item.classList.remove('dropdownRequired');
+                    }
+                    })
                     
 
                     

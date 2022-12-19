@@ -16,27 +16,24 @@
 </style>
 
 
-<div class="container">
-   @* @if (TempData["editError"] != null)
-    {
-        <div class="container">
-            <div class="alert alert-danger mt-5" role="alert">
-                @TempData["editError"]
-            </div>
-        </div>
-    }*@
-   @* @if (TempData["Success"] != null)
-    {
-        <div class="container">
-            <div class="alert alert-success mt-5" role="alert">
-                @TempData["Success"]
-            </div>
-        </div>
-    }*@
+<div class="content-wrapper main-panel content-wrapper-red">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="border:none">
+            <li class="breadcrumb-item">
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a asp-controller="Authority" class="active" asp-action="GetAllAuthority" style=" text-decoration: none;">Assign Authority</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Assign</li>
+        </ol>
+    </nav>
+
     <div class="col-11">
-        <div class="card">
+        <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
-                <h4 class="card-title"> Assign Authority</h4>
+                <h4 class="card-title" style="margin-left:3%;"> Assign Authority</h4>
                 <form class="form-sample needs-validation" asp-action="AssignAuthority" method="post" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
@@ -59,11 +56,6 @@
                             </div>
                         </div>*@
                     </div>
-                    
-                  
-
-                    
-                  
                      <div class="row">
                           <div class="col-md-6">
                              <div class="form-group row">
@@ -71,7 +63,7 @@
                                     Reporting Authority<span style="color: Red">&nbsp;*</span></label>
                                 
                                 <div asp-for="RepaId" class="col-sm-8">
-                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control">
+                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control p-3 form-select" required>
                                         <option value="">Select Reporting Authority </option>
                                     </select>
                                     <span asp-validation-for="RepaId" class="text-danger mx-1 small"></span>
@@ -84,7 +76,7 @@
                                     Reviewing Authority<span style="color: Red">&nbsp;*</span></label>
                                 
                                 <div asp-for="RevaId" class="col-sm-8">
-                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control" required>
+                                    <select asp-for="RevaId" asp-items="@ViewBag.ReviewingList" class="form-control p-3 form-select" required>
                                         <option value="">Select Reviewing Authority</option>
                                     </select>
                                     <span asp-validation-for="RevaId" class="text-danger mx-1 small"></span>

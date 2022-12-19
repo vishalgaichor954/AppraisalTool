@@ -345,10 +345,10 @@
     <div class="col-11">
         <div class="card content-wrapper-red w-100 h-100">
             <div class="card-body">
-                <input type="button" value="Back" class=" Button mb-4" onclick="history.back()" />
 
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-between">
 
+                    <input type="button" value="Back" class=" Button mb-4" onclick="history.back()" />
 
                     <button id="btnSubmit" value="Download" class="btn btn-icon-text GradeReportDownloadBtn d-flex"> <i class="mdi mdi-file-check btn-icon-prepend"></i>Download Grade Letter </button>
 
@@ -357,9 +357,32 @@
                     <div>
                         <h1 class="card-title FormHeader my-4">Grade Details</h1>
                         <p class="mx-2 my-4" style="color:#497174">Your grade based on your relative performance in your cohort, which is a group of employees working in similar role as yours and under similar constraints, capacity and bussiness setting. The criteria used to create your cohort and cohort size is given below. Employees following this criteria are part of one cohort. </p>
-                        <div class="alert-danger my-1 mx-1 p-2">
+                        @{
+                            string className = "";
+
+                            if (Model.totatScoredPercentage>0 && Model.totatScoredPercentage<18)
+                            {
+                                className = "alert-danger";
+                            }
+                            if(Model.totatScoredPercentage>17 && Model.totatScoredPercentage < 53)
+                            {
+                                className = "alert-warning";
+                            }
+                              if(Model.totatScoredPercentage>53 && Model.totatScoredPercentage < 100)
+                            {
+                                className = "alert-success";
+                            }
+                            <div class="@className my-1 mx-1 p-2">
+                            
+                                
+                               
+
+
+
+                            
                             <p class="m-2">Total Score: @Model.totatScoredPercentage %</p>
                         </div>
+                        }
                         <p class="mx-2 my-4" style="color:#497174">The relative position in your cohort has been decided based on your overall score. to score well on the overall level, it is important to perform well on the KRAs as well as on overall level using following charts.</p>
                         <div id="gauge-div" class="d-flex justify-content-center" style="max-height:60%;">
                             <div id="chart_div">

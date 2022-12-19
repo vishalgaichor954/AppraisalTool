@@ -2,6 +2,7 @@
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.Menu;
+using AppraisalTool.App.Services.CustomAttributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -18,6 +19,7 @@ namespace AppraisalTool.App.Controllers
         //    return View();
         //}
 
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult CreateMenu()
         {
             client = new HttpClient();
@@ -73,6 +75,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult UpdateMenu(int id)
         {
 
@@ -193,6 +196,7 @@ namespace AppraisalTool.App.Controllers
         }
 
         [HttpGet]
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult ListMenu()
         {
             client = new HttpClient();
@@ -211,6 +215,8 @@ namespace AppraisalTool.App.Controllers
             }
             return View();
         }
+
+        [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult DeleteMenu(int id)
         {
             //User/removeUser?id=9&api-version=1

@@ -1,5 +1,6 @@
 ﻿using AppraisalTool.App.Helpers;
 using AppraisalTool.App.Models.AppraisalToolAuth;
+using AppraisalTool.App.Services.CustomAttributes;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Drawing;
