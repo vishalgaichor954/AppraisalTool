@@ -1,8 +1,12 @@
-﻿using AppraisalTool.App.Helpers;
+﻿using AppraisalTool.App.Dtos;
+using AppraisalTool.App.Helpers;
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.Menu;
+using AppraisalTool.App.Profiles;
 using AppraisalTool.App.Services.CustomAttributes;
+using AutoMapper;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -14,10 +18,15 @@ namespace AppraisalTool.App.Controllers
     {
         Uri baseAddress = new Uri("https://localhost:5000/api/");
         HttpClient client = new HttpClient();
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+        private readonly IMapper _mapper;
+
+        private readonly IDataProtector _protector;
+
+        public MenuController(IMapper mapper, IDataProtectionProvider provider)
+        {
+            _mapper = mapper;
+            _protector = provider.CreateProtector("");
+        }
 
         [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult CreateMenu()
@@ -55,6 +64,7 @@ namespace AppraisalTool.App.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            ModelState.Remove("RoleName");
             ModelState.Remove("RoleList");
             if (ModelState.IsValid)
             {
@@ -76,8 +86,20 @@ namespace AppraisalTool.App.Controllers
 
         [HttpGet]
         [RouteAccess(Roles = "ADMINISTRATOR")]
-        public IActionResult UpdateMenu(int id)
+        public IActionResult UpdateMenu(string id)
         {
+            string x = HttpContext.Session.GetString("user");
+            if (x == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            if (id == null)
+            {
+                return RedirectToAction("ListMenu", "Menu");
+            }
+
+            int unprotectedId = int.Parse(_protector.Unprotect(id));
 
             Dictionary<string, int> roleDict2 = new Dictionary<string, int>();
             roleDict2.Add("ADMINISTRATOR", 1);
@@ -90,7 +112,7 @@ namespace AppraisalTool.App.Controllers
             client.BaseAddress = baseAddress;
             
             //getmenubyid api
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Menu/GetMenuById?id={id}&api-version=1").Result;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Menu/GetMenuById?id={unprotectedId}&api-version=1").Result;
 
        
             //getallmenus api
@@ -106,6 +128,7 @@ namespace AppraisalTool.App.Controllers
                 var res = JsonConvert.DeserializeObject<Response>(data);
                 var serres = JsonConvert.SerializeObject(res.Data);
                 menu = JsonConvert.DeserializeObject<MenuModel>(serres);
+                menu.menu_Id = unprotectedId;
                 List<int> rolelist = new List<int>();
                 //foreach (var item in res.Data)
                 //{
@@ -124,7 +147,7 @@ namespace AppraisalTool.App.Controllers
                 {
                     foreach (var i in rolelist)
                     {
-                        if (i == (int)item.roleId && item.menu_Id ==id)
+                        if (i == (int)item.roleId && item.menu_Id == unprotectedId)
                         {
 
                             roledict.Add((string)item.roleName, (int)item.roleId);
@@ -206,9 +229,10 @@ namespace AppraisalTool.App.Controllers
             {
 
                 string responseData = response.Content.ReadAsStringAsync().Result;
-                dynamic json = JsonConvert.DeserializeObject(responseData);
-               
-                ViewBag.MenuList = json.data;
+                var res = JsonConvert.DeserializeObject<Response>(responseData);
+
+                List<MenuModel> mylist = JsonConvert.DeserializeObject<List<MenuModel>>(JsonConvert.SerializeObject(res.Data));
+                ViewBag.MenuList = _mapper.Map<IEnumerable<MenuEncodeDto>>(mylist);
                 return View();
                 //[...new Set(varjson.DATA.map(({ name })=>name))]
 
@@ -217,15 +241,17 @@ namespace AppraisalTool.App.Controllers
         }
 
         [RouteAccess(Roles = "ADMINISTRATOR")]
-        public IActionResult DeleteMenu(int id)
+        public IActionResult DeleteMenu(string id)
         {
+
+            int unprotectedId = int.Parse(_protector.Unprotect(id));
             //User/removeUser?id=9&api-version=1
             Console.WriteLine("PostMethod hit");
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             //model.upda = userSession.UserId;
-            HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + $"Menu/removeMenu?id={id}&api-version=1").Result;
+            HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + $"Menu/removeMenu?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;

@@ -1,8 +1,12 @@
-﻿using AppraisalTool.App.Helpers;
+﻿using AppraisalTool.App.Dtos;
+using AppraisalTool.App.Helpers;
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.FinancialYear;
+using AppraisalTool.App.Models.Menu;
 using AppraisalTool.App.Services.CustomAttributes;
+using AutoMapper;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -13,6 +17,15 @@ namespace AppraisalTool.App.Controllers
     {
         Uri baseAddress = new Uri("https://localhost:5000/api/");
         HttpClient client = new HttpClient();
+
+        private readonly IMapper _mapper;
+        private readonly IDataProtector _protector;
+
+        public FinancialYearController(IMapper mapper, IDataProtectionProvider provider)
+        {
+            _mapper = mapper;
+            _protector = provider.CreateProtector("");
+        }
 
         [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult AddFinancialYear()
@@ -61,8 +74,10 @@ namespace AppraisalTool.App.Controllers
             if (response.IsSuccessStatusCode)
             {
                 string responseData = response.Content.ReadAsStringAsync().Result;
-                dynamic json = JsonConvert.DeserializeObject(responseData);
-                ViewBag.FinancialYearList = json.data;
+                var res = JsonConvert.DeserializeObject<Response>(responseData);
+
+                List<FinancialYear> mylist = JsonConvert.DeserializeObject<List<FinancialYear>>(JsonConvert.SerializeObject(res.Data));
+                ViewBag.FinancialYearList = _mapper.Map<IEnumerable<FinancialYearEncodeDto>>(mylist);
                 return View();
             }
             return View();
@@ -70,29 +85,33 @@ namespace AppraisalTool.App.Controllers
 
         [HttpGet]
         [RouteAccess(Roles = "ADMINISTRATOR")]
-        public IActionResult UpdateYear(int id)
+        public IActionResult UpdateYear(string id)
         {
+            int unprotectedId = int.Parse(_protector.Unprotect(id));
+
             FinancialYear financialYear = new FinancialYear();
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"FinancialYear/GetFinancialYearById?id={id}&api-version=1").Result;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"FinancialYear/GetFinancialYearById?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
                 var res = JsonConvert.DeserializeObject<Response>(data);
                 var serres = JsonConvert.SerializeObject(res.Data);
                 financialYear = JsonConvert.DeserializeObject<FinancialYear>(serres);
+                financialYear.Id = unprotectedId;
                 //ViewBag.RoleList = menu;
             }
             return View(financialYear);
         }
 
         [HttpPost]
-        public IActionResult UpdateYear(FinancialYear model, bool status)
+        public IActionResult UpdateYear(FinancialYear model, bool status, int id)
         {
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
+            model.Id = id;
             model.UpdatedBy = userSession.UserId;
             model.IsActive = status;
             string startDate = model.StartDate.ToString();
@@ -114,13 +133,12 @@ namespace AppraisalTool.App.Controllers
         }
 
         [RouteAccess(Roles = "ADMINISTRATOR")]
-        public IActionResult DeleteYear(int id)
+        public IActionResult DeleteYear(string id)
         {
+            int unprotectedId = int.Parse(_protector.Unprotect(id));
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            //model.upda = userSession.UserId;
-            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/FinancialYear/removeFinancialYear?id={id}&api-version=1").Result;
+            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/FinancialYear/removeFinancialYear?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;

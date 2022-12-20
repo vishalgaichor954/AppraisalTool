@@ -333,16 +333,14 @@ namespace AppraisalTool.App.Controllers
         }
 
         [RouteAccess(Roles = "ADMINISTRATOR")]
-        public IActionResult DeleteUser(int id)
+        public IActionResult DeleteUser(string id)
         {
-            //User/removeUser?id=9&api-version=1
+            int unprotectedId = int.Parse(_protector.Unprotect(id));
             Console.WriteLine("PostMethod hit");
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            //model.upda = userSession.UserId;
             UserViewModel user = new UserViewModel();
-            HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + $"User/removeUser?id={id}&api-version=1").Result;
+            HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + $"User/removeUser?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;

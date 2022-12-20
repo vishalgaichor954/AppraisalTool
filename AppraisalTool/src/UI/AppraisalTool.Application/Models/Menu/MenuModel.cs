@@ -35,7 +35,6 @@ namespace AppraisalTool.App.Models.Menu
         [Required(ErrorMessage = "Please Select role")]
         public List<int> RoleList { get; set; }
         public int RoleId { get; set; }
-
-        //public string RoleName { get; set; }
+        public string RoleName { get; set; }
     }
 }
