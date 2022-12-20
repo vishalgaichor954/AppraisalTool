@@ -1,7 +1,10 @@
-﻿using AppraisalTool.App.Helpers;
+﻿using AppraisalTool.App.Dtos;
+using AppraisalTool.App.Helpers;
 using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Services.CustomAttributes;
+using AutoMapper;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -13,7 +16,15 @@ namespace AppraisalTool.App.Controllers
     {
         Uri baseAddress = new Uri("https://localhost:5000/api/");
         HttpClient client = new HttpClient();
+        private readonly IMapper _mapper;
 
+        private readonly IDataProtector _protector;
+
+        public AuthorityController(IMapper mapper, IDataProtectionProvider provider)
+        {
+            _mapper = mapper;
+            _protector = provider.CreateProtector("");
+        }
 
         [HttpGet]
         [RouteAccess(Roles = "ADMINISTRATOR")]
@@ -36,8 +47,10 @@ namespace AppraisalTool.App.Controllers
             {
 
                 string responseData = response.Content.ReadAsStringAsync().Result;
-                dynamic json = JsonConvert.DeserializeObject(responseData);
-                ViewBag.UserList = json.data;
+                var res = JsonConvert.DeserializeObject<Response>(responseData);
+
+                List<UserViewModel> mylist = JsonConvert.DeserializeObject<List<UserViewModel>>(JsonConvert.SerializeObject(res.Data));
+                ViewBag.UserList = _mapper.Map<IEnumerable<UserEncodeDto>>(mylist); ;
                 return View();
 
             }
@@ -46,7 +59,7 @@ namespace AppraisalTool.App.Controllers
 
         [HttpGet]
         [RouteAccess(Roles = "ADMINISTRATOR")]
-        public IActionResult AssignAuthority(int? id)
+        public IActionResult AssignAuthority(string? id)
         {
             string x = HttpContext.Session.GetString("user");
             if (x == null)
@@ -62,9 +75,9 @@ namespace AppraisalTool.App.Controllers
             client.BaseAddress = baseAddress;
             AssignAuthorityVm user = new AssignAuthorityVm();
             //User/getUser?id=1&api-version=1
-          
+            int unprotectedId = int.Parse(_protector.Unprotect(id));
 
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"User/getUser?id={id}&api-version=1").Result;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"User/getUser?id={unprotectedId}&api-version=1").Result;
             HttpResponseMessage Reporting = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=2&api-version=1").Result;
             HttpResponseMessage Reviewing = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=3&api-version=1").Result;
             HttpResponseMessage admin = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=1&api-version=1").Result;

@@ -15,6 +15,7 @@ namespace AppraisalTool.App.Profiles
             CreateMap<JobRoles, jobRolesEncoded>().ConvertUsing<EncodedJobRolesList>();
             CreateMap<UserRole, UserEncodedDto>().ConvertUsing<EncodedRoleLists>();
             CreateMap<BranchVm, EncodedBranchDto>().ConvertUsing<EncodedBranchList>();
+            CreateMap<AssignAuthorityVm, EncodedAssignAuthorityDTo>().ConvertUsing<EncodedAssignAuthority>();
         }
     }
 }
