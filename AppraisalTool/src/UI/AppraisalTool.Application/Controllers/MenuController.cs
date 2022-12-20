@@ -99,7 +99,18 @@ namespace AppraisalTool.App.Controllers
                 return RedirectToAction("ListMenu", "Menu");
             }
 
-            int unprotectedId = int.Parse(_protector.Unprotect(id));
+            int unprotectedId = 0;
+
+            try
+            {
+                unprotectedId = int.Parse(_protector.Unprotect(id));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListMenu", "Menu");
+            }
+
+            
 
             Dictionary<string, int> roleDict2 = new Dictionary<string, int>();
             roleDict2.Add("ADMINISTRATOR", 1);

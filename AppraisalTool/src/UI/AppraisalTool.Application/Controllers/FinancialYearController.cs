@@ -87,7 +87,16 @@ namespace AppraisalTool.App.Controllers
         [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult UpdateYear(string id)
         {
-            int unprotectedId = int.Parse(_protector.Unprotect(id));
+            int unprotectedId = 0;
+
+            try
+            {
+                unprotectedId = int.Parse(_protector.Unprotect(id));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListFinancialYear", "FinancialYear");
+            }
 
             FinancialYear financialYear = new FinancialYear();
             client = new HttpClient();
