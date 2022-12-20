@@ -89,7 +89,17 @@ namespace AppraisalTool.App.Controllers
             UserRole financialYear = new UserRole();
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            int unprotectedId = int.Parse(_protector.Unprotect(id));
+
+            int unprotectedId = 0;
+            try
+            {
+                unprotectedId = int.Parse(_protector.Unprotect(id));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListUserRole", "UserRole");
+            }
+
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Role/GetUserRoleById?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {

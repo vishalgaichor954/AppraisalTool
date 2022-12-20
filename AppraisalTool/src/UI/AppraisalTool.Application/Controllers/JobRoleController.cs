@@ -89,7 +89,17 @@ namespace AppraisalTool.App.Controllers
             JobRoles financialYear = new JobRoles();
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            int unprotectedId = int.Parse(_protector.Unprotect(id));
+
+            int unprotectedId = 0;
+            try
+            {
+                unprotectedId = int.Parse(_protector.Unprotect(id));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListJobRole", "JobRole");
+            }
+            
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Role/GetJobRoleById?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {

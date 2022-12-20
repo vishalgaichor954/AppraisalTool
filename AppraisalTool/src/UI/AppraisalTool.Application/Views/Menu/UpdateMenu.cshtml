@@ -27,7 +27,7 @@
         <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Update Menu</h4>
-                <form class="form-sample form-inline needs-validation" asp-action="UpdateMenu" method="post" id="myForm" novalidate>
+                <form class="form-sample form-inline needs-validation" asp-controller="Menu" asp-route-id="@Model.menu_Id" method="post" id="myForm" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">

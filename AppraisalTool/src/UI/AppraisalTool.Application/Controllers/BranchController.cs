@@ -91,7 +91,17 @@ namespace AppraisalTool.App.Controllers
             Uri baseAddress = new Uri("https://localhost:5000/api/");
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            int unprotectedId = int.Parse(_protector.Unprotect(id));
+
+            int unprotectedId = 0;
+            try
+            {
+                unprotectedId = int.Parse(_protector.Unprotect(id));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListBranches", "Branch");
+            }
+
             BranchVm branchVm = new BranchVm();
             client = new HttpClient();
             client.BaseAddress = baseAddress;
