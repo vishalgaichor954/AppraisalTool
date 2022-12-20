@@ -4,6 +4,12 @@
     //ViewData["Title"] = "AppraisalTool";
 }
 
+<div class="loader" style="display:none;">
+    <div class="d-flex justify-content-center align-items-center" style="height:100vh ;">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        </div>
+    </div>
+</div>
 
 
 <style>
@@ -12,13 +18,29 @@
     }
 
 </style>
-<div class="container">
+<div class="content-wrapper main-panel content-wrapper-red">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="border:none">
+            <li class="breadcrumb-item">
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a asp-controller="FinancialYear" class="active" asp-action="ListFinancialYear" style=" text-decoration: none;">Finanacial Year Management</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Update Financial Year</li>
+        </ol>
+    </nav>
 
     <div class="col-11">
-        <div class="card">
+        <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Update Year</h4>
-                <form class="form-sample needs-validation" asp-action="UpdateYear" novalidate>
+<<<<<<< HEAD
+                <form method="post" class="form-sample needs-validation" as-controller="FinancialYear" asp-action="UpdateYear" asp-route-id="@Model.Id" novalidate>
+=======
+                <form class="form-sample needs-validation" asp-action="UpdateYear" id="myForm" novalidate>
+>>>>>>> AT-Dev
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
 
                     <div class="row">
@@ -26,13 +48,8 @@
                             <div class="form-group row">
                                 <label asp-for="StartDate" class="col-sm-4 col-form-label">Start Date<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-<<<<<<< HEAD
-                                    <input asp-for="StartDate"  onblur="xyz()"  type="date" id="to" class="form-control" />
-                                    <span asp-validation-for="StartDate" class="text-danger mx-1 small"></span>
-=======
-                                    <input asp-for="StartDate" onblur="xyz()" type="date" id="to"  class="form-control" required />
+                                    <input asp-for="StartDate" onblur="xyz()" type="date" id="to" class="form-control" required />
                                     @*<span asp-validation-for="StartDate" class="text-danger mx-1 small"></span>*@
->>>>>>> 73b52320a37e27acff8493e7103a7843aab3a23a
                                 </div>
                             </div>
                         </div>
@@ -57,29 +74,13 @@
                                 </div>
                             </div>
                         </div>
-<<<<<<< HEAD
-                       
-                    </div>
-                     <div class="form-group text-center">
-                           @* <input type="hidden" name="job" id="job" />*@
-                            <div class="row">
-                                <div class="col-4"></div>
-                                 <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
-                               
-                                <div class="col-2">  <a asp-action="ListFinancialYear" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
-                                <div class="col-4"></div>
-                                @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
-                            <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
-                            </div>
-=======
->>>>>>> 73b52320a37e27acff8493e7103a7843aab3a23a
 
                     </div>
                     <div class="form-group text-center">
                         @* <input type="hidden" name="job" id="job" />*@
                         <div class="row">
                             <div class="col-4"></div>
-                            <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+                            <div class="col-2"> <input type="submit" style="width:130px" id="buttonID" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
 
                             <div class="col-2">  <a asp-action="ListFinancialYear" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
                             <div class="col-4"></div>
@@ -112,52 +113,65 @@
         console.log(c);
         document.getElementById('from').value = c;
 
-        //var d = new Date();
-        // var year = d .getFullYear();
-        // console.log(year);
-        // var month = d .getMonth();
-        // console.log(month);
-        // var day = d .getDate();
-        // console.log(day);
-        // var c = new Date(year + 1, month, day);
-        // console.log(c);
-        // document.getElementById('from').value=c;
+
 
 
     }
 </script>
-<script>
-    (function() {
-        'use strict'
+@*<script>
+    document.getElementById("buttonID").onclick = function() {
+        let allAreFilled = true;
+        document.getElementById("myForm").querySelectorAll("[required]").forEach(function(i) {
+            if (!allAreFilled) return;
+            if (i.type === "checkbox") {
+                let radioValueCheck = false;
+                document.getElementById("myForm").querySelectorAll(`[name=${i.name}]`).forEach(function(r) {
+                    if (r.checked) radioValueCheck = true;
+                })
+                allAreFilled = radioValueCheck;
+                return;
+            }
+            if (!i.value) { allAreFilled = false; return; }
+        })
+        if (!allAreFilled) {
 
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
 
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
+            (function() {
+                'use strict'
 
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+            console.log(allAreFilled);
+
+        }
+        else {
+
+            document.getElementById("buttonID").onclick = function() {
+
+                this.disabled = true;
+            }
+        }
+    }
+
+
+
 </script>
+*@
 
-
-@*<script language="javascript">
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var yyyy = today.getFullYear();
-
-        today = yyyy + '-' + mm + '-' + dd;
-        $('#date_picker').attr('min',today);
-    </script>*@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

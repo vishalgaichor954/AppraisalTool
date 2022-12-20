@@ -30,8 +30,11 @@ namespace AppraisalTool.Application.Features.Users.Query.GetUserById
         {
             _logger.LogInformation("GetUserByIdQueryHandler Initiated");
             var user = await _userRepository.GetUserbyid(request.Id);
+            
            // var mappeduser = _mapper.Map<GetUserListQueryVm>(user);
             _logger.LogInformation("GetUserByIdQueryHandler completed");
+            var test = new Response<GetUserListQueryVm>(user);
+            Console.WriteLine(test.Data);
             return new Response<GetUserListQueryVm>(user, "success");
 
 

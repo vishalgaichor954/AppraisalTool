@@ -1,8 +1,8 @@
-﻿@model AppraisalTool.App.Models.FinancialYear.FinancialYear
-
+﻿@model AppraisalTool.App.Models.Branches.BranchVm
 @{
-    //ViewData["Title"] = "AppraisalTool";
+    ViewData["Title"] = "AddBranch";
 }
+
 
 <div class="loader" style="display:none;">
     <div class="d-flex justify-content-center align-items-center" style="height:100vh ;">
@@ -10,6 +10,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 
 <style>
@@ -26,62 +30,54 @@
                 <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
             </li>
             <li class="breadcrumb-item">
-                <a asp-controller="FinancialYear" class="active" asp-action="ListFinancialYear" style=" text-decoration: none;">Finanacial Year Management</a>
+                <a asp-controller="Branch" class="active" asp-action="ListBranches" style=" text-decoration: none;">Branch Management</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Update Financial Year</li>
+            <li class="breadcrumb-item active" aria-current="page">Create Branch</li>
         </ol>
     </nav>
 
     <div class="col-11">
         <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
-                <h4 class="card-title">Update Year</h4>
-                <form method="post" class="form-sample needs-validation" as-controller="FinancialYear" asp-action="UpdateYear" asp-route-id="@Model.Id" novalidate>
+<<<<<<< HEAD
+                <h4 class="card-title">Add Branch</h4>
+                <form class="form-sample  needs-validation" asp-action="AddBranch" id="myForm" novalidate>
+=======
+               <h4 class="card-title">Create Branch</h4>
+                <form class="form-sample  needs-validation" asp-action="AddBranch" novalidate>
+>>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="StartDate" class="col-sm-4 col-form-label">Start Date<sup class="required">*</sup></label>
+                                <label asp-for="BranchCode" class="col-sm-4 col-form-label">Branch Code<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="StartDate" onblur="xyz()" type="date" id="to" class="form-control" required />
-                                    @*<span asp-validation-for="StartDate" class="text-danger mx-1 small"></span>*@
+                                    <input asp-for="BranchCode" type="text" class="form-control" required />
+                                    @*<span asp-validation-for="BranchCode" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="EndDate" class="col-sm-4 col-form-label">End Date<sup class="required">*</sup></label>
+                                <label asp-for="BranchName" class="col-sm-4 col-form-label">Branch<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="EndDate" type="date" id="from" class="form-control" readonly />
-                                    <span asp-validation-for="EndDate" class="text-danger mx-1 small"></span>
+                                    <input asp-for="BranchName" type="text" class="form-control" required />
+                                    @*<span asp-validation-for="BranchName" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label asp-for="IsActive" class="col-sm-4 col-form-label">Active Status@*<sup class="required">*</sup>*@</label>
-                                <div class="col-sm-8">
-                                    @*                                    <input asp-for="IsActive" type="hidden" name="status" value="0" />
-                                    *@                                    <input asp-for="IsActive" type="checkbox" value="True" name="status" class="form-check-input" />
-                                    <span asp-validation-for="IsActive" class="text-danger mx-1 small"></span>
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
                     <div class="form-group text-center">
-                        @* <input type="hidden" name="job" id="job" />*@
+
                         <div class="row">
                             <div class="col-4"></div>
                             <div class="col-2"> <input type="submit" style="width:130px" id="buttonID" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
 
-                            <div class="col-2">  <a asp-action="ListFinancialYear" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
+                            <div class="col-2">  <a asp-action="ListBranches" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
                             <div class="col-4"></div>
-                            @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
-                            <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
+
                         </div>
 
                     </div>
@@ -91,29 +87,6 @@
     </div>
 
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-<script>
-    function xyz() {
-        var el_up = document.getElementById("to").value;
-        console.log(el_up);
-        d1 = new Date(el_up);
-        var year1 = d1.getFullYear();
-        console.log(year1);
-        var month = d1.getMonth();
-        console.log(month);
-        var day = d1.getDate();
-        console.log(day);
-        var c = new Date(year1 + 1, month, day).toISOString().split('T')[0];
-        console.log(c);
-        document.getElementById('from').value = c;
-
-
-
-
-    }
-</script>
 @*<script>
     document.getElementById("buttonID").onclick = function() {
         let allAreFilled = true;
@@ -165,8 +138,8 @@
 
 
 
-</script>
-*@
+</script>*@
+
 
 @section Scripts {
     @{

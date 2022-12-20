@@ -1,137 +1,3 @@
-﻿@model AppraisalTool.App.Models.AppraisalToolAuth.Login
-
-
-
-
-@{
-    //ViewData["Title"] = "AppraisalTool";
-}
-
-<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
-<script src="~/lib/package/dist/sweetalert2.all.min.js"></script>
-<script src="~/lib/package/dist/sweetalert2.all.js"></script>
-<script src="~/lib/package/dist/sweetalert2.min.js"></script>
-
-@if (TempData["Error"] != null)
-{
-
-
-    <script>
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-        Toast.fire({
-            icon: 'error',
-            title: 'Invalid Login Credentials'
-        })
-    </script>
-}
-<div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="content-wrapper d-flex align-items-center">
-            <div class="row flex-grow">
-                <div class="col-lg-4 mx-auto">
-                    <div style="background-color:white" class="auth-form-light text-left p-5">
-                        <div class="brand-logo logoImgLogin">
-                            <img src="~/lib/assets/images/AppraisalToolLogo_adobe_express.svg">
-                        </div>
-                        <h2 style="font-weight:500 ;padding-left:6rem" class=" LoginHeader pt-0" asp-action="Login">LogIn</h2>
-                        <form class="pt-3 needs-validation loginPageForm" id="loginForm" asp-action="Login" novalidate>
-                            <div class="form-group">
-                                <label asp-for="Email" class="control-label">Email<sup class="required">*</sup></label>
-                                <input asp-for="Email" type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" required>
-                               @*<span asp-validation-for="Email" class="text-danger"></span>*@
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="Password" class="control-label">Password<sup class="required">*</sup></label>
-                                <input asp-for="Password" type="Password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" required>
-                                <span asp-validation-for="Password" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <img id="img-captcha" src="~/get-captcha-image" />
-                                    </div>
-                                    <input type="text" class="form-control" id="captchaCode" placeholder="Captcha Code" asp-for="CaptchaCode" maxlength="4" required/>
-                                </div>
-                                <span asp-validation-for="CaptchaCode" class="text-danger">
-                                    @if (TempData["msg"] != null)
-                                    {
-                                        @TempData["msg"]
-
-                                    }
-                                </span>
-                            </div>
-                            <div class="my-1 mb-2 d-flex justify-content-between align-items-center">
-                                <a asp-controller="Login" asp-action="ForgotPassword" class="auth-link text-black">Forgot password?</a>
-                            </div>
-                            <div class="form-group">
-                                <div style="align-items:center ;">
-                                    <input type="submit" id="loginBtn" value="Login" class="btn btn-block LoginBtn btn-lg font-weight-medium auth-form-btn" />
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- content-wrapper ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-</div>
-
-<!-- Button trigger modal -->
-<!-- Modal -->
-<!-- Modal -->
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }
-<!-- plugins:js -->
-<script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
-
-<!-- endinject -->
-<!-- Plugin js for this page -->
-<!-- End plugin js for this page -->
-<!-- inject:js -->
-<script src="./lib/assets/js/off-canvas.js"></script>
-
-
-<script src="./lib/assets/js/hoverable-collapse.js"></script>
-
-<script src="./lib/assets/js/misc.js"></script>
-
-<!-- endinject -->
-
-<script>
-    $("#img-captcha").click(function () {
-        resetCaptchaImage();
-    });
-
-    function resetCaptchaImage() {
-        d = new Date();
-        $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());
-    }
-</script>
-
-
- 
-    <script>
-     
-   </script>
-  
-
+﻿@model AppraisalTool.App.Models.AppraisalToolAuth.Login@{    //ViewData["Title"] = "AppraisalTool";}<link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css"><script src="~/lib/package/dist/sweetalert2.all.min.js"></script><script src="~/lib/package/dist/sweetalert2.all.js"></script><script src="~/lib/package/dist/sweetalert2.min.js"></script>@if (TempData["Error"] != null)
+{    <script>        const Toast = Swal.mixin({            toast: true,            position: 'top-end',            showConfirmButton: false,            timer: 3000,            timerProgressBar: true,            didOpen: (toast) => {                toast.addEventListener('mouseenter', Swal.stopTimer)                toast.addEventListener('mouseleave', Swal.resumeTimer)            }        })        Toast.fire({            icon: 'error',            title: 'Invalid Login Credentials'        })    </script>}<div class="container-scroller">    <div class="container-fluid page-body-wrapper full-page-wrapper">        <div class="content-wrapper d-flex align-items-center">            <div class="row flex-grow">                <div class="col-lg-4 mx-auto">                    <div style="background-color:white" class="auth-form-light text-left p-5">                        <div class="brand-logo logoImgLogin">                            <img src="~/lib/assets/images/AppraisalToolLogo_adobe_express.svg">                        </div>                        <h2 style="font-weight:500 ;padding-left:6rem" class=" LoginHeader pt-0" asp-action="Login">LogIn</h2>                        <form class="pt-3 needs-validation loginPageForm" id="loginForm" asp-action="Login" novalidate>                            <div class="form-group">                                <label asp-for="Email" class="control-label">Email<sup class="required">*</sup></label>                                <input asp-for="Email" type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email" required>                                @*<span asp-validation-for="Email" class="text-danger"></span>*@                            </div>                            <div class="form-group">                                <label asp-for="Password" class="control-label">Password<sup class="required">*</sup></label>                                <input asp-for="Password" type="Password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password" required>                                <span asp-validation-for="Password" class="text-danger"></span>                            </div>                            <div class="form-group">                                <div class="input-group">                                    <div class="input-group-prepend">                                        <img id="img-captcha" src="~/get-captcha-image" />                                    </div>                                    <input type="text" class="form-control" id="captchaCode" placeholder="Captcha Code" asp-for="CaptchaCode" maxlength="4" required />                                </div>                                <span asp-validation-for="CaptchaCode" class="text-danger">                                    @if (TempData["msg"] != null)
+                                    {                                        @TempData["msg"]                                    }                                </span>                            </div>                            <div class="my-1 mb-2 d-flex justify-content-between align-items-center">                                <a asp-controller="Login" asp-action="ForgotPassword" class="auth-link text-black">Forgot password?</a>                            </div>                            <div class="form-group">                                <div style="align-items:center ;">                                    <input type="submit" id="loginBtn" value="Login" class="btn btn-block LoginBtn btn-lg font-weight-medium auth-form-btn" />                                </div>                            </div>                        </form>                    </div>                </div>            </div>        </div>        <!-- content-wrapper ends -->    </div>    <!-- page-body-wrapper ends --></div><!-- Button trigger modal --><!-- Modal --><!-- Modal -->@section Scripts {    @{        await Html.RenderPartialAsync("_ValidationScriptsPartial");    }    }    <!-- plugins:js -->    <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>    <!-- endinject -->    <!-- Plugin js for this page -->    <!-- End plugin js for this page -->    <!-- inject:js -->    <script src="./lib/assets/js/off-canvas.js"></script>    <script src="./lib/assets/js/hoverable-collapse.js"></script>    <script src="./lib/assets/js/misc.js"></script>    <!-- endinject -->    <script>        $("#img-captcha").click(function() {            resetCaptchaImage();        });        function resetCaptchaImage() {            d = new Date();            $("#img-captcha").attr("src", "/get-captcha-image?" + d.getTime());        }    </script>

@@ -315,7 +315,9 @@ legend {
     margin: 0% !important;
     padding: 0% !important;
 }
-
+.dropdownRequired {
+    border: 1px solid #dc3545 !important;
+}
 .required {
     color: red;
     font-size: 14px;
@@ -379,8 +381,6 @@ legend {
     opacity: .8;
 }
 
-<<<<<<< HEAD
-=======
 thead {
     background-color: #1746A2;
 }
@@ -418,8 +418,13 @@ table.dataTable thead td {
     width: 40%;
 }
 
+.dataTables_length {
+    margin-left: 3%;
+    margin-bottom: 2%;
+}
+
 #myTable_length {
-    margin-left: 2%;
+    margin-left: 3%;
     margin-bottom: 2%;
 }
 
@@ -437,7 +442,7 @@ table.dataTable thead td {
 }
 
 #table_length {
-    margin-left: 2%;
+    margin-left: 3%;
     margin-bottom: 2%;
 }
 
@@ -455,7 +460,7 @@ table.dataTable thead td {
 }
 
 #table_length {
-    margin-left: 2%;
+    margin-left: 3%;
     margin-bottom: 2%;
 }
 
@@ -471,7 +476,19 @@ table.dataTable thead td {
             width: 40%;
         }
 
->>>>>>> aa1b1e6714830fa440e57ebeeb16d93eac8ca5cd
 select {
     color: black !important;
+}
+
+<<<<<<< HEAD
+label.error {
+    display: none !important;
+=======
+.dataTables_info {
+    margin-left: 3%;
+}
+
+select[name="myTable_length"] {
+   width:100px;
+>>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
 }

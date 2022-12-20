@@ -1,10 +1,11 @@
 ﻿@model AppraisalTool.App.Models.JobRoles.JobRoles
 
-@{
-    //ViewData["Title"] = "AppraisalTool";
-}
-
-
+<div class="loader" style="display:none;">
+    <div class="d-flex justify-content-center align-items-center" style="height:100vh ;">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        </div>
+    </div>
+</div>
 
 <style>
     .small {
@@ -49,7 +50,7 @@
                         @* <input type="hidden" name="job" id="job" />*@
                         <div class="row">
                             <div class="col-4"></div>
-                            <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+                            <div class="col-2"> <input type="submit" style="width:130px" value="Save" id="buttonID" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
 
                             <div class="col-2">  <a asp-action="ListJobRole" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
                             <div class="col-4"></div>
@@ -86,38 +87,59 @@
 
     }
 </script>
-<script>
-    (function () {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
-</script>
+@*<script>
+    document.getElementById("buttonID").onclick = function() {
+        let allAreFilled = true;
+        document.getElementById("myForm").querySelectorAll("[required]").forEach(function(i) {
+            if (!allAreFilled) return;
+            if (i.type === "checkbox") {
+                let radioValueCheck = false;
+                document.getElementById("myForm").querySelectorAll(`[name=${i.name}]`).forEach(function(r) {
+                    if (r.checked) radioValueCheck = true;
+                })
+                allAreFilled = radioValueCheck;
+                return;
+            }
+            if (!i.value) { allAreFilled = false; return; }
+        })
+        if (!allAreFilled) {
 
 
-@*<script language="javascript">
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var yyyy = today.getFullYear();
+            (function() {
+                'use strict'
 
-        today = yyyy + '-' + mm + '-' + dd;
-        $('#date_picker').attr('min',today);
-    </script>*@
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+            console.log(allAreFilled);
+
+        }
+        else {
+
+            document.getElementById("buttonID").onclick = function() {
+
+                this.disabled = true;
+            }
+        }
+    }
+
+
+
+</script>*@
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

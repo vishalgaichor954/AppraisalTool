@@ -480,6 +480,9 @@ select {
     color: black !important;
 }
 
+label.error {
+    display: none !important;
+}
 .dataTables_info {
     margin-left: 3%;
 }

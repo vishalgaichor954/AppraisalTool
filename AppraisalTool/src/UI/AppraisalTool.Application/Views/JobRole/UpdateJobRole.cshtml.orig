@@ -1,8 +1,4 @@
-﻿@model AppraisalTool.App.Models.FinancialYear.FinancialYear
-
-@{
-    //ViewData["Title"] = "AppraisalTool";
-}
+﻿@model AppraisalTool.App.Models.JobRoles.JobRoles
 
 <div class="loader" style="display:none;">
     <div class="d-flex justify-content-center align-items-center" style="height:100vh ;">
@@ -11,12 +7,10 @@
     </div>
 </div>
 
-
 <style>
-    .small{
-        font-size : 14px;
+    .small {
+        font-size: 14px;
     }
-
 </style>
 <div class="content-wrapper main-panel content-wrapper-red">
 
@@ -26,59 +20,43 @@
                 <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
             </li>
             <li class="breadcrumb-item">
-                <a asp-controller="FinancialYear" class="active" asp-action="ListFinancialYear" style=" text-decoration: none;">Finanacial Year Management</a>
+                <a asp-controller="JobRole" class="active" asp-action="ListJobRole" style=" text-decoration: none;">Job Role Management</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Update Financial Year</li>
+            <li class="breadcrumb-item active" aria-current="page">Update Job Role</li>
         </ol>
     </nav>
 
     <div class="col-11">
         <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
-                <h4 class="card-title">Update Year</h4>
-                <form method="post" class="form-sample needs-validation" as-controller="FinancialYear" asp-action="UpdateYear" asp-route-id="@Model.Id" novalidate>
+                <h4 class="card-title">Update Job Role</h4>
+<<<<<<< HEAD
+                <form method="post" class="form-sample needs-validation" action="/JobRole/UpdateJobRole/@Model.Id" novalidate>
+=======
+                <form class="form-sample needs-validation" asp-action="UpdateJobRole" id="myForm" novalidate>
+>>>>>>> AT-Dev
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label asp-for="StartDate" class="col-sm-4 col-form-label">Start Date<sup class="required">*</sup></label>
+                                <label asp-for="Name" class="col-sm-4 col-form-label">Name<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="StartDate" onblur="xyz()" type="date" id="to" class="form-control" required />
-                                    @*<span asp-validation-for="StartDate" class="text-danger mx-1 small"></span>*@
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label asp-for="EndDate" class="col-sm-4 col-form-label">End Date<sup class="required">*</sup></label>
-                                <div class="col-sm-8">
-                                    <input asp-for="EndDate" type="date" id="from" class="form-control" readonly />
-                                    <span asp-validation-for="EndDate" class="text-danger mx-1 small"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-                                <label asp-for="IsActive" class="col-sm-4 col-form-label">Active Status@*<sup class="required">*</sup>*@</label>
-                                <div class="col-sm-8">
-                                    @*                                    <input asp-for="IsActive" type="hidden" name="status" value="0" />
-                                    *@                                    <input asp-for="IsActive" type="checkbox" value="True" name="status" class="form-check-input" />
-                                    <span asp-validation-for="IsActive" class="text-danger mx-1 small"></span>
+                                    <input asp-for="Name" type="Text" class="form-control" required />
+                                    @*<span asp-validation-for="Name" class="text-danger mx-1 small"></span>*@
                                 </div>
                             </div>
                         </div>
 
                     </div>
+
                     <div class="form-group text-center">
                         @* <input type="hidden" name="job" id="job" />*@
                         <div class="row">
                             <div class="col-4"></div>
-                            <div class="col-2"> <input type="submit" style="width:130px" id="buttonID" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+                            <div class="col-2"> <input type="submit" style="width:130px" value="Save" id="buttonID" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
 
-                            <div class="col-2">  <a asp-action="ListFinancialYear" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
+                            <div class="col-2">  <a asp-action="ListJobRole" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
                             <div class="col-4"></div>
                             @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
                             <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
@@ -108,7 +86,6 @@
         var c = new Date(year1 + 1, month, day).toISOString().split('T')[0];
         console.log(c);
         document.getElementById('from').value = c;
-
 
 
 
@@ -165,39 +142,38 @@
 
 
 
-</script>
-*@
+</script>*@
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     }
-    <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
 
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="./lib/assets/js/off-canvas.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="./lib/assets/js/off-canvas.js"></script>
 
 
-    <script src="./lib/assets/js/hoverable-collapse.js"></script>
+<script src="./lib/assets/js/hoverable-collapse.js"></script>
 
-    <script src="./lib/assets/js/misc.js"></script>
-    <!-- endinject -->
+<script src="./lib/assets/js/misc.js"></script>
+<!-- endinject -->
 
-    <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
 
-    @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
-    <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
-    @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
-    <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
-    @*<script src="assets/js/off-canvas.js"></script>
+@*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
+<script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
+@*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
+<script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+@*<script src="assets/js/off-canvas.js"></script>
     <script src="assets/js/hoverable-collapse.js"></script>
     <script src="assets/js/misc.js"></script>*@
-    <script src=" ~/lib/assets/js/off-canvas.js"></script>
-    <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
-    <script src=" ~/lib/assets/js/misc.js"></script>
+<script src=" ~/lib/assets/js/off-canvas.js"></script>
+<script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
+<script src=" ~/lib/assets/js/misc.js"></script>
 
 

@@ -1,7 +1,12 @@
 ﻿@model AppraisalTool.App.Models.Branches.BranchVm
-@*@{
-    ViewData["Title"] = "UpdateBranch";
-}*@
+
+
+<div class="loader" style="display:none;">
+    <div class="d-flex justify-content-center align-items-center" style="height:100vh ;">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        </div>
+    </div>
+</div>
 
 
 
@@ -9,6 +14,8 @@
     .small {
         font-size: 14px;
     }
+   
+
 </style>
 <div class="content-wrapper main-panel content-wrapper-red">
 
@@ -56,7 +63,7 @@
                         @* <input type="hidden" name="job" id="job" />*@
                         <div class="row">
                             <div class="col-4"></div>
-                            <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+                            <div class="col-2"> <input type="submit" style="width:130px" id="buttonID" name="buttonname" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
 
                             <div class="col-2">  <a asp-action="ListBranches" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
                             <div class="col-4"></div>
@@ -75,27 +82,62 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 
-<script>
-    (function () {
-        'use strict'
+@*<script>
+    document.getElementById("buttonID").onclick = function() {
+        let allAreFilled = true;
+        document.getElementById("myForm").querySelectorAll("[required]").forEach(function(i) {
+            if (!allAreFilled) return;
+            if (i.type === "checkbox") {
+                let radioValueCheck = false;
+                document.getElementById("myForm").querySelectorAll(`[name=${i.name}]`).forEach(function(r) {
+                    if (r.checked) radioValueCheck = true;
+                })
+                allAreFilled = radioValueCheck;
+                return;
+            }
+            if (!i.value) { allAreFilled = false; return; }
+        })
+        if (!allAreFilled) {
 
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
 
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
+            (function() {
+                'use strict'
 
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
-</script>
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+            console.log(allAreFilled);
+
+        }
+        else {
+
+            document.getElementsByName("buttonname").onclick = function() {
+
+                this.disabled = true;
+            }
+        }
+    }
+
+
+
+</script>*@
+
+
+
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

@@ -27,7 +27,7 @@ namespace AppraisalTool.App.Models
         [RegularExpression(@"^[0-9a-zA-z]+[.+-_$]{0,1}[0-9a-zA-z]+[@][a-zA-z]+[.][a-zA-z]{2,3}$", ErrorMessage = "Please Enter Valid Email")]
         public string ?Email { get; set; }
 
-       [Required(ErrorMessage = " ")]
+        [Required(ErrorMessage = " ")]
         [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,32}$", ErrorMessage = "Enter a strong password")]
         public string ?Password { get; set; }
 

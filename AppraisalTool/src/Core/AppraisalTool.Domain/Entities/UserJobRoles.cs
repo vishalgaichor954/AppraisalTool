@@ -12,9 +12,9 @@ namespace AppraisalTool.Domain.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public int JobRoleId { get; set; }
+        public int? Id { get; set; }
+        public int? UserId { get; set; }
+        public int? JobRoleId { get; set; }
         public bool IsPrimary { get; set; }
         public bool IsSecondary { get; set; }
 
