@@ -3,6 +3,8 @@ using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.UserRole;
 using AppraisalTool.App.Services.CustomAttributes;
+using AutoMapper;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -14,6 +16,15 @@ namespace AppraisalTool.App.Controllers
         Uri baseAddress = new Uri("https://localhost:5000/api/");
         HttpClient client = new HttpClient();
 
+        private readonly IMapper _mapper;
+
+        private readonly IDataProtector _protector;
+
+        public UserRoleController(IMapper mapper, IDataProtectionProvider provider)
+        {
+            _mapper = mapper;
+            _protector = provider.CreateProtector("");
+        }
         [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult AddUserRole()
         {
@@ -58,9 +69,11 @@ namespace AppraisalTool.App.Controllers
 
                 string responseData = response.Content.ReadAsStringAsync().Result;
 
-                dynamic json = JsonConvert.DeserializeObject(responseData);
+                var res = JsonConvert.DeserializeObject<Response>(responseData);
 
-                ViewBag.Role = json.data;
+                List<UserRole> mylist = JsonConvert.DeserializeObject<List<UserRole>>(JsonConvert.SerializeObject(res.Data));
+
+                ViewBag.Role = _mapper.Map<IEnumerable<UserEncodedDto>>(mylist);
                 return View();
 
             }
@@ -69,14 +82,15 @@ namespace AppraisalTool.App.Controllers
 
         [HttpGet]
         [RouteAccess(Roles = "ADMINISTRATOR")]
-        public IActionResult UpdateUserRole(int id)
+        public IActionResult UpdateUserRole(string id)
         {
 
 
             UserRole financialYear = new UserRole();
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Role/GetUserRoleById?id={id}&api-version=1").Result;
+            int unprotectedId = int.Parse(_protector.Unprotect(id));
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Role/GetUserRoleById?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
@@ -116,15 +130,16 @@ namespace AppraisalTool.App.Controllers
         }
 
         [RouteAccess(Roles = "ADMINISTRATOR")]
-        public IActionResult DeleteUserRole(int id)
+        public IActionResult DeleteUserRole(string id)
         {
             //User/removeUser?id=9&api-version=1
             Console.WriteLine("PostMethod hit");
             client = new HttpClient();
             client.BaseAddress = baseAddress;
+            int unprotectedId = int.Parse(_protector.Unprotect(id));
             //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             //model.upda = userSession.UserId;
-            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/Role/RemoveUserRole?id={id}&api-version=1").Result;
+            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/Role/RemoveUserRole?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
