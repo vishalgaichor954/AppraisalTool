@@ -29,7 +29,7 @@
         <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Update Job Role</h4>
-                <form class="form-sample needs-validation" asp-action="UpdateJobRole" novalidate>
+                <form method="post" class="form-sample needs-validation" action="/JobRole/UpdateJobRole/@Model.Id" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
 
                     <div class="row">

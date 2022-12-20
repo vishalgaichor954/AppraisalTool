@@ -246,20 +246,20 @@
                                             @foreach (var item in ViewBag.BranchList)
                                             {
                                                 <tr>
-                                                    <td class="text-center"> @item.branchCode </td>
-                                                    <td class="text-center"> @item.branchName</td>
+                                                    <td class="text-center"> @item.BranchCode </td>
+                                                    <td class="text-center"> @item.BranchName</td>
                                                     <td class="text-center">
-                                                        <a asp-action="UpdateBranch" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
-                                                        <a asp-action="DeleteBranch" asp-route-id="@item.id" class="btn btn-sm   btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
+                                                        <a asp-action="UpdateBranch" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
+                                                        <a asp-action="DeleteBranch" asp-route-id="@item.Id" class="btn btn-sm   btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>
-                                                    <td> @item.test</td>
-                                                    <td> @item.test</td>
-                                                    <td>@item.test</td>
+                                                    <td> @item.BranchName</td>
+                                                    <td> @item.BranchName</td>
+                                                    <td>@item.BranchName</td>
                                                      
-                                                    <td> @item.test</td>
-                                                    <td> @item.test</td>
-                                                    <td>@item.test </td>
-                                                    <td>@item.test</td>
+                                                    <td> @item.BranchName</td>
+                                                    <td> @item.BranchName</td>
+                                                    <td>@item.BranchName </td>
+                                                    <td>@item.BranchName</td>
 
                                                 </tr>
                                             }
