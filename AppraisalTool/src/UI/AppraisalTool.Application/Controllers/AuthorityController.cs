@@ -69,13 +69,21 @@ namespace AppraisalTool.App.Controllers
 
             if (id == null)
             {
-                return RedirectToAction("GetAllAuthority", "Admin");
+                return RedirectToAction("GetAllAuthority", "Authority");
             }
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             AssignAuthorityVm user = new AssignAuthorityVm();
             //User/getUser?id=1&api-version=1
-            int unprotectedId = int.Parse(_protector.Unprotect(id));
+            int unprotectedId = 0;
+            try
+            {
+                unprotectedId = int.Parse(_protector.Unprotect(id));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("GetAllAuthority", "Authority");
+            }
 
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"User/getUser?id={unprotectedId}&api-version=1").Result;
             HttpResponseMessage Reporting = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=2&api-version=1").Result;
