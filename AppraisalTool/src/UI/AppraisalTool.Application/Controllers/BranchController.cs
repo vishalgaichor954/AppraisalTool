@@ -3,6 +3,8 @@ using AppraisalTool.App.Models;
 using AppraisalTool.App.Models.AppraisalToolAuth;
 using AppraisalTool.App.Models.Branches;
 using AppraisalTool.App.Services.CustomAttributes;
+using AutoMapper;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -12,6 +14,15 @@ namespace AppraisalTool.App.Controllers
 
     public class BranchController : Controller
     {
+        private readonly IMapper _mapper;
+
+        private readonly IDataProtector _protector;
+
+        public BranchController(IMapper mapper, IDataProtectionProvider provider)
+        {
+            _mapper = mapper;
+            _protector = provider.CreateProtector("");
+        }
         [HttpGet]
         [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult ListBranches()
@@ -25,9 +36,11 @@ namespace AppraisalTool.App.Controllers
             {
 
                 string responseBranch = response.Content.ReadAsStringAsync().Result;
-                dynamic json = JsonConvert.DeserializeObject(responseBranch);
+                var res = JsonConvert.DeserializeObject<Response>(responseBranch);
 
-                ViewBag.BranchList = json.data;
+                List<BranchVm> mylist = JsonConvert.DeserializeObject<List<BranchVm>>(JsonConvert.SerializeObject(res.Data));
+
+                ViewBag.BranchList = _mapper.Map<IEnumerable<EncodedBranchDto>>(mylist); 
                 return View();
 
             }
@@ -73,16 +86,26 @@ namespace AppraisalTool.App.Controllers
 
         [HttpGet]
         [RouteAccess(Roles = "ADMINISTRATOR")]
-        public IActionResult UpdateBranch(int id)
+        public IActionResult UpdateBranch(string id)
         {
             Uri baseAddress = new Uri("https://localhost:5000/api/");
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
 
+            int unprotectedId = 0;
+            try
+            {
+                unprotectedId = int.Parse(_protector.Unprotect(id));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListBranches", "Branch");
+            }
+
             BranchVm branchVm = new BranchVm();
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"User/GetBranchById?id={id}&api-version=1").Result;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"User/GetBranchById?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
@@ -118,16 +141,17 @@ namespace AppraisalTool.App.Controllers
         }
 
         [RouteAccess(Roles = "ADMINISTRATOR")]
-        public IActionResult DeleteBranch(int id)
+        public IActionResult DeleteBranch(string id)
         {
             //User/removeUser?id=9&api-version=1
             Console.WriteLine("PostMethod hit");
             Uri baseAddress = new Uri("https://localhost:5000/api/");
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
+            int unprotectedId = int.Parse(_protector.Unprotect(id));
             //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             //model.upda = userSession.UserId;
-            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/User/RemoveBranch?id={id}&api-version=1").Result;
+            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/User/RemoveBranch?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;

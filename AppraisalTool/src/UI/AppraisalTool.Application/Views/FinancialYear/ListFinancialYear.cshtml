@@ -283,10 +283,10 @@
                                             <th class="text-center"> Start Date</th>
                                             <th class="text-center"> End Date </th>
                                             <th class="text-center">Active Status</th>
-                                            <th class="text-center"> Controller Name</th>
+                                            @*<th class="text-center"> Controller Name</th>
                                             <th class="text-center"> Action Name </th>
                                             <th class="text-center"> Link Name </th>
-                                            <th class="text-center"> Role </th>
+                                            <th class="text-center"> Role </th>*@
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -296,18 +296,18 @@
                                             @foreach (var item in ViewBag.FinancialYearList)
                                             {
                                                 <tr>
-                                                    <td class="text-center"> @item.startYear </td>
-                                                    <td class="text-center"> @item.endYear </td>
-                                                    <td class="text-center"> @item.startDate.ToString("dd MMMM")</td>
-                                                    <td class="text-center"> @item.endDate.ToString("dd MMMM")</td>
-                                                    <td class="text-center">@item.isActive</td>
-                                                    <td class="text-center"> @item.menuController </td>
+                                                    <td class="text-center"> @item.StartYear </td>
+                                                    <td class="text-center"> @item.EndYear </td>
+                                                    <td class="text-center"> @item.StartDate.ToString("dd MMMM")</td>
+                                                    <td class="text-center"> @item.EndDate.ToString("dd MMMM")</td>
+                                                    <td class="text-center">@item.IsActive</td>
+                                                    @*<td class="text-center"> @item.menuController </td>
                                                     <td class="text-center"> @item.menuAction </td>
                                                     <td class="text-center"> @item.menuLink </td>
-                                                    <td class="text-center"> @item.roleName </td>
+                                                    <td class="text-center"> @item.roleName </td>*@
                                                     <td class="text-center">
-                                                        <a asp-action="UpdateYear" asp-route-id="@item.id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
-                                                        <a asp-action="DeleteYear" asp-route-id="@item.id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
+                                                        <a asp-action="UpdateYear" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
+                                                        <a asp-action="DeleteYear" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
                                                     </td>
                                                 </tr>
                                             }
@@ -335,12 +335,9 @@
     $(document).ready(function () {
         $('#table').DataTable({
             'columnDefs': [{
-                'targets': [9], // column index (start from 0)
+                'targets': [5], // column index (start from 0)
                 'orderable': false, // set orderable false for selected columns
-            },
-            { visible: false, targets: [5, 6, 7, 8] },
-
-            ],
+            }],
             dom: 'lBfrtip',
             responsive: true,
             buttons: [

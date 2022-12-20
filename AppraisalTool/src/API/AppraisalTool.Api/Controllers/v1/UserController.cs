@@ -21,6 +21,7 @@ using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Branches.Command.RemoveBranchCommand;
 using AppraisalTool.Application.Features.Users.Command.AssignAuthorityCommand;
 using AppraisalTool.Application.Features.Authority.Query.GetAllAuthority;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -30,22 +31,24 @@ namespace AppraisalTool.Api.Controllers.v1
     {
         private readonly IMediator _mediator;
         private readonly ILogger<UserController> _logger;
+        private readonly IDataProtector _protector;
         private readonly IBranchRepository _branchRepository;
-        
-        public UserController(IMediator mediator, ILogger<UserController> logger, IBranchRepository branchRepository)
+
+        public UserController(IMediator mediator, ILogger<UserController> logger, IBranchRepository branchRepository, IDataProtectionProvider provider)
         {
             _branchRepository = branchRepository;
             _mediator = mediator;
-            _logger=logger;
+            _logger = logger;
+            _protector = provider.CreateProtector("");
         }
 
-       
+
         [HttpPost("RegisterUser")]
         public async Task<ActionResult> RegisterAsync(CreateUserCommand request)
         {
             _logger.LogInformation("RegisterAsync Initiated");
             var dtos = await _mediator.Send(request);
-           
+
             _logger.LogInformation("RegisterAsync Completed");
             return Ok(dtos);
         }
@@ -54,7 +57,7 @@ namespace AppraisalTool.Api.Controllers.v1
         public async Task<ActionResult> RemoveAsync(int id)
         {
             _logger.LogInformation("RemoveAsync Initiated");
-            var dtos = await _mediator.Send(new RemoveUserCommand() { Id=id});
+            var dtos = await _mediator.Send(new RemoveUserCommand() { Id = id });
             _logger.LogInformation("RemoveAsync Completed");
             return Ok(dtos);
         }
@@ -62,9 +65,8 @@ namespace AppraisalTool.Api.Controllers.v1
         [HttpPut("UpdateUser")]
         public async Task<ActionResult> UpdateUserAsync(UpdateUserCommand request)
         {
-            //var request = new UpdateUserCommand();
             _logger.LogInformation("UpdateUserAsync Initiates");
-            var dtos=await _mediator.Send(request);
+            var dtos = await _mediator.Send(request);
             _logger.LogInformation("UpdateUserAsync Completed ");
             return Ok(dtos);
         }
@@ -72,9 +74,9 @@ namespace AppraisalTool.Api.Controllers.v1
         [Route("GetJobProfile")]
         public async Task<ActionResult> GetJobProfile()
         {
-           var dtos= await _mediator.Send(new GetRoleQuery());
-           return Ok(dtos);
-                 
+            var dtos = await _mediator.Send(new GetRoleQuery());
+            return Ok(dtos);
+
         }
         [HttpGet]
         [Route("GetBranch")]
@@ -93,8 +95,8 @@ namespace AppraisalTool.Api.Controllers.v1
             return Ok(dtos);
 
         }
+
         [HttpGet(Name = "GetUserList")]
-        
         public async Task<ActionResult> GetAllUserList()
         {
             var res = await _mediator.Send(new GetUserListQuery());
@@ -114,7 +116,7 @@ namespace AppraisalTool.Api.Controllers.v1
         public async Task<ActionResult> GetUserJobProfile(int id)
         {
             _logger.LogInformation("GetUserJobProfile Initiated");
-            var dtos = await _mediator.Send(new GetUserJobProfilesQuery() { Id=id});
+            var dtos = await _mediator.Send(new GetUserJobProfilesQuery() { Id = id });
             _logger.LogInformation("GetUserJobProfile Completed");
             return Ok(dtos);
         }
@@ -139,6 +141,7 @@ namespace AppraisalTool.Api.Controllers.v1
             _logger.LogInformation("GetUserAsync Completed");
             return Ok(dtos);
         }
+
         [HttpGet("getUserByRoleId")]
         public async Task<ActionResult> GetUserByRoleId(int id)
         {
@@ -153,12 +156,12 @@ namespace AppraisalTool.Api.Controllers.v1
         public async Task<ActionResult> GetAllAppraisal()
         {
             _logger.LogInformation("GetAllAppraisal Initiated");
-            var dtos = await _mediator.Send(new GetAppraisalListQuery()) ;
+            var dtos = await _mediator.Send(new GetAppraisalListQuery());
             _logger.LogInformation("GetAllAppraisal Completed");
             return Ok(dtos);
         }
 
-        
+
         [HttpGet("ListOfBranch")]
         public async Task<ActionResult> GetAllBranch()
         {

@@ -8,6 +8,7 @@ namespace AppraisalTool.App.Models
         
 
         public int Id { get; set; }
+        public String IdEncoded { get; set; }
 
         [Required(ErrorMessage = "First name is required")]
         [RegularExpression(@"^[a-zA-z]+$", ErrorMessage = "First Name Should Contain only Alphabet")]

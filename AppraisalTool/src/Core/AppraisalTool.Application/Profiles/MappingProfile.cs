@@ -35,6 +35,7 @@ using AppraisalTool.Application.Features.UserJobProfileRoles.Query.GetJobProfile
 using AppraisalTool.Application.Features.UserRoles.Command.CreateUserRoleCommand;
 using AppraisalTool.Application.Features.UserRoles.Query.GetUserRoleById;
 using AppraisalTool.Application.Features.Branches.Command.AddBranchCommand;
+using AppraisalTool.Application.Models.Encoding;
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -68,7 +69,6 @@ namespace AppraisalTool.Application.Profiles
             //CreateMap<Appraisal, GetDataVM>().ConvertUsing<GetDataVmCustomMapper>();
             //CreateMap<Appraisal, GetDataQuery>().ReverseMap();  
             CreateMap<User, GetDataVM>().ConvertUsing<GetDataVmCustomMapper>();
-            
 
 
             CreateMap<Appraisal, GetYearQuery>().ReverseMap();
