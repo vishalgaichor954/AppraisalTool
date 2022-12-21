@@ -1,23 +1,20 @@
 ﻿@model AppraisalTool.App.Models.Menu.MenuModel
 
 @{
-    ViewData["Title"] = "Add Menu";
+    ViewData["Title"] = "Update Menu";
 }
-<style>
-    .checkbox {
-        disply: flex;
-    }
-</style>
-
-<<<<<<< HEAD
 <div class="loader" style="display:none;">
     <div class="d-flex justify-content-center align-items-center" style="height:100vh ;">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
         </div>
     </div>
 </div>
-<div class="container">
-=======
+<style>
+    .checkbox {
+        display: flex;
+    }
+</style>
+
 <div class="content-wrapper main-panel content-wrapper-red">
 
     <nav aria-label="breadcrumb">
@@ -31,13 +28,12 @@
             <li class="breadcrumb-item active" aria-current="page">Update Menu</li>
         </ol>
     </nav>
->>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
 
     <div class="col-11">
         <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Update Menu</h4>
-                <form class="form-sample form-inline needs-validation" id="myForm" asp-action="UpdateMenu" method="post"  novalidate>
+                <form class="form-sample form-inline needs-validation" asp-controller="Menu" asp-route-id="@Model.menu_Id" method="post" id="myForm" novalidate>
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
@@ -129,7 +125,7 @@
                                     {
                                         @if (item.Value == i.Value)
                                         {
-                                            <input type="checkbox" value="@i.Value" name="selectedRoles" id="check" class="form-check-input changeChecker" checked  >
+                                            <input type="checkbox" value="@i.Value" name="selectedRoles" id="check" class="form-check-input changeChecker" checked>
                                             <label class="form-check-label">@i.Key</label>
                                         }
 
@@ -147,8 +143,8 @@
                                         {
                                             ViewBag.RoleList.Remove(item.Key);
                                         }
-                                      
-                                        
+
+
 
 
 
@@ -159,7 +155,7 @@
                                 }
 
 
-                             @foreach (var role in ViewBag.RoleList)
+                                @foreach (var role in ViewBag.RoleList)
                                 {
 
                                     <input type="checkbox" value="@role.Value" name="selectedRoles" id="check" class="form-check-input  changeChecker">
@@ -171,13 +167,12 @@
                                 }
 
 
-   
 
                                 @*@foreach (var role in ViewBag.roledict3)
                                 {
 
-                                    <input type="checkbox" value="@role.Value" name="selectedRoles" id="check" class="form-check-input  changeChecker ">
-                                    <label class="form-check-label">@role.Key</label>
+                                <input type="checkbox" value="@role.Value" name="selectedRoles" id="check" class="form-check-input  changeChecker ">
+                                <label class="form-check-label">@role.Key</label>
 
 
 
@@ -193,7 +188,7 @@
                         @* <input type="hidden" name="job" id="job" />*@
                         <div class="row">
                             <div class="col-4"></div>
-                            <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" id="buttonID" /> </div>
+                            <div class="col-2"> <input type="submit" id="buttonID" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
 
                             <div class="col-2">  <a asp-action="ListMenu" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
                             <div class="col-4"></div>
@@ -210,11 +205,122 @@
 </div>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+@*<script>
+    document.querySelectorAll(".changeChecker").forEach(element => {
+
+        element.addEventListener("change", () => {
+            const checkboxes = document.querySelectorAll(".changeChecker");
+            let checkedBoxes = 0;
+            checkboxes.forEach(ele => {
+
+                if (ele.checked) {
+                    checkedBoxes += 1;
+                }
+
+            });
+            if (checkedBoxes == 0) {
+                checkboxes.forEach(box => {
+                    box.setAttribute("required", true);
+                })
+            }
+            if (checkedBoxes != 0) {
+                checkboxes.forEach(box => {
+                    box.removeAttribute("required");
+                })
+            }
+
+        });
+    })
+
+
+    $("#buttonID").click(function() {
+
+        alert("inside btn click func");
+        var valid = $("#myForm").valid();
+
+
+
+        if (valid === true) {
+
+            var tt = setInterval(function() {
+
+                $(".loader").show();
+            }, 10);
+            setTimeout(function() {
+                clearInterval(tt);
+                $(".loader").hide();
+            }, 7000);
+            console.log("inside if");
+        }
+        console.log(valid);
+</script>*@
+
+
+
+
+@*<script>
+    document.querySelectorAll(".changeChecker").forEach(element => {
+
+        element.addEventListener("change", () => {
+            const checkboxes = document.querySelectorAll(".changeChecker");
+            let checkedBoxes = 0;
+            checkboxes.forEach(ele => {
+
+                if (ele.checked) {
+                    checkedBoxes += 1;
+                }
+
+            });
+            if (checkedBoxes == 0) {
+                checkboxes.forEach(box => {
+                    box.setAttribute("required", true);
+                })
+            }
+            if (checkedBoxes != 0) {
+                checkboxes.forEach(box => {
+                    box.removeAttribute("required");
+                })
+            }
+
+        });
+    })
+
+
+    $("#buttonID").click(function() {
+
+        //alert("inside btn click func");
+        var valid = $("#myForm").valid();
+
+
+
+        if (valid === true) {
+
+            var tt = setInterval(function() {
+
+                $(".loader").show();
+            }, 10);
+            setTimeout(function() {
+                clearInterval(tt);
+                $(".loader").hide();
+            }, 7000);
+            console.log("inside if");
+        }
+        console.log(valid);
+
+    })
+    console.log(valid);
+
+    console.log("hello hi");
+</script>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.slim.min.js" defer></script>
 
-<script src="~/js/DropdownValidator.js"></script>
 <script>
+
+
     (function() {
         'use strict'
 
@@ -244,32 +350,36 @@
             })
     })()
 
-   
-    document.querySelectorAll(".changeChecker").forEach(element=>{
+
+    document.querySelectorAll(".changeChecker").forEach(element => {
 
         element.addEventListener("change", () => {
             const checkboxes = document.querySelectorAll(".changeChecker");
             let checkedBoxes = 0;
             checkboxes.forEach(ele => {
-              
-                 if(ele.checked){
-                     checkedBoxes += 1;
-                 }
+
+                if (ele.checked) {
+                    checkedBoxes += 1;
+                }
 
             });
-            if(checkedBoxes == 0){
+            if (checkedBoxes == 0) {
                 checkboxes.forEach(box => {
                     box.setAttribute("required", true);
                 })
             }
-            if(checkedBoxes != 0){
+            if (checkedBoxes != 0) {
                 checkboxes.forEach(box => {
                     box.removeAttribute("required");
                 })
             }
+
         });
     })
-</script>
+</script>*@
+
+
+
 
 <script>
      $("#buttonID").click(function() {

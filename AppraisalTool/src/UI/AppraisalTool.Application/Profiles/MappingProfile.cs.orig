@@ -1,0 +1,31 @@
+﻿using AppraisalTool.App.Dtos;
+using AppraisalTool.App.Models;
+<<<<<<< HEAD
+using AppraisalTool.App.Models.FinancialYear;
+using AppraisalTool.App.Models.Menu;
+=======
+using AppraisalTool.App.Models.Branches;
+using AppraisalTool.App.Models.JobRoles;
+using AppraisalTool.App.Models.UserRole;
+>>>>>>> 33a8a68500e822c1c5aa895861fbd0d6309e3dc8
+using AutoMapper;
+
+namespace AppraisalTool.App.Profiles
+{
+    public class MappingProfile : Profile
+    {
+        public MappingProfile()
+        {
+            CreateMap<UserViewModel, UserEncodeDto>().ConvertUsing<EncodeUserListVm>();
+<<<<<<< HEAD
+            CreateMap<MenuModel, MenuEncodeDto>().ConvertUsing<EncodeMenuListVm>();
+            CreateMap<FinancialYear, FinancialYearEncodeDto>().ConvertUsing<EncodeFinancialYearListVm>();
+=======
+            CreateMap<JobRoles, jobRolesEncoded>().ConvertUsing<EncodedJobRolesList>();
+            CreateMap<UserRole, UserEncodedDto>().ConvertUsing<EncodedRoleLists>();
+            CreateMap<BranchVm, EncodedBranchDto>().ConvertUsing<EncodedBranchList>();
+>>>>>>> 33a8a68500e822c1c5aa895861fbd0d6309e3dc8
+        }
+    }
+}
+

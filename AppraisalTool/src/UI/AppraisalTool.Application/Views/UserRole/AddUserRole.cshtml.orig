@@ -1,0 +1,189 @@
+﻿@model AppraisalTool.App.Models.UserRole.UserRole
+
+@{
+    //ViewData["Title"] = "AppraisalTool";
+}
+
+
+<div class="loader" style="display:none;">
+    <div class="d-flex justify-content-center align-items-center" style="height:100vh ;">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    .small {
+        font-size: 14px;
+    }
+</style>
+<div class="content-wrapper main-panel content-wrapper-red">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb" style="border:none">
+            <li class="breadcrumb-item">
+                <a asp-controller="Admin" class="active" asp-action="ConfigureSetting" style=" text-decoration: none;">Configure Settings</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a asp-controller="UserRole" class="active" asp-action="ListUserRole" style=" text-decoration: none;">User Role Management</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Create User Role</li>
+        </ol>
+    </nav>
+
+    <div class="col-11">
+        <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
+            <div class="card-body">
+<<<<<<< HEAD
+                <h4 class="card-title">Add User Role</h4>
+                <form class="form-sample needs-validation" asp-action="AddUserRole" id="myForm" novalidate>
+=======
+                <h4 class="card-title">Create User Role</h4>
+                <form class="form-sample needs-validation" asp-action="AddUserRole" novalidate>
+>>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
+                    <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label asp-for="Role" class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
+                                <div class="col-sm-8">
+                                    <input asp-for="Role" type="Text" class="form-control" required />
+                                    <br />
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group text-center">
+                        @* <input type="hidden" name="job" id="job" />*@
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-2"> <input type="submit" style="width:130px" id="buttonID" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
+
+                            <div class="col-2">  <a asp-action="ListUserRole" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
+
+                            <div class="col-4"></div>
+                            @* <input id="submit" type="submit" value="submit" class="btn btn-primary mt-4" />
+                            <input type="reset" value="reset" class="btn btn-danger mt-4" />*@
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script>
+    function xyz() {
+        var el_up = document.getElementById("to").value;
+        console.log(el_up);
+        d1 = new Date(el_up);
+        var year1 = d1.getFullYear();
+        console.log(year1);
+        var month = d1.getMonth();
+        console.log(month);
+        var day = d1.getDate();
+        console.log(day);
+        var c = new Date(year1 + 1, month, day).toISOString().split('T')[0];
+        console.log(c);
+        document.getElementById('from').value = c;
+
+
+
+    }
+</script>
+@*<script>
+    document.getElementById("buttonID").onclick = function() {
+        let allAreFilled = true;
+        document.getElementById("myForm").querySelectorAll("[required]").forEach(function(i) {
+            if (!allAreFilled) return;
+            if (i.type === "checkbox") {
+                let radioValueCheck = false;
+                document.getElementById("myForm").querySelectorAll(`[name=${i.name}]`).forEach(function(r) {
+                    if (r.checked) radioValueCheck = true;
+                })
+                allAreFilled = radioValueCheck;
+                return;
+            }
+            if (!i.value) { allAreFilled = false; return; }
+        })
+        if (!allAreFilled) {
+
+
+            (function() {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+            console.log(allAreFilled);
+
+        }
+        else {
+
+            document.getElementById("buttonID").onclick = function() {
+
+                this.disabled = true;
+            }
+        }
+    }
+
+
+
+</script>*@
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+    <script src="./lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="./lib/assets/js/off-canvas.js"></script>
+
+
+    <script src="./lib/assets/js/hoverable-collapse.js"></script>
+
+    <script src="./lib/assets/js/misc.js"></script>
+    <!-- endinject -->
+
+    <script src="~/lib/assets/vendors/js/vendor.bundle.base.js"></script>
+
+    @*<script src="assets/vendors/chart.js/Chart.min.js"></script>*@
+    <script src=" ~/lib/assets/vendors/chart.js/Chart.min.js"></script>
+    @*    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>*@
+    <script src=" ~/lib/assets/js/jquery.cookie.js" type="text/javascript"></script>
+    @*<script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>*@
+    <script src=" ~/lib/assets/js/off-canvas.js"></script>
+    <script src=" ~/lib/assets/js/hoverable-collapse.js"></script>
+    <script src=" ~/lib/assets/js/misc.js"></script>
+
+
