@@ -412,6 +412,7 @@ namespace AppraisalTool.App.Controllers
         {
             string x = HttpContext.Session.GetString("user");
             if (x == null)
+            
             {
                 return RedirectToAction("Login", "Login");
             }

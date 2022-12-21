@@ -177,7 +177,54 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
             
         }
 
+       
+        [Fact]
+   
+        public async Task Get_Appraisal_By_Id()
+        {
+            var controller = new AppraisalHomeController(_mockMediator.Object, _mockLogger.Object, _userRepository.Object);
+            var result = await controller.GetAppraisalById(96);
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
+            okObjectResult.StatusCode.ShouldBe(200);
+            okObjectResult.Value.ShouldNotBeNull();
+            okObjectResult.Value.ShouldBeOfType<Response<Appraisal>>();
+
+        }
+        [Fact]
+
+        public async Task Get_Appraisal_Results_ByAppraisalId()
+        {
+            var controller = new AppraisalHomeController(_mockMediator.Object, _mockLogger.Object, _userRepository.Object);
+            var result = await controller.GetAppraisalResultsByAppraisalId(96);
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
+            okObjectResult.StatusCode.ShouldBe(200);
+           
+            okObjectResult.Value.ShouldBeOfType<Response<List<AppraisalResult>>>();
+
+        }
+        [Fact]
+
+        public async Task Get_Review_Appraisal_By_RevAuthority()
+        {
+            var controller = new AppraisalHomeController(_mockMediator.Object, _mockLogger.Object, _userRepository.Object);
+            var result = await controller.GetReviewAppraisalByRevAuthority(1);
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
+            okObjectResult.StatusCode.ShouldBe(200);
+           
+            okObjectResult.Value.ShouldBeOfType<Response<List<ReviewAppraisalListVm>>>();
+
+        }
+
+         
+        
+
+
+
         #endregion
+
 
     }
 }
