@@ -14,11 +14,8 @@
     .small {
         font-size: 14px;
     }
-<<<<<<< HEAD
    
 
-=======
->>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
 </style>
 <div class="content-wrapper main-panel content-wrapper-red">
 
@@ -38,7 +35,11 @@
         <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Update Branch</h4>
+<<<<<<< HEAD
+                <form method="post" class="form-sample needs-validation" action="/Branch/UpdateBranch/@Model.Id" novalidate>
+=======
                 <form class="form-sample needs-validation" asp-action="UpdateBranch" id="myForm" novalidate>
+>>>>>>> AT-Dev
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
 
                     <div class="row">
@@ -66,11 +67,7 @@
                         @* <input type="hidden" name="job" id="job" />*@
                         <div class="row">
                             <div class="col-4"></div>
-<<<<<<< HEAD
                             <div class="col-2"> <input type="submit" style="width:130px" id="buttonID" name="buttonname" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
-=======
-                            <div class="col-2"> <input type="submit" style="width:130px" value="Save" class="btn btn-block blueTheme btn-md font-weight-medium auth-form-btn" /> </div>
->>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
 
                             <div class="col-2">  <a asp-action="ListBranches" class="btn  btn-block ResetButton btn-md font-weight-medium auth-form-btn">Cancel</a></div>
                             <div class="col-4"></div>
@@ -88,7 +85,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-<<<<<<< HEAD
 
 @*<script>
     document.getElementById("buttonID").onclick = function() {
@@ -146,30 +142,6 @@
 
 
 
-=======
-
-<script>
-    (function () {
-        'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
-</script>
->>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

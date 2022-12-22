@@ -65,10 +65,6 @@
 </style>
 
 
-<<<<<<< HEAD
-<div class="container">
-
-=======
 <div class="content-wrapper main-panel content-wrapper-red">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style="border:none">
@@ -81,12 +77,16 @@
             <li class="breadcrumb-item active" aria-current="page">Update User</li>
         </ol>
     </nav>
->>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
+
     <div class="col-11">
         <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
                 <h4 class="card-title"> Update User</h4>
+<<<<<<< HEAD
+                <form method="post" class="form-sample needs-validation" action="/Admin/UpdateUser/@Model.Id" novalidate>
+=======
                 <form class="form-sample needs-validation" asp-action="UpdateUser" method="post" id="myForm" novalidate>
+>>>>>>> AT-Dev
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
@@ -148,11 +148,7 @@
                             <div class="form-group row">
                                 <label asp-for="RoleId" class="col-sm-4 col-form-label">Role<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-<<<<<<< HEAD
-                                    <select asp-for="RoleId" class="form-control" asp-items="@ViewBag.Rolelist" required>
-=======
                                     <select asp-for="RoleId" class="form-control p-3 form-select" asp-items="@ViewBag.Rolelist" required >
->>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
                                         <option value="">Select Role</option>
                                     </select>
                                     @*<span asp-validation-for="RoleId" class="text-danger mx-1 small"></span>*@

@@ -20,9 +20,6 @@
 </style>
 
 
-<<<<<<< HEAD
-<div class="container">
-=======
 <div class="content-wrapper main-panel content-wrapper-red">
 
     <nav aria-label="breadcrumb">
@@ -37,17 +34,15 @@
         </ol>
     </nav>
 
->>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
     <div class="col-11">
         <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
-<<<<<<< HEAD
-                <h4 class="card-title"> Assign Authority</h4>
-                <form class="form-sample needs-validation" asp-action="AssignAuthority" id="myForm" method="post" novalidate>
-=======
                 <h4 class="card-title" style="margin-left:3%;"> Assign Authority</h4>
-                <form class="form-sample needs-validation" asp-action="AssignAuthority" method="post" novalidate>
->>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
+<<<<<<< HEAD
+                <form class="form-sample needs-validation" action="/Authority/AssignAuthority/@Model.Id" method="post" novalidate>
+=======
+                <form class="form-sample needs-validation" asp-action="AssignAuthority" id="myForm" method="post" novalidate>
+>>>>>>> AT-Dev
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
@@ -59,18 +54,6 @@
                                 </div>
                             </div>
                         </div>
-<<<<<<< HEAD
-
-                    </div>
-
-
-
-
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group row">
-=======
                       @*  <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="LastName" class="col-sm-4 col-form-label">Last Name<sup class="required">*</sup></label>
@@ -84,17 +67,12 @@
                      <div class="row">
                           <div class="col-md-6">
                              <div class="form-group row">
->>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
                                 <label asp-for="RepaId" class="col-sm-4 col-form-label">
                                     Reporting Authority<span style="color: Red">&nbsp;*</span>
                                 </label>
 
                                 <div asp-for="RepaId" class="col-sm-8">
-<<<<<<< HEAD
-                                    <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control" required>
-=======
                                     <select asp-for="RepaId" asp-items="@ViewBag.ReportingList" class="form-control p-3 form-select" required>
->>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
                                         <option value="">Select Reporting Authority </option>
                                     </select>
                                     <span asp-validation-for="RepaId" class="text-danger mx-1 small"></span>
