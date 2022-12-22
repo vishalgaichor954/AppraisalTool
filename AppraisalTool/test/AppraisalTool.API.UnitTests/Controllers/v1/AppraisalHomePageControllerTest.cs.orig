@@ -40,6 +40,7 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
         [Fact]
         public async Task Get_Data_ByYear()
         {
+<<<<<<< HEAD
             var controller = new AppraisalHomeController(_mockMediator.Object,_mockLogger.Object,_userRepository.Object);
             var result = await controller.GetDataByYear(1, 5);
             
@@ -191,6 +192,49 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
             okObjectResult.Value.ShouldBeOfType<Response<Appraisal>>();
 
         }
+=======
+            var controller = new AppraisalHomeController(_mockMediator.Object, _mockLogger.Object, _userRepository.Object);
+            var result = await controller.GetDataByYear(1, 5);
+
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
+            okObjectResult.StatusCode.ShouldBe(200);
+            okObjectResult.ShouldNotBeNull();
+            //okObjectResult.ShouldBeOfType<Response<IEnumerable<GetDataVM>>>();
+
+
+        }
+
+        [Fact]
+        public async Task Get_Appraisal_ByFidAndUserId()
+        {
+            var controller = new AppraisalHomeController(_mockMediator.Object, _mockLogger.Object, _userRepository.Object);
+            var result = await controller.GetAppraisalByFidAndUserId(2, 1);
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
+            okObjectResult.StatusCode.ShouldBe(200);
+            result.ShouldNotBeNull();
+            //okObjectResult.Value.ShouldNotBeNull();
+
+        }
+
+
+        [Fact]
+        public async Task Request_ToEdit()
+        {
+            var controller = new AppraisalHomeController(_mockMediator.Object, _mockLogger.Object, _userRepository.Object);
+            var result = await controller.RequestToEdit(7, 1);
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
+            okObjectResult.StatusCode.ShouldBe(200);
+            result.ShouldNotBeNull();
+        }
+        #endregion
+
+
+
+
+>>>>>>> 47a95f46efc29e34096fd613a7f9b73acd8b4b20
         [Fact]
 
         public async Task Get_Appraisal_Results_ByAppraisalId()
@@ -200,12 +244,39 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
             result.ShouldBeOfType<OkObjectResult>();
             var okObjectResult = result as OkObjectResult;
             okObjectResult.StatusCode.ShouldBe(200);
+<<<<<<< HEAD
            
             okObjectResult.Value.ShouldBeOfType<Response<List<AppraisalResult>>>();
 
         }
         [Fact]
 
+=======
+
+
+
+        }
+        #region Review Appraisal
+
+        [Fact]
+
+        public async Task Get_Review_Appraisal_By_RevA()
+        {
+            var controller = new AppraisalHomeController(_mockMediator.Object, _mockLogger.Object, _userRepository.Object);
+            var result = await controller.GetReviewAppraisalByRevAuthority(1);
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
+            okObjectResult.StatusCode.ShouldBe(200);
+            result.ShouldNotBeNull();
+
+            //okObjectResult.Value.ShouldBeOfType<Response<List<ReviewAppraisalListVm>>>();
+
+        }
+
+        [Fact]
+
+
+>>>>>>> 47a95f46efc29e34096fd613a7f9b73acd8b4b20
         public async Task Get_Review_Appraisal_By_RevAuthority()
         {
             var controller = new AppraisalHomeController(_mockMediator.Object, _mockLogger.Object, _userRepository.Object);
@@ -213,6 +284,21 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
             result.ShouldBeOfType<OkObjectResult>();
             var okObjectResult = result as OkObjectResult;
             okObjectResult.StatusCode.ShouldBe(200);
+<<<<<<< HEAD
+           
+            okObjectResult.Value.ShouldBeOfType<Response<List<ReviewAppraisalListVm>>>();
+
+        }
+
+         
+        
+
+
+
+        #endregion
+
+
+=======
             result.ShouldNotBeNull();
 
 
@@ -227,6 +313,7 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
 
 
 
+>>>>>>> 47a95f46efc29e34096fd613a7f9b73acd8b4b20
     }
 }
 

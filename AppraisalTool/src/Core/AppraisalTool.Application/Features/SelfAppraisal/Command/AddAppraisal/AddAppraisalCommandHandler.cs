@@ -27,6 +27,7 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal
         {
             Appraisal apraisalData = _mapper.Map<Appraisal>(request.addAppraisal);
             var response= await _selfAppraisalRepository.AddAppraisal(apraisalData);
+
             return new Response<Appraisal>() { Data = response, Message = "Added Successfully", Succeeded = true, Errors = null };
         }
     }
