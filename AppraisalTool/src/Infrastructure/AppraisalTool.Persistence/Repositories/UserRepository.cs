@@ -1,4 +1,5 @@
-﻿using AppraisalTool.Application.Contracts.Persistence;
+﻿using AppraisalTool.Application.Contracts.Infrastructure;
+using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalList;
 using AppraisalTool.Application.Features.Authority.Query.GetAllAuthority;
 using AppraisalTool.Application.Features.Users.Command.AssignAuthorityCommand;
@@ -27,12 +28,15 @@ namespace AppraisalTool.Persistence.Repositories
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly ILogger _logger;
+        private readonly IEmailService _emailservice;
+
         //private readonly IAuthenticationService _authService;
 
-        public UserRepository(ApplicationDbContext context, ILogger<User> logger/* IAuthenticationService authservice*/) : base(context, logger)
+        public UserRepository(ApplicationDbContext context, ILogger<User> logger/* IAuthenticationService authservice*/, IEmailService emailService) : base(context, logger)
         {
             _dbContext = context;
             _logger = logger;
+            _emailservice = emailService;
             //_authService = authservice;
         }
 
@@ -89,7 +93,7 @@ namespace AppraisalTool.Persistence.Repositories
 
         }
 
-      
+
         //@Author : Ilyas Dabholkar
         public async Task<User> FindUserByEmail(string email)
         {
@@ -100,13 +104,13 @@ namespace AppraisalTool.Persistence.Repositories
             }
             return user;
         }
-       
+
 
         //@Author : Abhishek Singh
         public async Task<List<MenuRoleMapping>> getAllCards(int id)
         {
             List<MenuRoleMapping> menu = _dbContext.MenuRoleMappings.Where(x => x.Role_id == id).Include(y => y.MenuList).ToList();
-            return menu.Where(x=>x.MenuList.IsDeleted != true).ToList();
+            return menu.Where(x => x.MenuList.IsDeleted != true).ToList();
             //return menu;
         }
 
@@ -139,14 +143,14 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<UpdateUserCommandDto> UpdateUserAsync(int id, UpdateUserCommand request)
         {
-            
+
             int PrimaryJobProfileId = 0;
             int SecondaryJobProfileId = 0;
             UpdateUserCommandDto response = new UpdateUserCommandDto();
             var userToUpdate = await _dbContext.User.Where(u => u.Id == id).FirstOrDefaultAsync();
             if (userToUpdate != null)
             {
-                
+
                 userToUpdate.FirstName = request.FirstName;
                 userToUpdate.LastName = request.LastName;
                 userToUpdate.Email = request.Email;
@@ -154,7 +158,7 @@ namespace AppraisalTool.Persistence.Repositories
                 userToUpdate.BranchId = (int)request.BranchId;
                 userToUpdate.JoinDate = request.JoinDate;
                 var Getuserrole = await GetUserById(userToUpdate.Id);
-                
+
 
 
                 foreach (UserJobRoles item in Getuserrole.JobRoles)
@@ -162,7 +166,7 @@ namespace AppraisalTool.Persistence.Repositories
                     if (item.IsPrimary)
                     {
 
-                        item.JobRoleId= (int)request.PrimaryJobProfileId;
+                        item.JobRoleId = (int)request.PrimaryJobProfileId;
 
                     }
                     else if (item.IsSecondary)
@@ -177,7 +181,7 @@ namespace AppraisalTool.Persistence.Repositories
                 //    authority.ReportingAuthorityId = request.RepaId;
                 //    authority.ReviewingAuthorityId = request.RevaId;
                 //}
-             
+
                 await _dbContext.SaveChangesAsync();
                 response.Message = "User Details Update Successfully";
                 response.Succeeded = true;
@@ -294,7 +298,7 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<IEnumerable<User>> GetUserByRoleId(int roleId)
         {
-            var user =await _dbContext.User.Where(u => u.RoleId == roleId).ToListAsync();
+            var user = await _dbContext.User.Where(u => u.RoleId == roleId).ToListAsync();
             return user;
         }
 
@@ -324,8 +328,9 @@ namespace AppraisalTool.Persistence.Repositories
 
             var result = (from A in _dbContext.User
                           join B in _dbContext.UserAuthorityMappings on A.Id equals B.UserId
-                          into auth from authority in auth.DefaultIfEmpty()
-                          
+                          into auth
+                          from authority in auth.DefaultIfEmpty()
+
                           select new GetUserListQueryVm
                           {
                               Id = A.Id,
@@ -347,14 +352,14 @@ namespace AppraisalTool.Persistence.Repositories
                               Name = A.FirstName + " " + A.LastName,
                               RepaName = authority.ReportingAuthority.FirstName,
                               RevaName = authority.ReviewingAuthority.FirstName,
-                             
+
 
                           });
             var res = await result.Where(u => u.Id == id).FirstOrDefaultAsync();
             return res;
-                        
+
         }
-    
+
         public async Task<IEnumerable<GetAppraisalDto>> GetAllAppraisals()
         {
             //IEnumerable<Appraisal> appraisals = await _dbContext.Appraisal.Include(x => x.Id).
@@ -365,50 +370,63 @@ namespace AppraisalTool.Persistence.Repositories
 
             IEnumerable<GetAppraisalDto> res = (from A in _dbContext.User
                                                 join B in _dbContext.Appraisal on A.Id equals B.UserId
-                                                where B.EditRequested==true
+                                                where B.EditRequested == true
 
 
 
                                                 select new GetAppraisalDto
                                                 {
                                                     AppraisalId = B.Id,
-                                                    UserId=B.UserId,
-                                                    Firstname=A.FirstName,
-                                                    LastName=A.LastName,
-                                                    FinanceYearId=B.FinancialYearId,
-                                                    StartYear=B.FinancialYear.StartYear,
-                                                    EndYear=B.FinancialYear.EndYear,
-                                                    StatusId=B.StatusId,
+                                                    UserId = B.UserId,
+                                                    Firstname = A.FirstName,
+                                                    LastName = A.LastName,
+                                                    FinanceYearId = B.FinancialYearId,
+                                                    StartYear = B.FinancialYear.StartYear,
+                                                    EndYear = B.FinancialYear.EndYear,
+                                                    StatusId = B.StatusId,
                                                     StatusName = B.Status.StatusTitle,
-                                                    Editable =B.Editable,
-                                                    EditRequested=B.EditRequested,
+                                                    Editable = B.Editable,
+                                                    EditRequested = B.EditRequested,
 
 
-                                                }) ;
+                                                });
             return res;
 
 
 
         }
 
-        public async Task<bool>  AllowEdit(AppraisalForEditVm appraisalForEditVm)
+        public async Task<bool> AllowEdit(AppraisalForEditVm appraisalForEditVm)
         {
-            Appraisal appraisal = await _dbContext.Appraisal.Where(x => x.Id == appraisalForEditVm.AppraisalId ).FirstOrDefaultAsync();
+            Appraisal appraisal = await _dbContext.Appraisal.Where(x => x.Id == appraisalForEditVm.AppraisalId).FirstOrDefaultAsync();
             appraisal.Id = appraisalForEditVm.AppraisalId;
             appraisal.Editable = appraisalForEditVm.Editable;
-            if(appraisal.Editable==true)
+            await _dbContext.SaveChangesAsync();
+            if (appraisal.Editable == true)
             {
                 appraisal.EditRequested = false;
+                await _dbContext.SaveChangesAsync();
+                User employee = await _dbContext.User.Where(x => x.Id == appraisal.UserId).FirstOrDefaultAsync();
+                var email = new Email()
+                {
+                    To = employee.Email,
+                    Body = $"Dear User, <br/> Your Appraisal form can be edited now. Login to edit your appraisal form",
+                    Subject = $" Allowed Edit Access",
+                };
+                await _emailservice.SendEmail(email);
+                appraisal.User = null;
             }
-            await _dbContext.SaveChangesAsync();
-            if(appraisal != null)
+
+
+
+            if (appraisal != null)
             {
                 return true;
             }
             return false;
 
-           
-           
+
+
 
         }
 
@@ -420,6 +438,18 @@ namespace AppraisalTool.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
             if (appraisal != null)
             {
+                User user = await _dbContext.User.Where(x => x.RoleId == 1).FirstOrDefaultAsync();
+                User employee = await _dbContext.User.Where(x => x.Id == appraisal.UserId).FirstOrDefaultAsync();
+
+                var email = new Email()
+                {
+                    To = user.Email,
+                    Body = $"Dear User, <br/> {employee.FirstName}  {employee.LastName} asked edit access to edit their form. Login to approve or deny.",
+                    Subject = $" Edit Requested by {employee.FirstName} {employee.LastName}",
+                };
+                await _emailservice.SendEmail(email);
+                appraisal.User = null;
+
                 return true;
             }
             return false;
@@ -435,8 +465,19 @@ namespace AppraisalTool.Persistence.Repositories
                     appraisal.EditRequested = true;
                     _dbContext.Entry(appraisal).State = EntityState.Modified;
                     await _dbContext.SaveChangesAsync();
+                    User user = await _dbContext.User.Where(x => x.RoleId == 1).FirstOrDefaultAsync();
+                    User receiver = await _dbContext.User.Where(x => x.Id == appraisal.UserId).FirstOrDefaultAsync();
+
+                    var email = new Email()
+                    {
+                        To = user.Email,
+                        Body = $"Dear User, <br/> {receiver.FirstName}  {receiver.LastName} asked edit access to edit their form. Login to approve or deny.",
+                        Subject = $" Edit Requested by {receiver.FirstName} {receiver.LastName}",
+                    };
+                    await _emailservice.SendEmail(email);
+                    appraisal.User = null;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex);
                 }
@@ -456,12 +497,12 @@ namespace AppraisalTool.Persistence.Repositories
 
 
             AssignAuthorityCommandDto response = new AssignAuthorityCommandDto();
-              var userToUpdate = await _dbContext.User.Where(u => u.Id == id).FirstOrDefaultAsync();
+            var userToUpdate = await _dbContext.User.Where(u => u.Id == id).FirstOrDefaultAsync();
             if (userToUpdate != null)
             {
 
-                
-               
+
+
                 var authority = await _dbContext.UserAuthorityMappings.Where(x => x.UserId == userToUpdate.Id).FirstOrDefaultAsync();
                 if (authority != null)
                 {
@@ -475,7 +516,7 @@ namespace AppraisalTool.Persistence.Repositories
                 //authority.UserId = userToUpdate.Id;
                 //authority.ReportingAuthorityId = request.RepaId;
                 //authority.ReviewingAuthorityId = request.RevaId;
-                
+
                 await _dbContext.SaveChangesAsync();
                 response.Message = "User Details Update Successfully";
                 response.Succeeded = true;
@@ -494,7 +535,7 @@ namespace AppraisalTool.Persistence.Repositories
 
 
 
-} 
+}
 
 
-        
+

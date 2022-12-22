@@ -28,7 +28,7 @@ namespace AppraisalTool.Api.Middleware
                 await _next(context);
             }
             catch (Exception ex)
-            {
+             {
                 _logger.LogError(ex, "", null);
                 await ConvertException(context, ex);
             }
