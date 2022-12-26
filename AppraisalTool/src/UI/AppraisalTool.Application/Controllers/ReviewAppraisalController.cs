@@ -165,6 +165,7 @@ namespace AppraisalTool.App.Controllers
                 {
                     templateData.Add(new ReviewAppraisalListVm()
                     {
+                        
                         AppraisalId = i.appraisalId,
                         StartDate = i.startDate,
                         EndDate = i.endDate,
@@ -196,7 +197,7 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.reportingAuthority = reportingAuthority;
 
                 List<SelectListItem> appraisalStatus = new List<SelectListItem>();
-                foreach (var item in templateData.DistinctBy(x => x.AppraisalStatusId))
+                foreach (var item in templateData.Where(x=> x.AppraisalStatusId != 2).DistinctBy(x => x.AppraisalStatusId))
                 {
                     {
                         appraisalStatus.Add(new SelectListItem { Text = item.AppraisalStatus, Value = item.AppraisalStatusId.ToString() });
@@ -205,6 +206,7 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.appraisalStatus = appraisalStatus;
 
                 //templateData.Reverse();
+                
                 ViewBag.UserList = templateData;
                 return View();
             }
