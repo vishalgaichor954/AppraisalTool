@@ -13,11 +13,12 @@ namespace AppraisalTool.App.Controllers
     public class ReviewAppraisalController : Controller
     {
         private readonly ILogger<ReviewAppraisalController> _logger;
-        Uri baseAddress = new Uri("https://localhost:5000/api/v1");
+        Uri baseAddress;
         HttpClient client;
-        public ReviewAppraisalController(ILogger<ReviewAppraisalController> logger)
+        public ReviewAppraisalController(ILogger<ReviewAppraisalController> logger, IConfiguration configuration)
         {
             client = new HttpClient();
+            baseAddress = new Uri(configuration.GetValue<string>("BaseUrl"));
             client.BaseAddress = baseAddress;
             _logger = logger;
         }
@@ -40,9 +41,8 @@ namespace AppraisalTool.App.Controllers
 
             Console.WriteLine("ReviewAppraisalDashboard");
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            //List<ReporteeAppraisalDashboard> modellist = new List<ReporteeAppraisalDashboard>();
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetReviewAppraisalByRevAuthority?id={user.UserId} ").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetReviewAppraisalByRevAuthority?id={user.UserId} ").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -150,9 +150,8 @@ namespace AppraisalTool.App.Controllers
 
             Console.WriteLine("ReviewAppraisalDashboard");
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            //List<ReporteeAppraisalDashboard> modellist = new List<ReporteeAppraisalDashboard>();
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetReviewAppraisalByRevAuthority?id={user.UserId} ").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetReviewAppraisalByRevAuthority?id={user.UserId} ").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -212,7 +211,7 @@ namespace AppraisalTool.App.Controllers
             }
             return View();
         }
-    
+
     }
 }
 

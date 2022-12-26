@@ -13,18 +13,21 @@ namespace AppraisalTool.App.Controllers
 {
     public class UserRoleController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:5000/api/");
-        HttpClient client = new HttpClient();
+        Uri baseAddress;
+        HttpClient client;
 
         private readonly IMapper _mapper;
 
         private readonly IDataProtector _protector;
 
-        public UserRoleController(IMapper mapper, IDataProtectionProvider provider)
+        public UserRoleController(IMapper mapper, IDataProtectionProvider provider, IConfiguration configuration)
         {
             _mapper = mapper;
+            client = new HttpClient();
             _protector = provider.CreateProtector("");
+            baseAddress = new Uri(configuration.GetValue<string>("BaseUrl"));
         }
+
         [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult AddUserRole()
         {
@@ -108,9 +111,6 @@ namespace AppraisalTool.App.Controllers
                 var res = JsonConvert.DeserializeObject<Response>(data);
                 var serres = JsonConvert.SerializeObject(res.Data);
                 financialYear = JsonConvert.DeserializeObject<UserRole>(serres);
-                //ViewBag.RoleList = menu;
-
-                Console.WriteLine(financialYear);
             }
             return View(financialYear);
         }
@@ -134,22 +134,16 @@ namespace AppraisalTool.App.Controllers
             }
             TempData["editError"] = "Failed to Update Role";
             return RedirectToAction("ListUserRole");
-
-
-
         }
 
         [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult DeleteUserRole(string id)
         {
-            //User/removeUser?id=9&api-version=1
             Console.WriteLine("PostMethod hit");
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             int unprotectedId = int.Parse(_protector.Unprotect(id));
-            //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            //model.upda = userSession.UserId;
-            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/Role/RemoveUserRole?id={unprotectedId}&api-version=1").Result;
+            HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + $"Role/RemoveUserRole?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
