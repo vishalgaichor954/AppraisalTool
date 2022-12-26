@@ -13,17 +13,19 @@ namespace AppraisalTool.App.Controllers
 {
     public class JobRoleController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:5000/api/");
+        Uri baseAddress;
         HttpClient client = new HttpClient();
         private readonly IMapper _mapper;
 
         private readonly IDataProtector _protector;
 
-        public JobRoleController(IMapper mapper, IDataProtectionProvider provider)
+        public JobRoleController(IMapper mapper, IDataProtectionProvider provider, IConfiguration configuration)
         {
+            baseAddress = new Uri(configuration.GetValue<string>("BaseUrl"));
             _mapper = mapper;
             _protector = provider.CreateProtector("");
         }
+
         [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult AddjobRole()
         {
@@ -35,12 +37,10 @@ namespace AppraisalTool.App.Controllers
         {
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            
             if (ModelState.IsValid)
             {
                 var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-                model.AddedBy= userSession.UserId;
+                model.AddedBy = userSession.UserId;
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(client.BaseAddress + "Role/AddJobProfileRole?api-version=1", content).Result;
@@ -73,7 +73,7 @@ namespace AppraisalTool.App.Controllers
                 List<JobRoles> mylist = JsonConvert.DeserializeObject<List<JobRoles>>(JsonConvert.SerializeObject(res.Data));
                 //dynamic json = JsonConvert.DeserializeObject(responseData);
 
-                ViewBag.JobProfileRole = _mapper.Map<IEnumerable<jobRolesEncoded>>(mylist); 
+                ViewBag.JobProfileRole = _mapper.Map<IEnumerable<jobRolesEncoded>>(mylist);
                 return View();
 
             }
@@ -99,7 +99,7 @@ namespace AppraisalTool.App.Controllers
             {
                 return RedirectToAction("ListJobRole", "JobRole");
             }
-            
+
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Role/GetJobRoleById?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -126,7 +126,7 @@ namespace AppraisalTool.App.Controllers
             model.UpdatedBy = userSession.UserId;
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PutAsync("Role/UpdateJobProfileRole?api-version=1", content).Result;
+            HttpResponseMessage response = client.PutAsync(baseAddress + "Role/UpdateJobProfileRole?api-version=1", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 TempData["Success"] = "Role Update Successfully";
@@ -147,9 +147,8 @@ namespace AppraisalTool.App.Controllers
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             int unprotectedId = int.Parse(_protector.Unprotect(id));
-            //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            //model.upda = userSession.UserId;
-            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/Role/RemoveJobProfileRole?id={unprotectedId}&api-version=1").Result;
+
+            HttpResponseMessage response = client.DeleteAsync(baseAddress + $"Role/RemoveJobProfileRole?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;

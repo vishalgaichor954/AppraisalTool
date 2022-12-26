@@ -15,11 +15,13 @@ namespace AppraisalTool.App.Controllers
     {
 
         private readonly ILogger<ReporteeAppraisalDashboardController> _logger;
-        Uri baseAddress = new Uri("https://localhost:5000/api/v1");
+        Uri baseAddress;
         HttpClient client;
-        public ReporteeAppraisalDashboardController(ILogger<ReporteeAppraisalDashboardController> logger)
+
+        public ReporteeAppraisalDashboardController(ILogger<ReporteeAppraisalDashboardController> logger, IConfiguration configuration)
         {
             client = new HttpClient();
+            baseAddress = new Uri(configuration.GetValue<string>("BaseUrl"));
             client.BaseAddress = baseAddress;
             _logger = logger;
         }
@@ -42,9 +44,8 @@ namespace AppraisalTool.App.Controllers
 
             Console.WriteLine("ReporteeAppraisalDashboard");
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            //List<ReporteeAppraisalDashboard> modellist = new List<ReporteeAppraisalDashboard>();
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={user.UserId} ").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={user.UserId} ").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -153,18 +154,17 @@ namespace AppraisalTool.App.Controllers
 
             Console.WriteLine("ReporteeAppraisalDashboard");
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            //List<ReporteeAppraisalDashboard> modellist = new List<ReporteeAppraisalDashboard>();
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={user.UserId} ").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={user.UserId} ").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 var responseData = httpResponseMessage.Content.ReadAsStringAsync().Result;
                 var users = JsonConvert.DeserializeObject<Response>(responseData);
 
-                
+
                 List<ReporteeAppraisalListVm> templateData = new List<ReporteeAppraisalListVm>();
-                foreach(var i in users.Data)
+                foreach (var i in users.Data)
                 {
                     templateData.Add(new ReporteeAppraisalListVm()
                     {
@@ -179,9 +179,9 @@ namespace AppraisalTool.App.Controllers
                         AppraisalStatus = i.appraisalStatus,
                         AppraisalStatusId = i.appraisalStatusId,
                         FinancialYearId = i.financialYearId,
-                        FinancialStartYear= i.financialStartYear,
+                        FinancialStartYear = i.financialStartYear,
                         FinancialEndYear = i.financialEndYear
-                    }) ;
+                    });
                 }
 
                 List<SelectListItem> employeeName = new List<SelectListItem>();

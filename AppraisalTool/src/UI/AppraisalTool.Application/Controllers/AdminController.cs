@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json.Nodes;
 
@@ -19,14 +20,15 @@ namespace AppraisalTool.App.Controllers
 
     public class AdminController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:5000/api/");
+        Uri baseAddress;
         HttpClient client = new HttpClient();
         private readonly IMapper _mapper;
 
         private readonly IDataProtector _protector;
 
-        public AdminController(IMapper mapper, IDataProtectionProvider provider)
+        public AdminController(IMapper mapper, IDataProtectionProvider provider, IConfiguration configuration)
         {
+            baseAddress = new Uri(configuration.GetValue<string>("BaseUrl"));
             _mapper = mapper;
             _protector = provider.CreateProtector("");
         }
@@ -144,17 +146,17 @@ namespace AppraisalTool.App.Controllers
             client.BaseAddress = baseAddress;
             var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-           
-                model.AddedBy = userSession.UserId;
-                string data = JsonConvert.SerializeObject(model);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "User/RegisterUser?api-version=1", content).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["AddUserSuccess"] = "User Created Successfully";
-                    return RedirectToAction("GetAllAuthority", "Authority");
-                }
-            
+
+            model.AddedBy = userSession.UserId;
+            string data = JsonConvert.SerializeObject(model);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "User/RegisterUser?api-version=1", content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["AddUserSuccess"] = "User Created Successfully";
+                return RedirectToAction("GetAllAuthority", "Authority");
+            }
+
             TempData["AddUserFailed"] = "Faild to Register User";
             return RedirectToAction("GetAllAuthority", "Authority");
         }
@@ -174,15 +176,16 @@ namespace AppraisalTool.App.Controllers
                 return RedirectToAction("ListUsers", "Admin");
             }
             int unprotectedId = 0;
-            
+
             try
             {
                 unprotectedId = int.Parse(_protector.Unprotect(id));
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return RedirectToAction("ListUsers", "Admin");
             }
-            
+
             client = new HttpClient();
             client.BaseAddress = baseAddress;
             EditUserViewModel user = new EditUserViewModel();
@@ -300,7 +303,7 @@ namespace AppraisalTool.App.Controllers
             string data = JsonConvert.SerializeObject(model);
 
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PutAsync($"https://localhost:5000/api/User/UpdateUser?api-version=1", content).Result;
+            HttpResponseMessage response = client.PutAsync(client.BaseAddress + $"User/UpdateUser?api-version=1", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 TempData["Success"] = "User Updated Successfully";
@@ -325,7 +328,7 @@ namespace AppraisalTool.App.Controllers
 
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            List<UserViewModel> modellist = new List<UserViewModel>(); 
+            List<UserViewModel> modellist = new List<UserViewModel>();
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User?api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -334,7 +337,7 @@ namespace AppraisalTool.App.Controllers
                 var res = JsonConvert.DeserializeObject<Response>(responseData);
 
                 List<UserViewModel> mylist = JsonConvert.DeserializeObject<List<UserViewModel>>(JsonConvert.SerializeObject(res.Data));
-                ViewBag.UserList = _mapper.Map<IEnumerable<UserEncodeDto>>(mylist); 
+                ViewBag.UserList = _mapper.Map<IEnumerable<UserEncodeDto>>(mylist);
                 return View();
             }
             return View();
@@ -391,7 +394,6 @@ namespace AppraisalTool.App.Controllers
         [HttpGet]
         public JsonResult UserExistsEmail(string email)
         {
-            //https://localhost:5000/api/Auth?email=ssabhishek00%40gmail.com&api-version=1
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Auth?email={email}&api-version=1").Result;
@@ -420,7 +422,7 @@ namespace AppraisalTool.App.Controllers
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage response = client.GetAsync("https://localhost:5000/api/User/ListOfAppraisal?api-version=1").Result;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + "User/ListOfAppraisal?api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
 
@@ -446,11 +448,10 @@ namespace AppraisalTool.App.Controllers
                 model.AppraisalId = item.AppraisalId;
                 model.Editable = item.IsAllowed;
             }
-            Console.WriteLine(model);
             string data = JsonConvert.SerializeObject(model);
 
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PutAsync("https://localhost:5000/api/v1/AppraisalHome/AllowEdit", content).Result;
+            HttpResponseMessage response = client.PutAsync(baseAddress + "v1/AppraisalHome/AllowEdit", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 TempData["AllowSuccess"] = "Allowed To Edit Successfully";

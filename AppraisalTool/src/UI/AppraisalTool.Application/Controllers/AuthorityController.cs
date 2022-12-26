@@ -14,14 +14,16 @@ namespace AppraisalTool.App.Controllers
 {
     public class AuthorityController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:5000/api/");
-        HttpClient client = new HttpClient();
+        Uri baseAddress;
+        HttpClient client;
         private readonly IMapper _mapper;
-
         private readonly IDataProtector _protector;
 
-        public AuthorityController(IMapper mapper, IDataProtectionProvider provider)
+        public AuthorityController(IMapper mapper, IDataProtectionProvider provider, IConfiguration configuration)
         {
+            client = new HttpClient();
+            baseAddress = new Uri(configuration.GetValue<string>("BaseUrl"));
+            client.BaseAddress = baseAddress;
             _mapper = mapper;
             _protector = provider.CreateProtector("");
         }
@@ -90,7 +92,7 @@ namespace AppraisalTool.App.Controllers
             HttpResponseMessage Reviewing = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=3&api-version=1").Result;
             HttpResponseMessage admin = client.GetAsync(client.BaseAddress + "User/getUserByRoleId?id=1&api-version=1").Result;
 
-            if (response.IsSuccessStatusCode  && Reporting.IsSuccessStatusCode && Reviewing.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode && Reporting.IsSuccessStatusCode && Reviewing.IsSuccessStatusCode)
             {
 
                 var data = response.Content.ReadAsStringAsync().Result;
@@ -99,7 +101,7 @@ namespace AppraisalTool.App.Controllers
                 var serres = JsonConvert.SerializeObject(res.Data);
                 user = JsonConvert.DeserializeObject<AssignAuthorityVm>(serres);
 
-               
+
                 //Reporting Authority dropdown
                 var reportingData = Reporting.Content.ReadAsStringAsync().Result;
                 var repata = JsonConvert.DeserializeObject<Response>(reportingData);
@@ -133,7 +135,7 @@ namespace AppraisalTool.App.Controllers
                     ReportingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.id.ToString() });
                     ReviewingList.Add(new SelectListItem { Text = item.firstName.ToString() + " " + item.lastName.ToString(), Value = item.id.ToString() });
                 }
-              
+
                 ViewBag.ReportingList = ReportingList;
                 ViewBag.ReviewingList = ReviewingList;
                 Console.WriteLine(user);
@@ -157,7 +159,7 @@ namespace AppraisalTool.App.Controllers
             string data = JsonConvert.SerializeObject(model);
 
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PutAsync("https://localhost:5000/api/User/AssignAuthority?api-version=1", content).Result;
+            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "User/AssignAuthority?api-version=1", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 TempData["Authority"] = "Updated Successfully";

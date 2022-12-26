@@ -84,7 +84,7 @@
         <script>
             @*var check = @TempData["RepaSUCCESS"].ToString();
         console.log(@TempData["RepaSUCCESS"].ToString());*@
-                                const Toast = Swal.mixin({
+                                                                    const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -172,7 +172,7 @@
                     <li class="breadcrumb-item active" aria-current="page">Review Appraisal Dashboard    </li>
                 </ol>
             </nav>
-           @* <br />
+            @* <br />
             <input type="button" value="Back" class="Button " onclick="location.href='@Url.Action("HomePageAppraisal", "AppraisalHomePage")'" />
             <br />*@
             <div style="  background-color: white;border-radius: 0.5rem;" class="container">
@@ -326,167 +326,100 @@
                 {
                     @foreach (var item in ViewBag.UserList)
                     {
+                        @if (item.AppraisalStatusId != 2)
+                        {
 
-                        <div class="text-center">
+                            <div class="text-center">
 
-                            <form method="post" action="/AppraisalHomePage/AddReviewingAuthorityAppraisalPost" class="p-0 m-0 ReporteeAnchorTag" style="display:inline;width:90%;">
-                                <input type="hidden" name="Appraisald" value="@item.AppraisalId" />
+                                <form method="post" action="/AppraisalHomePage/AddReviewingAuthorityAppraisalPost" class="p-0 m-0 ReporteeAnchorTag" style="display:inline;width:90%;">
+                                    <input type="hidden" name="Appraisald" value="@item.AppraisalId" />
 
-                                <button type="submit" style="border:none;background:#FFF;">
-                                    <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1.5px solid #1746A2; border-radius: 0.3rem;">
-                                        <div class="col-md-3">
+                                    <button type="submit" style="border:none;background:#FFF;">
+                                        <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1.5px solid #1746A2; border-radius: 0.3rem;">
+                                            <div class="col-md-3">
 
-                                            <div class="row">
-                                                <div class="col-md-2 Date-Badge">
-                                                    <label style="font-size:1rem ;" class="badge badge-pill  user-roles blueTheme " for=""><i class="mdi mdi-calendar-blank"></i></label>
-                                                </div>
-                                                <div class="col-md-10">
-                                                    <div class="row d-flex row date-p">
-                                                        <span class="reporteeTagPara" style="display: inline-block;">Date</span>
+                                                <div class="row">
+                                                    <div class="col-md-2 Date-Badge">
+                                                        <label style="font-size:1rem ;" class="badge badge-pill  user-roles blueTheme " for=""><i class="mdi mdi-calendar-blank"></i></label>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="row d-flex row date-p">
+                                                            <span class="reporteeTagPara" style="display: inline-block;">Date</span>
 
-                                                        <small class="reporteeTagSmall" asp-for="Date">@item.StartDate.ToString("dd MMM yyyy") to @item.EndDate.ToString("dd MMM yyyy") </small>
+                                                            <small class="reporteeTagSmall" asp-for="Date">@item.StartDate.ToString("dd MMM yyyy") to @item.EndDate.ToString("dd MMM yyyy") </small>
 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
+                                            <div class="col-md-3">
 
-                                            <div class="row">
-                                                <div class="col-md-2 Date-Badge">
-                                                    <label style="font-size:1rem ;" class="badge badge-pill user-roles blueTheme" for=""><i class=" mdi mdi-account-check"></i></label>
-                                                </div>
-                                                <div class="col-md-10">
-                                                    <div class="row d-flex row date-p">
-                                                        <span class="reporteeTagPara" style="display: inline-block;">Employee Name</span>
+                                                <div class="row">
+                                                    <div class="col-md-2 Date-Badge">
+                                                        <label style="font-size:1rem ;" class="badge badge-pill user-roles blueTheme" for=""><i class=" mdi mdi-account-check"></i></label>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="row d-flex row date-p">
+                                                            <span class="reporteeTagPara" style="display: inline-block;">Employee Name</span>
 
-                                                        <small class="reporteeTagSmall" asp-for="EmployeeName">@item.FirstName  @item.LastName </small>
+                                                            <small class="reporteeTagSmall" asp-for="EmployeeName">@item.FirstName  @item.LastName </small>
 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
+                                            <div class="col-md-3">
 
-                                            <div class="row">
-                                                <div class="col-md-2 Date-Badge">
-                                                    <label style="font-size:1rem ;" class="badge badge-pill user-roles blueTheme" for=""><i class=" mdi mdi-account"></i></label>
-                                                </div>
-                                                <div class="col-md-10">
-                                                    <div class="row d-flex row date-p">
-                                                        <span class="reporteeTagPara" style="display: inline-block;">Reporting Authority</span>
+                                                <div class="row">
+                                                    <div class="col-md-2 Date-Badge">
+                                                        <label style="font-size:1rem ;" class="badge badge-pill user-roles blueTheme" for=""><i class=" mdi mdi-account"></i></label>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="row d-flex row date-p">
+                                                            <span class="reporteeTagPara" style="display: inline-block;">Reporting Authority</span>
 
-                                                        <small class="reporteeTagSmall" asp-for="ReportingAuthority">@item.RepaName </small>
+                                                            <small class="reporteeTagSmall" asp-for="ReportingAuthority">@item.RepaName </small>
 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
 
-                                            <div class="row">
-                                                <div class="col-md-10 row date-p">
-                                                    @{
-                                                        string ApprovedBadgeColor;
-                                                        if (@item.AppraisalStatus == "Approved")
-                                                        {
-                                                            ApprovedBadgeColor = "ApprovedBadge";
+
+                                            <div class="col-md-3">
+
+
+                                                <div class="row">
+                                                    <div class="col-md-10 row date-p">
+                                                        @{
+                                                            string ApprovedBadgeColor;
+                                                            if (@item.AppraisalStatus == "Approved")
+                                                            {
+                                                                ApprovedBadgeColor = "ApprovedBadge";
+                                                            }
+                                                            else
+                                                            {
+                                                                ApprovedBadgeColor = "";
+                                                            }
+
                                                         }
-                                                        else
-                                                        {
-                                                            ApprovedBadgeColor = "";
-                                                        }
+                                                        <div class="row d-flex justify-content-center">
+                                                            <span class=" reporteeTagPara" style="display: inline-block;">Appraisal Status</span>
+                                                        </div>
+                                                        <smaller class=" reporteeTagPara  @ApprovedBadgeColor pt-1 pb-1" style="border-radius: 0.5rem; font-size:12px ; background-color: rgb(245, 177, 138);"><asp-for ="AppraisalStatus">@item.AppraisalStatus</smaller>
 
-                                                    }
-                                                    <div class="row d-flex justify-content-center">
-                                                        <span class=" reporteeTagPara" style="display: inline-block;">Appraisal Status</span>
                                                     </div>
-                                                    <smaller class=" reporteeTagPara  @ApprovedBadgeColor pt-1 pb-1" style="border-radius: 0.5rem; font-size:12px ; background-color: rgb(245, 177, 138);"><asp-for ="AppraisalStatus">@item.AppraisalStatus</smaller>
-
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </button>
-                            </form>
-                        </div>
-
-                       @* <a class="ReviewAnchorTag" href="/AppraisalHomePage/AddReviewingAuthorityAppraisal?Appraisald=@item.AppraisalId">
-                            <div class=" row pt-2 mb-4  pb-2 p-2" role="alert" style=" width:96%; margin-left:15px ;border: 1.5px solid #1746A2; border-radius: 0.3rem;">
-                                <div class="col-md-3">
-
-                                    <div class="row">
-                                        <div class="col-md-2 Date-Badge">
-                                            <label style="font-size:1rem ;" class="badge badge-pill  user-roles blueTheme " for=""><i class="mdi mdi-calendar-blank"></i></label>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="row d-flex row date-p">
-                                                <span class="reporteeTagPara" style="display: inline-block;">Date</span>
-
-                                                <small class="reporteeTagSmall" asp-for="Date">@item.StartDate.ToString("dd MMM yyyy") to @item.EndDate.ToString("dd MMM yyyy") </small>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-
-                                    <div class="row">
-                                        <div class="col-md-2 Date-Badge">
-                                            <label style="font-size:1rem ;" class="badge badge-pill user-roles blueTheme" for=""><i class=" mdi mdi-account-check"></i></label>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="row d-flex row date-p">
-                                                <span class="reporteeTagPara" style="display: inline-block;">Employee Name</span>
-
-                                                <small class="reporteeTagSmall" asp-for="EmployeeName">@item.FirstName  @item.LastName </small>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-
-                                    <div class="row">
-                                        <div class="col-md-2 Date-Badge">
-                                            <label style="font-size:1rem ;" class="badge badge-pill user-roles blueTheme" for=""><i class=" mdi mdi-account"></i></label>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="row d-flex row date-p">
-                                                <span class="reporteeTagPara" style="display: inline-block;">Reporting Authority</span>
-
-                                                <small class="reporteeTagSmall" asp-for="ReportingAuthority">@item.RepaName </small>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-
-                                    <div class="row">
-                                        <div class="col-md-10 row date-p">
-                                            @{
-                                                string ApprovedBadgeColor;
-                                                if (@item.AppraisalStatus == "Approved")
-                                                {
-                                                    ApprovedBadgeColor = "ApprovedBadge";
-                                                }
-                                                else
-                                                {
-                                                    ApprovedBadgeColor = "";
-                                                }
-
-                                            }
-                                            <div class="row d-flex justify-content-center">
-                                                <span class=" reporteeTagPara" style="display: inline-block;">Appraisal Status</span>
-                                            </div>
-                                            <smaller class=" reporteeTagPara  @ApprovedBadgeColor pt-1 pb-1" style="border-radius: 0.5rem; font-size:12px ; background-color: rgb(245, 177, 138);"><asp-for ="AppraisalStatus">@item.AppraisalStatus</smaller>
 
                                         </div>
-                                    </div>
-                                </div>
+                                    </button>
+
+                                </form>
                             </div>
-                        </a>*@
+
+                           
+                        }
                     }
                 }
             </div>

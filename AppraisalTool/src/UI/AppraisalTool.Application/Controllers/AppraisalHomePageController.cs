@@ -22,16 +22,15 @@ namespace AppraisalTool.App.Controllers
     public class AppraisalHomePageController : Controller
     {
         private readonly ILogger<AppraisalHomePageController> _logger;
-        Uri baseAddress = new Uri("https://localhost:5000/api/v1");
+        Uri baseAddress;
         HttpClient client;
-        public AppraisalHomePageController(ILogger<AppraisalHomePageController> logger)
+        public AppraisalHomePageController(ILogger<AppraisalHomePageController> logger, IConfiguration configuration)
         {
             client = new HttpClient();
+            baseAddress = new Uri(configuration.GetValue<string>("BaseUrl"));
             client.BaseAddress = baseAddress;
             _logger = logger;
         }
-
-        //Uri baseAddress = new Uri("https://localhost:5000/api");
 
         public IActionResult HomePageAppraisal()
         {
@@ -44,11 +43,11 @@ namespace AppraisalTool.App.Controllers
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
             ViewBag.UserId = user.UserId;
             SelfAppraisalHome model = new SelfAppraisalHome();
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome?userId={user.UserId}").Result;
-            HttpResponseMessage cardResponse = client.GetAsync($"https://localhost:5000/api/User/GetAllCard?id={user.RoleId}&api-version=1").Result;
-            HttpResponseMessage reportResponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={user.UserId}").Result;
-            HttpResponseMessage reviewResponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetReviewAppraisalByRevAuthority?id={user.UserId}").Result;
-            HttpResponseMessage yearResponse = client.GetAsync($"https://localhost:5000/api/v1/FinancialYear/GetFinancialYearsByUserJoining?userId={user.UserId}").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome?userId={user.UserId}").Result;
+            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"User/GetAllCard?id={user.RoleId}&api-version=1").Result;
+            HttpResponseMessage reportResponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={user.UserId}").Result;
+            HttpResponseMessage reviewResponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetReviewAppraisalByRevAuthority?id={user.UserId}").Result;
+            HttpResponseMessage yearResponse = client.GetAsync(client.BaseAddress + $"v1/FinancialYear/GetFinancialYearsByUserJoining?userId={user.UserId}").Result;
 
 
             if (httpResponseMessage.IsSuccessStatusCode && cardResponse.IsSuccessStatusCode && reportResponse.IsSuccessStatusCode && reviewResponse.IsSuccessStatusCode && yearResponse.IsSuccessStatusCode)
@@ -175,7 +174,7 @@ namespace AppraisalTool.App.Controllers
 
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/byYear?userId={user.UserId}&FyId={Fid}").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/byYear?userId={user.UserId}&FyId={Fid}").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -227,29 +226,6 @@ namespace AppraisalTool.App.Controllers
 
 
                 }
-                //try
-                //{
-                //    ViewBag.fyear = Fyear;
-                //    ViewBag.Fid = Fid;
-                //    ViewBag.ReportingAuthorityFirstName = data.Data[0].reportingAuthorityFirstName;
-                //    Console.WriteLine(ViewBag.ReportingAuthorityFirstName);
-                //    ViewBag.ReviewingAuthorityFirstName = data.Data[0].reviewingAuthorityFirstName;
-                //    Console.WriteLine(ViewBag.ReviewingAuthorityFirstName);
-                //    ViewBag.Role = data.Data[0].role;
-                //    ViewBag.AppraisalStatus = data.Data[0].appraisalStatus;
-                //    ViewBag.Date = data.Data[0].date;
-                //    ViewBag.ReviewingAuthorityLastName = data.Data[0].reviewingAuthorityLastName;
-                //    ViewBag.ReportingAuthorityLastName = data.Data[0].reportingAuthorityLastName;
-                //}
-                //catch (Exception e)
-                //{
-                //    ViewBag.ReportingAuthorityFirstName = "Not Assigned";
-                //    ViewBag.ReviewingAuthorityFirstName = "Not Assigned";
-                //    ViewBag.Date = "1st April 2022-31st March 2023";
-                //}
-                //string response = httpResponseMessage.Content.ReadAsStringAsync().Result;
-                //Console.WriteLine(response);
-
                 return View();
             }
             return View();
@@ -273,7 +249,7 @@ namespace AppraisalTool.App.Controllers
 
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/byYear?userId={user.UserId}&FyId={Fid}").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/byYear?userId={user.UserId}&FyId={Fid}").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -351,7 +327,7 @@ namespace AppraisalTool.App.Controllers
             ///AppraisalHome/GetAppraisalById?Id=52
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage Appraisal = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalById?Id={Appraisald}").Result;
+            HttpResponseMessage Appraisal = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetAppraisalById?Id={Appraisald}").Result;
             if (Appraisal.IsSuccessStatusCode)
             {
                 var responseData = Appraisal.Content.ReadAsStringAsync().Result;
@@ -363,7 +339,7 @@ namespace AppraisalTool.App.Controllers
             }
 
 
-            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
+            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
             if (cardResponse.IsSuccessStatusCode)
             {
 
@@ -371,33 +347,6 @@ namespace AppraisalTool.App.Controllers
                 var res = JsonConvert.DeserializeObject<Response>(responseData);
 
                 List<ReportingMetricDto> mylist = JsonConvert.DeserializeObject<List<ReportingMetricDto>>(JsonConvert.SerializeObject(res.Data));
-
-                //List<MetricsDto> IMetric = n
-                //ew List<MetricsDto>();
-                //List<MetricsDto> BevMetric = new List<MetricsDto>();
-                //List<MetricsDto> JobMetric = new List<MetricsDto>();
-
-                //mylist.ForEach(item =>
-                //{
-                //    if (item.List_Id.Equals(1))
-                //    {
-                //        IMetric.Add(item);
-                //    }
-                //    else if (item.List_Id.Equals(3))
-                //    {
-                //        BevMetric.Add(item);
-                //    }
-                //    else if (item.List_Id.Equals(4))
-                //    {
-                //        JobMetric.Add(item);
-                //    }
-                //});
-
-
-                //SelfAppraisalMetricsModel model = new SelfAppraisalMetricsModel() { IMetric = IMetric, BevMetric = BevMetric, JobMetric = JobMetric };
-                //Console.Write(model);
-                //ViewBag.AppraisalFormModel = model;
-                //[] bindingModel = new MetricsDto[mylist.Count()];
                 return View(mylist);
             }
             return View();
@@ -422,7 +371,7 @@ namespace AppraisalTool.App.Controllers
             ///AppraisalHome/GetAppraisalResultsByAppraisalId?id=40
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage Appraisal = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalById?Id={Appraisald}").Result;
+            HttpResponseMessage Appraisal = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetAppraisalById?Id={Appraisald}").Result;
             if (Appraisal.IsSuccessStatusCode)
             {
                 var responseData = Appraisal.Content.ReadAsStringAsync().Result;
@@ -441,7 +390,7 @@ namespace AppraisalTool.App.Controllers
                 ViewBag.appraisalStatus = appraisalResponseVm.StatusId;
 
             }
-            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
+            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
             if (cardResponse.IsSuccessStatusCode)
             {
 
@@ -468,7 +417,7 @@ namespace AppraisalTool.App.Controllers
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             //https://localhost:5000/api/v1/AppraisalHome/UpdateAppraisalResults?statusId=1
             //https://localhost:5000/api/v1/AppraisalHome/AddAppraisal
-            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/AppraisalHome/UpdateAppraisalResults?statusId=3", content).Result;
+            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "v1/AppraisalHome/UpdateAppraisalResults?statusId=3", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 string responseData = response.Content.ReadAsStringAsync().Result;
@@ -486,142 +435,6 @@ namespace AppraisalTool.App.Controllers
 
             return RedirectToRoute(new { controller = "ReporteeAppraisalDashboard", action = "ReporteeAppraisalDashboard" });
         }
-
-
-        //@Author : Ilyas Dabholkar
-        //[HttpGet]
-        //public IActionResult AddSelfAppraisal(int? fid)
-        //{
-        //    string x = HttpContext.Session.GetString("user");
-        //    if (x == null)
-        //    {
-        //        return RedirectToAction("Login", "Login");
-        //    }
-
-        //    if(fid == null)
-        //    {
-        //        return RedirectToAction("HomePageAppraisal", "AppraisalHomePage");
-        //    }
-        //    var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-        //    ViewBag.fid = fid;
-        //    ViewBag.uid = user.UserId;
-        //    AppraisalResponseVm appraisalResult = new AppraisalResponseVm();
-        //    //https://localhost:5000/api/v1/Metric/GetAllListOfMetric
-        //    HttpClient client = new HttpClient();
-        //    client.BaseAddress = baseAddress;
-        //    var sessionUser = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user"); ;
-        //    HttpResponseMessage appraisalResultResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByFidAndUserId?financialYearId={fid}&userId={sessionUser.UserId}").Result;
-        //    var apiResponseData = appraisalResultResponse.Content.ReadAsStringAsync().Result;
-        //    var apiResponse = JsonConvert.DeserializeObject<Response>(apiResponseData);
-
-        //    List<updateSelfAppraisalVM> IMetric = new List<updateSelfAppraisalVM>();
-        //    List<updateSelfAppraisalVM> BevMetric = new List<updateSelfAppraisalVM>();
-        //    List<updateSelfAppraisalVM> JobMetric = new List<updateSelfAppraisalVM>();
-
-        //    HttpResponseMessage appraisalResponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetAppraisalByFidandUserId?fId={fid}&userId={sessionUser.UserId}").Result;
-        //    if(appraisalResponse.IsSuccessStatusCode)
-        //    {
-        //        var appraisal  = appraisalResponse.Content.ReadAsStringAsync().Result;
-
-        //        appraisalResult = JsonConvert.DeserializeObject<AppraisalResponseVm>(appraisal);
-        //        ViewBag.appraisalData = appraisalResult;
-
-
-        //    }
-
-        //    if (apiResponse.Data == null)
-        //    {
-        //        HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/Metric/GetAllListOfMetric").Result;
-
-        //        if (cardResponse.IsSuccessStatusCode )
-        //        {
-        //            ViewBag.Fid = fid;
-        //            var responseData = cardResponse.Content.ReadAsStringAsync().Result;
-        //            var res = JsonConvert.DeserializeObject<Response>(responseData);
-
-        //            List<updateSelfAppraisalVM> mylist = JsonConvert.DeserializeObject<List<updateSelfAppraisalVM>>(JsonConvert.SerializeObject(res.Data));
-
-        //            mylist.ForEach(item =>
-        //            {
-        //                if (item.List_Id.Equals(1))
-        //                {
-        //                    IMetric.Add(item);
-        //                }
-        //                else if (item.List_Id.Equals(3))
-        //                {
-        //                    BevMetric.Add(item);
-        //                }
-        //                else if (item.List_Id.Equals(4))
-        //                {
-        //                    JobMetric.Add(item);
-        //                }
-        //            });
-
-        //            SelfAppraisalMetricsModel model = new SelfAppraisalMetricsModel() { IMetric = IMetric, BevMetric = BevMetric, JobMetric = JobMetric };
-        //            Console.Write(model);
-        //            ViewBag.AppraisalFormModel = model;
-        //            ViewBag.ReadOnlyForm = false;
-        //            ViewBag.IsEditable = 0;
-        //            return View(mylist);
-        //        }
-
-        //    }
-        //    else
-        //    {
-        //        List<AppraisalResultVM> resultData = JsonConvert.DeserializeObject<List<AppraisalResultVM>>(JsonConvert.SerializeObject(apiResponse.Data));
-        //        List<updateSelfAppraisalVM> metricListData = new List<updateSelfAppraisalVM>();
-        //        resultData.ForEach(item =>
-        //        {
-        //            updateSelfAppraisalVM tempObject = new updateSelfAppraisalVM()
-        //            {
-        //                Id=(int)item.ID,
-        //                Metric_ID = item.MetricId,
-        //                List_Id = item.KraListId,
-        //                Metric_Description = item.MetricDescription,
-        //                metric_Weightage = (double)item.MetricWeightage,
-        //                Score = (int?)item.SelfScore,
-        //                Comment = item.SelfComment,
-        //            };
-
-        //            metricListData.Add(tempObject);
-
-        //            if (item.KraListId.Equals(1))
-        //            {
-        //                IMetric.Add(tempObject);
-        //            }
-        //            else if (item.KraListId.Equals(3))
-        //            {
-        //                BevMetric.Add(tempObject);
-        //            }
-        //            else if (item.KraListId.Equals(4))
-        //            {
-        //                JobMetric.Add(tempObject);
-        //            }
-        //        });
-        //        SelfAppraisalMetricsModel model = new SelfAppraisalMetricsModel() { IMetric = IMetric, BevMetric = BevMetric, JobMetric = JobMetric };
-        //        Console.Write(model);
-        //        ViewBag.AppraisalFormModel = model;
-
-        //        ViewBag.ReadOnlyForm = true;
-        //        ViewBag.appraisalStatus = appraisalResult.StatusId;
-        //        if (appraisalResult.Editable == true)
-        //        {
-        //            ViewBag.IsEditable = 1;
-        //        }
-        //        else
-        //        {
-        //            ViewBag.IsEditable = 0;
-        //        }
-
-
-
-
-
-        //        //[] bindingModel = new MetricsDto[mylist.Count()];
-        //        return View(metricListData);
-        //    }
-        //    return View();
-        //}
 
 
         [HttpPost]
@@ -645,7 +458,7 @@ namespace AppraisalTool.App.Controllers
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
             var sessionUser = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user"); ;
-            HttpResponseMessage appraisalResultResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByFidAndUserId?financialYearId={fid}&userId={sessionUser.UserId}").Result;
+            HttpResponseMessage appraisalResultResponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetAppraisalResultsByFidAndUserId?financialYearId={fid}&userId={sessionUser.UserId}").Result;
             var apiResponseData = appraisalResultResponse.Content.ReadAsStringAsync().Result;
             var apiResponse = JsonConvert.DeserializeObject<Response>(apiResponseData);
 
@@ -653,7 +466,7 @@ namespace AppraisalTool.App.Controllers
             List<updateSelfAppraisalVM> BevMetric = new List<updateSelfAppraisalVM>();
             List<updateSelfAppraisalVM> JobMetric = new List<updateSelfAppraisalVM>();
 
-            HttpResponseMessage appraisalResponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetAppraisalByFidandUserId?fId={fid}&userId={sessionUser.UserId}").Result;
+            HttpResponseMessage appraisalResponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetAppraisalByFidandUserId?fId={fid}&userId={sessionUser.UserId}").Result;
             if (appraisalResponse.IsSuccessStatusCode)
             {
                 var appraisal = appraisalResponse.Content.ReadAsStringAsync().Result;
@@ -666,7 +479,7 @@ namespace AppraisalTool.App.Controllers
 
             if (apiResponse.Data == null)
             {
-                HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/Metric/GetAllListOfMetric").Result;
+                HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"v1/Metric/GetAllListOfMetric").Result;
 
                 if (cardResponse.IsSuccessStatusCode)
                 {
@@ -775,7 +588,7 @@ namespace AppraisalTool.App.Controllers
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
             var sessionUser = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user"); ;
-            HttpResponseMessage appraisalResultResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByFidAndUserId?financialYearId={fid}&userId={sessionUser.UserId}").Result;
+            HttpResponseMessage appraisalResultResponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetAppraisalResultsByFidAndUserId?financialYearId={fid}&userId={sessionUser.UserId}").Result;
             var apiResponseData = appraisalResultResponse.Content.ReadAsStringAsync().Result;
             var apiResponse = JsonConvert.DeserializeObject<Response>(apiResponseData);
 
@@ -783,7 +596,7 @@ namespace AppraisalTool.App.Controllers
             List<updateSelfAppraisalVM> BevMetric = new List<updateSelfAppraisalVM>();
             List<updateSelfAppraisalVM> JobMetric = new List<updateSelfAppraisalVM>();
 
-            HttpResponseMessage appraisalResponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetAppraisalByFidandUserId?fId={fid}&userId={sessionUser.UserId}").Result;
+            HttpResponseMessage appraisalResponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetAppraisalByFidandUserId?fId={fid}&userId={sessionUser.UserId}").Result;
             if (appraisalResponse.IsSuccessStatusCode)
             {
                 var appraisal = appraisalResponse.Content.ReadAsStringAsync().Result;
@@ -796,7 +609,7 @@ namespace AppraisalTool.App.Controllers
 
             if (apiResponse.Data == null)
             {
-                HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/Metric/GetAllListOfMetric").Result;
+                HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"v1/Metric/GetAllListOfMetric").Result;
 
                 if (cardResponse.IsSuccessStatusCode)
                 {
@@ -921,7 +734,7 @@ namespace AppraisalTool.App.Controllers
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 //https://localhost:5000/api/v1/AppraisalHome/UpdateAppraisalResults?statusId=1
                 //https://localhost:5000/api/v1/AppraisalHome/AddAppraisal
-                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/AppraisalHome/UpdateAppraisalResults?statusId=2", content).Result;
+                HttpResponseMessage response = client.PutAsync(client.BaseAddress + "v1/AppraisalHome/UpdateAppraisalResults?statusId=2", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string responseData = response.Content.ReadAsStringAsync().Result;
@@ -938,7 +751,7 @@ namespace AppraisalTool.App.Controllers
                     string Editdata = JsonConvert.SerializeObject(allowAppraisalEditVm);
 
                     StringContent Editcontent = new StringContent(Editdata, Encoding.UTF8, "application/json");
-                    HttpResponseMessage Editresponse = client.PutAsync("https://localhost:5000/api/v1/AppraisalHome/AllowEdit", Editcontent).Result;
+                    HttpResponseMessage Editresponse = client.PutAsync(client.BaseAddress + "v1/AppraisalHome/AllowEdit", Editcontent).Result;
 
 
                     return RedirectToAction("HomePageAppraisal");
@@ -967,7 +780,7 @@ namespace AppraisalTool.App.Controllers
                 string Appraisaldata = JsonConvert.SerializeObject(appraisalViewModel);
                 StringContent Appraisalcontent = new StringContent(Appraisaldata, Encoding.UTF8, "application/json");
                 int Appraisalid = 0;
-                HttpResponseMessage responseAppraisal = client.PostAsync(client.BaseAddress + "/AppraisalHome/AddAppraisal", Appraisalcontent).Result;
+                HttpResponseMessage responseAppraisal = client.PostAsync(client.BaseAddress + "v1/AppraisalHome/AddAppraisal", Appraisalcontent).Result;
                 //HttpResponseMessage requestEdit = client.PostAsync("://localhost:5000/api/v1/AppraisalHome/RequestEdit", Appraisalcontent).Result;
 
                 if (responseAppraisal.IsSuccessStatusCode /*&& requestEdit.IsSuccessStatusCode*/)
@@ -1011,7 +824,7 @@ namespace AppraisalTool.App.Controllers
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
                     //https://localhost:5000/api/v1/AppraisalHome/AddAppraisal
-                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/AppraisalHome/AddAppraisalResults", content).Result;
+                    HttpResponseMessage response = client.PostAsync(client.BaseAddress + "v1/AppraisalHome/AddAppraisalResults", content).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         string responseData = response.Content.ReadAsStringAsync().Result;
@@ -1037,7 +850,7 @@ namespace AppraisalTool.App.Controllers
         {
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/byYear?userId={user.UserId}&FyId={Fid}").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/byYear?userId={user.UserId}&FyId={Fid}").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -1081,7 +894,7 @@ namespace AppraisalTool.App.Controllers
         {
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/AppraisalHome/byYear?userId={user.UserId}&FyId={Fid}").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/byYear?userId={user.UserId}&FyId={Fid}").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -1139,7 +952,7 @@ namespace AppraisalTool.App.Controllers
 
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
+            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
             if (cardResponse.IsSuccessStatusCode)
             {
 
@@ -1147,32 +960,6 @@ namespace AppraisalTool.App.Controllers
                 var res = JsonConvert.DeserializeObject<Response>(responseData);
 
                 List<ReviewingMetricDto> mylist = JsonConvert.DeserializeObject<List<ReviewingMetricDto>>(JsonConvert.SerializeObject(res.Data));
-
-                //List<MetricsDto> IMetric = new List<MetricsDto>();
-                //List<MetricsDto> BevMetric = new List<MetricsDto>();
-                //List<MetricsDto> JobMetric = new List<MetricsDto>();
-
-                //mylist.ForEach(item =>
-                //{
-                //    if (item.List_Id.Equals(1))
-                //    {
-                //        IMetric.Add(item);
-                //    }
-                //    else if (item.List_Id.Equals(3))
-                //    {
-                //        BevMetric.Add(item);
-                //    }
-                //    else if (item.List_Id.Equals(4))
-                //    {
-                //        JobMetric.Add(item);
-                //    }
-                //});
-
-
-                //SelfAppraisalMetricsModel model = new SelfAppraisalMetricsModel() { IMetric = IMetric, BevMetric = BevMetric, JobMetric = JobMetric };
-                //Console.Write(model);
-                //ViewBag.AppraisalFormModel = model;
-                //[] bindingModel = new MetricsDto[mylist.Count()];
                 return View(mylist);
             }
             return View();
@@ -1197,7 +984,7 @@ namespace AppraisalTool.App.Controllers
 
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
+            HttpResponseMessage cardResponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetAppraisalResultsByAppraisalId?id={Appraisald}").Result;
             if (cardResponse.IsSuccessStatusCode)
             {
 
@@ -1205,32 +992,6 @@ namespace AppraisalTool.App.Controllers
                 var res = JsonConvert.DeserializeObject<Response>(responseData);
 
                 List<ReviewingMetricDto> mylist = JsonConvert.DeserializeObject<List<ReviewingMetricDto>>(JsonConvert.SerializeObject(res.Data));
-
-                //List<MetricsDto> IMetric = new List<MetricsDto>();
-                //List<MetricsDto> BevMetric = new List<MetricsDto>();
-                //List<MetricsDto> JobMetric = new List<MetricsDto>();
-
-                //mylist.ForEach(item =>
-                //{
-                //    if (item.List_Id.Equals(1))
-                //    {
-                //        IMetric.Add(item);
-                //    }
-                //    else if (item.List_Id.Equals(3))
-                //    {
-                //        BevMetric.Add(item);
-                //    }
-                //    else if (item.List_Id.Equals(4))
-                //    {
-                //        JobMetric.Add(item);
-                //    }
-                //});
-
-
-                //SelfAppraisalMetricsModel model = new SelfAppraisalMetricsModel() { IMetric = IMetric, BevMetric = BevMetric, JobMetric = JobMetric };
-                //Console.Write(model);
-                //ViewBag.AppraisalFormModel = model;
-                //[] bindingModel = new MetricsDto[mylist.Count()];
                 return View("AddReviewingAuthorityAppraisal", mylist);
             }
             return View("AddReviewingAuthorityAppraisal");
@@ -1245,9 +1006,8 @@ namespace AppraisalTool.App.Controllers
             }
             string data = JsonConvert.SerializeObject(scores);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            //https://localhost:5000/api/v1/AppraisalHome/UpdateAppraisalResults?statusId=1
-            //https://localhost:5000/api/v1/AppraisalHome/AddAppraisal
-            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/AppraisalHome/UpdateAppraisalResults?statusId=4", content).Result;
+
+            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "v1/AppraisalHome/UpdateAppraisalResults?statusId=4", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 string responseData = response.Content.ReadAsStringAsync().Result;
@@ -1256,7 +1016,7 @@ namespace AppraisalTool.App.Controllers
                 Console.WriteLine(res);
                 TempData["RepaSUCCESS"] = "Successfully Submited";
                 return RedirectToRoute(new { controller = "ReviewAppraisal", action = "ReviewAppraisalDashboard" });
-                //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
+
             }
             TempData["RepaError"] = "Error Occured";
             return RedirectToRoute(new { controller = "ReviewAppraisal", action = "ReviewAppraisalDashboard" });
@@ -1265,7 +1025,7 @@ namespace AppraisalTool.App.Controllers
         [HttpGet]
         public IActionResult RequestForEdit(int? fId, int? userId)
         {
-            HttpResponseMessage requestresponse = client.GetAsync($" https://localhost:5000/api/v1/AppraisalHome/RequestToEdit?fId={fId}&userId={userId}").Result;
+            HttpResponseMessage requestresponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/RequestToEdit?fId={fId}&userId={userId}").Result;
 
 
             if (requestresponse.IsSuccessStatusCode)
@@ -1282,9 +1042,8 @@ namespace AppraisalTool.App.Controllers
         public JsonResult startDateEndDate(int id)
         {
 
-            HttpResponseMessage requestresponse = client.GetAsync($"https://localhost:5000/api/FinancialYear/GetFinancialYearById?id={id}&api-version=1").Result;
+            HttpResponseMessage requestresponse = client.GetAsync(client.BaseAddress + $"v1/FinancialYear/GetFinancialYearById?id={id}&api-version=1").Result;
 
-            //https://localhost:5000/api/v1/AppraisalHome/RequestToEdit?fId=4&userId=5
             if (requestresponse.IsSuccessStatusCode)
             {
                 string responseData = requestresponse.Content.ReadAsStringAsync().Result;
@@ -1305,9 +1064,7 @@ namespace AppraisalTool.App.Controllers
         public JsonResult PendingAppriasalCount(int id, int userId)
         {
 
-            HttpResponseMessage requestresponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetAppraisalByFidandUserId?fId={id}&userId={userId}").Result;
-
-        https://localhost:5000/api/v1/AppraisalHome/GetAppraisalByFidandUserId?fId=4&userId=47
+            HttpResponseMessage requestresponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetAppraisalByFidandUserId?fId={id}&userId={userId}").Result;
             if (requestresponse.IsSuccessStatusCode)
             {
 
@@ -1334,7 +1091,7 @@ namespace AppraisalTool.App.Controllers
         public JsonResult GetPendingAppraisalCount(int userId)
         {
 
-            HttpResponseMessage requestresponse = client.GetAsync($"https://localhost:5000/api/v1/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={userId}").Result;
+            HttpResponseMessage requestresponse = client.GetAsync(client.BaseAddress + $"v1/AppraisalHome/GetReporteeAppraisalByRepAuthority?id={userId}").Result;
 
 
             if (requestresponse.IsSuccessStatusCode)

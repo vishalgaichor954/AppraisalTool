@@ -15,12 +15,13 @@ namespace AppraisalTool.App.Controllers
     public class BranchController : Controller
     {
         private readonly IMapper _mapper;
-
+        Uri baseAddress;
         private readonly IDataProtector _protector;
 
-        public BranchController(IMapper mapper, IDataProtectionProvider provider)
+        public BranchController(IMapper mapper, IDataProtectionProvider provider, IConfiguration configuration)
         {
             _mapper = mapper;
+            baseAddress = new Uri(configuration.GetValue<string>("BaseUrl"));
             _protector = provider.CreateProtector("");
         }
         [HttpGet]
@@ -40,7 +41,7 @@ namespace AppraisalTool.App.Controllers
 
                 List<BranchVm> mylist = JsonConvert.DeserializeObject<List<BranchVm>>(JsonConvert.SerializeObject(res.Data));
 
-                ViewBag.BranchList = _mapper.Map<IEnumerable<EncodedBranchDto>>(mylist); 
+                ViewBag.BranchList = _mapper.Map<IEnumerable<EncodedBranchDto>>(mylist);
                 return View();
 
             }
@@ -118,7 +119,6 @@ namespace AppraisalTool.App.Controllers
         [HttpPost]
         public IActionResult UpdateBranch(BranchVm model)
         {
-            Uri baseAddress = new Uri("https://localhost:5000/api/");
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
             Console.WriteLine("PostMethod hit");
@@ -130,7 +130,7 @@ namespace AppraisalTool.App.Controllers
             //model.IsActive = status;
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PutAsync("User/UpdateBranch?api-version=1", content).Result;
+            HttpResponseMessage response = client.PutAsync(baseAddress + "User/UpdateBranch?api-version=1", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 TempData["SuccessBranch"] = "Branch Updated Successfully";
@@ -145,13 +145,10 @@ namespace AppraisalTool.App.Controllers
         {
             //User/removeUser?id=9&api-version=1
             Console.WriteLine("PostMethod hit");
-            Uri baseAddress = new Uri("https://localhost:5000/api/");
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
             int unprotectedId = int.Parse(_protector.Unprotect(id));
-            //var userSession = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
-            //model.upda = userSession.UserId;
-            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/User/RemoveBranch?id={unprotectedId}&api-version=1").Result;
+            HttpResponseMessage response = client.DeleteAsync(baseAddress + $"User/RemoveBranch?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;
