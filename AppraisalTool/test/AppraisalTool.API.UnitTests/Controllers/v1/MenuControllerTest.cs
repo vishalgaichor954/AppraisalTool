@@ -1,6 +1,7 @@
 ﻿using AppraisalTool.Api.Controllers.v1;
 using AppraisalTool.Application.Contracts.Persistence;
 using AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand;
+using AppraisalTool.Application.Features.Menu.Command.UpdateMenuCommand;
 using AppraisalTool.Application.Response;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -73,8 +74,39 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
             var okObjectResult = result as OkObjectResult;
             okObjectResult.StatusCode.ShouldBe(200);
         }
+        [Fact]
+        public async Task UpdateMenu()
+        {
+            var controller = new MenuController(_mediator.Object, _logger.Object, _menrepository.Object);
+            var updateMenuCommand = new UpdateMenuCommand
+            {
+                Menu_Id = 1,
+                MenuAction = "text",
+                MenuClass = "text",
+                MenuController = "text",
+                MenuFlag = "text",
+                MenuIcon = "text",
+                MenuLink = "text",
+                MenuText = "text"
+            };
+            var result = await controller.UpdateMenu(updateMenuCommand);
 
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
+            okObjectResult.StatusCode.ShouldBe(200);
+        }
 
+        [Fact]
+        public async Task RemoveAsync()
+        {
+            var controller = new MenuController(_mediator.Object, _logger.Object, _menrepository.Object);
+
+            var result = await controller.RemoveAsync(1);
+
+            result.ShouldBeOfType<OkObjectResult>();
+            var okObjectResult = result as OkObjectResult;
+            okObjectResult.StatusCode.ShouldBe(200);
+        }
 
     }
 }
