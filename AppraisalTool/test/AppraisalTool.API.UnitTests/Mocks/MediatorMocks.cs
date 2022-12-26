@@ -35,6 +35,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand;
 
 namespace AppraisalTool.API.UnitTests.Mocks
 {
@@ -58,6 +59,8 @@ namespace AppraisalTool.API.UnitTests.Mocks
             mockMediator.Setup(m => m.Send(It.IsAny<TransactionCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<Guid>());
 
             mockMediator.Setup(m => m.Send(It.IsAny<GetOrdersForMonthQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new PagedResponse<IEnumerable<OrdersForMonthDto>>(null, 10, 1, 2));
+            
+            //user managment 
             mockMediator.Setup(m => m.Send(It.IsAny<GetUserListQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<IEnumerable<GetUserListQueryVm>>());
             mockMediator.Setup(m => m.Send(It.IsAny<GetUserByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<GetUserListQueryVm>());
             mockMediator.Setup(m => m.Send(It.IsAny<RemoveUserCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<RemoveUserCommandDto>());
@@ -82,7 +85,9 @@ namespace AppraisalTool.API.UnitTests.Mocks
             mockMediator.Setup(m => m.Send(It.IsAny<GetChartDataQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<GradeChartsData>());
             mockMediator.Setup(m => m.Send(It.IsAny<GetReviewAppraisalsByRevAuthorityQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<List<ReviewAppraisalListVm>>());
 
-            
+            //menu management 
+            mockMediator.Setup(m => m.Send(It.IsAny<CreateMenuCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<CreateMenuCommandDto>());
+
             return mockMediator;
         }
     }

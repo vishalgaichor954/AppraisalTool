@@ -47,7 +47,7 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
             var okObjectResult = result as OkObjectResult;
             okObjectResult.StatusCode.ShouldBe(200);
             okObjectResult.ShouldNotBeNull();
-            okObjectResult.ShouldBeOfType<Response<IEnumerable<GetDataVM>>>();
+            
 
             
         }

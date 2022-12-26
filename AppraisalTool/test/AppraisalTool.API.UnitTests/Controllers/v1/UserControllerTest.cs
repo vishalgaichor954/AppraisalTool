@@ -7,6 +7,7 @@ using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
 using AppraisalTool.Application.Response;
 using MediatR;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -25,6 +26,8 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
         private readonly Mock<IMediator> _mediator;
         private readonly Mock<ILogger<UserController>> _logger;
         private readonly Mock<IBranchRepository> _branchRepository;
+        private readonly Mock<IDataProtector> _protector;
+
 
 
         public UserControllerTest()
@@ -32,11 +35,12 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
             _branchRepository = new Mock<IBranchRepository>();
             _mediator = MediatorMocks.GetMediator();
             _logger = new Mock<ILogger<UserController>>();
+            _protector = new Mock<IDataProtector>();
         }
         [Fact]
         public async Task Get_All_User_List()
         {
-            var controller = new UserController(_mediator.Object, _logger.Object, _branchRepository.Object);
+            var controller = new UserController(_mediator.Object, _logger.Object, _branchRepository.Object, _protector.Object);
             var result = await controller.GetAllUserList();
             result.ShouldBeOfType<OkObjectResult>();
             var okObjectResult = result as OkObjectResult;
@@ -48,7 +52,7 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
         [Fact]
         public async Task Get_User_By_Id()
         {
-            var controller = new UserController(_mediator.Object, _logger.Object, _branchRepository.Object);
+            var controller = new UserController(_mediator.Object, _logger.Object, _branchRepository.Object,_protector.Object);
             var result = await controller.GetUserById(1);
             result.ShouldBeOfType<OkObjectResult>();
             var okObjectResult = result as OkObjectResult;
@@ -59,7 +63,7 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
         [Fact]
         public async Task Remove_Async()
         {
-            var controller = new UserController(_mediator.Object, _logger.Object, _branchRepository.Object);
+            var controller = new UserController(_mediator.Object, _logger.Object, _branchRepository.Object,_protector.Object);
             var result = await controller.RemoveAsync(65);
             result.ShouldBeOfType<OkObjectResult>();
             var okObjectResult = result as OkObjectResult;
@@ -70,7 +74,7 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
         [Fact]
         public async Task Update_User_Async()
         {
-            var controller = new UserController(_mediator.Object, _logger.Object, _branchRepository.Object);
+            var controller = new UserController(_mediator.Object, _logger.Object, _branchRepository.Object,_protector.Object);
             var testList = new UpdateUserCommand
             {
                 Id = 1,
@@ -99,7 +103,7 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
         [Fact]
         public async Task Register_Async()
         {
-            var controller = new UserController(_mediator.Object, _logger.Object, _branchRepository.Object);
+            var controller = new UserController(_mediator.Object, _logger.Object, _branchRepository.Object,_protector.Object);
             var testList = new CreateUserCommand
             {
 
