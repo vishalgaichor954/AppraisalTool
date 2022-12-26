@@ -11,7 +11,13 @@ namespace AppraisalTool.App.Controllers
 {
     public class LoginController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:5000/api");
+        Uri baseAddress;
+
+        public LoginController(IConfiguration configuration)
+        {
+            baseAddress = new Uri(configuration.GetValue<string>("BaseUrl"));
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -53,7 +59,7 @@ namespace AppraisalTool.App.Controllers
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpClient client = new HttpClient();
                 client.BaseAddress = baseAddress;
-                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/Auth/Login?api-version=1", content).Result;
+                HttpResponseMessage response = client.PostAsync(client.BaseAddress + "Auth/Login?api-version=1", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string responseData = response.Content.ReadAsStringAsync().Result;
@@ -71,7 +77,7 @@ namespace AppraisalTool.App.Controllers
         //@Author : Ilyas Dabholkar
         [HttpGet]
         public IActionResult UserLogout()
-        {           
+        {
             HttpContext.Session.Remove("user");
             return RedirectToAction("Login");
         }
@@ -96,7 +102,7 @@ namespace AppraisalTool.App.Controllers
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "/Auth/ForgotPassword?api-version=1", content).Result;
+            HttpResponseMessage response = client.PostAsync(client.BaseAddress + "Auth/ForgotPassword?api-version=1", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 string responseData = response.Content.ReadAsStringAsync().Result;
@@ -118,7 +124,7 @@ namespace AppraisalTool.App.Controllers
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"/Auth?email={email}&api-version=1").Result;
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress + $"Auth?email={email}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var responseData = response.Content.ReadAsStringAsync().Result;

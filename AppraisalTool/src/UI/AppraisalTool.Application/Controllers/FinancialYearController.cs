@@ -15,14 +15,15 @@ namespace AppraisalTool.App.Controllers
 {
     public class FinancialYearController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:5000/api/");
+        Uri baseAddress;
         HttpClient client = new HttpClient();
 
         private readonly IMapper _mapper;
         private readonly IDataProtector _protector;
 
-        public FinancialYearController(IMapper mapper, IDataProtectionProvider provider)
+        public FinancialYearController(IMapper mapper, IDataProtectionProvider provider, IConfiguration configuration)
         {
+            baseAddress = new Uri(configuration.GetValue<string>("BaseUrl"));
             _mapper = mapper;
             _protector = provider.CreateProtector("");
         }
@@ -131,7 +132,7 @@ namespace AppraisalTool.App.Controllers
             model.EndYear = Int32.Parse(endyear);
             string data = JsonConvert.SerializeObject(model);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PutAsync("FinancialYear/UpdateFinanacialYear?api-version=1", content).Result;
+            HttpResponseMessage response = client.PutAsync(baseAddress + "FinancialYear/UpdateFinanacialYear?api-version=1", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 TempData["Success"] = "Financial Year Updated Successfully";
@@ -147,7 +148,7 @@ namespace AppraisalTool.App.Controllers
             int unprotectedId = int.Parse(_protector.Unprotect(id));
             client = new HttpClient();
             client.BaseAddress = baseAddress;
-            HttpResponseMessage response = client.DeleteAsync($"https://localhost:5000/api/FinancialYear/removeFinancialYear?id={unprotectedId}&api-version=1").Result;
+            HttpResponseMessage response = client.DeleteAsync(baseAddress + $"FinancialYear/removeFinancialYear?id={unprotectedId}&api-version=1").Result;
             if (response.IsSuccessStatusCode)
             {
                 var data = response.Content.ReadAsStringAsync().Result;

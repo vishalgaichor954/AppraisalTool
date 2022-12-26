@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using Syncfusion.EJ2.CircularGauge;
 using System.Drawing.Printing;
 using System.Runtime.InteropServices;
-using PaperKind=DinkToPdf.PaperKind;
+using PaperKind = DinkToPdf.PaperKind;
 using Microsoft.AspNetCore.Mvc;
 using Syncfusion.EJ2.CircularGauge;
 using AppraisalTool.App.Services.CustomAttributes;
@@ -22,12 +22,14 @@ namespace AppraisalTool.App.Controllers
     public class GradeReportController : Controller
     {
         private readonly ILogger<GradeReportController> _logger;
-        Uri baseAddress = new Uri("https://localhost:5000/api/v1");
+        Uri baseAddress;
         HttpClient client;
-        //Uri baseAddress = new Uri("https://localhost:5000/api");
-        public GradeReportController(ILogger<GradeReportController> logger)
+
+
+        public GradeReportController(ILogger<GradeReportController> logger, IConfiguration configuration)
         {
             client = new HttpClient();
+            baseAddress = new Uri(configuration.GetValue<string>("BaseUrl"));
             client.BaseAddress = baseAddress;
             _logger = logger;
 
@@ -122,7 +124,7 @@ namespace AppraisalTool.App.Controllers
 
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/GradeReport/GetChartsData?Fid={Fid}&userId={user.UserId}").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"v1/GradeReport/GetChartsData?Fid={Fid}&userId={user.UserId}").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -151,7 +153,7 @@ namespace AppraisalTool.App.Controllers
 
         [HttpPost]
         [RouteAccess(Roles = "ADMINISTRATOR,REPORTING AUTHORITY,REVIEWING AUTHORITY,EMPLOYEE")]
-        public IActionResult ViewGradeReport(int? Fid,string? test)
+        public IActionResult ViewGradeReport(int? Fid, string? test)
         {
             List<CircularGaugePointer> pointers = new List<CircularGaugePointer>();
             CircularGaugePointer pointer1 = new CircularGaugePointer();
@@ -238,7 +240,7 @@ namespace AppraisalTool.App.Controllers
 
             var user = SessionHelper.GetObjectFromJson<LoginResponseDto>(HttpContext.Session, "user");
 
-            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"/GradeReport/GetChartsData?Fid={Fid}&userId={user.UserId}").Result;
+            HttpResponseMessage httpResponseMessage = client.GetAsync(client.BaseAddress + $"v1/GradeReport/GetChartsData?Fid={Fid}&userId={user.UserId}").Result;
 
             if (httpResponseMessage.IsSuccessStatusCode)
             {
@@ -267,7 +269,7 @@ namespace AppraisalTool.App.Controllers
 
         [HttpPost]
         public async Task<ActionResult> ExportPdf(string ExportData)
-       {
+        {
 
 
             var rs = new LocalReporting()
