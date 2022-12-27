@@ -32,7 +32,7 @@ namespace AppraisalTool.Persistence
 
             services.AddScoped<IFinancialYearRepository, FinancialYearRepository>();
 
-
+            services.AddScoped<INotificationRepository, NotificationRepository>();
             return services;
         }
     }
