@@ -36,6 +36,7 @@ using AppraisalTool.Application.Features.UserRoles.Command.CreateUserRoleCommand
 using AppraisalTool.Application.Features.UserRoles.Query.GetUserRoleById;
 using AppraisalTool.Application.Features.Branches.Command.AddBranchCommand;
 using AppraisalTool.Application.Models.Encoding;
+using AppraisalTool.Application.Features.Notifications.Command.AddNotification;
 
 namespace AppraisalTool.Application.Profiles
 {
@@ -119,6 +120,9 @@ namespace AppraisalTool.Application.Profiles
             //user role mapping
             CreateMap<UserRole, CreateUserRolesCommand>().ReverseMap();
             CreateMap<UserRole, GetUserRoleByIdQueryDto>().ReverseMap();
+
+            //CreateMap<Notification, CreateUserRolesCommand>().ReverseMap();
+            CreateMap<Notification, AddNotificationDto>().ReverseMap();
         }
     }
 }

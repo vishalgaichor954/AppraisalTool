@@ -30,7 +30,7 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
             _menrepository = new Mock<IMenuRepository>();
         }
         [Fact]
-        public async Task AddMenu()
+        public async Task Add_Menu()
         {
             
             var controller = new MenuController(_mediator.Object, _logger.Object, _menrepository.Object);
@@ -52,7 +52,7 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
           
         }
         [Fact]
-        public async Task GetMenuById()
+        public async Task Get_Menu_ById()
         {
             var controller = new MenuController(_mediator.Object, _logger.Object, _menrepository.Object);
             
@@ -64,7 +64,7 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
         }
 
         [Fact]
-        public async Task GetAllMenuList()
+        public async Task Get_All_MenuList()
         {
             var controller = new MenuController(_mediator.Object, _logger.Object, _menrepository.Object);
 
@@ -75,7 +75,7 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
             okObjectResult.StatusCode.ShouldBe(200);
         }
         [Fact]
-        public async Task UpdateMenu()
+        public async Task Update_Menu()
         {
             var controller = new MenuController(_mediator.Object, _logger.Object, _menrepository.Object);
             var updateMenuCommand = new UpdateMenuCommand
@@ -97,7 +97,7 @@ namespace AppraisalTool.API.UnitTests.Controllers.v1
         }
 
         [Fact]
-        public async Task RemoveAsync()
+        public async Task Remove_Async()
         {
             var controller = new MenuController(_mediator.Object, _logger.Object, _menrepository.Object);
 

@@ -105,12 +105,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label asp-for="Email" class="col-sm-4 col-form-label">Email Address<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
-                                    <input asp-for="Email" type="text" class="form-control" placeholder="Enter Email Address" required />
-                                    @*<span asp-validation-for="Email" class="text-danger mx-1 small"></span>*@
+                                    <input asp-for="Email" type="text" class="form-control" placeholder="Enter Email Address" title="Please Enter Valid Email"  pattern="^[0-9a-zA-z]+[.+-_$]{0,1}[0-9a-zA-z]+[@@][a-zA-z]+[.][a-zA-z]{2,3}$" required />
+                                    <br />
+                                    <span asp-validation-for="Email" class="text-danger mx-1 small"></span>
                                 </div>
                             </div>
                         </div>

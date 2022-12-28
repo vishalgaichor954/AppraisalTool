@@ -29,7 +29,11 @@
         <div  style="width:100%; background-color: white;border-radius: 0.5rem;" class="card p-4">
             <div class="card-body">
                 <h4 class="card-title">Create User</h4>
+<<<<<<< HEAD
                 <form class="form-sample needs-validation" asp-action="CreateUser" id="myForm" novalidate>
+=======
+                <form class="form-sample needs-validation " asp-action="CreateUser" id="myForm" novalidate">
+>>>>>>> 9321342b29b1fddfb1a4f9e4204ced09977acd89
                     <p class="card-description"> <b>Fields marked as <span class="required">*</span> are required</b> </p>
                     <div class="row">
                         <div class="col-md-6">
@@ -58,7 +62,11 @@
                             <div class="form-group row">
                                 <label asp-for="Email" class="col-sm-4 col-form-label">Email Address<sup class="required">*</sup></label>
                                 <div class="col-sm-8">
+<<<<<<< HEAD
+                                    <input asp-for="Email" type="text" class="form-control" placeholder="Enter Email Address" pattern="^[0-9a-zA-z]+[.+-_$]{0,1}[0-9a-zA-z]+[a-zA-z]+[.][a-zA-z]{2,3}$" title="Please Enter Valid Email" required />
+=======
                                     <input asp-for="Email" type="text" class="form-control" placeholder="Enter Email Address" title="Please Enter Valid Email"  pattern="^[0-9a-zA-z]+[.+-_$]{0,1}[0-9a-zA-z]+[@@][a-zA-z]+[.][a-zA-z]{2,3}$" required />
+>>>>>>> 9321342b29b1fddfb1a4f9e4204ced09977acd89
                                     <br />
                                     <span asp-validation-for="Email" class="text-danger mx-1 small"></span>
                                 </div>

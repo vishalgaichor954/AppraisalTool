@@ -85,6 +85,7 @@
 
 //})
 let email = document.getElementById("exampleInputEmail1");
+
 //if (email.value = null) {
 //    email.classList.remove('is-valid');
 //    email.classList.add('is-invalid');
@@ -217,5 +218,11 @@ captcha.addEventListener("keyup", () => {
 
 
 //});
+
+
+
+
+
+
 
 
