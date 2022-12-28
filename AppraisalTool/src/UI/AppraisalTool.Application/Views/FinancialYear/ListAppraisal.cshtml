@@ -191,12 +191,15 @@
         }
     </style>
 </head>
-<div class="container">
-    <h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting">Configure Settings</a>  /<a asp-controller="FinancialYear" asp-action="ListFinancialYear">Financial Year Management </a></h6>
+<div class="content-wrapper main-panel content-wrapper-red">
+    <h6 class="BreadCrump">
+        <a asp-controller="Admin" asp-action="ConfigureSetting">Configure Settings</a> 
+        /<a asp-controller="FinancialYear" asp-action="ListFinancialYear">Financial Year Management </a>
+    </h6>
 
- 
 
-    <div class="container-scroller ">
+
+    <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="container-scroller ">
         <!-- partial -->
         <div>
             <div class="row">
@@ -256,7 +259,7 @@
         <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
-</div>
+</>
 
 @*   <script src="~/js/dataTables.bootstrap5.min.js"></script>
 *@
