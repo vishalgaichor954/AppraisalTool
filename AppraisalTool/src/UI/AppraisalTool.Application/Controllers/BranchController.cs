@@ -52,7 +52,9 @@ namespace AppraisalTool.App.Controllers
         [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult AddBranch()
         {
+            
             return View();
+            
         }
 
         [HttpPost]
