@@ -171,9 +171,7 @@
 
 <div class="content-wrapper main-panel content-wrapper-red">
 
-@*<div class="container">*@
-    @*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting" >Configure Settings</a>  /<a asp-controller="Admin" asp-action="ListUsers" >
-    User Management </a></h6>*@
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style="border:none">
             <li class="breadcrumb-item">
@@ -182,60 +180,6 @@
             <li class="breadcrumb-item active" aria-current="page">User Management</li>
         </ol>
     </nav>
-
-
-
-    @*@if (TempData["AddUserSuccess"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["AddUserSuccess"]
-    </div>
-    </div>
-    }*@
-    @*    @if (TempData["AAddUserFailed"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["AddUserFailed"]
-    </div>
-    </div>
-    }
-    @if (TempData["DeleteuserSuccess"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["DeleteuserSuccess"]
-    </div>
-    </div>
-    }
-
-
-    @if (TempData["DeleteUserFaild"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["DeleteUserFaild"]
-    </div>
-    </div>
-    }*@
-
-    @* @if (TempData["editError"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-danger mt-5" role="alert">
-    @TempData["editError"]
-    </div>
-    </div>
-    }
-    @if (TempData["Success"] != null)
-    {
-    <div class="container">
-    <div class="alert alert-success mt-5" role="alert">
-    @TempData["Success"]
-    </div>
-    </div>
-    }*@
 
 
     <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="container-scroller ">

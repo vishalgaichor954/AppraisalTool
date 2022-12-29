@@ -72,21 +72,6 @@
     </script>
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <style>
     .BreadCrump > a:link {
         color: grey;
@@ -146,8 +131,9 @@
 
 </style>
 
-<div class="container">
-    @*<h6 class="BreadCrump"><a asp-controller="Admin" asp-action="ConfigureSetting">Configure Settings</a>  /<a asp-controller="Admin" asp-action="ListUsers">  User Management </a></h6>*@
+<div class="content-wrapper main-panel content-wrapper-red">
+
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb" style="border:none">
             <li class="breadcrumb-item">
@@ -158,24 +144,19 @@
     </nav>
 
 
-
-    <div class="container-scroller ">
+    <div style="width:100%; background-color: white;border-radius: 0.5rem;" class="container-scroller ">
         <!-- partial -->
         <div>
             <div class="row">
                 <div class="col-lg-12 grid-margin">
-                    <div class="card" style="max-width:95% ; margin-left:50px">
+                    <div class="card" style="max-width:95%">
                         <div class="card-body">
                             <div class="page-header">
-                                <h3 class="page-title"> Appraisal List </h3>
-
+                               
                             </div>
-                            @{
-
-                            }
                             <form method="post" asp-action="ListAppraisals">
 
-                                <div style="overflow:scroll;">
+                                <div style="overflow:none;">
 
                                     <table class="table table-bordered display" id="myTable" style="max-width:95% ">
                                         <thead>
@@ -197,7 +178,7 @@
                                                 {
                                                     var item = ViewBag.Appraisals[i];
                                                     <tr>
-                                                        <td class="text-center">@(i+1)</td>
+                                                        <td class="text-center">@(i + 1)</td>
 
                                                         <td class="text-center" style="display:none">
                                                             <span>@(item.appraisalId)</span>
@@ -246,6 +227,7 @@
     </div>
     <!-- page-body-wrapper ends -->
 </div>
+
 
 @*   <script src="~/js/dataTables.bootstrap5.min.js"></script>
 *@
