@@ -306,8 +306,8 @@
                                                     <td class="text-center"> @item.menuLink </td>
                                                     <td class="text-center"> @item.roleName </td>*@
                                                     <td class="text-center">
-                                                        <a asp-action="UpdateYear" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
-                                                        <a asp-action="DeleteYear" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>
+                                                        <a asp-action="UpdateYear" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="mdi mdi-table-edit"></i></a>
+                                                        <a asp-action="DeleteYear" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" onclick="loadDelete()" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="mdi mdi-delete"></i></a>
                                                     </td>
                                                 </tr>
                                             }

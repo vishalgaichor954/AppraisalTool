@@ -14,10 +14,30 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseExceptionHandler("/Home/InternalServerError");
+    // the default hsts value is 30 days. you may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.Use(async (context, next) =>
+{
+    await next();
+    if (context.Response.StatusCode == 404)
+    {
+        context.Request.Path = "/Home/PageNotFoundError";
+        await next();
+    }
+    if (context.Response.StatusCode == 405)
+    {
+        context.Request.Path = "/Home/PageNotFoundError";
+        await next();
+    }
+    if (context.Response.StatusCode == 500)
+    {
+        context.Request.Path = "/Home/InternalServerError";
+        await next();
+    }
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
