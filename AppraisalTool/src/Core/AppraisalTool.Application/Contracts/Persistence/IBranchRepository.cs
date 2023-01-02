@@ -17,5 +17,6 @@ namespace AppraisalTool.Application.Contracts.Persistence
         Task <UpdateBranchCommandDto> UpdateBranchAsync(int id, UpdateBranchCommand request);
         public Task<Branch> GetBranchById(int id);
         public Task<RemoveBranchesCommandDto> RemoveBranch(int id);
+        public Task<bool> GetBranchByCode(string branchcode);
     }
 }

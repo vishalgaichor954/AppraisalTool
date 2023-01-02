@@ -1,12 +1,16 @@
 ﻿@using Microsoft.AspNetCore.Http;
 @using Newtonsoft.Json;
 @using AppraisalTool.App.Models.Navbar;
+<html>
+<body>
+ 
 <div class="container-scroller">
 
     @{
         dynamic json = JsonConvert.DeserializeObject(Context.Session.GetString("navbarViewModel"));
     }
     <!-- partial:partials/_navbar.html -->
+   
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row no-margin">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
             <a class="navbar-brand brand-logo navbarLogo" asp-action="Dashboard" asp-controller="Dashboard"><img src="~/lib/assets/images/AppraisalToolLogo_adobe_express.svg" alt="logo" /></a>
@@ -82,10 +86,11 @@
                     </div>
                 </li>
                 <li class="nav-item nav-settings d-none d-lg-block">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="#" id="scrlBotm">
                         <i class="mdi mdi-format-line-spacing"></i>
                     </a>
                 </li>
+                
             </ul>
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
                 <span class="mdi mdi-menu"></span>
@@ -117,15 +122,32 @@
                         if (item.menuList.menuFlag == "SIDEBAR")
                         {
 
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction">
-                                    <span class="@item.menuList.menuClass">@item.menuList.menuText</span>
-                                    <i class="@item.menuList.menuIcon"></i>
-                                </a>
-                            </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction">
+                                                            <span class="@item.menuList.menuClass">@item.menuList.menuText</span>
+                                                            <i class="@item.menuList.menuIcon"></i>
+                                                        </a>
+                                                    </li>
                         }
                     }
                 }
             </ul>
         </nav>
+    
+        </body>
+    </html>
+    
         <!-- partial -->
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+ <script>
+      $(function () {
+             $('#scrlBotm').click(function () {
+              
+              $(document).scrollTop($(document).height());
+             });
+
+            
+         });
+    </script>
+

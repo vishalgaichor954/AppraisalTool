@@ -72,8 +72,8 @@ namespace AppraisalTool.Application.Features.Users.Command.CreateUserCommand
                 var email = new Email()
                 {
                     To = request.Email,
-                    Body = $"Dear User, <br/><br/>You application registered successfully on portal.<br/>\r\n  Kindly refer below credentials to Login.<br/>\r\nUsername : {request.Email} <br/>\r\nPassword :{request.Password}<br /> <br/>Regards, <br/> Team. Support",
-                    Subject = "User Registered Successfully !!"
+                    Body = $"Hello {request.FirstName} {request.LastName}, <br/><br/>Your account has been successfully created on Appraisal Portal.<br/>\r\n  Please  refer below credentials for login on the portal.<br/>\r\n Email :  {request.Email} <br/>\r\n Password : {request.Password} <br /> <br/>Regards, <br/> support team.",
+                    Subject = $"{request.FirstName} Registered Successfully !!"
                 };
                 await _emailservice.SendEmail(email);
                 return new Response<CreateUserDto>(userDto, "success");
