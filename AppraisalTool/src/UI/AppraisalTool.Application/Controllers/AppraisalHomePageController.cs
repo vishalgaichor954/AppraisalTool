@@ -15,6 +15,7 @@ using System.Security.Cryptography;
 using AppraisalTool.App.Models.FinancialYear;
 using AppraisalTool.Domain.Common;
 using AppraisalTool.App.Services.CustomAttributes;
+using AppraisalTool.App.Models.Notification;
 
 namespace AppraisalTool.App.Controllers
 {
@@ -824,6 +825,7 @@ namespace AppraisalTool.App.Controllers
 
                     //https://localhost:5000/api/v1/AppraisalHome/AddAppraisal
                     HttpResponseMessage response = client.PostAsync(client.BaseAddress + "v1/AppraisalHome/AddAppraisalResults", content).Result;
+                    //NotificationVm notification = new NotificationVm() { IsRead=false,NotificationText=};
                     if (response.IsSuccessStatusCode)
                     {
                         string responseData = response.Content.ReadAsStringAsync().Result;
@@ -831,6 +833,9 @@ namespace AppraisalTool.App.Controllers
                         var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
                         Console.WriteLine(res);
                         TempData["SUCCESS"] = "Successfully Submited";
+
+
+
                         return RedirectToAction("HomePageAppraisal");
                         //return RedirectToRoute(new { controller = "Dashboard", action = "Dashboard" });
                     }

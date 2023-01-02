@@ -1,4 +1,5 @@
 ﻿using AppraisalTool.Application.Features.Notifications.Command.AddNotification;
+using AppraisalTool.Application.Features.Notifications.Command.UpdateNotification;
 using AppraisalTool.Application.Features.Notifications.Queries.GetAllNotification;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +30,14 @@ namespace AppraisalTool.Api.Controllers.v1
             return Ok(dtos);
         }
 
+        [HttpPost("ClearNotification")]
+        public async Task<ActionResult> ClearAllNotification([FromBody] List<int> ints)
+        {
+            _logger.LogInformation("ClearAllNotification Initiated");
+            var dtos = await _mediator.Send(new UpdateNotificationCommand() { NotificationIds=ints });
+            _logger.LogInformation("ClearAllNotification Completed");
+            return Ok(dtos);
+        }
 
         [HttpGet("GetAllNotificationByUserId")]
         public async Task<ActionResult> getAllNotification(int id)

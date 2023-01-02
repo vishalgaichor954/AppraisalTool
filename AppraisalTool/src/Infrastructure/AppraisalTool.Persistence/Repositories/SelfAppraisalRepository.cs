@@ -98,12 +98,26 @@ namespace AppraisalTool.Persistence.Repositories
                 User user = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == addAppraisal.UserId);
                 if (mapping != null)
                 {
+                    FinancialYear financialyear = await _dbContext.FinancialYear.Where(x => x.Id == addAppraisal.FinancialYearId).FirstOrDefaultAsync();
+
+                    Notification notification = new Notification()
+                    {
+                        IsRead = false,
+                        UserId = mapping.ReportingAuthorityId,
+                        NotificationText = $"{user.FirstName} {user.LastName} just filled their appraisal for year {financialyear.StartYear} - {financialyear.EndYear}",
+                        NotificationDate = DateTime.Now
+                    };
+
+                    await _dbContext.Notifications.AddAsync(notification);
+                    await _dbContext.SaveChangesAsync();
+                    financialyear.Appraisals = null;
+
                     var email = new Email()
                     {
 
                         To = mapping.ReportingAuthority.Email,
-                        Body = $"Dear User, <br/>{user.FirstName} {user.LastName} filled their Appraisal. Login to view their form.",
-                        Subject = $"{user.FirstName} {user.LastName} filled their appraisal !!"
+                        Body = $"Dear {mapping.ReportingAuthority.FirstName} {mapping.ReportingAuthority.LastName}, <br/>{user.FirstName} {user.LastName} filled their Appraisal for year {financialyear.StartYear} - {financialyear.EndYear}. Login to view their appraisal form.  <br/> Regards, <br/> Support team",
+                        Subject = $"{user.FirstName} {user.LastName} filled their appraisal for {financialyear.StartYear} - {financialyear.EndYear} !!"
                     };
                     await _emailservice.SendEmail(email);
                 }
@@ -111,11 +125,28 @@ namespace AppraisalTool.Persistence.Repositories
                 {
                     User admin = await _dbContext.User.Where(x => x.RoleId == 1).FirstOrDefaultAsync();
                     User employee = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == addAppraisal.UserId);
+                    FinancialYear financialyear = await _dbContext.FinancialYear.Where(x => x.Id == addAppraisal.FinancialYearId).FirstOrDefaultAsync();
+
+
+                    Notification notification = new Notification()
+                    {
+                        IsRead = false,
+                        UserId = admin.Id,
+                        NotificationText = $" Assignation of authorities to {employee.FirstName} {employee.LastName}",
+                        NotificationDate = DateTime.Now
+                    };
+
+                    await _dbContext.Notifications.AddAsync(notification);
+                    await _dbContext.SaveChangesAsync();
+                    financialyear.Appraisals = null;
+
+
+
                     var email = new Email()
                     {
 
                         To = admin.Email,
-                        Body = $"Dear User, <br/>{employee.FirstName} {employee.LastName} filled their Appraisal. Login to assign them authorities.",
+                        Body = $"Dear {admin.FirstName} {admin.LastName}, <br/>{employee.FirstName} {employee.LastName} filled their Appraisal. Login to assign them authorities.<br/> Regards, <br/> Support team",
                         Subject = $"Assignation of  Authorities for {employee.FirstName} {employee.LastName}  !!"
                     };
                     await _emailservice.SendEmail(email);
@@ -124,13 +155,26 @@ namespace AppraisalTool.Persistence.Repositories
             }
             catch (Exception ex)
             {
-                User admin = await _dbContext.User.Where(x=>x.RoleId==1).FirstOrDefaultAsync();
+
+                User admin = await _dbContext.User.Where(x => x.RoleId == 1).FirstOrDefaultAsync();
                 User employee = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == addAppraisal.UserId);
+
+                Notification notification = new Notification()
+                {
+                    IsRead = false,
+                    UserId = admin.Id,
+                    NotificationText = $" Assignation of authorities to {employee.FirstName} {employee.LastName}",
+                    NotificationDate = DateTime.Now
+                };
+
+                await _dbContext.Notifications.AddAsync(notification);
+                await _dbContext.SaveChangesAsync();
+
                 var email = new Email()
                 {
 
                     To = admin.Email,
-                    Body = $"Dear User, <br/>{employee.FirstName} {employee.LastName} filled their Appraisal. Login to assign them authorities.",
+                    Body = $"Dear {admin.FirstName} {admin.LastName}, <br/>{employee.FirstName} {employee.LastName} filled their Appraisal for year. Login to assign them authorities. <br/> Regards, <br/> Support team",
                     Subject = $"Assignation of  Authorities for {employee.FirstName} {employee.LastName}  !!"
                 };
                 await _emailservice.SendEmail(email);
@@ -146,30 +190,59 @@ namespace AppraisalTool.Persistence.Repositories
             Appraisal data = await _dbContext.Appraisal.FirstOrDefaultAsync(x => x.Id == appraisalId);
             data.StatusId = status;
             await _dbContext.SaveChangesAsync();
-            if(data.StatusId == 3)
+            if (data.StatusId == 3)
             {
+
                 UserAuthorityMapping mapping = await _dbContext.UserAuthorityMappings.Include(x => x.ReviewingAuthority).FirstOrDefaultAsync(item => item.UserId == data.UserId);
                 User user = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == data.UserId);
+                FinancialYear financialyear = await _dbContext.FinancialYear.Where(x => x.Id == data.FinancialYearId).FirstOrDefaultAsync();
+
+
+                Notification notification = new Notification()
+                {
+                    IsRead = false,
+                    UserId = mapping.ReviewingAuthorityId,
+                    NotificationText = $"{user.FirstName} {user.LastName}'s appraisal form for year {financialyear.StartYear} - {financialyear.EndYear} is available to review",
+                    NotificationDate = DateTime.Now
+                };
+
+                await _dbContext.Notifications.AddAsync(notification);
+                await _dbContext.SaveChangesAsync();
+                financialyear.Appraisals = null;
+
                 var email = new Email()
                 {
                     To = mapping.ReviewingAuthority.Email,
-                    Body = $"Dear User, <br/>{user.FirstName} {user.LastName} filled their Appraisal. Login to review their form.",
-                    Subject = $"{user.FirstName} {user.LastName} filled their appraisal !!"
+                    Body = $"Dear {mapping.ReviewingAuthority.FirstName} {mapping.ReviewingAuthority.LastName}, <br/>{user.FirstName} {user.LastName}'s Appraisal form for year {financialyear.StartYear} - {financialyear.EndYear} is available for reviewing. Login to review their form.<br/> Regards, <br/> Support team",
+                    Subject = $"{user.FirstName} {user.LastName} filled their appraisal for {financialyear.StartYear} - {financialyear.EndYear} !!"
                 };
                 await _emailservice.SendEmail(email);
-                    data.User = null;
-               
+                data.User = null;
+
 
             }
 
-            if(data.StatusId==4)
+            if (data.StatusId == 4)
             {
                 User user = await _dbContext.User.FirstOrDefaultAsync(x => x.Id == data.UserId);
+                FinancialYear financialyear = await _dbContext.FinancialYear.Where(x => x.Id == data.FinancialYearId).FirstOrDefaultAsync();
+
+                Notification notification = new Notification()
+                {
+                    IsRead = false,
+                    UserId = user.Id,
+                    NotificationText = $"Appraisal request approved for year {financialyear.StartYear} - {financialyear.EndYear}"
+                };
+
+                await _dbContext.Notifications.AddAsync(notification);
+                await _dbContext.SaveChangesAsync();
+                financialyear.Appraisals = null;
+
                 var email = new Email()
                 {
                     To = user.Email,
-                    Body = $"Dear User, <br/> Your appraisal has been approved. Login to view or download your grade letter.",
-                    Subject = $"Appraisal Approved !!"
+                    Body = $"Dear {user.FirstName} {user.LastName}, <br/> Your appraisal for year {financialyear.StartYear} - {financialyear.EndYear} has been approved by Appraisal Team. Login to view or download your grade letter. <br/> Regards, <br/> Support team",
+                    Subject = $"Appraisal Approved for year {financialyear.StartYear} - {financialyear.EndYear} !!"
                 };
                 await _emailservice.SendEmail(email);
                 data.User = null;

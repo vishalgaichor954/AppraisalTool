@@ -10,5 +10,7 @@ namespace AppraisalTool.Application.Contracts.Persistence
     public interface INotificationRepository : IAsyncRepository<Notification>
     {
         public Task<List<Notification>> GetAllNotificationByUserId(int id);
+
+        public Task<string> ClearNotifications(List<int> notificationIdList);
     }
 }

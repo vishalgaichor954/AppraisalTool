@@ -404,14 +404,29 @@ namespace AppraisalTool.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
             if (appraisal.Editable == true)
             {
+                FinancialYear financialyear = await _dbContext.FinancialYear.Where(x => x.Id == appraisal.FinancialYearId).FirstOrDefaultAsync();
+
+
                 appraisal.EditRequested = false;
                 await _dbContext.SaveChangesAsync();
                 User employee = await _dbContext.User.Where(x => x.Id == appraisal.UserId).FirstOrDefaultAsync();
+
+                Notification notification = new Notification()
+                {
+                    IsRead = false,
+                    UserId = employee.Id,
+                    NotificationText = $"You can edit your appraisal form for year {financialyear.StartYear} - {financialyear.EndYear}",
+                    NotificationDate = DateTime.Now
+                };
+
+                await _dbContext.Notifications.AddAsync(notification);
+                await _dbContext.SaveChangesAsync();
+
                 var email = new Email()
                 {
                     To = employee.Email,
-                    Body = $"Dear User, <br/> Your Appraisal form can be edited now. Login to edit your appraisal form",
-                    Subject = $" Allowed Edit Access",
+                    Body = $"Hello {employee.FirstName} {employee.LastName}, <br/> Request for edit Appraisal form for year {financialyear.StartYear} - {financialyear.EndYear} has been approved.  <br/> Regards, <br/> Support team ",
+                    Subject = $" Edit access allowed for {financialyear.StartYear} - {financialyear.EndYear}",
                 };
                 await _emailservice.SendEmail(email);
                 appraisal.User = null;
@@ -433,19 +448,24 @@ namespace AppraisalTool.Persistence.Repositories
         public async Task<bool> RequestEdit(AppraisalForEditVm appraisalForEditVm)
         {
             Appraisal appraisal = await _dbContext.Appraisal.Where(x => x.Id == appraisalForEditVm.AppraisalId).FirstOrDefaultAsync();
+            
             appraisal.Id = appraisalForEditVm.AppraisalId;
             appraisal.EditRequested = appraisalForEditVm.Editable;
             await _dbContext.SaveChangesAsync();
             if (appraisal != null)
             {
+                FinancialYear financialyear = await _dbContext.FinancialYear.Where(x => x.Id == appraisal.FinancialYearId).FirstOrDefaultAsync();
+
                 User user = await _dbContext.User.Where(x => x.RoleId == 1).FirstOrDefaultAsync();
                 User employee = await _dbContext.User.Where(x => x.Id == appraisal.UserId).FirstOrDefaultAsync();
+
+
 
                 var email = new Email()
                 {
                     To = user.Email,
-                    Body = $"Dear User, <br/> {employee.FirstName}  {employee.LastName} asked edit access to edit their form. Login to approve or deny.",
-                    Subject = $" Edit Requested by {employee.FirstName} {employee.LastName}",
+                    Body = $"Hello {user.FirstName} {user.LastName}, <br/> {employee.FirstName}  {employee.LastName} have raised a request for edit access of appraisal form for the year  {financialyear.StartYear} - {financialyear.EndYear}. Kindly take the necessary action. <br/> Regards, <br/> Support team",
+                    Subject = $" Edit Requested by {employee.FirstName} {employee.LastName} for {financialyear.StartYear} - {financialyear.EndYear}",
                 };
                 await _emailservice.SendEmail(email);
                 appraisal.User = null;
@@ -457,6 +477,7 @@ namespace AppraisalTool.Persistence.Repositories
 
         public async Task<bool> RequestToEdit(int? fId, int? userId)
         {
+            FinancialYear financialyear = await _dbContext.FinancialYear.Where(x => x.Id == fId).FirstOrDefaultAsync();
             Appraisal appraisal = await _dbContext.Appraisal.Where(x => x.UserId == userId && x.FinancialYearId == fId).FirstOrDefaultAsync();
             if (appraisal != null)
             {
@@ -467,16 +488,38 @@ namespace AppraisalTool.Persistence.Repositories
                     await _dbContext.SaveChangesAsync();
                     User user = await _dbContext.User.Where(x => x.RoleId == 1).FirstOrDefaultAsync();
                     User receiver = await _dbContext.User.Where(x => x.Id == appraisal.UserId).FirstOrDefaultAsync();
+                    Notification notification = new Notification()
+                    {
+                        IsRead = false,
+                        UserId = user.Id,
+                        NotificationText = $"{receiver.FirstName} {receiver.LastName} raised a request for editing appraisal form for year {financialyear.StartYear} - {financialyear.EndYear}",
+                        NotificationDate = DateTime.Now
+                    };
 
+                    await _dbContext.Notifications.AddAsync(notification);
+                    await _dbContext.SaveChangesAsync();
                     var email = new Email()
                     {
                         To = user.Email,
-                        Body = $"Dear User, <br/> {receiver.FirstName}  {receiver.LastName} asked edit access to edit their form. Login to approve or deny.",
-                        Subject = $" Edit Requested by {receiver.FirstName} {receiver.LastName}",
+                        Body = $"Hello {user.FirstName} {user.LastName}, <br/> {receiver.FirstName}  {receiver.LastName} have raised a request for edit access of appraisal form for the year  {financialyear.StartYear} - {financialyear.EndYear}. Kindly take the necessary action. <br/> Regards, <br/> Support team",
+                        Subject = $" Edit Requested by {receiver.FirstName} {receiver.LastName} for {financialyear.StartYear} - {financialyear.EndYear}",
                     };
                     await _emailservice.SendEmail(email);
+                    
+
+                    var emailEmployee = new Email()
+                    {
+                        To = receiver.Email,
+                        Body = $"Hello {receiver.FirstName} {receiver.LastName}, <br/> Your request for edit access of appraisal form for year {financialyear.StartYear} - {financialyear.EndYear} was succesfully submitted. Please wait for further updates.",
+                        Subject = $" Edit requested submitted successfully",
+                    };
+                    await _emailservice.SendEmail(emailEmployee);
                     appraisal.User = null;
+                
                 }
+
+
+
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);

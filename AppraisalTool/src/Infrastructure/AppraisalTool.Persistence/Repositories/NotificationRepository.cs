@@ -23,15 +23,39 @@ namespace AppraisalTool.Persistence.Repositories
             {
                 //Appraisal appraisal = await _dbContext.Appraisal.FirstOrDefaultAsync(item => item.Id == id);
 
-                List<Notification> notifications = await _dbContext.Notifications.Where(x => x.Id == id).ToListAsync(); 
+                List<Notification> notifications = await _dbContext.Notifications.Where(x => x.UserId == id && x.IsRead == false).ToListAsync(); 
 
-                return notifications;
+                //return notifications;
+                return notifications.OrderByDescending(d => d.NotificationDate).ToList<Notification>();
+
             }
             catch (Exception e)
             {
                 Console.Write(e);
                 return null;
             }
+        }
+
+
+        public async Task<string> ClearNotifications(List<int> notificationIdList)
+        {
+            try
+            {
+                //Appraisal appraisal = await _dbContext.Appraisal.FirstOrDefaultAsync(item => item.Id == id);
+                notificationIdList.ForEach(notification =>
+                {
+                    _dbContext.Database.ExecuteSqlRaw($"Update Notifications Set IsRead=1 Where Id={notification}");
+                });
+                             //return notifications;
+                return "wow";
+
+            }
+            catch (Exception e)
+            {
+                Console.Write(e);
+                return null;
+            }
+
         }
 
     }

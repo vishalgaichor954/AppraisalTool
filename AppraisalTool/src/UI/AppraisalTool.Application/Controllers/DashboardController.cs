@@ -51,7 +51,7 @@ namespace AppraisalTool.App.Controllers
                 dynamic json = JsonConvert.DeserializeObject(responseData);
 
 
-                NavbarViewModel navbarVM = new NavbarViewModel() { UserRole = user.Role, UserName = user.Name, SideBarList = json.data };
+                NavbarViewModel navbarVM = new NavbarViewModel() { UserRole = user.Role, UserName = user.Name, SideBarList = json.data,UserId=user.UserId };
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "navbarViewModel", navbarVM);
 
 

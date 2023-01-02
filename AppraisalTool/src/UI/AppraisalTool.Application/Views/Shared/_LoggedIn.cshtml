@@ -17,61 +17,44 @@
                 <span class="mdi mdi-menu"></span>
             </button>
             <ul class="navbar-nav navbar-nav-right">
-                 <li class="nav-item dropdown">
-              <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-                <i class="mdi mdi-bell-outline"></i>
-                <span class="count-symbol bg-danger"></span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                <h6 class="p-3 mb-0">Notifications</h6>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-success">
-                      <i class="mdi mdi-calendar"></i>
+                <li class="nav-item dropdown">
+                    <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                          <i class="mdi mdi-bell-outline" style="font-size:26px;"></i>
+                        <sup style="right:20%;top:-13px;" ><span hidden id="NotificationCount" class="bg-danger p-1" style="border-radius:50%;color:white;font-size:10px;"></span></sup>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" id="notifiactionList" aria-labelledby="notificationDropdown" style="height:60vh;width:22vw;" >
+                       @* style="width:475%"*@
+                        <h6 class="m-2 p-0 ">Notifications</h6>
+                        <div class="dropdown-divider" ></div>
+                       @* <a class="preview-item mb-0" style="padding-left:35%;font-size:1.1rem;">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-success">
+                                    <i class="mdi mdi-calendar"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                                <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
+                                <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
+                            </div>
+                        </a>*@
+                        <div id="NotificationContatiner" style="height:79%;overflow:auto;">
+
+                        </div>
+
+                        <div class="dropdown-divider"></div>
+                        <h6 class="p-3 mb-0 text-center" style="cursor:pointer" id="ClearNotification">Clear all notifications</h6>
                     </div>
-                  </div>
-                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
-                    <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-warning">
-                      <i class="mdi mdi-settings"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-                    <p class="text-gray ellipsis mb-0"> Update dashboard </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-info">
-                      <i class="mdi mdi-link-variant"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-                    <p class="text-gray ellipsis mb-0"> New admin wow! </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <h6 class="p-3 mb-0 text-center">See all notifications</h6>
-              </div>
-            </li>
+                </li>
                 <li class="nav-item nav-profile dropdown">
                     <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="nav-profile-img">
+                             
                             <img src="~/lib/assets/images/faces/user.png" alt="image">
                             <span class="availability-status online"> </span>
                         </div>
                         <div class="nav-profile-text">
                             <p class="mb-1 text-black">@json.UserName</p>
+                            <input id="userIdNav" hidden value="@json.UserId" type="number">
                         </div>
                     </a>
                     <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
@@ -98,8 +81,9 @@
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
                 <li class="nav-item nav-profile">
-                    <a asp-action ="Dashboard" asp-controller="Dashboard" class="nav-link">
+                    <a asp-action="Dashboard" asp-controller="Dashboard" class="nav-link">
                         <div class="nav-profile-image">
+                            
                             <img src="~/lib/assets/images/faces/user.png" alt="profile">
                             <span class="login-status online"></span>
                             <!--change to offline or busy as needed-->
@@ -117,15 +101,208 @@
                         if (item.menuList.menuFlag == "SIDEBAR")
                         {
 
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction">
-                                    <span class="@item.menuList.menuClass">@item.menuList.menuText</span>
-                                    <i class="@item.menuList.menuIcon"></i>
-                                </a>
-                            </li>
+                                                                                                        <li class="nav-item">
+                                                                                                            <a class="nav-link" asp-controller="@item.menuList.menuController" asp-action="@item.menuList.menuAction">
+                                                                                                                <span class="@item.menuList.menuClass">@item.menuList.menuText</span>
+                                                                                                                <i class="@item.menuList.menuIcon"></i>
+                                                                                                            </a>
+                                                                                                        </li>
                         }
                     }
                 }
             </ul>
         </nav>
         <!-- partial -->
+
+
+        <script>
+
+            document.addEventListener("DOMContentLoaded", function(event) {
+
+                const createNotification = (parent, data) => {
+
+                    const divider = document.createElement('div');
+                    divider.className = "dropdown-divider";
+                    parent.appendChild(divider);
+
+                    const NotificationAnchor = document.createElement('a');
+                    NotificationAnchor.setAttribute("class", " preview-item notificationDiv p-2 m-0");
+                    NotificationAnchor.setAttribute("data-notification-id", `${data.id}`);
+                    NotificationAnchor.setAttribute("style", "max-width:100%;text-decoration:none;color:black;");
+                    //NotificationAnchor.classList.add = "dropdown-item";
+                    //NotificationAnchor.classList.add = "preview-item";
+
+                    //const ThumbNailNotification = document.createElement('div');
+                    //ThumbNailNotification.className = "preview-thumbnail";
+                    let html = `<div class="preview-thumbnail">
+                                                                                                        <div class="preview-icon blueTheme">
+                                                                                                          <i class="mdi mdi-calendar"></i>
+                                                                                                        </div>
+                                                                                                      </div>
+                                                                                                      <div class="preview-item-content d-flex align-items-start flex-column justify-content-center" style="width:90%">
+                                                                                                        <h6 class="preview-subject font-weight-normal mb-1">Test</h6>
+                                                                                                        <div style="max-width:90%;">
+                                                                                                            <p class="text-gray mb-0" style="max-width:100%;"> ${data.notificationText} </p>
+                                                                                                        </div>
+                                                                                                      </div>`
+
+
+                    NotificationAnchor.innerHTML = html;
+                    parent.appendChild(NotificationAnchor);
+                }
+
+                let userId = document.getElementById('userIdNav').value;
+                fetch('/Notification/GetAllNotifications?userId=' + userId)
+                    .then(res => res.json())
+                    .then(data => {
+
+                        const parent = document.querySelector("#NotificationContatiner");
+                        parent.innerHTML = "";
+
+                        //const heading = document.createElement("h6");
+                        //heading.setAttribute("class", "dropdown-item preview-item");
+                        //heading.innerText = "Notifications";
+                        //parent.appendChild(heading);
+                        
+                        if (data.length == 0) {
+                             const notificationDiv = document.querySelectorAll(".notificationDiv");
+                                        notificationDiv.forEach(item=>{
+                                            item.remove();
+                                            console.log("cleared");
+                                        })
+                           
+                                         document.querySelectorAll(".dropdown-divider").forEach(item=>{
+                                            item.remove();
+                                            console.log("cleared");
+                                        })
+
+                            document.querySelector("#NotificationContatiner").remove()
+                            document.getElementById("ClearNotification").setAttribute("hidden", true);
+                          
+                             const Header = document.createElement('h4');
+                              Header.setAttribute("style", "padding-left:27%;padding-top:22%;color:grey;");
+                            Header.innerText = "Nothing to Show";
+                            document.querySelector("#notifiactionList").appendChild(Header);
+                           document.getElementById("notifiactionList").style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/9018/9018889.png')";
+                            document.getElementById("notifiactionList").style.backgroundSize="120px 120px";
+                            document.getElementById("notifiactionList").style.backgroundRepeat = "no-repeat";
+                            document.getElementById("notifiactionList").style.backgroundPosition = "center";
+                            document.getElementById("notifiactionList").style.backgroundOrigin = "center-box";
+
+                            console.log("background color executed");
+                        }
+                        if (data.length > 0) {
+                            document.getElementById("NotificationCount").removeAttribute("hidden");
+                          document.getElementById('NotificationCount').innerText = data.length;
+                        }
+                        else{
+                            document.getElementById("NotificationCount").setAttribute("hidden", true);
+                        }
+                        
+                        for (let i = 0; i < data.length; i++) {
+                            createNotification(parent, data[i]);
+                        }
+
+                        const divider = document.createElement('div');
+                        divider.className = "dropdown-divider";
+                        parent.appendChild(divider);
+
+                        const click = () => {
+                            
+                            var notificationIdArray = [];
+                            
+                            document.querySelectorAll(".notificationDiv").forEach(item => {
+                                let id = item.getAttribute("data-notification-id");
+
+                                console.log(id);
+                                notificationIdArray.push(parseInt(id));
+                            }
+
+                            );
+                            //notificationIdArray.push(item.getAttribute("data-notification-id"));
+
+                            if (notificationIdArray.length > 0) {
+
+                                var listOfNotificationId = {
+
+                                    idList: [...notificationIdArray]
+                                }
+
+                                //DeleteAllQuery
+
+                                console.log(listOfNotificationId)
+
+                                $.ajax('/Notification/ClearNotifications', {
+                                    method: 'POST',
+                                    data: listOfNotificationId,
+                                    traditional: true,
+                                    success: function(data) {
+
+
+                                           const notificationDiv = document.querySelectorAll(".notificationDiv");
+                                        notificationDiv.forEach(item=>{
+                                            item.remove();
+                                            console.log("cleared");
+                                        })
+                           
+                                         document.querySelectorAll(".dropdown-divider").forEach(item=>{
+                                            item.remove();
+                                            console.log("cleared");
+                                        })
+
+                                        document.querySelector("#NotificationContatiner").remove();
+                                             document.getElementById("ClearNotification").setAttribute("hidden", true);
+                                             document.getElementById("NotificationCount").setAttribute("hidden", true);
+                             const Header = document.createElement('h4');
+                              Header.setAttribute("style", "padding-left:27%;padding-top:22%;color:grey;");
+                            Header.innerText = "Nothing to Show";
+                            document.querySelector("#notifiactionList").appendChild(Header);
+                           document.getElementById("notifiactionList").style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/9018/9018889.png')";
+                            document.getElementById("notifiactionList").style.backgroundSize="120px 120px";
+                            document.getElementById("notifiactionList").style.backgroundRepeat = "no-repeat";
+                            document.getElementById("notifiactionList").style.backgroundPosition = "center";
+                            document.getElementById("notifiactionList").style.backgroundOrigin = "center-box";
+                                        //const notificationDiv = document.querySelectorAll(".notificationDiv");
+                                        //notificationDiv.forEach(item=>{
+                                        //    item.remove();
+                                        //    console.log("cleared");
+                                        //})
+                                        //const notificationDiv = document.querySelectorAll("#notifiactionList");
+                                        //notificationDiv.innerHTML = `<h6 class="dropdown-item preview-item">Notifications</h6>`;
+                                        //console.log("cleared")
+                                        //const heading = document.createElement("h6");
+                                        //heading.setAttribute("class", "dropdown-item preview-item");
+                                        //heading.innerText = "Notifications";
+                                        //notificationDiv.appendChild(heading);
+                                       
+                                    }
+                                });
+
+
+
+                            }
+
+
+                            console.log(notificationIdArray);
+
+                        }
+
+
+
+                        document.getElementById("ClearNotification").addEventListener("click", click);
+                        //let clearH6 = document.createElement("h6");
+                        //clearH6.setAttribute("class", "p-3 mb-0 text-center");
+                        //clearH6.onclick = click;
+                        //clearH6.innerText = "See all notifications";
+                        //parent.appendChild(clearH6);
+
+
+                        //console.log("data  ", data);
+
+
+
+                    })
+
+            });
+
+        </script>
