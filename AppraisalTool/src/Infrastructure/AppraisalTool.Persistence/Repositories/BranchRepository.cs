@@ -29,14 +29,16 @@ namespace AppraisalTool.Persistence.Repositories
                 response.Succeeded = false;
                 return response;
             }
+           
             var result= await _dbContext.Branch.AddAsync(branch);
 
            await _dbContext.SaveChangesAsync();
+           
             response.Id = branch.Id;
             response.Message = "Branch Added Successfully";
             response.Succeeded = true;
             return response;
-        }
+       }
 
         public async Task<IEnumerable<Branch>> GetAllBranch()
         {
@@ -48,6 +50,18 @@ namespace AppraisalTool.Persistence.Repositories
         {
             var branch = await _dbContext.Branch.Where(x => x.Id == id).FirstOrDefaultAsync();
             return branch;
+        }
+        public async Task<bool> GetBranchByCode(string branchcode)
+        {
+            var branch = await _dbContext.Branch.Where(x => x.BranchCode ==branchcode).FirstOrDefaultAsync();
+            if (branch != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public async Task<RemoveBranchesCommandDto> RemoveBranch(int id)

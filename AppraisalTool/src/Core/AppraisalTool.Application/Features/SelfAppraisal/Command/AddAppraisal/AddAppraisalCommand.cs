@@ -13,6 +13,15 @@ namespace AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal
 
     public class AddAppraisalCommand : IRequest<Response<Appraisal>>
     {
-       public AddAppraisalVM addAppraisal { get; set; }
+        public AddAppraisalCommand()
+        {
+        }
+
+        public AddAppraisalCommand(AddAppraisalVM appraisal)
+        {
+            appraisal = addAppraisal;
+        }
+
+        public AddAppraisalVM addAppraisal { get; set; }
     }
 }

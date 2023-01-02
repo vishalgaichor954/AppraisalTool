@@ -1,4 +1,9 @@
-﻿using AppraisalTool.Application.Features.Categories.Commands.CreateCategory;
+﻿using AppraisalTool.Application.Features.AppraisalResults.Commands.AddAppraisalResult;
+using AppraisalTool.Application.Features.AppraisalResults.Commands.UpdateAppraisalResult;
+using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByAppraisalId;
+using AppraisalTool.Application.Features.AppraisalResults.Queries.GetAppraisalResultsByFidAndUserId;
+using AppraisalTool.Application.Features.Appraisals.Query.GetAppraisalById;
+using AppraisalTool.Application.Features.Categories.Commands.CreateCategory;
 using AppraisalTool.Application.Features.Categories.Commands.StoredProcedure;
 using AppraisalTool.Application.Features.Categories.Queries.GetCategoriesList;
 using AppraisalTool.Application.Features.Categories.Queries.GetCategoriesListWithEvents;
@@ -9,7 +14,12 @@ using AppraisalTool.Application.Features.Events.Commands.UpdateEvent;
 using AppraisalTool.Application.Features.Events.Queries.GetEventDetail;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsExport;
 using AppraisalTool.Application.Features.Events.Queries.GetEventsList;
+using AppraisalTool.Application.Features.GradeReports.Queries.GetChartData;
+using AppraisalTool.Application.Features.Metrics.Queries.GetAllMetricsList;
 using AppraisalTool.Application.Features.Orders.GetOrdersForMonth;
+using AppraisalTool.Application.Features.ReporteeAppraisals.Queries.GetReporteeAppraisalsByRevAuthority;
+using AppraisalTool.Application.Features.ReviewAppraisals.Queries.GetReviewAppraisalsByRevAuthority;
+using AppraisalTool.Application.Features.SelfAppraisal.Command.AddAppraisal;
 using AppraisalTool.Application.Features.Users.Command.CreateUserCommand;
 using AppraisalTool.Application.Features.Users.Command.RemoveUserCommand;
 using AppraisalTool.Application.Features.Users.Command.UpdateUserCommand;
@@ -17,12 +27,15 @@ using AppraisalTool.Application.Features.Users.Query.GetUserById;
 using AppraisalTool.Application.Features.Users.Query.GetUserList;
 using AppraisalTool.Application.Features.SelfAppraisal.Queries.GetData;
 using AppraisalTool.Application.Response;
+using AppraisalTool.Domain.Common;
+using AppraisalTool.Domain.Entities;
 using MediatR;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using AppraisalTool.Application.Features.Menu.Command.CreateMenuCommand;
 
 namespace AppraisalTool.API.UnitTests.Mocks
 {
@@ -46,6 +59,8 @@ namespace AppraisalTool.API.UnitTests.Mocks
             mockMediator.Setup(m => m.Send(It.IsAny<TransactionCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<Guid>());
 
             mockMediator.Setup(m => m.Send(It.IsAny<GetOrdersForMonthQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new PagedResponse<IEnumerable<OrdersForMonthDto>>(null, 10, 1, 2));
+            
+            //user managment 
             mockMediator.Setup(m => m.Send(It.IsAny<GetUserListQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<IEnumerable<GetUserListQueryVm>>());
             mockMediator.Setup(m => m.Send(It.IsAny<GetUserByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<GetUserListQueryVm>());
             mockMediator.Setup(m => m.Send(It.IsAny<RemoveUserCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<RemoveUserCommandDto>());
@@ -54,6 +69,24 @@ namespace AppraisalTool.API.UnitTests.Mocks
 
             //apprisalhome page 
             mockMediator.Setup(m => m.Send(It.IsAny<GetDataQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<IEnumerable<GetDataVM>>());
+            mockMediator.Setup(m => m.Send(It.IsAny<GetAppraisalResultsByFidAndUserIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<List<GetAppraisalsByUidAndFidDto>>());
+            mockMediator.Setup(m => m.Send(It.IsAny<GetAllMetricsListQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<IEnumerable<ListOfMetrics>>());
+            mockMediator.Setup(m => m.Send(It.IsAny<AddAppraisalCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<Appraisal>());
+
+            mockMediator.Setup(m => m.Send(It.IsAny<AddAppraisalResultCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<string>());
+            mockMediator.Setup(m => m.Send(It.IsAny<UpdateAppraisalResultCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<string>());
+
+            mockMediator.Setup(m => m.Send(It.IsAny<GetReporteeAppraisalsByRepAuthorityQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<List<ReporteeAppraisalListVm>>());
+            
+            mockMediator.Setup(m => m.Send(It.IsAny<GetAppraisalByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<Appraisal>());
+            
+             mockMediator.Setup(m => m.Send(It.IsAny<GetApprasisalResultsByAppraisalIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<List<AppraisalResult>>());
+
+            mockMediator.Setup(m => m.Send(It.IsAny<GetChartDataQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<GradeChartsData>());
+            mockMediator.Setup(m => m.Send(It.IsAny<GetReviewAppraisalsByRevAuthorityQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<List<ReviewAppraisalListVm>>());
+
+            //menu management 
+            mockMediator.Setup(m => m.Send(It.IsAny<CreateMenuCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync(new Response<CreateMenuCommandDto>());
 
             return mockMediator;
         }

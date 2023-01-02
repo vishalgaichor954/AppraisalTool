@@ -491,6 +491,30 @@ select[name="myTable_length"] {
    width:100px;
 }
 
+.scroll {
+    display: block;
+    position: fixed;
+    bottom: -4px;
+    right: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    z-index: 1000;
+}
+
+.scroll.top {
+  /*  top: calc(50% - 80px);*/
+    font-size: 25px;
+    color: grey;
+}
+
+.scroll.bottom {
+    bottom: calc(5% - 0px);
+    font-size: 25px;
+    color: grey;
+}
+
 .signout:hover{
     background : "red" !important;
     color : "green" !important;

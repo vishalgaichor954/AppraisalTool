@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using AppraisalTool.Application.Contracts.Persistence;
 using Moq;
 using System;

@@ -52,7 +52,9 @@ namespace AppraisalTool.App.Controllers
         [RouteAccess(Roles = "ADMINISTRATOR")]
         public IActionResult AddBranch()
         {
+            
             return View();
+            
         }
 
         [HttpPost]
@@ -160,6 +162,29 @@ namespace AppraisalTool.App.Controllers
             TempData["DeleteMenuFaild"] = "Failed To delete User Role";
             return RedirectToAction("ListBranches");
         }
+
+        [HttpGet]
+        public JsonResult BranchCodeExists(string branchcode)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = baseAddress;
+            HttpResponseMessage response = client.GetAsync($"https://localhost:5000/api/User/BranchCodeExist?branchcode={branchcode}&api-version=1").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+                var res = JsonConvert.DeserializeObject<ForgetPasswordResponse>(responseData);
+                if (res.Succeeded == true)
+                {
+                    return Json(false);
+                }
+                else
+                {
+                    return Json(true);
+                }
+            }
+            return Json(true);
+        }
+
 
     }
 }

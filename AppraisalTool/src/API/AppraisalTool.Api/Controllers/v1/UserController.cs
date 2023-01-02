@@ -22,6 +22,7 @@ using AppraisalTool.Application.Features.Branches.Command.RemoveBranchCommand;
 using AppraisalTool.Application.Features.Users.Command.AssignAuthorityCommand;
 using AppraisalTool.Application.Features.Authority.Query.GetAllAuthority;
 using Microsoft.AspNetCore.DataProtection;
+using AppraisalTool.Application.Response;
 
 namespace AppraisalTool.Api.Controllers.v1
 {
@@ -207,6 +208,22 @@ namespace AppraisalTool.Api.Controllers.v1
 
             _logger.LogInformation("RemoveUserRole Completed");
             return Ok(dtos);
+        }
+
+        [HttpGet("BranchCodeExist")]
+        public async Task<ActionResult> BranchCodeExist(string branchcode)
+        {
+            bool branchExists = await _branchRepository.GetBranchByCode(branchcode);
+            if (branchExists == true)
+            {
+                return Ok(new Response<string>() { Succeeded = true, Errors = null, Message = "Branch With This Branchcode exists", Data = null });
+            }
+            else
+            {
+                return Ok(new Response<string>() { Succeeded = false, Errors = null, Message = "Branch With This Branchcode not exist", Data = null });
+            }
+
+
         }
         [HttpPut("AssignAuthority")]
         public async Task<ActionResult> AssignAuthority(AssignAuthorityCommand request)
