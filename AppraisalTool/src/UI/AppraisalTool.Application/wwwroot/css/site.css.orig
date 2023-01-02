@@ -480,15 +480,45 @@ select {
     color: black !important;
 }
 
-<<<<<<< HEAD
 label.error {
     display: none !important;
-=======
+}
 .dataTables_info {
     margin-left: 3%;
 }
 
 select[name="myTable_length"] {
    width:100px;
->>>>>>> 1ba092da42f16ca2cc901887df61cd77625d14c4
 }
+
+<<<<<<< HEAD
+.scroll {
+    display: block;
+    position: fixed;
+    bottom: -4px;
+    right: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    z-index: 1000;
+}
+
+.scroll.top {
+  /*  top: calc(50% - 80px);*/
+    font-size: 25px;
+    color: grey;
+}
+
+.scroll.bottom {
+    bottom: calc(5% - 0px);
+    font-size: 25px;
+    color: grey;
+}
+
+=======
+.signout:hover{
+    background : "red" !important;
+    color : "green" !important;
+}
+>>>>>>> e23223735801f2a90bd4bca43e45c5911a3e02ed

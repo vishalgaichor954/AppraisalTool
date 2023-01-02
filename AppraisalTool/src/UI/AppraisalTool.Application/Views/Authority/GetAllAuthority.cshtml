@@ -187,7 +187,7 @@
                                                     <td class="text-center"> @item.RepaName</td>
                                                     <td class="text-center"> @item.RevaName</td>
                                                     <td class="text-center">
-                                                        <a asp-action="AssignAuthority" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info"><i class="mdi mdi-table-edit"></i></a>
+                                                        <a asp-action="AssignAuthority" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="mdi mdi-table-edit"></i></a>
                                                         @*<a asp-action="DeleteBranch" asp-route-id="@item.id" class="btn btn-sm LoginBtn" onclick="loadDelete()"><i class="mdi mdi-delete"></i></a>*@
                                                     </td>
                                                    <td> @item.Id</td>
