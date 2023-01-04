@@ -72,7 +72,7 @@
     }
 
     .ApplyButton {
-    background-color: #1746A2;
+    <!--background-color: #1746A2;
     border: none;
     color: white;
     padding: 15px;
@@ -84,7 +84,13 @@
     margin: 18px;
     width: 10%;
     cursor: pointer;
-    width: 15%;
+    width: 15%;-->
+	
+    padding: 10px;
+    border: none;
+    background-color:  #1746A2;
+    color: white;
+
 }
 
 </style>

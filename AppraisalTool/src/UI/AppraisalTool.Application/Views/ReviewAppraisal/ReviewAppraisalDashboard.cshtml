@@ -45,6 +45,12 @@
         background-color: transparent;
         text-decoration: underline;
     }
+     .ApplyBtn{
+    padding: 10px;
+    border: none;
+    background-color:  #1746A2;
+    color: white;
+    }
 
 </style>
 <link rel="stylesheet" href="~/lib/package/dist/sweetalert2.min.css">
@@ -186,17 +192,18 @@
 
 
                 <form method="post" id="filterForm" asp-action="ReviewAppraisalDashboard">
+                    <div>
                     <div class=" row pt-2 ">
 
 
-                        <div class="col-md-2">
+                       @*   <div class="col-md-2" style="display:none;">
                             <div class="row">
                                 <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Primary Role</p>
 
                             </div>
 
                         </div>
-
+*@
                         <div class="col-md-2">
                             <div class="row">
                                 <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Start Date</p>
@@ -221,9 +228,10 @@
 
                         </div>
 
+                     
                         <div class="col-md-2">
-                            <div class="row">
-                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Reporting Authority</p>
+                            <div class="row" style="white-space:nowrap;">
+                                <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Reviewing Authority</p>
                                 <div class="Dropdown">
                                 </div>
                             </div>
@@ -231,8 +239,15 @@
                         </div>
 
                         <div class="col-md-2">
-                            <div class="row">
+                            <div class="row" style="padding-left:40px;">
                                 <p class="DarkBlueP" style="font-weight:600;padding-top:30px">Status</p>
+
+                            </div>
+
+                        </div>
+                           <div class="col-md-2">
+                            <div class="row">
+                               
 
                             </div>
 
@@ -240,8 +255,8 @@
                     </div>
 
                     <div class="row pb-4">
-                        <div class="col-md-2">
-                            <div class="row">
+                    @*   <div class="col-md-2"  style="display:none;">
+                            <div class="row" >
                                 <div class="Dropdown">
 
                                     <select class="form-control form-select" asp-for="@Model.PrimaryRole">
@@ -250,7 +265,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div>*@
 
                         <div class="col-md-2">
                             <div class="row">
@@ -305,11 +320,22 @@
 
 
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <input type="submit" class="inline btn  ApplyButton" value="Apply" />
+                          <div class="col-md-2">
+                            <div class="row">
+                               
+                                  <div class="d-flex apply">
+                            <input type="submit" class="ApplyBtn" value="Apply" @*id="displayonclick" style="display:none;"*@ />
+                       
+                             </div>
+                            
+                            </div>
+
                         </div>
 
-
+                         </div>
+                        </div>
+                      
+                       
                 </form>
 
                 @if (ViewBag.UserList.Count == 0)
